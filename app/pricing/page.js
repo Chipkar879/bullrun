@@ -196,7 +196,7 @@ export default function PricingPage() {
             Student Platform Access
           </h1>
           <p className="text-slate-400 text-sm sm:text-base font-medium leading-relaxed">
-            Every registered account gets an unrestricted 7-day sandbox trial. Subscribe for ₹59/month to keep your workspace active.
+            Every registered account gets an unrestricted 7-day sandbox trial. Subscribe for ₹99/month to keep your workspace active.
           </p>
 
           {/* DYNAMIC CLEARANCE BADGE */}
@@ -257,7 +257,7 @@ export default function PricingPage() {
               YOUR ACCOUNT ACCESS IS FROZEN
             </h2>
             <p className="text-xs text-rose-300 leading-relaxed font-medium">
-              Your account workspace is currently restricted. Subscribe below for ₹59/month or contact support to reactivate your access.
+              Your account workspace is currently restricted. Subscribe below for ₹99/month or contact support to reactivate your access.
             </p>
           </div>
         )}
@@ -276,7 +276,7 @@ export default function PricingPage() {
               </p>
 
               <div className="font-mono pt-2 border-y border-[#2b0808] py-4">
-                <span className="text-4xl font-black text-white">₹59</span>
+                <span className="text-4xl font-black text-white">₹99</span>
                 <span className="text-slate-500 text-xs"> / month</span>
                 <span className="block text-[10px] text-emerald-400 font-bold mt-1">
                   ✓ Instant Account Unfreeze
@@ -327,7 +327,7 @@ export default function PricingPage() {
                 onClick={() => setPaymentStep('checkout')}
                 className="w-full py-4 bg-[#ff3333] hover:bg-[#dc2626] text-white text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-[#ff3333]/20 transition-all cursor-pointer"
               >
-                {status.isFrozen ? 'Unlock Account — ₹59/month' : 'Subscribe Now — ₹59/month'}
+                {status.isFrozen ? 'Unlock Account — ₹99/month' : 'Subscribe Now — ₹99/month'}
               </button>
             )}
           </div>
@@ -340,14 +340,14 @@ export default function PricingPage() {
               <span className="text-[10px] font-black text-[#ff3333] uppercase tracking-widest bg-[#1a0808] px-2.5 py-0.5 rounded border border-[#ff3333]/20">
                 SECURE UPI PAYMENT GATEWAY
               </span>
-              <h2 className="font-black text-xl text-white mt-2">Activate ₹59 Subscription</h2>
-              <p className="text-xs text-slate-400 mt-1">Direct Transfer Total: <span className="font-bold text-white">₹59</span></p>
+              <h2 className="font-black text-xl text-white mt-2">Activate ₹99 Subscription</h2>
+              <p className="text-xs text-slate-400 mt-1">Direct Transfer Total: <span className="font-bold text-white">₹99</span></p>
             </div>
 
             <div className="space-y-4">
               <div className="bg-[#1a0808] border border-dashed border-[#ff3333]/40 p-5 rounded-2xl flex flex-col items-center text-center space-y-3">
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRunAcademy&am=59&cu=INR`)}`} 
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRunAcademy&am=99&cu=INR`)}`} 
                   alt="Bull Run UPI Gateway QR" 
                   className="w-[150px] h-[150px] border bg-white p-1 rounded-xl shadow-md"
                   loading="lazy"
@@ -360,7 +360,7 @@ export default function PricingPage() {
 
               <ol className="text-[11px] text-slate-400 list-decimal pl-4 space-y-1.5 leading-relaxed font-sans font-medium">
                 <li>Scan QR code using GPay, PhonePe, Paytm, or any UPI app.</li>
-                <li>Transfer exactly <span className="font-bold text-white">₹59</span>.</li>
+                <li>Transfer exactly <span className="font-bold text-white">₹99</span>.</li>
                 <li>Tap the button below to verify payment and unfreeze your profile.</li>
               </ol>
             </div>
