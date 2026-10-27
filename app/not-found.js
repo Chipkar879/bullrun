@@ -22,7 +22,7 @@ export default function NotFound() {
 
         {/* Message */}
         <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-medium">
-          Whoops! It looks like you tried to navigate to an index route or position that doesn't exist in Bull Run's records. Let's get your portfolio back on track.
+          Whoops! It looks like you tried to navigate to an index route or position that doesn&apos;t exist in Bull Run&apos;s records. Let&apos;s get your portfolio back on track.
         </p>
 
         <hr className="border-[#2b0808]" />

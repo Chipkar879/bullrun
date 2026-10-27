@@ -540,7 +540,7 @@ function SignupForm() {
 
             <div className="text-center text-xs text-slate-400 pt-2 border-t border-[#2b0808]">
               {isLogin ? (
-                <>Don't have an account? <button onClick={() => { window.history.replaceState(null, '', '/signup'); setIsLogin(false); say("Switched to signup mode."); }} className="text-[#ff3333] font-bold hover:underline cursor-pointer">Register here</button></>
+                <>Don&apos;t have an account? <button onClick={() => { window.history.replaceState(null, '', '/signup'); setIsLogin(false); say("Switched to signup mode."); }} className="text-[#ff3333] font-bold hover:underline cursor-pointer">Register here</button></>
               ) : (
                 <>Already have an account? <button onClick={() => { window.history.replaceState(null, '', '/signup?mode=login'); setIsLogin(true); say("Switched to login terminal."); }} className="text-[#ff3333] font-bold hover:underline cursor-pointer">Login here</button></>
               )}
