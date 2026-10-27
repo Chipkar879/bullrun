@@ -299,7 +299,7 @@ export default function DailyQuiz() {
                   onClick={startDailyQuizStream} 
                   className="px-8 py-4 bg-[#7a0000] hover:bg-[#a30000] text-white font-black rounded-2xl text-xs uppercase tracking-wider shadow-xl transition-all transform hover:-translate-y-0.5 border-b-2 border-b-[#4a0000]"
                 >
-                  Launch Today's Quiz (5m) ⏱️
+                  Launch Today&apos;s Quiz (5m) ⏱️
                 </button>
               )}
               <button 

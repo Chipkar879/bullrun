@@ -1,7 +1,112 @@
+
 'use client';
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/navigation';
+
+// PRICE GRAPH
+function ArenaPriceChart({ stock }) {
+  const prices = stock.history;
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  const range = max - min || 1;
+  const isUp = !stock.changePct.startsWith('-');
+
+  const points = prices
+    .map((price, index) => {
+      const x = (index / Math.max(prices.length - 1, 1)) * 100;
+      const y = 90 - ((price - min) / range) * 75;
+      return `${x},${y}`;
+    })
+    .join(' ');
+
+  return (
+    <div className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4 min-w-0">
+      <div className="flex justify-between items-start gap-2 mb-4">
+        <div>
+          <p className="text-[10px] uppercase tracking-widest font-black text-slate-500">
+            Simulated Price
+          </p>
+          <p className="text-2xl font-black font-mono text-white mt-1">
+            ₹{stock.price.toLocaleString('en-IN')}
+          </p>
+        </div>
+        <span className={`text-xs font-black ${isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
+          {stock.changePct}
+        </span>
+      </div>
+
+      <div className="h-[180px] w-full">
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="w-full h-full overflow-visible"
+          role="img"
+          aria-label={`${stock.name} simulated price history`}
+        >
+          {[20, 40, 60, 80].map(y => (
+            <line
+              key={y}
+              x1="0"
+              y1={y}
+              x2="100"
+              y2={y}
+              stroke="#3b1515"
+              strokeWidth="0.5"
+              strokeDasharray="2 2"
+            />
+          ))}
+
+          <polygon
+            points={`0,100 ${points} 100,100`}
+            fill={isUp ? 'rgba(16,185,129,0.12)' : 'rgba(244,63,94,0.12)'}
+          />
+
+          <polyline
+            points={points}
+            fill="none"
+            stroke={isUp ? '#34d399' : '#fb7185'}
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+          />
+
+          <circle
+            cx="100"
+            cy={90 - ((stock.price - min) / range) * 75}
+            r="2"
+            fill={isUp ? '#34d399' : '#fb7185'}
+          />
+        </svg>
+      </div>
+
+      <div className="flex justify-between text-[10px] text-slate-500 mt-3">
+        <span>Earlier ticks</span>
+        <span>Latest tick</span>
+      </div>
+
+      <div className="mt-4 pt-3 border-t border-[#2b0808] space-y-2">
+        <div className="flex justify-between text-xs">
+          <span className="text-slate-500">Previous close</span>
+          <span className="font-mono text-slate-300">
+            ₹{stock.prevClose.toLocaleString('en-IN')}
+          </span>
+        </div>
+        <div className="flex justify-between text-xs">
+          <span className="text-slate-500">Current price</span>
+          <span className="font-mono font-bold text-white">
+            ₹{stock.price.toLocaleString('en-IN')}
+          </span>
+        </div>
+      </div>
+
+      <p className="text-[10px] text-slate-600 mt-4">
+        Illustrative simulated prices, not live exchange data.
+      </p>
+    </div>
+  );
+}
 
 // 40 DYNAMIC GAMIFIED EVENT ALERTS
 const CHALLENGE_EVENTS_REGISTRY = [
@@ -50,11 +155,9 @@ const CHALLENGE_EVENTS_REGISTRY = [
 export default function ArenaPage() {
   const router = useRouter();
 
-  // GAME ENGINE STATES: 'LOBBY' -> 'COUNTDOWN' -> 'RUNNING' -> 'FINISHED'
   const [gameState, setGameState] = useState('LOBBY');
   const [countdownNum, setCountdownNum] = useState(3);
-  
-  // LEAVE CONFIRMATION MODAL STATE
+
   const [showExitModal, setShowExitModal] = useState(false);
   const [pendingHref, setPendingHref] = useState(null);
 
@@ -87,7 +190,6 @@ export default function ArenaPage() {
     { name: 'PaperTrader 📄', score: 9200 },
   ];
 
-  // HANDLE HEADER CLOSE BUTTON (X) CLICK
   const handleHeaderCloseClick = () => {
     if (gameState === 'RUNNING') {
       setPendingHref('/');
@@ -97,7 +199,6 @@ export default function ArenaPage() {
     }
   };
 
-  // 1. INITIATE COUNTDOWN ENGINE
   const startCountdownSequence = () => {
     setGameState('COUNTDOWN');
     setCountdownNum(3);
@@ -114,7 +215,6 @@ export default function ArenaPage() {
     }, 1000);
   };
 
-  // 2. MID-GAME NAVIGATION PROTECTION (BROWSER REFRESH & TAB CLOSE)
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (gameState === 'RUNNING') {
@@ -127,7 +227,6 @@ export default function ArenaPage() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [gameState]);
 
-  // 3. MID-GAME NAVIGATION PROTECTION (NAVBAR & IN-PAGE LINKS)
   useEffect(() => {
     if (gameState !== 'RUNNING') return;
 
@@ -157,7 +256,6 @@ export default function ArenaPage() {
     }
   };
 
-  // 4. LIVE 30-DAY MARKET TICKER ENGINE
   useEffect(() => {
     if (gameState !== 'RUNNING') return;
 
@@ -287,12 +385,9 @@ export default function ArenaPage() {
     <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-16">
       <Navbar />
 
-      {/* 🎮 LOBBY VIEW (CLEAN MINIMAL LAUNCHER CARD ONLY) */}
       {gameState === 'LOBBY' ? (
         <div className="min-h-[80vh] flex items-center justify-center p-4">
           <div className="bg-[#0f0505] border border-[#2b0808] max-w-lg w-full rounded-3xl p-8 shadow-2xl text-center space-y-6 relative overflow-hidden animate-fadeIn">
-            
-            {/* LOBBY CLOSE (X) BUTTON */}
             <button
               type="button"
               onClick={() => router.push('/')}
@@ -312,7 +407,7 @@ export default function ArenaPage() {
                 Trade 10 fast-paced high-beta assets over a 30-day timeline. Test your instincts against AI market events!
               </p>
             </div>
-            <button 
+            <button
               onClick={startCountdownSequence}
               className="w-full py-4 bg-[#ff3333] hover:bg-[#dc2626] text-white font-black uppercase text-sm tracking-wider rounded-2xl shadow-2xl transition-all active:scale-95 cursor-pointer"
             >
@@ -321,10 +416,7 @@ export default function ArenaPage() {
           </div>
         </div>
       ) : (
-        /* 🚀 MAIN ARENA GAMEPLAY VIEW (RUNNING or FINISHED) */
         <div className="max-w-[1240px] mx-auto px-4 pt-4 space-y-6">
-          
-          {/* HEADER BAR */}
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-[#2b0808] pb-4 relative z-40">
             <div>
               <h1 className="text-2xl font-black tracking-tight text-white flex items-center gap-2">
@@ -346,7 +438,6 @@ export default function ArenaPage() {
                 </div>
               </div>
 
-              {/* HEADER EXIT / CLOSE (X) BUTTON */}
               <button
                 type="button"
                 onClick={handleHeaderCloseClick}
@@ -358,14 +449,12 @@ export default function ArenaPage() {
             </div>
           </div>
 
-          {/* EVENT BROADCAST */}
           {activeEvent && (
             <div className={`p-4 rounded-2xl border text-xs font-black shadow-lg animate-bounce ${activeEvent.col}`}>
               {activeEvent.msg}
             </div>
           )}
 
-          {/* METRICS DASHBOARD */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4 shadow-xl">
               <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Arena Cash</span>
@@ -387,17 +476,14 @@ export default function ArenaPage() {
             </div>
           </div>
 
-          {/* MAIN LAYOUT: COMPACT CARDS GRID + LEADERBOARD */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            {/* COMPACT CARDS GRID */}
             <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-3">
               {gameStocks.map(st => {
                 const hold = gameHoldings[st.sym];
                 const isUp = !st.changePct.startsWith('-');
 
                 return (
-                  <div 
+                  <div
                     key={st.sym}
                     onClick={() => {
                       if (gameState === 'RUNNING') {
@@ -422,15 +508,14 @@ export default function ArenaPage() {
                       </span>
                     </div>
 
-                    {/* MINI SPARKLINE TREND GRAPH */}
                     <div className="h-6 w-full flex items-end gap-1 pt-1">
                       {st.history.map((val, idx) => {
                         const max = Math.max(...st.history);
                         const min = Math.min(...st.history);
                         const heightPct = max === min ? 50 : Math.max(15, ((val - min) / (max - min)) * 100);
                         return (
-                          <div 
-                            key={idx} 
+                          <div
+                            key={idx}
                             className={`flex-1 rounded-t transition-all ${isUp ? 'bg-emerald-500/60 group-hover:bg-emerald-400' : 'bg-rose-500/60 group-hover:bg-rose-400'}`}
                             style={{ height: `${heightPct}%` }}
                           />
@@ -453,7 +538,6 @@ export default function ArenaPage() {
               })}
             </div>
 
-            {/* LEADERBOARD SIDEBAR */}
             <div className="space-y-4">
               <div className="bg-[#0f0505] border border-[#2b0808] rounded-3xl p-5 shadow-xl space-y-4">
                 <h3 className="font-black text-xs uppercase tracking-wider text-slate-400 border-b border-[#2b0808] pb-3 flex items-center justify-between">
@@ -462,7 +546,7 @@ export default function ArenaPage() {
                 </h3>
                 <div className="space-y-2.5">
                   {sortedLeaderboard.map((player, idx) => (
-                    <div 
+                    <div
                       key={player.name}
                       className={`flex justify-between items-center text-xs p-3 rounded-2xl border ${player.name.includes('You') ? 'bg-[#1a0808] border-[#7a0000] font-black text-[#ff3333]' : 'border-[#2b0808] bg-[#0f0505] text-slate-300'}`}
                     >
@@ -475,7 +559,7 @@ export default function ArenaPage() {
                   ))}
                 </div>
 
-                <button 
+                <button
                   onClick={resetChallengeArena}
                   className="w-full text-center py-3 border border-[#2b0808] hover:border-rose-900/60 text-slate-400 hover:text-rose-400 text-xs font-bold bg-[#1a0808] rounded-2xl transition-all cursor-pointer"
                 >
@@ -491,7 +575,7 @@ export default function ArenaPage() {
                   <div className="text-2xl font-black font-mono bg-black/50 p-3 rounded-2xl border border-white/10">
                     ₹{Math.round(currentTotalGameVal).toLocaleString('en-IN')}
                   </div>
-                  <button 
+                  <button
                     onClick={resetChallengeArena}
                     className="w-full py-3.5 bg-[#ff3333] hover:bg-[#dc2626] text-white font-black uppercase text-xs tracking-wider rounded-2xl shadow-lg transition-all cursor-pointer"
                   >
@@ -500,13 +584,10 @@ export default function ArenaPage() {
                 </div>
               )}
             </div>
-
           </div>
-
         </div>
       )}
 
-      {/* 🚀 DRAMATIC 3-2-1 COUNTDOWN OVERLAY */}
       {gameState === 'COUNTDOWN' && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex flex-col items-center justify-center">
           <div className="text-8xl font-black text-[#ff3333] animate-ping font-mono">
@@ -518,7 +599,6 @@ export default function ArenaPage() {
         </div>
       )}
 
-      {/* ⚠️ MID-GAME NAVIGATION WARNING MODAL */}
       {showExitModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
           <div className="bg-[#0f0505] border border-[#7a0000] max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-5 text-center">
@@ -530,13 +610,13 @@ export default function ArenaPage() {
               </p>
             </div>
             <div className="flex gap-3">
-              <button 
+              <button
                 onClick={confirmExitAndNavigate}
                 className="flex-1 bg-rose-700 hover:bg-rose-800 text-white font-black text-xs uppercase py-3 rounded-xl transition-all cursor-pointer"
               >
-                Forfeit & Leave
+                Forfeit &amp; Leave
               </button>
-              <button 
+              <button
                 onClick={() => {
                   setShowExitModal(false);
                   setPendingHref(null);
@@ -550,108 +630,116 @@ export default function ArenaPage() {
         </div>
       )}
 
-      {/* 🚀 COMPANY DOSSIER & TRADING MODAL */}
+      {/* COMPANY DOSSIER & TRADING MODAL */}
       {activeModalStockData && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
-          <div className="bg-[#0f0505] border border-[#2b0808] max-w-xl w-full rounded-3xl p-6 shadow-2xl space-y-6 relative overflow-hidden">
-            
-            {/* CLOSE BUTTON */}
-            <button 
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn overflow-y-auto">
+          <div className="bg-[#0f0505] border border-[#2b0808] max-w-5xl w-full rounded-3xl p-5 md:p-6 shadow-2xl relative my-auto">
+            <button
               onClick={() => setSelectedStockModal(null)}
-              className="absolute top-5 right-5 h-8 w-8 bg-[#1a0808] border border-[#2b0808] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="absolute top-4 right-4 h-8 w-8 bg-[#1a0808] border border-[#2b0808] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer z-10"
+              aria-label="Close company details"
             >
               ✕
             </button>
 
-            {/* HEADER */}
-            <div className="flex items-center gap-4">
-              <div className="text-4xl p-3 bg-[#1a0808] border border-[#2b0808] rounded-2xl">
-                {activeModalStockData.icon}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+              {/* LEFT: PRICE GRAPH */}
+              <div className="min-w-0">
+                <ArenaPriceChart stock={activeModalStockData} />
               </div>
-              <div>
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#ff3333] bg-[#1a0808] border border-[#2b0808] px-2 py-0.5 rounded">
-                  {activeModalStockData.sector}
-                </span>
-                <h2 className="text-xl font-black text-white mt-1">{activeModalStockData.name} ({activeModalStockData.sym})</h2>
+
+              {/* RIGHT: COMPANY DETAILS AND TRADING CONTROLS */}
+              <div className="min-w-0 space-y-5 pt-1">
+                <div className="flex items-center gap-4 pr-8">
+                  <div className="text-4xl p-3 bg-[#1a0808] border border-[#2b0808] rounded-2xl">
+                    {activeModalStockData.icon}
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#ff3333] bg-[#1a0808] border border-[#2b0808] px-2 py-0.5 rounded">
+                      {activeModalStockData.sector}
+                    </span>
+                    <h2 className="text-xl font-black text-white mt-1">
+                      {activeModalStockData.name} ({activeModalStockData.sym})
+                    </h2>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-300 bg-[#1a0808] p-3.5 rounded-2xl border border-[#2b0808]">
+                  {activeModalStockData.desc}
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 bg-[#1a0808] p-4 rounded-2xl border border-[#2b0808] font-mono text-xs">
+                  <div>
+                    <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Current Asset Rate</span>
+                    <span className="text-lg font-black text-white">
+                      ₹{activeModalStockData.price.toLocaleString('en-IN')}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Owned In Position</span>
+                    <span className="text-lg font-black text-[#ff3333]">
+                      {activeModalHolding ? `${activeModalHolding.shares} Units` : '0 Units'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+                    Order Quantity Size
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      value={tradeQty}
+                      onChange={e => setTradeQty(Math.max(1, parseInt(e.target.value) || 1))}
+                      className="flex-1 min-w-[100px] bg-[#1a0808] border border-[#2b0808] rounded-2xl px-4 py-2.5 font-mono text-sm font-bold text-white focus:outline-none focus:border-[#7a0000]"
+                    />
+                    <button
+                      onClick={() => setTradeQty(5)}
+                      className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
+                    >
+                      5x
+                    </button>
+                    <button
+                      onClick={() => setTradeQty(10)}
+                      className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
+                    >
+                      10x
+                    </button>
+                    <button
+                      onClick={() => {
+                        const maxPossible = Math.floor(gameBalance / activeModalStockData.price);
+                        setTradeQty(Math.max(1, maxPossible));
+                      }}
+                      className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-[#ff3333] cursor-pointer"
+                    >
+                      MAX
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 pt-1">
+                  <button
+                    onClick={() => handleGameTrade(activeModalStockData.sym, 'BUY', tradeQty)}
+                    disabled={gameState !== 'RUNNING'}
+                    className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-2xl shadow-lg transition-all active:scale-95 disabled:opacity-40 cursor-pointer"
+                  >
+                    Buy Asset
+                  </button>
+                  <button
+                    onClick={() => handleGameTrade(activeModalStockData.sym, 'SELL', tradeQty)}
+                    disabled={gameState !== 'RUNNING' || !activeModalHolding}
+                    className="flex-1 bg-rose-700 hover:bg-rose-800 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-2xl shadow-lg transition-all active:scale-95 disabled:opacity-40 cursor-pointer"
+                  >
+                    Sell Asset
+                  </button>
+                </div>
               </div>
             </div>
-
-            {/* DESCRIPTION */}
-            <p className="text-xs text-slate-300 bg-[#1a0808] p-3.5 rounded-2xl border border-[#2b0808]">
-              {activeModalStockData.desc}
-            </p>
-
-            {/* LIVE PRICE & STATS */}
-            <div className="grid grid-cols-2 gap-4 bg-[#1a0808] p-4 rounded-2xl border border-[#2b0808] font-mono text-xs">
-              <div>
-                <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Current Asset Rate</span>
-                <span className="text-lg font-black text-white">₹{activeModalStockData.price.toLocaleString('en-IN')}</span>
-              </div>
-              <div>
-                <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Owned In Position</span>
-                <span className="text-lg font-black text-[#ff3333]">
-                  {activeModalHolding ? `${activeModalHolding.shares} Units` : '0 Units'}
-                </span>
-              </div>
-            </div>
-
-            {/* QUANTITY INPUT & PRESETS */}
-            <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Order Quantity Size</label>
-              <div className="flex gap-2">
-                <input 
-                  type="number"
-                  min="1"
-                  value={tradeQty}
-                  onChange={e => setTradeQty(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="flex-1 bg-[#1a0808] border border-[#2b0808] rounded-2xl px-4 py-2.5 font-mono text-sm font-bold text-white focus:outline-none focus:border-[#7a0000]"
-                />
-                <button 
-                  onClick={() => setTradeQty(5)} 
-                  className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
-                >
-                  5x
-                </button>
-                <button 
-                  onClick={() => setTradeQty(10)} 
-                  className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
-                >
-                  10x
-                </button>
-                <button 
-                  onClick={() => {
-                    const maxPossible = Math.floor(gameBalance / activeModalStockData.price);
-                    setTradeQty(Math.max(1, maxPossible));
-                  }} 
-                  className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-[#ff3333] cursor-pointer"
-                >
-                  MAX
-                </button>
-              </div>
-            </div>
-
-            {/* ACTION BUTTONS */}
-            <div className="flex gap-3 pt-2">
-              <button 
-                onClick={() => handleGameTrade(activeModalStockData.sym, 'BUY', tradeQty)}
-                disabled={gameState !== 'RUNNING'}
-                className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-2xl shadow-lg transition-all active:scale-95 disabled:opacity-40 cursor-pointer"
-              >
-                Buy Asset
-              </button>
-              <button 
-                onClick={() => handleGameTrade(activeModalStockData.sym, 'SELL', tradeQty)}
-                disabled={gameState !== 'RUNNING' || !activeModalHolding}
-                className="flex-1 bg-rose-700 hover:bg-rose-800 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-2xl shadow-lg transition-all active:scale-95 disabled:opacity-40 cursor-pointer"
-              >
-                Sell Asset
-              </button>
-            </div>
-
           </div>
         </div>
       )}
-
     </main>
   );
 }
