@@ -388,7 +388,10 @@ export default function RealSimulatorPage() {
   const [pendingOrder, setPendingOrder] = useState(null);
   const [processingStatusText, setProcessingStatusText] = useState('Preparing simulated order...');
   const [executedReceipt, setExecutedReceipt] = useState(null);
+  const [portfolioReady, setPortfolioReady] = useState(false);
+  const [portfolioError, setPortfolioError] = useState('');
   const saveTimerRef = useRef(null);
+  const busyRef = useRef(false);
 
   useEffect(() => {
     const tick = () => {
@@ -438,10 +441,85 @@ export default function RealSimulatorPage() {
     return true;
   }, [calculateHoldingsValue]);
 
+  // Only updates net_worth. Cash is saved only when a trade happens, so a device
+  // with stale data can never overwrite the cash balance of another device.
+  const persistNetWorth = useCallback(async (userId, balance, holdings, priceMap) => {
+    if (!userId || !priceMap || !Object.keys(priceMap).length) return false;
+
+    const holdingsValue = calculateHoldingsValue(holdings, priceMap);
+    const totalNetWorth = Number((Number(balance) + holdingsValue).toFixed(2));
+
+    if (!Number.isFinite(totalNetWorth)) return false;
+
+    const { error } = await supabase
+      .from('profiles')
+      .update({ net_worth: totalNetWorth })
+      .eq('id', userId);
+
+    if (error) {
+      console.error('Net worth save failed:', error);
+      return false;
+    }
+
+    return true;
+  }, [calculateHoldingsValue]);
+
+  // The database is the single source of truth, so every device sees the same portfolio.
+  const loadPortfolio = useCallback(async (userId) => {
+    const [
+      { data: profile, error: profileError },
+      { data: rows, error: holdingsError },
+    ] = await Promise.all([
+      supabase
+        .from('profiles')
+        .select('wallet_balance')
+        .eq('id', userId)
+        .maybeSingle(),
+      supabase
+        .from('user_holdings')
+        .select('sym, shares, avg_price')
+        .eq('user_id', userId),
+    ]);
+
+    const describe = (e) =>
+      [e?.message, e?.code, e?.details, e?.hint].filter(Boolean).join(' | ') ||
+      JSON.stringify(e, Object.getOwnPropertyNames(e || {}));
+
+    if (profileError) console.error('Profile restore failed:', describe(profileError));
+    if (holdingsError) console.error('Holdings restore failed:', describe(holdingsError));
+
+    if (profileError || holdingsError) {
+      setPortfolioError(
+        profileError
+          ? 'profiles: ' + describe(profileError)
+          : 'user_holdings: ' + describe(holdingsError)
+      );
+      return null;
+    }
+
+    const holdings = {};
+    (rows || []).forEach((row) => {
+      holdings[row.sym] = {
+        sym: row.sym,
+        shares: Number(row.shares),
+        avgPrice: Number(row.avg_price),
+      };
+    });
+
+    const savedBalance = profile?.wallet_balance;
+    const balance = Number(savedBalance);
+    const hasBalance =
+      savedBalance !== null && savedBalance !== undefined && Number.isFinite(balance);
+
+    return { balance: hasBalance ? balance : null, holdings };
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
 
     const syncUserSession = async () => {
+      if (busyRef.current) return;
+
       try {
         const {
           data: { session },
@@ -455,57 +533,20 @@ export default function RealSimulatorPage() {
           const currentUser = session.user;
           setUser(currentUser);
 
-          const [
-            { data: profile, error: profileError },
-            { data: rows, error: holdingsError },
-          ] = await Promise.all([
-            supabase
-              .from('profiles')
-              .select('wallet_balance, balance')
-              .eq('id', currentUser.id)
-              .maybeSingle(),
-            supabase
-              .from('user_holdings')
-              .select('sym, shares, avg_price')
-              .eq('user_id', currentUser.id),
-          ]);
+          const restored = await loadPortfolio(currentUser.id);
+          if (cancelled || busyRef.current) return;
 
-          if (profileError) console.error('Profile restore failed:', profileError);
-          if (holdingsError) console.error('Holdings restore failed:', holdingsError);
-
-          let holdings = {};
-
-          if (rows?.length) {
-            rows.forEach((row) => {
-              holdings[row.sym] = {
-                sym: row.sym,
-                shares: Number(row.shares),
-                avgPrice: Number(row.avg_price),
-              };
-            });
-
-            localStorage.setItem(
-              `bullrun_holdings_${currentUser.id}`,
-              JSON.stringify(holdings)
+          if (!restored) {
+            setPortfolioReady(false);
+            setMarketMessage(
+              'Could not load your saved portfolio. Refresh the page; trading is paused to protect your data.'
             );
-          } else {
-            try {
-              holdings = JSON.parse(
-                localStorage.getItem(`bullrun_holdings_${currentUser.id}`) || '{}'
-              );
-            } catch {
-              holdings = {};
-            }
+            return;
           }
 
-          const savedBalance = profile?.wallet_balance ?? profile?.balance;
-          let balance = Number(savedBalance);
+          let balance = restored.balance;
 
-          if (
-            savedBalance === null ||
-            savedBalance === undefined ||
-            !Number.isFinite(balance)
-          ) {
+          if (balance === null) {
             const cached = localStorage.getItem(`bullrun_wallet_${currentUser.id}`);
 
             balance =
@@ -522,18 +563,21 @@ export default function RealSimulatorPage() {
           }
 
           if (!cancelled) {
-            setRealHoldings(holdings);
+            setRealHoldings(restored.holdings);
             setRealBalance(balance);
+            setPortfolioReady(true);
+            setPortfolioError('');
+            setMarketMessage('');
 
+            localStorage.setItem(`bullrun_wallet_${currentUser.id}`, String(balance));
             localStorage.setItem(
-              `bullrun_wallet_${currentUser.id}`,
-              String(balance)
+              `bullrun_holdings_${currentUser.id}`,
+              JSON.stringify(restored.holdings)
             );
-
-            await persistPortfolio(currentUser.id, balance, holdings, prices);
           }
         } else {
           setUser(null);
+          setPortfolioReady(false);
 
           let guestHoldings = {};
 
@@ -573,10 +617,33 @@ export default function RealSimulatorPage() {
       cancelled = true;
       subscription.unsubscribe();
     };
-    // Prices are intentionally not dependencies here.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [persistPortfolio]);
+  }, [loadPortfolio]);
 
+  // Pull in trades made on other devices (every 20s and when the tab regains focus).
+  useEffect(() => {
+    if (!user || !portfolioReady) return undefined;
+
+    let cancelled = false;
+
+    const resync = async () => {
+      if (busyRef.current || document.hidden) return;
+
+      const latest = await loadPortfolio(user.id);
+      if (cancelled || busyRef.current || !latest) return;
+
+      if (latest.balance !== null) setRealBalance(latest.balance);
+      setRealHoldings(latest.holdings);
+    };
+
+    const timer = setInterval(resync, 20000);
+    document.addEventListener('visibilitychange', resync);
+
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', resync);
+    };
+  }, [user, portfolioReady, loadPortfolio]);
   const fetchSimulatedPrices = useCallback(async () => {
     try {
       const response = await fetch('/api/historical-prices', {
@@ -621,34 +688,54 @@ export default function RealSimulatorPage() {
     }
   }, []);
 
+  // Refresh on shared wall-clock boundaries (e.g. :00, :15, :30, :45 seconds),
+  // so every device asks for the same price tick at the same moment.
   useEffect(() => {
+    let cancelled = false;
+    let timer;
+
     fetchSimulatedPrices();
 
-    const timer = setInterval(fetchSimulatedPrices, PRICE_REFRESH_MS);
-    return () => clearInterval(timer);
-  }, [fetchSimulatedPrices]);
+    const schedule = () => {
+      const now = Date.now();
+      const next = Math.ceil((now + 1) / PRICE_REFRESH_MS) * PRICE_REFRESH_MS + 1000;
 
+      timer = setTimeout(async () => {
+        await fetchSimulatedPrices();
+        if (!cancelled) schedule();
+      }, next - now);
+    };
+
+    schedule();
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [fetchSimulatedPrices]);
   const getHoldingsValue = useCallback(
     () => calculateHoldingsValue(realHoldings, prices),
     [realHoldings, prices, calculateHoldingsValue]
   );
 
+  // Keeps the leaderboard value (cash + holdings at the shared price) up to date.
   useEffect(() => {
-    if (!user) return undefined;
+    if (!user || !portfolioReady || !Object.keys(prices).length) return undefined;
 
     if (saveTimerRef.current) {
       clearTimeout(saveTimerRef.current);
     }
 
     saveTimerRef.current = setTimeout(() => {
-      persistPortfolio(user.id, realBalance, realHoldings, prices);
+      if (!busyRef.current) {
+        persistNetWorth(user.id, realBalance, realHoldings, prices);
+      }
     }, SAVE_DEBOUNCE_MS);
 
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
-  }, [realBalance, realHoldings, prices, user, persistPortfolio]);
-
+  }, [realBalance, realHoldings, prices, user, portfolioReady, persistNetWorth]);
   const filteredAssets = useMemo(
     () =>
       selectedCategory === 'All Assets'
@@ -673,6 +760,11 @@ export default function RealSimulatorPage() {
   };
 
   const initiateOrderReview = (type) => {
+    if (user && !portfolioReady) {
+      alert('Your saved portfolio is still loading. Please try again in a moment.');
+      return;
+    }
+
     if (!marketOpen) {
       alert(
         `The simulated market is closed. Trading hours are Monday to Friday, 9:15 AM to 3:30 PM IST. Current India time: ${indiaTime}.`
@@ -718,7 +810,7 @@ export default function RealSimulatorPage() {
     setExecutedReceipt(null);
     setOrderStage('REVIEW');
   };
-  const processAndExecuteOrder = async () => {
+  const executeOrder = async () => {
     if (!pendingOrder || orderStage === 'PROCESSING') return;
 
     if (!marketOpen) {
@@ -852,6 +944,17 @@ export default function RealSimulatorPage() {
     setOrderStage('SUCCESS');
   };
 
+  const processAndExecuteOrder = async () => {
+    if (busyRef.current) return;
+    busyRef.current = true;
+
+    try {
+      await executeOrder();
+    } finally {
+      busyRef.current = false;
+    }
+  };
+
   const holdingsValue = getHoldingsValue();
   const netWorth = Number((realBalance + holdingsValue).toFixed(2));
   const netReturn = netWorth - START_BALANCE;
@@ -886,6 +989,12 @@ export default function RealSimulatorPage() {
         <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs text-amber-200">
           These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice.
         </div>
+
+        {portfolioError && (
+          <div className="p-3 rounded-xl text-xs bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">
+            Portfolio load error: {portfolioError}
+          </div>
+        )}
 
         {marketMessage && (
           <div className="p-3 rounded-xl text-xs bg-rose-950/40 border border-rose-900/60 text-rose-300">

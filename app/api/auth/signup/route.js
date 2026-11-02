@@ -1,13 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) throw new Error('Server is missing Supabase environment variables.');
+  return createClient(url, key);
+}
 
 export async function POST(request) {
   try {
+    const supabase = getSupabase();
     const { name, email, password, role, schoolCode, specificClassId, documentUrl } = await request.json();
 
     // 1. Check if student is signing up with a valid classroom token in 'school_classes'

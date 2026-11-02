@@ -1,0 +1,26 @@
+warning: in the working copy of 'app/api/auth/signup/route.js', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/app/api/auth/signup/route.js b/app/api/auth/signup/route.js[m
+[1mindex 3a63546d..5db79c3b 100644[m
+[1m--- a/app/api/auth/signup/route.js[m
+[1m+++ b/app/api/auth/signup/route.js[m
+[36m@@ -1,13 +1,16 @@[m
+ import { createClient } from '@supabase/supabase-js';[m
+ import { NextResponse } from 'next/server';[m
+ [m
+[31m-const supabase = createClient([m
+[31m-  process.env.NEXT_PUBLIC_SUPABASE_URL,[m
+[31m-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY[m
+[31m-);[m
+[32m+[m[32mfunction getSupabase() {[m
+[32m+[m[32m  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;[m
+[32m+[m[32m  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;[m
+[32m+[m[32m  if (!url || !key) throw new Error('Server is missing Supabase environment variables.');[m
+[32m+[m[32m  return createClient(url, key);[m
+[32m+[m[32m}[m
+ [m
+ export async function POST(request) {[m
+   try {[m
+[32m+[m[32m    const supabase = getSupabase();[m
+     const { name, email, password, role, schoolCode, specificClassId, documentUrl } = await request.json();[m
+ [m
+     // 1. Check if student is signing up with a valid classroom token in 'school_classes'[m

@@ -60,23 +60,36 @@ export default function OnboardingTour() {
     async function checkAuthAndTourStatus() {
       try {
         const { data: { session } } = await supabase.auth.getSession();
-        
-        // ONLY SHOW TOUR IF USER IS LOGGED IN
-        if (session?.user) {
-          const userId = session.user.id;
-          const hasSeenTour = localStorage.getItem(`bullrun_has_seen_tour_${userId}`);
-          
-          // IF USER HAS NEVER SEEN THE TOUR BEFORE
-          if (!hasSeenTour) {
-            setIsOpen(true);
-            
-            // LOAD SAVED STEP FROM SESSION STORAGE SO NAVIGATION DOES NOT RESET STEP 1
-            const savedStep = sessionStorage.getItem(`bullrun_tour_step_${userId}`);
-            if (savedStep !== null) {
-              setCurrentStep(parseInt(savedStep, 10));
-            }
-          }
+        if (!session?.user) return;
+
+        const userId = session.user.id;
+        const seenKey = `bullrun_has_seen_tour_${userId}`;
+        const stepKey = `bullrun_tour_step_${userId}`;
+
+        const savedStep = sessionStorage.getItem(stepKey);
+        const isResuming = savedStep !== null;
+
+        // Already shown once in this browser: never show again (except mid-tour page changes)
+        if (localStorage.getItem(seenKey) && !isResuming) return;
+
+        // Only brand-new accounts (created in the last 30 minutes) get the tour
+        const createdAt = new Date(session.user.created_at).getTime();
+        const isNewAccount =
+          Number.isFinite(createdAt) && Date.now() - createdAt < 30 * 60 * 1000;
+
+        if (!isResuming && !isNewAccount) return;
+
+        if (isResuming) {
+          const step = parseInt(savedStep, 10);
+          setCurrentStep(
+            Number.isInteger(step) && step >= 0 && step < TOUR_STEPS.length ? step : 0
+          );
+        } else {
+          localStorage.setItem(seenKey, 'true');
+          sessionStorage.setItem(stepKey, '0');
         }
+
+        setIsOpen(true);
       } catch (err) {
         console.error('Error verifying tour auth state:', err);
       }
