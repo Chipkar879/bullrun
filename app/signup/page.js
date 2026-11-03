@@ -83,7 +83,13 @@ function PasswordBeamInput({
 function SignupForm() {
   const searchParams = useSearchParams();
   const [isLogin, setIsLogin] = useState(false);
-  const [accountType, setAccountType] = useState('personal');
+
+  // Step 1: Personal or School. Step 2 (School only): Student or Admin.
+  // Admin is stored as the existing 'teacher' role so approvals and the admin queue keep working.
+  const [accountGroup, setAccountGroup] = useState('personal');
+  const [schoolRole, setSchoolRole] = useState('student');
+  const accountType = accountGroup === 'personal' ? 'personal' : schoolRole;
+
   const [documentFile, setDocumentFile] = useState(null);
   const [availableClasses, setAvailableClasses] = useState([]);
   const [formData, setFormData] = useState({ name: '', email: '', password: '', schoolCode: '', specificClassId: '' });
@@ -109,6 +115,26 @@ function SignupForm() {
   }, [searchParams]);
 
   const say = (text) => setSpeechText(text);
+
+  const chooseGroup = (group) => {
+    setAccountGroup(group);
+
+    if (group === 'personal') {
+      setFormData((prev) => ({ ...prev, schoolCode: '', specificClassId: '' }));
+      setAvailableClasses([]);
+      setDocumentFile(null);
+      say('Personal track selected. Just you and the market.');
+    } else {
+      say('School track! Are you a student or an admin?');
+    }
+  };
+
+  const chooseSchoolRole = (role) => {
+    setSchoolRole(role);
+    setFormData((prev) => ({ ...prev, specificClassId: '' }));
+    if (role !== 'teacher') setDocumentFile(null);
+    say(role === 'student' ? 'Student track. Enter your school code.' : 'Admin track. I will need your appointment letter.');
+  };
 
   const followInputLength = (valLength) => {
     const ratio = Math.min(valLength / 22, 1);
@@ -250,8 +276,8 @@ function SignupForm() {
             email: formData.email,
             password: formData.password,
             role: accountType,
-            schoolCode: formData.schoolCode.toUpperCase(),
-            specificClassId: formData.specificClassId || null,
+            schoolCode: accountType === 'personal' ? '' : formData.schoolCode.toUpperCase(),
+            specificClassId: accountType === 'student' ? (formData.specificClassId || null) : null,
             documentUrl: uploadedUrl
           }),
         });
@@ -421,15 +447,42 @@ function SignupForm() {
             </div>
 
             {!isLogin && (
-              <div className="grid grid-cols-3 gap-1 bg-[#1a0808] p-1 border border-[#2b0808] rounded-xl font-mono">
-                {['personal', 'student', 'teacher'].map((type) => (
-                  <button
-                    key={type} type="button" onClick={() => { setAccountType(type); say(`Switched to ${type} track initialization.`); }}
-                    className={`py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${accountType === type ? 'bg-[#7a0000] text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
-                  >
-                    {type}
-                  </button>
-                ))}
+              <div className="space-y-2 font-mono">
+                {/* STEP 1: PERSONAL OR SCHOOL */}
+                <div className="grid grid-cols-2 gap-1 bg-[#1a0808] p-1 border border-[#2b0808] rounded-xl">
+                  {[
+                    { key: 'personal', label: '👤 Personal' },
+                    { key: 'school', label: '🏫 School' },
+                  ].map((option) => (
+                    <button
+                      key={option.key}
+                      type="button"
+                      onClick={() => chooseGroup(option.key)}
+                      className={`py-2.5 text-[11px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${accountGroup === option.key ? 'bg-[#7a0000] text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* STEP 2: STUDENT OR ADMIN (SCHOOL ONLY) */}
+                {accountGroup === 'school' && (
+                  <div className="grid grid-cols-2 gap-1 bg-[#1a0808] p-1 border border-[#2b0808] rounded-xl animate-fadeInFast">
+                    {[
+                      { key: 'student', label: '🎓 Student' },
+                      { key: 'teacher', label: '🛡️ Admin' },
+                    ].map((option) => (
+                      <button
+                        key={option.key}
+                        type="button"
+                        onClick={() => chooseSchoolRole(option.key)}
+                        className={`py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${schoolRole === option.key ? 'bg-[#3a0a0a] text-white border border-[#7a0000]' : 'text-slate-400 hover:text-white border border-transparent'}`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 
@@ -467,7 +520,7 @@ function SignupForm() {
                 />
               </div>
 
-              {!isLogin && (accountType === 'student' || accountType === 'teacher') && (
+              {!isLogin && accountGroup === 'school' && (
                 <div className="animate-fadeInFast">
                   <label className="block text-[11px] font-black uppercase text-[#ff3333] tracking-wider mb-1 font-mono">Master School Hub Code</label>
                   <input type="text" required className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm font-mono uppercase focus:outline-none focus:border-[#7a0000]" placeholder="E.G. DPS-MUMBAI" 

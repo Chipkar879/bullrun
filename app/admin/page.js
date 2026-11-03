@@ -1,11 +1,35 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
 
 // ⚠️ SUPER ADMIN IMMUNITY EMAIL
 const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
+const REFRESH_MS = 10000;
+
+const inr = (value) =>
+  `₹${Number(value || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
+
+// Same value the leaderboard ranks on (cash + holdings, saved by the simulator)
+const getNetWorth = (p) => Number(p.net_worth ?? p.wallet_balance ?? 0) || 0;
+
+const formatDuration = (seconds) => {
+  const total = Math.max(0, Math.round(Number(seconds) || 0));
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  return h + 'h ' + m + 'm';
+};
+
+// Stable order: highest net worth first, ties broken by id (same as the leaderboard)
+const rankProfiles = (list) =>
+  [...list]
+    .sort((a, b) => {
+      const diff = getNetWorth(b) - getNetWorth(a);
+      if (diff !== 0) return diff;
+      return String(a.id).localeCompare(String(b.id));
+    })
+    .map((p, index) => ({ ...p, rank: index + 1 }));
 
 // HELPER: CALCULATE EXACT EXPIRY & FREEZE STATUS
 const getProfileFreezeStatus = (p) => {
@@ -36,14 +60,15 @@ export default function SuperAdminDashboard() {
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const [allProfiles, setAllProfiles] = useState([]);
-  const [pendingTeachers, setPendingTeachers] = useState([]);
-  
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [activity, setActivity] = useState({});
+
   // Search & School Category Filter States
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSchoolFilter, setSelectedSchoolFilter] = useState('ALL');
 
   // Modal Inspection & Custom Days State
-  const [selectedProfile, setSelectedProfile] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
   const [customDaysInput, setCustomDaysInput] = useState('30');
 
   // Modal Real-Time Live Countdown State
@@ -55,12 +80,65 @@ export default function SuperAdminDashboard() {
     isExpired: false
   });
 
+  // The open dossier always reflects the latest synced data
+  const selectedProfile = useMemo(
+    () => allProfiles.find((p) => p.id === selectedId) || null,
+    [allProfiles, selectedId]
+  );
+
+  const pendingTeachers = useMemo(
+    () => allProfiles.filter((p) => p.role === 'teacher' && p.verification_status === 'pending'),
+    [allProfiles]
+  );
+
+  const patchProfile = useCallback((profileId, fields) => {
+    setAllProfiles((prev) =>
+      rankProfiles(prev.map((p) => (p.id === profileId ? { ...p, ...fields } : p)))
+    );
+  }, []);
+
+  const fetchMasterData = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
+
+    const { data, error } = await supabase.from('profiles').select('*');
+
+    if (error) {
+      console.error('Admin profile fetch failed:', error);
+      if (!silent) setLoading(false);
+      return;
+    }
+
+    setAllProfiles(rankProfiles(data || []));
+    setLastUpdated(new Date());
+    setLoading(false);
+
+    // Weekly time on site: last 7 IST days including today
+    const cutoff = new Date(Date.now() + 5.5 * 3600 * 1000 - 6 * 86400 * 1000)
+      .toISOString()
+      .slice(0, 10);
+
+    const { data: rows, error: actError } = await supabase
+      .from('user_activity')
+      .select('user_id, seconds')
+      .gte('day', cutoff);
+
+    if (actError) {
+      console.warn('Activity fetch failed:', actError.message);
+      return;
+    }
+
+    const totals = {};
+    (rows || []).forEach((r) => {
+      totals[r.user_id] = (totals[r.user_id] || 0) + Number(r.seconds || 0);
+    });
+    setActivity(totals);
+  }, []);
+
   useEffect(() => {
     const verifyIdentity = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user && session.user.email === SUPER_ADMIN_EMAIL) {
         setAuthorized(true);
-        fetchMasterData();
       } else {
         window.location.href = '/';
       }
@@ -68,38 +146,38 @@ export default function SuperAdminDashboard() {
     verifyIdentity();
   }, []);
 
-  const fetchMasterData = async () => {
-    setLoading(true);
-    
-    const { data: profiles } = await supabase.from('profiles').select('*');
-    
-    const sortedByWallet = [...(profiles || [])].sort(
-      (a, b) => (b.wallet_balance || 0) - (a.wallet_balance || 0)
-    );
+  // LIVE SYNC: initial load, realtime changes, plus a refresh every 10 seconds
+  useEffect(() => {
+    if (!authorized) return undefined;
 
-    const profilesWithRank = (profiles || []).map(p => {
-      const rank = sortedByWallet.findIndex(x => x.id === p.id) + 1;
-      return { ...p, rank };
-    });
+    fetchMasterData(false);
 
-    setAllProfiles(profilesWithRank);
+    const refresh = () => {
+      if (!document.hidden) fetchMasterData(true);
+    };
 
-    const { data: teachers } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('role', 'teacher')
-      .eq('verification_status', 'pending');
-    setPendingTeachers(teachers || []);
-    setLoading(false);
-  };
+    const channel = supabase
+      .channel('admin-profiles-live')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, refresh)
+      .subscribe();
+
+    const interval = setInterval(refresh, REFRESH_MS);
+    document.addEventListener('visibilitychange', refresh);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', refresh);
+      supabase.removeChannel(channel);
+    };
+  }, [authorized, fetchMasterData]);
 
   // 1. LIVE REAL-TIME COUNTDOWN TICKER FOR SELECTED PROFILE
   useEffect(() => {
-    if (!selectedProfile) return;
+    if (!selectedProfile) return undefined;
 
     const calculateTime = () => {
       const { expiryMs, isSuperAdmin, isFrozen } = getProfileFreezeStatus(selectedProfile);
-      
+
       if (isSuperAdmin) {
         setModalTimeLeft({ days: 999, hours: 0, minutes: 0, seconds: 0, isExpired: false });
         return;
@@ -132,12 +210,13 @@ export default function SuperAdminDashboard() {
       .update({ verification_status: status })
       .eq('id', teacherId);
 
-    if (!error) {
-      fetchMasterData();
-      if (selectedProfile?.id === teacherId) {
-        setSelectedProfile(prev => ({ ...prev, verification_status: status }));
-      }
+    if (error) {
+      console.error('Teacher update error:', error);
+      alert(`Failed to update teacher: ${error.message}`);
+      return;
     }
+
+    patchProfile(teacherId, { verification_status: status });
   };
 
   // 2. ADMIN CUSTOM DAYS ACTIVATION HANDLER
@@ -156,27 +235,21 @@ export default function SuperAdminDashboard() {
     const newExpiryDate = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString();
 
     try {
-      const { error } = await supabase
-        .from('profiles')
-        .update({
-          is_frozen: false,
-          is_premium: true,
-          access_expires_at: newExpiryDate
-        })
-        .eq('id', profileId);
-
-      if (error) throw error;
-
-      alert(`Successfully granted ${days} days of unfrozen access!`);
-      
       const updatedFields = {
         is_frozen: false,
         is_premium: true,
         access_expires_at: newExpiryDate
       };
 
-      setSelectedProfile(prev => prev ? { ...prev, ...updatedFields } : null);
-      setAllProfiles(prev => prev.map(p => p.id === profileId ? { ...p, ...updatedFields } : p));
+      const { error } = await supabase
+        .from('profiles')
+        .update(updatedFields)
+        .eq('id', profileId);
+
+      if (error) throw error;
+
+      alert(`Successfully granted ${days} days of unfrozen access!`);
+      patchProfile(profileId, updatedFields);
     } catch (err) {
       console.error("Custom days activation error:", err);
       alert(`Failed to extend access: ${err.message}`);
@@ -228,10 +301,7 @@ export default function SuperAdminDashboard() {
       }
 
       alert(`Account successfully ${action}D!`);
-
-      // Immediately synchronize local UI state
-      setSelectedProfile(prev => prev ? { ...prev, ...updatePayload } : null);
-      setAllProfiles(prev => prev.map(p => p.id === profileId ? { ...p, ...updatePayload } : p));
+      patchProfile(profileId, updatePayload);
     } catch (err) {
       console.error("Freeze toggle error:", err);
       alert(`Failed to update freeze state: ${err.message}`);
@@ -252,8 +322,8 @@ export default function SuperAdminDashboard() {
       if (error) throw error;
 
       alert("User dossier purged successfully.");
-      setSelectedProfile(null);
-      fetchMasterData();
+      setSelectedId(null);
+      setAllProfiles((prev) => rankProfiles(prev.filter((p) => p.id !== profileId)));
     } catch (err) {
       console.error("Deletion error:", err);
       alert(`Failed to delete dossier: ${err.message}`);
@@ -263,17 +333,17 @@ export default function SuperAdminDashboard() {
   // Extract School IDs
   const schoolList = useMemo(() => {
     const schools = new Set();
-    allProfiles.forEach(p => { 
-      if (p.school_id || p.school_code) schools.add(p.school_id || p.school_code); 
+    allProfiles.forEach(p => {
+      if (p.school_id || p.school_code) schools.add(p.school_id || p.school_code);
     });
-    return Array.from(schools);
+    return Array.from(schools).sort((a, b) => String(a).localeCompare(String(b)));
   }, [allProfiles]);
 
-  // Filter Roster
+  // Filter Roster (keeps the ranked order)
   const filteredProfiles = useMemo(() => {
     return allProfiles.filter(p => {
       const schoolIdentifier = p.school_id || p.school_code;
-      const matchesSearch = 
+      const matchesSearch =
         (p.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
         (p.email || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
         (schoolIdentifier || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -308,9 +378,9 @@ export default function SuperAdminDashboard() {
   return (
     <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
       <Navbar />
-      
+
       <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8 animate-fadeInFast">
-        
+
         {/* HEADER BLOCK */}
         <div className="border-b border-[#2b0808] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -323,8 +393,14 @@ export default function SuperAdminDashboard() {
             </p>
           </div>
 
-          <div className="bg-[#0f0505] border border-[#2b0808] px-4 py-2 rounded-xl text-xs font-mono text-slate-400">
-            Node ID: <span className="text-[#ff3333] font-bold">{SUPER_ADMIN_EMAIL}</span>
+          <div className="space-y-2 text-right">
+            <div className="bg-[#0f0505] border border-[#2b0808] px-4 py-2 rounded-xl text-xs font-mono text-slate-400">
+              Node ID: <span className="text-[#ff3333] font-bold">{SUPER_ADMIN_EMAIL}</span>
+            </div>
+            <div className="text-[10px] font-mono text-slate-500">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse" />
+              LIVE · updated {lastUpdated ? lastUpdated.toLocaleTimeString('en-IN') : '--'}
+            </div>
           </div>
         </div>
 
@@ -373,10 +449,11 @@ export default function SuperAdminDashboard() {
               <h2 className="text-sm font-black text-slate-300 uppercase tracking-wider flex items-center gap-2 font-mono">
                 📊 Application Users Matrix ({filteredProfiles.length} / {allProfiles.length})
               </h2>
+              <p className="text-[10px] font-mono text-slate-500 mt-1">Ranked by net worth, same as the leaderboard.</p>
             </div>
 
             <div className="w-full md:w-72 relative">
-              <input 
+              <input
                 type="text"
                 placeholder="🔍 Search name, email, school..."
                 value={searchQuery}
@@ -424,7 +501,7 @@ export default function SuperAdminDashboard() {
               return (
                 <div
                   key={p.id}
-                  onClick={() => setSelectedProfile(p)}
+                  onClick={() => setSelectedId(p.id)}
                   className="bg-[#1a0808] border-2 border-[#2b0808] hover:border-[#7a0000] p-5 rounded-2xl shadow-xl transition-all cursor-pointer group space-y-3 relative overflow-hidden"
                 >
                   <div className="flex justify-between items-start gap-2">
@@ -447,17 +524,19 @@ export default function SuperAdminDashboard() {
 
                   <div className="flex items-center justify-between pt-2 border-t border-[#2b0808] text-xs font-bold font-mono">
                     <div>
-                      <span className="text-[9px] uppercase text-slate-500 block">Balance</span>
-                      <span className="text-white">₹{(p.wallet_balance || 0).toLocaleString('en-IN')}</span>
+                      <span className="text-[9px] uppercase text-slate-500 block">Net Worth</span>
+                      <span className="text-emerald-400">{inr(getNetWorth(p))}</span>
+                      <span className="text-[9px] text-slate-500 block mt-0.5">Cash {inr(p.wallet_balance)}</span>
+                      <span className="text-[9px] text-sky-400 block mt-0.5">Week: {formatDuration(activity[p.id])}</span>
                     </div>
 
                     <div className="text-right">
                       <span className="text-[9px] uppercase text-slate-500 block">Status</span>
                       <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded border ${
-                        isSuperAdmin 
-                          ? 'bg-sky-950 text-sky-400 border-sky-800' 
-                          : isFrozen 
-                            ? 'bg-rose-950 text-rose-400 border-rose-800 animate-pulse' 
+                        isSuperAdmin
+                          ? 'bg-sky-950 text-sky-400 border-sky-800'
+                          : isFrozen
+                            ? 'bg-rose-950 text-rose-400 border-rose-800 animate-pulse'
                             : 'bg-emerald-950 text-emerald-400 border-emerald-800'
                       }`}>
                         {isSuperAdmin ? 'IMMUNE' : isFrozen ? 'FROZEN 🔒' : 'UNFROZEN 🔓'}
@@ -478,7 +557,7 @@ export default function SuperAdminDashboard() {
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/80 animate-fadeInFast">
             <div className="bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] animate-scaleUp">
-              
+
               {/* Modal Header */}
               <div className="p-6 border-b border-[#2b0808] flex items-center justify-between bg-[#1a0808]">
                 <div>
@@ -487,8 +566,8 @@ export default function SuperAdminDashboard() {
                   </h3>
                   <p className="text-xs font-mono text-slate-400">{selectedProfile.email}</p>
                 </div>
-                <button 
-                  onClick={() => setSelectedProfile(null)}
+                <button
+                  onClick={() => setSelectedId(null)}
                   className="w-8 h-8 rounded-full bg-[#0f0505] border border-[#2b0808] text-slate-400 font-bold hover:text-white transition cursor-pointer"
                 >
                   ✕
@@ -497,7 +576,7 @@ export default function SuperAdminDashboard() {
 
               {/* Modal Body */}
               <div className="p-6 overflow-y-auto space-y-6 text-left flex-1 font-mono">
-                
+
                 {/* ⚡ ADMIN CUSTOM ACCESS DURATION ACTIVATOR */}
                 {!isSuperAdmin && (
                   <div className="p-5 bg-[#1a0808] border-2 border-[#ff3333]/40 rounded-2xl space-y-3 shadow-xl">
@@ -541,8 +620,8 @@ export default function SuperAdminDashboard() {
                     <button
                       onClick={() => handleToggleFreezeStatus(selectedProfile.id, isFrozen, selectedProfile.email)}
                       className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-md transition cursor-pointer ${
-                        isFrozen 
-                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white' 
+                        isFrozen
+                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
                           : 'bg-[#ff3333] hover:bg-[#dc2626] text-white'
                       }`}
                     >
@@ -584,11 +663,26 @@ export default function SuperAdminDashboard() {
                   </div>
 
                   <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
-                    <span className="text-[10px] uppercase text-slate-500">Wallet Balance</span>
-                    <p className="text-emerald-400">₹{(selectedProfile.wallet_balance || 0).toLocaleString('en-IN')}</p>
+                    <span className="text-[10px] uppercase text-slate-500">Net Worth (live)</span>
+                    <p className="text-emerald-400">{inr(getNetWorth(selectedProfile))}</p>
                   </div>
 
                   <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Wallet Balance (cash)</span>
+                    <p className="text-white">{inr(selectedProfile.wallet_balance)}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Time on site (last 7 days)</span>
+                    <p className="text-sky-400">{formatDuration(activity[selectedProfile.id])}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Average per day (7-day)</span>
+                    <p className="text-sky-400">{formatDuration((activity[selectedProfile.id] || 0) / 7)}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1 col-span-1 md:col-span-2">
                     <span className="text-[10px] uppercase text-slate-500">Registration Date</span>
                     <p className="text-slate-300 text-[11px]">
                       {selectedProfile.created_at ? new Date(selectedProfile.created_at).toLocaleDateString() : 'N/A'}
@@ -608,7 +702,7 @@ export default function SuperAdminDashboard() {
                 </button>
 
                 <button
-                  onClick={() => setSelectedProfile(null)}
+                  onClick={() => setSelectedId(null)}
                   className="px-5 py-2 bg-[#0f0505] border border-[#2b0808] text-slate-300 rounded-xl text-xs font-black uppercase cursor-pointer"
                 >
                   Close
