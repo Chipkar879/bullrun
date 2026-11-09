@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
 
@@ -32,28 +32,37 @@ const rankProfiles = (list) =>
     .map((p, index) => ({ ...p, rank: index + 1 }));
 
 // HELPER: CALCULATE EXACT EXPIRY & FREEZE STATUS
-const getProfileFreezeStatus = (p) => {
+// `now` is passed in so the UI can re-evaluate every second.
+const getProfileFreezeStatus = (p, now = Date.now()) => {
   if (p.email === SUPER_ADMIN_EMAIL) {
-    return { isFrozen: false, isSuperAdmin: true, expiryMs: null };
+    return { isFrozen: false, isSuperAdmin: true, isPermanent: true, expiryMs: null };
   }
 
   // 1. Explicit admin freeze flag in database ALWAYS takes top priority
   if (p.is_frozen === true) {
-    return { isFrozen: true, isSuperAdmin: false, expiryMs: 0 };
+    return { isFrozen: true, isSuperAdmin: false, isPermanent: false, expiryMs: 0 };
   }
 
+  // 2. Premium with NO deadline = permanent access
+  if (!p.access_expires_at && p.is_premium) {
+    return { isFrozen: false, isSuperAdmin: false, isPermanent: true, expiryMs: null };
+  }
+
+  // 3. The deadline decides, even for premium / admin-granted accounts
   let expiryMs;
   if (p.access_expires_at) {
     expiryMs = new Date(p.access_expires_at).getTime();
   } else {
-    const createdAt = p.created_at ? new Date(p.created_at).getTime() : Date.now();
+    const createdAt = p.created_at ? new Date(p.created_at).getTime() : now;
     expiryMs = createdAt + (7 * 24 * 60 * 60 * 1000);
   }
 
-  const isExpired = Date.now() >= expiryMs;
-  const isFrozen = (isExpired && !p.is_premium);
-
-  return { isFrozen, isSuperAdmin: false, expiryMs };
+  return {
+    isFrozen: now >= expiryMs,
+    isSuperAdmin: false,
+    isPermanent: false,
+    expiryMs
+  };
 };
 
 export default function SuperAdminDashboard() {
@@ -62,6 +71,11 @@ export default function SuperAdminDashboard() {
   const [allProfiles, setAllProfiles] = useState([]);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [activity, setActivity] = useState({});
+
+  // Global clock: makes cards flip to FROZEN the moment time runs out
+  const [now, setNow] = useState(Date.now());
+  // Remembers which accounts we already auto-froze in the database
+  const autoFrozenRef = useRef(new Set());
 
   // Search & School Category Filter States
   const [searchQuery, setSearchQuery] = useState('');
@@ -171,14 +185,47 @@ export default function SuperAdminDashboard() {
     };
   }, [authorized, fetchMasterData]);
 
+  // GLOBAL 1-SECOND CLOCK (re-renders cards so expiry shows instantly)
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  // AUTO-FREEZE SYNC: when access expires, write is_frozen=true to the database
+  useEffect(() => {
+    if (!authorized) return;
+
+    allProfiles.forEach(async (p) => {
+      const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(p, now);
+
+      // If the account is active again (e.g. admin granted days), allow future auto-freeze
+      if (!isFrozen) autoFrozenRef.current.delete(p.id);
+
+      if (!isFrozen || isSuperAdmin || p.is_frozen === true) return;
+      if (autoFrozenRef.current.has(p.id)) return;
+
+      autoFrozenRef.current.add(p.id);
+
+      const fields = { is_frozen: true, is_premium: false };
+      const { error } = await supabase.from('profiles').update(fields).eq('id', p.id);
+
+      if (error) {
+        console.warn('Auto-freeze failed:', error.message);
+        return;
+      }
+
+      patchProfile(p.id, fields);
+    });
+  }, [now, allProfiles, authorized, patchProfile]);
+
   // 1. LIVE REAL-TIME COUNTDOWN TICKER FOR SELECTED PROFILE
   useEffect(() => {
     if (!selectedProfile) return undefined;
 
     const calculateTime = () => {
-      const { expiryMs, isSuperAdmin, isFrozen } = getProfileFreezeStatus(selectedProfile);
+      const { expiryMs, isSuperAdmin, isPermanent, isFrozen } = getProfileFreezeStatus(selectedProfile);
 
-      if (isSuperAdmin) {
+      if (isSuperAdmin || isPermanent) {
         setModalTimeLeft({ days: 999, hours: 0, minutes: 0, seconds: 0, isExpired: false });
         return;
       }
@@ -496,7 +543,7 @@ export default function SuperAdminDashboard() {
           {/* USER CARDS GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
             {filteredProfiles.map((p) => {
-              const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(p);
+              const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(p, now);
 
               return (
                 <div
@@ -552,7 +599,7 @@ export default function SuperAdminDashboard() {
 
       {/* DOSSIER INSPECTION MODAL */}
       {selectedProfile && (() => {
-        const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(selectedProfile);
+        const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(selectedProfile, now);
 
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/80 animate-fadeInFast">
