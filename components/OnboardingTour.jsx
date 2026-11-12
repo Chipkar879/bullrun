@@ -6,24 +6,24 @@ import { supabase } from '@/lib/supabase';
 
 const TOUR_STEPS = [
   {
-    title: '📈 1. Live Stock Simulator',
+    title: '📖 1. Learning Modules',
     badge: 'STEP 1 OF 6',
+    description: 'Start here. Master business fundamentals, technical analysis, valuation, and risk engineering across 5 level tracks and earn XP. Finish your first 2 modules and the simulator becomes the first page you see when you sign in.',
+    href: '/modules',
+    actionText: 'Next: Simulator →',
+  },
+  {
+    title: '📈 2. Live Stock Simulator',
+    badge: 'STEP 2 OF 6',
     description: 'Your ₹50,000 sandbox portfolio lives here. Execute real-time trades on BSE equities, Gold/Silver ETFs, and commodities with live TradingView feeds.',
     href: '/simulator',
     actionText: 'Next: Arena →',
   },
   {
-    title: '⚔️ 2. Volatility Arena',
-    badge: 'STEP 2 OF 6',
+    title: '⚔️ 3. Volatility Arena',
+    badge: 'STEP 3 OF 6',
     description: 'Enter high-frequency 30-day volatility matches against other traders to test your market reaction speed.',
     href: '/arena',
-    actionText: 'Next: Modules →',
-  },
-  {
-    title: '📖 3. Learning Arena Modules',
-    badge: 'STEP 3 OF 6',
-    description: 'Master business fundamentals, technical analysis, valuation, and risk engineering across 5 level tracks to earn XP.',
-    href: '/modules',
     actionText: 'Next: Daily Quiz →',
   },
   {
@@ -47,7 +47,7 @@ const TOUR_STEPS = [
     badge: 'STEP 6 OF 6',
     description: 'Your account starts with a 7-day free trial. Upgrade anytime to maintain continuous, un-frozen access to all platform features.',
     href: '/pricing',
-    actionText: 'Finish Tour & Start Trading! 🚀',
+    actionText: 'Finish Tour 🚀',
   },
 ];
 
