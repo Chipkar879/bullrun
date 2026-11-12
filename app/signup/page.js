@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
+import { goToLanding } from '@/lib/landing';
 
 // INTERACTIVE PASSWORD BEAM INPUT COMPONENT
 function PasswordBeamInput({ 
@@ -247,7 +248,7 @@ function SignupForm() {
         setMood('success');
         say(`Credentials verified! Access granted, ${formData.email.split('@')[0]}.`);
         setTimeout(() => {
-          window.location.href = '/simulator';
+          goToLanding();
         }, 800);
       } else {
         let uploadedUrl = null;
@@ -306,7 +307,7 @@ function SignupForm() {
         });
 
         setTimeout(() => {
-          window.location.href = '/simulator';
+          goToLanding();
         }, 1000);
       }
     } catch (err) {
