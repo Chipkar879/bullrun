@@ -6,7 +6,6 @@ const ROLES = [
   { key: 'accent', label: 'Accent', hint: 'Buttons, active tabs, XP and rewards' },
   { key: 'gain', label: 'Gains', hint: 'Profits, progress bars, quiz' },
   { key: 'loss', label: 'Losses', hint: 'Losses, alerts, NEW tags' },
-  { key: 'bg', label: 'Background', hint: 'Page and card colors (stays dark)' },
 ];
 
 function PaletteIcon() {
@@ -20,10 +19,27 @@ function PaletteIcon() {
   );
 }
 
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+    </svg>
+  );
+}
+
 export default function ThemeCustomizer() {
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false);
-  const [colors, setColors] = useState(null);
+  const [prefs, setPrefs] = useState(null);
   const [warnings, setWarnings] = useState([]);
   const [drafts, setDrafts] = useState({});
   const buttonRef = useRef(null);
@@ -31,20 +47,20 @@ export default function ThemeCustomizer() {
 
   const t = typeof window !== 'undefined' ? window.BullRunTheme : null;
 
-  // Load the saved colors once the page is on screen
+  // Load the saved choice once the page is on screen
   useEffect(() => {
     const engine = window.BullRunTheme;
     if (!engine) return undefined;
-    const res = engine.compute(engine.load() || engine.DEFAULTS);
-    setColors(res.clean);
-    setWarnings(res.warnings);
+    const current = engine.load() || engine.DEFAULTS;
+    setPrefs(current);
+    setWarnings(engine.compute(current).warnings);
     setReady(true);
 
     const onStorage = (e) => {
       if (e.key !== engine.KEY) return;
-      const next = engine.compute(engine.load() || engine.DEFAULTS);
-      setColors(next.clean);
-      setWarnings(next.warnings);
+      const next = engine.load() || engine.DEFAULTS;
+      setPrefs(next);
+      setWarnings(engine.compute(next).warnings);
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
@@ -64,36 +80,45 @@ export default function ThemeCustomizer() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
-  if (!ready || !t || !colors) return null;
+  if (!ready || !t || !prefs) return null;
 
   const commit = (next, keepDrafts) => {
-    const res = t.apply(next);
-    t.save(res.clean);
-    setColors(res.clean);
+    const saved = t.save(next);
+    const res = t.apply(saved);
+    setPrefs(saved);
     setWarnings(res.warnings);
     if (!keepDrafts) setDrafts({});
   };
 
-  const changeColor = (key, value) => commit({ ...colors, [key]: value }, false);
+  const isLight = prefs.mode === 'light';
+  const changeMode = (mode) => commit({ ...prefs, mode }, false);
+  const toggleMode = () => changeMode(isLight ? 'dark' : 'light');
+  const changeColor = (key, value) => commit({ ...prefs, [key]: value }, false);
 
   const changeText = (key, raw) => {
     setDrafts((d) => ({ ...d, [key]: raw }));
     const digits = raw.replace('#', '');
     const valid = digits.length === 6 ? t.norm(raw) : null;
-    if (valid) commit({ ...colors, [key]: valid }, true);
+    if (valid) commit({ ...prefs, [key]: valid }, true);
   };
 
-  const resetAll = () => {
-    const res = t.reset();
-    setColors(res.clean);
-    setWarnings(res.warnings);
-    setDrafts({});
-  };
+  // Resets the three colors but keeps the chosen mode
+  const resetColors = () => commit({ ...t.DEFAULTS, mode: prefs.mode }, false);
 
-  const isActivePreset = (p) => ROLES.every((r) => colors[r.key] === p.colors[r.key]);
+  const isActivePreset = (p) => ROLES.every((r) => prefs[r.key] === p.colors[r.key]);
 
   return (
     <>
+      <button
+        type="button"
+        onClick={toggleMode}
+        aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
+        title={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
+        className="fixed bottom-4 right-[4.5rem] z-40 flex h-12 w-12 items-center justify-center rounded-full border border-bull-line bg-bull-surface text-white shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+      >
+        {isLight ? <MoonIcon /> : <SunIcon />}
+      </button>
+
       <button
         ref={buttonRef}
         type="button"
@@ -116,7 +141,7 @@ export default function ThemeCustomizer() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <h2 className="text-lg font-black text-white">Make it yours</h2>
-              <p className="text-xs text-bull-muted">Pick where each color goes. Saved on this device.</p>
+              <p className="text-xs text-bull-muted">Pick a mode and where each color goes. Saved on this device.</p>
             </div>
             <button
               type="button"
@@ -128,6 +153,21 @@ export default function ThemeCustomizer() {
             </button>
           </div>
 
+          <div className="grid grid-cols-2 gap-1 rounded-2xl border border-bull-line bg-bull-bg p-1" role="group" aria-label="Color mode">
+            {['dark', 'light'].map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => changeMode(m)}
+                aria-pressed={prefs.mode === m}
+                className={`flex items-center justify-center gap-2 rounded-xl py-2 text-xs font-black transition-colors cursor-pointer ${prefs.mode === m ? 'bg-bull-lime text-bull-ink' : 'text-bull-muted hover:text-white'}`}
+              >
+                {m === 'dark' ? <MoonIcon /> : <SunIcon />}
+                {m === 'dark' ? 'Dark' : 'Light'}
+              </button>
+            ))}
+          </div>
+
           <div className="space-y-2">
             <p className="text-xs font-bold text-bull-muted">Presets</p>
             <div className="grid grid-cols-2 gap-2">
@@ -135,12 +175,12 @@ export default function ThemeCustomizer() {
                 <button
                   key={p.id}
                   type="button"
-                  onClick={() => commit(p.colors, false)}
+                  onClick={() => commit({ ...p.colors, mode: prefs.mode }, false)}
                   className={`flex items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left text-xs font-bold text-white transition-colors cursor-pointer ${isActivePreset(p) ? 'border-bull-lime bg-bull-raised' : 'border-bull-line bg-bull-bg hover:border-bull-lime/50'}`}
                 >
                   <span className="truncate">{p.name}</span>
                   <span className="flex shrink-0 -space-x-1">
-                    {['bg', 'accent', 'gain', 'loss'].map((k) => (
+                    {['accent', 'gain', 'loss'].map((k) => (
                       <span key={k} className="h-4 w-4 rounded-full border border-white/20" style={{ background: p.colors[k] }} />
                     ))}
                   </span>
@@ -155,7 +195,7 @@ export default function ThemeCustomizer() {
                 <input
                   type="color"
                   aria-label={`${role.label} color`}
-                  value={colors[role.key].toLowerCase()}
+                  value={prefs[role.key].toLowerCase()}
                   onChange={(e) => changeColor(role.key, e.target.value)}
                   className="h-10 w-12 shrink-0 cursor-pointer rounded-lg border border-bull-line bg-transparent p-0.5"
                 />
@@ -166,7 +206,7 @@ export default function ThemeCustomizer() {
                 <input
                   type="text"
                   aria-label={`${role.label} hex code`}
-                  value={drafts[role.key] !== undefined ? drafts[role.key] : colors[role.key]}
+                  value={drafts[role.key] !== undefined ? drafts[role.key] : prefs[role.key]}
                   onChange={(e) => changeText(role.key, e.target.value)}
                   onBlur={() => setDrafts({})}
                   maxLength={7}
@@ -198,7 +238,7 @@ export default function ThemeCustomizer() {
 
           <button
             type="button"
-            onClick={resetAll}
+            onClick={resetColors}
             className="w-full rounded-xl border border-bull-line bg-bull-raised py-2.5 text-sm font-bold text-white transition-colors hover:border-bull-lime cursor-pointer"
           >
             Reset to Bull Run colors
