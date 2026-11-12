@@ -20,7 +20,7 @@ const RainingAsset = ({ icon, isMobileHidden }) => {
 
   return (
     <div
-      className={`absolute top-[-5vh] text-[#7a0000]/25 pointer-events-none select-none animate-rainDown ${
+      className={`absolute top-[-5vh] text-bull-lime/25 pointer-events-none select-none animate-rainDown ${
         isMobileHidden ? 'hidden md:block' : ''
       }`}
       style={style}
@@ -158,7 +158,7 @@ export default function Home() {
   const ASSET_TYPES = ['\u20B9', '$', '\uD83D\uDE80', '\uD83D\uDCC8', '\uD83D\uDCC9', '\u20BF', '\uD83D\uDCCA', '\uD83D\uDCBC', '\uD83D\uDCB3', '\uD83D\uDC8E'];
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pb-20">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pb-20">
       <Navbar />
 
       {/* RAINING BACKGROUND MATRIX */}
@@ -178,14 +178,14 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 text-center space-y-8 relative z-10">
         
         {/* Ambient Glow Orb */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] sm:w-[600px] h-[200px] sm:h-[300px] bg-[#7a0000]/20 blur-[120px] rounded-full -z-10" />
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] sm:w-[600px] h-[200px] sm:h-[300px] bg-bull-lime/20 blur-[120px] rounded-full -z-10" />
 
         {/* HEADLINE BLOCK */}
         <div className="space-y-4 max-w-3xl mx-auto select-none">
           
           {/* BADGE */}
           <div>
-            <span className="inline-flex items-center gap-2 bg-[#1a0808] border border-[#2b0808] text-[#ff3333] text-[11px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-lg border-b-2 border-b-[#7a0000] hover:border-[#ff3333] transition-all duration-300">
+            <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-[11px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-lg border-b-2 border-b-bull-lime-dark hover:border-bull-lime transition-all duration-300">
               🚀 The Ultimate Classroom Sandbox Arena
             </span>
           </div>
@@ -194,7 +194,7 @@ export default function Home() {
           <h1 className="text-4xl sm:text-7xl font-black tracking-tight leading-none text-white font-poppins">
             Own the Market <br className="hidden sm:inline" />
             Before the{' '}
-            <span className="inline-block bg-gradient-to-r from-[#e24040] via-[#bd7f7f] to-[#e24040] bg-clip-text text-transparent font-black filter drop-shadow-[2px_2px_0px_#4a0000] drop-shadow-[0_10px_20px_rgba(226,64,64,0.3)] hover:scale-105 transition-transform duration-300 cursor-default">
+            <span className="inline-block bg-gradient-to-r from-bull-lime via-bull-teal to-bull-lime bg-clip-text text-transparent font-black filter drop-shadow-[2px_2px_0px_var(--color-bull-lime-dark)] drop-shadow-[0_10px_20px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] hover:scale-105 transition-transform duration-300 cursor-default">
               Bell Rings
             </span>
           </h1>
@@ -208,27 +208,27 @@ export default function Home() {
         {/* CARD WORKSPACE: CARD-LEVEL INTERACTIVE HOVER TARGETS */}
         <div className="flex flex-wrap justify-center items-center gap-4 pt-4">
           {loading ? (
-            <div className="px-10 py-4 bg-[#1a0808] border border-[#2b0808] text-slate-500 rounded-2xl text-sm font-bold animate-pulse shadow-xl">
+            <div className="px-10 py-4 bg-bull-raised border border-bull-line text-slate-500 rounded-2xl text-sm font-bold animate-pulse shadow-xl">
               Syncing Terminal...
             </div>
           ) : !user ? (
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/signup"
-                className="bg-[#7a0000] text-white font-poppins font-black px-10 py-4 rounded-2xl text-sm shadow-[0_10px_25px_rgba(122,0,0,0.4)] hover:bg-[#a30000] hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(255,51,51,0.5)] transition-all duration-300 relative overflow-hidden group border-b-4 border-b-[#4a0000]"
+                className="bg-bull-lime text-bull-ink font-poppins font-black px-10 py-4 rounded-2xl text-sm shadow-[0_10px_25px_color-mix(in_srgb,var(--color-bull-lime)_40%,transparent)] hover:bg-bull-lime-light hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_50%,transparent)] transition-all duration-300 relative overflow-hidden group border-b-4 border-b-bull-lime-dark"
               >
                 <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-[-20deg]" />
                 Claim Your Sandbox Wallet
               </Link>
               <Link
                 href="/signup?mode=login"
-                className="bg-[#0f0505] border-2 border-[#2b0808] text-slate-300 font-poppins font-black px-10 py-4 rounded-2xl text-sm hover:border-[#7a0000] hover:text-white hover:-translate-y-1 transition-all shadow-lg"
+                className="bg-bull-surface border-2 border-bull-line text-slate-300 font-poppins font-black px-10 py-4 rounded-2xl text-sm hover:border-bull-lime/50 hover:text-white hover:-translate-y-1 transition-all shadow-lg"
               >
                 Access Dashboard
               </Link>
             </div>
           ) : (
-            <div className="card w-full max-w-md bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl p-6 text-left shadow-xl space-y-4 hover:border-[#7a0000] hover:shadow-[0_20px_40px_rgba(122,0,0,0.3)] transition-all duration-300 border-b-4 border-b-[#2b0808]">
+            <div className="card w-full max-w-md bg-bull-surface border-2 border-bull-line rounded-3xl p-6 text-left shadow-xl space-y-4 hover:border-bull-lime/50 hover:shadow-[0_20px_40px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300 border-b-4 border-b-bull-line">
               
               {profile?.role === 'student' && !profile?.student_approved && (
                 <div className="bg-amber-950/40 border border-amber-900/60 text-amber-300 rounded-xl p-4 text-xs space-y-1 shadow-inner">
@@ -244,19 +244,19 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="flex items-center justify-between border-b border-[#2b0808] pb-3">
+              <div className="flex items-center justify-between border-b border-bull-line pb-3">
                 <div>
                   <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Active User</p>
                   <h3 className="text-base font-poppins font-black text-white">{profile?.name || 'Workspace Account'}</h3>
                 </div>
-                <span className="px-2.5 py-0.5 bg-[#1a0808] border border-[#2b0808] rounded-full text-[9px] font-black uppercase tracking-wider text-[#ff3333] shadow-md">
+                <span className="px-2.5 py-0.5 bg-bull-raised border border-bull-line rounded-full text-[10px] font-black uppercase tracking-wider text-bull-lime shadow-md">
                   {profile?.role || 'Personal'} Track
                 </span>
               </div>
               
               {((profile?.role === 'student' && profile?.student_approved) || profile?.role === 'personal') && (
-                <div className="bg-gradient-to-br from-[#7a0000] to-[#4a0000] p-4 rounded-xl text-white shadow-md space-y-1 border border-[#a30000]/40 border-b-2 border-b-[#4a0000]">
-                  <p className="text-[9px] font-black uppercase tracking-wider text-rose-200/80">Available Sandbox Balance</p>
+                <div className="bg-gradient-to-br from-bull-raised to-bull-surface p-4 rounded-xl text-white shadow-md space-y-1 border border-bull-lime/40 border-b-2 border-b-bull-lime-dark">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-rose-200/80">Available Sandbox Balance</p>
                   <p className="text-2xl font-poppins font-black tracking-tight font-mono">
                     ₹{(profile?.wallet_balance || 50000).toLocaleString('en-IN')}
                   </p>
@@ -270,22 +270,22 @@ export default function Home() {
               )}
 
               {profile?.role === 'teacher' && profile?.verification_status === 'approved' && (
-                <div className="space-y-4 pt-1 border-t border-[#2b0808]">
-                  <div className="bg-[#1a0808] p-3 rounded-xl border border-[#2b0808] space-y-2">
+                <div className="space-y-4 pt-1 border-t border-bull-line">
+                  <div className="bg-bull-raised p-3 rounded-xl border border-bull-line space-y-2">
                     <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider">🏢 School Class Matrix (Hub: {profile.school_id})</p>
                     <div className="flex gap-2">
-                      <input type="text" className="px-2.5 py-1.5 bg-[#0f0505] border border-[#2b0808] text-white rounded-xl text-xs font-bold focus:outline-none focus:border-[#7a0000] w-full" placeholder="Add Class (e.g. Class 9-A)" value={newClassName} onChange={(e) => setNewClassName(e.target.value)} />
-                      <button onClick={handleCreateClassContainer} className="px-3 py-1.5 bg-[#7a0000] hover:bg-[#a30000] text-white font-bold text-xs rounded-xl whitespace-nowrap">Create</button>
+                      <input type="text" className="px-2.5 py-1.5 bg-bull-surface border border-bull-line text-white rounded-xl text-xs font-bold focus:outline-none focus:border-bull-lime w-full" placeholder="Add Class (e.g. Class 9-A)" value={newClassName} onChange={(e) => setNewClassName(e.target.value)} />
+                      <button onClick={handleCreateClassContainer} className="px-3 py-1.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-bold text-xs rounded-xl whitespace-nowrap">Create</button>
                     </div>
 
-                    <div className="space-y-1.5 pt-1.5 max-h-36 overflow-y-auto divide-y divide-[#2b0808]">
+                    <div className="space-y-1.5 pt-1.5 max-h-36 overflow-y-auto divide-y divide-bull-line">
                       {schoolClasses.length === 0 ? (
                         <p className="text-[10px] text-slate-500 font-medium py-1">No classrooms added under this school code yet.</p>
                       ) : (
                         schoolClasses.map((c) => (
                           <div key={c.id} className="flex flex-col gap-1 pt-1.5 text-[11px] font-bold">
                             <span className="text-white">🏫 {c.class_name}</span>
-                            <select className="bg-[#0f0505] border border-[#2b0808] p-1 rounded-lg text-[10px] text-slate-400 font-medium focus:outline-none w-full" value={c.assigned_teacher_id || ''} onChange={(e) => handleTeacherAssignToClass(c.id, e.target.value)}>
+                            <select className="bg-bull-surface border border-bull-line p-1 rounded-lg text-[10px] text-slate-400 font-medium focus:outline-none w-full" value={c.assigned_teacher_id || ''} onChange={(e) => handleTeacherAssignToClass(c.id, e.target.value)}>
                               <option value="">-- Assign Managing Teacher --</option>
                               {allSchoolTeachers.map(t => <option key={t.id} value={t.id}>{t.name} ({t.email})</option>)}
                             </select>
@@ -306,7 +306,7 @@ export default function Home() {
                 </button>
               </div>
 
-              <div className="flex gap-2 items-center justify-between pt-1 border-t border-[#2b0808]">
+              <div className="flex gap-2 items-center justify-between pt-1 border-t border-bull-line">
                 <div className="text-[10px] text-slate-500 font-medium truncate max-w-[60%] font-mono">
                   {user.email}
                 </div>
@@ -315,7 +315,7 @@ export default function Home() {
                     await supabase.auth.signOut();
                     window.location.reload();
                   }}
-                  className="px-3 py-1.5 bg-[#1a0808] border border-[#2b0808] hover:bg-rose-950/40 hover:text-rose-400 text-slate-400 text-[10px] font-bold rounded-lg transition-all"
+                  className="px-3 py-1.5 bg-bull-raised border border-bull-line hover:bg-rose-950/40 hover:text-rose-400 text-slate-400 text-[10px] font-bold rounded-lg transition-all"
                 >
                   Sign Out
                 </button>
@@ -328,14 +328,14 @@ export default function Home() {
       {/* TEACHER APPROVAL QUEUE CARD */}
       {profile?.role === 'teacher' && profile?.verification_status === 'approved' && pendingClassStudents.length > 0 && (
         <section className="max-w-md mx-auto px-4 sm:px-6 pt-6 relative z-20 animate-fadeInFast">
-          <div className="card bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl p-5 shadow-2xl space-y-3 hover:border-[#7a0000] transition-all">
+          <div className="card bg-bull-surface border-2 border-bull-line rounded-3xl p-5 shadow-2xl space-y-3 hover:border-bull-lime/50 transition-all">
             <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">📋 Live Assigned Class Requests ({pendingClassStudents.length})</h4>
             <div className="max-h-48 overflow-y-auto space-y-2 pr-1">
               {pendingClassStudents.map(student => (
-                <div key={student.id} className="p-2.5 bg-[#1a0808] border border-[#2b0808] rounded-xl flex items-center justify-between gap-2 text-xs font-bold">
+                <div key={student.id} className="p-2.5 bg-bull-raised border border-bull-line rounded-xl flex items-center justify-between gap-2 text-xs font-bold">
                   <div className="truncate">
                     <p className="text-white truncate">{student.name}</p>
-                    <p className="text-[9px] text-slate-500 font-mono font-medium truncate">{student.email}</p>
+                    <p className="text-[10px] text-slate-500 font-mono font-medium truncate">{student.email}</p>
                   </div>
                   <button onClick={() => handleApproveStudent(student.id)} className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-bold whitespace-nowrap transition-all">Approve Position</button>
                 </div>
@@ -347,35 +347,35 @@ export default function Home() {
 
       {/* LIVE MARKET SIMULATOR TERMINAL CARD */}
       <section id="simulator" className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 relative z-10 flex flex-col items-center justify-center animate-fadeIn scroll-mt-24">
-        <div className="border-b border-[#2b0808] pb-6 mb-12 text-center max-w-xl w-full">
+        <div className="border-b border-bull-line pb-6 mb-12 text-center max-w-xl w-full">
           <h2 className="text-2xl font-black text-white font-poppins">Terminal Engine Simulator</h2>
           <p className="text-xs text-slate-400 mt-1 font-medium">Real-time exchange tracking interfaces driven by high-accuracy pipeline proxies.</p>
         </div>
 
-        <div className="card bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl shadow-2xl w-full max-w-4xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center border-b-4 border-b-[#2b0808] hover:border-[#7a0000] hover:shadow-[0_20px_50px_rgba(122,0,0,0.25)] transition-all duration-300">
+        <div className="card bg-bull-surface border-2 border-bull-line rounded-3xl shadow-2xl w-full max-w-4xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center border-b-4 border-b-bull-line hover:border-bull-lime/50 hover:shadow-[0_20px_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] transition-all duration-300">
           <div className="col-span-1 space-y-3">
             <div className="text-[11px] font-black uppercase text-slate-500 tracking-wider px-1">Select Live Stream Desk:</div>
             <button
               onClick={() => setActiveTab('stocks')}
-              className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'stocks' ? 'bg-[#7a0000]/20 border-[#7a0000] text-[#ff3333] shadow-md' : 'bg-[#1a0808] border-[#2b0808] text-slate-400 hover:bg-[#2b0808]'}`}
+              className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'stocks' ? 'bg-bull-lime/20 border-bull-lime/50 text-bull-lime shadow-md' : 'bg-bull-raised border-bull-line text-slate-400 hover:bg-bull-line'}`}
             >
               📈 Live NSE Indian Stocks
-              <span className={`h-2 w-2 rounded-full ${activeTab === 'stocks' ? 'bg-[#ff3333] animate-pulse' : 'bg-slate-700'}`} />
+              <span className={`h-2 w-2 rounded-full ${activeTab === 'stocks' ? 'bg-bull-lime animate-pulse' : 'bg-slate-700'}`} />
             </button>
             <button
               onClick={() => setActiveTab('crypto')}
-              className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'crypto' ? 'bg-[#7a0000]/20 border-[#7a0000] text-[#ff3333] shadow-md' : 'bg-[#1a0808] border-[#2b0808] text-slate-400 hover:bg-[#2b0808]'}`}
+              className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'crypto' ? 'bg-bull-lime/20 border-bull-lime/50 text-bull-lime shadow-md' : 'bg-bull-raised border-bull-line text-slate-400 hover:bg-bull-line'}`}
             >
               🚀 Beta Challenge Equities
-              <span className={`h-2 w-2 rounded-full ${activeTab === 'crypto' ? 'bg-[#ff3333] animate-pulse' : 'bg-slate-700'}`} />
+              <span className={`h-2 w-2 rounded-full ${activeTab === 'crypto' ? 'bg-bull-lime animate-pulse' : 'bg-slate-700'}`} />
             </button>
           </div>
 
-          <div className="col-span-2 bg-[#000000] border border-[#2b0808] rounded-2xl p-6 font-sans text-slate-200 relative overflow-hidden group min-h-[250px] flex flex-col justify-between shadow-inner">
+          <div className="col-span-2 bg-bull-bg border border-bull-line rounded-2xl p-6 font-sans text-slate-200 relative overflow-hidden group min-h-[250px] flex flex-col justify-between shadow-inner">
             {activeTab === 'stocks' && (
               <div className="space-y-4 animate-fadeInFast w-full">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-black bg-[#1a0808] text-rose-300 border border-[#2b0808] px-2.5 py-1 rounded-md tracking-wider">RELIANCE.NS • NSE LIVE</span>
+                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">RELIANCE.NS • NSE LIVE</span>
                   <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">● Exchange Open</span>
                 </div>
                 <div className="space-y-1">
@@ -383,7 +383,7 @@ export default function Home() {
                   <div className="text-3xl font-black font-mono tracking-tight text-white">₹1,309.35</div>
                   <div className="text-xs font-bold text-emerald-400 font-mono">+₹12.40 (+0.95%)</div>
                 </div>
-                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-[#2b0808] text-[11px] font-mono text-slate-400">
+                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-bull-line text-[11px] font-mono text-slate-400">
                   <div>Prev Close: <span className="text-white font-bold">₹1,296.95</span></div>
                   <div>Day Volume: <span className="text-white font-bold">4.2M Shares</span></div>
                 </div>
@@ -393,7 +393,7 @@ export default function Home() {
             {activeTab === 'crypto' && (
               <div className="space-y-4 animate-fadeInFast w-full">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-black bg-[#1a0808] text-rose-300 border border-[#2b0808] px-2.5 py-1 rounded-md tracking-wider">TECH.CHALLENGE • HIGH-BETA</span>
+                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">TECH.CHALLENGE • HIGH-BETA</span>
                   <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md animate-pulse">⚡ Arena Ticking</span>
                 </div>
                 <div className="space-y-1">
@@ -408,7 +408,7 @@ export default function Home() {
             )}
 
             <div className="absolute bottom-0 inset-x-0 h-24 opacity-10 pointer-events-none -z-10">
-              <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="w-full h-full fill-none stroke-current text-[#7a0000]">
+              <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="w-full h-full fill-none stroke-current text-bull-teal">
                 <path d="M0,120 L20,90 L50,110 L100,20 L150,80 L200,10 L250,90 L300,40 L350,110 L400,10" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </div>
@@ -424,34 +424,34 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card bg-[#0f0505] border-2 border-[#2b0808] p-6 rounded-3xl space-y-4 shadow-xl hover:border-[#7a0000] hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(122,0,0,0.3)] transition-all duration-300">
-            <div className="h-10 w-10 rounded-xl bg-[#1a0808] border border-[#2b0808] text-[#ff3333] flex items-center justify-center text-lg font-black">01</div>
+          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+            <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">01</div>
             <h3 className="font-black text-base text-white font-poppins">Market Foundations</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Understand technical asset pricing loops, stock charts, order structures, and index operations across primary exchanges.</p>
-            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-[#1a0808] border border-[#2b0808] text-rose-300 px-2.5 py-1 rounded-md">8 Modules • Beginner</span></div>
+            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">8 Modules • Beginner</span></div>
           </div>
 
-          <div className="card bg-[#0f0505] border-2 border-[#2b0808] p-6 rounded-3xl space-y-4 shadow-xl hover:border-[#7a0000] hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(122,0,0,0.3)] transition-all duration-300">
-            <div className="h-10 w-10 rounded-xl bg-[#1a0808] border border-[#2b0808] text-[#ff3333] flex items-center justify-center text-lg font-black">02</div>
+          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+            <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">02</div>
             <h3 className="font-black text-base text-white font-poppins">Technical Analysis</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Map patterns using support levels, moving averages, and volume indicators to execute quantitative simulator mock plays.</p>
-            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-[#1a0808] border border-[#2b0808] text-rose-300 px-2.5 py-1 rounded-md">12 Modules • Intermediate</span></div>
+            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">12 Modules • Intermediate</span></div>
           </div>
 
-          <div className="card bg-[#0f0505] border-2 border-[#2b0808] p-6 rounded-3xl space-y-4 shadow-xl hover:border-[#7a0000] hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(122,0,0,0.3)] transition-all duration-300">
-            <div className="h-10 w-10 rounded-xl bg-[#1a0808] border border-[#2b0808] text-[#ff3333] flex items-center justify-center text-lg font-black">03</div>
+          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+            <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">03</div>
             <h3 className="font-black text-base text-white font-poppins">Portfolio Risk Management</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Mitigate drawdown via position sizing models, strict asset tracking ratios, and dynamic algorithmic hedging criteria.</p>
-            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-[#1a0808] border border-[#2b0808] text-rose-300 px-2.5 py-1 rounded-md">6 Modules • Advanced</span></div>
+            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">6 Modules • Advanced</span></div>
           </div>
         </div>
       </section>
 
       {/* CAMPUS DEPLOYMENT BANNER CARD */}
       <section id="pricing" className="max-w-7xl mx-auto px-4 sm:px-6 pt-32 relative z-10 scroll-mt-24">
-        <div className="card bg-gradient-to-br from-[#0f0505] to-[#1a0808] border-2 border-[#2b0808] text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 group border-b-4 border-b-[#7a0000] hover:border-[#ff3333] transition-all duration-300">
+        <div className="card bg-gradient-to-br from-bull-surface to-bull-raised border-2 border-bull-line text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 group border-b-4 border-b-bull-lime-dark hover:border-bull-lime transition-all duration-300">
           <div className="space-y-3 max-w-xl text-center md:text-left z-10">
-            <span className="bg-[#7a0000]/20 text-[#ff3333] font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-[#7a0000]/40">
+            <span className="bg-bull-lime/20 text-bull-lime font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
               Campus Classroom Access
             </span>
             <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight text-white font-poppins">Launch Custom Classroom Tournaments</h2>
@@ -463,13 +463,13 @@ export default function Home() {
           <div className="w-full md:w-auto z-10 flex flex-col sm:flex-row items-center gap-4 justify-center">
             <Link
               href="/signup"
-              className="px-6 py-4 bg-[#7a0000] hover:bg-[#a30000] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg border-b-2 border-b-[#4a0000] transform hover:-translate-y-0.5 transition-all text-center w-full sm:w-auto whitespace-nowrap"
+              className="px-6 py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-xl shadow-lg border-b-2 border-b-bull-lime-dark transform hover:-translate-y-0.5 transition-all text-center w-full sm:w-auto whitespace-nowrap"
             >
               Setup Institutional Trial Token
             </Link>
             <Link
               href="/signup?mode=login"
-              className="px-6 py-4 bg-[#1a0808] border border-[#2b0808] text-slate-300 hover:text-white hover:border-[#7a0000] text-xs font-black uppercase tracking-wider rounded-xl transform hover:-translate-y-0.5 transition-all text-center w-full sm:w-auto whitespace-nowrap"
+              className="px-6 py-4 bg-bull-raised border border-bull-line text-slate-300 hover:text-white hover:border-bull-lime/50 text-xs font-black uppercase tracking-wider rounded-xl transform hover:-translate-y-0.5 transition-all text-center w-full sm:w-auto whitespace-nowrap"
             >
               Existing Trader Login
             </Link>

@@ -1,29 +1,80 @@
 @import "tailwindcss";
 
 /* ==========================================
-   1. COLOR PALETTE & SYSTEM VARIABLES
+   1. BULL RUN BRAND TOKENS  (Midnight Navy + Electric Lime)
+   Tailwind v4 reads @theme, so these become utilities:
+   bg-bull-bg, bg-bull-surface, bg-bull-raised, border-bull-line,
+   text-bull-lime, bg-bull-lime, text-bull-teal, text-bull-coral, text-bull-ink ...
    ========================================== */
+@theme {
+  /* Surfaces */
+  --color-bull-bg: #0A1226;        /* page */
+  --color-bull-surface: #101B35;   /* navbar, cards, modals */
+  --color-bull-raised: #17254A;    /* hover, inputs, elevated cards */
+  --color-bull-line: #24345C;      /* borders, dividers */
+
+  /* Brand */
+  --color-bull-lime: #B7F34A;       /* primary action, XP, rewards, active state */
+  --color-bull-lime-light: #C9FA6B; /* hover */
+  --color-bull-lime-dark: #7FB52B;  /* pressed edge on 3D buttons */
+  --color-bull-ink: #0A1226;        /* text ON lime / teal / coral */
+
+  /* Meaning */
+  --color-bull-teal: #19C6B4;       /* gains, progress, quiz */
+  --color-bull-coral: #FF765E;      /* losses, alerts, NEW tags */
+
+  /* Text */
+  --color-bull-text: #F5F7FA;
+  --color-bull-text-2: #D3DBEA;
+  --color-bull-muted: #A9B4CC;
+
+  /* Gains / losses: existing emerald-* classes now render teal, rose-* render coral.
+     Keeps ~300 existing class names working while freeing red/green from the brand. */
+  --color-emerald-100: #D5F7F3;
+  --color-emerald-200: #A8EEE6;
+  --color-emerald-300: #6FE0D3;
+  --color-emerald-400: #19C6B4;
+  --color-emerald-500: #12A494;
+  --color-emerald-600: #0E8377;
+  --color-emerald-700: #0B665C;
+  --color-emerald-800: #094D46;
+  --color-emerald-900: #073A35;
+  --color-emerald-950: #04201D;
+
+  --color-rose-100: #FFE8E3;
+  --color-rose-200: #FFD0C6;
+  --color-rose-300: #FFAF9F;
+  --color-rose-400: #FF765E;
+  --color-rose-500: #F4553B;
+  --color-rose-600: #D93F27;
+  --color-rose-700: #B3321E;
+  --color-rose-800: #8A2716;
+  --color-rose-900: #5E1C12;
+  --color-rose-950: #3A1109;
+
+  /* Fonts: --font-display / --font-body are set by next/font in layout.js */
+  --font-poppins: var(--font-display), 'Poppins', sans-serif;
+  --font-inter: var(--font-geist-sans), 'Inter', system-ui, sans-serif;
+}
+
 :root {
-  --font-poppins: 'Poppins', sans-serif;
-  --font-inter: 'Inter', sans-serif;
+  --bg-main: #0A1226;
+  --bg-surface: #101B35;
+  --bg-surface-elevated: #17254A;
 
-  /* Bull Run Crimson & Black Color Variables */
-  --bg-main: #000000;
-  --bg-surface: #0f0505;
-  --bg-surface-elevated: #1a0808;
+  --color-lime: #B7F34A;
+  --color-lime-hover: #C9FA6B;
+  --color-teal: #19C6B4;
+  --color-coral: #FF765E;
+  --color-gain: #19C6B4;
+  --color-loss: #FF765E;
 
-  --color-red-dark: #4a0000;
-  --color-red-primary: #7a0000;
-  --color-red-hover: #a30000;
-  --color-red-bright: #dc2626;
-  --color-red-glow: #ff3333;
+  --text-primary: #F5F7FA;
+  --text-secondary: #D3DBEA;
+  --text-muted: #A9B4CC;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-
-  --border-color: #2b0808;
-  --border-color-active: #7a0000;
+  --border-color: #24345C;
+  --border-color-active: #B7F34A;
 }
 
 /* ==========================================
@@ -45,18 +96,18 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-poppins);
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 /* Text Selection Styles */
 ::selection {
-  background-color: var(--color-red-primary);
-  color: #ffffff;
+  background-color: var(--color-lime);
+  color: var(--color-bull-ink);
 }
 
 /* Focus State Accessibility */
 *:focus-visible {
-  outline: 2px solid var(--color-red-glow);
+  outline: 2px solid var(--color-lime);
   outline-offset: 2px;
 }
 
@@ -69,22 +120,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2b0808;
+  background: var(--border-color);
   border-radius: 4px;
-  border: 1px solid #1a0808;
+  border: 1px solid var(--bg-surface-elevated);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-red-primary);
+  background: var(--color-lime);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #2b0808 #000000;
+  scrollbar-color: var(--border-color) var(--bg-main);
 }
 
 /* ==========================================
@@ -185,7 +236,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .animate-gradientFlow {
-  background: linear-gradient(-45deg, #000000, #2b0000, #7a0000, #a30000, #000000);
+  background: linear-gradient(-45deg, var(--bg-main), var(--bg-surface), var(--bg-surface-elevated), color-mix(in srgb, var(--color-bull-teal) 25%, var(--bg-main)), var(--bg-main));
   background-size: 200% 200%;
   animation: gradientFlow 6s ease infinite;
 }
@@ -209,7 +260,15 @@ h1, h2, h3, h4, h5, h6 {
 /* Hide keyboard hotkey/shortcut hint badges inside TradingView menus & popups */
 iframe[id^="tv-view-wrapper"] [class*="shortcut-"],
 iframe[id^="tv-view-wrapper"] [class*="hotkey-"],
-.tv-dialog__shortcut,
-[class*="shortcut-"] {
+.tv-dialog__shortcut {
   display: none !important;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

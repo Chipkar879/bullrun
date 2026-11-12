@@ -1,0 +1,33 @@
+warning: in the working copy of 'app/admin/page.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/globals.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/layout.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/signup/page.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/Features.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/Footer.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/Hero.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/StockChart.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tailwind.config.js', LF will be replaced by CRLF the next time Git touches it
+ app/admin/page.js                       |  90 [32m+++++++++++[m[31m------------[m
+ app/arena/page.js                       | 104 [32m+++++++++++++[m[31m-------------[m
+ app/auth/update-password/page.js        |  10 [32m+[m[31m--[m
+ app/globals.css                         | 125 [32m+++++++++++++++++++++++[m[31m---------[m
+ app/layout.js                           |  17 [32m++++[m[31m-[m
+ app/leaderboard/page.js                 |  26 [32m+++[m[31m----[m
+ app/modules/InteractiveCourseWrapper.js | 108 [32m+++++++++++++[m[31m--------------[m
+ app/modules/page.js                     |   4 [32m+[m[31m-[m
+ app/not-found.js                        |  16 [32m++[m[31m--[m
+ app/page.js                             |  96 [32m++++++++++++[m[31m------------[m
+ app/pricing/page.js                     |  56 [32m+++++++[m[31m-------[m
+ app/profile/page.js                     |  50 [32m++++++[m[31m-------[m
+ app/quiz/page.js                        |  64 [32m++++++++[m[31m--------[m
+ app/signup/page.js                      |  92 [32m+++++++++++[m[31m------------[m
+ app/simulator/page.js                   |  52 [32m++++++[m[31m-------[m
+ components/CourseAccordion.js           |   2 [32m+[m[31m-[m
+ components/Features.jsx                 |  20 [32m++[m[31m---[m
+ components/Footer.jsx                   |   6 [32m+[m[31m-[m
+ components/Hero.jsx                     |   8 [32m+[m[31m-[m
+ components/Navbar.jsx                   |  52 [32m++++++[m[31m-------[m
+ components/OnboardingTour.jsx           |  20 [32m++[m[31m---[m
+ components/StockChart.jsx               |   4 [32m+[m[31m-[m
+ tailwind.config.js                      |  27 [32m++[m[31m-----[m
+ 23 files changed, 553 insertions(+), 496 deletions(-)

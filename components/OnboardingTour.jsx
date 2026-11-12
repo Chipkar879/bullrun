@@ -154,17 +154,17 @@ export default function OnboardingTour() {
   const step = TOUR_STEPS[currentStep];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeInFast font-sans">
-      <div className="bg-[#0f0505] border-2 border-[#ff3333]/60 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-[0_0_50px_rgba(255,51,51,0.25)] space-y-6 relative animate-scaleUp font-mono">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bull-bg/85 backdrop-blur-md animate-fadeInFast font-sans">
+      <div className="bg-bull-surface border-2 border-bull-lime/60 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] space-y-6 relative animate-scaleUp font-mono">
         
         {/* HEADER BADGES */}
-        <div className="flex justify-between items-center border-b border-[#2b0808] pb-3">
+        <div className="flex justify-between items-center border-b border-bull-line pb-3">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-[#ff3333] bg-[#1a0808] border border-[#ff3333]/30 px-3 py-1 rounded-full">
+            <span className="text-[10px] font-black uppercase tracking-widest text-bull-lime bg-bull-raised border border-bull-lime/30 px-3 py-1 rounded-full">
               {step.badge}
             </span>
             {step.isNew && (
-              <span className="text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-0.5 rounded-full animate-pulse">
+              <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-0.5 rounded-full animate-pulse">
                 ✦ NEW FEATURE
               </span>
             )}
@@ -195,26 +195,26 @@ export default function OnboardingTour() {
               key={idx}
               className={`h-2 rounded-full transition-all ${
                 idx === currentStep
-                  ? 'w-6 bg-[#ff3333]'
-                  : 'w-2 bg-[#2b0808]'
+                  ? 'w-6 bg-bull-lime'
+                  : 'w-2 bg-bull-line'
               }`}
             />
           ))}
         </div>
 
         {/* ACTION BUTTONS */}
-        <div className="flex items-center justify-between gap-3 border-t border-[#2b0808] pt-4">
+        <div className="flex items-center justify-between gap-3 border-t border-bull-line pt-4">
           <button
             onClick={handlePrev}
             disabled={currentStep === 0}
-            className="px-4 py-2.5 bg-[#1a0808] border border-[#2b0808] hover:border-[#ff3333] disabled:opacity-30 text-xs font-bold text-slate-300 rounded-xl transition cursor-pointer font-mono"
+            className="px-4 py-2.5 bg-bull-raised border border-bull-line hover:border-bull-lime disabled:opacity-30 text-xs font-bold text-slate-300 rounded-xl transition cursor-pointer font-mono"
           >
             ◀ Back
           </button>
 
           <button
             onClick={handleNext}
-            className="flex-1 py-3 bg-[#ff3333] hover:bg-[#dc2626] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition cursor-pointer font-mono"
+            className="flex-1 py-3 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition cursor-pointer font-mono"
           >
             {step.actionText}
           </button>

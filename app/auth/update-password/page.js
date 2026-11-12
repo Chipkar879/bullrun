@@ -58,17 +58,17 @@ export default function UpdatePasswordPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased pt-28 pb-12 font-sans">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased pt-28 pb-12 font-sans">
       <Navbar />
       <section className="max-w-md mx-auto px-6">
-        <div className="bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl p-8 shadow-2xl space-y-6">
+        <div className="bg-bull-surface border-2 border-bull-line rounded-3xl p-8 shadow-2xl space-y-6">
           <div className="text-center space-y-1">
             <h1 className="font-black text-2xl text-white">Reset Password</h1>
             <p className="text-xs text-slate-400">Enter your new security password below.</p>
           </div>
 
           {!sessionReady ? (
-            <div className="p-4 bg-[#1a0808] border border-[#2b0808] text-amber-400 text-xs rounded-xl text-center font-mono animate-pulse">
+            <div className="p-4 bg-bull-raised border border-bull-line text-amber-400 text-xs rounded-xl text-center font-mono animate-pulse">
               Verifying security token from email link...
             </div>
           ) : (
@@ -84,7 +84,7 @@ export default function UpdatePasswordPage() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm focus:outline-none focus:border-[#7a0000] font-mono"
+                  className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime font-mono"
                 />
               </div>
 
@@ -97,7 +97,7 @@ export default function UpdatePasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-[#7a0000] hover:bg-[#a30000] text-white font-black rounded-xl text-sm uppercase tracking-wider transition-all disabled:opacity-50 cursor-pointer font-mono shadow-md"
+                className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black rounded-xl text-sm uppercase tracking-wider transition-all disabled:opacity-50 cursor-pointer font-mono shadow-md"
               >
                 {loading ? 'Updating Credentials...' : 'Save New Password'}
               </button>

@@ -278,12 +278,12 @@ export default function Leaderboard() {
   const isPersonalTrack = profile?.role === 'personal';
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 font-sans pt-24 pb-20">
+    <main className="min-h-screen bg-bull-bg text-slate-100 font-sans pt-24 pb-20">
       <Navbar />
 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
         <header className="text-center space-y-3">
-          <span className="inline-block rounded-full border border-[#2b0808] bg-[#1a0808] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#ff3333]">
+          <span className="inline-block rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-bull-lime">
             {'\u{1F3C6}'} Real-Time Arena Rankings
           </span>
 
@@ -297,7 +297,7 @@ export default function Leaderboard() {
         </header>
 
         <div className="flex justify-center">
-          <div className="flex flex-wrap justify-center gap-2 rounded-2xl border border-[#2b0808] bg-[#0f0505] p-2">
+          <div className="flex flex-wrap justify-center gap-2 rounded-2xl border border-bull-line bg-bull-surface p-2">
             {[
               { id: 'world', label: '\u{1F310} World Ranking' },
               { id: 'school', label: '\u{1F3EB} School Ranking' },
@@ -319,8 +319,8 @@ export default function Leaderboard() {
                   }}
                   className={`rounded-xl px-4 py-2 text-xs font-black uppercase transition-colors ${
                     rankingScope === tab.id
-                      ? 'bg-[#7a0000] text-white'
-                      : 'text-slate-400 hover:bg-[#1a0808] hover:text-white'
+                      ? 'bg-bull-lime text-bull-ink'
+                      : 'text-slate-400 hover:bg-bull-raised hover:text-white'
                   } disabled:cursor-not-allowed disabled:opacity-30`}
                 >
                   {tab.label}
@@ -330,19 +330,19 @@ export default function Leaderboard() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border-2 border-[#2b0808] border-b-4 border-b-[#7a0000] bg-[#0f0505] shadow-2xl">
+        <div className="overflow-hidden rounded-3xl border-2 border-bull-line border-b-4 border-b-bull-lime-dark bg-bull-surface shadow-2xl">
           {loading ? (
             <p className="p-12 text-center text-sm text-slate-400">
               Loading rankings...
             </p>
           ) : errorMessage ? (
-            <p className="p-12 text-center text-sm text-red-400">
+            <p className="p-12 text-center text-sm text-rose-400">
               {errorMessage}
             </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-[#1a0808] text-[10px] uppercase text-slate-400">
+                <thead className="bg-bull-raised text-[10px] uppercase text-slate-400">
                   <tr>
                     <th className="p-4 text-center">Rank</th>
                     <th className="p-4">Trader</th>
@@ -351,7 +351,7 @@ export default function Leaderboard() {
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-[#2b0808] text-xs">
+                <tbody className="divide-y divide-bull-line text-xs">
                   {entries.length === 0 ? (
                     <tr>
                       <td colSpan={4} className="p-10 text-center text-slate-500">
@@ -385,7 +385,7 @@ export default function Leaderboard() {
                                 onClick={() =>
                                   setTopCount((count) => count + TOP_STEP)
                                 }
-                                className="mt-1 rounded-full border border-[#2b0808] bg-[#1a0808] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-[#7a0000] hover:text-white"
+                                className="mt-1 rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-bull-lime/50 hover:text-white"
                               >
                                 Show {TOP_STEP} more
                               </button>
@@ -404,8 +404,8 @@ export default function Leaderboard() {
                           key={trader.id}
                           className={
                             isCurrentUser
-                              ? 'bg-[#7a0000]/25 shadow-[inset_3px_0_0_#ff3333]'
-                              : 'hover:bg-[#1a0808]'
+                              ? 'bg-bull-lime/25 shadow-[inset_3px_0_0_var(--color-bull-lime)]'
+                              : 'hover:bg-bull-raised'
                           }
                         >
                           <td className="p-4 text-center font-black text-white">
@@ -416,7 +416,7 @@ export default function Leaderboard() {
                             <span
                               className={
                                 isCurrentUser
-                                  ? 'text-[#ff3333] font-black'
+                                  ? 'text-bull-lime font-black'
                                   : 'text-white'
                               }
                             >

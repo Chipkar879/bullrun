@@ -1,5 +1,7 @@
 import ActivityTracker from '@/components/ActivityTracker';
-import { Geist, Geist_Mono } from "next/font/google";
+import ThemeCustomizer from '@/components/ThemeCustomizer';
+import { THEME_ENGINE_SOURCE } from '@/lib/theme-engine';
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,6 +13,17 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+// Display font for headlines (rounded, friendly, game-like)
+const poppins = Poppins({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+});
+
+export const viewport = {
+  themeColor: "#0A1226",
+};
 
 // TOTAL REWRITTEN METADATA AND SEO CONFIGURATION
 export const metadata = {
@@ -86,11 +99,16 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-black text-slate-100 antialiased selection:bg-[#7a0000] selection:text-white">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_ENGINE_SOURCE }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-bull-bg text-slate-100 antialiased selection:bg-bull-lime selection:text-bull-ink">
         <ActivityTracker />
         {children}
+        <ThemeCustomizer />
       </body>
     </html>
   );

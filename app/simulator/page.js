@@ -105,7 +105,7 @@ function PriceChart({ history, symbol }) {
   const first = values[0] ?? 0;
   const last = values[values.length - 1] ?? 0;
   const rising = last >= first;
-  const lineColor = rising ? '#34d399' : '#fb7185';
+  const lineColor = rising ? 'var(--color-bull-teal)' : 'var(--color-bull-coral)';
   const gradientId = `chart-gradient-${symbol.replace(/[^a-zA-Z0-9_-]/g, '')}`;
   const rawMin = values.length ? Math.min(...values) : 0;
   const rawMax = values.length ? Math.max(...values) : 1;
@@ -202,7 +202,7 @@ function PriceChart({ history, symbol }) {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-white/[0.06] bg-[#080b0a] overflow-hidden">
+      <div className="rounded-2xl border border-white/[0.06] bg-bull-bg overflow-hidden">
         <svg
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
@@ -327,7 +327,7 @@ function PriceChart({ history, symbol }) {
                   cy={activePoint.y}
                   r="3.5"
                   fill={lineColor}
-                  stroke="#080b0a"
+                  stroke="var(--color-bull-bg)"
                   strokeWidth="1.5"
                 />
               </>
@@ -960,14 +960,14 @@ export default function RealSimulatorPage() {
   const netReturn = netWorth - START_BALANCE;
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-16">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-16">
       <Navbar />
 
       <div className="max-w-[1240px] mx-auto px-4 pt-4 space-y-6">
-        <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-[#2b0808] pb-4">
+        <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-bull-line pb-4">
           <div>
             <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
-              <span className="text-[#ff3333]">BULL RUN</span> MULTI-ASSET SIMULATOR
+              <span className="text-bull-lime">BULL RUN</span> MULTI-ASSET SIMULATOR
             </h1>
             <p className="text-slate-400 text-xs mt-1">
               Practice with generated prices. No live exchange execution.
@@ -975,7 +975,7 @@ export default function RealSimulatorPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-            <div className="bg-[#0f0505] border border-[#2b0808] px-3.5 py-2 rounded-xl text-xs">
+            <div className="bg-bull-surface border border-bull-line px-3.5 py-2 rounded-xl text-xs">
               <span className="text-slate-500 mr-2">INDIA TIME</span>
               <span className="font-mono font-black text-white tabular-nums">{indiaTime}</span>
             </div>
@@ -1009,7 +1009,7 @@ export default function RealSimulatorPage() {
             ['Account Net Worth', netWorth, 'text-emerald-400'],
             ['Net Return', netReturn, netReturn >= 0 ? 'text-emerald-400' : 'text-rose-400'],
           ].map(([label, value, color]) => (
-            <div key={label} className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4">
+            <div key={label} className="bg-bull-surface border border-bull-line rounded-2xl p-4">
               <div className="text-[10px] font-black tracking-wider text-slate-500 uppercase">
                 {label}
               </div>
@@ -1021,10 +1021,10 @@ export default function RealSimulatorPage() {
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <aside className="bg-[#0f0505] border border-[#2b0808] rounded-3xl p-4 h-fit">
-            <div className="flex justify-between items-center pb-3 border-b border-[#2b0808] text-xs font-black uppercase">
+          <aside className="bg-bull-surface border border-bull-line rounded-3xl p-4 h-fit">
+            <div className="flex justify-between items-center pb-3 border-b border-bull-line text-xs font-black uppercase">
               <span>Asset Watchlist</span>
-              <span className="text-[#ff3333]">{filteredAssets.length} assets</span>
+              <span className="text-bull-lime">{filteredAssets.length} assets</span>
             </div>
 
             <div className="flex gap-1.5 overflow-x-auto py-3">
@@ -1032,14 +1032,14 @@ export default function RealSimulatorPage() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`text-[10px] font-black uppercase px-3 py-1.5 rounded-xl whitespace-nowrap ${selectedCategory === category ? 'bg-[#ff3333] text-white' : 'bg-[#1a0808] text-slate-400 border border-[#2b0808]'}`}
+                  className={`text-[10px] font-black uppercase px-3 py-1.5 rounded-xl whitespace-nowrap ${selectedCategory === category ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line'}`}
                 >
                   {category}
                 </button>
               ))}
             </div>
 
-            <div className="divide-y divide-[#2b0808] max-h-[520px] overflow-y-auto">
+            <div className="divide-y divide-bull-line max-h-[520px] overflow-y-auto">
               {filteredAssets.map((asset) => {
                 const quote = prices[asset.sym];
                 const holding = realHoldings[asset.sym];
@@ -1052,13 +1052,13 @@ export default function RealSimulatorPage() {
                       setSelectedRealStock(asset.sym);
                       if (orderStage !== 'IDLE') resetOrderDesk();
                     }}
-                    className={`w-full p-3 text-left flex justify-between items-center rounded-xl my-1 ${selected ? 'bg-[#1a0808] border border-[#7a0000]' : 'hover:bg-[#1a0808]'}`}
+                    className={`w-full p-3 text-left flex justify-between items-center rounded-xl my-1 ${selected ? 'bg-bull-raised border border-bull-lime/50' : 'hover:bg-bull-raised'}`}
                   >
                     <div className="min-w-0 pr-2">
                       <div className="font-black text-sm">{asset.sym}</div>
                       <div className="text-[10px] text-slate-400 truncate">{asset.name}</div>
                       {holding && (
-                        <div className="text-[9px] text-emerald-400 mt-1">
+                        <div className="text-[10px] text-emerald-400 mt-1">
                           Owned: {holding.shares}
                         </div>
                       )}
@@ -1079,11 +1079,11 @@ export default function RealSimulatorPage() {
           </aside>
 
           <section className="lg:col-span-2 space-y-6">
-            <div className="bg-[#0f0505] border border-[#2b0808] p-5 sm:p-6 rounded-3xl">
+            <div className="bg-bull-surface border border-bull-line p-5 sm:p-6 rounded-3xl">
               {orderStage === 'IDLE' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
-                    <div className="text-[10px] uppercase font-black text-[#ff3333]">
+                    <div className="text-[10px] uppercase font-black text-bull-lime">
                       {activeAsset.sector}
                     </div>
                     <h2 className="text-xl font-black">{activeAsset.name}</h2>
@@ -1104,7 +1104,7 @@ export default function RealSimulatorPage() {
                       step="any"
                       value={realQtyInput}
                       onChange={(event) => setRealQtyInput(event.target.value)}
-                      className="w-full border border-[#2b0808] rounded-xl px-4 py-3 text-sm font-mono font-bold bg-[#1a0808] focus:outline-none focus:border-[#7a0000]"
+                      className="w-full border border-bull-line rounded-xl px-4 py-3 text-sm font-mono font-bold bg-bull-raised focus:outline-none focus:border-bull-lime"
                     />
 
                     <div className="flex gap-3">
@@ -1123,7 +1123,7 @@ export default function RealSimulatorPage() {
                     </div>
                   </div>
 
-                  <div className="bg-[#1a0808] border border-[#2b0808] p-4 rounded-2xl space-y-3 text-xs">
+                  <div className="bg-bull-raised border border-bull-line p-4 rounded-2xl space-y-3 text-xs">
                     <h3 className="font-black uppercase text-slate-400">Asset profile</h3>
                     {[
                       ['Market cap', activeAsset.cap],
@@ -1131,7 +1131,7 @@ export default function RealSimulatorPage() {
                       ['EPS', activeAsset.eps === 'N/A' ? 'N/A' : `₹${activeAsset.eps}`],
                       ['Dividend yield', activeAsset.div],
                     ].map(([label, value]) => (
-                      <div key={label} className="flex justify-between border-b border-[#2b0808] pb-2 last:border-0">
+                      <div key={label} className="flex justify-between border-b border-bull-line pb-2 last:border-0">
                         <span className="text-slate-400">{label}</span>
                         <b>{value}</b>
                       </div>
@@ -1146,7 +1146,7 @@ export default function RealSimulatorPage() {
                     {pendingOrder.type} ORDER · {pendingOrder.name}
                   </h2>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-[#1a0808] border border-[#2b0808] p-4 rounded-xl text-xs">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-xs">
                     <div><span className="block text-slate-400">Units</span><b>{pendingOrder.qty}</b></div>
                     <div><span className="block text-slate-400">Price per unit</span><b>{money(pendingOrder.price)}</b></div>
                     <div><span className="block text-slate-400">Total</span><b className="text-emerald-400">{money(pendingOrder.totalCost)}</b></div>
@@ -1165,7 +1165,7 @@ export default function RealSimulatorPage() {
                     </button>
                     <button
                       onClick={resetOrderDesk}
-                      className="px-5 bg-[#1a0808] border border-[#2b0808] rounded-xl text-xs font-bold"
+                      className="px-5 bg-bull-raised border border-bull-line rounded-xl text-xs font-bold"
                     >
                       Cancel
                     </button>
@@ -1175,7 +1175,7 @@ export default function RealSimulatorPage() {
 
               {orderStage === 'PROCESSING' && (
                 <div className="py-10 text-center">
-                  <div className="animate-spin h-10 w-10 border-4 border-[#ff3333]/20 border-t-[#ff3333] rounded-full mx-auto mb-4" />
+                  <div className="animate-spin h-10 w-10 border-4 border-bull-lime/20 border-t-bull-lime rounded-full mx-auto mb-4" />
                   <b>{processingStatusText}</b>
                   <p className="text-xs text-slate-400 mt-2">
                     Updating the practice portfolio…
@@ -1189,7 +1189,7 @@ export default function RealSimulatorPage() {
                     Simulated order completed · {executedReceipt.orderId}
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-[#1a0808] border border-[#2b0808] p-4 rounded-xl text-xs">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-xs">
                     {[
                       ['Asset / side', `${executedReceipt.sym} / ${executedReceipt.type}`],
                       ['Units', executedReceipt.qty],
@@ -1207,7 +1207,7 @@ export default function RealSimulatorPage() {
 
                   <button
                     onClick={resetOrderDesk}
-                    className="bg-[#ff3333] hover:bg-red-700 px-5 py-3 rounded-xl text-xs font-black uppercase"
+                    className="bg-bull-lime hover:bg-bull-lime-light text-bull-ink px-5 py-3 rounded-xl text-xs font-black uppercase"
                   >
                     Done / new order
                   </button>
@@ -1215,7 +1215,7 @@ export default function RealSimulatorPage() {
               )}
             </div>
 
-            <div className="bg-[#050505] border border-[#2b0808] rounded-3xl overflow-hidden p-4 sm:p-6">
+            <div className="bg-bull-bg border border-bull-line rounded-3xl overflow-hidden p-4 sm:p-6">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
                 <div>
                   <h3 className="font-black text-sm">

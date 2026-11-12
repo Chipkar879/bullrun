@@ -43,7 +43,7 @@ export default function CourseAccordion({ modules }) {
                 
                 {/* 1. Dynamic Video Render Segment */}
                 {mod.contentType === 'video' && mod.videoUrl && (
-                  <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-black shadow-sm">
+                  <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-bull-bg shadow-sm">
                     <iframe 
                       className="absolute top-0 left-0 w-full h-full"
                       src={mod.videoUrl} 

@@ -36,8 +36,8 @@ function PasswordBeamInput({
           placeholder={placeholder}
           className={`w-full px-4 py-3 pr-12 text-sm font-mono transition-all focus:outline-none relative z-10 ${
             showPassword 
-              ? 'bg-[#1f0808] text-white border-2 border-[#ff3333] shadow-[0_0_20px_rgba(255,51,51,0.5)]' 
-              : 'bg-[#1a0808] text-white border border-[#2b0808] focus:border-[#7a0000]'
+              ? 'bg-bull-raised text-white border-2 border-bull-lime shadow-[0_0_20px_color-mix(in_srgb,var(--color-bull-lime)_50%,transparent)]' 
+              : 'bg-bull-raised text-white border border-bull-line focus:border-bull-lime'
           }`}
         />
 
@@ -45,7 +45,7 @@ function PasswordBeamInput({
         <button
           type="button"
           onClick={togglePasswordVisibility}
-          className="absolute right-3.5 p-1 text-[#ff3333] hover:text-white transition-colors cursor-pointer select-none focus:outline-none z-30"
+          className="absolute right-3.5 p-1 text-bull-lime hover:text-white transition-colors cursor-pointer select-none focus:outline-none z-30"
           aria-label="Toggle password visibility"
         >
           <div className="relative w-5 h-5 flex items-center justify-center">
@@ -57,10 +57,10 @@ function PasswordBeamInput({
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round" 
-              className={`w-5 h-5 transition-transform duration-200 ${showPassword ? 'scale-110 text-white' : 'text-[#ff3333]'}`}
+              className={`w-5 h-5 transition-transform duration-200 ${showPassword ? 'scale-110 text-white' : 'text-bull-lime'}`}
             >
               <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-              <circle cx="12" cy="12" r="3" fill={showPassword ? "#ff3333" : "currentColor"} />
+              <circle cx="12" cy="12" r="3" fill={showPassword ? "var(--color-bull-lime)" : "currentColor"} />
             </svg>
           </div>
         </button>
@@ -70,7 +70,7 @@ function PasswordBeamInput({
           <div
             className="absolute top-0 right-8 bottom-0 left-0 pointer-events-none z-20 transition-all duration-300"
             style={{
-              background: 'linear-gradient(270deg, rgba(255, 51, 51, 0.45) 0%, rgba(255, 51, 51, 0.15) 70%, transparent 100%)',
+              background: 'linear-gradient(270deg, color-mix(in srgb, var(--color-bull-lime) 45%, transparent) 0%, color-mix(in srgb, var(--color-bull-lime) 15%, transparent) 70%, transparent 100%)',
               clipPath: 'polygon(100% 50%, 0 0, 0 100%)',
             }}
           />
@@ -325,15 +325,15 @@ function SignupForm() {
       <div className="relative mb-[-20px] z-10 flex flex-col items-center select-none">
         
         {/* SPEECH BUBBLE */}
-        <div className="mb-3 px-4 py-2 bg-[#0f0505] border-2 border-[#7a0000] text-slate-200 text-xs font-bold rounded-2xl shadow-xl max-w-[280px] text-center relative animate-fadeInFast">
+        <div className="mb-3 px-4 py-2 bg-bull-surface border-2 border-bull-lime/50 text-slate-200 text-xs font-bold rounded-2xl shadow-xl max-w-[280px] text-center relative animate-fadeInFast">
           <span>{speechText}</span>
-          <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#7a0000]" />
+          <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-bull-lime/50" />
         </div>
 
         {/* ANTENNA */}
         <div className="flex flex-col items-center">
-          <div className={`w-3.5 h-3.5 rounded-full border-2 border-[#7a0000] transition-colors duration-300 ${mood === 'success' ? 'bg-emerald-500 animate-pulse' : mood === 'excited' ? 'bg-amber-400 animate-ping' : 'bg-[#ff3333]'}`} />
-          <div className="w-1 h-5 bg-[#7a0000] rounded-full" />
+          <div className={`w-3.5 h-3.5 rounded-full border-2 border-bull-lime/50 transition-colors duration-300 ${mood === 'success' ? 'bg-emerald-500 animate-pulse' : mood === 'excited' ? 'bg-amber-400 animate-ping' : 'bg-bull-lime'}`} />
+          <div className="w-1 h-5 bg-bull-lime rounded-full" />
         </div>
 
         {/* 3D ROBOT HEAD */}
@@ -343,21 +343,21 @@ function SignupForm() {
             transform: `perspective(700px) rotateX(${headTilt.rx}deg) rotateY(${headTilt.ry}deg)`,
           }}
         >
-          <div className="absolute top-10 -left-2.5 w-3.5 h-10 bg-[#1a0808] border-2 border-[#7a0000] rounded-lg" />
-          <div className="absolute top-10 -right-2.5 w-3.5 h-10 bg-[#1a0808] border-2 border-[#7a0000] rounded-lg" />
+          <div className="absolute top-10 -left-2.5 w-3.5 h-10 bg-bull-raised border-2 border-bull-lime/50 rounded-lg" />
+          <div className="absolute top-10 -right-2.5 w-3.5 h-10 bg-bull-raised border-2 border-bull-lime/50 rounded-lg" />
 
-          <div className={`w-full h-full bg-[#0f0505] border-2 border-[#7a0000] rounded-[32px] shadow-2xl relative overflow-hidden transition-transform duration-700 ${isTurned ? '[transform:rotateY(180deg)]' : ''}`}>
+          <div className={`w-full h-full bg-bull-surface border-2 border-bull-lime/50 rounded-[32px] shadow-2xl relative overflow-hidden transition-transform duration-700 ${isTurned ? '[transform:rotateY(180deg)]' : ''}`}>
             
             <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center ${isTurned ? 'hidden' : 'block'}`}>
-              <div className="w-full h-full bg-black border border-[#2b0808] rounded-2xl flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-                <div className="absolute inset-x-0 h-[2px] bg-[#ff3333]/30 animate-pulse top-2" />
+              <div className="w-full h-full bg-bull-bg border border-bull-line rounded-2xl flex flex-col items-center justify-center gap-3 relative overflow-hidden">
+                <div className="absolute inset-x-0 h-[2px] bg-bull-lime/30 animate-pulse top-2" />
 
                 <div 
                   className="flex gap-6 transition-transform duration-200"
                   style={{ transform: `translate(${eyePos.x}px, ${eyePos.y}px)` }}
                 >
-                  <div className={`w-4 h-6 rounded-lg transition-all duration-300 ${mood === 'happy' || mood === 'success' ? 'h-3 bg-emerald-400 rounded-t-full border-2 border-emerald-400' : mood === 'pressed' ? 'h-3 bg-[#ff3333] rounded-b-full' : 'bg-[#ff3333] shadow-[0_0_10px_#ff3333]'}`} />
-                  <div className={`w-4 h-6 rounded-lg transition-all duration-300 ${mood === 'happy' || mood === 'success' ? 'h-3 bg-emerald-400 rounded-t-full border-2 border-emerald-400' : mood === 'pressed' ? 'h-3 bg-[#ff3333] rounded-b-full' : 'bg-[#ff3333] shadow-[0_0_10px_#ff3333]'}`} />
+                  <div className={`w-4 h-6 rounded-lg transition-all duration-300 ${mood === 'happy' || mood === 'success' ? 'h-3 bg-emerald-400 rounded-t-full border-2 border-emerald-400' : mood === 'pressed' ? 'h-3 bg-bull-lime rounded-b-full' : 'bg-bull-lime shadow-[0_0_10px_var(--color-bull-lime)]'}`} />
+                  <div className={`w-4 h-6 rounded-lg transition-all duration-300 ${mood === 'happy' || mood === 'success' ? 'h-3 bg-emerald-400 rounded-t-full border-2 border-emerald-400' : mood === 'pressed' ? 'h-3 bg-bull-lime rounded-b-full' : 'bg-bull-lime shadow-[0_0_10px_var(--color-bull-lime)]'}`} />
                 </div>
 
                 <div className={`flex justify-between w-full px-4 absolute bottom-5 transition-opacity duration-300 ${mood === 'happy' || mood === 'success' ? 'opacity-100' : 'opacity-0'}`}>
@@ -365,22 +365,22 @@ function SignupForm() {
                   <div className="w-3 h-1.5 rounded-full bg-emerald-500/80" />
                 </div>
 
-                <div className={`transition-all duration-300 ${mood === 'watching' ? 'w-2 h-2 rounded-full bg-[#ff3333]' : mood === 'happy' || mood === 'success' ? 'w-6 h-2 bg-emerald-400 rounded-b-full' : 'w-4 h-1 bg-[#ff3333] rounded-full'}`} />
+                <div className={`transition-all duration-300 ${mood === 'watching' ? 'w-2 h-2 rounded-full bg-bull-lime' : mood === 'happy' || mood === 'success' ? 'w-6 h-2 bg-emerald-400 rounded-b-full' : 'w-4 h-1 bg-bull-lime rounded-full'}`} />
               </div>
             </div>
 
-            <div className={`absolute inset-0 p-3 bg-black flex flex-col items-center justify-center gap-2 text-center ${isTurned ? 'block [transform:rotateY(180deg)]' : 'hidden'}`}>
+            <div className={`absolute inset-0 p-3 bg-bull-bg flex flex-col items-center justify-center gap-2 text-center ${isTurned ? 'block [transform:rotateY(180deg)]' : 'hidden'}`}>
               <div className="flex gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7a0000] animate-ping" />
+                <span className="w-1.5 h-1.5 rounded-full bg-bull-lime animate-ping" />
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               </div>
               <div className="flex gap-1">
                 {[1, 2, 3, 4].map((lvl) => (
-                  <div key={lvl} className={`w-3.5 h-4 rounded-sm transition-colors duration-200 ${passScore >= lvl ? (passScore === 4 ? 'bg-emerald-500' : passScore >= 2 ? 'bg-amber-400' : 'bg-rose-600') : 'bg-[#2b0808]'}`} />
+                  <div key={lvl} className={`w-3.5 h-4 rounded-sm transition-colors duration-200 ${passScore >= lvl ? (passScore === 4 ? 'bg-emerald-500' : passScore >= 2 ? 'bg-amber-400' : 'bg-rose-600') : 'bg-bull-line'}`} />
                 ))}
               </div>
-              <p className="text-[9px] font-mono font-black text-slate-300 uppercase tracking-widest">{passLabels[passScore]}</p>
+              <p className="text-[10px] font-mono font-black text-slate-300 uppercase tracking-widest">{passLabels[passScore]}</p>
             </div>
 
           </div>
@@ -388,16 +388,16 @@ function SignupForm() {
       </div>
 
       {/* CARD FORM WRAPPER */}
-      <div className="w-full max-w-md bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl p-8 shadow-2xl space-y-6 relative z-20">
-        <div className="absolute -top-4 left-10 w-10 h-6 bg-[#1a0808] border-2 border-[#7a0000] rounded-xl z-30" />
-        <div className="absolute -top-4 right-10 w-10 h-6 bg-[#1a0808] border-2 border-[#7a0000] rounded-xl z-30" />
+      <div className="w-full max-w-md bg-bull-surface border-2 border-bull-line rounded-3xl p-8 shadow-2xl space-y-6 relative z-20">
+        <div className="absolute -top-4 left-10 w-10 h-6 bg-bull-raised border-2 border-bull-lime/50 rounded-xl z-30" />
+        <div className="absolute -top-4 right-10 w-10 h-6 bg-bull-raised border-2 border-bull-lime/50 rounded-xl z-30" />
 
         {isLogin && isForgotMode ? (
           /* FORGOT PASSWORD FLOW */
           <div className="space-y-6 animate-fadeInFast">
             <div className="text-center space-y-1">
               <h1 className="font-black text-2xl text-white">Security Reset Matrix</h1>
-              <p className="text-xs text-slate-400">Confirm identity for target payload: <span className="text-[#ff3333] font-mono font-bold">{maskedEmail}</span></p>
+              <p className="text-xs text-slate-400">Confirm identity for target payload: <span className="text-bull-lime font-mono font-bold">{maskedEmail}</span></p>
             </div>
 
             <form onSubmit={handlePasswordResetRequest} className="space-y-4">
@@ -407,7 +407,7 @@ function SignupForm() {
                   type="email" 
                   required 
                   value={confirmEmailInput}
-                  className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm font-mono focus:outline-none focus:border-[#7a0000]" 
+                  className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-mono focus:outline-none focus:border-bull-lime" 
                   placeholder="Type your email exactly to unlock" 
                   onChange={(e) => setConfirmEmailInput(e.target.value)} 
                   onFocus={() => { setIsTurned(false); setMood('watching'); say("Verification input detected. Be precise."); }}
@@ -424,14 +424,14 @@ function SignupForm() {
                 <button 
                   type="button" 
                   onClick={() => { setIsForgotMode(false); setStatus({ message: '', success: false, loading: false }); say("Returned to main terminal login."); }}
-                  className="w-1/3 py-3 bg-[#1a0808] border border-[#2b0808] hover:bg-[#2b0808] text-slate-300 font-bold rounded-xl text-xs transition-all cursor-pointer font-mono"
+                  className="w-1/3 py-3 bg-bull-raised border border-bull-line hover:bg-bull-line text-slate-300 font-bold rounded-xl text-xs transition-all cursor-pointer font-mono"
                 >
                   Back
                 </button>
                 <button 
                   type="submit" 
                   disabled={status.loading || !confirmEmailInput} 
-                  className="w-2/3 py-3 bg-[#7a0000] hover:bg-[#a30000] text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all disabled:opacity-50 shadow-md cursor-pointer font-mono"
+                  className="w-2/3 py-3 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black rounded-xl text-xs uppercase tracking-wider transition-all disabled:opacity-50 shadow-md cursor-pointer font-mono"
                 >
                   {status.loading ? 'Dispatching...' : 'Dispatch Token Link'}
                 </button>
@@ -449,7 +449,7 @@ function SignupForm() {
             {!isLogin && (
               <div className="space-y-2 font-mono">
                 {/* STEP 1: PERSONAL OR SCHOOL */}
-                <div className="grid grid-cols-2 gap-1 bg-[#1a0808] p-1 border border-[#2b0808] rounded-xl">
+                <div className="grid grid-cols-2 gap-1 bg-bull-raised p-1 border border-bull-line rounded-xl">
                   {[
                     { key: 'personal', label: '👤 Personal' },
                     { key: 'school', label: '🏫 School' },
@@ -458,7 +458,7 @@ function SignupForm() {
                       key={option.key}
                       type="button"
                       onClick={() => chooseGroup(option.key)}
-                      className={`py-2.5 text-[11px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${accountGroup === option.key ? 'bg-[#7a0000] text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+                      className={`py-2.5 text-[11px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${accountGroup === option.key ? 'bg-bull-lime text-bull-ink shadow-md' : 'text-slate-400 hover:text-white'}`}
                     >
                       {option.label}
                     </button>
@@ -467,7 +467,7 @@ function SignupForm() {
 
                 {/* STEP 2: STUDENT OR ADMIN (SCHOOL ONLY) */}
                 {accountGroup === 'school' && (
-                  <div className="grid grid-cols-2 gap-1 bg-[#1a0808] p-1 border border-[#2b0808] rounded-xl animate-fadeInFast">
+                  <div className="grid grid-cols-2 gap-1 bg-bull-raised p-1 border border-bull-line rounded-xl animate-fadeInFast">
                     {[
                       { key: 'student', label: '🎓 Student' },
                       { key: 'teacher', label: '🛡️ Admin' },
@@ -476,7 +476,7 @@ function SignupForm() {
                         key={option.key}
                         type="button"
                         onClick={() => chooseSchoolRole(option.key)}
-                        className={`py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${schoolRole === option.key ? 'bg-[#3a0a0a] text-white border border-[#7a0000]' : 'text-slate-400 hover:text-white border border-transparent'}`}
+                        className={`py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${schoolRole === option.key ? 'bg-bull-raised text-white border border-bull-lime/50' : 'text-slate-400 hover:text-white border border-transparent'}`}
                       >
                         {option.label}
                       </button>
@@ -493,7 +493,7 @@ function SignupForm() {
                   <input 
                     type="text" 
                     required 
-                    className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm focus:outline-none focus:border-[#7a0000]" 
+                    className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime" 
                     placeholder="Alex Mercer" 
                     onChange={(e) => {
                       setFormData({ ...formData, name: e.target.value });
@@ -510,7 +510,7 @@ function SignupForm() {
                   type="email" 
                   required 
                   value={formData.email} 
-                  className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm focus:outline-none focus:border-[#7a0000] font-mono" 
+                  className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime font-mono" 
                   placeholder="alex@campus.edu" 
                   onChange={(e) => {
                     setFormData({ ...formData, email: e.target.value });
@@ -522,8 +522,8 @@ function SignupForm() {
 
               {!isLogin && accountGroup === 'school' && (
                 <div className="animate-fadeInFast">
-                  <label className="block text-[11px] font-black uppercase text-[#ff3333] tracking-wider mb-1 font-mono">Master School Hub Code</label>
-                  <input type="text" required className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm font-mono uppercase focus:outline-none focus:border-[#7a0000]" placeholder="E.G. DPS-MUMBAI" 
+                  <label className="block text-[11px] font-black uppercase text-bull-lime tracking-wider mb-1 font-mono">Master School Hub Code</label>
+                  <input type="text" required className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-mono uppercase focus:outline-none focus:border-bull-lime" placeholder="E.G. DPS-MUMBAI" 
                     onChange={(e) => setFormData({ ...formData, schoolCode: e.target.value })}
                     onBlur={(e) => handleSchoolCodeBlur(e.target.value)} 
                     onFocus={() => { setIsTurned(false); setMood('watching'); say("Enter your institutional school code."); }}
@@ -534,10 +534,10 @@ function SignupForm() {
               {!isLogin && accountType === 'student' && availableClasses.length > 0 && (
                 <div className="animate-fadeInFast">
                   <label className="block text-[11px] font-black uppercase text-emerald-400 tracking-wider mb-1 font-mono">Select Your Classroom</label>
-                  <select required className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm focus:outline-none focus:border-[#7a0000]" onChange={(e) => setFormData({ ...formData, specificClassId: e.target.value })}>
+                  <select required className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime" onChange={(e) => setFormData({ ...formData, specificClassId: e.target.value })}>
                     <option value="">-- Choose Class --</option>
                     {availableClasses.map((c) => (
-                      <option key={c.id} value={c.id} className="bg-[#0f0505] text-white">{c.class_name}</option>
+                      <option key={c.id} value={c.id} className="bg-bull-surface text-white">{c.class_name}</option>
                     ))}
                   </select>
                 </div>
@@ -546,7 +546,7 @@ function SignupForm() {
               {!isLogin && accountType === 'teacher' && (
                 <div className="animate-fadeInFast">
                   <label className="block text-[11px] font-black uppercase text-amber-400 tracking-wider mb-1 font-mono">Upload Appointment Letter Proof (PDF/Image)</label>
-                  <input type="file" required accept="image/*,application/pdf" className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#1a0808] file:text-amber-400" onChange={(e) => setDocumentFile(e.target.files[0])} />
+                  <input type="file" required accept="image/*,application/pdf" className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-bull-raised file:text-amber-400" onChange={(e) => setDocumentFile(e.target.files[0])} />
                 </div>
               )}
 
@@ -557,7 +557,7 @@ function SignupForm() {
                     <button 
                       type="button" 
                       onClick={initForgotPasswordFlow}
-                      className="text-[10px] font-bold text-[#ff3333] hover:underline focus:outline-none font-mono cursor-pointer"
+                      className="text-[10px] font-bold text-bull-lime hover:underline focus:outline-none font-mono cursor-pointer"
                     >
                       Forgot Password?
                     </button>
@@ -585,17 +585,17 @@ function SignupForm() {
                 disabled={status.loading} 
                 onMouseEnter={() => { setMood('excited'); say("Ready to initialize execution?"); }}
                 onMouseLeave={() => setMood('idle')}
-                className="w-full py-4 bg-[#7a0000] hover:bg-[#a30000] text-white font-black rounded-xl text-sm transition-all disabled:opacity-50 shadow-md uppercase tracking-wider cursor-pointer font-mono"
+                className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black rounded-xl text-sm transition-all disabled:opacity-50 shadow-md uppercase tracking-wider cursor-pointer font-mono"
               >
                 {status.loading ? 'Syncing Workspace...' : isLogin ? 'Sign In' : 'Register Account'}
               </button>
             </form>
 
-            <div className="text-center text-xs text-slate-400 pt-2 border-t border-[#2b0808]">
+            <div className="text-center text-xs text-slate-400 pt-2 border-t border-bull-line">
               {isLogin ? (
-                <>Don&apos;t have an account? <button onClick={() => { window.history.replaceState(null, '', '/signup'); setIsLogin(false); say("Switched to signup mode."); }} className="text-[#ff3333] font-bold hover:underline cursor-pointer">Register here</button></>
+                <>Don&apos;t have an account? <button onClick={() => { window.history.replaceState(null, '', '/signup'); setIsLogin(false); say("Switched to signup mode."); }} className="text-bull-lime font-bold hover:underline cursor-pointer">Register here</button></>
               ) : (
-                <>Already have an account? <button onClick={() => { window.history.replaceState(null, '', '/signup?mode=login'); setIsLogin(true); say("Switched to login terminal."); }} className="text-[#ff3333] font-bold hover:underline cursor-pointer">Login here</button></>
+                <>Already have an account? <button onClick={() => { window.history.replaceState(null, '', '/signup?mode=login'); setIsLogin(true); say("Switched to login terminal."); }} className="text-bull-lime font-bold hover:underline cursor-pointer">Login here</button></>
               )}
             </div>
           </>
@@ -608,7 +608,7 @@ function SignupForm() {
 
 export default function Signup() {
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased pt-28 pb-12">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased pt-28 pb-12">
       <Navbar />
       <section className="max-w-md mx-auto px-6">
         <Suspense fallback={<div className="w-full text-center py-12 text-xs font-bold text-slate-500 font-mono">Loading Terminal...</div>}>

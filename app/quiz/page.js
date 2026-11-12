@@ -247,14 +247,14 @@ export default function DailyQuiz() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
       <Navbar />
 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 relative z-10 animate-fadeInFast">
         
         {/* PERSONAL STANDINGS CARD BADGE */}
         {profile && !quizActive && (
-          <div className="max-w-md mx-auto bg-[#0f0505] border-2 border-[#2b0808] border-b-2 border-b-[#7a0000] text-white rounded-2xl p-4 flex items-center justify-between shadow-2xl">
+          <div className="max-w-md mx-auto bg-bull-surface border-2 border-bull-line border-b-2 border-b-bull-lime-dark text-white rounded-2xl p-4 flex items-center justify-between shadow-2xl">
             <div>
               <p className="text-[10px] uppercase font-black tracking-wider text-slate-400">Your Current Status</p>
               <h4 className="text-sm font-black text-white">{profile.name || "Anonymous Trader"}</h4>
@@ -266,7 +266,7 @@ export default function DailyQuiz() {
               </div>
               <div>
                 <p className="text-[10px] uppercase font-black tracking-wider text-slate-400">Balance</p>
-                <p className="text-sm font-mono font-black text-[#ff3333]">{profile.quiz_points || 0} BB</p>
+                <p className="text-sm font-mono font-black text-bull-lime">{profile.quiz_points || 0} BB</p>
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ export default function DailyQuiz() {
 
         {!quizActive && !quizCompleted && !loading && (
           <div className="text-center space-y-4 max-w-xl mx-auto">
-            <span className="inline-flex items-center bg-[#1a0808] border border-[#2b0808] text-[#ff3333] text-[11px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner animate-pulse">
+            <span className="inline-flex items-center bg-bull-raised border border-bull-line text-bull-lime text-[11px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner animate-pulse">
               🧠 Financial Intelligence Battleground
             </span>
             <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-none font-poppins">
@@ -291,20 +291,20 @@ export default function DailyQuiz() {
             </p>
             <div className="pt-4 flex flex-wrap justify-center gap-4">
               {hasPlayedToday ? (
-                <div className="px-6 py-4 bg-[#0f0505] text-slate-500 font-black border border-[#2b0808] rounded-2xl text-xs uppercase tracking-wider shadow-inner cursor-not-allowed">
+                <div className="px-6 py-4 bg-bull-surface text-slate-500 font-black border border-bull-line rounded-2xl text-xs uppercase tracking-wider shadow-inner cursor-not-allowed">
                   🔒 Locked: Quiz Attempted Today
                 </div>
               ) : (
                 <button 
                   onClick={startDailyQuizStream} 
-                  className="px-8 py-4 bg-[#7a0000] hover:bg-[#a30000] text-white font-black rounded-2xl text-xs uppercase tracking-wider shadow-xl transition-all transform hover:-translate-y-0.5 border-b-2 border-b-[#4a0000]"
+                  className="px-8 py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black rounded-2xl text-xs uppercase tracking-wider shadow-xl transition-all transform hover:-translate-y-0.5 border-b-2 border-b-bull-lime-dark"
                 >
                   Launch Today&apos;s Quiz (5m) ⏱️
                 </button>
               )}
               <button 
                 onClick={() => setShowQuizLeaderboard(!showQuizLeaderboard)} 
-                className="px-6 py-4 bg-[#0f0505] border-2 border-[#2b0808] text-slate-300 font-bold rounded-2xl text-xs uppercase tracking-wider hover:border-[#7a0000] hover:text-white transition-all shadow-md"
+                className="px-6 py-4 bg-bull-surface border-2 border-bull-line text-slate-300 font-bold rounded-2xl text-xs uppercase tracking-wider hover:border-bull-lime/50 hover:text-white transition-all shadow-md"
               >
                 {showQuizLeaderboard ? 'Hide Standings' : 'Check Quiz Rank 🏆'}
               </button>
@@ -313,7 +313,7 @@ export default function DailyQuiz() {
         )}
 
         {quizCompleted && (
-          <div className="bg-[#0f0505] border-2 border-[#2b0808] border-b-4 border-b-[#7a0000] rounded-3xl p-8 max-w-md mx-auto text-center shadow-2xl space-y-6 animate-scaleUp">
+          <div className="bg-bull-surface border-2 border-bull-line border-b-4 border-b-bull-lime-dark rounded-3xl p-8 max-w-md mx-auto text-center shadow-2xl space-y-6 animate-scaleUp">
             <div className="text-6xl">🎯</div>
             <div className="space-y-1">
               <h2 className="text-2xl font-black text-white font-poppins">Arena Run Complete!</h2>
@@ -321,7 +321,7 @@ export default function DailyQuiz() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-left">
-              <div className="p-3.5 bg-[#1a0808] rounded-xl border border-[#2b0808]">
+              <div className="p-3.5 bg-bull-raised rounded-xl border border-bull-line">
                 <p className="text-[10px] font-black uppercase text-slate-400">Accuracy</p>
                 <p className="text-xl font-black text-white font-mono">{score} / {questions.length}</p>
               </div>
@@ -329,8 +329,8 @@ export default function DailyQuiz() {
                 <p className="text-[10px] font-black uppercase text-emerald-400">Earned Payout</p>
                 <p className="text-xl font-black text-emerald-400 font-mono">+{pointsEarned} BB</p>
               </div>
-              <div className="p-3.5 bg-[#1a0808] rounded-xl border border-[#2b0808] col-span-2 text-center">
-                <p className="text-[10px] font-black uppercase text-[#ff3333]">Total Run Time Invested</p>
+              <div className="p-3.5 bg-bull-raised rounded-xl border border-bull-line col-span-2 text-center">
+                <p className="text-[10px] font-black uppercase text-bull-lime">Total Run Time Invested</p>
                 <p className="text-lg font-black text-rose-300 font-mono">{formatTime(totalTimeSpent)}</p>
               </div>
             </div>
@@ -338,13 +338,13 @@ export default function DailyQuiz() {
             <div className="flex flex-col gap-2 pt-2">
               <button 
                 onClick={shareAchievement} 
-                className="w-full py-3 bg-[#7a0000] hover:bg-[#a30000] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md"
+                className="w-full py-3 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md"
               >
                 Share Achievement Context 🚀
               </button>
               <button 
                 onClick={() => { setQuizCompleted(false); setShowQuizLeaderboard(true); }} 
-                className="w-full py-3 bg-[#1a0808] text-slate-300 font-bold text-xs uppercase tracking-wider rounded-xl hover:text-white border border-[#2b0808] hover:border-[#7a0000] transition-all"
+                className="w-full py-3 bg-bull-raised text-slate-300 font-bold text-xs uppercase tracking-wider rounded-xl hover:text-white border border-bull-line hover:border-bull-lime/50 transition-all"
               >
                 Check Quiz Standing Map
               </button>
@@ -354,45 +354,45 @@ export default function DailyQuiz() {
 
         {quizActive && questions.length > 0 && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between bg-[#0f0505] border-2 border-[#2b0808] px-6 py-4 rounded-2xl shadow-xl">
+            <div className="flex items-center justify-between bg-bull-surface border-2 border-bull-line px-6 py-4 rounded-2xl shadow-xl">
               <div className="font-bold text-xs text-slate-300">
-                Question <span className="font-mono font-black text-[#ff3333] text-sm">{currentIdx + 1}</span> / {questions.length}
+                Question <span className="font-mono font-black text-bull-lime text-sm">{currentIdx + 1}</span> / {questions.length}
                 {apiError && <span className="ml-2 text-[10px] text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-900/60">Local Mode</span>}
               </div>
               
               <div className={`px-4 py-1.5 rounded-full text-xs font-mono font-black tracking-wider flex items-center gap-1.5 border transition-all ${
-                timeLeft <= 60 ? 'bg-rose-950/60 text-rose-400 border-rose-900/80 animate-pulse' : 'bg-[#1a0808] text-white border-[#2b0808]'
+                timeLeft <= 60 ? 'bg-rose-950/60 text-rose-400 border-rose-900/80 animate-pulse' : 'bg-bull-raised text-white border-bull-line'
               }`}>
-                ⏰ {formatTime(timeLeft)} {isTimerFrozen && <span className="text-[9px] bg-sky-600 text-white px-1 py-0.5 rounded ml-1 animate-bounce">FROZEN</span>}
+                ⏰ {formatTime(timeLeft)} {isTimerFrozen && <span className="text-[10px] bg-sky-600 text-white px-1 py-0.5 rounded ml-1 animate-bounce">FROZEN</span>}
               </div>
             </div>
 
-            <div className="bg-[#0f0505] border border-[#2b0808] p-3 rounded-2xl flex justify-center items-center gap-4 flex-wrap">
+            <div className="bg-bull-surface border border-bull-line p-3 rounded-2xl flex justify-center items-center gap-4 flex-wrap">
               <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Tactical Add-ons:</span>
               <button 
                 disabled={powerUps.fiftyFifty <= 0 || selectedAnswer !== null} 
                 onClick={useFiftyFifty} 
-                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${powerUps.fiftyFifty > 0 ? 'bg-[#1a0808] border-[#2b0808] text-slate-200 hover:border-[#7a0000] shadow-sm' : 'bg-[#0f0505] text-slate-600 border-transparent cursor-not-allowed'}`}
+                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${powerUps.fiftyFifty > 0 ? 'bg-bull-raised border-bull-line text-slate-200 hover:border-bull-lime/50 shadow-sm' : 'bg-bull-surface text-slate-600 border-transparent cursor-not-allowed'}`}
               >
                 🌓 50:50 ({powerUps.fiftyFifty})
               </button>
               <button 
                 disabled={powerUps.freezeTime <= 0 || selectedAnswer !== null || isTimerFrozen} 
                 onClick={useTimeFreeze} 
-                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${powerUps.freezeTime > 0 ? 'bg-[#1a0808] border-[#2b0808] text-slate-200 hover:border-[#7a0000] shadow-sm' : 'bg-[#0f0505] text-slate-600 border-transparent cursor-not-allowed'}`}
+                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${powerUps.freezeTime > 0 ? 'bg-bull-raised border-bull-line text-slate-200 hover:border-bull-lime/50 shadow-sm' : 'bg-bull-surface text-slate-600 border-transparent cursor-not-allowed'}`}
               >
                 ❄️ Time Freeze ({powerUps.freezeTime})
               </button>
               <button 
                 disabled={powerUps.skipQuestion <= 0 || selectedAnswer !== null} 
                 onClick={useSkipQuestion} 
-                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${powerUps.skipQuestion > 0 ? 'bg-[#1a0808] border-[#2b0808] text-slate-200 hover:border-[#7a0000] shadow-sm' : 'bg-[#0f0505] text-slate-600 border-transparent cursor-not-allowed'}`}
+                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${powerUps.skipQuestion > 0 ? 'bg-bull-raised border-bull-line text-slate-200 hover:border-bull-lime/50 shadow-sm' : 'bg-bull-surface text-slate-600 border-transparent cursor-not-allowed'}`}
               >
                 ⏩ Skip Field ({powerUps.skipQuestion})
               </button>
             </div>
 
-            <div className="bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <div className="bg-bull-surface border-2 border-bull-line rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
               <h3 className="text-base sm:text-lg font-black text-white leading-relaxed font-poppins">
                 {questions[currentIdx]?.question_text}
               </h3>
@@ -406,7 +406,7 @@ export default function DailyQuiz() {
                   
                   if (isHidden) return <div key={optionLetter} className="hidden sm:block opacity-0 pointer-events-none" />;
 
-                  let optionStyle = "bg-[#1a0808] border-[#2b0808] text-slate-300 hover:bg-[#2b0808] hover:border-[#7a0000]";
+                  let optionStyle = "bg-bull-raised border-bull-line text-slate-300 hover:bg-bull-line hover:border-bull-lime/50";
                   if (selectedAnswer !== null) {
                     if (isSelected) {
                       optionStyle = isCorrectAnswer 
@@ -415,7 +415,7 @@ export default function DailyQuiz() {
                     } else if (isCorrectAnswer) {
                       optionStyle = "bg-emerald-950/60 border-emerald-600 text-emerald-300 font-bold shadow-md";
                     } else {
-                      optionStyle = "bg-[#0f0505] border-[#2b0808] text-slate-600 opacity-50";
+                      optionStyle = "bg-bull-surface border-bull-line text-slate-600 opacity-50";
                     }
                   }
 
@@ -428,7 +428,7 @@ export default function DailyQuiz() {
                     >
                       <div className="flex items-center gap-3">
                         <span className={`h-6 w-6 rounded-lg text-[10px] font-black flex items-center justify-center border ${
-                          isSelected ? 'bg-[#ff3333] text-white border-[#ff3333]' : 'bg-[#0f0505] text-slate-400 border-[#2b0808]'
+                          isSelected ? 'bg-bull-lime text-bull-ink border-bull-lime' : 'bg-bull-surface text-slate-400 border-bull-line'
                         }`}>{optionLetter}</span>
                         <span>{choiceString}</span>
                       </div>
@@ -442,28 +442,28 @@ export default function DailyQuiz() {
         )}
 
         {showQuizLeaderboard && !quizActive && (
-          <div className="bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl overflow-hidden shadow-2xl space-y-4 p-6 animate-fadeInFast">
-            <div className="flex justify-between items-center border-b border-[#2b0808] pb-3">
+          <div className="bg-bull-surface border-2 border-bull-line rounded-3xl overflow-hidden shadow-2xl space-y-4 p-6 animate-fadeInFast">
+            <div className="flex justify-between items-center border-b border-bull-line pb-3">
               <div>
                 <h3 className="text-base font-black text-white font-poppins">Bazaar Bucks (BB) Standings</h3>
                 <p className="text-[10px] text-slate-400 font-medium">Top quiz masters ranked by cumulative correct payouts.</p>
               </div>
-              <button onClick={() => setShowQuizLeaderboard(false)} className="text-xs font-bold text-[#ff3333] hover:underline">Close Table</button>
+              <button onClick={() => setShowQuizLeaderboard(false)} className="text-xs font-bold text-bull-lime hover:underline">Close Table</button>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="bg-[#1a0808] text-[9px] font-black uppercase text-slate-400 tracking-wider">
+                  <tr className="bg-bull-raised text-[10px] font-black uppercase text-slate-400 tracking-wider">
                     <th className="p-3 text-center w-14">Rank</th>
                     <th className="p-3">Trader</th>
                     <th className="p-3">Track</th>
                     <th className="p-3 text-right">Quiz Payout Balance</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#2b0808] text-xs font-bold text-slate-300">
+                <tbody className="divide-y divide-bull-line text-xs font-bold text-slate-300">
                   {quizLeaderboard.map((trader, idx) => (
-                    <tr key={idx} className={`hover:bg-[#1a0808]/80 ${trader.id === user?.id ? 'bg-[#7a0000]/20 border-y border-[#7a0000]' : ''}`}>
+                    <tr key={idx} className={`hover:bg-bull-raised/80 ${trader.id === user?.id ? 'bg-bull-lime/20 border-y border-bull-lime/50' : ''}`}>
                       <td className="p-3 text-center font-mono font-black text-white">
                         #{idx + 1} {trader.id === user?.id && "⭐"}
                       </td>
@@ -471,7 +471,7 @@ export default function DailyQuiz() {
                         {trader.name ? trader.name : "Anonymous Trader"}
                       </td>
                       <td className="p-3 text-[10px] font-mono text-slate-400 uppercase">{trader.role}</td>
-                      <td className="p-3 text-right font-mono font-black text-[#ff3333]">{trader.quiz_points || 0} BB</td>
+                      <td className="p-3 text-right font-mono font-black text-bull-lime">{trader.quiz_points || 0} BB</td>
                     </tr>
                   ))}
                 </tbody>

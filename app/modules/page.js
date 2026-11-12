@@ -78,13 +78,13 @@ export default function ModulesPage() {
   const initialTracks = getAllModulesData();
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-16">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-16">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Header Section */}
         <div className="space-y-2 mb-10 text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 bg-[#1a0808] border border-[#2b0808] text-[#ff3333] text-[10px] uppercase tracking-widest font-black px-3.5 py-1 rounded-full shadow-inner mb-2 font-mono">
+          <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-[10px] uppercase tracking-widest font-black px-3.5 py-1 rounded-full shadow-inner mb-2 font-mono">
             🎓 Bull Run Academy
           </span>
           <h1 className="font-poppins font-black text-3xl sm:text-4xl text-white tracking-tight">

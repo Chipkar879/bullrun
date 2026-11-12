@@ -21,7 +21,7 @@ function ArenaPriceChart({ stock }) {
     .join(' ');
 
   return (
-    <div className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4 min-w-0">
+    <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 min-w-0">
       <div className="flex justify-between items-start gap-2 mb-4">
         <div>
           <p className="text-[10px] uppercase tracking-widest font-black text-slate-500">
@@ -51,7 +51,7 @@ function ArenaPriceChart({ stock }) {
               y1={y}
               x2="100"
               y2={y}
-              stroke="#3b1515"
+              stroke="var(--color-bull-line)"
               strokeWidth="0.5"
               strokeDasharray="2 2"
             />
@@ -59,13 +59,13 @@ function ArenaPriceChart({ stock }) {
 
           <polygon
             points={`0,100 ${points} 100,100`}
-            fill={isUp ? 'rgba(16,185,129,0.12)' : 'rgba(244,63,94,0.12)'}
+            fill={isUp ? 'color-mix(in srgb, var(--color-bull-teal) 12%, transparent)' : 'color-mix(in srgb, var(--color-bull-coral) 12%, transparent)'}
           />
 
           <polyline
             points={points}
             fill="none"
-            stroke={isUp ? '#34d399' : '#fb7185'}
+            stroke={isUp ? 'var(--color-bull-teal)' : 'var(--color-bull-coral)'}
             strokeWidth="1.8"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -76,7 +76,7 @@ function ArenaPriceChart({ stock }) {
             cx="100"
             cy={90 - ((stock.price - min) / range) * 75}
             r="2"
-            fill={isUp ? '#34d399' : '#fb7185'}
+            fill={isUp ? 'var(--color-bull-teal)' : 'var(--color-bull-coral)'}
           />
         </svg>
       </div>
@@ -86,7 +86,7 @@ function ArenaPriceChart({ stock }) {
         <span>Latest tick</span>
       </div>
 
-      <div className="mt-4 pt-3 border-t border-[#2b0808] space-y-2">
+      <div className="mt-4 pt-3 border-t border-bull-line space-y-2">
         <div className="flex justify-between text-xs">
           <span className="text-slate-500">Previous close</span>
           <span className="font-mono text-slate-300">
@@ -382,16 +382,16 @@ export default function ArenaPage() {
   const activeModalHolding = activeModalStockData ? gameHoldings[activeModalStockData.sym] : null;
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-16">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-16">
       <Navbar />
 
       {gameState === 'LOBBY' ? (
         <div className="min-h-[80vh] flex items-center justify-center p-4">
-          <div className="bg-[#0f0505] border border-[#2b0808] max-w-lg w-full rounded-3xl p-8 shadow-2xl text-center space-y-6 relative overflow-hidden animate-fadeIn">
+          <div className="bg-bull-surface border border-bull-line max-w-lg w-full rounded-3xl p-8 shadow-2xl text-center space-y-6 relative overflow-hidden animate-fadeIn">
             <button
               type="button"
               onClick={() => router.push('/')}
-              className="absolute top-5 right-5 h-8 w-8 bg-[#1a0808] border border-[#2b0808] hover:border-[#ff3333] hover:bg-[#7a0000] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-all cursor-pointer z-20"
+              className="absolute top-5 right-5 h-8 w-8 bg-bull-raised border border-bull-line hover:border-bull-lime hover:bg-bull-lime rounded-xl flex items-center justify-center text-slate-400 hover:text-bull-ink transition-all cursor-pointer z-20"
               title="Close & Return Home"
             >
               ✕
@@ -399,7 +399,7 @@ export default function ArenaPage() {
 
             <div className="text-6xl animate-bounce pt-2">⚡</div>
             <div className="space-y-2">
-              <span className="text-xs font-black uppercase tracking-widest text-[#ff3333] bg-[#1a0808] border border-[#2b0808] px-3 py-1 rounded-md">
+              <span className="text-xs font-black uppercase tracking-widest text-bull-lime bg-bull-raised border border-bull-line px-3 py-1 rounded-md">
                 30-Day Speed Trading
               </span>
               <h2 className="text-2xl font-black text-white">Ready to Enter the Arena?</h2>
@@ -409,7 +409,7 @@ export default function ArenaPage() {
             </div>
             <button
               onClick={startCountdownSequence}
-              className="w-full py-4 bg-[#ff3333] hover:bg-[#dc2626] text-white font-black uppercase text-sm tracking-wider rounded-2xl shadow-2xl transition-all active:scale-95 cursor-pointer"
+              className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black uppercase text-sm tracking-wider rounded-2xl shadow-2xl transition-all active:scale-95 cursor-pointer"
             >
               Start Arena Match
             </button>
@@ -417,24 +417,24 @@ export default function ArenaPage() {
         </div>
       ) : (
         <div className="max-w-[1240px] mx-auto px-4 pt-4 space-y-6">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-[#2b0808] pb-4 relative z-40">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-bull-line pb-4 relative z-40">
             <div>
               <h1 className="text-2xl font-black tracking-tight text-white flex items-center gap-2">
-                <span className="text-[#ff3333]">30-DAY</span> VOLATILITY ARENA ⚡
+                <span className="text-bull-lime">30-DAY</span> VOLATILITY ARENA ⚡
               </h1>
               <p className="text-slate-400 text-xs mt-1 font-medium">Click any card to inspect company stats, live charts, and place instant trades.</p>
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-3 bg-[#0f0505] border border-[#2b0808] px-4 py-2 rounded-2xl shadow-xl w-fit">
+              <div className="flex items-center gap-3 bg-bull-surface border border-bull-line px-4 py-2 rounded-2xl shadow-xl w-fit">
                 <div className="text-xs">
                   <span className="text-slate-400 block text-[10px] uppercase font-black">Timeline Progress</span>
                   <span className="font-mono font-black text-white">Day {day} / 30</span>
                 </div>
-                <div className="h-6 w-[1px] bg-[#2b0808]" />
+                <div className="h-6 w-[1px] bg-bull-line" />
                 <div className="text-xs">
                   <span className="text-slate-400 block text-[10px] uppercase font-black">Next Tick</span>
-                  <span className="font-mono font-black text-[#ff3333]">{autoSecsLeft}s</span>
+                  <span className="font-mono font-black text-bull-lime">{autoSecsLeft}s</span>
                 </div>
               </div>
 
@@ -442,7 +442,7 @@ export default function ArenaPage() {
                 type="button"
                 onClick={handleHeaderCloseClick}
                 title="Close Arena & Return Home"
-                className="h-10 w-10 rounded-2xl bg-[#1a0808] hover:bg-[#7a0000] border border-[#2b0808] hover:border-[#ff3333] text-slate-300 hover:text-white flex items-center justify-center font-bold text-sm transition-all shadow-lg active:scale-95 cursor-pointer z-50"
+                className="h-10 w-10 rounded-2xl bg-bull-raised hover:bg-bull-lime border border-bull-line hover:border-bull-lime text-slate-300 hover:text-bull-ink flex items-center justify-center font-bold text-sm transition-all shadow-lg active:scale-95 cursor-pointer z-50"
               >
                 ✕
               </button>
@@ -456,19 +456,19 @@ export default function ArenaPage() {
           )}
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4 shadow-xl">
+            <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
               <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Arena Cash</span>
               <div className="text-lg font-black mt-1 font-mono text-white">₹{gameBalance.toLocaleString('en-IN')}</div>
             </div>
-            <div className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4 shadow-xl">
+            <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
               <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Holdings Worth</span>
               <div className="text-lg font-black mt-1 font-mono text-white">₹{getGameHoldingsValue().toLocaleString('en-IN')}</div>
             </div>
-            <div className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4 shadow-xl">
+            <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
               <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total Net Worth</span>
-              <div className="text-lg font-black mt-1 font-mono text-[#ff3333]">₹{currentTotalGameVal.toLocaleString('en-IN')}</div>
+              <div className="text-lg font-black mt-1 font-mono text-bull-lime">₹{currentTotalGameVal.toLocaleString('en-IN')}</div>
             </div>
-            <div className="bg-[#0f0505] border border-[#2b0808] rounded-2xl p-4 shadow-xl">
+            <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
               <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Net Profit / Loss</span>
               <div className={`text-lg font-black mt-1 font-mono ${(currentTotalGameVal - START_GAME) >= 0 ? 'text-emerald-400' : 'text-rose-500'}`}>
                 ₹{(currentTotalGameVal - START_GAME).toLocaleString('en-IN')}
@@ -491,15 +491,15 @@ export default function ArenaPage() {
                         setTradeQty(1);
                       }
                     }}
-                    className="bg-[#0f0505] border border-[#2b0808] hover:border-[#7a0000] p-3 rounded-2xl shadow-lg transition-all duration-200 hover:scale-[1.02] cursor-pointer group flex flex-col justify-between space-y-2 relative overflow-hidden"
+                    className="bg-bull-surface border border-bull-line hover:border-bull-lime/50 p-3 rounded-2xl shadow-lg transition-all duration-200 hover:scale-[1.02] cursor-pointer group flex flex-col justify-between space-y-2 relative overflow-hidden"
                   >
                     <div className="flex justify-between items-start gap-1">
                       <div className="flex items-center gap-2">
-                        <div className="text-lg p-1.5 bg-[#1a0808] border border-[#2b0808] rounded-xl group-hover:scale-105 transition-transform">
+                        <div className="text-lg p-1.5 bg-bull-raised border border-bull-line rounded-xl group-hover:scale-105 transition-transform">
                           {st.icon}
                         </div>
                         <div>
-                          <h3 className="font-black text-white text-xs group-hover:text-[#ff3333] transition-colors">{st.sym}</h3>
+                          <h3 className="font-black text-white text-xs group-hover:text-bull-lime transition-colors">{st.sym}</h3>
                           <p className="text-[10px] text-slate-400 font-medium truncate max-w-[70px]">{st.name}</p>
                         </div>
                       </div>
@@ -523,12 +523,12 @@ export default function ArenaPage() {
                       })}
                     </div>
 
-                    <div className="flex justify-between items-center pt-1 border-t border-[#2b0808] text-[10px]">
+                    <div className="flex justify-between items-center pt-1 border-t border-bull-line text-[10px]">
                       <div>
                         <span className="font-mono font-black text-white">₹{st.price.toLocaleString('en-IN')}</span>
                       </div>
                       <div className="text-right">
-                        <span className="font-mono font-black text-[#ff3333]">
+                        <span className="font-mono font-black text-bull-lime">
                           {hold ? `${hold.shares} U` : '0'}
                         </span>
                       </div>
@@ -539,16 +539,16 @@ export default function ArenaPage() {
             </div>
 
             <div className="space-y-4">
-              <div className="bg-[#0f0505] border border-[#2b0808] rounded-3xl p-5 shadow-xl space-y-4">
-                <h3 className="font-black text-xs uppercase tracking-wider text-slate-400 border-b border-[#2b0808] pb-3 flex items-center justify-between">
+              <div className="bg-bull-surface border border-bull-line rounded-3xl p-5 shadow-xl space-y-4">
+                <h3 className="font-black text-xs uppercase tracking-wider text-slate-400 border-b border-bull-line pb-3 flex items-center justify-between">
                   <span>Arena Standings</span>
-                  <span className="text-[#ff3333]">Season 1</span>
+                  <span className="text-bull-lime">Season 1</span>
                 </h3>
                 <div className="space-y-2.5">
                   {sortedLeaderboard.map((player, idx) => (
                     <div
                       key={player.name}
-                      className={`flex justify-between items-center text-xs p-3 rounded-2xl border ${player.name.includes('You') ? 'bg-[#1a0808] border-[#7a0000] font-black text-[#ff3333]' : 'border-[#2b0808] bg-[#0f0505] text-slate-300'}`}
+                      className={`flex justify-between items-center text-xs p-3 rounded-2xl border ${player.name.includes('You') ? 'bg-bull-raised border-bull-lime/50 font-black text-bull-lime' : 'border-bull-line bg-bull-surface text-slate-300'}`}
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="font-mono font-black text-slate-500 text-sm">#{idx + 1}</span>
@@ -561,23 +561,23 @@ export default function ArenaPage() {
 
                 <button
                   onClick={resetChallengeArena}
-                  className="w-full text-center py-3 border border-[#2b0808] hover:border-rose-900/60 text-slate-400 hover:text-rose-400 text-xs font-bold bg-[#1a0808] rounded-2xl transition-all cursor-pointer"
+                  className="w-full text-center py-3 border border-bull-line hover:border-rose-900/60 text-slate-400 hover:text-rose-400 text-xs font-bold bg-bull-raised rounded-2xl transition-all cursor-pointer"
                 >
                   Reset Arena Game
                 </button>
               </div>
 
               {gameState === 'FINISHED' && (
-                <div className="bg-gradient-to-br from-[#7a0000] to-black border border-[#a30000] text-white p-6 rounded-3xl shadow-2xl space-y-4 text-center">
+                <div className="bg-gradient-to-br from-bull-raised to-bull-bg border border-bull-lime-dark text-white p-6 rounded-3xl shadow-2xl space-y-4 text-center">
                   <div className="text-5xl">🏆</div>
                   <h2 className="font-black text-xl">30-Day Arena Finished!</h2>
                   <p className="text-rose-200/80 text-xs">Your final standing portfolio net worth:</p>
-                  <div className="text-2xl font-black font-mono bg-black/50 p-3 rounded-2xl border border-white/10">
+                  <div className="text-2xl font-black font-mono bg-bull-bg/50 p-3 rounded-2xl border border-white/10">
                     ₹{Math.round(currentTotalGameVal).toLocaleString('en-IN')}
                   </div>
                   <button
                     onClick={resetChallengeArena}
-                    className="w-full py-3.5 bg-[#ff3333] hover:bg-[#dc2626] text-white font-black uppercase text-xs tracking-wider rounded-2xl shadow-lg transition-all cursor-pointer"
+                    className="w-full py-3.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black uppercase text-xs tracking-wider rounded-2xl shadow-lg transition-all cursor-pointer"
                   >
                     Start New Session
                   </button>
@@ -589,8 +589,8 @@ export default function ArenaPage() {
       )}
 
       {gameState === 'COUNTDOWN' && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex flex-col items-center justify-center">
-          <div className="text-8xl font-black text-[#ff3333] animate-ping font-mono">
+        <div className="fixed inset-0 bg-bull-bg/90 backdrop-blur-xl z-50 flex flex-col items-center justify-center">
+          <div className="text-8xl font-black text-bull-lime animate-ping font-mono">
             {countdownNum}
           </div>
           <div className="text-sm font-black uppercase tracking-widest text-slate-400 mt-6 animate-pulse">
@@ -600,8 +600,8 @@ export default function ArenaPage() {
       )}
 
       {showExitModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
-          <div className="bg-[#0f0505] border border-[#7a0000] max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-5 text-center">
+        <div className="fixed inset-0 bg-bull-bg/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
+          <div className="bg-bull-surface border border-bull-lime/50 max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-5 text-center">
             <div className="text-4xl text-rose-500">⚠️</div>
             <div className="space-y-2">
               <h2 className="text-xl font-black text-white">Forfeit Arena Match?</h2>
@@ -621,7 +621,7 @@ export default function ArenaPage() {
                   setShowExitModal(false);
                   setPendingHref(null);
                 }}
-                className="flex-1 bg-[#1a0808] border border-[#2b0808] text-slate-300 font-bold text-xs uppercase py-3 rounded-xl transition-all cursor-pointer"
+                className="flex-1 bg-bull-raised border border-bull-line text-slate-300 font-bold text-xs uppercase py-3 rounded-xl transition-all cursor-pointer"
               >
                 Keep Playing
               </button>
@@ -632,11 +632,11 @@ export default function ArenaPage() {
 
       {/* COMPANY DOSSIER & TRADING MODAL */}
       {activeModalStockData && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn overflow-y-auto">
-          <div className="bg-[#0f0505] border border-[#2b0808] max-w-5xl w-full rounded-3xl p-5 md:p-6 shadow-2xl relative my-auto">
+        <div className="fixed inset-0 bg-bull-bg/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn overflow-y-auto">
+          <div className="bg-bull-surface border border-bull-line max-w-5xl w-full rounded-3xl p-5 md:p-6 shadow-2xl relative my-auto">
             <button
               onClick={() => setSelectedStockModal(null)}
-              className="absolute top-4 right-4 h-8 w-8 bg-[#1a0808] border border-[#2b0808] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer z-10"
+              className="absolute top-4 right-4 h-8 w-8 bg-bull-raised border border-bull-line rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer z-10"
               aria-label="Close company details"
             >
               ✕
@@ -651,11 +651,11 @@ export default function ArenaPage() {
               {/* RIGHT: COMPANY DETAILS AND TRADING CONTROLS */}
               <div className="min-w-0 space-y-5 pt-1">
                 <div className="flex items-center gap-4 pr-8">
-                  <div className="text-4xl p-3 bg-[#1a0808] border border-[#2b0808] rounded-2xl">
+                  <div className="text-4xl p-3 bg-bull-raised border border-bull-line rounded-2xl">
                     {activeModalStockData.icon}
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-[#ff3333] bg-[#1a0808] border border-[#2b0808] px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-bull-lime bg-bull-raised border border-bull-line px-2 py-0.5 rounded">
                       {activeModalStockData.sector}
                     </span>
                     <h2 className="text-xl font-black text-white mt-1">
@@ -664,11 +664,11 @@ export default function ArenaPage() {
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-300 bg-[#1a0808] p-3.5 rounded-2xl border border-[#2b0808]">
+                <p className="text-xs text-slate-300 bg-bull-raised p-3.5 rounded-2xl border border-bull-line">
                   {activeModalStockData.desc}
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 bg-[#1a0808] p-4 rounded-2xl border border-[#2b0808] font-mono text-xs">
+                <div className="grid grid-cols-2 gap-4 bg-bull-raised p-4 rounded-2xl border border-bull-line font-mono text-xs">
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Current Asset Rate</span>
                     <span className="text-lg font-black text-white">
@@ -677,7 +677,7 @@ export default function ArenaPage() {
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Owned In Position</span>
-                    <span className="text-lg font-black text-[#ff3333]">
+                    <span className="text-lg font-black text-bull-lime">
                       {activeModalHolding ? `${activeModalHolding.shares} Units` : '0 Units'}
                     </span>
                   </div>
@@ -693,17 +693,17 @@ export default function ArenaPage() {
                       min="1"
                       value={tradeQty}
                       onChange={e => setTradeQty(Math.max(1, parseInt(e.target.value) || 1))}
-                      className="flex-1 min-w-[100px] bg-[#1a0808] border border-[#2b0808] rounded-2xl px-4 py-2.5 font-mono text-sm font-bold text-white focus:outline-none focus:border-[#7a0000]"
+                      className="flex-1 min-w-[100px] bg-bull-raised border border-bull-line rounded-2xl px-4 py-2.5 font-mono text-sm font-bold text-white focus:outline-none focus:border-bull-lime"
                     />
                     <button
                       onClick={() => setTradeQty(5)}
-                      className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
+                      className="bg-bull-raised border border-bull-line hover:border-bull-lime/50 text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
                     >
                       5x
                     </button>
                     <button
                       onClick={() => setTradeQty(10)}
-                      className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
+                      className="bg-bull-raised border border-bull-line hover:border-bull-lime/50 text-xs font-bold px-3.5 rounded-2xl text-slate-300 cursor-pointer"
                     >
                       10x
                     </button>
@@ -712,7 +712,7 @@ export default function ArenaPage() {
                         const maxPossible = Math.floor(gameBalance / activeModalStockData.price);
                         setTradeQty(Math.max(1, maxPossible));
                       }}
-                      className="bg-[#1a0808] border border-[#2b0808] hover:border-[#7a0000] text-xs font-bold px-3.5 rounded-2xl text-[#ff3333] cursor-pointer"
+                      className="bg-bull-raised border border-bull-line hover:border-bull-lime/50 text-xs font-bold px-3.5 rounded-2xl text-bull-lime cursor-pointer"
                     >
                       MAX
                     </button>

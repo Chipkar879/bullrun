@@ -154,11 +154,11 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative">
+      <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative">
         <Navbar />
         <div className="max-w-4xl mx-auto px-6 pt-32 pb-24 flex justify-center">
           <div className="space-y-4 text-center">
-            <div className="w-12 h-12 border-4 border-[#ff3333] border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <div className="w-12 h-12 border-4 border-bull-lime border-t-transparent rounded-full animate-spin mx-auto"></div>
             <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Decrypting Secured Trading Dossier...</p>
           </div>
         </div>
@@ -167,29 +167,29 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
       <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 animate-fadeInFast">
         
         {/* HERO BANNER PROFILE CARD */}
-        <div className="bg-[#0f0505] border-2 border-[#2b0808] p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden border-b-4 border-b-[#7a0000]">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#7a0000]/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="bg-bull-surface border-2 border-bull-line p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden border-b-4 border-b-bull-lime-dark">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-bull-lime/15 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 relative z-10">
-            <div className="w-24 h-24 bg-gradient-to-tr from-[#7a0000] to-black text-[#ff3333] border-2 border-[#2b0808] rounded-2xl font-poppins font-black text-4xl flex items-center justify-center shadow-xl select-none">
+            <div className="w-24 h-24 bg-gradient-to-tr from-bull-raised to-bull-bg text-bull-lime border-2 border-bull-line rounded-2xl font-poppins font-black text-4xl flex items-center justify-center shadow-xl select-none">
               {initials}
             </div>
             
             <div className="space-y-2 text-center sm:text-left">
-              <span className="bg-[#1a0808] text-[#ff3333] border border-[#2b0808] text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner">
+              <span className="bg-bull-raised text-bull-lime border border-bull-line text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner">
                 🏆 {analytics.tier}
               </span>
               <h1 className="font-poppins font-black text-2xl sm:text-3xl text-white tracking-tight">
                 {profile.name}
               </h1>
               <p className="text-slate-400 text-xs font-bold">
-                Network Stream ID: <span className="text-[#ff3333] font-mono">BR-{profile.role.toUpperCase()}-ACTIVE</span>
+                Network Stream ID: <span className="text-bull-lime font-mono">BR-{profile.role.toUpperCase()}-ACTIVE</span>
               </p>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function ProfilePage() {
           <div className="flex gap-3 relative z-10">
             <button
               onClick={() => setIsEditing(!isEditing)}
-              className="text-xs font-black uppercase tracking-wider text-slate-200 border border-[#2b0808] bg-[#1a0808] hover:border-[#7a0000] hover:text-white px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap"
+              className="text-xs font-black uppercase tracking-wider text-slate-200 border border-bull-line bg-bull-raised hover:border-bull-lime/50 hover:text-white px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap"
             >
               {isEditing ? 'Cancel Edit' : 'Modify Details ⚙️'}
             </button>
@@ -212,7 +212,7 @@ export default function ProfilePage() {
 
         {/* INTERACTIVE EDITING PORTAL PANEL */}
         {isEditing && (
-          <form onSubmit={handleSaveChanges} className="bg-[#0f0505] border-2 border-[#7a0000] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4 animate-scaleUp">
+          <form onSubmit={handleSaveChanges} className="bg-bull-surface border-2 border-bull-lime/50 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4 animate-scaleUp">
             <h3 className="font-poppins font-black text-lg text-white flex items-center gap-2">
               📝 Edit Personal Profile Records
             </h3>
@@ -224,7 +224,7 @@ export default function ProfilePage() {
                 required
                 maxLength={40}
                 onChange={(e) => setEditName(e.target.value)}
-                className="w-full px-4 py-3 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm font-bold focus:outline-none focus:border-[#7a0000] transition-colors"
+                className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-bold focus:outline-none focus:border-bull-lime transition-colors"
                 placeholder="Update your name"
               />
             </div>
@@ -238,7 +238,7 @@ export default function ProfilePage() {
             <button 
               type="submit" 
               disabled={updateStatus.loading}
-              className="px-6 py-3 bg-[#7a0000] hover:bg-[#a30000] text-white text-xs font-black uppercase tracking-wider rounded-xl transition shadow-md disabled:opacity-50"
+              className="px-6 py-3 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-xl transition shadow-md disabled:opacity-50"
             >
               {updateStatus.loading ? 'Saving Dossier Changes...' : 'Commit Changes'}
             </button>
@@ -247,60 +247,60 @@ export default function ProfilePage() {
 
         {/* CORE METRICS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-[#0f0505] border border-[#2b0808] p-5 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="text-3xl p-3 bg-[#1a0808] border border-[#2b0808] rounded-xl">👑</div>
+          <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
+            <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">👑</div>
             <div>
               <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Bazaar Bucks Balance</p>
               <h3 className="text-xl font-black font-mono text-white">{profile.quiz_points || 0} BB</h3>
             </div>
           </div>
-          <div className="bg-[#0f0505] border border-[#2b0808] p-5 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="text-3xl p-3 bg-[#1a0808] border border-[#2b0808] rounded-xl">⚡</div>
+          <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
+            <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">⚡</div>
             <div>
               <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Payout Multiplier</p>
               <h3 className="text-xl font-black font-mono text-emerald-400">{analytics.multiplier}</h3>
             </div>
           </div>
-          <div className="bg-[#0f0505] border border-[#2b0808] p-5 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="text-3xl p-3 bg-[#1a0808] border border-[#2b0808] rounded-xl">📈</div>
+          <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
+            <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">📈</div>
             <div>
               <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Quiz Completion Rate</p>
-              <h3 className="text-xl font-black font-mono text-[#ff3333]">{analytics.completionRate}</h3>
+              <h3 className="text-xl font-black font-mono text-bull-lime">{analytics.completionRate}</h3>
             </div>
           </div>
         </div>
 
         {/* CORE DETAILS DATA MATRIX */}
-        <section className="bg-[#0f0505] border border-[#2b0808] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-          <h2 className="font-poppins font-black text-lg text-white border-b border-[#2b0808] pb-4 flex items-center gap-2">
+        <section className="bg-bull-surface border border-bull-line rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+          <h2 className="font-poppins font-black text-lg text-white border-b border-bull-line pb-4 flex items-center gap-2">
             🛡️ Confidential Credentials Matrix
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-1.5">
               <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">System Username Identification</label>
-              <div className="p-4 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-sm font-bold select-all">
+              <div className="p-4 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-bold select-all">
                 {profile.name}
               </div>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">Registered Email Handle</label>
-              <div className="p-4 bg-[#1a0808] border border-[#2b0808] text-slate-400 rounded-xl text-sm font-semibold select-none font-mono">
+              <div className="p-4 bg-bull-raised border border-bull-line text-slate-400 rounded-xl text-sm font-semibold select-none font-mono">
                 {profile.email}
               </div>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">Account Initialization Stamp</label>
-              <div className="p-4 bg-[#1a0808] border border-[#2b0808] text-slate-300 rounded-xl text-sm font-bold select-none">
+              <div className="p-4 bg-bull-raised border border-bull-line text-slate-300 rounded-xl text-sm font-bold select-none">
                 {profile.joined}
               </div>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">Current Selected Workspace Track</label>
-              <div className="p-4 bg-[#1a0808] border border-[#2b0808] text-[#ff3333] rounded-xl text-sm font-black uppercase select-none tracking-wider">
+              <div className="p-4 bg-bull-raised border border-bull-line text-bull-lime rounded-xl text-sm font-black uppercase select-none tracking-wider">
                 {profile.role} Profile Mode
               </div>
             </div>

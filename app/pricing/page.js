@@ -182,14 +182,14 @@ export default function PricingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans max-w-full overflow-x-hidden pt-24 pb-20 relative">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans max-w-full overflow-x-hidden pt-24 pb-20 relative">
       <Navbar />
 
       <div className="max-w-[1000px] mx-auto px-4 space-y-10">
         
         {/* HEADER */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="inline-flex items-center gap-2 bg-[#1a0808] border border-[#ff3333]/30 text-[#ff3333] text-[10px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner font-mono">
+          <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-lime/30 text-bull-lime text-[10px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner font-mono">
             ⚡ BULL RUN ACADEMY PASS
           </span>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
@@ -201,7 +201,7 @@ export default function PricingPage() {
 
           {/* DYNAMIC CLEARANCE BADGE */}
           <div className="pt-2 flex justify-center">
-            <div className="bg-[#0f0505] border border-[#2b0808] px-5 py-3 rounded-2xl shadow-xl font-mono text-xs flex flex-col items-center gap-2">
+            <div className="bg-bull-surface border border-bull-line px-5 py-3 rounded-2xl shadow-xl font-mono text-xs flex flex-col items-center gap-2">
               <span className="text-slate-500 font-medium text-[10px] uppercase tracking-wider">Account Clearance Status</span>
               
               {loading ? (
@@ -214,7 +214,7 @@ export default function PricingPage() {
                   </p>
                   <Link
                     href="/signup"
-                    className="mt-1 px-4 py-1.5 bg-[#7a0000] hover:bg-[#a30000] text-white font-bold rounded-xl text-[10px] uppercase tracking-wider transition-all"
+                    className="mt-1 px-4 py-1.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-bold rounded-xl text-[10px] uppercase tracking-wider transition-all"
                   >
                     Claim 7-Day Free Pass →
                   </Link>
@@ -234,14 +234,14 @@ export default function PricingPage() {
               ) : (
                 <div className="flex flex-col items-center space-y-1">
                   <span className="text-amber-400 font-bold text-[11px]">⏳ TIME REMAINING BEFORE FREEZE:</span>
-                  <div className="flex items-center gap-2 text-white font-black text-base bg-[#1a0808] px-4 py-1.5 rounded-xl border border-[#ff3333]/40">
-                    <div className="text-center"><span className="text-[#ff3333]">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-[9px] text-slate-500 block font-normal">DAYS</span></div>
-                    <span className="text-[#ff3333]">:</span>
-                    <div className="text-center"><span className="text-[#ff3333]">{String(timeLeft.hours).padStart(2, '0')}</span><span className="text-[9px] text-slate-500 block font-normal">HRS</span></div>
-                    <span className="text-[#ff3333]">:</span>
-                    <div className="text-center"><span className="text-[#ff3333]">{String(timeLeft.minutes).padStart(2, '0')}</span><span className="text-[9px] text-slate-500 block font-normal">MIN</span></div>
-                    <span className="text-[#ff3333]">:</span>
-                    <div className="text-center"><span className="text-[#ff3333]">{String(timeLeft.seconds).padStart(2, '0')}</span><span className="text-[9px] text-slate-500 block font-normal">SEC</span></div>
+                  <div className="flex items-center gap-2 text-white font-black text-base bg-bull-raised px-4 py-1.5 rounded-xl border border-bull-lime/40">
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">DAYS</span></div>
+                    <span className="text-bull-lime">:</span>
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.hours).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">HRS</span></div>
+                    <span className="text-bull-lime">:</span>
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.minutes).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">MIN</span></div>
+                    <span className="text-bull-lime">:</span>
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.seconds).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">SEC</span></div>
                   </div>
                 </div>
               )}
@@ -251,7 +251,7 @@ export default function PricingPage() {
 
         {/* LOCKED ACCOUNT WARNING — EXCLUSIVE TO FROZEN STATE */}
         {userSession && status.isFrozen && !status.isSuperAdmin && (
-          <div className="bg-rose-950/60 border border-rose-500 p-6 rounded-3xl text-center space-y-3 max-w-xl mx-auto shadow-[0_0_30px_rgba(225,29,72,0.25)] animate-pulse">
+          <div className="bg-rose-950/60 border border-rose-500 p-6 rounded-3xl text-center space-y-3 max-w-xl mx-auto shadow-[0_0_30px_color-mix(in_srgb,var(--color-bull-coral)_25%,transparent)] animate-pulse">
             <div className="text-3xl">🔒</div>
             <h2 className="text-lg font-black text-rose-200 uppercase font-mono tracking-wider">
               YOUR ACCOUNT ACCESS IS FROZEN
@@ -264,9 +264,9 @@ export default function PricingPage() {
 
         {/* SUBSCRIPTION CARD */}
         {paymentStep === 'browse' && (
-          <div className="max-w-md mx-auto bg-[#0f0505] border border-[#ff3333] shadow-[0_0_40px_rgba(255,51,51,0.2)] rounded-3xl p-8 space-y-6 relative">
+          <div className="max-w-md mx-auto bg-bull-surface border border-bull-lime shadow-[0_0_40px_color-mix(in_srgb,var(--color-bull-lime)_20%,transparent)] rounded-3xl p-8 space-y-6 relative">
             <div className="space-y-4 text-center">
-              <span className="text-[10px] font-black uppercase text-[#ff3333] bg-[#1a0808] border border-[#ff3333]/30 px-3.5 py-1 rounded-full font-mono">
+              <span className="text-[10px] font-black uppercase text-bull-lime bg-bull-raised border border-bull-lime/30 px-3.5 py-1 rounded-full font-mono">
                 MANDATORY STUDENT PASS
               </span>
 
@@ -275,7 +275,7 @@ export default function PricingPage() {
                 Unlocks all 28 modules, 336 submodules, Volatility Arena matches, and live portfolio tracking.
               </p>
 
-              <div className="font-mono pt-2 border-y border-[#2b0808] py-4">
+              <div className="font-mono pt-2 border-y border-bull-line py-4">
                 <span className="text-4xl font-black text-white">₹99</span>
                 <span className="text-slate-500 text-xs"> / month</span>
                 <span className="block text-[10px] text-emerald-400 font-bold mt-1">
@@ -290,19 +290,19 @@ export default function PricingPage() {
               </span>
               <ul className="space-y-2.5 font-sans font-medium text-slate-200">
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#ff3333] font-black">✓</span>
+                  <span className="text-bull-lime font-black">✓</span>
                   <span>Full Access to All 28 Modules & Quizzes</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#ff3333] font-black">✓</span>
+                  <span className="text-bull-lime font-black">✓</span>
                   <span>Volatility Arena Match Access</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#ff3333] font-black">✓</span>
+                  <span className="text-bull-lime font-black">✓</span>
                   <span>Unfreezes Account Permanently</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#ff3333] font-black">✓</span>
+                  <span className="text-bull-lime font-black">✓</span>
                   <span>Trader XP & Level Progress Saved</span>
                 </li>
               </ul>
@@ -318,14 +318,14 @@ export default function PricingPage() {
             ) : !userSession ? (
               <Link
                 href="/signup"
-                className="w-full py-4 bg-[#ff3333] hover:bg-[#dc2626] text-white text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-[#ff3333]/20 transition-all block text-center"
+                className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all block text-center"
               >
                 Create Account for Free Trial →
               </Link>
             ) : (
               <button
                 onClick={() => setPaymentStep('checkout')}
-                className="w-full py-4 bg-[#ff3333] hover:bg-[#dc2626] text-white text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-[#ff3333]/20 transition-all cursor-pointer"
+                className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all cursor-pointer"
               >
                 {status.isFrozen ? 'Unlock Account — ₹99/month' : 'Subscribe Now — ₹99/month'}
               </button>
@@ -335,9 +335,9 @@ export default function PricingPage() {
 
         {/* CHECKOUT STEP */}
         {paymentStep === 'checkout' && (
-          <div className="max-w-md mx-auto bg-[#0f0505] border border-[#ff3333]/50 rounded-3xl shadow-[0_0_50px_rgba(255,51,51,0.2)] p-6 space-y-6 animate-scaleUp font-mono">
-            <div className="text-center border-b border-[#2b0808] pb-4">
-              <span className="text-[10px] font-black text-[#ff3333] uppercase tracking-widest bg-[#1a0808] px-2.5 py-0.5 rounded border border-[#ff3333]/20">
+          <div className="max-w-md mx-auto bg-bull-surface border border-bull-lime/50 rounded-3xl shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-lime)_20%,transparent)] p-6 space-y-6 animate-scaleUp font-mono">
+            <div className="text-center border-b border-bull-line pb-4">
+              <span className="text-[10px] font-black text-bull-lime uppercase tracking-widest bg-bull-raised px-2.5 py-0.5 rounded border border-bull-lime/20">
                 SECURE UPI PAYMENT GATEWAY
               </span>
               <h2 className="font-black text-xl text-white mt-2">Activate ₹99 Subscription</h2>
@@ -345,7 +345,7 @@ export default function PricingPage() {
             </div>
 
             <div className="space-y-4">
-              <div className="bg-[#1a0808] border border-dashed border-[#ff3333]/40 p-5 rounded-2xl flex flex-col items-center text-center space-y-3">
+              <div className="bg-bull-raised border border-dashed border-bull-lime/40 p-5 rounded-2xl flex flex-col items-center text-center space-y-3">
                 <img 
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRunAcademy&am=99&cu=INR`)}`} 
                   alt="Bull Run UPI Gateway QR" 
@@ -365,7 +365,7 @@ export default function PricingPage() {
               </ol>
             </div>
 
-            <div className="space-y-2 border-t border-[#2b0808] pt-4">
+            <div className="space-y-2 border-t border-bull-line pt-4">
               <button 
                 onClick={handleVerifyPayment}
                 disabled={isProcessing}
@@ -393,7 +393,7 @@ export default function PricingPage() {
 
         {/* PAYMENT SUCCESS */}
         {paymentStep === 'success' && (
-          <div className="max-w-md mx-auto bg-[#0f0505] border border-emerald-500/50 rounded-3xl shadow-[0_0_50px_rgba(16,185,129,0.2)] p-8 text-center space-y-6 animate-scaleUp font-mono">
+          <div className="max-w-md mx-auto bg-bull-surface border border-emerald-500/50 rounded-3xl shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-teal)_20%,transparent)] p-8 text-center space-y-6 animate-scaleUp font-mono">
             <div className="h-12 w-12 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-2xl flex items-center justify-center mx-auto text-xl font-black">
               ✓
             </div>

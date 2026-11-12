@@ -28,9 +28,9 @@ function FormattedLessonContent({ content }) {
           const body = lines.slice(1).join('\n');
 
           return (
-            <div key={idx} className="bg-gradient-to-r from-[#210707] via-[#120404] to-[#0a0202] border border-[#ff3333]/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(255,51,51,0.15)] space-y-2">
+            <div key={idx} className="bg-gradient-to-r from-bull-raised via-bull-surface to-bull-bg border border-bull-lime/50 rounded-2xl p-5 shadow-[0_0_20px_color-mix(in_srgb,var(--color-bull-lime)_15%,transparent)] space-y-2">
               <div className="flex items-center gap-2">
-                <span className="bg-[#ff3333] text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md font-mono shadow-md">
+                <span className="bg-bull-lime text-bull-ink text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md font-mono shadow-md">
                   INTEL HEADER
                 </span>
                 <h4 className="text-white font-black text-sm sm:text-base tracking-tight">
@@ -65,12 +65,12 @@ function FormattedLessonContent({ content }) {
               key={idx} 
               className={`p-5 rounded-2xl border transition-all ${
                 isWarning 
-                  ? 'bg-rose-950/40 border-rose-500/60 text-rose-200 shadow-[0_0_20px_rgba(225,29,72,0.2)]' 
+                  ? 'bg-rose-950/40 border-rose-500/60 text-rose-200 shadow-[0_0_20px_color-mix(in_srgb,var(--color-bull-coral)_20%,transparent)]' 
                   : 'bg-amber-950/40 border-amber-500/60 text-amber-200 shadow-[0_0_20px_rgba(245,158,11,0.2)]'
               } space-y-2`}
             >
               <div className="flex items-center gap-2 font-black text-xs sm:text-sm uppercase tracking-wider font-mono">
-                <span className="bg-black/50 px-2.5 py-1 rounded-lg border border-current">{title}</span>
+                <span className="bg-bull-bg/50 px-2.5 py-1 rounded-lg border border-current">{title}</span>
               </div>
               {body && (
                 <div className="text-slate-100 text-xs sm:text-sm font-medium leading-relaxed pt-1 space-y-1.5">
@@ -94,9 +94,9 @@ function FormattedLessonContent({ content }) {
           const bodyLines = lines.slice(1);
 
           return (
-            <div key={idx} className="bg-[#140505] border border-[#2b0808] hover:border-[#ff3333]/50 rounded-2xl p-5 space-y-3 transition-colors shadow-xl">
+            <div key={idx} className="bg-bull-surface border border-bull-line hover:border-bull-lime/50 rounded-2xl p-5 space-y-3 transition-colors shadow-xl">
               <h4 className="text-white font-black text-xs sm:text-sm tracking-tight flex items-center gap-2 text-rose-400 font-mono">
-                <span className="h-2 w-2 rounded-full bg-[#ff3333]" />
+                <span className="h-2 w-2 rounded-full bg-bull-lime" />
                 {title}
               </h4>
               {bodyLines.length > 0 && (
@@ -105,8 +105,8 @@ function FormattedLessonContent({ content }) {
                     const trimmedLine = line.trim();
                     if (trimmedLine.startsWith('•') || trimmedLine.startsWith('-')) {
                       return (
-                        <div key={lIdx} className="flex items-start gap-2.5 bg-[#0a0202] p-3 rounded-xl border border-[#2b0808] text-xs">
-                          <span className="text-[#ff3333] font-black font-mono">➢</span>
+                        <div key={lIdx} className="flex items-start gap-2.5 bg-bull-bg p-3 rounded-xl border border-bull-line text-xs">
+                          <span className="text-bull-lime font-black font-mono">➢</span>
                           <span className="text-slate-100 leading-relaxed">{trimmedLine.replace(/^[•-]\s*/, '')}</span>
                         </div>
                       );
@@ -120,7 +120,7 @@ function FormattedLessonContent({ content }) {
         }
 
         return (
-          <div key={idx} className="bg-[#120505] border border-[#2b0808] p-5 rounded-2xl text-slate-200 leading-relaxed font-medium shadow-md">
+          <div key={idx} className="bg-bull-surface border border-bull-line p-5 rounded-2xl text-slate-200 leading-relaxed font-medium shadow-md">
             {trimmed.split('\n').map((line, lIdx) => (
               <p key={lIdx} className={lIdx > 0 ? 'mt-2' : ''}>
                 {line}
@@ -257,13 +257,13 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     <div className="space-y-10 relative antialiased font-sans">
       
       {/* GAMIFIED STATS BANNER */}
-      <div className="bg-[#0f0505] border border-[#2b0808] p-4 rounded-3xl flex flex-wrap items-center justify-between gap-4 shadow-2xl">
+      <div className="bg-bull-surface border border-bull-line p-4 rounded-3xl flex flex-wrap items-center justify-between gap-4 shadow-2xl">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-2xl bg-[#1a0808] border border-[#ff3333]/40 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(255,51,51,0.2)]">
+          <div className="h-10 w-10 rounded-2xl bg-bull-raised border border-bull-lime/40 flex items-center justify-center text-xl shadow-[0_0_15px_color-mix(in_srgb,var(--color-bull-lime)_20%,transparent)]">
             ⚡
           </div>
           <div>
-            <span className="text-[10px] font-black tracking-widest text-[#ff3333] uppercase block font-mono">
+            <span className="text-[10px] font-black tracking-widest text-bull-lime uppercase block font-mono">
               TRADER LEVEL {Math.floor(userXP / 500) + 1}
             </span>
             <h3 className="text-sm font-black text-white font-mono">
@@ -273,11 +273,11 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
         </div>
 
         <div className="flex items-center gap-6 font-mono text-xs">
-          <div className="bg-[#1a0808] border border-[#2b0808] px-3.5 py-1.5 rounded-xl">
+          <div className="bg-bull-raised border border-bull-line px-3.5 py-1.5 rounded-xl">
             <span className="text-slate-500 text-[10px] block font-sans uppercase font-black">TOTAL XP</span>
             <span className="font-black text-amber-400">🔥 {userXP} XP</span>
           </div>
-          <div className="bg-[#1a0808] border border-[#2b0808] px-3.5 py-1.5 rounded-xl">
+          <div className="bg-bull-raised border border-bull-line px-3.5 py-1.5 rounded-xl">
             <span className="text-slate-500 text-[10px] block font-sans uppercase font-black">NODES CLEARED</span>
             <span className="font-black text-emerald-400">{completedSubmodules.length} / {allSubmodules.length}</span>
           </div>
@@ -290,7 +290,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
         {/* Left Arrow Button (Placed before Mod 1) */}
         <button
           onClick={() => scrollTracks('left')}
-          className="mr-3 shrink-0 w-10 h-10 rounded-full bg-[#1a0808] border border-[#ff3333] text-[#ff3333] hover:bg-[#ff3333] hover:text-white font-black flex items-center justify-center shadow-xl transition cursor-pointer active:scale-95"
+          className="mr-3 shrink-0 w-10 h-10 rounded-full bg-bull-raised border border-bull-lime text-bull-lime hover:bg-bull-lime hover:text-bull-ink font-black flex items-center justify-center shadow-xl transition cursor-pointer active:scale-95"
           aria-label="Scroll Tracks Left"
         >
           ◀
@@ -312,26 +312,26 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                 className={`min-w-[280px] sm:min-w-[310px] max-w-[340px] p-6 rounded-3xl border transition-all duration-300 select-none text-left relative overflow-hidden group flex-shrink-0 flex flex-col justify-between ${
                   unlocked 
                     ? isSelected
-                      ? 'bg-gradient-to-br from-[#7a0000] via-[#4a0000] to-black border-[#ff3333] text-white shadow-[0_0_30px_rgba(255,51,51,0.3)] scale-[1.02] cursor-pointer'
-                      : 'bg-[#0f0505] border-[#2b0808] text-slate-200 shadow-xl hover:border-[#ff3333]/60 hover:bg-[#1a0808] cursor-pointer hover:scale-[1.01]'
-                    : 'bg-[#0f0505]/40 border-[#2b0808] opacity-40 cursor-not-allowed'
+                      ? 'bg-gradient-to-br from-bull-raised via-bull-surface to-bull-bg border-bull-lime text-white shadow-[0_0_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] scale-[1.02] cursor-pointer'
+                      : 'bg-bull-surface border-bull-line text-slate-200 shadow-xl hover:border-bull-lime/60 hover:bg-bull-raised cursor-pointer hover:scale-[1.01]'
+                    : 'bg-bull-surface/40 border-bull-line opacity-40 cursor-not-allowed'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className={`font-mono font-black text-3xl ${isSelected ? 'text-rose-200' : 'text-[#ff3333]'}`}>
+                    <span className={`font-mono font-black text-3xl ${isSelected ? 'text-rose-200' : 'text-bull-lime'}`}>
                       0{track.trackNumber || idx + 1}
                     </span>
                     <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-xl font-mono ${
                       isSelected 
-                        ? 'bg-[#ff3333] text-white shadow-md' 
-                        : 'bg-[#1a0808] border border-[#2b0808] text-slate-400'
+                        ? 'bg-bull-lime text-bull-ink shadow-md' 
+                        : 'bg-bull-raised border border-bull-line text-slate-400'
                     }`}>
                       {track.level}
                     </span>
                   </div>
 
-                  <h2 className="font-black text-lg tracking-tight text-white group-hover:text-[#ff3333] transition-colors">
+                  <h2 className="font-black text-lg tracking-tight text-white group-hover:text-bull-lime transition-colors">
                     {track.title}
                   </h2>
                   <p className={`text-xs mt-2 leading-relaxed ${isSelected ? 'text-rose-100/90' : 'text-slate-400'}`}>
@@ -341,7 +341,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                 
                 <div className="mt-5 pt-3 border-t border-white/10 flex justify-between items-center text-[10px] font-black font-mono">
                   {unlocked ? (
-                    <span className={isSelected ? 'text-rose-200 animate-pulse' : 'text-[#ff3333]'}>
+                    <span className={isSelected ? 'text-rose-200 animate-pulse' : 'text-bull-lime'}>
                       {isSelected ? '▼ ACTIVE TRACK (CLICK TO CLOSE)' : '▶ LAUNCH TRACK NODES'}
                     </span>
                   ) : (
@@ -358,7 +358,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
         {/* Right Arrow Button (Placed after Card 04) */}
         <button
           onClick={() => scrollTracks('right')}
-          className="ml-3 shrink-0 w-10 h-10 rounded-full bg-[#1a0808] border border-[#ff3333] text-[#ff3333] hover:bg-[#ff3333] hover:text-white font-black flex items-center justify-center shadow-xl transition cursor-pointer active:scale-95"
+          className="ml-3 shrink-0 w-10 h-10 rounded-full bg-bull-raised border border-bull-lime text-bull-lime hover:bg-bull-lime hover:text-bull-ink font-black flex items-center justify-center shadow-xl transition cursor-pointer active:scale-95"
           aria-label="Scroll Tracks Right"
         >
           ▶
@@ -367,10 +367,10 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
       {/* 2. MODULES & SUBMODULES SECTION */}
       {activeTrack && (
-        <section className="bg-[#0f0505] p-6 sm:p-8 rounded-3xl border border-[#ff3333]/30 shadow-[0_0_40px_rgba(0,0,0,0.8)] space-y-8 animate-fadeInFast relative">
-          <div className="flex justify-between items-center border-b border-[#2b0808] pb-4">
+        <section className="bg-bull-surface p-6 sm:p-8 rounded-3xl border border-bull-lime/30 shadow-[0_0_40px_rgba(0,0,0,0.8)] space-y-8 animate-fadeInFast relative">
+          <div className="flex justify-between items-center border-b border-bull-line pb-4">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-white bg-[#ff3333] px-3 py-1 rounded-md shadow-md font-mono">
+              <span className="text-[10px] font-black uppercase tracking-widest text-bull-ink bg-bull-lime px-3 py-1 rounded-md shadow-md font-mono">
                 ACTIVE FOCUS ARENA
               </span>
               <h2 className="font-black text-2xl text-white mt-2 flex items-center gap-2">
@@ -379,7 +379,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
             </div>
             <button
               onClick={() => setSelectedTrackId(null)}
-              className="text-xs font-black text-slate-400 hover:text-white bg-[#1a0808] border border-[#2b0808] hover:border-[#ff3333] px-3.5 py-1.5 rounded-xl font-mono cursor-pointer transition-all"
+              className="text-xs font-black text-slate-400 hover:text-white bg-bull-raised border border-bull-line hover:border-bull-lime px-3.5 py-1.5 rounded-xl font-mono cursor-pointer transition-all"
             >
               ✕ CLOSE
             </button>
@@ -387,7 +387,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
           <div className="space-y-8">
             {(activeTrack.modules || []).length === 0 ? (
-              <div className="p-8 text-center text-slate-500 font-mono text-xs bg-[#1a0808] rounded-2xl border border-[#2b0808]">
+              <div className="p-8 text-center text-slate-500 font-mono text-xs bg-bull-raised rounded-2xl border border-bull-line">
                 ⚠️ No modules loaded for this track yet. Add files to app/data/ to populate nodes.
               </div>
             ) : (
@@ -397,21 +397,21 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   {/* Module Header + Scroll Buttons */}
                   <div className="flex items-center justify-between">
                     <h3 className="font-black text-sm sm:text-base text-slate-200 flex items-center gap-2 uppercase tracking-wider font-mono">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#ff3333] animate-ping" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-bull-lime animate-ping" />
                       Module {mIdx + 1}: {mod.title}
                     </h3>
 
                     <div className="flex gap-2">
                       <button
                         onClick={() => scrollSubmodules(mod.id, 'left')}
-                        className="w-8 h-8 rounded-xl bg-[#1a0808] border border-[#2b0808] hover:border-[#ff3333] text-[#ff3333] font-black flex items-center justify-center text-xs transition cursor-pointer"
+                        className="w-8 h-8 rounded-xl bg-bull-raised border border-bull-line hover:border-bull-lime text-bull-lime font-black flex items-center justify-center text-xs transition cursor-pointer"
                         aria-label="Scroll Submodules Left"
                       >
                         ◀
                       </button>
                       <button
                         onClick={() => scrollSubmodules(mod.id, 'right')}
-                        className="w-8 h-8 rounded-xl bg-[#1a0808] border border-[#2b0808] hover:border-[#ff3333] text-[#ff3333] font-black flex items-center justify-center text-xs transition cursor-pointer"
+                        className="w-8 h-8 rounded-xl bg-bull-raised border border-bull-line hover:border-bull-lime text-bull-lime font-black flex items-center justify-center text-xs transition cursor-pointer"
                         aria-label="Scroll Submodules Right"
                       >
                         ▶
@@ -436,13 +436,13 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                             submodUnlocked
                               ? completed
                                 ? 'bg-emerald-950/20 border-emerald-900/60 cursor-pointer hover:border-emerald-500 hover:scale-[1.02]'
-                                : 'bg-[#1a0808] border-[#2b0808] hover:border-[#ff3333] cursor-pointer hover:scale-[1.02] shadow-xl'
-                              : 'bg-[#0f0505] border-[#2b0808]/40 opacity-30 cursor-not-allowed'
+                                : 'bg-bull-raised border-bull-line hover:border-bull-lime cursor-pointer hover:scale-[1.02] shadow-xl'
+                              : 'bg-bull-surface border-bull-line/40 opacity-30 cursor-not-allowed'
                           }`}
                         >
                           <div className="space-y-2">
                             <div className="flex justify-between items-start gap-2">
-                              <h4 className={`font-black text-sm tracking-tight group-hover:text-[#ff3333] transition-colors ${submodUnlocked ? 'text-white' : 'text-slate-500'}`}>
+                              <h4 className={`font-black text-sm tracking-tight group-hover:text-bull-lime transition-colors ${submodUnlocked ? 'text-white' : 'text-slate-500'}`}>
                                 {submod.title}
                               </h4>
                               {completed ? (
@@ -450,7 +450,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                                   ✓ PASSED (+100 XP)
                                 </span>
                               ) : submodUnlocked ? (
-                                <span className="text-[#ff3333] text-[9px] font-black uppercase tracking-wider bg-[#2b0808] border border-[#ff3333]/30 px-2 py-0.5 rounded-md font-mono">
+                                <span className="text-bull-lime text-[10px] font-black uppercase tracking-wider bg-bull-line border border-bull-lime/30 px-2 py-0.5 rounded-md font-mono">
                                   MISSION READY ⚡
                                 </span>
                               ) : (
@@ -462,7 +462,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                             </p>
                           </div>
 
-                          <div className="pt-2 border-t border-[#2b0808] flex justify-between items-center text-[10px] text-slate-500 font-mono">
+                          <div className="pt-2 border-t border-bull-line flex justify-between items-center text-[10px] text-slate-500 font-mono">
                             <span className="text-amber-400 font-bold">+100 XP REWARD</span>
                             <span className="text-slate-300 font-black group-hover:translate-x-1 transition-transform">
                               ENTER DOSSIER →
@@ -481,12 +481,12 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
       {/* 3. GAMIFIED DOSSIER MODAL */}
       {activeModalSubmod && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-black/90 transition-all duration-300 animate-fadeInFast">
-          <div className="bg-[#0f0505] border border-[#ff3333]/50 rounded-3xl w-full max-w-2xl overflow-hidden shadow-[0_0_50px_rgba(255,51,51,0.25)] flex flex-col max-h-[90vh] animate-scaleUp">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-bull-bg/90 transition-all duration-300 animate-fadeInFast">
+          <div className="bg-bull-surface border border-bull-lime/50 rounded-3xl w-full max-w-2xl overflow-hidden shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] flex flex-col max-h-[90vh] animate-scaleUp">
             
-            <div className="p-6 border-b border-[#2b0808] flex items-center justify-between bg-[#1a0808]">
+            <div className="p-6 border-b border-bull-line flex items-center justify-between bg-bull-raised">
               <div>
-                <span className="text-[10px] font-black uppercase text-[#ff3333] tracking-widest bg-[#2b0808] px-2.5 py-0.5 rounded-md border border-[#ff3333]/20 font-mono">
+                <span className="text-[10px] font-black uppercase text-bull-lime tracking-widest bg-bull-line px-2.5 py-0.5 rounded-md border border-bull-lime/20 font-mono">
                   MISSION BRIEFING DOSSIER
                 </span>
                 <h3 className="font-black text-lg sm:text-xl text-white tracking-tight mt-1.5">
@@ -495,18 +495,18 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
               </div>
               <button 
                 onClick={() => setActiveModalSubmod(null)}
-                className="w-9 h-9 rounded-xl bg-[#0f0505] border border-[#2b0808] hover:border-[#ff3333] text-slate-400 hover:text-white font-black flex items-center justify-center transition cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-bull-surface border border-bull-line hover:border-bull-lime text-slate-400 hover:text-white font-black flex items-center justify-center transition cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <div className="flex bg-[#1a0808] border-b border-[#2b0808] px-6 pt-3 gap-2">
+            <div className="flex bg-bull-raised border-b border-bull-line px-6 pt-3 gap-2">
               <button
                 onClick={() => setModalTab('lesson')}
                 className={`pb-2.5 px-4 text-xs font-black transition-all border-b-2 cursor-pointer font-mono ${
                   modalTab === 'lesson' 
-                    ? 'border-[#ff3333] text-white shadow-sm' 
+                    ? 'border-bull-lime text-white shadow-sm' 
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -516,7 +516,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                 onClick={() => setModalTab('quiz')}
                 className={`pb-2.5 px-4 text-xs font-black transition-all border-b-2 cursor-pointer font-mono ${
                   modalTab === 'quiz' 
-                    ? 'border-[#ff3333] text-white shadow-sm' 
+                    ? 'border-bull-lime text-white shadow-sm' 
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -531,7 +531,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
                   <button
                     onClick={() => setModalTab('quiz')}
-                    className="w-full py-4 bg-[#ff3333] hover:bg-[#dc2626] text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl transition-all active:scale-95 cursor-pointer font-mono mt-4"
+                    className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl transition-all active:scale-95 cursor-pointer font-mono mt-4"
                   >
                     PROCEED TO SKILL VERIFICATION QUIZ →
                   </button>
@@ -540,7 +540,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
               {modalTab === 'quiz' && activeModalSubmod.quiz && (
                 <div className="space-y-6 animate-fadeIn">
-                  <div className="flex items-center justify-between border-b border-[#2b0808] pb-2 font-mono">
+                  <div className="flex items-center justify-between border-b border-bull-line pb-2 font-mono">
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-300">
                       NODE VERIFICATION ({activeModalSubmod.quiz.length} QUESTIONS)
                     </h4>
@@ -552,7 +552,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   </div>
 
                   {activeModalSubmod.quiz.map((q, qIdx) => (
-                    <div key={qIdx} className="bg-[#1a0808] p-4 rounded-2xl border border-[#2b0808] space-y-3">
+                    <div key={qIdx} className="bg-bull-raised p-4 rounded-2xl border border-bull-line space-y-3">
                       <p className="text-xs font-bold text-white">{qIdx + 1}. {q.question}</p>
                       
                       <div className="space-y-2">
@@ -560,12 +560,12 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                           const isSelected = userAnswers[qIdx] === oIdx;
                           const isCorrect = q.correctIndex === oIdx;
                           
-                          let btnStyle = "bg-[#0f0505] border-[#2b0808] text-slate-300 hover:border-[#ff3333]/50";
+                          let btnStyle = "bg-bull-surface border-bull-line text-slate-300 hover:border-bull-lime/50";
                           if (quizSubmitted) {
                             if (isCorrect) btnStyle = "bg-emerald-950/80 border-emerald-500 text-emerald-300 font-bold";
                             else if (isSelected && !isCorrect) btnStyle = "bg-rose-950/80 border-rose-500 text-rose-300 font-bold";
                           } else if (isSelected) {
-                            btnStyle = "bg-[#7a0000]/60 border-[#ff3333] text-white font-bold";
+                            btnStyle = "bg-bull-lime/60 border-bull-lime text-white font-bold";
                           }
 
                           return (
@@ -583,7 +583,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                       </div>
 
                       {quizSubmitted && (
-                        <div className="p-3 bg-[#0f0505] border border-[#2b0808] rounded-xl text-[11px] text-slate-400 leading-relaxed font-medium">
+                        <div className="p-3 bg-bull-surface border border-bull-line rounded-xl text-[11px] text-slate-400 leading-relaxed font-medium">
                           💡 <span className="font-black text-slate-200">EXPLANATION: </span>{q.explanation}
                         </div>
                       )}
@@ -601,7 +601,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   ) : !quizPassed && (
                     <button
                       onClick={() => { setQuizSubmitted(false); setUserAnswers({}); }}
-                      className="w-full py-3.5 bg-[#1a0808] border border-[#2b0808] hover:bg-[#2b0808] text-slate-200 text-xs font-bold rounded-2xl transition-all cursor-pointer font-mono"
+                      className="w-full py-3.5 bg-bull-raised border border-bull-line hover:bg-bull-line text-slate-200 text-xs font-bold rounded-2xl transition-all cursor-pointer font-mono"
                     >
                       RETRY VERIFICATION QUIZ
                     </button>
@@ -611,10 +611,10 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
             </div>
 
-            <div className="p-6 border-t border-[#2b0808] bg-[#1a0808] flex items-center justify-between gap-3">
+            <div className="p-6 border-t border-bull-line bg-bull-raised flex items-center justify-between gap-3">
               <button
                 onClick={() => setActiveModalSubmod(null)}
-                className="px-5 py-2.5 border border-[#2b0808] bg-[#0f0505] rounded-2xl text-xs font-bold text-slate-300 hover:bg-[#1a0808] transition cursor-pointer font-mono"
+                className="px-5 py-2.5 border border-bull-line bg-bull-surface rounded-2xl text-xs font-bold text-slate-300 hover:bg-bull-raised transition cursor-pointer font-mono"
               >
                 CLOSE DOSSIER
               </button>

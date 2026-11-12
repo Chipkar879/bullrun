@@ -406,11 +406,11 @@ export default function SuperAdminDashboard() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative">
+      <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative">
         <Navbar />
         <div className="max-w-6xl mx-auto px-6 pt-32 pb-24 flex justify-center">
           <div className="space-y-4 text-center">
-            <div className="w-12 h-12 border-4 border-[#ff3333] border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-12 h-12 border-4 border-bull-lime border-t-transparent rounded-full animate-spin mx-auto" />
             <p className="text-slate-400 text-xs font-bold uppercase tracking-wider animate-pulse font-mono">
               Securing Admin Firewall Layer...
             </p>
@@ -423,15 +423,15 @@ export default function SuperAdminDashboard() {
   if (!authorized) return null;
 
   return (
-    <main className="min-h-screen bg-black text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
       <Navbar />
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8 animate-fadeInFast">
 
         {/* HEADER BLOCK */}
-        <div className="border-b border-[#2b0808] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="border-b border-bull-line pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <span className="bg-[#1a0808] text-[#ff3333] border border-[#2b0808] text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner mb-2 inline-block font-mono">
+            <span className="bg-bull-raised text-bull-lime border border-bull-line text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner mb-2 inline-block font-mono">
               🛡️ Super Admin Clearance
             </span>
             <h1 className="text-3xl font-black text-white tracking-tight">Master Control Panel</h1>
@@ -441,8 +441,8 @@ export default function SuperAdminDashboard() {
           </div>
 
           <div className="space-y-2 text-right">
-            <div className="bg-[#0f0505] border border-[#2b0808] px-4 py-2 rounded-xl text-xs font-mono text-slate-400">
-              Node ID: <span className="text-[#ff3333] font-bold">{SUPER_ADMIN_EMAIL}</span>
+            <div className="bg-bull-surface border border-bull-line px-4 py-2 rounded-xl text-xs font-mono text-slate-400">
+              Node ID: <span className="text-bull-lime font-bold">{SUPER_ADMIN_EMAIL}</span>
             </div>
             <div className="text-[10px] font-mono text-slate-500">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse" />
@@ -452,8 +452,8 @@ export default function SuperAdminDashboard() {
         </div>
 
         {/* SECTION A: TEACHER VERIFICATION QUEUE */}
-        <div className="bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
-          <div className="flex items-center justify-between border-b border-[#2b0808] pb-4">
+        <div className="bg-bull-surface border-2 border-bull-line rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+          <div className="flex items-center justify-between border-b border-bull-line pb-4">
             <h2 className="text-sm font-black text-amber-400 uppercase tracking-wider flex items-center gap-2 font-mono">
               📝 Pending Teacher Verification Queue ({pendingTeachers.length})
             </h2>
@@ -465,12 +465,12 @@ export default function SuperAdminDashboard() {
           ) : (
             <div className="space-y-3">
               {pendingTeachers.map((teacher) => (
-                <div key={teacher.id} className="p-4 bg-[#1a0808] border border-[#2b0808] rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs font-bold shadow-md">
+                <div key={teacher.id} className="p-4 bg-bull-raised border border-bull-line rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs font-bold shadow-md">
                   <div className="space-y-1">
                     <p className="text-sm text-white font-black">{teacher.name}</p>
                     <p className="text-slate-400 font-mono font-medium">{teacher.email}</p>
                     {teacher.verification_document_url && (
-                      <a href={teacher.verification_document_url} target="_blank" rel="noreferrer" className="inline-block text-[#ff3333] hover:underline pt-1 text-[11px] font-bold">
+                      <a href={teacher.verification_document_url} target="_blank" rel="noreferrer" className="inline-block text-bull-lime hover:underline pt-1 text-[11px] font-bold">
                         📂 View Appointment Letter Proof
                       </a>
                     )}
@@ -490,8 +490,8 @@ export default function SuperAdminDashboard() {
         </div>
 
         {/* SECTION B: USER ROSTER & SCHOOL FILTERS */}
-        <div className="bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl p-6 space-y-6 shadow-2xl">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-[#2b0808] pb-4">
+        <div className="bg-bull-surface border-2 border-bull-line rounded-3xl p-6 space-y-6 shadow-2xl">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-bull-line pb-4">
             <div>
               <h2 className="text-sm font-black text-slate-300 uppercase tracking-wider flex items-center gap-2 font-mono">
                 📊 Application Users Matrix ({filteredProfiles.length} / {allProfiles.length})
@@ -505,7 +505,7 @@ export default function SuperAdminDashboard() {
                 placeholder="🔍 Search name, email, school..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2.5 bg-[#1a0808] border border-[#2b0808] text-white rounded-xl text-xs font-bold focus:outline-none focus:border-[#7a0000] font-mono"
+                className="w-full px-4 py-2.5 bg-bull-raised border border-bull-line text-white rounded-xl text-xs font-bold focus:outline-none focus:border-bull-lime font-mono"
               />
             </div>
           </div>
@@ -516,14 +516,14 @@ export default function SuperAdminDashboard() {
             <div className="flex flex-wrap gap-2 font-mono">
               <button
                 onClick={() => setSelectedSchoolFilter('ALL')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === 'ALL' ? 'bg-[#7a0000] border-[#a30000] text-white' : 'bg-[#1a0808] border-[#2b0808] text-slate-400'}`}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === 'ALL' ? 'bg-bull-lime border-bull-lime-dark text-bull-ink' : 'bg-bull-raised border-bull-line text-slate-400'}`}
               >
                 All Users ({allProfiles.length})
               </button>
 
               <button
                 onClick={() => setSelectedSchoolFilter('PERSONAL')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === 'PERSONAL' ? 'bg-[#7a0000] border-[#a30000] text-white' : 'bg-[#1a0808] border-[#2b0808] text-slate-400'}`}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === 'PERSONAL' ? 'bg-bull-lime border-bull-lime-dark text-bull-ink' : 'bg-bull-raised border-bull-line text-slate-400'}`}
               >
                 Personal Track
               </button>
@@ -532,7 +532,7 @@ export default function SuperAdminDashboard() {
                 <button
                   key={schoolId}
                   onClick={() => setSelectedSchoolFilter(schoolId)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === schoolId ? 'bg-[#7a0000] border-[#a30000] text-white' : 'bg-[#1a0808] border-[#2b0808] text-slate-400'}`}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === schoolId ? 'bg-bull-lime border-bull-lime-dark text-bull-ink' : 'bg-bull-raised border-bull-line text-slate-400'}`}
                 >
                   🏫 {schoolId}
                 </button>
@@ -549,36 +549,36 @@ export default function SuperAdminDashboard() {
                 <div
                   key={p.id}
                   onClick={() => setSelectedId(p.id)}
-                  className="bg-[#1a0808] border-2 border-[#2b0808] hover:border-[#7a0000] p-5 rounded-2xl shadow-xl transition-all cursor-pointer group space-y-3 relative overflow-hidden"
+                  className="bg-bull-raised border-2 border-bull-line hover:border-bull-lime/50 p-5 rounded-2xl shadow-xl transition-all cursor-pointer group space-y-3 relative overflow-hidden"
                 >
                   <div className="flex justify-between items-start gap-2">
                     <div className="truncate">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-mono font-black px-1.5 py-0.5 rounded bg-[#0f0505] text-[#ff3333] border border-[#2b0808]">
+                        <span className="text-[10px] font-mono font-black px-1.5 py-0.5 rounded bg-bull-surface text-bull-lime border border-bull-line">
                           #{p.rank}
                         </span>
-                        <h3 className="font-black text-sm text-white group-hover:text-[#ff3333] truncate">
+                        <h3 className="font-black text-sm text-white group-hover:text-bull-lime truncate">
                           {p.name || 'Unnamed Account'}
                         </h3>
                       </div>
                       <p className="text-[11px] font-mono text-slate-400 truncate mt-1">{p.email}</p>
                     </div>
 
-                    <span className="px-2.5 py-0.5 bg-[#0f0505] border border-[#2b0808] text-[#ff3333] rounded-full text-[9px] font-black uppercase font-mono">
+                    <span className="px-2.5 py-0.5 bg-bull-surface border border-bull-line text-bull-lime rounded-full text-[10px] font-black uppercase font-mono">
                       {p.role}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-[#2b0808] text-xs font-bold font-mono">
+                  <div className="flex items-center justify-between pt-2 border-t border-bull-line text-xs font-bold font-mono">
                     <div>
-                      <span className="text-[9px] uppercase text-slate-500 block">Net Worth</span>
+                      <span className="text-[10px] uppercase text-slate-500 block">Net Worth</span>
                       <span className="text-emerald-400">{inr(getNetWorth(p))}</span>
-                      <span className="text-[9px] text-slate-500 block mt-0.5">Cash {inr(p.wallet_balance)}</span>
-                      <span className="text-[9px] text-sky-400 block mt-0.5">Week: {formatDuration(activity[p.id])}</span>
+                      <span className="text-[10px] text-slate-500 block mt-0.5">Cash {inr(p.wallet_balance)}</span>
+                      <span className="text-[10px] text-sky-400 block mt-0.5">Week: {formatDuration(activity[p.id])}</span>
                     </div>
 
                     <div className="text-right">
-                      <span className="text-[9px] uppercase text-slate-500 block">Status</span>
+                      <span className="text-[10px] uppercase text-slate-500 block">Status</span>
                       <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded border ${
                         isSuperAdmin
                           ? 'bg-sky-950 text-sky-400 border-sky-800'
@@ -602,11 +602,11 @@ export default function SuperAdminDashboard() {
         const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(selectedProfile, now);
 
         return (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/80 animate-fadeInFast">
-            <div className="bg-[#0f0505] border-2 border-[#2b0808] rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] animate-scaleUp">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-bull-bg/80 animate-fadeInFast">
+            <div className="bg-bull-surface border-2 border-bull-line rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] animate-scaleUp">
 
               {/* Modal Header */}
-              <div className="p-6 border-b border-[#2b0808] flex items-center justify-between bg-[#1a0808]">
+              <div className="p-6 border-b border-bull-line flex items-center justify-between bg-bull-raised">
                 <div>
                   <h3 className="font-black text-xl text-white tracking-tight">
                     {selectedProfile.name || 'User Workspace'}
@@ -615,7 +615,7 @@ export default function SuperAdminDashboard() {
                 </div>
                 <button
                   onClick={() => setSelectedId(null)}
-                  className="w-8 h-8 rounded-full bg-[#0f0505] border border-[#2b0808] text-slate-400 font-bold hover:text-white transition cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-bull-surface border border-bull-line text-slate-400 font-bold hover:text-white transition cursor-pointer"
                 >
                   ✕
                 </button>
@@ -626,8 +626,8 @@ export default function SuperAdminDashboard() {
 
                 {/* ⚡ ADMIN CUSTOM ACCESS DURATION ACTIVATOR */}
                 {!isSuperAdmin && (
-                  <div className="p-5 bg-[#1a0808] border-2 border-[#ff3333]/40 rounded-2xl space-y-3 shadow-xl">
-                    <span className="text-[10px] font-black uppercase text-[#ff3333] tracking-wider block">
+                  <div className="p-5 bg-bull-raised border-2 border-bull-lime/40 rounded-2xl space-y-3 shadow-xl">
+                    <span className="text-[10px] font-black uppercase text-bull-lime tracking-wider block">
                       ⚡ ADMIN CUSTOM ACCESS DURATION ACTIVATOR
                     </span>
                     <p className="text-xs text-slate-300 font-sans font-medium">
@@ -641,7 +641,7 @@ export default function SuperAdminDashboard() {
                         max="365"
                         value={customDaysInput}
                         onChange={(e) => setCustomDaysInput(e.target.value)}
-                        className="w-28 bg-[#0f0505] border border-[#2b0808] text-white px-3 py-2 rounded-xl text-sm font-black text-center focus:outline-none focus:border-[#ff3333]"
+                        className="w-28 bg-bull-surface border border-bull-line text-white px-3 py-2 rounded-xl text-sm font-black text-center focus:outline-none focus:border-bull-lime"
                         placeholder="30"
                       />
                       <button
@@ -656,7 +656,7 @@ export default function SuperAdminDashboard() {
 
                 {/* 🔒 / 🔓 MANUAL FREEZE SWITCH WITH DYNAMIC TOGGLE */}
                 {!isSuperAdmin && (
-                  <div className="flex items-center justify-between p-4 bg-[#1a0808] border border-[#2b0808] rounded-2xl">
+                  <div className="flex items-center justify-between p-4 bg-bull-raised border border-bull-line rounded-2xl">
                     <div>
                       <span className="text-xs font-black text-white block">Manual Freeze Switch</span>
                       <span className="text-[10px] text-slate-400 font-sans">
@@ -669,7 +669,7 @@ export default function SuperAdminDashboard() {
                       className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-md transition cursor-pointer ${
                         isFrozen
                           ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                          : 'bg-[#ff3333] hover:bg-[#dc2626] text-white'
+                          : 'bg-bull-lime hover:bg-bull-lime-light text-bull-ink'
                       }`}
                     >
                       {isFrozen ? '🔓 UNFREEZE ACCOUNT' : '🔒 FREEZE ACCOUNT'}
@@ -679,18 +679,18 @@ export default function SuperAdminDashboard() {
 
                 {/* METADATA GRID WITH REAL-TIME REMAINING TIME */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-bold">
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
                     <span className="text-[10px] uppercase text-slate-500">School Code</span>
                     <p className="text-white">{selectedProfile.school_code || selectedProfile.school_id || 'Personal Track'}</p>
                   </div>
 
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
                     <span className="text-[10px] uppercase text-slate-500">Classroom ID</span>
                     <p className="text-white">{selectedProfile.specific_class_id || 'Unassigned'}</p>
                   </div>
 
                   {/* EXACT REAL-TIME REMAINING TIME DISPLAY */}
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1 col-span-1 md:col-span-2">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1 col-span-1 md:col-span-2">
                     <span className="text-[10px] uppercase text-slate-500 block">Exact Time Remaining Before Freeze</span>
                     {isSuperAdmin ? (
                       <p className="text-amber-400 font-bold">👑 Permanent Access (Super Admin)</p>
@@ -709,27 +709,27 @@ export default function SuperAdminDashboard() {
                     )}
                   </div>
 
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
                     <span className="text-[10px] uppercase text-slate-500">Net Worth (live)</span>
                     <p className="text-emerald-400">{inr(getNetWorth(selectedProfile))}</p>
                   </div>
 
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
                     <span className="text-[10px] uppercase text-slate-500">Wallet Balance (cash)</span>
                     <p className="text-white">{inr(selectedProfile.wallet_balance)}</p>
                   </div>
 
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
                     <span className="text-[10px] uppercase text-slate-500">Time on site (last 7 days)</span>
                     <p className="text-sky-400">{formatDuration(activity[selectedProfile.id])}</p>
                   </div>
 
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
                     <span className="text-[10px] uppercase text-slate-500">Average per day (7-day)</span>
                     <p className="text-sky-400">{formatDuration((activity[selectedProfile.id] || 0) / 7)}</p>
                   </div>
 
-                  <div className="p-3.5 bg-[#1a0808] border border-[#2b0808] rounded-xl space-y-1 col-span-1 md:col-span-2">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1 col-span-1 md:col-span-2">
                     <span className="text-[10px] uppercase text-slate-500">Registration Date</span>
                     <p className="text-slate-300 text-[11px]">
                       {selectedProfile.created_at ? new Date(selectedProfile.created_at).toLocaleDateString() : 'N/A'}
@@ -740,7 +740,7 @@ export default function SuperAdminDashboard() {
               </div>
 
               {/* Modal Controls */}
-              <div className="p-6 border-t border-[#2b0808] bg-[#1a0808] flex items-center justify-between gap-3 font-mono">
+              <div className="p-6 border-t border-bull-line bg-bull-raised flex items-center justify-between gap-3 font-mono">
                 <button
                   onClick={() => handleDeleteDossier(selectedProfile.id, selectedProfile.name || 'User Account')}
                   className="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-xl text-xs font-black uppercase cursor-pointer"
@@ -750,7 +750,7 @@ export default function SuperAdminDashboard() {
 
                 <button
                   onClick={() => setSelectedId(null)}
-                  className="px-5 py-2 bg-[#0f0505] border border-[#2b0808] text-slate-300 rounded-xl text-xs font-black uppercase cursor-pointer"
+                  className="px-5 py-2 bg-bull-surface border border-bull-line text-slate-300 rounded-xl text-xs font-black uppercase cursor-pointer"
                 >
                   Close
                 </button>
