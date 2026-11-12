@@ -6,7 +6,7 @@ export default async function sitemap() {
     '',
     '/simulator',
     '/quiz',
-    '/courses',
+    '/modules',
     '/leaderboard',
     '/pricing',
   ];

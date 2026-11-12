@@ -85,7 +85,7 @@ export default function ModulesPage() {
         {/* Header Section */}
         <div className="space-y-2 mb-10 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-[10px] uppercase tracking-widest font-black px-3.5 py-1 rounded-full shadow-inner mb-2 font-mono">
-            🎓 Bull Run Academy
+            🎓 Bull Run
           </span>
           <h1 className="font-poppins font-black text-3xl sm:text-4xl text-white tracking-tight">
             Interactive Learning Arena

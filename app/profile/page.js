@@ -134,7 +134,7 @@ export default function ProfilePage() {
         window.localStorage.clear();
         window.sessionStorage.clear();
         const cookies = document.cookie.split(";");
-        const targetPaths = ['/', '/simulator', '/quiz', '/courses', '/leaderboard', '/profile'];
+        const targetPaths = ['/', '/simulator', '/quiz', '/modules', '/leaderboard', '/profile'];
         for (let i = 0; i < cookies.length; i++) {
           const cookie = cookies[i];
           const eqPos = cookie.indexOf("=");

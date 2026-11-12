@@ -40,19 +40,19 @@ export default function NotFound() {
             >
               🏠 Return to Home Base
             </Link>
+
+            <Link 
+              href="/modules" 
+              className="p-3 bg-bull-raised border border-bull-line hover:border-bull-lime/50 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all block text-center"
+            >
+              📚 Open Learning Modules
+            </Link>
             
             <Link 
               href="/simulator" 
               className="p-3 bg-bull-raised border border-bull-line hover:border-bull-lime/50 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all block text-center"
             >
               📈 Launch Paper Trading Simulator
-            </Link>
-
-            <Link 
-              href="/courses" 
-              className="p-3 bg-bull-raised border border-bull-line hover:border-bull-lime/50 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all block text-center"
-            >
-              📚 Open Learning Modules
             </Link>
           </div>
         </div>

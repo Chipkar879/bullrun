@@ -73,9 +73,9 @@ export default function Navbar() {
           {/* Navigation Items */}
           <nav className="hidden md:flex items-center gap-8 text-xs font-bold text-slate-400">
             <Link href="/" className={`pb-0.5 transition-all ${pathname === '/' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Home</Link>
+            <Link href="/modules" className={`pb-0.5 transition-all ${pathname === '/modules' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Modules</Link>
             <Link href="/simulator" className={`pb-0.5 transition-all ${pathname === '/simulator' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Simulator</Link>
             <Link href="/arena" className={`pb-0.5 transition-all ${pathname === '/arena' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Arena</Link>
-            <Link href="/modules" className={`pb-0.5 transition-all ${pathname === '/modules' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Modules</Link>
             
             {/* Daily Quiz Link + NEW Tag */}
             <Link href="/quiz" className={`pb-0.5 transition-all flex items-center gap-1 ${pathname === '/quiz' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>
@@ -134,9 +134,9 @@ export default function Navbar() {
         {/* Mobile Drawer */}
         <div className={`absolute top-full left-0 right-0 w-full bg-bull-surface border-b border-bull-line shadow-2xl p-5 flex flex-col gap-2.5 text-xs font-bold text-slate-300 md:hidden transition-all duration-300 origin-top ${isMobileMenuOpen ? 'scale-y-100 opacity-100 visible' : 'scale-y-0 opacity-0 invisible'}`}>
           <Link href="/" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Home</Link>
+          <Link href="/modules" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/modules' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Modules</Link>
           <Link href="/simulator" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/simulator' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Simulator</Link>
           <Link href="/arena" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/arena' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Arena</Link>
-          <Link href="/modules" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/modules' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Modules</Link>
           <Link href="/quiz" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/quiz' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Daily Quiz <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
           <Link href="/leaderboard" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/leaderboard' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Leaderboard <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
           <Link href="/pricing" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/pricing' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Pricing</Link>

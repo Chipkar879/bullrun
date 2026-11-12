@@ -190,7 +190,7 @@ export default function PricingPage() {
         {/* HEADER */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-lime/30 text-bull-lime text-[10px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner font-mono">
-            ⚡ BULL RUN ACADEMY PASS
+            ⚡ BULL RUN PASS
           </span>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             Student Platform Access
@@ -347,7 +347,7 @@ export default function PricingPage() {
             <div className="space-y-4">
               <div className="bg-bull-raised border border-dashed border-bull-lime/40 p-5 rounded-2xl flex flex-col items-center text-center space-y-3">
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRunAcademy&am=99&cu=INR`)}`} 
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRun&am=99&cu=INR`)}`} 
                   alt="Bull Run UPI Gateway QR" 
                   className="w-[150px] h-[150px] border bg-white p-1 rounded-xl shadow-md"
                   loading="lazy"
