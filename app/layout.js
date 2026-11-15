@@ -1,4 +1,5 @@
 import ActivityTracker from '@/components/ActivityTracker';
+import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, JSON_LD } from '@/lib/site';
 import ThemeCustomizer from '@/components/ThemeCustomizer';
 import { THEME_ENGINE_SOURCE } from '@/lib/theme-engine';
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
@@ -28,55 +29,40 @@ export const viewport = {
 // TOTAL REWRITTEN METADATA AND SEO CONFIGURATION
 export const metadata = {
   title: {
-    default: "Bull Run | Premium Stock Market Sandbox Arena",
-    template: "%s | Bull Run"
+    default: SITE_TITLE,
+    template: '%s | ' + SITE_NAME,
   },
-  description: "Practice paper trading risk-free with live NSE market feeds, join custom classroom trading tournaments, and climb the standings leaderboard.",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  category: 'education',
   keywords: [
-    // Core Simulator & Paper Trading Phrases
-    "stock market simulator", 
-    "paper trading India", 
-    "NSE simulator", 
-    "virtual stock trading app",
-    "free portfolio tracker mock",
-    "nifty 50 simulator game",
-    "learn trading risk free",
-    "live market data sandbox",
-    "virtual stock market platform",
-    
-    // Quiz & Gamification Terms
-    "finance mock quiz", 
-    "classroom trading game", 
-    "Bull Run sandbox",
-    "financial intelligence battleground",
-    "stock market game for schools",
-    "daily finance mcq challenge",
-    "bazaar bucks leaderboard",
-    
-    // Indian Market Specifics (High Volume)
-    "nse bse virtual trading",
-    "practice intra day trading free",
-    "indian stock market game for students",
-    "fno simulation sandbox india",
-    "share market learning app free"
+    'stock market game for students',
+    'paper trading India',
+    'stock market simulator India',
+    'virtual stock trading game',
+    'learn stock market for teens',
+    'school stock market competition',
+    'classroom trading game',
+    'finance quiz for students',
+    'investing for students',
   ],
-  authors: [{ name: "Vikrant Chipkar" }],
-  metadataBase: new URL("https://bullrun-arena.vercel.app"),
+  authors: [{ name: 'Vikrant Chipkar' }],
+  metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: "/",
+    canonical: '/',
   },
   openGraph: {
-    title: "Bull Run | Classroom Stock Market Sandbox Arena",
-    description: "Practice paper trading risk-free with live market data feeds and competitive leaderboards.",
-    url: "https://bullrun-arena.vercel.app",
-    siteName: "Bull Run",
-    locale: "en_IN",
-    type: "website",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: 'en_IN',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Bull Run | Stock Market Sandbox Arena",
-    description: "Practice paper trading risk-free with live market data feeds.",
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -104,10 +90,14 @@ export default function RootLayout({ children }) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_ENGINE_SOURCE }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
       </head>
       <body className="min-h-full flex flex-col bg-bull-bg text-slate-100 antialiased selection:bg-bull-lime selection:text-bull-ink">
         <ActivityTracker />
         {children}
+        <footer className="mt-auto border-t border-bull-line px-4 py-4 text-center text-xs leading-relaxed text-bull-muted">
+          Bull Run is an educational game. All prices are simulated, no real money is used, and nothing here is investment advice. Not affiliated with NSE, BSE or SEBI.
+        </footer>
         <ThemeCustomizer />
       </body>
     </html>

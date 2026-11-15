@@ -4,48 +4,80 @@ import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
 
+// Supabase reports a bad or expired reset link in the URL hash or query string.
+function readUrlError() {
+  if (typeof window === 'undefined') return '';
+  const params = new URLSearchParams(
+    window.location.hash.replace(/^#/, '') + '&' + window.location.search.replace(/^\?/, '')
+  );
+  const code = params.get('error_code');
+  const desc = params.get('error_description');
+  if (!code && !params.get('error')) return '';
+  if (code === 'otp_expired') {
+    return 'This reset link has expired or was already used. Please request a new one.';
+  }
+  return desc || 'This reset link is not valid. Please request a new one.';
+}
+
 export default function UpdatePasswordPage() {
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ message: '', success: false });
   const [sessionReady, setSessionReady] = useState(false);
+  const [urlError, setUrlError] = useState('');
+  const [timedOut, setTimedOut] = useState(false);
 
   useEffect(() => {
-    // 1. Listen for Supabase password recovery token exchange
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'PASSWORD_RECOVERY' || session) {
-        setSessionReady(true);
-      }
+    const err = readUrlError();
+    if (err) {
+      setUrlError(err);
+      return;
+    }
+
+    let active = true;
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!active) return;
+      if (event === 'PASSWORD_RECOVERY' || session) setSessionReady(true);
     });
 
-    // 2. Check if user session already exchanged token
-    async function checkExistingSession() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setSessionReady(true);
-      }
-    }
-    checkExistingSession();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (active && session) setSessionReady(true);
+    });
 
-    return () => subscription.unsubscribe();
+    const timer = setTimeout(() => {
+      if (active) setTimedOut(true);
+    }, 10000);
+
+    return () => {
+      active = false;
+      clearTimeout(timer);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setStatus({ message: '', success: false });
 
-    try {
-      const { error } = await supabase.auth.updateUser({
-        password: newPassword,
-      });
+    if (newPassword !== confirmPassword) {
+      setStatus({ message: 'The two passwords do not match.', success: false });
+      return;
+    }
 
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
       if (error) throw error;
 
       setStatus({
-        message: 'Password successfully updated! Redirecting to login...',
+        message: 'Password updated! Redirecting to login...',
         success: true,
       });
+
+      // End the recovery session so the user signs in fresh with the new password.
+      await supabase.auth.signOut();
 
       setTimeout(() => {
         window.location.href = '/signup?mode=login';
@@ -57,6 +89,11 @@ export default function UpdatePasswordPage() {
     }
   };
 
+  const linkProblem = urlError || (!sessionReady && timedOut);
+  const problemText =
+    urlError ||
+    'We could not verify this reset link. It may have expired or already been used. Please request a new one.';
+
   return (
     <main className="min-h-screen bg-bull-bg text-slate-100 antialiased pt-28 pb-12 font-sans">
       <Navbar />
@@ -67,7 +104,19 @@ export default function UpdatePasswordPage() {
             <p className="text-xs text-slate-400">Enter your new security password below.</p>
           </div>
 
-          {!sessionReady ? (
+          {linkProblem && !sessionReady ? (
+            <div className="space-y-4">
+              <p className="text-xs font-bold p-3 rounded-xl border bg-rose-950/40 border-rose-900/40 text-rose-400">
+                {problemText}
+              </p>
+              <a
+                href="/signup?mode=login"
+                className="block w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black rounded-xl text-sm uppercase tracking-wider text-center font-mono shadow-md"
+              >
+                Back to login
+              </a>
+            </div>
+          ) : !sessionReady ? (
             <div className="p-4 bg-bull-raised border border-bull-line text-amber-400 text-xs rounded-xl text-center font-mono animate-pulse">
               Verifying security token from email link...
             </div>
@@ -83,7 +132,22 @@ export default function UpdatePasswordPage() {
                   minLength={6}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="********"
+                  className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime font-mono"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">
+                  Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="********"
                   className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime font-mono"
                 />
               </div>

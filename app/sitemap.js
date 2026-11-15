@@ -1,21 +1,10 @@
-export default async function sitemap() {
-  const baseUrl = 'https://stockbazaar.vercel.app';
+import { SITE_URL } from '@/lib/site';
 
-  // Define your platform's static route endpoints
-  const routes = [
-    '',
-    '/simulator',
-    '/quiz',
-    '/modules',
-    '/leaderboard',
-    '/pricing',
-  ];
-
-  // Map them into the formal sitemap XML layout structure
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString(),
-    changeFrequency: route === '/leaderboard' || route === '/quiz' ? 'daily' : 'weekly',
-    priority: route === '' ? 1.0 : 0.8,
+// Only public pages belong here. Everything else needs a login and redirects to /signup.
+export default function sitemap() {
+  const lastModified = new Date();
+  return ['', '/pricing'].map((route) => ({
+    url: SITE_URL + route,
+    lastModified,
   }));
 }

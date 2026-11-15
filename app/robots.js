@@ -1,16 +1,15 @@
+import { SITE_URL } from '@/lib/site';
+
 export default function robots() {
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/api/',          // Blocks search bots from wasting time crawling backend routes
-          '/admin/',        // Keeps private admin dashboards off Google results
-          '/dashboard/settings' // Keeps user-specific private panels hidden
-        ],
+        // Logged-in areas: crawlers would only be redirected to /signup
+        disallow: ['/api/', '/admin/', '/auth/', '/profile', '/simulator', '/arena', '/quiz', '/modules', '/leaderboard'],
       },
     ],
-    sitemap: 'https://stockbazaar.vercel.app/sitemap.xml',
+    sitemap: SITE_URL + '/sitemap.xml',
   };
 }

@@ -13,9 +13,9 @@ const TOUR_STEPS = [
     actionText: 'Next: Simulator →',
   },
   {
-    title: '📈 2. Live Stock Simulator',
+    title: '📈 2. Stock Simulator',
     badge: 'STEP 2 OF 6',
-    description: 'Your ₹50,000 sandbox portfolio lives here. Execute real-time trades on BSE equities, Gold/Silver ETFs, and commodities with live TradingView feeds.',
+    description: 'Your ₹50,000 sandbox portfolio lives here. Practice trades on simulated prices for Indian stocks, Gold/Silver ETFs and commodities. No real money and no live exchange connection.',
     href: '/simulator',
     actionText: 'Next: Arena →',
   },

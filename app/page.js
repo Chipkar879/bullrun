@@ -201,7 +201,7 @@ export default function Home() {
 
           {/* SUBTITLE */}
           <p className="text-slate-300 text-xs sm:text-base max-w-xl mx-auto leading-relaxed pt-3 font-medium">
-            Risk-free paper trading powered by high-frequency market simulations. Practice with live data feeds, candlestick tracking layers, and competitive campus leaderboards.
+            Risk-free paper trading with simulated market prices. Practice with real company names, price charts and competitive school leaderboards. No real money, no live exchange connection.
           </p>
         </div>
 
@@ -345,21 +345,21 @@ export default function Home() {
         </section>
       )}
 
-      {/* LIVE MARKET SIMULATOR TERMINAL CARD */}
+      {/* MARKET SIMULATOR TERMINAL CARD */}
       <section id="simulator" className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 relative z-10 flex flex-col items-center justify-center animate-fadeIn scroll-mt-24">
         <div className="border-b border-bull-line pb-6 mb-12 text-center max-w-xl w-full">
           <h2 className="text-2xl font-black text-white font-poppins">Terminal Engine Simulator</h2>
-          <p className="text-xs text-slate-400 mt-1 font-medium">Real-time exchange tracking interfaces driven by high-accuracy pipeline proxies.</p>
+          <p className="text-xs text-slate-400 mt-1 font-medium">Realistic simulated prices for practice. No real money and no live exchange connection.</p>
         </div>
 
         <div className="card bg-bull-surface border-2 border-bull-line rounded-3xl shadow-2xl w-full max-w-4xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center border-b-4 border-b-bull-line hover:border-bull-lime/50 hover:shadow-[0_20px_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] transition-all duration-300">
           <div className="col-span-1 space-y-3">
-            <div className="text-[11px] font-black uppercase text-slate-500 tracking-wider px-1">Select Live Stream Desk:</div>
+            <div className="text-[11px] font-black uppercase text-slate-500 tracking-wider px-1">Choose a practice desk:</div>
             <button
               onClick={() => setActiveTab('stocks')}
               className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'stocks' ? 'bg-bull-lime/20 border-bull-lime/50 text-bull-lime shadow-md' : 'bg-bull-raised border-bull-line text-slate-400 hover:bg-bull-line'}`}
             >
-              📈 Live NSE Indian Stocks
+              📈 Indian Stocks (Simulated)
               <span className={`h-2 w-2 rounded-full ${activeTab === 'stocks' ? 'bg-bull-lime animate-pulse' : 'bg-slate-700'}`} />
             </button>
             <button
@@ -375,11 +375,11 @@ export default function Home() {
             {activeTab === 'stocks' && (
               <div className="space-y-4 animate-fadeInFast w-full">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">RELIANCE.NS • NSE LIVE</span>
-                  <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">● Exchange Open</span>
+                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">RELIANCE • SIMULATED</span>
+                  <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">● Practice Mode</span>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Current Market Price</div>
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sample Simulated Price</div>
                   <div className="text-3xl font-black font-mono tracking-tight text-white">₹1,309.35</div>
                   <div className="text-xs font-bold text-emerald-400 font-mono">+₹12.40 (+0.95%)</div>
                 </div>

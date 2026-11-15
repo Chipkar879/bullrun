@@ -272,7 +272,7 @@ export default function PricingPage() {
 
               <h2 className="text-2xl font-black text-white">Full Platform Access Pass</h2>
               <p className="text-slate-400 text-xs leading-relaxed font-medium">
-                Unlocks all 28 modules, 336 submodules, Volatility Arena matches, and live portfolio tracking.
+                Unlocks all 28 modules, 336 submodules, Volatility Arena matches, and portfolio tracking.
               </p>
 
               <div className="font-mono pt-2 border-y border-bull-line py-4">

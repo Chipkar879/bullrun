@@ -422,7 +422,7 @@ export default function ArenaPage() {
               <h1 className="text-2xl font-black tracking-tight text-white flex items-center gap-2">
                 <span className="text-bull-lime">30-DAY</span> VOLATILITY ARENA ⚡
               </h1>
-              <p className="text-slate-400 text-xs mt-1 font-medium">Click any card to inspect company stats, live charts, and place instant trades.</p>
+              <p className="text-slate-400 text-xs mt-1 font-medium">Click any card to inspect company stats, simulated charts, and place instant trades.</p>
             </div>
 
             <div className="flex items-center gap-3">
