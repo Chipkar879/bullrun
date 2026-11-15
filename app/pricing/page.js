@@ -31,7 +31,6 @@ export default function PricingPage() {
 
   const [paymentStep, setPaymentStep] = useState('browse'); // 'browse' | 'checkout' | 'success'
   const [isProcessing, setIsProcessing] = useState(false);
-  const [classSize, setClassSize] = useState(30);
 
   // 1. FETCH USER PROFILE & COMPUTE EXPIRY DATE
   useEffect(() => {
@@ -331,128 +330,6 @@ export default function PricingPage() {
                 {status.isFrozen ? 'Unlock Account — ₹99/month' : 'Subscribe Now — ₹99/month'}
               </button>
             )}
-          </div>
-        )}
-
-        {/* SCHOOL PLAN CARD */}
-        {paymentStep === 'browse' && (
-          <div className="school-glow max-w-md mx-auto">
-            <style>{`
-              .school-glow { position: relative; border-radius: 1.5rem; padding: 1.5px; background: linear-gradient(120deg, #19C6B4, #B7F34A, #19C6B4); background-size: 300% 300%; animation: schoolGlowShift 6s ease infinite; box-shadow: 0 0 40px rgba(25, 198, 180, 0.18); }
-              @keyframes schoolGlowShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-              .school-bar { transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
-            `}</style>
-
-            <div className="bg-bull-surface rounded-[22px] p-8 space-y-6">
-              <div className="space-y-4 text-center">
-                <span className="text-[10px] font-black uppercase text-bull-teal bg-bull-raised border border-bull-teal/30 px-3.5 py-1 rounded-full font-mono">
-                  FOR SCHOOLS ONLY
-                </span>
-
-                <h2 className="text-2xl font-black text-white">School Plan</h2>
-                <p className="text-slate-400 text-xs leading-relaxed font-medium">
-                  One plan for a whole class. A teacher or school buys it once and up to 30 students get full access.
-                </p>
-
-                <div className="font-mono pt-2 border-y border-bull-line py-4">
-                  <span className="text-4xl font-black text-white">{'\u20B9'}2,500</span>
-                  <span className="text-slate-500 text-xs"> / month</span>
-                  <span className="block text-[10px] text-emerald-400 font-bold mt-1">
-                    Up to 30 students (about {'\u20B9'}83 per student)
-                  </span>
-                </div>
-              </div>
-
-              {/* SAVINGS CALCULATOR */}
-              {(() => {
-                const individual = classSize * 99;
-                const school = 2500;
-                const diff = individual - school;
-                const maxVal = 30 * 99;
-                return (
-                  <div className="bg-bull-raised border border-bull-line rounded-2xl p-4 space-y-3 font-mono">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">How big is your class?</span>
-                      <span className="text-sm font-black text-bull-lime">{classSize} students</span>
-                    </div>
-
-                    <input
-                      type="range"
-                      min="5"
-                      max="30"
-                      value={classSize}
-                      onChange={(e) => setClassSize(Number(e.target.value))}
-                      className="w-full cursor-pointer"
-                      style={{ accentColor: '#B7F34A' }}
-                      aria-label="Number of students in your class"
-                    />
-
-                    <div className="space-y-2 text-[10px]">
-                      <div>
-                        <div className="flex justify-between text-slate-400 mb-1">
-                          <span>{classSize} individual passes</span>
-                          <span className="text-white font-bold">{'\u20B9'}{individual.toLocaleString('en-IN')}/mo</span>
-                        </div>
-                        <div className="h-2 bg-bull-surface rounded-full overflow-hidden">
-                          <div className="school-bar h-full bg-slate-500 rounded-full" style={{ width: (individual / maxVal * 100) + '%' }} />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="flex justify-between text-slate-400 mb-1">
-                          <span>School Plan</span>
-                          <span className="text-bull-teal font-bold">{'\u20B9'}2,500/mo</span>
-                        </div>
-                        <div className="h-2 bg-bull-surface rounded-full overflow-hidden">
-                          <div className="school-bar h-full bg-bull-teal rounded-full" style={{ width: (school / maxVal * 100) + '%' }} />
-                        </div>
-                      </div>
-                    </div>
-
-                    <p className={`text-[11px] font-bold font-sans leading-relaxed ${diff > 0 ? 'text-emerald-400' : 'text-slate-400'}`}>
-                      {diff > 0
-                        ? 'You save \u20B9' + diff.toLocaleString('en-IN') + ' every month with the School Plan.'
-                        : 'For fewer than 26 students, individual passes cost less. The School Plan pays off from 26 to 30 students.'}
-                    </p>
-                  </div>
-                );
-              })()}
-
-              <div className="space-y-3 text-xs font-mono">
-                <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
-                  WHAT IS INCLUDED:
-                </span>
-                <ul className="space-y-2.5 font-sans font-medium text-slate-200">
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>Full access for up to 30 students</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>Teacher-managed classes and student approvals</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>School leaderboard and daily quizzes</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>All modules and Volatility Arena matches</span>
-                  </li>
-                </ul>
-                <p className="text-[10px] text-slate-500 font-sans font-medium leading-relaxed">
-                  Bought by the school or teacher, not by students. Need more than 30 students? Message us.
-                </p>
-              </div>
-
-              <a
-                href="https://wa.me/919324459446?text=Hi%2C%20I%20want%20the%20Bull%20Run%20School%20Plan%20(30%20students)."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-4 bg-bull-teal hover:opacity-90 text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono transition-all block text-center"
-              >
-                Request School Plan
-              </a>
-            </div>
           </div>
         )}
 
