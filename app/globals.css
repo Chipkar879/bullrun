@@ -7,6 +7,7 @@
    text-bull-lime, bg-bull-lime, text-bull-teal, text-bull-coral, text-bull-ink ...
    ========================================== */
 @theme {
+  --color-white: #E4E9F3;
   /* Surfaces */
   --color-bull-bg: #0A1226;        /* page */
   --color-bull-surface: #101B35;   /* navbar, cards, modals */
@@ -24,8 +25,8 @@
   --color-bull-coral: #FF765E;      /* losses, alerts, NEW tags */
 
   /* Text */
-  --color-bull-text: #F5F7FA;
-  --color-bull-text-2: #D3DBEA;
+  --color-bull-text: #E1E7F2;
+  --color-bull-text-2: #C4CEE2;
   --color-bull-muted: #A9B4CC;
 
   /* Gains / losses: existing emerald-* classes now render teal, rose-* render coral.
