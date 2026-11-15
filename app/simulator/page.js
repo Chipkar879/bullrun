@@ -9,28 +9,28 @@ const PRICE_REFRESH_MS = 15000;
 const SAVE_DEBOUNCE_MS = 1000;
 
 const ASSETS = [
-  { sym: 'GOLDBEES', name: 'Nippon India ETF Gold BeES', tv: 'BSE:GOLDBEES', sector: 'Commodities / Gold ETF', category: 'Crypto & ETFs', cap: '₹12.4K Cr', pe: 'N/A', eps: 'N/A', div: '0.00%' },
-  { sym: 'SILVERBEES', name: 'Nippon India Silver ETF', tv: 'BSE:SILVERBEES', sector: 'Commodities / Silver ETF', category: 'Crypto & ETFs', cap: '₹3.8K Cr', pe: 'N/A', eps: 'N/A', div: '0.00%' },
-  { sym: 'TATASTEEL', name: 'Tata Steel Ltd.', tv: 'BSE:TATASTEEL', sector: 'Metals & Mining', category: 'Crypto & ETFs', cap: '₹1.9L Cr', pe: '42.1', eps: '3.8', div: '2.40%' },
-  { sym: 'HINDALCO', name: 'Hindalco Industries Ltd.', tv: 'BSE:HINDALCO', sector: 'Aluminum & Copper', category: 'Crypto & ETFs', cap: '₹1.4L Cr', pe: '14.2', eps: '45.1', div: '0.55%' },
-  { sym: 'VEDL', name: 'Vedanta Limited', tv: 'BSE:VEDL', sector: 'Diversified Metals', category: 'Crypto & ETFs', cap: '₹1.6L Cr', pe: '11.5', eps: '38.0', div: '6.50%' },
-  { sym: 'COALINDIA', name: 'Coal India Ltd.', tv: 'BSE:COALINDIA', sector: 'Energy & Mining', category: 'Crypto & ETFs', cap: '₹2.8L Cr', pe: '7.8', eps: '62.4', div: '5.20%' },
-  { sym: 'HDFCBANK', name: 'HDFC Bank Ltd.', tv: 'BSE:HDFCBANK', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹5.9L Cr', pe: '15.8', eps: '49.2', div: '1.66%' },
-  { sym: 'ICICIBANK', name: 'ICICI Bank Ltd.', tv: 'BSE:ICICIBANK', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹7.8L Cr', pe: '16.1', eps: '68.2', div: '0.85%' },
-  { sym: 'SBIN', name: 'State Bank of India', tv: 'BSE:SBIN', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹7.2L Cr', pe: '10.5', eps: '72.0', div: '1.70%' },
-  { sym: 'BAJFINANCE', name: 'Bajaj Finance Ltd.', tv: 'BSE:BAJFINANCE', sector: 'NBFC / Lending', category: 'Banking & Finance', cap: '₹3.9L Cr', pe: '26.4', eps: '210.5', div: '0.35%' },
-  { sym: 'INFY', name: 'Infosys Ltd.', tv: 'BSE:INFY', sector: 'Information Technology', category: 'Tech & Telecom', cap: '₹4.3L Cr', pe: '14.7', eps: '71.4', div: '4.55%' },
-  { sym: 'TCS', name: 'Tata Consultancy Services', tv: 'BSE:TCS', sector: 'Information Technology', category: 'Tech & Telecom', cap: '₹7.8L Cr', pe: '15.8', eps: '136.0', div: '2.33%' },
-  { sym: 'BHARTIARTL', name: 'Bharti Airtel Ltd.', tv: 'BSE:BHARTIARTL', sector: 'Telecommunications', category: 'Tech & Telecom', cap: '₹8.1L Cr', pe: '54.0', eps: '24.1', div: '0.60%' },
-  { sym: 'RELIANCE', name: 'Reliance Industries Ltd.', tv: 'BSE:RELIANCE', sector: 'Energy & Retail', category: 'Energy & Macro', cap: '₹17.9L Cr', pe: '37.7', eps: '35.2', div: '0.61%' },
-  { sym: 'OIL', name: 'Oil India Limited', tv: 'BSE:OIL', sector: 'Energy & Petroleum', category: 'Energy & Macro', cap: '₹72.4K Cr', pe: '12.1', eps: '42.8', div: '2.80%' },
-  { sym: 'NTPC', name: 'NTPC Ltd.', tv: 'BSE:NTPC', sector: 'Utilities & Power', category: 'Energy & Macro', cap: '₹3.7L Cr', pe: '18.2', eps: '21.0', div: '2.10%' },
-  { sym: 'ADANIPORTS', name: 'Adani Ports & SEZ Ltd.', tv: 'BSE:ADANIPORTS', sector: 'Infrastructure & Ports', category: 'Energy & Macro', cap: '₹2.9L Cr', pe: '32.4', eps: '38.2', div: '0.50%' },
-  { sym: 'SUNPHARMA', name: 'Sun Pharmaceutical Ind.', tv: 'BSE:SUNPHARMA', sector: 'Pharmaceuticals', category: 'Consumer & Pharma', cap: '₹3.6L Cr', pe: '34.2', eps: '41.0', div: '0.80%' },
-  { sym: 'TITAN', name: 'Titan Company Ltd.', tv: 'BSE:TITAN', sector: 'Consumer Durables', category: 'Consumer & Pharma', cap: '₹2.8L Cr', pe: '82.4', eps: '38.5', div: '0.35%' },
-  { sym: 'ITC', name: 'ITC Ltd.', tv: 'BSE:ITC', sector: 'FMCG / Consumer', category: 'Consumer & Pharma', cap: '₹5.8L Cr', pe: '28.5', eps: '16.2', div: '3.10%' },
-  { sym: 'LT', name: 'Larsen & Toubro Ltd.', tv: 'BSE:LT', sector: 'Engineering & Infrastructure', category: 'Consumer & Pharma', cap: '₹4.9L Cr', pe: '31.2', eps: '92.0', div: '0.80%' },
-  { sym: 'MARUTI', name: 'Maruti Suzuki India', tv: 'BSE:MARUTI', sector: 'Automobiles', category: 'Consumer & Pharma', cap: '₹3.8L Cr', pe: '28.4', eps: '412.0', div: '1.00%' },
+  { sym: 'GOLDVLT', name: 'Gold Vault ETF', sector: 'Commodities / Gold ETF', category: 'Crypto & ETFs', cap: '₹12.4K Cr', pe: 'N/A', eps: 'N/A', div: '0.00%' },
+  { sym: 'SILVRVLT', name: 'Silver Vault ETF', sector: 'Commodities / Silver ETF', category: 'Crypto & ETFs', cap: '₹3.8K Cr', pe: 'N/A', eps: 'N/A', div: '0.00%' },
+  { sym: 'IRONWORKS', name: 'Ironworks Steel Ltd.', sector: 'Metals & Mining', category: 'Crypto & ETFs', cap: '₹1.9L Cr', pe: '42.1', eps: '3.8', div: '2.40%' },
+  { sym: 'ALUMINA', name: 'Alumina Metals Ltd.', sector: 'Aluminum & Copper', category: 'Crypto & ETFs', cap: '₹1.4L Cr', pe: '14.2', eps: '45.1', div: '0.55%' },
+  { sym: 'TERRAMIN', name: 'Terra Minerals Ltd.', sector: 'Diversified Metals', category: 'Crypto & ETFs', cap: '₹1.6L Cr', pe: '11.5', eps: '38.0', div: '6.50%' },
+  { sym: 'CARBONIA', name: 'Carbonia Coal Ltd.', sector: 'Energy & Mining', category: 'Crypto & ETFs', cap: '₹2.8L Cr', pe: '7.8', eps: '62.4', div: '5.20%' },
+  { sym: 'PRIMEBANK', name: 'Prime Bank Ltd.', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹5.9L Cr', pe: '15.8', eps: '49.2', div: '1.66%' },
+  { sym: 'UNITYBANK', name: 'Unity Bank Ltd.', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹7.8L Cr', pe: '16.1', eps: '68.2', div: '0.85%' },
+  { sym: 'NATBANK', name: 'National Savings Bank', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹7.2L Cr', pe: '10.5', eps: '72.0', div: '1.70%' },
+  { sym: 'CREDITO', name: 'Credito Finance Ltd.', sector: 'NBFC / Lending', category: 'Banking & Finance', cap: '₹3.9L Cr', pe: '26.4', eps: '210.5', div: '0.35%' },
+  { sym: 'INFOSPHR', name: 'Infosphere Ltd.', sector: 'Information Technology', category: 'Tech & Telecom', cap: '₹4.3L Cr', pe: '14.7', eps: '71.4', div: '4.55%' },
+  { sym: 'TECHNOVA', name: 'Technova Consulting Services', sector: 'Information Technology', category: 'Tech & Telecom', cap: '₹7.8L Cr', pe: '15.8', eps: '136.0', div: '2.33%' },
+  { sym: 'SKYLINK', name: 'Skylink Telecom Ltd.', sector: 'Telecommunications', category: 'Tech & Telecom', cap: '₹8.1L Cr', pe: '54.0', eps: '24.1', div: '0.60%' },
+  { sym: 'ENERGIA', name: 'Energia Industries Ltd.', sector: 'Energy & Retail', category: 'Energy & Macro', cap: '₹17.9L Cr', pe: '37.7', eps: '35.2', div: '0.61%' },
+  { sym: 'PETROFLD', name: 'Petrofield Oil Ltd.', sector: 'Energy & Petroleum', category: 'Energy & Macro', cap: '₹72.4K Cr', pe: '12.1', eps: '42.8', div: '2.80%' },
+  { sym: 'VOLTARA', name: 'Voltara Power Ltd.', sector: 'Utilities & Power', category: 'Energy & Macro', cap: '₹3.7L Cr', pe: '18.2', eps: '21.0', div: '2.10%' },
+  { sym: 'HARBORLN', name: 'Harborline Ports Ltd.', sector: 'Infrastructure & Ports', category: 'Energy & Macro', cap: '₹2.9L Cr', pe: '32.4', eps: '38.2', div: '0.50%' },
+  { sym: 'VITACURE', name: 'Vitacure Pharma Ltd.', sector: 'Pharmaceuticals', category: 'Consumer & Pharma', cap: '₹3.6L Cr', pe: '34.2', eps: '41.0', div: '0.80%' },
+  { sym: 'AURUM', name: 'Aurum Timepieces Ltd.', sector: 'Consumer Durables', category: 'Consumer & Pharma', cap: '₹2.8L Cr', pe: '82.4', eps: '38.5', div: '0.35%' },
+  { sym: 'CONSUMEX', name: 'Consumex Goods Ltd.', sector: 'FMCG / Consumer', category: 'Consumer & Pharma', cap: '₹5.8L Cr', pe: '28.5', eps: '16.2', div: '3.10%' },
+  { sym: 'BUILDCRP', name: 'Buildcorp Engineering Ltd.', sector: 'Engineering & Infrastructure', category: 'Consumer & Pharma', cap: '₹4.9L Cr', pe: '31.2', eps: '92.0', div: '0.80%' },
+  { sym: 'MOTORIA', name: 'Motoria Autos India', sector: 'Automobiles', category: 'Consumer & Pharma', cap: '₹3.8L Cr', pe: '28.4', eps: '412.0', div: '1.00%' },
 ];
 
 const CATEGORIES = [
@@ -376,7 +376,7 @@ export default function RealSimulatorPage() {
   const [user, setUser] = useState(null);
   const [realBalance, setRealBalance] = useState(START_BALANCE);
   const [realHoldings, setRealHoldings] = useState({});
-  const [selectedRealStock, setSelectedRealStock] = useState('GOLDBEES');
+  const [selectedRealStock, setSelectedRealStock] = useState('GOLDVLT');
   const [selectedCategory, setSelectedCategory] = useState('All Assets');
   const [realQtyInput, setRealQtyInput] = useState('1');
   const [prices, setPrices] = useState({});

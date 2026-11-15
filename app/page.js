@@ -201,7 +201,7 @@ export default function Home() {
 
           {/* SUBTITLE */}
           <p className="text-slate-300 text-xs sm:text-base max-w-xl mx-auto leading-relaxed pt-3 font-medium">
-            Risk-free paper trading with simulated market prices. Practice with real company names, price charts and competitive school leaderboards. No real money, no live exchange connection.
+            Risk-free paper trading with simulated market prices. Practice with fictional companies, price charts and competitive school leaderboards. No real money, no live exchange connection.
           </p>
         </div>
 
@@ -375,7 +375,7 @@ export default function Home() {
             {activeTab === 'stocks' && (
               <div className="space-y-4 animate-fadeInFast w-full">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">RELIANCE • SIMULATED</span>
+                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">ENERGIA • SIMULATED</span>
                   <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">● Practice Mode</span>
                 </div>
                 <div className="space-y-1">

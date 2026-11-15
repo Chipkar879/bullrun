@@ -15,7 +15,7 @@ const TOUR_STEPS = [
   {
     title: '📈 2. Stock Simulator',
     badge: 'STEP 2 OF 6',
-    description: 'Your ₹50,000 sandbox portfolio lives here. Practice trades on simulated prices for Indian stocks, Gold/Silver ETFs and commodities. No real money and no live exchange connection.',
+    description: 'Your ₹50,000 sandbox portfolio lives here. Practice trades on simulated prices for fictional companies, ETFs and commodities. No real money and no live exchange connection.',
     href: '/simulator',
     actionText: 'Next: Arena →',
   },
