@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import OnboardingTour from '@/components/OnboardingTour';
+import BrandMark from '@/components/BrandMark';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -65,9 +66,12 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
           
           {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-1.5 group select-none outline-none" onClick={closeMenu}>
-            <span className="text-xl font-black tracking-tight text-white transition-colors">Bull</span>
-            <span className="text-xl font-black tracking-tight text-bull-lime transition-colors">Run</span>
+          <Link href="/" aria-label="Bull Run home" className="flex items-center gap-2.5 group select-none outline-none" onClick={closeMenu}>
+            <BrandMark className="h-8 w-8 shrink-0 rounded-lg ring-1 ring-bull-line transition-transform duration-300 group-hover:-rotate-6 group-focus-visible:-rotate-6" />
+            <span className="hidden min-[420px]:flex items-center gap-1.5">
+              <span className="text-xl font-black tracking-tight text-white transition-colors">Bull</span>
+              <span className="text-xl font-black tracking-tight text-bull-lime transition-colors">Run</span>
+            </span>
           </Link>
 
           {/* Navigation Items */}
