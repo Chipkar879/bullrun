@@ -405,6 +405,68 @@ export default function RealSimulatorPage() {
     return () => clearInterval(timer);
   }, []);
 
+  // Opening bell: rings once at 9:15 AM IST on weekdays (real NSE open time).
+  useEffect(() => {
+    const audio = new Audio('/sounds/bull_run_bell.mp3');
+    audio.preload = 'auto';
+    let unlocked = false;
+    let lastRung = '';
+
+    // Browsers block sound until the user has interacted with the page once.
+    const unlock = () => {
+      if (unlocked) return;
+      unlocked = true;
+      audio.muted = true;
+      audio.play()
+        .then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.muted = false;
+        })
+        .catch(() => {
+          audio.muted = false;
+          unlocked = false;
+        });
+    };
+    window.addEventListener('pointerdown', unlock);
+    window.addEventListener('keydown', unlock);
+
+    const check = () => {
+      const parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'short',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hourCycle: 'h23',
+      }).formatToParts(new Date());
+      const get = (type) => parts.find((p) => p.type === type)?.value;
+
+      const weekday = get('weekday');
+      const minutes = Number(get('hour')) * 60 + Number(get('minute'));
+      const seconds = Number(get('second'));
+      const dayKey = `${get('year')}-${get('month')}-${get('day')}`;
+
+      const isWeekday = weekday !== 'Sat' && weekday !== 'Sun';
+      if (isWeekday && minutes === 9 * 60 + 15 && seconds < 10 && lastRung !== dayKey) {
+        lastRung = dayKey;
+        audio.currentTime = 0;
+        audio.play().catch((error) => console.error('Bell blocked:', error));
+      }
+    };
+
+    const timer = setInterval(check, 1000);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+      audio.pause();
+    };
+  }, []);
+
   const calculateHoldingsValue = useCallback((holdings, priceMap) => (
     Object.values(holdings || {}).reduce((sum, holding) => {
       const price = Number(priceMap?.[holding.sym]?.price || holding.avgPrice || 0);
