@@ -397,7 +397,7 @@ export default function RealSimulatorPage() {
     const tick = () => {
       const now = new Date();
       setIndiaTime(getIndiaClock(now));
-      setMarketOpen(isIndianMarketOpen(now));
+      setMarketOpen(true);
     };
 
     tick();
@@ -765,13 +765,6 @@ export default function RealSimulatorPage() {
       return;
     }
 
-    if (!marketOpen) {
-      alert(
-        `The simulated market is closed. Trading hours are Monday to Friday, 9:15 AM to 3:30 PM IST. Current India time: ${indiaTime}.`
-      );
-      return;
-    }
-
     const price = Number(prices[selectedRealStock]?.price);
     const qty = Number(realQtyInput);
 
@@ -812,12 +805,6 @@ export default function RealSimulatorPage() {
   };
   const executeOrder = async () => {
     if (!pendingOrder || orderStage === 'PROCESSING') return;
-
-    if (!marketOpen) {
-      alert('The simulated market is closed. Your order was not executed.');
-      resetOrderDesk();
-      return;
-    }
 
     setOrderStage('PROCESSING');
     setProcessingStatusText('Validating simulated order...');
@@ -981,7 +968,7 @@ export default function RealSimulatorPage() {
             </div>
 
             <div className={`border px-3.5 py-2 rounded-xl text-xs font-bold ${marketOpen ? 'bg-emerald-950/40 border-emerald-800/60 text-emerald-300' : 'bg-amber-950/40 border-amber-800/60 text-amber-300'}`}>
-              {marketOpen ? 'SIMULATED MARKET OPEN' : 'SIMULATED MARKET CLOSED'}
+              {marketOpen ? 'SIMULATED MARKET OPEN 24/7' : 'SIMULATED MARKET OPEN 24/7'}
             </div>
           </div>
         </header>
