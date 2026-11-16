@@ -5,8 +5,48 @@ import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
-// ⚠️ PERMANENT SUPER ADMIN IMMUNITY EMAIL
+// PERMANENT SUPER ADMIN IMMUNITY EMAIL
 const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
+
+const RS = '\u20B9';
+const TICK = '\u2713';
+const INDIVIDUAL_PRICE = 99;
+const MAX_SELF_SERVE = 1000;
+
+// What the Student Pass includes (edit this list to add or remove items)
+const INDIVIDUAL_FEATURES = [
+  'All 28 modules and 336 submodules',
+  'Quizzes and daily practice questions',
+  'Volatility Arena matches',
+  'Virtual ' + RS + '50,000 trading simulator',
+  'Portfolio tracking and live leaderboard',
+  'Trader XP and level progress saved',
+  'Works on phone, tablet and laptop',
+  '7-day free trial before you pay',
+];
+
+// Volume pricing: every student is charged at the rate of their band (like tax slabs).
+// Bigger schools get a lower rate on the extra students, so the total never drops as size grows.
+const SLABS = [
+  { from: 1, to: 10, rate: 99 },
+  { from: 11, to: 30, rate: 85 },
+  { from: 31, to: 100, rate: 72 },
+  { from: 101, to: 200, rate: 62 },
+  { from: 201, to: MAX_SELF_SERVE, rate: 55 },
+];
+
+function schoolPrice(n) {
+  let total = 0;
+  for (const s of SLABS) {
+    if (n >= s.from) {
+      const count = Math.min(n, s.to) - s.from + 1;
+      total += count * s.rate;
+    }
+  }
+  return total;
+}
+
+const fmt = (v) => RS + Number(v).toLocaleString('en-IN');
 
 export default function PricingPage() {
   const [loading, setLoading] = useState(true);
@@ -31,7 +71,34 @@ export default function PricingPage() {
 
   const [paymentStep, setPaymentStep] = useState('browse'); // 'browse' | 'checkout' | 'success'
   const [isProcessing, setIsProcessing] = useState(false);
-  const [classSize, setClassSize] = useState(30);
+  const [studentInput, setStudentInput] = useState('100');
+
+  // School plan calculation
+  const n = parseInt(studentInput, 10);
+  const validN = Number.isFinite(n) && n >= 1;
+  const overMax = validN && n > MAX_SELF_SERVE;
+  let calc = null;
+  if (validN && !overMax) {
+    const individualTotal = n * INDIVIDUAL_PRICE;
+    const school = schoolPrice(n);
+    const saved = individualTotal - school;
+    calc = {
+      individualTotal,
+      school,
+      saved,
+      pct: Math.round((saved / individualTotal) * 100),
+      perStudent: Math.round(school / n),
+      barWidth: Math.max(4, Math.round((school / individualTotal) * 100)),
+    };
+  }
+
+  const whatsappHref =
+    'https://wa.me/919324459446?text=' +
+    encodeURIComponent(
+      validN && !overMax
+        ? 'Hi, I want the Bull Run School Plan for ' + n + ' students (' + fmt(calc.school) + '/month).'
+        : 'Hi, I want a Bull Run School Plan quote for a large school.'
+    );
 
   // 1. FETCH USER PROFILE & COMPUTE EXPIRY DATE
   useEffect(() => {
@@ -187,29 +254,29 @@ export default function PricingPage() {
       <Navbar />
 
       <div className="max-w-[1000px] mx-auto px-4 space-y-10">
-        
+
         {/* HEADER */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-lime/30 text-bull-lime text-[10px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner font-mono">
-            ⚡ BULL RUN PASS
+            {'\u26A1'} BULL RUN PASS
           </span>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Student Platform Access
+            Simple, Transparent Pricing
           </h1>
           <p className="text-slate-400 text-sm sm:text-base font-medium leading-relaxed">
-            Every registered account gets an unrestricted 7-day sandbox trial. Subscribe for ₹99/month to keep your workspace active.
+            Every registered account gets an unrestricted 7-day trial. Students pay {RS}99/month, or a school can buy one plan for the whole class and pay less per student.
           </p>
 
           {/* DYNAMIC CLEARANCE BADGE */}
           <div className="pt-2 flex justify-center">
             <div className="bg-bull-surface border border-bull-line px-5 py-3 rounded-2xl shadow-xl font-mono text-xs flex flex-col items-center gap-2">
               <span className="text-slate-500 font-medium text-[10px] uppercase tracking-wider">Account Clearance Status</span>
-              
+
               {loading ? (
                 <span className="text-slate-400 animate-pulse">Querying database firewall...</span>
               ) : !userSession ? (
                 <div className="flex flex-col items-center space-y-2 py-1">
-                  <span className="text-amber-400 font-bold text-[11px]">✨ 7-DAY FREE TRIAL AVAILABLE</span>
+                  <span className="text-amber-400 font-bold text-[11px]">{'\u2728'} 7-DAY FREE TRIAL AVAILABLE</span>
                   <p className="text-slate-400 text-[10px] max-w-xs text-center font-sans">
                     Countdown begins the moment you create your profile.
                   </p>
@@ -217,24 +284,24 @@ export default function PricingPage() {
                     href="/signup"
                     className="mt-1 px-4 py-1.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-bold rounded-xl text-[10px] uppercase tracking-wider transition-all"
                   >
-                    Claim 7-Day Free Pass →
+                    Claim 7-Day Free Pass {'\u2192'}
                   </Link>
                 </div>
               ) : status.isSuperAdmin ? (
                 <span className="bg-amber-950 text-amber-400 font-black px-3 py-1 rounded-xl border border-amber-800 flex items-center gap-1.5">
-                  👑 SUPER ADMIN IMMUNE ({SUPER_ADMIN_EMAIL})
+                  {'\uD83D\uDC51'} SUPER ADMIN IMMUNE ({SUPER_ADMIN_EMAIL})
                 </span>
               ) : status.isFrozen ? (
                 <span className="bg-rose-950 text-rose-400 font-black px-3 py-1 rounded-xl border border-rose-800 animate-pulse flex items-center gap-1.5">
-                  🔒 ACCOUNT FROZEN — ACCESS EXPIRED
+                  {'\uD83D\uDD12'} ACCOUNT FROZEN {'\u2014'} ACCESS EXPIRED
                 </span>
               ) : status.isPremium ? (
                 <span className="bg-emerald-950 text-emerald-400 font-black px-3 py-1 rounded-xl border border-emerald-800 flex items-center gap-1.5">
-                  ✓ PRO PASS ACTIVE (UNLOCKED)
+                  {TICK} PRO PASS ACTIVE (UNLOCKED)
                 </span>
               ) : (
                 <div className="flex flex-col items-center space-y-1">
-                  <span className="text-amber-400 font-bold text-[11px]">⏳ TIME REMAINING BEFORE FREEZE:</span>
+                  <span className="text-amber-400 font-bold text-[11px]">{'\u23F3'} TIME REMAINING BEFORE FREEZE:</span>
                   <div className="flex items-center gap-2 text-white font-black text-base bg-bull-raised px-4 py-1.5 rounded-xl border border-bull-lime/40">
                     <div className="text-center"><span className="text-bull-lime">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">DAYS</span></div>
                     <span className="text-bull-lime">:</span>
@@ -250,210 +317,226 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* LOCKED ACCOUNT WARNING — EXCLUSIVE TO FROZEN STATE */}
+        {/* LOCKED ACCOUNT WARNING - EXCLUSIVE TO FROZEN STATE */}
         {userSession && status.isFrozen && !status.isSuperAdmin && (
           <div className="bg-rose-950/60 border border-rose-500 p-6 rounded-3xl text-center space-y-3 max-w-xl mx-auto shadow-[0_0_30px_color-mix(in_srgb,var(--color-bull-coral)_25%,transparent)] animate-pulse">
-            <div className="text-3xl">🔒</div>
+            <div className="text-3xl">{'\uD83D\uDD12'}</div>
             <h2 className="text-lg font-black text-rose-200 uppercase font-mono tracking-wider">
               YOUR ACCOUNT ACCESS IS FROZEN
             </h2>
             <p className="text-xs text-rose-300 leading-relaxed font-medium">
-              Your account workspace is currently restricted. Subscribe below for ₹99/month or contact support to reactivate your access.
+              Your account workspace is currently restricted. Subscribe below for {RS}99/month or ask your school to buy the School Plan to reactivate your access.
             </p>
           </div>
         )}
 
-        {/* SUBSCRIPTION CARD */}
+        {/* PRICING: STUDENT | SCHOOL */}
         {paymentStep === 'browse' && (
-          <div className="max-w-md mx-auto bg-bull-surface border border-bull-lime shadow-[0_0_40px_color-mix(in_srgb,var(--color-bull-lime)_20%,transparent)] rounded-3xl p-8 space-y-6 relative">
-            <div className="space-y-4 text-center">
-              <span className="text-[10px] font-black uppercase text-bull-lime bg-bull-raised border border-bull-lime/30 px-3.5 py-1 rounded-full font-mono">
-                MANDATORY STUDENT PASS
-              </span>
+          <section className="max-w-4xl mx-auto bg-bull-surface border border-bull-lime/60 shadow-[0_0_40px_color-mix(in_srgb,var(--color-bull-lime)_20%,transparent)] rounded-3xl overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1.35fr]">
 
-              <h2 className="text-2xl font-black text-white">Full Platform Access Pass</h2>
-              <p className="text-slate-400 text-xs leading-relaxed font-medium">
-                Unlocks all 28 modules, 336 submodules, Volatility Arena matches, and portfolio tracking.
-              </p>
-
-              <div className="font-mono pt-2 border-y border-bull-line py-4">
-                <span className="text-4xl font-black text-white">₹99</span>
-                <span className="text-slate-500 text-xs"> / month</span>
-                <span className="block text-[10px] text-emerald-400 font-bold mt-1">
-                  ✓ Instant Account Unfreeze
-                </span>
-              </div>
-            </div>
-
-            <div className="space-y-3 text-xs font-mono">
-              <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
-                WHAT IS INCLUDED:
-              </span>
-              <ul className="space-y-2.5 font-sans font-medium text-slate-200">
-                <li className="flex items-center gap-2.5">
-                  <span className="text-bull-lime font-black">✓</span>
-                  <span>Full Access to All 28 Modules & Quizzes</span>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <span className="text-bull-lime font-black">✓</span>
-                  <span>Volatility Arena Match Access</span>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <span className="text-bull-lime font-black">✓</span>
-                  <span>Unfreezes Account Permanently</span>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <span className="text-bull-lime font-black">✓</span>
-                  <span>Trader XP & Level Progress Saved</span>
-                </li>
-              </ul>
-            </div>
-
-            {status.isPremium && !status.isFrozen ? (
-              <Link
-                href="/modules"
-                className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg block text-center transition-all"
-              >
-                Launch Learning Arena →
-              </Link>
-            ) : !userSession ? (
-              <Link
-                href="/signup"
-                className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all block text-center"
-              >
-                Create Account for Free Trial →
-              </Link>
-            ) : (
-              <button
-                onClick={() => setPaymentStep('checkout')}
-                className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all cursor-pointer"
-              >
-                {status.isFrozen ? 'Unlock Account — ₹99/month' : 'Subscribe Now — ₹99/month'}
-              </button>
-            )}
-          </div>
-        )}
-
-        {/* SCHOOL PLAN CARD */}
-        {paymentStep === 'browse' && (
-          <div className="school-glow max-w-md mx-auto">
-            <style>{`
-              .school-glow { position: relative; border-radius: 1.5rem; padding: 1.5px; background: linear-gradient(120deg, #19C6B4, #B7F34A, #19C6B4); background-size: 300% 300%; animation: schoolGlowShift 6s ease infinite; box-shadow: 0 0 40px rgba(25, 198, 180, 0.18); }
-              @keyframes schoolGlowShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-              .school-bar { transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
-            `}</style>
-
-            <div className="bg-bull-surface rounded-[22px] p-8 space-y-6">
-              <div className="space-y-4 text-center">
-                <span className="text-[10px] font-black uppercase text-bull-teal bg-bull-raised border border-bull-teal/30 px-3.5 py-1 rounded-full font-mono">
-                  FOR SCHOOLS ONLY
-                </span>
-
-                <h2 className="text-2xl font-black text-white">School Plan</h2>
-                <p className="text-slate-400 text-xs leading-relaxed font-medium">
-                  One plan for a whole class. A teacher or school buys it once and up to 30 students get full access.
-                </p>
-
-                <div className="font-mono pt-2 border-y border-bull-line py-4">
-                  <span className="text-4xl font-black text-white">{'\u20B9'}2,500</span>
-                  <span className="text-slate-500 text-xs"> / month</span>
-                  <span className="block text-[10px] text-emerald-400 font-bold mt-1">
-                    Up to 30 students (about {'\u20B9'}83 per student)
+              {/* LEFT: INDIVIDUAL STUDENT */}
+              <div className="p-8 space-y-6 flex flex-col">
+                <div className="space-y-4 text-center md:text-left">
+                  <span className="inline-block text-[10px] font-black uppercase text-bull-lime bg-bull-raised border border-bull-lime/30 px-3.5 py-1 rounded-full font-mono">
+                    INDIVIDUAL
                   </span>
+                  <h2 className="text-2xl font-black text-white">Student Pass</h2>
+                  <p className="text-slate-400 text-xs leading-relaxed font-medium">
+                    One student, one account. Full access to the learning arena and the simulator.
+                  </p>
+
+                  <div className="font-mono border-y border-bull-line py-5">
+                    <span className="text-5xl font-black text-white">{RS}99</span>
+                    <span className="text-slate-500 text-xs"> / month</span>
+                    <span className="block text-[10px] text-emerald-400 font-bold mt-1">
+                      {TICK} Instant account unfreeze
+                    </span>
+                  </div>
                 </div>
+
+                <div className="space-y-3 flex-1">
+                  <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block font-mono">
+                    WHAT IS INCLUDED:
+                  </span>
+                  <ul className="space-y-3 font-sans font-medium text-slate-200 text-xs">
+                    {INDIVIDUAL_FEATURES.map((item) => (
+                      <li key={item} className="flex items-center gap-2.5">
+                        <span className="text-bull-lime font-black">{TICK}</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {status.isPremium && !status.isFrozen ? (
+                  <Link
+                    href="/modules"
+                    className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg block text-center transition-all"
+                  >
+                    Launch Learning Arena {'\u2192'}
+                  </Link>
+                ) : !userSession ? (
+                  <Link
+                    href="/signup"
+                    className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all block text-center"
+                  >
+                    Create Account for Free Trial {'\u2192'}
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => setPaymentStep('checkout')}
+                    className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all cursor-pointer"
+                  >
+                    {status.isFrozen ? 'Unlock Account \u2014 ' + RS + '99/month' : 'Subscribe Now \u2014 ' + RS + '99/month'}
+                  </button>
+                )}
               </div>
 
-              {/* SAVINGS CALCULATOR */}
-              {(() => {
-                const individual = classSize * 99;
-                const school = 2500;
-                const diff = individual - school;
-                const maxVal = 30 * 99;
-                return (
-                  <div className="bg-bull-raised border border-bull-line rounded-2xl p-4 space-y-3 font-mono">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">How big is your class?</span>
-                      <span className="text-sm font-black text-bull-lime">{classSize} students</span>
-                    </div>
+              {/* DIVIDER */}
+              <div className="h-px md:h-auto md:w-px bg-bull-line" />
 
-                    <input
-                      type="range"
-                      min="5"
-                      max="30"
-                      value={classSize}
-                      onChange={(e) => setClassSize(Number(e.target.value))}
-                      className="w-full cursor-pointer"
-                      style={{ accentColor: '#B7F34A' }}
-                      aria-label="Number of students in your class"
-                    />
+              {/* RIGHT: SCHOOL PLAN */}
+              <div className="p-8 space-y-6 flex flex-col">
+                <div className="space-y-4 text-center md:text-left">
+                  <span className="inline-block text-[10px] font-black uppercase text-bull-teal bg-bull-raised border border-bull-teal/30 px-3.5 py-1 rounded-full font-mono">
+                    FOR SCHOOLS
+                  </span>
+                  <h2 className="text-2xl font-black text-white">School Plan</h2>
+                  <p className="text-slate-400 text-xs leading-relaxed font-medium">
+                    One plan for your whole school, bought by the school or teacher. The bigger the school, the lower the price per student.
+                  </p>
+                </div>
+
+                {/* STUDENT COUNT INPUT */}
+                <div className="bg-bull-raised border border-bull-line rounded-2xl p-4 space-y-3 font-mono">
+                  <label htmlFor="student-count" className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
+                    How many students does your school have?
+                  </label>
+                  <input
+                    id="student-count"
+                    type="text"
+                    inputMode="numeric"
+                    value={studentInput}
+                    onChange={(e) => setStudentInput(e.target.value.replace(/[^0-9]/g, '').slice(0, 5))}
+                    placeholder="e.g. 300"
+                    className="w-full bg-bull-surface border border-bull-line focus:border-bull-teal outline-none rounded-xl px-4 py-3 text-lg font-black text-white placeholder-slate-600"
+                    aria-label="Number of students in your school"
+                  />
+                  <div className="flex flex-wrap gap-2">
+                    {[30, 100, 300, 500].map((v) => (
+                      <button
+                        key={v}
+                        type="button"
+                        onClick={() => setStudentInput(String(v))}
+                        className={'px-3 py-1 rounded-lg text-[10px] font-bold border transition-all cursor-pointer ' + (String(v) === studentInput ? 'border-bull-teal text-bull-teal bg-bull-surface' : 'border-bull-line text-slate-400 hover:text-white')}
+                      >
+                        {v}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* RESULT */}
+                {!validN ? (
+                  <div className="border border-dashed border-bull-line rounded-2xl p-5 text-center text-xs text-slate-400 font-medium">
+                    Enter the number of students to see your price.
+                  </div>
+                ) : overMax ? (
+                  <div className="border border-bull-teal/40 bg-bull-raised rounded-2xl p-5 text-center space-y-1">
+                    <span className="text-sm font-black text-white block">Over {MAX_SELF_SERVE.toLocaleString('en-IN')} students?</span>
+                    <span className="text-xs text-slate-400 font-medium block">Message us for a custom quote with an even better rate.</span>
+                  </div>
+                ) : (
+                  <div className="bg-bull-raised border border-bull-teal/40 rounded-2xl p-5 space-y-4 font-mono">
+                    <div className="flex items-end justify-between gap-3">
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-slate-500 block">Your school pays</span>
+                        <span className="text-4xl font-black text-white">{fmt(calc.school)}</span>
+                        <span className="text-slate-500 text-xs"> / month</span>
+                      </div>
+                      {calc.pct > 0 && (
+                        <span className="text-[11px] font-black text-emerald-400 bg-emerald-950 border border-emerald-800 px-3 py-1 rounded-full whitespace-nowrap">
+                          {calc.pct}% OFF
+                        </span>
+                      )}
+                    </div>
 
                     <div className="space-y-2 text-[10px]">
                       <div>
                         <div className="flex justify-between text-slate-400 mb-1">
-                          <span>{classSize} individual passes</span>
-                          <span className="text-white font-bold">{'\u20B9'}{individual.toLocaleString('en-IN')}/mo</span>
+                          <span>{n} individual passes</span>
+                          <span className="text-white font-bold">{fmt(calc.individualTotal)}/mo</span>
                         </div>
                         <div className="h-2 bg-bull-surface rounded-full overflow-hidden">
-                          <div className="school-bar h-full bg-slate-500 rounded-full" style={{ width: (individual / maxVal * 100) + '%' }} />
+                          <div className="h-full bg-slate-500 rounded-full" style={{ width: '100%' }} />
                         </div>
                       </div>
                       <div>
                         <div className="flex justify-between text-slate-400 mb-1">
                           <span>School Plan</span>
-                          <span className="text-bull-teal font-bold">{'\u20B9'}2,500/mo</span>
+                          <span className="text-bull-teal font-bold">{fmt(calc.school)}/mo</span>
                         </div>
                         <div className="h-2 bg-bull-surface rounded-full overflow-hidden">
-                          <div className="school-bar h-full bg-bull-teal rounded-full" style={{ width: (school / maxVal * 100) + '%' }} />
+                          <div className="h-full bg-bull-teal rounded-full" style={{ width: calc.barWidth + '%', transition: 'width 0.5s ease' }} />
                         </div>
                       </div>
                     </div>
 
-                    <p className={`text-[11px] font-bold font-sans leading-relaxed ${diff > 0 ? 'text-emerald-400' : 'text-slate-400'}`}>
-                      {diff > 0
-                        ? 'You save \u20B9' + diff.toLocaleString('en-IN') + ' every month with the School Plan.'
-                        : 'For fewer than 26 students, individual passes cost less. The School Plan pays off from 26 to 30 students.'}
+                    <div className="flex items-center justify-between border-t border-bull-line pt-3 text-[11px]">
+                      <span className="text-slate-400">Per student</span>
+                      <span className="text-white font-black">{fmt(calc.perStudent)} / month</span>
+                    </div>
+
+                    <p className={'text-[11px] font-bold font-sans leading-relaxed ' + (calc.saved > 0 ? 'text-emerald-400' : 'text-slate-400')}>
+                      {calc.saved > 0
+                        ? 'You save ' + fmt(calc.saved) + ' every month compared with individual passes.'
+                        : 'Discounts start from 11 students. For up to 10 students the price is the same as individual passes.'}
                     </p>
                   </div>
-                );
-              })()}
+                )}
 
-              <div className="space-y-3 text-xs font-mono">
-                <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
-                  WHAT IS INCLUDED:
-                </span>
-                <ul className="space-y-2.5 font-sans font-medium text-slate-200">
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>Full access for up to 30 students</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>Teacher-managed classes and student approvals</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>School leaderboard and daily quizzes</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <span className="text-bull-lime font-black">+</span>
-                    <span>All modules and Volatility Arena matches</span>
-                  </li>
-                </ul>
-                <p className="text-[10px] text-slate-500 font-sans font-medium leading-relaxed">
-                  Bought by the school or teacher, not by students. Need more than 30 students? Message us.
-                </p>
+                <div className="space-y-3 flex-1">
+                  <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block font-mono">
+                    WHAT IS INCLUDED:
+                  </span>
+                  <ul className="space-y-3 font-sans font-medium text-slate-200 text-xs">
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>Everything in the Student Pass, for every student</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>Teacher-managed classes and student approvals</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>School leaderboard and daily quizzes</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>One payment for the whole school</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {validN ? (
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 bg-bull-teal hover:opacity-90 text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono transition-all block text-center"
+                  >
+                    {overMax ? 'Request Custom Quote' : 'Request School Plan \u2014 ' + fmt(calc.school) + '/month'}
+                  </a>
+                ) : (
+                  <div className="w-full py-4 bg-bull-raised text-slate-600 text-xs font-black uppercase tracking-wider rounded-2xl font-mono block text-center border border-bull-line">
+                    Enter student count
+                  </div>
+                )}
               </div>
-
-              <a
-                href="https://wa.me/919324459446?text=Hi%2C%20I%20want%20the%20Bull%20Run%20School%20Plan%20(30%20students)."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-4 bg-bull-teal hover:opacity-90 text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono transition-all block text-center"
-              >
-                Request School Plan
-              </a>
             </div>
-          </div>
+          </section>
         )}
 
         {/* CHECKOUT STEP */}
@@ -463,15 +546,15 @@ export default function PricingPage() {
               <span className="text-[10px] font-black text-bull-lime uppercase tracking-widest bg-bull-raised px-2.5 py-0.5 rounded border border-bull-lime/20">
                 SECURE UPI PAYMENT GATEWAY
               </span>
-              <h2 className="font-black text-xl text-white mt-2">Activate ₹99 Subscription</h2>
-              <p className="text-xs text-slate-400 mt-1">Direct Transfer Total: <span className="font-bold text-white">₹99</span></p>
+              <h2 className="font-black text-xl text-white mt-2">Activate {RS}99 Subscription</h2>
+              <p className="text-xs text-slate-400 mt-1">Direct Transfer Total: <span className="font-bold text-white">{RS}99</span></p>
             </div>
 
             <div className="space-y-4">
               <div className="bg-bull-raised border border-dashed border-bull-lime/40 p-5 rounded-2xl flex flex-col items-center text-center space-y-3">
-                <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRun&am=99&cu=INR`)}`} 
-                  alt="Bull Run UPI Gateway QR" 
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRun&am=99&cu=INR`)}`}
+                  alt="Bull Run UPI Gateway QR"
                   className="w-[150px] h-[150px] border bg-white p-1 rounded-xl shadow-md"
                   loading="lazy"
                 />
@@ -483,13 +566,13 @@ export default function PricingPage() {
 
               <ol className="text-[11px] text-slate-400 list-decimal pl-4 space-y-1.5 leading-relaxed font-sans font-medium">
                 <li>Scan QR code using GPay, PhonePe, Paytm, or any UPI app.</li>
-                <li>Transfer exactly <span className="font-bold text-white">₹99</span>.</li>
+                <li>Transfer exactly <span className="font-bold text-white">{RS}99</span>.</li>
                 <li>Tap the button below to verify payment and unfreeze your profile.</li>
               </ol>
             </div>
 
             <div className="space-y-2 border-t border-bull-line pt-4">
-              <button 
+              <button
                 onClick={handleVerifyPayment}
                 disabled={isProcessing}
                 className="w-full text-center py-3.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer font-mono"
@@ -500,10 +583,10 @@ export default function PricingPage() {
                     Updating Database...
                   </>
                 ) : (
-                  "Verify Remittance — Unlock Account"
+                  'Verify Remittance \u2014 Unlock Account'
                 )}
               </button>
-              <button 
+              <button
                 onClick={() => setPaymentStep('browse')}
                 disabled={isProcessing}
                 className="w-full text-center py-2 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer font-mono"
@@ -518,9 +601,9 @@ export default function PricingPage() {
         {paymentStep === 'success' && (
           <div className="max-w-md mx-auto bg-bull-surface border border-emerald-500/50 rounded-3xl shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-teal)_20%,transparent)] p-8 text-center space-y-6 animate-scaleUp font-mono">
             <div className="h-12 w-12 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-2xl flex items-center justify-center mx-auto text-xl font-black">
-              ✓
+              {TICK}
             </div>
-            
+
             <div className="space-y-2">
               <h2 className="text-xl font-black text-emerald-400">Subscription Successfully Active!</h2>
               <p className="text-xs text-slate-300 leading-relaxed font-sans font-medium">
@@ -528,11 +611,11 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <Link 
+            <Link
               href="/modules"
               className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md transition-all font-mono block text-center"
             >
-              Launch Learning Arena →
+              Launch Learning Arena {'\u2192'}
             </Link>
           </div>
         )}
