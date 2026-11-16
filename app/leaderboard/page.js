@@ -55,6 +55,7 @@ export default function Leaderboard() {
   const [loading, setLoading] = useState(true);
   const [rankingScope, setRankingScope] = useState('world');
   const [topCount, setTopCount] = useState(TOP_STEP);
+  const [bottomCount, setBottomCount] = useState(NEIGHBOURS);
   const [entries, setEntries] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -131,7 +132,7 @@ export default function Leaderboard() {
 
           const myIndex = ahead ?? 0;
           const windowStart = Math.max(0, myIndex - NEIGHBOURS);
-          const windowEnd = myIndex + NEIGHBOURS;
+          const windowEnd = myIndex + bottomCount;
 
           if (windowStart <= topCount) {
             const end = Math.max(topCount - 1, windowEnd);
@@ -179,7 +180,7 @@ export default function Leaderboard() {
         if (requestId === requestRef.current) setLoading(false);
       }
     },
-    [rankingScope, topCount]
+    [rankingScope, topCount, bottomCount]
   );
 
   const fetchRef = useRef(fetchRankings);
@@ -315,6 +316,7 @@ export default function Leaderboard() {
                   disabled={disabled}
                   onClick={() => {
                     setRankingScope(tab.id);
+                    setBottomCount(NEIGHBOURS);
                     setTopCount(TOP_STEP);
                   }}
                   className={`rounded-xl px-4 py-2 text-xs font-black uppercase transition-colors ${
@@ -361,6 +363,27 @@ export default function Leaderboard() {
                   ) : (
                     entries.map((entry) => {
                       if (entry.type === 'gap') {
+                        return (
+                          <tr key={entry.key}>
+                            <td colSpan={4} className="py-3 text-center">
+                              <div className="text-xl font-black tracking-[0.4em] text-slate-600">
+                                {'\u22EF'}
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setBottomCount((count) => count + TOP_STEP)
+                                }
+                                className="mt-1 rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-bull-lime/50 hover:text-white"
+                              >
+                                Show {TOP_STEP} more below
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      }
+
+                      if (entry.type === 'unused-gap') {
                         return (
                           <tr key={entry.key}>
                             <td
