@@ -1,0 +1,55 @@
+{
+  "id": "mod-4",
+  "title": "Module 4: Getting Started, Accounts and Trading Mechanics",
+  "submodules": [
+    {
+      "id": "submod-4-1",
+      "title": "1. Account Setup",
+      "intro": "KYC, demat account, trading account, linked bank account",
+      "content": "⚡ MISSION BRIEFING: Account Setup: KYC, demat account, trading account, linked bank account\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-4-2",
+      "title": "2. Choosing a Broker",
+      "intro": "Discount vs. full-service, fees, platform features",
+      "content": "⚡ MISSION BRIEFING: Choosing a Broker: Discount vs. full-service, fees, platform features\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-4-3",
+      "title": "3. Trading Sessions and Timings",
+      "intro": "Pre-open session, normal market, closing session",
+      "content": "⚡ MISSION BRIEFING: Trading Sessions and Timings: Pre-open session, normal market, closing session\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-4-4",
+      "title": "4. Order Types",
+      "intro": "Market, limit, stop-loss, GTT, bracket and cover orders",
+      "content": "⚡ MISSION BRIEFING: Order Types: Market, limit, stop-loss, GTT, bracket and cover orders\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-4-5",
+      "title": "5. Settlement",
+      "intro": "T+1 cycle, delivery vs. intraday trades",
+      "content": "⚡ MISSION BRIEFING: Settlement: T+1 cycle, delivery vs. intraday trades\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-4-6",
+      "title": "6. Costs and Charges",
+      "intro": "Brokerage, STT, GST, stamp duty, exchange charges, DP charges",
+      "content": "⚡ MISSION BRIEFING: Costs and Charges: Brokerage, STT, GST, stamp duty, exchange charges, DP charges\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-4-7",
+      "title": "7. Reading a Trading Screen",
+      "intro": "Bid-ask, volume, OHLC, market depth, circuits",
+      "content": "⚡ MISSION BRIEFING: Reading a Trading Screen: Bid-ask, volume, OHLC, market depth, circuits\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    }
+  ]
+}

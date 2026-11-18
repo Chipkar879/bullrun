@@ -1,0 +1,222 @@
+{
+  "id": "mod-1",
+  "title": "Module 1: Foundations of Money and Investing",
+  "submodules": [
+    {
+      "id": "submod-1-1",
+      "title": "1. The Basics of Money and Finance",
+      "intro": "Is keeping money the same as growing money?",
+      "content": "⚡ MISSION BRIEFING: SAVING VS. INVESTING\nSaving: keeping money aside for future use. It is generally safer and easier to access.\nInvesting: putting money into assets that may grow in value or generate income. Returns are not guaranteed.\n\n⚡ FINANCIAL INTEL: INFLATION\nInflation means the general prices of goods and services rise over time, so the same money buys fewer things.\nToday: ₹100 buys a sandwich (₹50) and a juice (₹50). A few years later, both cost more and ₹100 may not be enough.\nYour money hasn't disappeared, but its purchasing power has decreased.\n\n⚡ FINANCIAL INTEL: TIME VALUE OF MONEY\nMoney today is generally worth more than the same amount later, because today's money can be saved or invested to earn returns.\nChoice A: ₹1,000 today. Choice B: ₹1,000 after three years. Choice A lets you save or invest in the meantime.\n\n💡 CORE TAKEAWAY:\nSaving protects money for planned needs; investing aims to grow it, with risk.",
+      "quiz": [
+        {
+          "question": "What is the main difference between saving and investing?",
+          "options": [
+            "Saving always gives higher returns",
+            "Saving keeps money aside, while investing aims to grow it",
+            "Investing guarantees profits",
+            "There is no difference"
+          ],
+          "correctIndex": 1,
+          "explanation": "Saving keeps money aside; investing aims for growth but returns are not guaranteed."
+        },
+        {
+          "question": "What happens to the purchasing power of money when inflation increases?",
+          "options": [
+            "It increases",
+            "It stays the same",
+            "It generally decreases",
+            "It doubles"
+          ],
+          "correctIndex": 2,
+          "explanation": "Rising prices mean the same money buys less."
+        },
+        {
+          "question": "Why can receiving money today be more valuable than the same amount later?",
+          "options": [
+            "Future money is illegal",
+            "Today's money can be saved or invested to earn returns",
+            "Banks close in future",
+            "It is not more valuable"
+          ],
+          "correctIndex": 1,
+          "explanation": "Money today can start earning returns right away."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-2",
+      "title": "2. The Power of Compounding",
+      "intro": "Can your money make more money?",
+      "content": "⚡ MISSION BRIEFING: COMPOUNDING\nCompounding happens when your returns start earning returns of their own. You earn on your original money, and then on the growth as well.\nExample (hypothetical): ₹1,000 at 10% a year becomes ₹1,331 after 3 years. This is a mathematical example, not a promised return.\n\n⚡ FINANCIAL INTEL: THE RULE OF 72\nYears to double = 72 ÷ Annual return (%)\n• 6% return → about 12 years\n• 8% return → about 9 years\n• 12% return → about 6 years\n\n⚡ FINANCIAL INTEL: EARLY VS. LATE\nAarav starts at age 20 and Rohan at age 30. Both invest a hypothetical ₹10,000 once at an assumed 8% a year.\n• Aarav (20 years) → about ₹46,610 at age 40\n• Rohan (10 years) → about ₹21,589 at age 40\n\n💡 CORE TAKEAWAY:\nTime can make a significant difference to compound growth.",
+      "quiz": [
+        {
+          "question": "What makes compounding different from simple interest?",
+          "options": [
+            "Returns earn returns of their own",
+            "It is always guaranteed",
+            "It only works for gold",
+            "There is no difference"
+          ],
+          "correctIndex": 0,
+          "explanation": "Compounding earns returns on both the original money and previous growth."
+        },
+        {
+          "question": "What does the Rule of 72 help estimate?",
+          "options": [
+            "Taxes owed",
+            "How long money takes to double",
+            "Your credit score",
+            "Share price"
+          ],
+          "correctIndex": 1,
+          "explanation": "Years to double ≈ 72 ÷ annual return %."
+        },
+        {
+          "question": "At an 8% annual return, roughly how long to double money?",
+          "options": [
+            "6 years",
+            "9 years",
+            "12 years",
+            "18 years"
+          ],
+          "correctIndex": 1,
+          "explanation": "72 ÷ 8 = 9 years."
+        },
+        {
+          "question": "Why does starting early make a difference?",
+          "options": [
+            "More time for returns to compound",
+            "Early investing guarantees profit",
+            "Fees are lower",
+            "It does not"
+          ],
+          "correctIndex": 0,
+          "explanation": "More time lets growth build on growth."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-3",
+      "title": "3. Understanding Asset Classes",
+      "intro": "Where do people put their money?",
+      "content": "⚡ MISSION BRIEFING: THE FIVE ASSET CLASSES\nAn asset class is a group of investments that share similar characteristics.\n\n1. Equity (Stocks): owning a small part of a company. Value can rise or fall. Higher risk generally.\n\n2. Debt: lending money to a government or company through instruments like bonds. The borrower agrees to repay on specified terms. Generally lower risk than equity, depending on the issuer.\n\n3. Gold: a precious metal held as a store of value or for diversification (coins, gold ETFs). Its price can fluctuate.\n\n4. Real Estate: houses, apartments or commercial buildings. Can be expensive and hard to sell quickly.\n\n5. Cash and Cash Equivalents: cash, savings accounts and short-term instruments. Easy to access, but inflation can reduce purchasing power.\n\n💡 CORE TAKEAWAY:\nEach asset class has its own mix of risk, return and ease of access.",
+      "quiz": [
+        {
+          "question": "What does owning equity mean?",
+          "options": [
+            "Lending money to a company",
+            "Owning a small part of a company",
+            "Owning gold",
+            "Holding cash"
+          ],
+          "correctIndex": 1,
+          "explanation": "Shares represent ownership."
+        },
+        {
+          "question": "You lend money to the government. Which asset class?",
+          "options": [
+            "Equity",
+            "Debt",
+            "Real Estate",
+            "Gold"
+          ],
+          "correctIndex": 1,
+          "explanation": "Government bonds are debt instruments."
+        },
+        {
+          "question": "Which asset is generally easiest to access quickly?",
+          "options": [
+            "Property",
+            "Cash",
+            "Gold coins in a locker",
+            "Bonds locked for 10 years"
+          ],
+          "correctIndex": 1,
+          "explanation": "Cash is readily available."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-4",
+      "title": "4. Understanding Risk and Return",
+      "intro": "Why can you earn more but also lose more?",
+      "content": "⚡ MISSION BRIEFING: RISK AND RETURN\nRisk: the possibility that an investment may not perform as expected, including losing money.\nReturn: money gained or lost over a period, usually as a percentage.\nExample: ₹1,000 rises to ₹1,200 → gain of ₹200 (20%). Falls to ₹800 → loss of ₹200 (20%).\n\n💡 CORE TAKEAWAY:\nHigher potential returns generally come with higher risk. This does NOT mean higher risk guarantees higher returns.\n\n⚡ FINANCIAL INTEL: TYPES OF RISK\n• Market Risk: overall market prices fall.\n• Business Risk: a company faces difficulties, e.g. falling sales.\n• Inflation Risk: money loses purchasing power.\n• Liquidity Risk: difficulty selling an asset quickly.\n• Interest Rate Risk: changing rates affect investment values, e.g. bond prices.\n\n⚡ FINANCIAL INTEL: RISK APPETITE\nRisk appetite is how much risk someone is comfortable taking and can financially afford. Aarav prefers stability and needs money soon; Ishaan has a longer goal and accepts fluctuations. Neither is automatically right.\n\n💡 CORE TAKEAWAY:\nThe best decision suits your goal, time horizon and ability to handle risk. (Educational only, not a financial risk assessment.)",
+      "quiz": [
+        {
+          "question": "Does higher risk guarantee higher returns?",
+          "options": [
+            "Yes",
+            "No, it only means greater possible gains and losses",
+            "Only for stocks",
+            "Only for gold"
+          ],
+          "correctIndex": 1,
+          "explanation": "Risk raises the range of outcomes, not the guarantee."
+        },
+        {
+          "question": "Difficulty selling a property quickly is which risk?",
+          "options": [
+            "Market risk",
+            "Liquidity risk",
+            "Inflation risk",
+            "Business risk"
+          ],
+          "correctIndex": 1,
+          "explanation": "Liquidity risk."
+        },
+        {
+          "question": "Why consider your goal before choosing an investment?",
+          "options": [
+            "Goals decide time horizon and how much risk fits",
+            "Goals set share prices",
+            "Goals do not matter",
+            "To avoid taxes"
+          ],
+          "correctIndex": 0,
+          "explanation": "The right investment depends on goal, horizon and risk capacity."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-5",
+      "title": "5. Setting Financial Goals",
+      "intro": "How do you turn a money dream into a money plan?",
+      "content": "⚡ MISSION BRIEFING: THREE TYPES OF GOALS\n• Short-term: usually within 1 year (e.g. ₹3,000 for headphones).\n• Medium-term: around 1-5 years (e.g. a laptop or future education expense).\n• Long-term: more than 5 years (e.g. higher education, long-term financial security).\nThese are learning categories, not fixed rules.\n\n⚡ FINANCIAL INTEL: THE SMART METHOD\n• S - Specific: buy a laptop\n• M - Measurable: save ₹30,000\n• A - Achievable: save an affordable amount regularly\n• R - Relevant: needed for studies\n• T - Time-bound: within 12 months\n\n⚡ FINANCIAL INTEL: MATCHING GOALS WITH TIME\n• Need money soon? Prioritise safety and easy access.\n• More time? You can learn about investment options and their risks.\n• Long-term goal? Understand how inflation and compounding affect the amount needed.\n\n🍕 CASE STUDY: THE LAPTOP CHALLENGE\nRiya wants a ₹30,000 laptop in 12 months and has ₹6,000 saved. Remaining ₹24,000 ÷ 12 months = ₹2,000 per month.\n\n💡 CORE TAKEAWAY:\nSEBI suggests considering goals, risk appetite and investment horizon together.",
+      "quiz": [
+        {
+          "question": "What does SMART stand for?",
+          "options": [
+            "Specific, Measurable, Achievable, Relevant, Time-bound",
+            "Save, Margin, Assets, Returns, Tax",
+            "Simple, Modern, Active, Real, Timely",
+            "None of these"
+          ],
+          "correctIndex": 0,
+          "explanation": "The SMART goal method."
+        },
+        {
+          "question": "Riya needs ₹24,000 more in 12 months. Monthly saving?",
+          "options": [
+            "₹1,000",
+            "₹2,000",
+            "₹3,000",
+            "₹24,000"
+          ],
+          "correctIndex": 1,
+          "explanation": "₹24,000 ÷ 12 = ₹2,000."
+        },
+        {
+          "question": "For a goal needed soon, what should be prioritised?",
+          "options": [
+            "Highest returns",
+            "Safety and easy access",
+            "Real estate",
+            "Small-cap stocks"
+          ],
+          "correctIndex": 1,
+          "explanation": "Short horizons favour safety and liquidity."
+        }
+      ]
+    }
+  ]
+}

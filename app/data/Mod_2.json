@@ -1,0 +1,48 @@
+{
+  "id": "mod-2",
+  "title": "Module 2: Introduction to the Stock Market",
+  "submodules": [
+    {
+      "id": "submod-2-1",
+      "title": "1. What a Stock Is",
+      "intro": "Ownership, shares, face value, market value",
+      "content": "⚡ MISSION BRIEFING: What a Stock Is: Ownership, shares, face value, market value\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-2-2",
+      "title": "2. Why Companies List",
+      "intro": "Raising capital, liquidity, visibility",
+      "content": "⚡ MISSION BRIEFING: Why Companies List: Raising capital, liquidity, visibility\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-2-3",
+      "title": "3. Primary Market",
+      "intro": "IPO, FPO, rights issue, OFS, bonus shares, stock splits",
+      "content": "⚡ MISSION BRIEFING: Primary Market: IPO, FPO, rights issue, OFS, bonus shares, stock splits\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-2-4",
+      "title": "4. Secondary Market",
+      "intro": "How trading works after listing",
+      "content": "⚡ MISSION BRIEFING: Secondary Market: How trading works after listing\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-2-5",
+      "title": "5. Key Participants",
+      "intro": "Retail investors, institutions (FIIs, DIIs, mutual funds), brokers, market makers",
+      "content": "⚡ MISSION BRIEFING: Key Participants: Retail investors, institutions (FIIs, DIIs, mutual funds), brokers, market makers\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-2-6",
+      "title": "6. Types of Stocks",
+      "intro": "Large-, mid- and small-cap; blue-chip; growth vs. value; dividend stocks; penny stocks",
+      "content": "⚡ MISSION BRIEFING: Types of Stocks: Large-, mid- and small-cap; blue-chip; growth vs. value; dividend stocks; penny stocks\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    }
+  ]
+}

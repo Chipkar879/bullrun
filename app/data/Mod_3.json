@@ -1,0 +1,41 @@
+{
+  "id": "mod-3",
+  "title": "Module 3: Market Structure and Regulation",
+  "submodules": [
+    {
+      "id": "submod-3-1",
+      "title": "1. Exchanges",
+      "intro": "NSE, BSE and their roles",
+      "content": "⚡ MISSION BRIEFING: Exchanges: NSE, BSE and their roles\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-3-2",
+      "title": "2. Regulators",
+      "intro": "SEBI, RBI and the Ministry of Finance",
+      "content": "⚡ MISSION BRIEFING: Regulators: SEBI, RBI and the Ministry of Finance\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-3-3",
+      "title": "3. Market Indices",
+      "intro": "Nifty 50, Sensex, Bank Nifty, sectoral indices, how indices are calculated",
+      "content": "⚡ MISSION BRIEFING: Market Indices: Nifty 50, Sensex, Bank Nifty, sectoral indices, how indices are calculated\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-3-4",
+      "title": "4. Market Participants' Roles",
+      "intro": "Depositories (NSDL, CDSL), clearing corporations, depository participants",
+      "content": "⚡ MISSION BRIEFING: Market Participants' Roles: Depositories (NSDL, CDSL), clearing corporations, depository participants\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    },
+    {
+      "id": "submod-3-5",
+      "title": "5. Investor Protection",
+      "intro": "SEBI rules, SCORES, insider trading, circuit breakers",
+      "content": "⚡ MISSION BRIEFING: Investor Protection: SEBI rules, SCORES, insider trading, circuit breakers\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
+      "quiz": []
+    }
+  ]
+}

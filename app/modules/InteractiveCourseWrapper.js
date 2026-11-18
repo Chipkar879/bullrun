@@ -151,7 +151,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
   useEffect(() => {
     try {
-      const savedProgress = localStorage.getItem('bullrun_module_progress');
+      const savedProgress = localStorage.getItem('bullrun_progress_v2');
       if (savedProgress) {
         const parsed = JSON.parse(savedProgress);
         setCompletedSubmodules(parsed);
@@ -164,7 +164,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
   const saveProgressToLocalStorage = (updatedCompleted) => {
     try {
-      localStorage.setItem('bullrun_module_progress', JSON.stringify(updatedCompleted));
+      localStorage.setItem('bullrun_progress_v2', JSON.stringify(updatedCompleted));
       setUserXP(updatedCompleted.length * 100);
     } catch (err) {
       console.warn('Could not save progress:', err);
@@ -208,6 +208,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     setQuizSubmitted(true);
     if (correctCount >= Math.ceil(activeModalSubmod.quiz.length * 0.8)) {
       setQuizPassed(true);
+      if (!completedSubmodules.includes(activeModalSubmod.id)) { const u=[...completedSubmodules, activeModalSubmod.id]; setCompletedSubmodules(u); saveProgressToLocalStorage(u); }
     } else {
       setQuizPassed(false);
     }

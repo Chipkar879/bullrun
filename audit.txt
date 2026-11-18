@@ -1,0 +1,2475 @@
+﻿
+
+########## FILE LIST ##########
+.eslintrc.json
+jsconfig.json
+middleware.js
+next.config.mjs
+package-lock.json
+package.json
+postcss.config.mjs
+tailwind.config.js
+app\globals.css
+app\layout.js
+app\not-found.js
+app\opengraph-image.jsx
+app\page.js
+app\robots.js
+app\sitemap.js
+app\twitter-image.jsx
+app\admin\page.js
+app\api\auth\signup\route.js
+app\api\generate-quiz\route.js
+app\api\historical-prices\route.js
+app\api\onboarding-modules\route.js
+app\api\sync-networth\route.js
+app\api\trade\route.js
+app\arena\page.js
+app\auth\update-password\page.js
+app\leaderboard\page.js
+app\modules\InteractiveCourseWrapper.js
+app\modules\page.js
+app\pricing\page.js
+app\profile\page.js
+app\quiz\page.js
+app\signup\page.js
+app\simulator\page.js
+components\ActivityTracker.jsx
+components\BrandMark.jsx
+components\CourseAccordion.js
+components\Features.jsx
+components\Footer.jsx
+components\Hero.jsx
+components\Navbar.jsx
+components\OnboardingTour.jsx
+components\StockChart.jsx
+components\ThemeCustomizer.jsx
+lib\landing.js
+lib\og.jsx
+lib\serverMarket.js
+lib\site.js
+lib\supabase.js
+lib\supabaseAdmin.js
+lib\theme-engine.js
+
+
+########## app\admin\page.js ##########
+'use client';
+
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import Navbar from '@/components/Navbar';
+import { supabase } from '@/lib/supabase';
+
+// âš ï¸ SUPER ADMIN IMMUNITY EMAIL
+const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
+const REFRESH_MS = 10000;
+
+const inr = (value) =>
+  `â‚¹${Number(value || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
+
+// Same value the leaderboard ranks on (cash + holdings, saved by the simulator)
+const getNetWorth = (p) => Number(p.net_worth ?? p.wallet_balance ?? 0) || 0;
+
+const formatDuration = (seconds) => {
+  const total = Math.max(0, Math.round(Number(seconds) || 0));
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  return h + 'h ' + m + 'm';
+};
+
+// Stable order: highest net worth first, ties broken by id (same as the leaderboard)
+const rankProfiles = (list) =>
+  [...list]
+    .sort((a, b) => {
+      const diff = getNetWorth(b) - getNetWorth(a);
+      if (diff !== 0) return diff;
+      return String(a.id).localeCompare(String(b.id));
+    })
+    .map((p, index) => ({ ...p, rank: index + 1 }));
+
+// HELPER: CALCULATE EXACT EXPIRY & FREEZE STATUS
+// `now` is passed in so the UI can re-evaluate every second.
+const getProfileFreezeStatus = (p, now = Date.now()) => {
+  if (p.email === SUPER_ADMIN_EMAIL) {
+    return { isFrozen: false, isSuperAdmin: true, isPermanent: true, expiryMs: null };
+  }
+
+  // 1. Explicit admin freeze flag in database ALWAYS takes top priority
+  if (p.is_frozen === true) {
+    return { isFrozen: true, isSuperAdmin: false, isPermanent: false, expiryMs: 0 };
+  }
+
+  // 2. Premium with NO deadline = permanent access
+  if (!p.access_expires_at && p.is_premium) {
+    return { isFrozen: false, isSuperAdmin: false, isPermanent: true, expiryMs: null };
+  }
+
+  // 3. The deadline decides, even for premium / admin-granted accounts
+  let expiryMs;
+  if (p.access_expires_at) {
+    expiryMs = new Date(p.access_expires_at).getTime();
+  } else {
+    const createdAt = p.created_at ? new Date(p.created_at).getTime() : now;
+    expiryMs = createdAt + (7 * 24 * 60 * 60 * 1000);
+  }
+
+  return {
+    isFrozen: now >= expiryMs,
+    isSuperAdmin: false,
+    isPermanent: false,
+    expiryMs
+  };
+};
+
+export default function SuperAdminDashboard() {
+  const [authorized, setAuthorized] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [allProfiles, setAllProfiles] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [activity, setActivity] = useState({});
+
+  // Global clock: makes cards flip to FROZEN the moment time runs out
+  const [now, setNow] = useState(Date.now());
+  // Remembers which accounts we already auto-froze in the database
+  const autoFrozenRef = useRef(new Set());
+
+  // Search & School Category Filter States
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedSchoolFilter, setSelectedSchoolFilter] = useState('ALL');
+
+  // Modal Inspection & Custom Days State
+  const [selectedId, setSelectedId] = useState(null);
+  const [customDaysInput, setCustomDaysInput] = useState('30');
+
+  // Modal Real-Time Live Countdown State
+  const [modalTimeLeft, setModalTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    isExpired: false
+  });
+
+  // The open dossier always reflects the latest synced data
+  const selectedProfile = useMemo(
+    () => allProfiles.find((p) => p.id === selectedId) || null,
+    [allProfiles, selectedId]
+  );
+
+  const pendingTeachers = useMemo(
+    () => allProfiles.filter((p) => p.role === 'teacher' && p.verification_status === 'pending'),
+    [allProfiles]
+  );
+
+  const patchProfile = useCallback((profileId, fields) => {
+    setAllProfiles((prev) =>
+      rankProfiles(prev.map((p) => (p.id === profileId ? { ...p, ...fields } : p)))
+    );
+  }, []);
+
+  const fetchMasterData = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
+
+    const { data, error } = await supabase.from('profiles').select('*');
+
+    if (error) {
+      console.error('Admin profile fetch failed:', error);
+      if (!silent) setLoading(false);
+      return;
+    }
+
+    setAllProfiles(rankProfiles(data || []));
+    setLastUpdated(new Date());
+    setLoading(false);
+
+    // Weekly time on site: last 7 IST days including today
+    const cutoff = new Date(Date.now() + 5.5 * 3600 * 1000 - 6 * 86400 * 1000)
+      .toISOString()
+      .slice(0, 10);
+
+    const { data: rows, error: actError } = await supabase
+      .from('user_activity')
+      .select('user_id, seconds')
+      .gte('day', cutoff);
+
+    if (actError) {
+      console.warn('Activity fetch failed:', actError.message);
+      return;
+    }
+
+    const totals = {};
+    (rows || []).forEach((r) => {
+      totals[r.user_id] = (totals[r.user_id] || 0) + Number(r.seconds || 0);
+    });
+    setActivity(totals);
+  }, []);
+
+  useEffect(() => {
+    const verifyIdentity = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user && session.user.email === SUPER_ADMIN_EMAIL) {
+        setAuthorized(true);
+      } else {
+        window.location.href = '/';
+      }
+    };
+    verifyIdentity();
+  }, []);
+
+  // LIVE SYNC: initial load, realtime changes, plus a refresh every 10 seconds
+  useEffect(() => {
+    if (!authorized) return undefined;
+
+    fetchMasterData(false);
+
+    const refresh = () => {
+      if (!document.hidden) fetchMasterData(true);
+    };
+
+    const channel = supabase
+      .channel('admin-profiles-live')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, refresh)
+      .subscribe();
+
+    const interval = setInterval(refresh, REFRESH_MS);
+    document.addEventListener('visibilitychange', refresh);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', refresh);
+      supabase.removeChannel(channel);
+    };
+  }, [authorized, fetchMasterData]);
+
+  // GLOBAL 1-SECOND CLOCK (re-renders cards so expiry shows instantly)
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  // AUTO-FREEZE SYNC: when access expires, write is_frozen=true to the database
+  useEffect(() => {
+    if (!authorized) return;
+
+    allProfiles.forEach(async (p) => {
+      const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(p, now);
+
+      // If the account is active again (e.g. admin granted days), allow future auto-freeze
+      if (!isFrozen) autoFrozenRef.current.delete(p.id);
+
+      if (!isFrozen || isSuperAdmin || p.is_frozen === true) return;
+      if (autoFrozenRef.current.has(p.id)) return;
+
+      autoFrozenRef.current.add(p.id);
+
+      const fields = { is_frozen: true, is_premium: false };
+      const { error } = await supabase.from('profiles').update(fields).eq('id', p.id);
+
+      if (error) {
+        console.warn('Auto-freeze failed:', error.message);
+        return;
+      }
+
+      patchProfile(p.id, fields);
+    });
+  }, [now, allProfiles, authorized, patchProfile]);
+
+  // 1. LIVE REAL-TIME COUNTDOWN TICKER FOR SELECTED PROFILE
+  useEffect(() => {
+    if (!selectedProfile) return undefined;
+
+    const calculateTime = () => {
+      const { expiryMs, isSuperAdmin, isPermanent, isFrozen } = getProfileFreezeStatus(selectedProfile);
+
+      if (isSuperAdmin || isPermanent) {
+        setModalTimeLeft({ days: 999, hours: 0, minutes: 0, seconds: 0, isExpired: false });
+        return;
+      }
+
+      if (isFrozen || !expiryMs || expiryMs <= Date.now()) {
+        setModalTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true });
+        return;
+      }
+
+      const diffMs = expiryMs - Date.now();
+
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diffMs / 1000 / 60) % 60);
+      const seconds = Math.floor((diffMs / 1000) % 60);
+
+      setModalTimeLeft({ days, hours, minutes, seconds, isExpired: false });
+    };
+
+    calculateTime();
+    const interval = setInterval(calculateTime, 1000);
+    return () => clearInterval(interval);
+  }, [selectedProfile]);
+
+  // Teacher Approval / Rejection Handler
+  const handleUpdateTeacher = async (teacherId, status) => {
+    const { error } = await supabase
+      .from('profiles')
+      .update({ verification_status: status })
+      .eq('id', teacherId);
+
+    if (error) {
+      console.error('Teacher update error:', error);
+      alert(`Failed to update teacher: ${error.message}`);
+      return;
+    }
+
+    patchProfile(teacherId, { verification_status: status });
+  };
+
+  // 2. ADMIN CUSTOM DAYS ACTIVATION HANDLER
+  const handleActivateCustomDays = async (profileId, profileEmail) => {
+    if (profileEmail === SUPER_ADMIN_EMAIL) {
+      alert("âš ï¸ Super Admin account is permanently immune.");
+      return;
+    }
+
+    const days = parseInt(customDaysInput, 10);
+    if (isNaN(days) || days <= 0) {
+      alert("Please enter a valid number of days.");
+      return;
+    }
+
+    const newExpiryDate = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString();
+
+    try {
+      const updatedFields = {
+        is_frozen: false,
+        is_premium: true,
+        access_expires_at: newExpiryDate
+      };
+
+      const { error } = await supabase
+        .from('profiles')
+        .update(updatedFields)
+        .eq('id', profileId);
+
+      if (error) throw error;
+
+      alert(`Successfully granted ${days} days of unfrozen access!`);
+      patchProfile(profileId, updatedFields);
+    } catch (err) {
+      console.error("Custom days activation error:", err);
+      alert(`Failed to extend access: ${err.message}`);
+    }
+  };
+
+  // 3. BULLETPROOF FREEZE / UNFREEZE TOGGLE HANDLER (ALL-IN-ONE)
+  const handleToggleFreezeStatus = async (profileId, isCurrentlyFrozen, profileEmail) => {
+    if (profileEmail === SUPER_ADMIN_EMAIL) {
+      alert("âš ï¸ Super Admin account is immune and can NEVER be frozen.");
+      return;
+    }
+
+    const newFrozenState = !isCurrentlyFrozen;
+    const action = newFrozenState ? 'FREEZE' : 'UNFREEZE';
+
+    if (!confirm(`Are you sure you want to ${action} this user account?`)) return;
+
+    try {
+      let updatePayload = {};
+
+      if (newFrozenState) {
+        // ðŸ”¥ HARD FREEZE: Force is_frozen=true, wipe is_premium=false, set expiry in the past
+        updatePayload = {
+          is_frozen: true,
+          is_premium: false,
+          access_expires_at: new Date(0).toISOString()
+        };
+      } else {
+        // ðŸ”“ UNFREEZE: Restore is_frozen=false, activate premium, grant 7 days
+        updatePayload = {
+          is_frozen: false,
+          is_premium: true,
+          access_expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+        };
+      }
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .update(updatePayload)
+        .eq('id', profileId)
+        .select();
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        alert("âš ï¸ Supabase didn't update this row. Please make sure Row Level Security (RLS) on your 'profiles' table allows UPDATE for admins.");
+        return;
+      }
+
+      alert(`Account successfully ${action}D!`);
+      patchProfile(profileId, updatePayload);
+    } catch (err) {
+      console.error("Freeze toggle error:", err);
+      alert(`Failed to update freeze state: ${err.message}`);
+    }
+  };
+
+  // Delete Profile Handler
+  const handleDeleteDossier = async (profileId, profileName) => {
+    const confirmFirst = confirm(`âš ï¸ Are you sure you want to delete profile "${profileName}"?`);
+    if (!confirmFirst) return;
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('id', profileId);
+
+      if (error) throw error;
+
+      alert("User dossier purged successfully.");
+      setSelectedId(null);
+      setAllProfiles((prev) => rankProfiles(prev.filter((p) => p.id !== profileId)));
+    } catch (err) {
+      console.error("Deletion error:", err);
+      alert(`Failed to delete dossier: ${err.message}`);
+    }
+  };
+
+  // Extract School IDs
+  const schoolList = useMemo(() => {
+    const schools = new Set();
+    allProfiles.forEach(p => {
+      if (p.school_id || p.school_code) schools.add(p.school_id || p.school_code);
+    });
+    return Array.from(schools).sort((a, b) => String(a).localeCompare(String(b)));
+  }, [allProfiles]);
+
+  // Filter Roster (keeps the ranked order)
+  const filteredProfiles = useMemo(() => {
+    return allProfiles.filter(p => {
+      const schoolIdentifier = p.school_id || p.school_code;
+      const matchesSearch =
+        (p.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (p.email || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (schoolIdentifier || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (p.role || '').toLowerCase().includes(searchQuery.toLowerCase());
+
+      if (!matchesSearch) return false;
+
+      if (selectedSchoolFilter === 'ALL') return true;
+      if (selectedSchoolFilter === 'PERSONAL') return p.role === 'personal' || !schoolIdentifier;
+      return schoolIdentifier === selectedSchoolFilter;
+    });
+  }, [allProfiles, searchQuery, selectedSchoolFilter]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative">
+        <Navbar />
+        <div className="max-w-6xl mx-auto px-6 pt-32 pb-24 flex justify-center">
+          <div className="space-y-4 text-center">
+            <div className="w-12 h-12 border-4 border-bull-lime border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-slate-400 text-xs font-bold uppercase tracking-wider animate-pulse font-mono">
+              Securing Admin Firewall Layer...
+            </p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (!authorized) return null;
+
+  return (
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
+      <Navbar />
+
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8 animate-fadeInFast">
+
+        {/* HEADER BLOCK */}
+        <div className="border-b border-bull-line pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span className="bg-bull-raised text-bull-lime border border-bull-line text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner mb-2 inline-block font-mono">
+              ðŸ›¡ï¸ Super Admin Clearance
+            </span>
+            <h1 className="text-3xl font-black text-white tracking-tight">Master Control Panel</h1>
+            <p className="text-xs text-slate-400 font-medium mt-1">
+              Set custom access duration, inspect live remaining time, toggle freeze states, or purge dossiers.
+            </p>
+          </div>
+
+          <div className="space-y-2 text-right">
+            <div className="bg-bull-surface border border-bull-line px-4 py-2 rounded-xl text-xs font-mono text-slate-400">
+              Node ID: <span className="text-bull-lime font-bold">{SUPER_ADMIN_EMAIL}</span>
+            </div>
+            <div className="text-[10px] font-mono text-slate-500">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse" />
+              LIVE Â· updated {lastUpdated ? lastUpdated.toLocaleTimeString('en-IN') : '--'}
+            </div>
+          </div>
+        </div>
+
+        {/* SECTION A: TEACHER VERIFICATION QUEUE */}
+        <div className="bg-bull-surface border-2 border-bull-line rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+          <div className="flex items-center justify-between border-b border-bull-line pb-4">
+            <h2 className="text-sm font-black text-amber-400 uppercase tracking-wider flex items-center gap-2 font-mono">
+              ðŸ“ Pending Teacher Verification Queue ({pendingTeachers.length})
+            </h2>
+            <span className="text-[10px] font-mono text-slate-500 font-bold">MANUAL AUDIT</span>
+          </div>
+
+          {pendingTeachers.length === 0 ? (
+            <p className="text-xs font-medium text-slate-500 py-2 font-mono">No teacher verification letters currently pending audit.</p>
+          ) : (
+            <div className="space-y-3">
+              {pendingTeachers.map((teacher) => (
+                <div key={teacher.id} className="p-4 bg-bull-raised border border-bull-line rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs font-bold shadow-md">
+                  <div className="space-y-1">
+                    <p className="text-sm text-white font-black">{teacher.name}</p>
+                    <p className="text-slate-400 font-mono font-medium">{teacher.email}</p>
+                    {teacher.verification_document_url && (
+                      <a href={teacher.verification_document_url} target="_blank" rel="noreferrer" className="inline-block text-bull-lime hover:underline pt-1 text-[11px] font-bold">
+                        ðŸ“‚ View Appointment Letter Proof
+                      </a>
+                    )}
+                  </div>
+                  <div className="flex gap-2 w-full md:w-auto">
+                    <button onClick={() => handleUpdateTeacher(teacher.id, 'approved')} className="w-full md:w-auto px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-black uppercase font-mono cursor-pointer">
+                      Approve
+                    </button>
+                    <button onClick={() => handleUpdateTeacher(teacher.id, 'rejected')} className="w-full md:w-auto px-4 py-2 bg-rose-950 text-rose-400 border border-rose-900 rounded-xl text-xs font-black uppercase font-mono cursor-pointer">
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* SECTION B: USER ROSTER & SCHOOL FILTERS */}
+        <div className="bg-bull-surface border-2 border-bull-line rounded-3xl p-6 space-y-6 shadow-2xl">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-bull-line pb-4">
+            <div>
+              <h2 className="text-sm font-black text-slate-300 uppercase tracking-wider flex items-center gap-2 font-mono">
+                ðŸ“Š Application Users Matrix ({filteredProfiles.length} / {allProfiles.length})
+              </h2>
+              <p className="text-[10px] font-mono text-slate-500 mt-1">Ranked by net worth, same as the leaderboard.</p>
+            </div>
+
+            <div className="w-full md:w-72 relative">
+              <input
+                type="text"
+                placeholder="ðŸ” Search name, email, school..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2.5 bg-bull-raised border border-bull-line text-white rounded-xl text-xs font-bold focus:outline-none focus:border-bull-lime font-mono"
+              />
+            </div>
+          </div>
+
+          {/* SCHOOL CODE TABS */}
+          <div className="space-y-2">
+            <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider font-mono">Filter By School Code:</span>
+            <div className="flex flex-wrap gap-2 font-mono">
+              <button
+                onClick={() => setSelectedSchoolFilter('ALL')}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === 'ALL' ? 'bg-bull-lime border-bull-lime-dark text-bull-ink' : 'bg-bull-raised border-bull-line text-slate-400'}`}
+              >
+                All Users ({allProfiles.length})
+              </button>
+
+              <button
+                onClick={() => setSelectedSchoolFilter('PERSONAL')}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === 'PERSONAL' ? 'bg-bull-lime border-bull-lime-dark text-bull-ink' : 'bg-bull-raised border-bull-line text-slate-400'}`}
+              >
+                Personal Track
+              </button>
+
+              {schoolList.map(schoolId => (
+                <button
+                  key={schoolId}
+                  onClick={() => setSelectedSchoolFilter(schoolId)}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ${selectedSchoolFilter === schoolId ? 'bg-bull-lime border-bull-lime-dark text-bull-ink' : 'bg-bull-raised border-bull-line text-slate-400'}`}
+                >
+                  ðŸ« {schoolId}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* USER CARDS GRID */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+            {filteredProfiles.map((p) => {
+              const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(p, now);
+
+              return (
+                <div
+                  key={p.id}
+                  onClick={() => setSelectedId(p.id)}
+                  className="bg-bull-raised border-2 border-bull-line hover:border-bull-lime/50 p-5 rounded-2xl shadow-xl transition-all cursor-pointer group space-y-3 relative overflow-hidden"
+                >
+                  <div className="flex justify-between items-start gap-2">
+                    <div className="truncate">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-mono font-black px-1.5 py-0.5 rounded bg-bull-surface text-bull-lime border border-bull-line">
+                          #{p.rank}
+                        </span>
+                        <h3 className="font-black text-sm text-white group-hover:text-bull-lime truncate">
+                          {p.name || 'Unnamed Account'}
+                        </h3>
+                      </div>
+                      <p className="text-[11px] font-mono text-slate-400 truncate mt-1">{p.email}</p>
+                    </div>
+
+                    <span className="px-2.5 py-0.5 bg-bull-surface border border-bull-line text-bull-lime rounded-full text-[10px] font-black uppercase font-mono">
+                      {p.role}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-bull-line text-xs font-bold font-mono">
+                    <div>
+                      <span className="text-[10px] uppercase text-slate-500 block">Net Worth</span>
+                      <span className="text-emerald-400">{inr(getNetWorth(p))}</span>
+                      <span className="text-[10px] text-slate-500 block mt-0.5">Cash {inr(p.wallet_balance)}</span>
+                      <span className="text-[10px] text-sky-400 block mt-0.5">Week: {formatDuration(activity[p.id])}</span>
+                    </div>
+
+                    <div className="text-right">
+                      <span className="text-[10px] uppercase text-slate-500 block">Status</span>
+                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded border ${
+                        isSuperAdmin
+                          ? 'bg-sky-950 text-sky-400 border-sky-800'
+                          : isFrozen
+                            ? 'bg-rose-950 text-rose-400 border-rose-800 animate-pulse'
+                            : 'bg-emerald-950 text-emerald-400 border-emerald-800'
+                      }`}>
+                        {isSuperAdmin ? 'IMMUNE' : isFrozen ? 'FROZEN ðŸ”’' : 'UNFROZEN ðŸ”“'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* DOSSIER INSPECTION MODAL */}
+      {selectedProfile && (() => {
+        const { isFrozen, isSuperAdmin } = getProfileFreezeStatus(selectedProfile, now);
+
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-bull-bg/80 animate-fadeInFast">
+            <div className="bg-bull-surface border-2 border-bull-line rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] animate-scaleUp">
+
+              {/* Modal Header */}
+              <div className="p-6 border-b border-bull-line flex items-center justify-between bg-bull-raised">
+                <div>
+                  <h3 className="font-black text-xl text-white tracking-tight">
+                    {selectedProfile.name || 'User Workspace'}
+                  </h3>
+                  <p className="text-xs font-mono text-slate-400">{selectedProfile.email}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedId(null)}
+                  className="w-8 h-8 rounded-full bg-bull-surface border border-bull-line text-slate-400 font-bold hover:text-white transition cursor-pointer"
+                >
+                  âœ•
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-6 overflow-y-auto space-y-6 text-left flex-1 font-mono">
+
+                {/* âš¡ ADMIN CUSTOM ACCESS DURATION ACTIVATOR */}
+                {!isSuperAdmin && (
+                  <div className="p-5 bg-bull-raised border-2 border-bull-lime/40 rounded-2xl space-y-3 shadow-xl">
+                    <span className="text-[10px] font-black uppercase text-bull-lime tracking-wider block">
+                      âš¡ ADMIN CUSTOM ACCESS DURATION ACTIVATOR
+                    </span>
+                    <p className="text-xs text-slate-300 font-sans font-medium">
+                      Enter the exact number of days to grant unfrozen access to this student account:
+                    </p>
+
+                    <div className="flex gap-2">
+                      <input
+                        type="number"
+                        min="1"
+                        max="365"
+                        value={customDaysInput}
+                        onChange={(e) => setCustomDaysInput(e.target.value)}
+                        className="w-28 bg-bull-surface border border-bull-line text-white px-3 py-2 rounded-xl text-sm font-black text-center focus:outline-none focus:border-bull-lime"
+                        placeholder="30"
+                      />
+                      <button
+                        onClick={() => handleActivateCustomDays(selectedProfile.id, selectedProfile.email)}
+                        className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider rounded-xl transition shadow-md cursor-pointer"
+                      >
+                        GRANT {customDaysInput || 0} DAYS ACCESS âœ“
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* ðŸ”’ / ðŸ”“ MANUAL FREEZE SWITCH WITH DYNAMIC TOGGLE */}
+                {!isSuperAdmin && (
+                  <div className="flex items-center justify-between p-4 bg-bull-raised border border-bull-line rounded-2xl">
+                    <div>
+                      <span className="text-xs font-black text-white block">Manual Freeze Switch</span>
+                      <span className="text-[10px] text-slate-400 font-sans">
+                        Status: <span className={isFrozen ? 'text-rose-400 font-bold' : 'text-emerald-400 font-bold'}>{isFrozen ? 'FROZEN ðŸ”’' : 'ACTIVE / UNFROZEN ðŸ”“'}</span>
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => handleToggleFreezeStatus(selectedProfile.id, isFrozen, selectedProfile.email)}
+                      className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-md transition cursor-pointer ${
+                        isFrozen
+                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                          : 'bg-bull-lime hover:bg-bull-lime-light text-bull-ink'
+                      }`}
+                    >
+                      {isFrozen ? 'ðŸ”“ UNFREEZE ACCOUNT' : 'ðŸ”’ FREEZE ACCOUNT'}
+                    </button>
+                  </div>
+                )}
+
+                {/* METADATA GRID WITH REAL-TIME REMAINING TIME */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-bold">
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">School Code</span>
+                    <p className="text-white">{selectedProfile.school_code || selectedProfile.school_id || 'Personal Track'}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Classroom ID</span>
+                    <p className="text-white">{selectedProfile.specific_class_id || 'Unassigned'}</p>
+                  </div>
+
+                  {/* EXACT REAL-TIME REMAINING TIME DISPLAY */}
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1 col-span-1 md:col-span-2">
+                    <span className="text-[10px] uppercase text-slate-500 block">Exact Time Remaining Before Freeze</span>
+                    {isSuperAdmin ? (
+                      <p className="text-amber-400 font-bold">ðŸ‘‘ Permanent Access (Super Admin)</p>
+                    ) : isFrozen ? (
+                      <p className="text-rose-400 font-bold animate-pulse">00d : 00h : 00m : 00s (ACCOUNT FROZEN / EXPIRED)</p>
+                    ) : (
+                      <div className="text-emerald-400 font-mono font-black text-sm flex items-center gap-1.5 pt-0.5">
+                        <span>{String(modalTimeLeft.days).padStart(2, '0')}d</span>
+                        <span>:</span>
+                        <span>{String(modalTimeLeft.hours).padStart(2, '0')}h</span>
+                        <span>:</span>
+                        <span>{String(modalTimeLeft.minutes).padStart(2, '0')}m</span>
+                        <span>:</span>
+                        <span>{String(modalTimeLeft.seconds).padStart(2, '0')}s</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Net Worth (live)</span>
+                    <p className="text-emerald-400">{inr(getNetWorth(selectedProfile))}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Wallet Balance (cash)</span>
+                    <p className="text-white">{inr(selectedProfile.wallet_balance)}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Time on site (last 7 days)</span>
+                    <p className="text-sky-400">{formatDuration(activity[selectedProfile.id])}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1">
+                    <span className="text-[10px] uppercase text-slate-500">Average per day (7-day)</span>
+                    <p className="text-sky-400">{formatDuration((activity[selectedProfile.id] || 0) / 7)}</p>
+                  </div>
+
+                  <div className="p-3.5 bg-bull-raised border border-bull-line rounded-xl space-y-1 col-span-1 md:col-span-2">
+                    <span className="text-[10px] uppercase text-slate-500">Registration Date</span>
+                    <p className="text-slate-300 text-[11px]">
+                      {selectedProfile.created_at ? new Date(selectedProfile.created_at).toLocaleDateString() : 'N/A'}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Modal Controls */}
+              <div className="p-6 border-t border-bull-line bg-bull-raised flex items-center justify-between gap-3 font-mono">
+                <button
+                  onClick={() => handleDeleteDossier(selectedProfile.id, selectedProfile.name || 'User Account')}
+                  className="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-xl text-xs font-black uppercase cursor-pointer"
+                >
+                  Delete Dossier
+                </button>
+
+                <button
+                  onClick={() => setSelectedId(null)}
+                  className="px-5 py-2 bg-bull-surface border border-bull-line text-slate-300 rounded-xl text-xs font-black uppercase cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+
+            </div>
+          </div>
+        );
+      })()}
+
+    </main>
+  );
+}
+
+
+########## app\page.js ##########
+'use client';
+
+import Link from 'next/link';
+import Navbar from '@/components/Navbar';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
+
+// Floating background assets with fixed depth layers
+const RainingAsset = ({ icon, isMobileHidden }) => {
+  const [style, setStyle] = useState({});
+
+  useEffect(() => {
+    setStyle({
+      left: `${Math.random() * 92 + 3}%`,
+      animationDuration: `${Math.random() * 5 + 6}s`,
+      animationDelay: `${Math.random() * 6}s`,
+      fontSize: `${Math.random() * 10 + 14}px`,
+    });
+  }, []);
+
+  return (
+    <div
+      className={`absolute top-[-5vh] text-bull-lime/25 pointer-events-none select-none animate-rainDown ${
+        isMobileHidden ? 'hidden md:block' : ''
+      }`}
+      style={style}
+    >
+      {icon}
+    </div>
+  );
+};
+
+export default function Home() {
+  const [activeTab, setActiveTab] = useState('stocks'); 
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
+  // Institutional school & delegated class architecture states
+  const [schoolClasses, setSchoolClasses] = useState([]);
+  const [allSchoolTeachers, setAllSchoolTeachers] = useState([]);
+  const [pendingClassStudents, setPendingClassStudents] = useState([]);
+  const [newClassName, setNewClassName] = useState('');
+
+  // Sync state with active user sessions and visual cloud profiles
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          setUser(session.user);
+          const { data, error } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+          if (!error && data) {
+            setProfile(data);
+            fetchInstitutionalEcosystem(data);
+          }
+        }
+      } catch (err) {
+        console.error("Session sync fault:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkUser();
+  }, []);
+
+  const fetchInstitutionalEcosystem = async (currentProfile) => {
+    if (!currentProfile.school_id) return;
+
+    const { data: classes } = await supabase
+      .from('school_classes')
+      .select('*, profiles(name, email)')
+      .eq('school_code', currentProfile.school_id);
+    setSchoolClasses(classes || []);
+
+    const { data: teachers } = await supabase
+      .from('profiles')
+      .select('id, name, email')
+      .eq('school_id', currentProfile.school_id)
+      .eq('role', 'teacher')
+      .eq('verification_status', 'approved');
+    setAllSchoolTeachers(teachers || []);
+
+    const myAssignedClassIds = (classes || [])
+      .filter(c => c.assigned_teacher_id === currentProfile.id)
+      .map(c => c.id);
+
+    if (myAssignedClassIds.length > 0) {
+      const { data: students } = await supabase
+        .from('profiles')
+        .select('*')
+        .in('specific_class_id', myAssignedClassIds)
+        .eq('student_approved', false);
+      setPendingClassStudents(students || []);
+    }
+  };
+
+  const handleCreateClassContainer = async () => {
+    if (!newClassName || !profile?.school_id) return;
+    const { error } = await supabase
+      .from('school_classes')
+      .insert([{ school_code: profile.school_id, class_name: newClassName }]);
+    if (!error) {
+      setNewClassName('');
+      fetchInstitutionalEcosystem(profile);
+    }
+  };
+
+  const handleTeacherAssignToClass = async (classId, teacherId) => {
+    const { error } = await supabase
+      .from('school_classes')
+      .update({ assigned_teacher_id: teacherId || null })
+      .eq('id', classId);
+    if (!error) fetchInstitutionalEcosystem(profile);
+  };
+
+  const handleApproveStudent = async (studentId) => {
+    const { error } = await supabase
+      .from('profiles')
+      .update({ student_approved: true, wallet_balance: 50000 })
+      .eq('id', studentId);
+    if (!error) fetchInstitutionalEcosystem(profile);
+  };
+
+  const handleLeaveClassroomTrack = async () => {
+    if (!confirm("Are you sure you want to leave this class track room? Your wallet position will reset.")) return;
+    const { error } = await supabase
+      .from('profiles')
+      .update({ school_id: null, specific_class_id: null, student_approved: false, wallet_balance: 0 })
+      .eq('id', user.id);
+    if (!error) window.location.reload();
+  };
+
+  // COMPLETE ACCOUNT PURGE (DELETES FROM AUTH.USERS AND PUBLIC.PROFILES)
+  const handlePermanentDeletion = async () => {
+    if (!confirm("CRITICAL WARNING: This will permanently wipe your profile and authentication nodes. Proceed?")) return;
+    if (!confirm("ðŸš¨ FINAL WARNING: Deleting your account is permanent and cannot be undone.")) return;
+
+    try {
+      // Call Supabase RPC function to purge user from auth.users (cascades to public.profiles)
+      const { error } = await supabase.rpc('delete_user_account');
+
+      if (error) throw error;
+
+      await supabase.auth.signOut();
+      alert("Account completely deleted from database registers.");
+      window.location.reload();
+    } catch (err) {
+      console.error("Deletion error:", err);
+      alert(`Failed to delete account: ${err.message}`);
+    }
+  };
+
+  const ASSET_TYPES = ['\u20B9', '$', '\uD83D\uDE80', '\uD83D\uDCC8', '\uD83D\uDCC9', '\u20BF', '\uD83D\uDCCA', '\uD83D\uDCBC', '\uD83D\uDCB3', '\uD83D\uDC8E'];
+
+  return (
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pb-20">
+      <Navbar />
+
+      {/* RAINING BACKGROUND MATRIX */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden max-w-full">
+        {ASSET_TYPES.map((asset, typeIdx) => 
+          [...Array(5)].map((_, itemIdx) => (
+            <RainingAsset 
+              key={`asset-${typeIdx}-${itemIdx}`} 
+              icon={asset} 
+              isMobileHidden={itemIdx >= 2} 
+            />
+          ))
+        )}
+      </div>
+
+      {/* HERO SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 text-center space-y-8 relative z-10">
+        
+        {/* Ambient Glow Orb */}
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] sm:w-[600px] h-[200px] sm:h-[300px] bg-bull-lime/20 blur-[120px] rounded-full -z-10" />
+
+        {/* HEADLINE BLOCK */}
+        <div className="space-y-4 max-w-3xl mx-auto select-none">
+          
+          {/* BADGE */}
+          <div>
+            <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-[11px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-lg border-b-2 border-b-bull-lime-dark hover:border-bull-lime transition-all duration-300">
+              ðŸš€ The Ultimate Classroom Sandbox Arena
+            </span>
+          </div>
+          
+          {/* MAIN HEADLINE */}
+          <h1 className="text-4xl sm:text-7xl font-black tracking-tight leading-none text-white font-poppins">
+            Own the Market <br className="hidden sm:inline" />
+            Before the{' '}
+            <span className="inline-block bg-gradient-to-r from-bull-lime via-bull-teal to-bull-lime bg-clip-text text-transparent font-black filter drop-shadow-[2px_2px_0px_var(--color-bull-lime-dark)] drop-shadow-[0_10px_20px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] hover:scale-105 transition-transform duration-300 cursor-default">
+              Bell Rings
+            </span>
+          </h1>
+
+          {/* SUBTITLE */}
+          <p className="text-slate-300 text-xs sm:text-base max-w-xl mx-auto leading-relaxed pt-3 font-medium">
+            Risk-free paper trading with simulated market prices. Practice with fictional companies, price charts and competitive school leaderboards. No real money, no live exchange connection.
+          </p>
+        </div>
+
+        {/* CARD WORKSPACE: CARD-LEVEL INTERACTIVE HOVER TARGETS */}
+        <div className="flex flex-wrap justify-center items-center gap-4 pt-4">
+          {loading ? (
+            <div className="px-10 py-4 bg-bull-raised border border-bull-line text-slate-500 rounded-2xl text-sm font-bold animate-pulse shadow-xl">
+              Syncing Terminal...
+            </div>
+          ) : !user ? (
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/signup"
+                className="bg-bull-lime text-bull-ink font-poppins font-black px-10 py-4 rounded-2xl text-sm shadow-[0_10px_25px_color-mix(in_srgb,var(--color-bull-lime)_40%,transparent)] hover:bg-bull-lime-light hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_50%,transparent)] transition-all duration-300 relative overflow-hidden group border-b-4 border-b-bull-lime-dark"
+              >
+                <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-[-20deg]" />
+                Claim Your Sandbox Wallet
+              </Link>
+              <Link
+                href="/signup?mode=login"
+                className="bg-bull-surface border-2 border-bull-line text-slate-300 font-poppins font-black px-10 py-4 rounded-2xl text-sm hover:border-bull-lime/50 hover:text-white hover:-translate-y-1 transition-all shadow-lg"
+              >
+                Access Dashboard
+              </Link>
+            </div>
+          ) : (
+            <div className="card w-full max-w-md bg-bull-surface border-2 border-bull-line rounded-3xl p-6 text-left shadow-xl space-y-4 hover:border-bull-lime/50 hover:shadow-[0_20px_40px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300 border-b-4 border-b-bull-line">
+              
+              {profile?.role === 'student' && !profile?.student_approved && (
+                <div className="bg-amber-950/40 border border-amber-900/60 text-amber-300 rounded-xl p-4 text-xs space-y-1 shadow-inner">
+                  <p className="font-black uppercase tracking-wider">ðŸ”’ Verification Pending</p>
+                  <p className="text-slate-400 font-medium">Your profile is connected to school hub <strong>{profile.school_id}</strong>. Your specific class manager teacher will unlock your wallet shortly.</p>
+                </div>
+              )}
+
+              {profile?.role === 'teacher' && profile?.verification_status === 'pending' && (
+                <div className="bg-amber-950/40 border border-amber-900/60 text-amber-300 rounded-xl p-4 text-xs space-y-1 shadow-inner">
+                  <p className="font-black uppercase tracking-wider">â³ Verification Auditing</p>
+                  <p className="text-slate-400 font-medium">Your document proof has been submitted to the admin queue. Dashboards will unlock right after approval confirmation.</p>
+                </div>
+              )}
+
+              <div className="flex items-center justify-between border-b border-bull-line pb-3">
+                <div>
+                  <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Active User</p>
+                  <h3 className="text-base font-poppins font-black text-white">{profile?.name || 'Workspace Account'}</h3>
+                </div>
+                <span className="px-2.5 py-0.5 bg-bull-raised border border-bull-line rounded-full text-[10px] font-black uppercase tracking-wider text-bull-lime shadow-md">
+                  {profile?.role || 'Personal'} Track
+                </span>
+              </div>
+              
+              {((profile?.role === 'student' && profile?.student_approved) || profile?.role === 'personal') && (
+                <div className="bg-gradient-to-br from-bull-raised to-bull-surface p-4 rounded-xl text-white shadow-md space-y-1 border border-bull-lime/40 border-b-2 border-b-bull-lime-dark">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-rose-200/80">Available Sandbox Balance</p>
+                  <p className="text-2xl font-poppins font-black tracking-tight font-mono">
+                    â‚¹{(profile?.wallet_balance || 50000).toLocaleString('en-IN')}
+                  </p>
+                </div>
+              )}
+
+              {profile?.role === 'student' && (
+                <button onClick={handleLeaveClassroomTrack} className="w-full py-2 bg-rose-950/30 border border-rose-900/40 hover:bg-rose-950/60 text-rose-400 font-bold text-xs rounded-xl transition-all">
+                  Leave Classroom Tracker
+                </button>
+              )}
+
+              {profile?.role === 'teacher' && profile?.verification_status === 'approved' && (
+                <div className="space-y-4 pt-1 border-t border-bull-line">
+                  <div className="bg-bull-raised p-3 rounded-xl border border-bull-line space-y-2">
+                    <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider">ðŸ¢ School Class Matrix (Hub: {profile.school_id})</p>
+                    <div className="flex gap-2">
+                      <input type="text" className="px-2.5 py-1.5 bg-bull-surface border border-bull-line text-white rounded-xl text-xs font-bold focus:outline-none focus:border-bull-lime w-full" placeholder="Add Class (e.g. Class 9-A)" value={newClassName} onChange={(e) => setNewClassName(e.target.value)} />
+                      <button onClick={handleCreateClassContainer} className="px-3 py-1.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-bold text-xs rounded-xl whitespace-nowrap">Create</button>
+                    </div>
+
+                    <div className="space-y-1.5 pt-1.5 max-h-36 overflow-y-auto divide-y divide-bull-line">
+                      {schoolClasses.length === 0 ? (
+                        <p className="text-[10px] text-slate-500 font-medium py-1">No classrooms added under this school code yet.</p>
+                      ) : (
+                        schoolClasses.map((c) => (
+                          <div key={c.id} className="flex flex-col gap-1 pt-1.5 text-[11px] font-bold">
+                            <span className="text-white">ðŸ« {c.class_name}</span>
+                            <select className="bg-bull-surface border border-bull-line p-1 rounded-lg text-[10px] text-slate-400 font-medium focus:outline-none w-full" value={c.assigned_teacher_id || ''} onChange={(e) => handleTeacherAssignToClass(c.id, e.target.value)}>
+                              <option value="">-- Assign Managing Teacher --</option>
+                              {allSchoolTeachers.map(t => <option key={t.id} value={t.id}>{t.name} ({t.email})</option>)}
+                            </select>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* DANGER ZONE: ACCOUNT DELETION */}
+              <div className="p-3.5 border border-rose-900/30 bg-rose-950/20 rounded-2xl space-y-1">
+                <h4 className="text-xs font-black text-rose-400 uppercase tracking-wider">âš ï¸ Danger Zone</h4>
+                <p className="text-[10px] text-slate-400 font-medium">Wiping your account is immediate, final, and deletes all user and database data.</p>
+                <button onClick={handlePermanentDeletion} className="mt-1 px-3 py-1.5 bg-rose-700 hover:bg-rose-800 text-white font-black text-[10px] rounded-xl transition-all">
+                  Delete My Account Completely
+                </button>
+              </div>
+
+              <div className="flex gap-2 items-center justify-between pt-1 border-t border-bull-line">
+                <div className="text-[10px] text-slate-500 font-medium truncate max-w-[60%] font-mono">
+                  {user.email}
+                </div>
+                <button
+                  onClick={async () => {
+                    await supabase.auth.signOut();
+                    window.location.reload();
+                  }}
+                  className="px-3 py-1.5 bg-bull-raised border border-bull-line hover:bg-rose-950/40 hover:text-rose-400 text-slate-400 text-[10px] font-bold rounded-lg transition-all"
+                >
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* TEACHER APPROVAL QUEUE CARD */}
+      {profile?.role === 'teacher' && profile?.verification_status === 'approved' && pendingClassStudents.length > 0 && (
+        <section className="max-w-md mx-auto px-4 sm:px-6 pt-6 relative z-20 animate-fadeInFast">
+          <div className="card bg-bull-surface border-2 border-bull-line rounded-3xl p-5 shadow-2xl space-y-3 hover:border-bull-lime/50 transition-all">
+            <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">ðŸ“‹ Live Assigned Class Requests ({pendingClassStudents.length})</h4>
+            <div className="max-h-48 overflow-y-auto space-y-2 pr-1">
+              {pendingClassStudents.map(student => (
+                <div key={student.id} className="p-2.5 bg-bull-raised border border-bull-line rounded-xl flex items-center justify-between gap-2 text-xs font-bold">
+                  <div className="truncate">
+                    <p className="text-white truncate">{student.name}</p>
+                    <p className="text-[10px] text-slate-500 font-mono font-medium truncate">{student.email}</p>
+                  </div>
+                  <button onClick={() => handleApproveStudent(student.id)} className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-bold whitespace-nowrap transition-all">Approve Position</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* MARKET SIMULATOR TERMINAL CARD */}
+      <section id="simulator" className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 relative z-10 flex flex-col items-center justify-center animate-fadeIn scroll-mt-24">
+        <div className="border-b border-bull-line pb-6 mb-12 text-center max-w-xl w-full">
+          <h2 className="text-2xl font-black text-white font-poppins">Terminal Engine Simulator</h2>
+          <p className="text-xs text-slate-400 mt-1 font-medium">Realistic simulated prices for practice. No real money and no live exchange connection.</p>
+        </div>
+
+        <div className="card bg-bull-surface border-2 border-bull-line rounded-3xl shadow-2xl w-full max-w-4xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center border-b-4 border-b-bull-line hover:border-bull-lime/50 hover:shadow-[0_20px_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] transition-all duration-300">
+          <div className="col-span-1 space-y-3">
+            <div className="text-[11px] font-black uppercase text-slate-500 tracking-wider px-1">Choose a practice desk:</div>
+            <button
+              onClick={() => setActiveTab('stocks')}
+              className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'stocks' ? 'bg-bull-lime/20 border-bull-lime/50 text-bull-lime shadow-md' : 'bg-bull-raised border-bull-line text-slate-400 hover:bg-bull-line'}`}
+            >
+              ðŸ“ˆ Indian Stocks (Simulated)
+              <span className={`h-2 w-2 rounded-full ${activeTab === 'stocks' ? 'bg-bull-lime animate-pulse' : 'bg-slate-700'}`} />
+            </button>
+            <button
+              onClick={() => setActiveTab('crypto')}
+              className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'crypto' ? 'bg-bull-lime/20 border-bull-lime/50 text-bull-lime shadow-md' : 'bg-bull-raised border-bull-line text-slate-400 hover:bg-bull-line'}`}
+            >
+              ðŸš€ Beta Challenge Equities
+              <span className={`h-2 w-2 rounded-full ${activeTab === 'crypto' ? 'bg-bull-lime animate-pulse' : 'bg-slate-700'}`} />
+            </button>
+          </div>
+
+          <div className="col-span-2 bg-bull-bg border border-bull-line rounded-2xl p-6 font-sans text-slate-200 relative overflow-hidden group min-h-[250px] flex flex-col justify-between shadow-inner">
+            {activeTab === 'stocks' && (
+              <div className="space-y-4 animate-fadeInFast w-full">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">ENERGIA â€¢ SIMULATED</span>
+                  <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">â— Practice Mode</span>
+                </div>
+                <div className="space-y-1">
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sample Simulated Price</div>
+                  <div className="text-3xl font-black font-mono tracking-tight text-white">â‚¹1,309.35</div>
+                  <div className="text-xs font-bold text-emerald-400 font-mono">+â‚¹12.40 (+0.95%)</div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-bull-line text-[11px] font-mono text-slate-400">
+                  <div>Prev Close: <span className="text-white font-bold">â‚¹1,296.95</span></div>
+                  <div>Day Volume: <span className="text-white font-bold">4.2M Shares</span></div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'crypto' && (
+              <div className="space-y-4 animate-fadeInFast w-full">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">TECH.CHALLENGE â€¢ HIGH-BETA</span>
+                  <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md animate-pulse">âš¡ Arena Ticking</span>
+                </div>
+                <div className="space-y-1">
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Simulated Price Scale</div>
+                  <div className="text-3xl font-black font-mono tracking-tight text-white">â‚¹12,500.00</div>
+                  <div className="text-xs font-bold text-rose-500 font-mono">-â‚¹2,500.00 (-20.00%)</div>
+                </div>
+                <div className="p-2.5 bg-rose-500/5 border border-rose-500/10 rounded-xl text-[11px] text-rose-400 leading-relaxed font-semibold">
+                  ðŸ“¢ System Event Broadcast: Tech sector crash initiated! TECH drops 20% over current challenge lifecycle step.
+                </div>
+              </div>
+            )}
+
+            <div className="absolute bottom-0 inset-x-0 h-24 opacity-10 pointer-events-none -z-10">
+              <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="w-full h-full fill-none stroke-current text-bull-teal">
+                <path d="M0,120 L20,90 L50,110 L100,20 L150,80 L200,10 L250,90 L300,40 L350,110 L400,10" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INTEGRATED LEARNING ACADEMY CARDS */}
+      <section id="courses" className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 relative z-10 space-y-8 scroll-mt-24">
+        <div className="text-center space-y-2">
+          <h2 className="text-3xl font-black tracking-tight text-white font-poppins">Integrated Trading Academy</h2>
+          <p className="text-slate-400 text-xs max-w-md mx-auto font-medium">Master tactical market theories through dynamic self-paced sandbox training paths.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+            <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">01</div>
+            <h3 className="font-black text-base text-white font-poppins">Market Foundations</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-medium">Understand technical asset pricing loops, stock charts, order structures, and index operations across primary exchanges.</p>
+            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">8 Modules â€¢ Beginner</span></div>
+          </div>
+
+          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+            <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">02</div>
+            <h3 className="font-black text-base text-white font-poppins">Technical Analysis</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-medium">Map patterns using support levels, moving averages, and volume indicators to execute quantitative simulator mock plays.</p>
+            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">12 Modules â€¢ Intermediate</span></div>
+          </div>
+
+          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+            <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">03</div>
+            <h3 className="font-black text-base text-white font-poppins">Portfolio Risk Management</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-medium">Mitigate drawdown via position sizing models, strict asset tracking ratios, and dynamic algorithmic hedging criteria.</p>
+            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">6 Modules â€¢ Advanced</span></div>
+          </div>
+        </div>
+      </section>
+
+      {/* CAMPUS DEPLOYMENT BANNER CARD */}
+      <section id="pricing" className="max-w-7xl mx-auto px-4 sm:px-6 pt-32 relative z-10 scroll-mt-24">
+        <div className="card bg-gradient-to-br from-bull-surface to-bull-raised border-2 border-bull-line text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 group border-b-4 border-b-bull-lime-dark hover:border-bull-lime transition-all duration-300">
+          <div className="space-y-3 max-w-xl text-center md:text-left z-10">
+            <span className="bg-bull-lime/20 text-bull-lime font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
+              Campus Classroom Access
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight text-white font-poppins">Launch Custom Classroom Tournaments</h2>
+            <p className="text-slate-400 text-xs leading-relaxed max-w-lg mx-auto md:mx-0 font-medium">
+              Deploy programmatic classroom sandboxes, initiate specific challenge milestones, and monitor student metrics through clean analytical reporting tables.
+            </p>
+          </div>
+
+          <div className="w-full md:w-auto z-10 flex flex-col sm:flex-row items-center gap-4 justify-center">
+            <Link
+              href="/signup"
+              className="px-6 py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-xl shadow-lg border-b-2 border-b-bull-lime-dark transform hover:-translate-y-0.5 transition-all text-center w-full sm:w-auto whitespace-nowrap"
+            >
+              Setup Institutional Trial Token
+            </Link>
+            <Link
+              href="/signup?mode=login"
+              className="px-6 py-4 bg-bull-raised border border-bull-line text-slate-300 hover:text-white hover:border-bull-lime/50 text-xs font-black uppercase tracking-wider rounded-xl transform hover:-translate-y-0.5 transition-all text-center w-full sm:w-auto whitespace-nowrap"
+            >
+              Existing Trader Login
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+
+########## app\pricing\page.js ##########
+'use client';
+
+import { useState, useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
+
+// PERMANENT SUPER ADMIN IMMUNITY EMAIL
+const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
+
+const RS = '\u20B9';
+const TICK = '\u2713';
+const INDIVIDUAL_PRICE = 99;
+const MAX_SELF_SERVE = 1000;
+
+// What the Student Pass includes (edit this list to add or remove items)
+const INDIVIDUAL_FEATURES = [
+  'All 28 modules and 336 submodules',
+  'Quizzes and daily practice questions',
+  'Volatility Arena matches',
+  'Virtual ' + RS + '50,000 trading simulator',
+  'Portfolio tracking and live leaderboard',
+  'Trader XP and level progress saved',
+  'Works on phone, tablet and laptop',
+  '7-day free trial before you pay',
+];
+
+// Volume pricing: every student is charged at the rate of their band (like tax slabs).
+// Bigger schools get a lower rate on the extra students, so the total never drops as size grows.
+const SLABS = [
+  { from: 1, to: 10, rate: 99 },
+  { from: 11, to: 30, rate: 85 },
+  { from: 31, to: 100, rate: 72 },
+  { from: 101, to: 200, rate: 62 },
+  { from: 201, to: MAX_SELF_SERVE, rate: 55 },
+];
+
+function schoolPrice(n) {
+  let total = 0;
+  for (const s of SLABS) {
+    if (n >= s.from) {
+      const count = Math.min(n, s.to) - s.from + 1;
+      total += count * s.rate;
+    }
+  }
+  return total;
+}
+
+const fmt = (v) => RS + Number(v).toLocaleString('en-IN');
+
+export default function PricingPage() {
+  const [loading, setLoading] = useState(true);
+  const [userSession, setUserSession] = useState(null);
+  const [profile, setProfile] = useState(null);
+
+  const [status, setStatus] = useState({
+    isSuperAdmin: false,
+    isPremium: false,
+    isFrozen: false,
+    targetExpiryDate: null,
+  });
+
+  // Real-time Countdown State
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    totalMs: 0,
+  });
+
+  const [paymentStep, setPaymentStep] = useState('browse'); // 'browse' | 'checkout' | 'success'
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [studentInput, setStudentInput] = useState('100');
+
+  // School plan calculation
+  const n = parseInt(studentInput, 10);
+  const validN = Number.isFinite(n) && n >= 1;
+  const overMax = validN && n > MAX_SELF_SERVE;
+  let calc = null;
+  if (validN && !overMax) {
+    const individualTotal = n * INDIVIDUAL_PRICE;
+    const school = schoolPrice(n);
+    const saved = individualTotal - school;
+    calc = {
+      individualTotal,
+      school,
+      saved,
+      pct: Math.round((saved / individualTotal) * 100),
+      perStudent: Math.round(school / n),
+      barWidth: Math.max(4, Math.round((school / individualTotal) * 100)),
+    };
+  }
+
+  const whatsappHref =
+    'https://wa.me/919324459446?text=' +
+    encodeURIComponent(
+      validN && !overMax
+        ? 'Hi, I want the Bull Run School Plan for ' + n + ' students (' + fmt(calc.school) + '/month).'
+        : 'Hi, I want a Bull Run School Plan quote for a large school.'
+    );
+
+  // 1. FETCH USER PROFILE & COMPUTE EXPIRY DATE
+  useEffect(() => {
+    async function initUserSubscription() {
+      try {
+        setLoading(true);
+
+        const { data: { session } } = await supabase.auth.getSession();
+        setUserSession(session);
+
+        if (session?.user) {
+          const userEmail = session.user.email;
+          const isSuperAdmin = userEmail === SUPER_ADMIN_EMAIL;
+
+          const { data: userProfile, error } = await supabase
+            .from('profiles')
+            .select('id, email, role, is_premium, is_frozen, created_at, access_expires_at')
+            .eq('id', session.user.id)
+            .single();
+
+          if (userProfile && !error) {
+            setProfile(userProfile);
+            const isAdmin = isSuperAdmin || userProfile.role === 'admin' || userProfile.email === SUPER_ADMIN_EMAIL;
+
+            if (isAdmin) {
+              setStatus({
+                isSuperAdmin: true,
+                isPremium: true,
+                isFrozen: false,
+                targetExpiryDate: null,
+              });
+              setLoading(false);
+              return;
+            }
+
+            // Determine Target Expiration Date
+            let expiryTimeMs;
+            if (userProfile.access_expires_at) {
+              expiryTimeMs = new Date(userProfile.access_expires_at).getTime();
+            } else {
+              const registrationDate = userProfile.created_at ? new Date(userProfile.created_at).getTime() : Date.now();
+              expiryTimeMs = registrationDate + (7 * 24 * 60 * 60 * 1000);
+            }
+
+            const now = Date.now();
+            const hasPremium = Boolean(userProfile.is_premium);
+            const isTrialExpired = now >= expiryTimeMs && !hasPremium;
+
+            // STRICT OVERRIDE: Database freeze flag always wins
+            const isFrozenCalculated = Boolean(userProfile.is_frozen) || isTrialExpired;
+
+            setStatus({
+              isSuperAdmin: false,
+              isPremium: hasPremium && !userProfile.is_frozen,
+              isFrozen: isFrozenCalculated,
+              targetExpiryDate: expiryTimeMs,
+            });
+
+            // Sync freeze status back to database if trial has expired
+            if (isTrialExpired && !userProfile.is_frozen) {
+              await supabase
+                .from('profiles')
+                .update({ is_frozen: true })
+                .eq('id', session.user.id);
+            }
+
+            setLoading(false);
+            return;
+          }
+        }
+
+        // Unauthenticated guest
+        setStatus({
+          isSuperAdmin: false,
+          isPremium: false,
+          isFrozen: false,
+          targetExpiryDate: null,
+        });
+      } catch (err) {
+        console.error('Subscription sync error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    initUserSubscription();
+  }, []);
+
+  // 2. REAL-TIME COUNTDOWN TIMER TICKER (ONLY FOR NON-FROZEN, ACTIVE GUESTS/TRIAL USERS)
+  useEffect(() => {
+    if (!userSession || !status.targetExpiryDate || status.isSuperAdmin || status.isPremium || status.isFrozen) return;
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const diffMs = status.targetExpiryDate - now;
+
+      if (diffMs <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, totalMs: 0 });
+        setStatus((prev) => ({ ...prev, isFrozen: true, isPremium: false }));
+        clearInterval(interval);
+      } else {
+        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diffMs / 1000 / 60) % 60);
+        const seconds = Math.floor((diffMs / 1000) % 60);
+
+        setTimeLeft({ days, hours, minutes, seconds, totalMs: diffMs });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [userSession, status.targetExpiryDate, status.isSuperAdmin, status.isPremium, status.isFrozen]);
+
+  // 3. VERIFY & ACTIVATION PAYMENT HANDLER
+  const handleVerifyPayment = async () => {
+    setIsProcessing(true);
+
+    try {
+      if (userSession?.user) {
+        const new30DaysExpiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+
+        const { error } = await supabase
+          .from('profiles')
+          .update({
+            is_premium: true,
+            is_frozen: false,
+            access_expires_at: new30DaysExpiry,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', userSession.user.id);
+
+        if (error) throw error;
+      }
+
+      setStatus({
+        isSuperAdmin: false,
+        isPremium: true,
+        isFrozen: false,
+        targetExpiryDate: null,
+      });
+
+      setIsProcessing(false);
+      setPaymentStep('success');
+    } catch (err) {
+      console.error('Payment activation error:', err);
+      alert('Failed to process payment. Please contact admin support.');
+      setIsProcessing(false);
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans max-w-full overflow-x-hidden pt-24 pb-20 relative">
+      <Navbar />
+
+      <div className="max-w-[1000px] mx-auto px-4 space-y-10">
+
+        {/* HEADER */}
+        <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-lime/30 text-bull-lime text-[10px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner font-mono">
+            {'\u26A1'} BULL RUN PASS
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Simple, Transparent Pricing
+          </h1>
+          <p className="text-slate-400 text-sm sm:text-base font-medium leading-relaxed">
+            Every registered account gets an unrestricted 7-day trial. Students pay {RS}99/month, or a school can buy one plan for the whole class and pay less per student.
+          </p>
+
+          {/* DYNAMIC CLEARANCE BADGE */}
+          <div className="pt-2 flex justify-center">
+            <div className="bg-bull-surface border border-bull-line px-5 py-3 rounded-2xl shadow-xl font-mono text-xs flex flex-col items-center gap-2">
+              <span className="text-slate-500 font-medium text-[10px] uppercase tracking-wider">Account Clearance Status</span>
+
+              {loading ? (
+                <span className="text-slate-400 animate-pulse">Querying database firewall...</span>
+              ) : !userSession ? (
+                <div className="flex flex-col items-center space-y-2 py-1">
+                  <span className="text-amber-400 font-bold text-[11px]">{'\u2728'} 7-DAY FREE TRIAL AVAILABLE</span>
+                  <p className="text-slate-400 text-[10px] max-w-xs text-center font-sans">
+                    Countdown begins the moment you create your profile.
+                  </p>
+                  <Link
+                    href="/signup"
+                    className="mt-1 px-4 py-1.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-bold rounded-xl text-[10px] uppercase tracking-wider transition-all"
+                  >
+                    Claim 7-Day Free Pass {'\u2192'}
+                  </Link>
+                </div>
+              ) : status.isSuperAdmin ? (
+                <span className="bg-amber-950 text-amber-400 font-black px-3 py-1 rounded-xl border border-amber-800 flex items-center gap-1.5">
+                  {'\uD83D\uDC51'} SUPER ADMIN IMMUNE ({SUPER_ADMIN_EMAIL})
+                </span>
+              ) : status.isFrozen ? (
+                <span className="bg-rose-950 text-rose-400 font-black px-3 py-1 rounded-xl border border-rose-800 animate-pulse flex items-center gap-1.5">
+                  {'\uD83D\uDD12'} ACCOUNT FROZEN {'\u2014'} ACCESS EXPIRED
+                </span>
+              ) : status.isPremium ? (
+                <span className="bg-emerald-950 text-emerald-400 font-black px-3 py-1 rounded-xl border border-emerald-800 flex items-center gap-1.5">
+                  {TICK} PRO PASS ACTIVE (UNLOCKED)
+                </span>
+              ) : (
+                <div className="flex flex-col items-center space-y-1">
+                  <span className="text-amber-400 font-bold text-[11px]">{'\u23F3'} TIME REMAINING BEFORE FREEZE:</span>
+                  <div className="flex items-center gap-2 text-white font-black text-base bg-bull-raised px-4 py-1.5 rounded-xl border border-bull-lime/40">
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">DAYS</span></div>
+                    <span className="text-bull-lime">:</span>
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.hours).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">HRS</span></div>
+                    <span className="text-bull-lime">:</span>
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.minutes).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">MIN</span></div>
+                    <span className="text-bull-lime">:</span>
+                    <div className="text-center"><span className="text-bull-lime">{String(timeLeft.seconds).padStart(2, '0')}</span><span className="text-[10px] text-slate-500 block font-normal">SEC</span></div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* LOCKED ACCOUNT WARNING - EXCLUSIVE TO FROZEN STATE */}
+        {userSession && status.isFrozen && !status.isSuperAdmin && (
+          <div className="bg-rose-950/60 border border-rose-500 p-6 rounded-3xl text-center space-y-3 max-w-xl mx-auto shadow-[0_0_30px_color-mix(in_srgb,var(--color-bull-coral)_25%,transparent)] animate-pulse">
+            <div className="text-3xl">{'\uD83D\uDD12'}</div>
+            <h2 className="text-lg font-black text-rose-200 uppercase font-mono tracking-wider">
+              YOUR ACCOUNT ACCESS IS FROZEN
+            </h2>
+            <p className="text-xs text-rose-300 leading-relaxed font-medium">
+              Your account workspace is currently restricted. Subscribe below for {RS}99/month or ask your school to buy the School Plan to reactivate your access.
+            </p>
+          </div>
+        )}
+
+        {/* PRICING: STUDENT | SCHOOL */}
+        {paymentStep === 'browse' && (
+          <section className="max-w-4xl mx-auto bg-bull-surface border border-bull-lime/60 shadow-[0_0_40px_color-mix(in_srgb,var(--color-bull-lime)_20%,transparent)] rounded-3xl overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1.35fr]">
+
+              {/* LEFT: INDIVIDUAL STUDENT */}
+              <div className="p-8 space-y-6 flex flex-col">
+                <div className="space-y-4 text-center md:text-left">
+                  <span className="inline-block text-[10px] font-black uppercase text-bull-lime bg-bull-raised border border-bull-lime/30 px-3.5 py-1 rounded-full font-mono">
+                    INDIVIDUAL
+                  </span>
+                  <h2 className="text-2xl font-black text-white">Student Pass</h2>
+                  <p className="text-slate-400 text-xs leading-relaxed font-medium">
+                    One student, one account. Full access to the learning arena and the simulator.
+                  </p>
+
+                  <div className="font-mono border-y border-bull-line py-5">
+                    <span className="text-5xl font-black text-white">{RS}99</span>
+                    <span className="text-slate-500 text-xs"> / month</span>
+                    <span className="block text-[10px] text-emerald-400 font-bold mt-1">
+                      {TICK} Instant account unfreeze
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-3 flex-1">
+                  <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block font-mono">
+                    WHAT IS INCLUDED:
+                  </span>
+                  <ul className="space-y-3 font-sans font-medium text-slate-200 text-xs">
+                    {INDIVIDUAL_FEATURES.map((item) => (
+                      <li key={item} className="flex items-center gap-2.5">
+                        <span className="text-bull-lime font-black">{TICK}</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {status.isPremium && !status.isFrozen ? (
+                  <Link
+                    href="/modules"
+                    className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg block text-center transition-all"
+                  >
+                    Launch Learning Arena {'\u2192'}
+                  </Link>
+                ) : !userSession ? (
+                  <Link
+                    href="/signup"
+                    className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all block text-center"
+                  >
+                    Create Account for Free Trial {'\u2192'}
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => setPaymentStep('checkout')}
+                    className="w-full py-4 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono shadow-lg shadow-bull-lime/20 transition-all cursor-pointer"
+                  >
+                    {status.isFrozen ? 'Unlock Account \u2014 ' + RS + '99/month' : 'Subscribe Now \u2014 ' + RS + '99/month'}
+                  </button>
+                )}
+              </div>
+
+              {/* DIVIDER */}
+              <div className="h-px md:h-auto md:w-px bg-bull-line" />
+
+              {/* RIGHT: SCHOOL PLAN */}
+              <div className="p-8 space-y-6 flex flex-col">
+                <div className="space-y-4 text-center md:text-left">
+                  <span className="inline-block text-[10px] font-black uppercase text-bull-teal bg-bull-raised border border-bull-teal/30 px-3.5 py-1 rounded-full font-mono">
+                    FOR SCHOOLS
+                  </span>
+                  <h2 className="text-2xl font-black text-white">School Plan</h2>
+                  <p className="text-slate-400 text-xs leading-relaxed font-medium">
+                    One plan for your whole school, bought by the school or teacher. The bigger the school, the lower the price per student.
+                  </p>
+                </div>
+
+                {/* STUDENT COUNT INPUT */}
+                <div className="bg-bull-raised border border-bull-line rounded-2xl p-4 space-y-3 font-mono">
+                  <label htmlFor="student-count" className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
+                    How many students does your school have?
+                  </label>
+                  <input
+                    id="student-count"
+                    type="text"
+                    inputMode="numeric"
+                    value={studentInput}
+                    onChange={(e) => setStudentInput(e.target.value.replace(/[^0-9]/g, '').slice(0, 5))}
+                    placeholder="e.g. 300"
+                    className="w-full bg-bull-surface border border-bull-line focus:border-bull-teal outline-none rounded-xl px-4 py-3 text-lg font-black text-white placeholder-slate-600"
+                    aria-label="Number of students in your school"
+                  />
+                  <div className="flex flex-wrap gap-2">
+                    {[30, 100, 300, 500].map((v) => (
+                      <button
+                        key={v}
+                        type="button"
+                        onClick={() => setStudentInput(String(v))}
+                        className={'px-3 py-1 rounded-lg text-[10px] font-bold border transition-all cursor-pointer ' + (String(v) === studentInput ? 'border-bull-teal text-bull-teal bg-bull-surface' : 'border-bull-line text-slate-400 hover:text-white')}
+                      >
+                        {v}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* RESULT */}
+                {!validN ? (
+                  <div className="border border-dashed border-bull-line rounded-2xl p-5 text-center text-xs text-slate-400 font-medium">
+                    Enter the number of students to see your price.
+                  </div>
+                ) : overMax ? (
+                  <div className="border border-bull-teal/40 bg-bull-raised rounded-2xl p-5 text-center space-y-1">
+                    <span className="text-sm font-black text-white block">Over {MAX_SELF_SERVE.toLocaleString('en-IN')} students?</span>
+                    <span className="text-xs text-slate-400 font-medium block">Message us for a custom quote with an even better rate.</span>
+                  </div>
+                ) : (
+                  <div className="bg-bull-raised border border-bull-teal/40 rounded-2xl p-5 space-y-4 font-mono">
+                    <div className="flex items-end justify-between gap-3">
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-slate-500 block">Your school pays</span>
+                        <span className="text-4xl font-black text-white">{fmt(calc.school)}</span>
+                        <span className="text-slate-500 text-xs"> / month</span>
+                      </div>
+                      {calc.pct > 0 && (
+                        <span className="text-[11px] font-black text-emerald-400 bg-emerald-950 border border-emerald-800 px-3 py-1 rounded-full whitespace-nowrap">
+                          {calc.pct}% OFF
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="space-y-2 text-[10px]">
+                      <div>
+                        <div className="flex justify-between text-slate-400 mb-1">
+                          <span>{n} individual passes</span>
+                          <span className="text-white font-bold">{fmt(calc.individualTotal)}/mo</span>
+                        </div>
+                        <div className="h-2 bg-bull-surface rounded-full overflow-hidden">
+                          <div className="h-full bg-slate-500 rounded-full" style={{ width: '100%' }} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between text-slate-400 mb-1">
+                          <span>School Plan</span>
+                          <span className="text-bull-teal font-bold">{fmt(calc.school)}/mo</span>
+                        </div>
+                        <div className="h-2 bg-bull-surface rounded-full overflow-hidden">
+                          <div className="h-full bg-bull-teal rounded-full" style={{ width: calc.barWidth + '%', transition: 'width 0.5s ease' }} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-bull-line pt-3 text-[11px]">
+                      <span className="text-slate-400">Per student</span>
+                      <span className="text-white font-black">{fmt(calc.perStudent)} / month</span>
+                    </div>
+
+                    <p className={'text-[11px] font-bold font-sans leading-relaxed ' + (calc.saved > 0 ? 'text-emerald-400' : 'text-slate-400')}>
+                      {calc.saved > 0
+                        ? 'You save ' + fmt(calc.saved) + ' every month compared with individual passes.'
+                        : 'Discounts start from 11 students. For up to 10 students the price is the same as individual passes.'}
+                    </p>
+                  </div>
+                )}
+
+                <div className="space-y-3 flex-1">
+                  <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block font-mono">
+                    WHAT IS INCLUDED:
+                  </span>
+                  <ul className="space-y-3 font-sans font-medium text-slate-200 text-xs">
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>Everything in the Student Pass, for every student</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>Teacher-managed classes and student approvals</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>School leaderboard and daily quizzes</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <span className="text-bull-teal font-black">+</span>
+                      <span>One payment for the whole school</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {validN ? (
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 bg-bull-teal hover:opacity-90 text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono transition-all block text-center"
+                  >
+                    {overMax ? 'Request Custom Quote' : 'Request School Plan \u2014 ' + fmt(calc.school) + '/month'}
+                  </a>
+                ) : (
+                  <div className="w-full py-4 bg-bull-raised text-slate-600 text-xs font-black uppercase tracking-wider rounded-2xl font-mono block text-center border border-bull-line">
+                    Enter student count
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* CHECKOUT STEP */}
+        {paymentStep === 'checkout' && (
+          <div className="max-w-md mx-auto bg-bull-surface border border-bull-lime/50 rounded-3xl shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-lime)_20%,transparent)] p-6 space-y-6 animate-scaleUp font-mono">
+            <div className="text-center border-b border-bull-line pb-4">
+              <span className="text-[10px] font-black text-bull-lime uppercase tracking-widest bg-bull-raised px-2.5 py-0.5 rounded border border-bull-lime/20">
+                SECURE UPI PAYMENT GATEWAY
+              </span>
+              <h2 className="font-black text-xl text-white mt-2">Activate {RS}99 Subscription</h2>
+              <p className="text-xs text-slate-400 mt-1">Direct Transfer Total: <span className="font-bold text-white">{RS}99</span></p>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-bull-raised border border-dashed border-bull-lime/40 p-5 rounded-2xl flex flex-col items-center text-center space-y-3">
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`upi://pay?pa=9324459446@ybl&pn=BullRun&am=99&cu=INR`)}`}
+                  alt="Bull Run UPI Gateway QR"
+                  className="w-[150px] h-[150px] border bg-white p-1 rounded-xl shadow-md"
+                  loading="lazy"
+                />
+                <div className="text-xs">
+                  <span className="text-slate-500 block text-[10px] uppercase">Official VPA Address</span>
+                  <span className="font-mono font-black text-sm text-white">9324459446@ybl</span>
+                </div>
+              </div>
+
+              <ol className="text-[11px] text-slate-400 list-decimal pl-4 space-y-1.5 leading-relaxed font-sans font-medium">
+                <li>Scan QR code using GPay, PhonePe, Paytm, or any UPI app.</li>
+                <li>Transfer exactly <span className="font-bold text-white">{RS}99</span>.</li>
+                <li>Tap the button below to verify payment and unfreeze your profile.</li>
+              </ol>
+            </div>
+
+            <div className="space-y-2 border-t border-bull-line pt-4">
+              <button
+                onClick={handleVerifyPayment}
+                disabled={isProcessing}
+                className="w-full text-center py-3.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer font-mono"
+              >
+                {isProcessing ? (
+                  <>
+                    <span className="h-3.5 w-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Updating Database...
+                  </>
+                ) : (
+                  'Verify Remittance \u2014 Unlock Account'
+                )}
+              </button>
+              <button
+                onClick={() => setPaymentStep('browse')}
+                disabled={isProcessing}
+                className="w-full text-center py-2 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer font-mono"
+              >
+                Cancel and Return
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* PAYMENT SUCCESS */}
+        {paymentStep === 'success' && (
+          <div className="max-w-md mx-auto bg-bull-surface border border-emerald-500/50 rounded-3xl shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-teal)_20%,transparent)] p-8 text-center space-y-6 animate-scaleUp font-mono">
+            <div className="h-12 w-12 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-2xl flex items-center justify-center mx-auto text-xl font-black">
+              {TICK}
+            </div>
+
+            <div className="space-y-2">
+              <h2 className="text-xl font-black text-emerald-400">Subscription Successfully Active!</h2>
+              <p className="text-xs text-slate-300 leading-relaxed font-sans font-medium">
+                Your payment cleared. Your account is fully unfrozen in the database with access to all modules and Volatility Arena matches.
+              </p>
+            </div>
+
+            <Link
+              href="/modules"
+              className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md transition-all font-mono block text-center"
+            >
+              Launch Learning Arena {'\u2192'}
+            </Link>
+          </div>
+        )}
+
+      </div>
+    </main>
+  );
+}
+
+
+########## app\layout.js ##########
+import ActivityTracker from '@/components/ActivityTracker';
+import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, JSON_LD } from '@/lib/site';
+import ThemeCustomizer from '@/components/ThemeCustomizer';
+import { THEME_ENGINE_SOURCE } from '@/lib/theme-engine';
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+// Display font for headlines (rounded, friendly, game-like)
+const poppins = Poppins({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+});
+
+export const viewport = {
+  themeColor: "#0A1226",
+};
+
+// TOTAL REWRITTEN METADATA AND SEO CONFIGURATION
+export const metadata = {
+  title: {
+    default: SITE_TITLE,
+    template: '%s | ' + SITE_NAME,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  category: 'education',
+  keywords: [
+    'stock market game for students',
+    'paper trading India',
+    'stock market simulator India',
+    'virtual stock trading game',
+    'learn stock market for teens',
+    'school stock market competition',
+    'classroom trading game',
+    'finance quiz for students',
+    'investing for students',
+  ],
+  authors: [{ name: 'Vikrant Chipkar' }],
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: 'en_IN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  // GOOGLE VERIFICATION CODE
+  verification: {
+    google: 'VQoGNl67LtYaYB-yOhc8N_G1pyNl7cUr2M-20CRQXtU',
+  },
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full antialiased`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_ENGINE_SOURCE }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-bull-bg text-slate-100 antialiased selection:bg-bull-lime selection:text-bull-ink">
+        <ActivityTracker />
+        {children}
+        <footer className="mt-auto border-t border-bull-line px-4 py-4 text-center text-xs leading-relaxed text-bull-muted">
+          Bull Run is an educational game. All prices are simulated, no real money is used, and nothing here is investment advice. Not affiliated with NSE, BSE or SEBI.
+        </footer>
+        <ThemeCustomizer />
+      </body>
+    </html>
+  );
+}
+
+
+########## middleware.js ##########
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
+
+export async function middleware(req) {
+  const res = NextResponse.next();
+  const { pathname } = req.nextUrl;
+
+  // 1. Static files & internal assets always pass
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname === '/icon.svg' ||
+    pathname === '/apple-icon.png' ||
+    pathname.startsWith('/opengraph-image') ||
+    pathname.startsWith('/twitter-image') ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname === '/manifest.webmanifest'
+  ) {
+    return res;
+  }
+
+  // 2. Open public pages
+  const isAlwaysAllowedPage =
+    pathname === '/' ||
+    pathname.startsWith('/pricing') ||
+    pathname.startsWith('/signup') ||
+    pathname.startsWith('/auth');
+
+  // 3. Extract the auth token from cookies
+  const allCookies = req.cookies.getAll();
+  const authCookie = allCookies.find((c) =>
+    c.name.includes('-auth-token') || c.name.startsWith('sb-')
+  );
+
+  let user = null;
+  let accessToken = null;
+
+  if (authCookie) {
+    try {
+      let rawVal = authCookie.value;
+      if (rawVal.startsWith('base64-')) {
+        rawVal = Buffer.from(rawVal.replace('base64-', ''), 'base64').toString('utf-8');
+      }
+      const parsed = JSON.parse(rawVal);
+      accessToken = Array.isArray(parsed) ? parsed[0] : parsed?.access_token || parsed;
+
+      if (accessToken && typeof accessToken === 'string') {
+        const supabaseAuth = createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL,
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        );
+        const { data } = await supabaseAuth.auth.getUser(accessToken);
+        user = data?.user || null;
+      }
+    } catch {
+      user = null;
+    }
+  }
+
+  // NOT LOGGED IN
+  if (!user) {
+    if (isAlwaysAllowedPage) return res;
+    const loginUrl = req.nextUrl.clone();
+    loginUrl.pathname = '/signup';
+    loginUrl.searchParams.set('mode', 'login');
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // SUPER ADMIN IMMUNITY
+  if (user.email === SUPER_ADMIN_EMAIL) {
+    return res;
+  }
+
+  // QUERY PROFILE WITH USER'S AUTH HEADER (Bypasses RLS blocks)
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    {
+      global: {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    }
+  );
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_frozen, is_premium, access_expires_at, created_at, role')
+    .eq('id', user.id)
+    .maybeSingle();
+
+  if (profile) {
+    if (profile.role === 'admin') return res;
+
+    let expiryMs;
+    if (profile.access_expires_at) {
+      expiryMs = new Date(profile.access_expires_at).getTime();
+    } else {
+      const createdAtMs = profile.created_at ? new Date(profile.created_at).getTime() : Date.now();
+      expiryMs = createdAtMs + 7 * 24 * 60 * 60 * 1000;
+    }
+
+    const hasPremium = Boolean(profile.is_premium);
+    const isTrialExpired = Date.now() >= expiryMs && !hasPremium;
+    
+    // HARD ENFORCEMENT: If is_frozen is TRUE in Supabase, BLOCK IMMEDIATELY
+    const isFrozen = Boolean(profile.is_frozen) || isTrialExpired;
+
+    if (isFrozen) {
+      const isAllowedForFrozenUser = pathname === '/' || pathname.startsWith('/pricing');
+      if (!isAllowedForFrozenUser) {
+        const pricingUrl = req.nextUrl.clone();
+        pricingUrl.pathname = '/pricing';
+        return NextResponse.redirect(pricingUrl);
+      }
+    }
+  }
+
+  return res;
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+};
+
+
+########## lib\supabase.js ##########
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://gfaqalqnrwevpzgxbiws.supabase.co';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmYXFhbHFucndldnB6Z3hiaXdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxOTI2NDksImV4cCI6MjA5Nzc2ODY0OX0.xFLqEc1rI0Ik4mZPFMVYgmzKYn5DfBrv_MvLSpYdzGY';
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing Supabase Environment Credentials.');
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    // CRITICAL FIX: Automatically save sessions to cookies so the server middleware can see them
+    storage: {
+      getItem: (key) => {
+        if (typeof window === 'undefined') return null;
+        // Check cookie first, fallback to local storage
+        const value = document.cookie
+          .split('; ')
+          .find((row) => row.startsWith(`${key}=`))
+          ?.split('=')[1];
+        return value ? decodeURIComponent(value) : window.localStorage.getItem(key);
+      },
+      setItem: (key, value) => {
+        if (typeof window === 'undefined') return;
+        window.localStorage.setItem(key, value);
+        // Write cookie (expires in 7 days)
+        document.cookie = `${key}=${encodeURIComponent(value)}; path=/; max-age=604800; SameSite=Lax; Secure`;
+      },
+      removeItem: (key) => {
+        if (typeof window === 'undefined') return;
+        window.localStorage.removeItem(key);
+        // Delete cookie
+        document.cookie = `${key}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      }
+    }
+  }
+});
+
+
+########## src\app\admin\page.js (NOT FOUND) ##########
+
+
+########## src\app\page.js (NOT FOUND) ##########
+
+
+########## src\app\pricing\page.js (NOT FOUND) ##########
+
+
+########## src\app\layout.js (NOT FOUND) ##########
+
+
+########## src\middleware.js (NOT FOUND) ##########
+
+
+########## src\lib\supabase.js (NOT FOUND) ##########
+
+
+########## middleware.js ##########
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
+
+export async function middleware(req) {
+  const res = NextResponse.next();
+  const { pathname } = req.nextUrl;
+
+  // 1. Static files & internal assets always pass
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname === '/icon.svg' ||
+    pathname === '/apple-icon.png' ||
+    pathname.startsWith('/opengraph-image') ||
+    pathname.startsWith('/twitter-image') ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname === '/manifest.webmanifest'
+  ) {
+    return res;
+  }
+
+  // 2. Open public pages
+  const isAlwaysAllowedPage =
+    pathname === '/' ||
+    pathname.startsWith('/pricing') ||
+    pathname.startsWith('/signup') ||
+    pathname.startsWith('/auth');
+
+  // 3. Extract the auth token from cookies
+  const allCookies = req.cookies.getAll();
+  const authCookie = allCookies.find((c) =>
+    c.name.includes('-auth-token') || c.name.startsWith('sb-')
+  );
+
+  let user = null;
+  let accessToken = null;
+
+  if (authCookie) {
+    try {
+      let rawVal = authCookie.value;
+      if (rawVal.startsWith('base64-')) {
+        rawVal = Buffer.from(rawVal.replace('base64-', ''), 'base64').toString('utf-8');
+      }
+      const parsed = JSON.parse(rawVal);
+      accessToken = Array.isArray(parsed) ? parsed[0] : parsed?.access_token || parsed;
+
+      if (accessToken && typeof accessToken === 'string') {
+        const supabaseAuth = createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL,
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        );
+        const { data } = await supabaseAuth.auth.getUser(accessToken);
+        user = data?.user || null;
+      }
+    } catch {
+      user = null;
+    }
+  }
+
+  // NOT LOGGED IN
+  if (!user) {
+    if (isAlwaysAllowedPage) return res;
+    const loginUrl = req.nextUrl.clone();
+    loginUrl.pathname = '/signup';
+    loginUrl.searchParams.set('mode', 'login');
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // SUPER ADMIN IMMUNITY
+  if (user.email === SUPER_ADMIN_EMAIL) {
+    return res;
+  }
+
+  // QUERY PROFILE WITH USER'S AUTH HEADER (Bypasses RLS blocks)
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    {
+      global: {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    }
+  );
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_frozen, is_premium, access_expires_at, created_at, role')
+    .eq('id', user.id)
+    .maybeSingle();
+
+  if (profile) {
+    if (profile.role === 'admin') return res;
+
+    let expiryMs;
+    if (profile.access_expires_at) {
+      expiryMs = new Date(profile.access_expires_at).getTime();
+    } else {
+      const createdAtMs = profile.created_at ? new Date(profile.created_at).getTime() : Date.now();
+      expiryMs = createdAtMs + 7 * 24 * 60 * 60 * 1000;
+    }
+
+    const hasPremium = Boolean(profile.is_premium);
+    const isTrialExpired = Date.now() >= expiryMs && !hasPremium;
+    
+    // HARD ENFORCEMENT: If is_frozen is TRUE in Supabase, BLOCK IMMEDIATELY
+    const isFrozen = Boolean(profile.is_frozen) || isTrialExpired;
+
+    if (isFrozen) {
+      const isAllowedForFrozenUser = pathname === '/' || pathname.startsWith('/pricing');
+      if (!isAllowedForFrozenUser) {
+        const pricingUrl = req.nextUrl.clone();
+        pricingUrl.pathname = '/pricing';
+        return NextResponse.redirect(pricingUrl);
+      }
+    }
+  }
+
+  return res;
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+};
+
+
+########## package.json ##########
+{
+  "name": "bullrun",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.108.2",
+    "next": "^15.5.19",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^15.5.19",
+    "postcss": "^8.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}
+
+
+
+########## tailwind.config.js ##########
+/**
+ * Tailwind v4 note: this project uses `@import "tailwindcss"`, which does NOT read this file
+ * unless you add `@config "../tailwind.config.js";` to globals.css.
+ * All brand colors now live in app/globals.css inside @theme (bg-bull-*, text-bull-*, etc.),
+ * so this file is intentionally minimal.
+ */
+module.exports = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+};
+
+
+
+########## next.config.js (NOT FOUND) ##########
+
+
+########## next.config.mjs ##########
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // We removed "output: 'export'" so your /api/stock route can run flawlessly on Vercel!
+  images: {
+    unoptimized: true,
+  },
+};
+
+export default nextConfig;
+
+
+########## vercel.json (NOT FOUND) ##########
+
+
+########## API ROUTES ##########
+C:\Users\Vikrant C\OneDrive\Documents\GitHub\bullrun\app\api\auth\signup\route.js
+C:\Users\Vikrant C\OneDrive\Documents\GitHub\bullrun\app\api\generate-quiz\route.js
+C:\Users\Vikrant C\OneDrive\Documents\GitHub\bullrun\app\api\historical-prices\route.js
+C:\Users\Vikrant C\OneDrive\Documents\GitHub\bullrun\app\api\onboarding-modules\route.js
+C:\Users\Vikrant C\OneDrive\Documents\GitHub\bullrun\app\api\sync-networth\route.js
+C:\Users\Vikrant C\OneDrive\Documents\GitHub\bullrun\app\api\trade\route.js
+
+
+########## USAGE OF school_id / specific_class_id / class tables ##########
+app\admin\page.js:384: if (p.school_id || p.school_code) schools.add(p.school_id || p.school_code);
+app\admin\page.js:392: const schoolIdentifier = p.school_id || p.school_code;
+app\admin\page.js:684: <p className="text-white">{selectedProfile.school_code || selectedProfile.school_id || 'Personal Track'}</p>
+app\admin\page.js:689: <p className="text-white">{selectedProfile.specific_class_id || 'Unassigned'}</p>
+app\api\auth\signup\route.js:106: school_id: usesSchool ? schoolCode : null,
+app\api\auth\signup\route.js:107: specific_class_id: role === 'student' && specificClassId ? specificClassId : null,
+app\leaderboard\page.js:10: 'id, name, role, school_id, specific_class_id, wallet_balance, net_worth';
+app\leaderboard\page.js:43: if (scope === 'school' && profile?.school_id) {
+app\leaderboard\page.js:44: return query.eq('school_id', profile.school_id);
+app\leaderboard\page.js:46: if (scope === 'class' && profile?.specific_class_id) {
+app\leaderboard\page.js:47: return query.eq('specific_class_id', profile.specific_class_id);
+app\leaderboard\page.js:310: (tab.id === 'school' && !profile?.school_id) ||
+app\leaderboard\page.js:311: (tab.id === 'class' && !profile?.specific_class_id));
+app\page.js:72: if (!currentProfile.school_id) return;
+app\page.js:77: .eq('school_code', currentProfile.school_id);
+app\page.js:83: .eq('school_id', currentProfile.school_id)
+app\page.js:96: .in('specific_class_id', myAssignedClassIds)
+app\page.js:103: if (!newClassName || !profile?.school_id) return;
+app\page.js:106: .insert([{ school_code: profile.school_id, class_name: newClassName }]);
+app\page.js:133: .update({ school_id: null, specific_class_id: null, student_approved: false, wallet_balance: 0 })
+app\page.js:236: <p className="text-slate-400 font-medium">Your profile is connected to school hub <strong>{profile.school_id}</strong>. Your specific class manager teacher will unlock your wallet shortly.</p>
+app\page.js:275: <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider">🏢 School Class Matrix (Hub: {profile.school_id})</p>
+
+
+########## ENV VARIABLE NAMES (values hidden) ##########
+- - -   . e n v . l o c a l  
+ NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+GEMINI_API_KEY
+SUPABASE_SERVICE_ROLE_KEY
