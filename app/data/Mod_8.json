@@ -1,83 +1,457 @@
 {
   "id": "mod-8",
-  "title": "Module 8: Technical Analysis",
+  "title": "Technical Analysis",
   "submodules": [
     {
       "id": "submod-8-1",
       "title": "1. Foundations",
-      "intro": "Dow Theory, price action, trends",
-      "content": "⚡ MISSION BRIEFING: Foundations: Dow Theory, price action, trends\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind foundations.",
+      "content": "⚡ MISSION BRIEFING: FOUNDATIONS\n\nFoundations is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Dow Theory, price action and trends are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Dow Theory. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Dow Theory is the starting concept to understand.\n• price action and trends is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what foundations means, then examines how dow theory, price action and trends affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nFoundations helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying foundations?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about foundations?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-2",
       "title": "2. Charts",
-      "intro": "Line, bar, candlestick, timeframes",
-      "content": "⚡ MISSION BRIEFING: Charts: Line, bar, candlestick, timeframes\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind charts.",
+      "content": "⚡ MISSION BRIEFING: CHARTS\n\nCharts is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Line, bar, candlestick and timeframes are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Line. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Line is the starting concept to understand.\n• bar is another important element of this subject.\n• candlestick and timeframes is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what charts means, then examines how line, bar, candlestick and timeframes affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nCharts helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying charts?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about charts?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-3",
       "title": "3. Candlestick Patterns",
-      "intro": "Doji, hammer, engulfing, morning/evening star",
-      "content": "⚡ MISSION BRIEFING: Candlestick Patterns: Doji, hammer, engulfing, morning/evening star\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind candlestick patterns.",
+      "content": "⚡ MISSION BRIEFING: CANDLESTICK PATTERNS\n\nCandlestick Patterns is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Doji, hammer, engulfing and star patterns are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Doji. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Doji is the starting concept to understand.\n• hammer is another important element of this subject.\n• engulfing and star patterns is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what candlestick patterns means, then examines how doji, hammer, engulfing and star patterns affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nCandlestick Patterns helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying candlestick patterns?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about candlestick patterns?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-4",
       "title": "4. Support, Resistance and Trendlines",
-      "intro": "Key price zones",
-      "content": "⚡ MISSION BRIEFING: Support, Resistance and Trendlines: Key price zones\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind support, resistance and trendlines.",
+      "content": "⚡ MISSION BRIEFING: SUPPORT, RESISTANCE AND TRENDLINES\n\nSupport, Resistance and Trendlines is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Understanding important price zones are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Understanding important price zones. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Understanding important price zones is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what support, resistance and trendlines means, then examines how understanding important price zones affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nSupport, Resistance and Trendlines helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying support, resistance and trendlines?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about support, resistance and trendlines?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-5",
       "title": "5. Chart Patterns",
-      "intro": "Head and shoulders, double top/bottom, triangles, flags, cup and handle",
-      "content": "⚡ MISSION BRIEFING: Chart Patterns: Head and shoulders, double top/bottom, triangles, flags, cup and handle\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind chart patterns.",
+      "content": "⚡ MISSION BRIEFING: CHART PATTERNS\n\nChart Patterns is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Head and shoulders, double tops, triangles, flags and cup and handle are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Head and shoulders. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Head and shoulders is the starting concept to understand.\n• double tops is another important element of this subject.\n• triangles is another important element of this subject.\n• flags and cup and handle is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what chart patterns means, then examines how head and shoulders, double tops, triangles, flags and cup and handle affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nChart Patterns helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying chart patterns?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about chart patterns?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-6",
       "title": "6. Indicators",
-      "intro": "Overview",
-      "content": "⚡ MISSION BRIEFING: Indicators: Overview\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind indicators.",
+      "content": "⚡ MISSION BRIEFING: INDICATORS\n\nIndicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Purpose and limitations of technical indicators are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Purpose and limitations of technical indicators. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Purpose and limitations of technical indicators is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what indicators means, then examines how purpose and limitations of technical indicators affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nIndicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying indicators?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about indicators?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-7",
       "title": "7. Trend Indicators",
-      "intro": "Moving averages (SMA/EMA), MACD",
-      "content": "⚡ MISSION BRIEFING: Trend Indicators: Moving averages (SMA/EMA), MACD\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind trend indicators.",
+      "content": "⚡ MISSION BRIEFING: TREND INDICATORS\n\nTrend Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. SMA, EMA and MACD are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of SMA. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• SMA is the starting concept to understand.\n• EMA and MACD is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what trend indicators means, then examines how sma, ema and macd affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nTrend Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying trend indicators?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about trend indicators?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-8",
       "title": "8. Momentum Indicators",
-      "intro": "RSI, stochastic",
-      "content": "⚡ MISSION BRIEFING: Momentum Indicators: RSI, stochastic\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind momentum indicators.",
+      "content": "⚡ MISSION BRIEFING: MOMENTUM INDICATORS\n\nMomentum Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. RSI and stochastic oscillator are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of RSI and stochastic oscillator. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• RSI and stochastic oscillator is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what momentum indicators means, then examines how rsi and stochastic oscillator affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMomentum Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying momentum indicators?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about momentum indicators?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-9",
       "title": "9. Volatility Indicators",
-      "intro": "Bollinger Bands, ATR",
-      "content": "⚡ MISSION BRIEFING: Volatility Indicators: Bollinger Bands, ATR\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind volatility indicators.",
+      "content": "⚡ MISSION BRIEFING: VOLATILITY INDICATORS\n\nVolatility Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Bollinger Bands and ATR are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Bollinger Bands and ATR. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Bollinger Bands and ATR is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what volatility indicators means, then examines how bollinger bands and atr affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nVolatility Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying volatility indicators?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about volatility indicators?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-10",
       "title": "10. Volume Indicators",
-      "intro": "OBV, volume profile",
-      "content": "⚡ MISSION BRIEFING: Volume Indicators: OBV, volume profile\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind volume indicators.",
+      "content": "⚡ MISSION BRIEFING: VOLUME INDICATORS\n\nVolume Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. OBV and volume profile are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of OBV and volume profile. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• OBV and volume profile is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what volume indicators means, then examines how obv and volume profile affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nVolume Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying volume indicators?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about volume indicators?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-8-11",
       "title": "11. Limitations of Technical Analysis",
-      "intro": "What charts cannot do",
-      "content": "⚡ MISSION BRIEFING: Limitations of Technical Analysis: What charts cannot do\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind limitations of technical analysis.",
+      "content": "⚡ MISSION BRIEFING: LIMITATIONS OF TECHNICAL ANALYSIS\n\nLimitations of Technical Analysis is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. What charts cannot predict are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of What charts cannot predict. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• What charts cannot predict is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what limitations of technical analysis means, then examines how what charts cannot predict affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nLimitations of Technical Analysis helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying limitations of technical analysis?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about limitations of technical analysis?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     }
   ]
 }

@@ -1,48 +1,762 @@
 {
   "id": "mod-2",
-  "title": "Module 2: Introduction to the Stock Market",
+  "title": "Introduction to the Stock Market",
   "submodules": [
     {
       "id": "submod-2-1",
-      "title": "1. What a Stock Is",
-      "intro": "Ownership, shares, face value, market value",
-      "content": "⚡ MISSION BRIEFING: What a Stock Is: Ownership, shares, face value, market value\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "1. What Is a Stock? Owning a Slice of a Company",
+      "intro": "What does it mean to own a piece of a company?",
+      "content": "\u26a1 MISSION BRIEFING: WHAT IS A STOCK?\nA stock (also called a share) is a small slice of ownership in a company. If a company is a pizza, each share is one slice.\nSomeone who holds shares is called a shareholder. Even one share makes you a part-owner, though a very small one.\nA company that is owned by many people through shares is called a public company. Its shares can be bought and sold by anyone through a stock exchange.\n\n\ud83e\udd2f WOW FACT:\nThe word 'equity' also means ownership. That is why the stock market is often called the equity market!\n\n\u26a1 FINANCIAL INTEL: WHAT SHAREHOLDERS MAY GET\n\u2022 Price gains: if the share price rises, your slice is worth more. If it falls, it is worth less.\n\u2022 Dividends: some companies share a part of their profit with shareholders. It is never guaranteed.\n\u2022 A say in the company: shareholders can usually vote on big decisions, in proportion to how many shares they hold.\n\n\u26a1 FINANCIAL INTEL: OWNER, NOT LENDER\nOwning a share is different from lending money. A lender (like a bond holder) is promised repayment. A shareholder is promised nothing. If the company does well, the slice may gain. If it struggles, the slice may lose value, even all of it.\n\n\ud83c\udf55 MINI CASE: SUNRISE SNACKS (FICTIONAL)\nSunrise Snacks Ltd has 1,000 shares. Meera owns 10 of them, which is 1% of the company. If the company's total value is \u20b95,00,000, her slice is worth about \u20b95,000. If the value falls to \u20b94,00,000, her slice is worth about \u20b94,000.\n\n\ud83e\uddea TRY IT: SLICE MATHS\nPick any made-up company with 200 shares. If you own 5 shares, what percent do you own? (5 \u00f7 200 x 100 = 2.5%)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA share is a slice of ownership. It can gain or lose value, and nothing about it is guaranteed.",
+      "quiz": [
+        {
+          "question": "What does owning a share of a company mean?",
+          "options": [
+            "You have lent money to the company",
+            "You own a small part of that company",
+            "You are guaranteed a fixed profit",
+            "You work for the company"
+          ],
+          "correctIndex": 1,
+          "explanation": "A share is a slice of ownership, not a loan."
+        },
+        {
+          "question": "Someone who holds shares is called a:",
+          "options": [
+            "Borrower",
+            "Banker",
+            "Shareholder",
+            "Auditor"
+          ],
+          "correctIndex": 2,
+          "explanation": "A person who holds shares is a shareholder."
+        },
+        {
+          "question": "Meera owns 10 of 1,000 shares of a company. What percent does she own?",
+          "options": [
+            "10%",
+            "0.1%",
+            "100%",
+            "1%"
+          ],
+          "correctIndex": 3,
+          "explanation": "10 \u00f7 1,000 x 100 = 1%."
+        },
+        {
+          "question": "Which statement about shares is correct?",
+          "options": [
+            "Their value can rise or fall",
+            "Their value never changes",
+            "They always pay a dividend",
+            "They are guaranteed to grow"
+          ],
+          "correctIndex": 0,
+          "explanation": "Share values move, and neither growth nor dividends are guaranteed."
+        },
+        {
+          "question": "How is a shareholder different from a lender?",
+          "options": [
+            "A shareholder is always repaid first",
+            "A shareholder is an owner with no promised return",
+            "A lender owns the company",
+            "There is no difference"
+          ],
+          "correctIndex": 1,
+          "explanation": "Owners share in gains and losses. Lenders are promised repayment on set terms."
+        }
+      ]
     },
     {
       "id": "submod-2-2",
-      "title": "2. Why Companies List",
-      "intro": "Raising capital, liquidity, visibility",
-      "content": "⚡ MISSION BRIEFING: Why Companies List: Raising capital, liquidity, visibility\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "2. Face Value, Market Value and Share Price",
+      "intro": "Why can a share with a face value of \u20b910 trade at \u20b9500?",
+      "content": "\u26a1 MISSION BRIEFING: THREE PRICE-LIKE TERMS\nFace value (or par value): the original, nominal value written on a share, such as \u20b91, \u20b92, \u20b95 or \u20b910. It is mostly an accounting number.\nMarket price: the price at which the share is trading right now on the exchange. It changes through the day.\nMarket capitalisation (market cap): market price x number of shares. It is the market's current value of the whole company.\n\n\ud83e\udd2f WOW FACT:\nA share with a face value of \u20b910 can trade at \u20b9500 or even \u20b95,000. Face value says little about what a share is worth today!\n\n\u26a1 FINANCIAL INTEL: A WORKED EXAMPLE (FICTIONAL)\nSunrise Snacks has 10,00,000 shares. Face value is \u20b910 each. The market price today is \u20b9250.\n\u2022 Face value total: 10,00,000 x \u20b910 = \u20b91,00,00,000\n\u2022 Market cap: 10,00,000 x \u20b9250 = \u20b925,00,00,000\nIf the price moves to \u20b9260, market cap rises by \u20b91,00,00,000 (10,00,000 x \u20b910).\n\n\u26a1 FINANCIAL INTEL: WHY THE PRICE IS NOT THE VALUE\nA low price does not mean a share is cheap, and a high price does not mean it is expensive. A \u20b9100 share of a big company may be far more valuable overall than a \u20b910 share of a tiny one. What matters is the price compared with the business behind it. Later modules show how to judge that.\n\n\u26a1 FINANCIAL INTEL: BOOK VALUE (A PREVIEW)\nBook value is roughly what a company would be worth on paper after paying off its debts. It is another number that can differ a lot from the market price. You will study it in the valuation module.\n\n\ud83e\uddea TRY IT: CALCULATE IT\nA fictional company has 2,00,000 shares trading at \u20b9300. What is its market cap? (2,00,000 x \u20b9300 = \u20b96,00,00,000, which is \u20b96 crore.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nFace value is a label, market price is today's trading price, and market cap is price times number of shares.",
+      "quiz": [
+        {
+          "question": "What is market capitalisation?",
+          "options": [
+            "Face value x market price",
+            "The company's yearly profit",
+            "Market price x number of shares",
+            "The total debt of the company"
+          ],
+          "correctIndex": 2,
+          "explanation": "Market cap is what the market currently values the whole company at."
+        },
+        {
+          "question": "A company has 1,00,000 shares trading at \u20b9200. What is its market cap?",
+          "options": [
+            "\u20b92,00,000",
+            "\u20b920,000",
+            "\u20b91,00,200",
+            "\u20b92,00,00,000"
+          ],
+          "correctIndex": 3,
+          "explanation": "1,00,000 x \u20b9200 = \u20b92,00,00,000 (\u20b92 crore)."
+        },
+        {
+          "question": "Which statement about face value is correct?",
+          "options": [
+            "It can be very different from the market price",
+            "It always equals the market price",
+            "It changes every second",
+            "It tells you if a share is cheap"
+          ],
+          "correctIndex": 0,
+          "explanation": "Face value is mostly an accounting number and often far from the trading price."
+        },
+        {
+          "question": "Does a \u20b910 share price mean the share is cheap?",
+          "options": [
+            "Yes, always",
+            "No, price alone does not show value",
+            "Yes, if face value is \u20b910",
+            "Only on Mondays"
+          ],
+          "correctIndex": 1,
+          "explanation": "You must compare the price with the business behind it."
+        },
+        {
+          "question": "What does market price show?",
+          "options": [
+            "The price printed on the share",
+            "The company's total profit",
+            "The price at which the share is trading right now",
+            "The price from ten years ago"
+          ],
+          "correctIndex": 2,
+          "explanation": "Market price is the live trading price set by buyers and sellers."
+        }
+      ]
     },
     {
       "id": "submod-2-3",
-      "title": "3. Primary Market",
-      "intro": "IPO, FPO, rights issue, OFS, bonus shares, stock splits",
-      "content": "⚡ MISSION BRIEFING: Primary Market: IPO, FPO, rights issue, OFS, bonus shares, stock splits\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "3. Why Companies Go Public",
+      "intro": "Why would a company share ownership with strangers?",
+      "content": "\u26a1 MISSION BRIEFING: GOING PUBLIC\nA company that sells its shares to the public and gets them listed on a stock exchange is said to 'go public'. Listing means its shares can then be traded on the exchange.\nWhy do it? Companies list for a few main reasons.\n\n\u26a1 FINANCIAL INTEL: REASONS TO LIST\n\u2022 Raising capital: money to build factories, hire people, repay loans or grow into new areas.\n\u2022 Liquidity: early owners and investors get a way to sell some of their shares later.\n\u2022 Visibility and trust: listed companies share regular reports, which can help customers and lenders trust them.\n\u2022 Employee rewards: shares can be given to staff, so they share in the growth.\n\n\ud83e\udd2f WOW FACT:\nMoney raised from shareholders does not have to be paid back like a loan. In return, shareholders become part-owners!\n\n\u26a1 FINANCIAL INTEL: THE TRADE-OFFS\n\u2022 More rules: listed companies must follow disclosure and governance rules set by the regulator, SEBI.\n\u2022 Less control: founders share ownership and decisions.\n\u2022 Public pressure: results are watched every quarter, and share prices can swing.\n\n\ud83c\udf55 MINI CASE: BHARAT BAKERS (FICTIONAL)\nBharat Bakers is a family firm that wants to open 50 new outlets. A bank loan would need repayment with interest. Instead, it sells 20% of the company to the public and raises the money without borrowing. The family now owns 80%, must publish results, and answers to many more owners.\n\n\ud83e\uddea TRY IT: YOUR CALL\nImagine you own a small, fast-growing company. Write one reason to list and one reason to stay private. There is no single right answer.\n\n\ud83d\udca1 CORE TAKEAWAY:\nCompanies list to raise money and gain visibility, and they accept more rules and shared control in return.",
+      "quiz": [
+        {
+          "question": "Which is a main reason companies go public?",
+          "options": [
+            "To avoid all rules",
+            "To keep full control forever",
+            "To stop sharing results",
+            "To raise money from many investors"
+          ],
+          "correctIndex": 3,
+          "explanation": "Listing helps raise capital from the public."
+        },
+        {
+          "question": "What does 'listing' mean?",
+          "options": [
+            "Its shares can be traded on a stock exchange",
+            "The company closes down",
+            "The company changes its name",
+            "The company gets a bank loan"
+          ],
+          "correctIndex": 0,
+          "explanation": "A listed company's shares trade on an exchange."
+        },
+        {
+          "question": "Compared with a loan, money raised by selling shares:",
+          "options": [
+            "Must be repaid with interest",
+            "Does not have to be repaid like a loan",
+            "Is always free of any cost",
+            "Cannot be used for growth"
+          ],
+          "correctIndex": 1,
+          "explanation": "Shareholders become owners. They are not repaid like lenders."
+        },
+        {
+          "question": "Which is a trade-off of becoming a listed company?",
+          "options": [
+            "No more rules",
+            "No more owners",
+            "More disclosure rules and shared control",
+            "Guaranteed higher profits"
+          ],
+          "correctIndex": 2,
+          "explanation": "Listed companies face more rules and give up some control."
+        },
+        {
+          "question": "Bharat Bakers sells 20% of itself to the public. How much do the founders keep?",
+          "options": [
+            "20%",
+            "100%",
+            "50%",
+            "80%"
+          ],
+          "correctIndex": 3,
+          "explanation": "100% - 20% = 80%."
+        }
+      ]
     },
     {
       "id": "submod-2-4",
-      "title": "4. Secondary Market",
-      "intro": "How trading works after listing",
-      "content": "⚡ MISSION BRIEFING: Secondary Market: How trading works after listing\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "4. The Primary Market and IPOs",
+      "intro": "How do shares reach the public for the very first time?",
+      "content": "\u26a1 MISSION BRIEFING: PRIMARY MARKET\nThe primary market is where a company issues new shares and sells them directly to investors to raise money. Think of it as the 'launch store'.\nThe first time a company sells shares to the public is called an IPO, short for Initial Public Offering.\n\n\u26a1 FINANCIAL INTEL: HOW AN IPO WORKS (SIMPLIFIED)\n1. The company hires merchant bankers and files a detailed document, the draft offer document, with SEBI.\n2. SEBI reviews it. The final offer document is then shared publicly.\n3. The company announces a price band, such as \u20b9200 to \u20b9210, and a date range when you can apply.\n4. Investors apply for shares. If more people apply than shares available, shares are allotted by a process, so not everyone gets them.\n5. After allotment, the shares are listed and start trading on the exchange.\n\n\ud83e\udd2f WOW FACT:\nIn some IPOs, applications can be many times the number of shares on offer. When that happens, many applicants get nothing and their money is released back.\n\n\u26a1 FINANCIAL INTEL: THINGS TO KNOW\n\u2022 Apply only through registered channels, such as your broker or bank.\n\u2022 Read the offer document. It lists the business, its risks and how the money will be used.\n\u2022 The listing price can be higher or lower than the issue price. A listing is never a guaranteed gain.\n\u2022 Rules on lot sizes, timelines and who can apply change over time. Check SEBI and exchange websites. (As of 2026, verify current details.)\n\n\ud83e\uddea TRY IT: SPOT THE CLUE\nA message says 'Guaranteed 100% listing gain, pay me to get you shares'. Is this a safe offer? No. Nobody can guarantee gains. Be careful of such messages.\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe primary market is where new shares are first sold. An IPO is a company's first public offer, and listing gains are never guaranteed.",
+      "quiz": [
+        {
+          "question": "What is the primary market?",
+          "options": [
+            "Where a company first issues new shares to raise money",
+            "Where old shares are traded between investors",
+            "Where banks give loans",
+            "Where goods are sold"
+          ],
+          "correctIndex": 0,
+          "explanation": "The primary market is where new shares are created and sold to investors."
+        },
+        {
+          "question": "What does IPO stand for?",
+          "options": [
+            "Investor Profit Option",
+            "Initial Public Offering",
+            "Indian Price Order",
+            "Internal Public Offer"
+          ],
+          "correctIndex": 1,
+          "explanation": "IPO means Initial Public Offering."
+        },
+        {
+          "question": "What is a 'price band' in an IPO?",
+          "options": [
+            "A guaranteed profit range",
+            "A fee paid to SEBI",
+            "The range within which investors can bid",
+            "The final listing price"
+          ],
+          "correctIndex": 2,
+          "explanation": "The price band is the range of prices at which you can apply."
+        },
+        {
+          "question": "An IPO is heavily oversubscribed. What may happen?",
+          "options": [
+            "Everyone gets double shares",
+            "The IPO price falls to zero",
+            "The IPO is cancelled for sure",
+            "Many applicants may not get shares"
+          ],
+          "correctIndex": 3,
+          "explanation": "When demand is higher than supply, shares are allotted by a process and some applicants get none."
+        },
+        {
+          "question": "A stranger promises guaranteed IPO listing gains for a fee. This is:",
+          "options": [
+            "A warning sign of a scam",
+            "A safe offer",
+            "An official SEBI service",
+            "A way to avoid risk"
+          ],
+          "correctIndex": 0,
+          "explanation": "No one can guarantee gains, so such offers should be treated carefully."
+        }
+      ]
     },
     {
       "id": "submod-2-5",
-      "title": "5. Key Participants",
-      "intro": "Retail investors, institutions (FIIs, DIIs, mutual funds), brokers, market makers",
-      "content": "⚡ MISSION BRIEFING: Key Participants: Retail investors, institutions (FIIs, DIIs, mutual funds), brokers, market makers\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "5. FPO, Rights Issue and OFS",
+      "intro": "What other ways can companies raise money or sell shares?",
+      "content": "\u26a1 MISSION BRIEFING: MORE WAYS SHARES ARE ISSUED\nAfter an IPO, listed companies and their owners have other tools too. Here are the common ones.\n\n\u26a1 FINANCIAL INTEL: THE FOUR TOOLS\n\u2022 FPO (Follow-on Public Offer): a listed company issues new shares to the public to raise more money.\n\u2022 Rights issue: a listed company offers new shares first to its existing shareholders, often at a discount, in proportion to what they already own.\n\u2022 OFS (Offer for Sale): big shareholders, such as promoters, sell some of their existing shares through the exchange. The company itself does not get the money.\n\u2022 Private placement: shares are sold to selected investors rather than the general public.\n\n\ud83e\udd2f WOW FACT:\nIn an IPO or FPO, new shares are created. In an OFS, no new shares are created. Existing shares just change hands!\n\n\u26a1 FINANCIAL INTEL: RIGHTS ISSUE EXAMPLE (FICTIONAL)\nSunrise Snacks announces a 1:5 rights issue. This means shareholders can buy 1 new share for every 5 they own. Meera owns 100 shares, so she can buy 20 new shares at the offered price. If she does nothing, she may lose the chance, and her ownership percentage may shrink because more shares now exist.\n\n\u26a1 FINANCIAL INTEL: WHAT TO ASK\nWhy is the company raising money? Who gets the money, the company or the sellers? Does the new issue dilute (shrink) existing owners' share? Answers are in the offer documents.\n\n\ud83e\uddea TRY IT: MATCH THEM\nMatch: new shares to the public = FPO. Existing owners first = rights issue. Owners sell their old shares = OFS.\n\n\ud83d\udca1 CORE TAKEAWAY:\nIPO, FPO, rights and OFS are different ways shares are issued or sold. Always check who gets the money and who gets diluted.",
+      "quiz": [
+        {
+          "question": "In a rights issue, new shares are offered first to:",
+          "options": [
+            "Only foreign investors",
+            "Existing shareholders",
+            "Only banks",
+            "Only employees"
+          ],
+          "correctIndex": 1,
+          "explanation": "Rights issues give existing shareholders the first chance."
+        },
+        {
+          "question": "In an OFS, who receives the money from the sale?",
+          "options": [
+            "The company",
+            "SEBI",
+            "The selling shareholders",
+            "The stock exchange"
+          ],
+          "correctIndex": 2,
+          "explanation": "In an OFS, existing owners sell their shares, so they get the money."
+        },
+        {
+          "question": "What does FPO stand for?",
+          "options": [
+            "First Private Offer",
+            "Fixed Price Order",
+            "Fund Pool Option",
+            "Follow-on Public Offer"
+          ],
+          "correctIndex": 3,
+          "explanation": "An FPO is a follow-on public offer by an already listed company."
+        },
+        {
+          "question": "Meera owns 100 shares and gets a 1:5 rights issue. How many new shares can she buy?",
+          "options": [
+            "20",
+            "5",
+            "100",
+            "500"
+          ],
+          "correctIndex": 0,
+          "explanation": "100 \u00f7 5 = 20 new shares."
+        },
+        {
+          "question": "Which of these creates NEW shares?",
+          "options": [
+            "OFS",
+            "FPO",
+            "A friend selling shares to you",
+            "Trading on the exchange"
+          ],
+          "correctIndex": 1,
+          "explanation": "An FPO issues new shares. An OFS only moves existing ones."
+        }
+      ]
     },
     {
       "id": "submod-2-6",
-      "title": "6. Types of Stocks",
-      "intro": "Large-, mid- and small-cap; blue-chip; growth vs. value; dividend stocks; penny stocks",
-      "content": "⚡ MISSION BRIEFING: Types of Stocks: Large-, mid- and small-cap; blue-chip; growth vs. value; dividend stocks; penny stocks\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "6. Bonus Shares, Stock Splits and Dividends",
+      "intro": "What is the difference between getting more shares and getting cash?",
+      "content": "\u26a1 MISSION BRIEFING: THREE COMMON COMPANY ACTIONS\nListed companies sometimes announce actions that change the number of shares or give cash to shareholders. They sound exciting, but they are not 'free money'.\n\n\u26a1 FINANCIAL INTEL: BONUS SHARES\nA company gives existing shareholders extra shares for free, from its own reserves. In a 1:1 bonus, you get 1 extra share for each you own.\nExample (fictional): You own 10 shares at \u20b9200 (value \u20b92,000). After a 1:1 bonus you own 20 shares. The price adjusts to about \u20b9100, so the value is still about \u20b92,000.\n\n\u26a1 FINANCIAL INTEL: STOCK SPLIT\nA split divides each share into smaller ones. For example, a face value of \u20b910 split into \u20b92 gives 5 shares for each 1 held.\nExample (fictional): 1 share at \u20b91,000 becomes 5 shares at about \u20b9200. Total value is still about \u20b91,000. A split can make the price look friendlier, but does not change the company's value.\n\n\ud83e\udd2f WOW FACT:\nAfter a bonus or split, your total value does not change on its own. It is like swapping one \u20b9100 note for two \u20b950 notes!\n\n\u26a1 FINANCIAL INTEL: DIVIDENDS\nA dividend is a part of profit paid in cash to shareholders. Example (fictional): a \u20b92 dividend per share on 50 shares means \u20b9100 paid. When the dividend is paid, the share price usually adjusts down a little because cash has left the company. Dividends are decided by the company and are never guaranteed.\n\n\ud83e\uddea TRY IT: TRY THE SPLIT\nYou own 4 shares at \u20b9500 each. A 1:5 split happens. How many shares do you own, and at roughly what price? (20 shares at about \u20b9100.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nBonus and splits change the number of shares, not your total value. Dividends are cash from profits, and none of these is guaranteed or free money.",
+      "quiz": [
+        {
+          "question": "After a 1:1 bonus, how many shares does someone with 10 shares hold?",
+          "options": [
+            "11",
+            "10",
+            "20",
+            "100"
+          ],
+          "correctIndex": 2,
+          "explanation": "1:1 means 1 extra for each 1 held, so 10 becomes 20."
+        },
+        {
+          "question": "A stock split mainly changes:",
+          "options": [
+            "The company's total value",
+            "The company's profit",
+            "The regulator",
+            "The number of shares and the price per share"
+          ],
+          "correctIndex": 3,
+          "explanation": "A split divides shares into smaller ones, without changing total value on its own."
+        },
+        {
+          "question": "1 share at \u20b91,000 splits into 5 shares. About what price per share after?",
+          "options": [
+            "\u20b9200",
+            "\u20b95,000",
+            "\u20b91,000",
+            "\u20b950"
+          ],
+          "correctIndex": 0,
+          "explanation": "\u20b91,000 \u00f7 5 = \u20b9200."
+        },
+        {
+          "question": "What is a dividend?",
+          "options": [
+            "A fee paid to the broker",
+            "A part of profit paid to shareholders",
+            "A loan from the bank",
+            "Extra shares for free"
+          ],
+          "correctIndex": 1,
+          "explanation": "A dividend is cash paid out of profit."
+        },
+        {
+          "question": "A \u20b92 dividend per share is paid on 50 shares. How much cash?",
+          "options": [
+            "\u20b92",
+            "\u20b950",
+            "\u20b9100",
+            "\u20b9250"
+          ],
+          "correctIndex": 2,
+          "explanation": "50 x \u20b92 = \u20b9100."
+        }
+      ]
+    },
+    {
+      "id": "submod-2-7",
+      "title": "7. The Secondary Market: Trading After Listing",
+      "intro": "Where do shares go once they are listed?",
+      "content": "\u26a1 MISSION BRIEFING: SECONDARY MARKET\nOnce shares are listed, investors trade them with each other on a stock exchange. This is the secondary market. The company does not receive money when you buy from another investor. The money goes to the seller.\nIn India, the two main exchanges are the NSE (National Stock Exchange) and the BSE (Bombay Stock Exchange).\n\n\ud83e\udd2f WOW FACT:\nThe BSE, started in 1875, is often described as one of Asia's oldest stock exchanges!\n\n\u26a1 FINANCIAL INTEL: HOW A TRADE HAPPENS\n1. You place a buy or sell order through your broker's app.\n2. The exchange matches it with an opposite order at the same price.\n3. The trade is confirmed and, after the settlement period, shares and money change hands. (As of 2026, regular equity trades settle on the next working day, called T+1. Check current rules.)\n\n\u26a1 FINANCIAL INTEL: WHY IT MATTERS\n\u2022 Liquidity: it lets investors sell shares when they want, which makes primary market investing more attractive.\n\u2022 Price discovery: continuous buying and selling shows what the market thinks a share is worth right now.\n\u2022 Both exchanges list many of the same companies, and prices are very close.\n\n\u26a1 FINANCIAL INTEL: INDEXES (A PREVIEW)\nAn index tracks a group of shares. Nifty 50 (NSE) and Sensex (BSE) follow big companies and are used as a quick temperature check of the market. You will learn more later.\n\n\u26a1 FINANCIAL INTEL: SIMULATOR REMINDER\nIn Bull Run, you practise trading with simulated prices, not live exchange data. Real trading involves real money and real risk.\n\n\ud83e\uddea TRY IT: PRIMARY OR SECONDARY?\nDecide: (a) A company sells new shares in an IPO. (b) You buy shares from another investor on the exchange. (a) is primary, (b) is secondary.\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe secondary market is where listed shares trade between investors. The company is not paid when you buy from another investor.",
+      "quiz": [
+        {
+          "question": "Where do listed shares trade between investors?",
+          "options": [
+            "The primary market",
+            "The post office",
+            "A bank counter",
+            "The secondary market"
+          ],
+          "correctIndex": 3,
+          "explanation": "Trading after listing happens in the secondary market."
+        },
+        {
+          "question": "When you buy a listed share from another investor, who gets your money?",
+          "options": [
+            "The seller",
+            "The company",
+            "SEBI",
+            "The government"
+          ],
+          "correctIndex": 0,
+          "explanation": "In the secondary market, money goes to the seller."
+        },
+        {
+          "question": "Which are the two main stock exchanges in India?",
+          "options": [
+            "NYSE and NASDAQ",
+            "NSE and BSE",
+            "MCX and NCDEX",
+            "SEBI and RBI"
+          ],
+          "correctIndex": 1,
+          "explanation": "NSE and BSE are India's main stock exchanges."
+        },
+        {
+          "question": "What does 'price discovery' mean?",
+          "options": [
+            "The company sets the price alone",
+            "SEBI sets the price daily",
+            "Buyers and sellers together reveal a share's current price",
+            "The price is fixed forever"
+          ],
+          "correctIndex": 2,
+          "explanation": "Continuous trading shows what the market thinks a share is worth."
+        },
+        {
+          "question": "Which statement about the Bull Run simulator is correct?",
+          "options": [
+            "It uses live NSE prices",
+            "It trades real money",
+            "It guarantees returns",
+            "It uses simulated prices, not live exchange data"
+          ],
+          "correctIndex": 3,
+          "explanation": "The simulator is for learning with simulated prices."
+        }
+      ]
+    },
+    {
+      "id": "submod-2-8",
+      "title": "8. Who Moves the Market? Key Participants",
+      "intro": "Who are the buyers, sellers and helpers in the market?",
+      "content": "\u26a1 MISSION BRIEFING: THE PLAYERS\nMany different kinds of participants take part in the stock market. Knowing who they are helps explain why prices move.\n\n\u26a1 FINANCIAL INTEL: INVESTORS\n\u2022 Retail investors: individuals like you investing their own money, usually in smaller amounts.\n\u2022 DIIs (Domestic Institutional Investors): large Indian institutions such as mutual funds and insurance companies.\n\u2022 FIIs / FPIs (Foreign Institutional or Portfolio Investors): large overseas funds investing in Indian markets.\n\u2022 Mutual funds: pool money from many people and invest it through professional fund managers.\n\n\u26a1 FINANCIAL INTEL: HELPERS AND WATCHDOGS\n\u2022 Brokers: registered intermediaries who place your orders on the exchange, for a fee.\n\u2022 Market makers: firms that keep offering to buy and sell so that trading stays smooth.\n\u2022 Depositories (NSDL, CDSL): keep your shares safely in electronic form.\n\u2022 SEBI: the regulator that sets and enforces the rules to protect investors.\n\n\ud83e\udd2f WOW FACT:\nLarge institutions can trade in huge amounts. When many of them buy or sell the same share, prices can move quickly!\n\n\ud83c\udf55 MINI CASE: ONE TRADE, MANY HANDS (FICTIONAL)\nAnanya places a buy order for Sunrise Snacks shares on her broker's app. The order goes to the exchange, where a seller is matched. Her shares will be held electronically at a depository, and SEBI's rules cover how it all works. Behind one tap, many participants did their job.\n\n\ud83e\uddea TRY IT: SORT THEM\nWhich is which? Insurance company investing in shares: DII. Overseas fund: FII. A teenager's parent investing their savings: retail. App that sends the order: broker.\n\n\ud83d\udca1 CORE TAKEAWAY:\nRetail investors, institutions, brokers and regulators each play a part. No single participant controls the whole market.",
+      "quiz": [
+        {
+          "question": "Who are retail investors?",
+          "options": [
+            "Individuals investing their own money",
+            "Large overseas funds",
+            "The regulator",
+            "Stock exchanges"
+          ],
+          "correctIndex": 0,
+          "explanation": "Retail investors are individuals."
+        },
+        {
+          "question": "What does a broker do?",
+          "options": [
+            "Prints shares",
+            "Places your buy and sell orders on the exchange",
+            "Sets share prices",
+            "Gives guaranteed returns"
+          ],
+          "correctIndex": 1,
+          "explanation": "A broker is an intermediary who executes your orders."
+        },
+        {
+          "question": "Which participant is the securities market regulator in India?",
+          "options": [
+            "A mutual fund",
+            "A broker",
+            "SEBI",
+            "A retail investor"
+          ],
+          "correctIndex": 2,
+          "explanation": "SEBI regulates the securities market in India."
+        },
+        {
+          "question": "What do depositories like NSDL and CDSL do?",
+          "options": [
+            "Decide share prices",
+            "Collect brokerage",
+            "Give loans",
+            "Hold shares safely in electronic form"
+          ],
+          "correctIndex": 3,
+          "explanation": "Depositories keep investors' shares in electronic (demat) form."
+        },
+        {
+          "question": "What are mutual funds?",
+          "options": [
+            "Pools of many investors' money managed by professionals",
+            "Loans from banks",
+            "Government stamps",
+            "A type of broker"
+          ],
+          "correctIndex": 0,
+          "explanation": "Mutual funds pool money and invest it through fund managers."
+        }
+      ]
+    },
+    {
+      "id": "submod-2-9",
+      "title": "9. Why Do Share Prices Move?",
+      "intro": "What makes a price go up or down?",
+      "content": "\u26a1 MISSION BRIEFING: DEMAND AND SUPPLY\nShare prices move because of demand (people wanting to buy) and supply (people wanting to sell).\n\u2022 More buyers than sellers: the price tends to rise.\n\u2022 More sellers than buyers: the price tends to fall.\n\n\ud83e\udd2f WOW FACT:\nOn a busy day, a popular share can have thousands of price changes. Every one is a buyer and a seller agreeing on a number!\n\n\u26a1 FINANCIAL INTEL: THE BID-ASK IDEA\nBid: the highest price a buyer is willing to pay. Ask: the lowest price a seller is willing to accept. A trade happens when they meet.\nExample (fictional): Bid \u20b9100, Ask \u20b9101. The small gap is called the spread. A buyer willing to pay \u20b9101 gets matched with the seller.\n\n\u26a1 FINANCIAL INTEL: WHAT CAN INFLUENCE BUYERS AND SELLERS\n\u2022 Company news: results, new products, leadership changes.\n\u2022 The economy: growth, inflation, interest rates.\n\u2022 Industry news: new rules or changing demand.\n\u2022 Global events and the mood of investors, which can turn fast.\n\u2022 Rumours and social media posts, which are often unreliable.\n\n\u26a1 FINANCIAL INTEL: SHORT TERM VS. LONG TERM\nOver days, prices can swing on mood and news. Over many years, prices tend to follow how the business actually performs, though nothing is guaranteed. No one can reliably predict daily moves, and Bull Run does not predict prices.\n\n\ud83e\uddea TRY IT: PRACTISE IT\nA fictional share has 500 buyers and 800 sellers at the current price. Which way is the price likely to move? Down, since sellers outnumber buyers.\n\n\ud83d\udca1 CORE TAKEAWAY:\nPrices move because of demand and supply, which are shaped by news, the economy and investor mood. No one can predict them for sure.",
+      "quiz": [
+        {
+          "question": "What usually happens when buyers outnumber sellers?",
+          "options": [
+            "The price tends to fall",
+            "The price tends to rise",
+            "The exchange closes",
+            "Nothing changes"
+          ],
+          "correctIndex": 1,
+          "explanation": "More demand than supply pushes price up."
+        },
+        {
+          "question": "What does the 'ask' price mean?",
+          "options": [
+            "The highest price a buyer will pay",
+            "The face value",
+            "The lowest price a seller will accept",
+            "The company's profit"
+          ],
+          "correctIndex": 2,
+          "explanation": "Ask is the seller's price."
+        },
+        {
+          "question": "Bid is \u20b9100 and ask is \u20b9101. The gap is called:",
+          "options": [
+            "The dividend",
+            "The split",
+            "The index",
+            "The spread"
+          ],
+          "correctIndex": 3,
+          "explanation": "The difference between bid and ask is the spread."
+        },
+        {
+          "question": "Which is a reliable way to predict tomorrow's price?",
+          "options": [
+            "None, no one can predict prices reliably",
+            "A social media post",
+            "A friend's tip",
+            "A rumour group"
+          ],
+          "correctIndex": 0,
+          "explanation": "Short-term prices cannot be predicted reliably."
+        },
+        {
+          "question": "Which can influence share prices?",
+          "options": [
+            "Only the colour of the logo",
+            "Company news, the economy and investor mood",
+            "Only the day of the week",
+            "Nothing at all"
+          ],
+          "correctIndex": 1,
+          "explanation": "Many factors affect buying and selling."
+        }
+      ]
+    },
+    {
+      "id": "submod-2-10",
+      "title": "10. Types of Stocks by Size: Large, Mid and Small Cap",
+      "intro": "How do we group companies by size?",
+      "content": "\u26a1 MISSION BRIEFING: MARKET CAP GROUPS\nMarket capitalisation (price x number of shares) is used to group companies by size.\n\u2022 Large-cap: the biggest, most established listed companies.\n\u2022 Mid-cap: medium-sized companies, often growing.\n\u2022 Small-cap: smaller companies, usually with bigger ups and downs.\nIn India, market regulators have fixed a ranking approach: the top 100 companies by market cap are large-cap, ranks 101 to 250 are mid-cap, and from 251 onward are small-cap. (As of 2026, verify current rules.)\n\n\ud83e\udd2f WOW FACT:\nA company can move between groups as its market cap changes. A small-cap today can be a mid-cap in the future, or a large-cap can slide down!\n\n\u26a1 FINANCIAL INTEL: GENERAL TENDENCIES (NOT RULES)\n\u2022 Large-caps: usually more stable and easier to trade, but may grow more slowly.\n\u2022 Mid-caps: may have room to grow, with more price swings than large-caps.\n\u2022 Small-caps: may grow fast, but can fall sharply, and can be harder to sell quickly (liquidity risk).\n\n\u26a1 FINANCIAL INTEL: A SIMPLE PICTURE\nThink of ships. Large-caps are big ocean liners: steadier in waves. Small-caps are speedboats: quick, but tossed around by waves. Neither ship is automatically better. They suit different journeys.\n\n\u26a1 FINANCIAL INTEL: LINK TO RISK\nRemember Module 1: more potential return generally comes with more risk. Smaller companies often show this tendency, but there is no guarantee for any company.\n\n\ud83e\uddea TRY IT: LABEL IT\nA fictional company has market cap \u20b92,00,000 crore and is among the top 100 by size. Which group? Large-cap.\n\n\ud83d\udca1 CORE TAKEAWAY:\nLarge, mid and small cap describe company size by market cap. Smaller companies tend to be more volatile, but nothing is guaranteed.",
+      "quiz": [
+        {
+          "question": "What is used to group companies into large, mid and small cap?",
+          "options": [
+            "Face value",
+            "Number of employees",
+            "Market capitalisation",
+            "Colour of the logo"
+          ],
+          "correctIndex": 2,
+          "explanation": "Market cap is the basis for size groups."
+        },
+        {
+          "question": "Which group usually has the biggest price swings?",
+          "options": [
+            "Large-cap",
+            "They are all identical",
+            "Government bonds",
+            "Small-cap"
+          ],
+          "correctIndex": 3,
+          "explanation": "Smaller companies tend to be more volatile."
+        },
+        {
+          "question": "Which statement is true about large-caps?",
+          "options": [
+            "They are usually more stable but not risk-free",
+            "They never fall",
+            "They always grow fastest",
+            "They are always cheap"
+          ],
+          "correctIndex": 0,
+          "explanation": "Large-caps tend to be steadier, but can still fall."
+        },
+        {
+          "question": "Can a company move from small-cap to mid-cap?",
+          "options": [
+            "No, never",
+            "Yes, if its market cap grows",
+            "Only if SEBI renames it",
+            "Only on Fridays"
+          ],
+          "correctIndex": 1,
+          "explanation": "Groups follow market cap, which changes."
+        },
+        {
+          "question": "Why can small-caps carry liquidity risk?",
+          "options": [
+            "They pay no tax",
+            "They have no owners",
+            "They can be harder to sell quickly",
+            "They cannot be listed"
+          ],
+          "correctIndex": 2,
+          "explanation": "Fewer buyers and sellers can make selling harder."
+        }
+      ]
+    },
+    {
+      "id": "submod-2-11",
+      "title": "11. Styles of Stocks: Blue-Chip, Growth, Value, Dividend and Penny",
+      "intro": "What do all these stock 'labels' mean?",
+      "content": "\u26a1 MISSION BRIEFING: COMMON LABELS\nInvestors also use labels that describe a stock's style. Labels are shortcuts, not promises.\n\u2022 Blue-chip: large, well-established, financially strong companies with a long track record.\n\u2022 Growth: companies expected to grow faster than average. They often reinvest profits rather than pay big dividends.\n\u2022 Value: shares that seem priced low compared with the business behind them. They may be undervalued, or cheap for a reason.\n\u2022 Dividend: companies known for paying regular dividends.\n\u2022 Penny stocks: very low-priced shares, often of tiny, thinly traded companies.\n\n\ud83e\udd2f WOW FACT:\nThe term 'blue-chip' comes from poker, where blue chips are the most valuable. It has nothing to do with the colour of the company's logo!\n\n\u26a1 FINANCIAL INTEL: A CLOSER LOOK AT PENNY STOCKS\nPenny stocks can look tempting because the price is low, so you can 'buy a lot'. But a low price is not the same as cheap. They often have little information, few buyers, and wild swings. They are also commonly used in pump-and-dump schemes, where fraudsters hype a share and then sell. Treat tips about them very carefully.\n\n\u26a1 FINANCIAL INTEL: LABELS CAN OVERLAP OR CHANGE\nA company can be a large-cap and a dividend payer. A growth company may mature into a blue-chip. A 'value' label can turn out wrong if the business is truly weak. Always look at the business, not just the label.\n\n\ud83c\udf55 MINI CASE: FICTIONAL EXAMPLES\nSteady Steel Ltd: large, old, pays regular dividends, so blue-chip and dividend. Zippy Apps Ltd: young, reinvests everything, expected to grow fast, so a growth company. Tiny Toys Ltd: priced at \u20b95, hardly traded: a penny stock with high risk.\n\n\ud83e\uddea TRY IT: YOUR LABELS\nPick 3 made-up companies and give each a label. Then write one risk for each label.\n\n\ud83d\udca1 CORE TAKEAWAY:\nStock labels describe style, not safety or returns. Be extra careful with penny stocks and anyone hyping them.",
+      "quiz": [
+        {
+          "question": "What is a blue-chip stock?",
+          "options": [
+            "Any share priced below \u20b910",
+            "A share with a blue logo",
+            "A new company with no history",
+            "A large, well-established, financially strong company"
+          ],
+          "correctIndex": 3,
+          "explanation": "Blue-chips are large, established companies."
+        },
+        {
+          "question": "Growth companies usually:",
+          "options": [
+            "Reinvest profits to expand faster",
+            "Always pay the highest dividends",
+            "Never change in price",
+            "Are guaranteed to grow"
+          ],
+          "correctIndex": 0,
+          "explanation": "Growth companies often reinvest rather than pay big dividends."
+        },
+        {
+          "question": "What is a penny stock?",
+          "options": [
+            "A share of the largest company",
+            "A very low-priced share, often of a tiny, thinly traded company",
+            "A guaranteed profit share",
+            "A government bond"
+          ],
+          "correctIndex": 1,
+          "explanation": "Penny stocks are low-priced, risky and often thinly traded."
+        },
+        {
+          "question": "A low price per share means the share is:",
+          "options": [
+            "Always a bargain",
+            "Always safe",
+            "Not automatically cheap or safe",
+            "Guaranteed to rise"
+          ],
+          "correctIndex": 2,
+          "explanation": "Price alone does not show value or safety."
+        },
+        {
+          "question": "What is a pump-and-dump scheme?",
+          "options": [
+            "A company paying a special dividend",
+            "An IPO process",
+            "A type of mutual fund",
+            "Fraudsters hype a share, then sell to those who buy in"
+          ],
+          "correctIndex": 3,
+          "explanation": "Hype pushes the price up so schemers can sell at a high price."
+        }
+      ]
+    },
+    {
+      "id": "submod-2-12",
+      "title": "12. Case Study and Common Beginner Mistakes",
+      "intro": "Can you put the whole module together?",
+      "content": "\u26a1 MISSION BRIEFING: COMMON BEGINNER MISTAKES\n1. Thinking a low share price means a cheap share.\n2. Chasing tips from social media or messaging groups.\n3. Confusing the primary market with the secondary market.\n4. Expecting every IPO to give a listing gain.\n5. Ignoring risk, especially in small-caps and penny stocks.\n6. Treating a bonus or split as free money.\n7. Investing money you will need soon.\n8. Not reading official information.\n\n\ud83e\udd2f WOW FACT:\nMost mistakes come from rushing. Slow, curious learning is a real advantage in markets!\n\n\u26a1 FINANCIAL INTEL: MODULE RECAP\n\u2022 A share is a slice of ownership. Value can rise or fall.\n\u2022 Market cap = price x number of shares.\n\u2022 Companies list to raise money. IPO is the first public sale.\n\u2022 FPO, rights issue and OFS are other ways to issue or sell shares.\n\u2022 Bonus and splits change share count, not total value. Dividends are cash from profits.\n\u2022 The secondary market is where listed shares trade between investors.\n\u2022 Retail, institutions, brokers and SEBI each play a role.\n\u2022 Demand and supply move prices.\n\u2022 Large, mid and small cap describe size. Labels describe style.\n\n\ud83c\udf55 MINI CASE: DEV AND THE TIP (FICTIONAL)\nDev, 15, sees a post: 'Penny stock will 10x this month!' The share costs \u20b94. Instead of rushing, he asks: Who wrote this? What does the company do? Is it thinly traded? Can anyone really promise returns? He finds no reliable information, so he skips it and notes the post as a warning sign.\n\n\u26a1 FINANCIAL INTEL: A SIMPLE QUESTION LIST\nBefore looking at any stock in the simulator, ask: What does the company do? What is its size group? How does it make money? What are the risks? Do I understand it?\n\n\ud83e\uddea TRY IT: YOUR ACTION LIST\n1. Write down the three terms you found hardest. 2. Explain them to a friend or parent. 3. Remember: Bull Run uses simulated prices for practice only.\n\n\ud83d\udca1 CORE TAKEAWAY:\nYou now know how stocks are issued, traded and grouped. Question tips, respect risk and keep learning before the next module.",
+      "quiz": [
+        {
+          "question": "Which is a common beginner mistake?",
+          "options": [
+            "Believing a low share price always means a bargain",
+            "Reading official information",
+            "Learning before investing",
+            "Asking questions about a tip"
+          ],
+          "correctIndex": 0,
+          "explanation": "A low price does not make a share cheap."
+        },
+        {
+          "question": "A post promises a penny stock will '10x this month'. What is the best response?",
+          "options": [
+            "Put all savings in at once",
+            "Be careful, since no one can promise such returns",
+            "Share it with friends",
+            "Treat it as safe"
+          ],
+          "correctIndex": 1,
+          "explanation": "Promises of huge returns are a warning sign."
+        },
+        {
+          "question": "Which describes the secondary market?",
+          "options": [
+            "A company's first sale of shares",
+            "A bank loan market",
+            "Investors trading listed shares with each other",
+            "A type of dividend"
+          ],
+          "correctIndex": 2,
+          "explanation": "Secondary market trades happen between investors."
+        },
+        {
+          "question": "After a 1:1 bonus, your total value:",
+          "options": [
+            "Doubles for sure",
+            "Falls to zero",
+            "Is paid as cash",
+            "Does not rise by itself"
+          ],
+          "correctIndex": 3,
+          "explanation": "The price adjusts when shares increase."
+        },
+        {
+          "question": "In Bull Run, share prices are:",
+          "options": [
+            "Simulated, for practice",
+            "Live from the exchange",
+            "Guaranteed to rise",
+            "Real money"
+          ],
+          "correctIndex": 0,
+          "explanation": "The simulator uses simulated prices only."
+        }
+      ]
     }
   ]
 }

@@ -1,48 +1,252 @@
 {
   "id": "mod-7",
-  "title": "Module 7: Valuation and Stock Selection",
+  "title": "Valuation and Stock Selection",
   "submodules": [
     {
       "id": "submod-7-1",
-      "title": "1. Intrinsic Value vs. Market Price",
-      "intro": "Price vs. worth",
-      "content": "⚡ MISSION BRIEFING: Intrinsic Value vs. Market Price: Price vs. worth\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "1. Intrinsic Value vs Market Price",
+      "intro": "Discover the important ideas behind intrinsic value vs market price.",
+      "content": "⚡ MISSION BRIEFING: INTRINSIC VALUE VS MARKET PRICE\n\nIntrinsic Value vs Market Price is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Understanding price versus business value are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Understanding price versus business value. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Understanding price versus business value is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what intrinsic value vs market price means, then examines how understanding price versus business value affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nIntrinsic Value vs Market Price helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying intrinsic value vs market price?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about intrinsic value vs market price?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-7-2",
       "title": "2. Valuation Methods",
-      "intro": "Relative valuation, DCF, dividend discount model",
-      "content": "⚡ MISSION BRIEFING: Valuation Methods: Relative valuation, DCF, dividend discount model\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind valuation methods.",
+      "content": "⚡ MISSION BRIEFING: VALUATION METHODS\n\nValuation Methods is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Relative valuation, DCF and dividend discount model are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Relative valuation. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Relative valuation is the starting concept to understand.\n• DCF and dividend discount model is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what valuation methods means, then examines how relative valuation, dcf and dividend discount model affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nValuation Methods helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying valuation methods?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about valuation methods?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-7-3",
       "title": "3. Margin of Safety",
-      "intro": "Buying with a cushion",
-      "content": "⚡ MISSION BRIEFING: Margin of Safety: Buying with a cushion\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind margin of safety.",
+      "content": "⚡ MISSION BRIEFING: MARGIN OF SAFETY\n\nMargin of Safety is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Understanding a valuation cushion are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Understanding a valuation cushion. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Understanding a valuation cushion is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what margin of safety means, then examines how understanding a valuation cushion affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMargin of Safety helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying margin of safety?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about margin of safety?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-7-4",
       "title": "4. Investment Philosophies",
-      "intro": "Value (Graham, Buffett), growth (Lynch, Fisher), momentum, quality",
-      "content": "⚡ MISSION BRIEFING: Investment Philosophies: Value (Graham, Buffett), growth (Lynch, Fisher), momentum, quality\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind investment philosophies.",
+      "content": "⚡ MISSION BRIEFING: INVESTMENT PHILOSOPHIES\n\nInvestment Philosophies is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Value, growth, momentum and quality investing are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Value. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Value is the starting concept to understand.\n• growth is another important element of this subject.\n• momentum and quality investing is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what investment philosophies means, then examines how value, growth, momentum and quality investing affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nInvestment Philosophies helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying investment philosophies?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about investment philosophies?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-7-5",
       "title": "5. Screening Stocks",
-      "intro": "Screener.in, Tickertape, NSE/BSE websites",
-      "content": "⚡ MISSION BRIEFING: Screening Stocks: Screener.in, Tickertape, NSE/BSE websites\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind screening stocks.",
+      "content": "⚡ MISSION BRIEFING: SCREENING STOCKS\n\nScreening Stocks is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Understanding stock screeners and financial filters are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Understanding stock screeners and financial filters. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Understanding stock screeners and financial filters is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what screening stocks means, then examines how understanding stock screeners and financial filters affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nScreening Stocks helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying screening stocks?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about screening stocks?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-7-6",
       "title": "6. Watchlist and Investment Thesis",
-      "intro": "Building a watchlist and thesis",
-      "content": "⚡ MISSION BRIEFING: Watchlist and Investment Thesis: Building a watchlist and thesis\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind watchlist and investment thesis.",
+      "content": "⚡ MISSION BRIEFING: WATCHLIST AND INVESTMENT THESIS\n\nWatchlist and Investment Thesis is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Building a watchlist and evaluating a business are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Building a watchlist and evaluating a business. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Building a watchlist and evaluating a business is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what watchlist and investment thesis means, then examines how building a watchlist and evaluating a business affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nWatchlist and Investment Thesis helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying watchlist and investment thesis?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about watchlist and investment thesis?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     }
   ]
 }

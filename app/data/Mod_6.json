@@ -1,76 +1,416 @@
 {
   "id": "mod-6",
-  "title": "Module 6: Fundamental Analysis II (Company Analysis)",
+  "title": "Fundamental Analysis II - Company Analysis",
   "submodules": [
     {
       "id": "submod-6-1",
       "title": "1. Reading Financial Statements",
-      "intro": "Balance sheet, P&L, cash flow statement",
-      "content": "⚡ MISSION BRIEFING: Reading Financial Statements: Balance sheet, P&L, cash flow statement\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind reading financial statements.",
+      "content": "⚡ MISSION BRIEFING: READING FINANCIAL STATEMENTS\n\nReading Financial Statements is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Balance sheet, profit and loss and cash flow statement are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Balance sheet. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Balance sheet is the starting concept to understand.\n• profit and loss and cash flow statement is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what reading financial statements means, then examines how balance sheet, profit and loss and cash flow statement affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nReading Financial Statements helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying reading financial statements?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about reading financial statements?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-2",
       "title": "2. Annual Report Sections",
-      "intro": "Director's report, auditor's report, notes to accounts",
-      "content": "⚡ MISSION BRIEFING: Annual Report Sections: Director's report, auditor's report, notes to accounts\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind annual report sections.",
+      "content": "⚡ MISSION BRIEFING: ANNUAL REPORT SECTIONS\n\nAnnual Report Sections is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Directors report, auditors report and notes to accounts are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Directors report. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Directors report is the starting concept to understand.\n• auditors report and notes to accounts is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what annual report sections means, then examines how directors report, auditors report and notes to accounts affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nAnnual Report Sections helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying annual report sections?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about annual report sections?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-3",
       "title": "3. Key Ratios",
-      "intro": "Overview of ratio families",
-      "content": "⚡ MISSION BRIEFING: Key Ratios: Overview of ratio families\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind key ratios.",
+      "content": "⚡ MISSION BRIEFING: KEY RATIOS\n\nKey Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Understanding financial ratio categories are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Understanding financial ratio categories. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Understanding financial ratio categories is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what key ratios means, then examines how understanding financial ratio categories affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nKey Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying key ratios?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about key ratios?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-4",
       "title": "4. Profitability Ratios",
-      "intro": "ROE, ROCE, net and operating margin",
-      "content": "⚡ MISSION BRIEFING: Profitability Ratios: ROE, ROCE, net and operating margin\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind profitability ratios.",
+      "content": "⚡ MISSION BRIEFING: PROFITABILITY RATIOS\n\nProfitability Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. ROE, ROCE, net margin and operating margin are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of ROE. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• ROE is the starting concept to understand.\n• ROCE is another important element of this subject.\n• net margin and operating margin is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what profitability ratios means, then examines how roe, roce, net margin and operating margin affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nProfitability Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying profitability ratios?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about profitability ratios?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-5",
       "title": "5. Valuation Ratios",
-      "intro": "P/E, P/B, EV/EBITDA, PEG, dividend yield",
-      "content": "⚡ MISSION BRIEFING: Valuation Ratios: P/E, P/B, EV/EBITDA, PEG, dividend yield\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind valuation ratios.",
+      "content": "⚡ MISSION BRIEFING: VALUATION RATIOS\n\nValuation Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. P/E, P/B, EV/EBITDA, PEG and dividend yield are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of P/E. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• P/E is the starting concept to understand.\n• P/B is another important element of this subject.\n• EV/EBITDA is another important element of this subject.\n• PEG and dividend yield is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what valuation ratios means, then examines how p/e, p/b, ev/ebitda, peg and dividend yield affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nValuation Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying valuation ratios?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about valuation ratios?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-6",
       "title": "6. Liquidity and Leverage",
-      "intro": "Current ratio, debt-to-equity, interest coverage",
-      "content": "⚡ MISSION BRIEFING: Liquidity and Leverage: Current ratio, debt-to-equity, interest coverage\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind liquidity and leverage.",
+      "content": "⚡ MISSION BRIEFING: LIQUIDITY AND LEVERAGE\n\nLiquidity and Leverage is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Current ratio, debt-to-equity and interest coverage are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Current ratio. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Current ratio is the starting concept to understand.\n• debt-to-equity and interest coverage is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what liquidity and leverage means, then examines how current ratio, debt-to-equity and interest coverage affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nLiquidity and Leverage helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying liquidity and leverage?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about liquidity and leverage?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-7",
       "title": "7. Efficiency Ratios",
-      "intro": "Asset turnover, inventory days, receivable days",
-      "content": "⚡ MISSION BRIEFING: Efficiency Ratios: Asset turnover, inventory days, receivable days\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind efficiency ratios.",
+      "content": "⚡ MISSION BRIEFING: EFFICIENCY RATIOS\n\nEfficiency Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Asset turnover, inventory days and receivable days are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Asset turnover. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Asset turnover is the starting concept to understand.\n• inventory days and receivable days is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what efficiency ratios means, then examines how asset turnover, inventory days and receivable days affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nEfficiency Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying efficiency ratios?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about efficiency ratios?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-8",
       "title": "8. Qualitative Factors",
-      "intro": "Management quality, promoter holding, governance, moat, brand",
-      "content": "⚡ MISSION BRIEFING: Qualitative Factors: Management quality, promoter holding, governance, moat, brand\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind qualitative factors.",
+      "content": "⚡ MISSION BRIEFING: QUALITATIVE FACTORS\n\nQualitative Factors is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Management, promoter holding, governance, moat and brand are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Management. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Management is the starting concept to understand.\n• promoter holding is another important element of this subject.\n• governance is another important element of this subject.\n• moat and brand is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what qualitative factors means, then examines how management, promoter holding, governance, moat and brand affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nQualitative Factors helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying qualitative factors?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about qualitative factors?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-9",
       "title": "9. Shareholding Patterns",
-      "intro": "Promoter, FII, DII, public, pledged shares",
-      "content": "⚡ MISSION BRIEFING: Shareholding Patterns: Promoter, FII, DII, public, pledged shares\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind shareholding patterns.",
+      "content": "⚡ MISSION BRIEFING: SHAREHOLDING PATTERNS\n\nShareholding Patterns is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Promoters, FIIs, DIIs, public and pledged shares are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Promoters. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Promoters is the starting concept to understand.\n• FIIs is another important element of this subject.\n• DIIs is another important element of this subject.\n• public and pledged shares is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what shareholding patterns means, then examines how promoters, fiis, diis, public and pledged shares affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nShareholding Patterns helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying shareholding patterns?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about shareholding patterns?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-6-10",
       "title": "10. Red Flags",
-      "intro": "High debt, falling cash flows, auditor changes, related-party transactions",
-      "content": "⚡ MISSION BRIEFING: Red Flags: High debt, falling cash flows, auditor changes, related-party transactions\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind red flags.",
+      "content": "⚡ MISSION BRIEFING: RED FLAGS\n\nRed Flags is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. High debt, falling cash flows, auditor changes and related-party transactions are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of High debt. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• High debt is the starting concept to understand.\n• falling cash flows is another important element of this subject.\n• auditor changes and related-party transactions is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what red flags means, then examines how high debt, falling cash flows, auditor changes and related-party transactions affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nRed Flags helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying red flags?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about red flags?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     }
   ]
 }

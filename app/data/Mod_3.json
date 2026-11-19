@@ -1,41 +1,211 @@
 {
   "id": "mod-3",
-  "title": "Module 3: Market Structure and Regulation",
+  "title": "Market Structure and Regulation",
   "submodules": [
     {
       "id": "submod-3-1",
       "title": "1. Exchanges",
-      "intro": "NSE, BSE and their roles",
-      "content": "⚡ MISSION BRIEFING: Exchanges: NSE, BSE and their roles\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind exchanges.",
+      "content": "⚡ MISSION BRIEFING: EXCHANGES\n\nExchanges is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. NSE, BSE and their roles are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of NSE. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• NSE is the starting concept to understand.\n• BSE and their roles is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what exchanges means, then examines how nse, bse and their roles affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nExchanges helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying exchanges?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about exchanges?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-3-2",
       "title": "2. Regulators",
-      "intro": "SEBI, RBI and the Ministry of Finance",
-      "content": "⚡ MISSION BRIEFING: Regulators: SEBI, RBI and the Ministry of Finance\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind regulators.",
+      "content": "⚡ MISSION BRIEFING: REGULATORS\n\nRegulators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. SEBI, RBI and Ministry of Finance are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of SEBI. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• SEBI is the starting concept to understand.\n• RBI and Ministry of Finance is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what regulators means, then examines how sebi, rbi and ministry of finance affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nRegulators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying regulators?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about regulators?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-3-3",
       "title": "3. Market Indices",
-      "intro": "Nifty 50, Sensex, Bank Nifty, sectoral indices, how indices are calculated",
-      "content": "⚡ MISSION BRIEFING: Market Indices: Nifty 50, Sensex, Bank Nifty, sectoral indices, how indices are calculated\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind market indices.",
+      "content": "⚡ MISSION BRIEFING: MARKET INDICES\n\nMarket Indices is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Nifty 50, Sensex, Bank Nifty and sectoral indices are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Nifty 50. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Nifty 50 is the starting concept to understand.\n• Sensex is another important element of this subject.\n• Bank Nifty and sectoral indices is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what market indices means, then examines how nifty 50, sensex, bank nifty and sectoral indices affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMarket Indices helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying market indices?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about market indices?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-3-4",
-      "title": "4. Market Participants' Roles",
-      "intro": "Depositories (NSDL, CDSL), clearing corporations, depository participants",
-      "content": "⚡ MISSION BRIEFING: Market Participants' Roles: Depositories (NSDL, CDSL), clearing corporations, depository participants\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "4. Market Participants Roles",
+      "intro": "Discover the important ideas behind market participants roles.",
+      "content": "⚡ MISSION BRIEFING: MARKET PARTICIPANTS ROLES\n\nMarket Participants Roles is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. NSDL, CDSL, clearing corporations and depository participants are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of NSDL. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• NSDL is the starting concept to understand.\n• CDSL is another important element of this subject.\n• clearing corporations and depository participants is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what market participants roles means, then examines how nsdl, cdsl, clearing corporations and depository participants affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMarket Participants Roles helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying market participants roles?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about market participants roles?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-3-5",
       "title": "5. Investor Protection",
-      "intro": "SEBI rules, SCORES, insider trading, circuit breakers",
-      "content": "⚡ MISSION BRIEFING: Investor Protection: SEBI rules, SCORES, insider trading, circuit breakers\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind investor protection.",
+      "content": "⚡ MISSION BRIEFING: INVESTOR PROTECTION\n\nInvestor Protection is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. SEBI rules, SCORES, insider trading and circuit breakers are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of SEBI rules. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• SEBI rules is the starting concept to understand.\n• SCORES is another important element of this subject.\n• insider trading and circuit breakers is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what investor protection means, then examines how sebi rules, scores, insider trading and circuit breakers affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nInvestor Protection helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying investor protection?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about investor protection?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     }
   ]
 }

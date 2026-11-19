@@ -1,41 +1,211 @@
 {
   "id": "mod-5",
-  "title": "Module 5: Fundamental Analysis I (Economy and Industry)",
+  "title": "Fundamental Analysis I - Economy and Industry",
   "submodules": [
     {
       "id": "submod-5-1",
       "title": "1. Macroeconomic Indicators",
-      "intro": "GDP, inflation (CPI/WPI), interest rates, repo rate, fiscal deficit, currency movement",
-      "content": "⚡ MISSION BRIEFING: Macroeconomic Indicators: GDP, inflation (CPI/WPI), interest rates, repo rate, fiscal deficit, currency movement\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind macroeconomic indicators.",
+      "content": "⚡ MISSION BRIEFING: MACROECONOMIC INDICATORS\n\nMacroeconomic Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. GDP, CPI, WPI, inflation, interest rates and fiscal deficit are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of GDP. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• GDP is the starting concept to understand.\n• CPI is another important element of this subject.\n• WPI is another important element of this subject.\n• inflation is another important element of this subject.\n• interest rates and fiscal deficit is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what macroeconomic indicators means, then examines how gdp, cpi, wpi, inflation, interest rates and fiscal deficit affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMacroeconomic Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying macroeconomic indicators?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about macroeconomic indicators?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-5-2",
       "title": "2. Economic Cycles",
-      "intro": "Expansion, peak, recession, recovery",
-      "content": "⚡ MISSION BRIEFING: Economic Cycles: Expansion, peak, recession, recovery\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind economic cycles.",
+      "content": "⚡ MISSION BRIEFING: ECONOMIC CYCLES\n\nEconomic Cycles is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Expansion, peak, recession and recovery are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Expansion. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Expansion is the starting concept to understand.\n• peak is another important element of this subject.\n• recession and recovery is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what economic cycles means, then examines how expansion, peak, recession and recovery affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nEconomic Cycles helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying economic cycles?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about economic cycles?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-5-3",
       "title": "3. Global Factors",
-      "intro": "Crude oil, US Fed policy, geopolitical events",
-      "content": "⚡ MISSION BRIEFING: Global Factors: Crude oil, US Fed policy, geopolitical events\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind global factors.",
+      "content": "⚡ MISSION BRIEFING: GLOBAL FACTORS\n\nGlobal Factors is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Crude oil, US Federal Reserve and geopolitical events are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Crude oil. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Crude oil is the starting concept to understand.\n• US Federal Reserve and geopolitical events is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what global factors means, then examines how crude oil, us federal reserve and geopolitical events affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nGlobal Factors helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying global factors?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about global factors?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-5-4",
       "title": "4. Industry Analysis",
-      "intro": "Sector life cycle, competition, entry barriers, government policy",
-      "content": "⚡ MISSION BRIEFING: Industry Analysis: Sector life cycle, competition, entry barriers, government policy\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "intro": "Discover the important ideas behind industry analysis.",
+      "content": "⚡ MISSION BRIEFING: INDUSTRY ANALYSIS\n\nIndustry Analysis is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Sector life cycle, competition, entry barriers and government policy are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Sector life cycle. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Sector life cycle is the starting concept to understand.\n• competition is another important element of this subject.\n• entry barriers and government policy is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what industry analysis means, then examines how sector life cycle, competition, entry barriers and government policy affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nIndustry Analysis helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying industry analysis?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about industry analysis?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     },
     {
       "id": "submod-5-5",
-      "title": "5. Top-down vs. Bottom-up Approach",
-      "intro": "Two ways to pick stocks",
-      "content": "⚡ MISSION BRIEFING: Top-down vs. Bottom-up Approach: Two ways to pick stocks\nThis lesson is being prepared.\n\n💡 CORE TAKEAWAY:\nContent coming soon.",
-      "quiz": []
+      "title": "5. Top-down vs Bottom-up",
+      "intro": "Discover the important ideas behind top-down vs bottom-up.",
+      "content": "⚡ MISSION BRIEFING: TOP-DOWN VS BOTTOM-UP\n\nTop-down vs Bottom-up is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Two approaches to analysing investments are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Two approaches to analysing investments. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Two approaches to analysing investments is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what top-down vs bottom-up means, then examines how two approaches to analysing investments affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nTop-down vs Bottom-up helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "quiz": [
+        {
+          "question": "What is the main purpose of studying top-down vs bottom-up?",
+          "options": [
+            "To understand an important financial concept",
+            "To guarantee investment returns",
+            "To predict every market movement",
+            "To avoid analysing information"
+          ],
+          "correctIndex": 0,
+          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+        },
+        {
+          "question": "Which approach is most useful when learning about top-down vs bottom-up?",
+          "options": [
+            "Rely on rumours",
+            "Understand the concepts and examine reliable information",
+            "Follow every market headline",
+            "Assume all companies behave identically"
+          ],
+          "correctIndex": 1,
+          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+        },
+        {
+          "question": "Which organisation operates as a securities market regulator in India?",
+          "options": [
+            "SEBI",
+            "A private stockbroker",
+            "A retail investor",
+            "A listed company"
+          ],
+          "correctIndex": 0,
+          "explanation": "SEBI regulates India's securities market."
+        }
+      ]
     }
   ]
 }

@@ -1,220 +1,460 @@
 {
   "id": "mod-1",
-  "title": "Module 1: Foundations of Money and Investing",
+  "title": "Foundations of Money and Investing",
   "submodules": [
     {
       "id": "submod-1-1",
-      "title": "1. The Basics of Money and Finance",
-      "intro": "Is keeping money the same as growing money?",
-      "content": "⚡ MISSION BRIEFING: SAVING VS. INVESTING\nSaving: keeping money aside for future use. It is generally safer and easier to access.\nInvesting: putting money into assets that may grow in value or generate income. Returns are not guaranteed.\n\n⚡ FINANCIAL INTEL: INFLATION\nInflation means the general prices of goods and services rise over time, so the same money buys fewer things.\nToday: ₹100 buys a sandwich (₹50) and a juice (₹50). A few years later, both cost more and ₹100 may not be enough.\nYour money hasn't disappeared, but its purchasing power has decreased.\n\n⚡ FINANCIAL INTEL: TIME VALUE OF MONEY\nMoney today is generally worth more than the same amount later, because today's money can be saved or invested to earn returns.\nChoice A: ₹1,000 today. Choice B: ₹1,000 after three years. Choice A lets you save or invest in the meantime.\n\n💡 CORE TAKEAWAY:\nSaving protects money for planned needs; investing aims to grow it, with risk.",
+      "title": "1. What Is Money? Needs, Wants and Value",
+      "intro": "What is money, and why do we use it?",
+      "content": "\u26a1 MISSION BRIEFING: WHAT IS MONEY?\nMoney is anything people agree to accept in exchange for goods and services. Today that means coins, notes, bank balances and digital payments like UPI.\nLong ago people used barter: swapping wheat for cloth. Barter is hard because both people must want what the other has.\nMoney fixes this. It is a medium of exchange, a store of value and a unit of measure.\n\n\ud83e\udd2f WOW FACT:\nOn the island of Yap, people once used giant stone wheels as money! Money works because everyone trusts and agrees it has value.\n\n\u26a1 FINANCIAL INTEL: NEEDS VS. WANTS\n\u2022 Needs: things you must have, like food, school books and a safe home.\n\u2022 Wants: nice-to-have things, like a gaming skin or trendy sneakers.\nExample: School shoes for \u20b9800 are a need. A \u20b94,000 limited-edition pair is mostly a want. Wants are not bad. Cover needs first, then choose wants on purpose.\n\n\u26a1 FINANCIAL INTEL: INCOME AND EXPENSES\nIncome is money coming in (pocket money, a gift, later a salary). Expenses are money going out (snacks, tickets, recharges).\nIncome minus expenses = surplus, which you can save or invest. If expenses are bigger, that is a deficit.\nExample: Aman gets \u20b91,000 a month and spends \u20b9700. His surplus is \u20b9300.\n\n\ud83e\uddea TRY IT: THE 3-COLUMN LIST\nWrite down what you spent money on last week. Put each item in a column: Need, Want or Saved. Add up each column. There is no right or wrong answer. You cannot manage what you do not notice.\n\n\ud83d\udca1 CORE TAKEAWAY:\nMoney is a tool. Knowing needs from wants, and income from expenses, is step one to using it well.",
       "quiz": [
         {
-          "question": "What is the main difference between saving and investing?",
-          "options": [
-            "Saving always gives higher returns",
-            "Saving keeps money aside, while investing aims to grow it",
-            "Investing guarantees profits",
-            "There is no difference"
-          ],
-          "correctIndex": 1,
-          "explanation": "Saving keeps money aside; investing aims for growth but returns are not guaranteed."
+          "question": "Which is an example of barter?",
+          "options": ["Swapping 2 kg of wheat for cloth without using money", "Paying a shopkeeper through UPI", "Withdrawing cash from an ATM", "Keeping money in a savings account"],
+          "correctIndex": 0,
+          "explanation": "Barter means trading goods directly, with no money involved."
         },
         {
-          "question": "What happens to the purchasing power of money when inflation increases?",
-          "options": [
-            "It increases",
-            "It stays the same",
-            "It generally decreases",
-            "It doubles"
-          ],
+          "question": "Money acting as a 'store of value' means:",
+          "options": ["It gives every item a price", "It can be swapped directly for wheat", "You can keep it and use it later", "It always increases in value"],
           "correctIndex": 2,
-          "explanation": "Rising prices mean the same money buys less."
+          "explanation": "A store of value holds its worth over time so you can spend it later. It does not mean it always grows."
         },
         {
-          "question": "Why can receiving money today be more valuable than the same amount later?",
-          "options": [
-            "Future money is illegal",
-            "Today's money can be saved or invested to earn returns",
-            "Banks close in future",
-            "It is not more valuable"
-          ],
+          "question": "Which is most clearly a need rather than a want?",
+          "options": ["A limited-edition gaming skin", "A third pair of branded sneakers", "Tickets for a weekend movie", "School books required for your class"],
+          "correctIndex": 3,
+          "explanation": "Needs are things you must have. Required school books are a need; the others are wants."
+        },
+        {
+          "question": "Aman gets \u20b91,000 a month and spends \u20b9700. What is his surplus?",
+          "options": ["\u20b9700", "\u20b9300", "\u20b91,000", "\u20b91,700"],
           "correctIndex": 1,
-          "explanation": "Money today can start earning returns right away."
+          "explanation": "Surplus = income - expenses = \u20b91,000 - \u20b9700 = \u20b9300."
+        },
+        {
+          "question": "If your expenses are more than your income, what is this called?",
+          "options": ["A surplus", "Barter", "A deficit", "Compounding"],
+          "correctIndex": 2,
+          "explanation": "When money going out is more than money coming in, it is a deficit."
         }
       ]
     },
     {
       "id": "submod-1-2",
-      "title": "2. The Power of Compounding",
-      "intro": "Can your money make more money?",
-      "content": "⚡ MISSION BRIEFING: COMPOUNDING\nCompounding happens when your returns start earning returns of their own. You earn on your original money, and then on the growth as well.\nExample (hypothetical): ₹1,000 at 10% a year becomes ₹1,331 after 3 years. This is a mathematical example, not a promised return.\n\n⚡ FINANCIAL INTEL: THE RULE OF 72\nYears to double = 72 ÷ Annual return (%)\n• 6% return → about 12 years\n• 8% return → about 9 years\n• 12% return → about 6 years\n\n⚡ FINANCIAL INTEL: EARLY VS. LATE\nAarav starts at age 20 and Rohan at age 30. Both invest a hypothetical ₹10,000 once at an assumed 8% a year.\n• Aarav (20 years) → about ₹46,610 at age 40\n• Rohan (10 years) → about ₹21,589 at age 40\n\n💡 CORE TAKEAWAY:\nTime can make a significant difference to compound growth.",
+      "title": "2. Saving vs. Investing",
+      "intro": "Is keeping money the same as growing money?",
+      "content": "\u26a1 MISSION BRIEFING: SAVING VS. INVESTING\nSaving means keeping money aside for future use. It is generally safer and easier to access.\nInvesting means putting money into assets that may grow in value or earn income. Returns are not guaranteed, and you can lose money.\n\n\ud83e\udd2f WOW FACT:\nSetting aside just \u20b950 a day adds up to \u20b918,250 in a year (50 x 365). Small habits become big numbers!\n\n\u26a1 FINANCIAL INTEL: SIDE BY SIDE\n\u2022 Purpose: saving is for planned needs soon; investing is for growing money over a longer time.\n\u2022 Risk: saving is generally low risk; investing carries more risk.\n\u2022 Access: saved money is easy to reach; invested money may take time to sell, or sell for less than you paid.\nNeither is 'better'. They do different jobs.\n\n\u26a1 FINANCIAL INTEL: THE EMERGENCY FUND\nAn emergency fund is money kept aside for surprises, like a broken phone screen or a medical bill. Without it, a surprise cost may force you to sell investments at a bad time, maybe at a loss.\nExample: Meera keeps \u20b92,000 aside for surprises first. Only money she will not need soon is ever something she would think about investing.\n\n\u26a1 FINANCIAL INTEL: A SIMPLE ORDER\n1. Cover your needs.\n2. Build a small emergency cushion.\n3. Save for goals coming up soon.\n4. Learn about investing for goals that are further away.\n(This is a learning guide, not personal financial advice.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nSaving protects money for planned needs; investing aims to grow it, with risk. A safety cushion comes first.",
       "quiz": [
         {
-          "question": "What makes compounding different from simple interest?",
-          "options": [
-            "Returns earn returns of their own",
-            "It is always guaranteed",
-            "It only works for gold",
-            "There is no difference"
-          ],
+          "question": "Which best describes investing?",
+          "options": ["Keeping money in a drawer for next week", "Spending money on wants", "Putting money into assets that may grow or earn income, with no guarantee", "Lending money with a guaranteed profit"],
+          "correctIndex": 2,
+          "explanation": "Investing aims for growth or income, but returns are never guaranteed."
+        },
+        {
+          "question": "Which is generally safer and easier to access?",
+          "options": ["Saving", "Investing", "Both are exactly the same", "Neither"],
           "correctIndex": 0,
-          "explanation": "Compounding earns returns on both the original money and previous growth."
+          "explanation": "Savings are usually lower risk and easy to reach. Investments carry more risk."
         },
         {
-          "question": "What does the Rule of 72 help estimate?",
-          "options": [
-            "Taxes owed",
-            "How long money takes to double",
-            "Your credit score",
-            "Share price"
-          ],
+          "question": "An emergency fund is meant for:",
+          "options": ["Buying the latest gadget", "Making risky bets", "Paying for planned holidays", "Unexpected costs such as a broken phone or a medical bill"],
+          "correctIndex": 3,
+          "explanation": "An emergency fund covers surprises so you do not have to sell investments in a hurry."
+        },
+        {
+          "question": "Why might someone without an emergency cushion be in trouble?",
+          "options": ["Their savings would automatically double", "A surprise cost may force them to sell investments at a bad time", "Investments never fall in value", "They would have no needs"],
           "correctIndex": 1,
-          "explanation": "Years to double ≈ 72 ÷ annual return %."
+          "explanation": "Being forced to sell at a bad time can lock in a loss."
         },
         {
-          "question": "At an 8% annual return, roughly how long to double money?",
-          "options": [
-            "6 years",
-            "9 years",
-            "12 years",
-            "18 years"
-          ],
+          "question": "Which statement about investing is correct?",
+          "options": ["Returns are always higher than savings", "Returns are not guaranteed", "You can never lose money", "It is always easy to sell at the price you paid"],
           "correctIndex": 1,
-          "explanation": "72 ÷ 8 = 9 years."
-        },
-        {
-          "question": "Why does starting early make a difference?",
-          "options": [
-            "More time for returns to compound",
-            "Early investing guarantees profit",
-            "Fees are lower",
-            "It does not"
-          ],
-          "correctIndex": 0,
-          "explanation": "More time lets growth build on growth."
+          "explanation": "Investments can rise or fall. Nobody can guarantee returns."
         }
       ]
     },
     {
       "id": "submod-1-3",
-      "title": "3. Understanding Asset Classes",
-      "intro": "Where do people put their money?",
-      "content": "⚡ MISSION BRIEFING: THE FIVE ASSET CLASSES\nAn asset class is a group of investments that share similar characteristics.\n\n1. Equity (Stocks): owning a small part of a company. Value can rise or fall. Higher risk generally.\n\n2. Debt: lending money to a government or company through instruments like bonds. The borrower agrees to repay on specified terms. Generally lower risk than equity, depending on the issuer.\n\n3. Gold: a precious metal held as a store of value or for diversification (coins, gold ETFs). Its price can fluctuate.\n\n4. Real Estate: houses, apartments or commercial buildings. Can be expensive and hard to sell quickly.\n\n5. Cash and Cash Equivalents: cash, savings accounts and short-term instruments. Easy to access, but inflation can reduce purchasing power.\n\n💡 CORE TAKEAWAY:\nEach asset class has its own mix of risk, return and ease of access.",
+      "title": "3. Inflation: Why \u20b9100 Buys Less Over Time",
+      "intro": "Why does your money seem to buy less every year?",
+      "content": "\u26a1 MISSION BRIEFING: INFLATION\nInflation means the general prices of goods and services rise over time, so the same money buys fewer things.\nToday \u20b9100 buys a sandwich (\u20b950) and a juice (\u20b950). A few years later both cost more and \u20b9100 may not be enough.\nYour money has not disappeared, but its purchasing power has gone down.\n\n\ud83e\udd2f WOW FACT:\nAsk a grandparent what a cup of tea or a bus ride cost when they were your age. The gap between then and now is inflation at work!\n\n\u26a1 FINANCIAL INTEL: THE NUMBERS (HYPOTHETICAL)\nSay a samosa costs \u20b920 and prices rise 5% every year.\n\u2022 After 1 year: about \u20b921\n\u2022 After 2 years: about \u20b922\n\u2022 After 5 years: about \u20b925.50\nSo to buy what \u20b910,000 buys today, you would need about \u20b912,763 in 5 years.\n\n\u26a1 FINANCIAL INTEL: WHY DO PRICES RISE?\n\u2022 Demand is higher than supply: many people want something, but there is not enough of it.\n\u2022 Costs go up: fuel, wages or raw materials cost more, so sellers charge more.\nSome items rise faster than others.\n\n\u26a1 FINANCIAL INTEL: KEEPING UP\nFor your money to keep its buying power, it needs to grow at least as fast as prices rise.\nExample (hypothetical): your savings grow 4% a year, but prices rise 6%. Your balance goes up, yet it buys less than before.\n\n\ud83e\uddea TRY IT: YOUR PERSONAL PRICE CHECK\nAsk a parent what a notebook or a snack cost when they were your age. Compare with today's price. That gap is inflation over many years.\n\n\ud83d\udca1 CORE TAKEAWAY:\nInflation lowers what your money can buy. Growth lower than inflation means a loss of purchasing power.",
       "quiz": [
         {
-          "question": "What does owning equity mean?",
-          "options": [
-            "Lending money to a company",
-            "Owning a small part of a company",
-            "Owning gold",
-            "Holding cash"
-          ],
-          "correctIndex": 1,
-          "explanation": "Shares represent ownership."
+          "question": "What does inflation mean?",
+          "options": ["General prices rise over time, so the same money buys less", "Prices fall so money buys more", "Your bank balance goes to zero", "The government prints a new note"],
+          "correctIndex": 0,
+          "explanation": "Inflation is a general rise in prices, which reduces purchasing power."
         },
         {
-          "question": "You lend money to the government. Which asset class?",
-          "options": [
-            "Equity",
-            "Debt",
-            "Real Estate",
-            "Gold"
-          ],
-          "correctIndex": 1,
-          "explanation": "Government bonds are debt instruments."
+          "question": "A samosa costs \u20b920 and prices rise 5% a year. About how much will it cost after 1 year?",
+          "options": ["\u20b920", "\u20b925", "\u20b930", "\u20b921"],
+          "correctIndex": 3,
+          "explanation": "5% of \u20b920 is \u20b91, so the price becomes about \u20b921."
         },
         {
-          "question": "Which asset is generally easiest to access quickly?",
-          "options": [
-            "Property",
-            "Cash",
-            "Gold coins in a locker",
-            "Bonds locked for 10 years"
-          ],
+          "question": "\u20b910,000 is kept idle for 5 years while prices rise. What happens to its purchasing power?",
+          "options": ["It rises by itself", "It stays exactly the same", "It falls, because the same money buys less", "It disappears at once"],
+          "correctIndex": 2,
+          "explanation": "The amount stays \u20b910,000, but prices go up, so it buys less."
+        },
+        {
+          "question": "Your savings grow 4% a year but prices rise 6%. What is the result?",
+          "options": ["Your buying power rises", "Your balance rises, but its buying power falls", "Nothing changes", "Prices must fall"],
           "correctIndex": 1,
-          "explanation": "Cash is readily available."
+          "explanation": "Growth lower than inflation means you can buy less over time."
+        },
+        {
+          "question": "Which situation is most likely to push prices up?",
+          "options": ["Nobody wants the product", "Production costs fall a lot", "Demand is much higher than supply", "Supply is much higher than demand"],
+          "correctIndex": 2,
+          "explanation": "When many people want something that is in short supply, prices tend to rise."
         }
       ]
     },
     {
       "id": "submod-1-4",
-      "title": "4. Understanding Risk and Return",
-      "intro": "Why can you earn more but also lose more?",
-      "content": "⚡ MISSION BRIEFING: RISK AND RETURN\nRisk: the possibility that an investment may not perform as expected, including losing money.\nReturn: money gained or lost over a period, usually as a percentage.\nExample: ₹1,000 rises to ₹1,200 → gain of ₹200 (20%). Falls to ₹800 → loss of ₹200 (20%).\n\n💡 CORE TAKEAWAY:\nHigher potential returns generally come with higher risk. This does NOT mean higher risk guarantees higher returns.\n\n⚡ FINANCIAL INTEL: TYPES OF RISK\n• Market Risk: overall market prices fall.\n• Business Risk: a company faces difficulties, e.g. falling sales.\n• Inflation Risk: money loses purchasing power.\n• Liquidity Risk: difficulty selling an asset quickly.\n• Interest Rate Risk: changing rates affect investment values, e.g. bond prices.\n\n⚡ FINANCIAL INTEL: RISK APPETITE\nRisk appetite is how much risk someone is comfortable taking and can financially afford. Aarav prefers stability and needs money soon; Ishaan has a longer goal and accepts fluctuations. Neither is automatically right.\n\n💡 CORE TAKEAWAY:\nThe best decision suits your goal, time horizon and ability to handle risk. (Educational only, not a financial risk assessment.)",
+      "title": "4. The Time Value of Money",
+      "intro": "Would you take \u20b91,000 today or \u20b91,000 in three years?",
+      "content": "\u26a1 MISSION BRIEFING: TIME VALUE OF MONEY\nMoney today is generally worth more than the same amount later, because today's money can be saved or invested to earn returns.\nChoice A: \u20b91,000 today. Choice B: \u20b91,000 after three years. Choice A lets you save or invest in the meantime.\n\n\ud83e\udd2f WOW FACT:\nEvery time a bank pays interest on savings or charges interest on a loan, it is using the time value of money!\n\n\u26a1 FINANCIAL INTEL: THREE REASONS TODAY BEATS LATER\n1. Today's money can earn returns.\n2. Prices may rise, so later money may buy less (inflation).\n3. The future is uncertain. A promise for later may not be kept.\n\n\u26a1 FINANCIAL INTEL: PRESENT AND FUTURE VALUE\n\u2022 Present value: what money is worth today.\n\u2022 Future value: what that money could be worth later.\nExample (hypothetical): \u20b910,000 at an assumed 8% a year becomes \u20b910,800 after 1 year. So \u20b910,000 today is like \u20b910,800 a year from now.\n\n\u26a1 FINANCIAL INTEL: OPPORTUNITY COST\nOpportunity cost is what you give up when you choose one option over another.\nExample: spending \u20b92,000 on a game now means that \u20b92,000 cannot be used for something else, and cannot grow. This does not mean 'never spend'. It means know what you are trading.\n\n\ud83c\udf55 MINI CASE: KABIR'S CHOICE\nKabir is offered \u20b95,000 today or \u20b95,200 in one year. If he could earn an assumed 8% elsewhere, \u20b95,000 would become \u20b95,400 in a year. That beats \u20b95,200, so taking the money today looks better in this example.\n\n\ud83d\udca1 CORE TAKEAWAY:\nA rupee today can work for you, so it is generally worth more than a rupee later. Every choice has an opportunity cost.",
       "quiz": [
         {
-          "question": "Does higher risk guarantee higher returns?",
-          "options": [
-            "Yes",
-            "No, it only means greater possible gains and losses",
-            "Only for stocks",
-            "Only for gold"
-          ],
+          "question": "Why is \u20b91,000 today generally worth more than \u20b91,000 in three years?",
+          "options": ["Notes lose their colour over time", "Today's money can be saved or invested to earn returns", "Banks only pay out today", "Prices always fall over time"],
           "correctIndex": 1,
-          "explanation": "Risk raises the range of outcomes, not the guarantee."
+          "explanation": "Money in hand now can start earning, so it has more value than the same sum later."
         },
         {
-          "question": "Difficulty selling a property quickly is which risk?",
-          "options": [
-            "Market risk",
-            "Liquidity risk",
-            "Inflation risk",
-            "Business risk"
-          ],
-          "correctIndex": 1,
-          "explanation": "Liquidity risk."
+          "question": "What does 'future value' mean?",
+          "options": ["What money was worth last year", "The price of an item you want", "Money that is spent today", "What money could be worth at a later date"],
+          "correctIndex": 3,
+          "explanation": "Future value is the worth of today's money at a later date."
         },
         {
-          "question": "Why consider your goal before choosing an investment?",
-          "options": [
-            "Goals decide time horizon and how much risk fits",
-            "Goals set share prices",
-            "Goals do not matter",
-            "To avoid taxes"
-          ],
+          "question": "At an assumed 8% a year, \u20b910,000 becomes about how much after 1 year?",
+          "options": ["\u20b910,080", "\u20b918,000", "\u20b910,800", "\u20b910,008"],
+          "correctIndex": 2,
+          "explanation": "8% of \u20b910,000 is \u20b9800, so the total is \u20b910,800."
+        },
+        {
+          "question": "Opportunity cost is:",
+          "options": ["What you give up when you choose one option over another", "The fee charged by a shop", "The price of an item", "Money earned from a gift"],
           "correctIndex": 0,
-          "explanation": "The right investment depends on goal, horizon and risk capacity."
+          "explanation": "Choosing one thing means not choosing another. The lost alternative is the opportunity cost."
+        },
+        {
+          "question": "Kabir can have \u20b95,000 today or \u20b95,200 in a year, and could earn an assumed 8% elsewhere. Which looks better?",
+          "options": ["\u20b95,200 in a year, because it is a bigger number", "Both are exactly equal", "\u20b95,000 today, because it could grow to \u20b95,400", "Neither, because money has no value"],
+          "correctIndex": 2,
+          "explanation": "\u20b95,000 at 8% becomes \u20b95,400, which beats \u20b95,200."
         }
       ]
     },
     {
       "id": "submod-1-5",
-      "title": "5. Setting Financial Goals",
-      "intro": "How do you turn a money dream into a money plan?",
-      "content": "⚡ MISSION BRIEFING: THREE TYPES OF GOALS\n• Short-term: usually within 1 year (e.g. ₹3,000 for headphones).\n• Medium-term: around 1-5 years (e.g. a laptop or future education expense).\n• Long-term: more than 5 years (e.g. higher education, long-term financial security).\nThese are learning categories, not fixed rules.\n\n⚡ FINANCIAL INTEL: THE SMART METHOD\n• S - Specific: buy a laptop\n• M - Measurable: save ₹30,000\n• A - Achievable: save an affordable amount regularly\n• R - Relevant: needed for studies\n• T - Time-bound: within 12 months\n\n⚡ FINANCIAL INTEL: MATCHING GOALS WITH TIME\n• Need money soon? Prioritise safety and easy access.\n• More time? You can learn about investment options and their risks.\n• Long-term goal? Understand how inflation and compounding affect the amount needed.\n\n🍕 CASE STUDY: THE LAPTOP CHALLENGE\nRiya wants a ₹30,000 laptop in 12 months and has ₹6,000 saved. Remaining ₹24,000 ÷ 12 months = ₹2,000 per month.\n\n💡 CORE TAKEAWAY:\nSEBI suggests considering goals, risk appetite and investment horizon together.",
+      "title": "5. The Power of Compounding",
+      "intro": "Can your money make more money?",
+      "content": "\u26a1 MISSION BRIEFING: COMPOUNDING\nCompounding happens when your returns start earning returns of their own. You earn on your original money, and then on the growth as well.\nExample (hypothetical): \u20b91,000 at 10% a year becomes \u20b91,331 after 3 years. This is a maths example, not a promised return.\n\n\ud83e\udd2f WOW FACT:\nImagine a coin that doubles every day. Day 1: \u20b91. Day 10: \u20b9512. Day 20: over \u20b95 lakh. Day 30: over \u20b950 crore! Real investments never grow this fast, but it shows how growth on growth explodes.\n\n\u26a1 FINANCIAL INTEL: SIMPLE VS. COMPOUND\nSimple growth: you earn only on the original amount. \u20b91,000 at 10% earns \u20b9100 every year, so after 3 years you have \u20b91,300.\nCompound growth: you earn on the original amount plus past earnings.\n\u2022 Year 1: \u20b91,000 becomes \u20b91,100\n\u2022 Year 2: \u20b91,100 becomes \u20b91,210\n\u2022 Year 3: \u20b91,210 becomes \u20b91,331\nThat extra \u20b931 is 'interest on interest'.\n\n\u26a1 FINANCIAL INTEL: THE SNOWBALL\nPicture a snowball rolling down a hill. It is small at first, then picks up more snow and grows faster. Compounding is slow at the start and powerful later.\n\u20b91,000 at an assumed 10% a year:\n\u2022 After 10 years: about \u20b92,594\n\u2022 After 20 years: about \u20b96,727\n\u2022 After 30 years: about \u20b917,449\n\n\u26a1 FINANCIAL INTEL: IT WORKS BOTH WAYS\nWhen you borrow and do not pay the interest, it is added to what you owe, and then interest is charged on the bigger amount. Debt can snowball too, in the wrong direction.\n\n\ud83d\udca1 CORE TAKEAWAY:\nCompounding rewards patience: growth on growth. It can also make unpaid debt grow quickly.",
       "quiz": [
         {
-          "question": "What does SMART stand for?",
-          "options": [
-            "Specific, Measurable, Achievable, Relevant, Time-bound",
-            "Save, Margin, Assets, Returns, Tax",
-            "Simple, Modern, Active, Real, Timely",
-            "None of these"
-          ],
+          "question": "What is compounding?",
+          "options": ["Earning returns only on your original money", "Spending all your returns each year", "Earning returns on your original money and on your earlier returns", "Paying a fee to your bank"],
+          "correctIndex": 2,
+          "explanation": "Compounding means returns themselves start earning returns."
+        },
+        {
+          "question": "\u20b91,000 at 10% compound growth becomes how much after 3 years?",
+          "options": ["\u20b91,300", "\u20b91,331", "\u20b91,100", "\u20b91,030"],
+          "correctIndex": 1,
+          "explanation": "Year by year: \u20b91,100, then \u20b91,210, then \u20b91,331."
+        },
+        {
+          "question": "What is the difference between simple and compound growth?",
+          "options": ["Simple growth earns on past earnings too", "Compound growth never changes", "There is no difference", "Simple growth earns only on the original amount"],
+          "correctIndex": 3,
+          "explanation": "Only compound growth earns returns on previous returns."
+        },
+        {
+          "question": "Why is compounding compared to a snowball?",
+          "options": ["It always melts in summer", "It stays the same size", "Growth starts slow and speeds up as the amount gets bigger", "It only works on debt"],
+          "correctIndex": 2,
+          "explanation": "As the amount grows, each period's growth is bigger than the one before."
+        },
+        {
+          "question": "A coin starts at \u20b91 and doubles every day. What is it worth on day 4?",
+          "options": ["\u20b94", "\u20b98", "\u20b916", "\u20b92"],
+          "correctIndex": 1,
+          "explanation": "Day 1: \u20b91, day 2: \u20b92, day 3: \u20b94, day 4: \u20b98."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-6",
+      "title": "6. The Rule of 72 and Starting Early",
+      "intro": "How fast can money double, and does starting early matter?",
+      "content": "\u26a1 MISSION BRIEFING: THE RULE OF 72\nA quick shortcut to estimate how long money takes to double.\nYears to double = 72 \u00f7 annual return (%)\n\u2022 6% return: about 12 years\n\u2022 8% return: about 9 years\n\u2022 12% return: about 6 years\nTry one yourself: at 9%, 72 \u00f7 9 = about 8 years. It is an estimate, not an exact answer, and these returns are only examples.\n\n\ud83e\udd2f WOW FACT:\nYou can do the Rule of 72 in your head, no calculator needed. People around the world use it for quick estimates!\n\n\u26a1 FINANCIAL INTEL: EARLY VS. LATE\nAarav starts at age 20 and Rohan at age 30. Both invest a hypothetical \u20b910,000 once, at an assumed 8% a year.\n\u2022 Aarav (20 years) becomes about \u20b946,610 at age 40\n\u2022 Rohan (10 years) becomes about \u20b921,589 at age 40\nAarav had twice as long, yet ended with more than twice as much. That extra is the power of compounding over time.\n\n\u26a1 FINANCIAL INTEL: THE RULE WORKS FOR PRICES TOO\nIf prices rise about 6% a year, 72 \u00f7 6 = about 12 years. Prices could double in around 12 years, so a \u20b950 sandwich might cost about \u20b9100. This shows why money needs to grow, not just sit.\n\n\u26a1 FINANCIAL INTEL: WHAT YOU CAN DO AS A TEEN\nYou may not have much to invest yet, and that is fine. What you do have is time. Learning how money works now, and building the habit of saving small amounts regularly, helps later. No one can promise how markets will perform. This lesson is about time and habits, not returns.\n\n\ud83e\uddea TRY IT: THE DOUBLING LADDER\nUse the rule on \u20b91,000 at an assumed 6%. About 12 years: \u20b92,000. About 24 years: \u20b94,000. About 36 years: \u20b98,000. Each doubling adds more rupees than the one before.\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe Rule of 72 gives a quick doubling estimate. Starting early gives compounding more time to work.",
+      "quiz": [
+        {
+          "question": "What is the Rule of 72 formula?",
+          "options": ["Years to double = annual return (%) - 72", "Years to double = 72 x annual return (%)", "Years to double = 72 + annual return (%)", "Years to double = 72 \u00f7 annual return (%)"],
+          "correctIndex": 3,
+          "explanation": "Divide 72 by the yearly return in percent to estimate the doubling time."
+        },
+        {
+          "question": "At an assumed 9% return, about how many years does it take for money to double?",
+          "options": ["6 years", "8 years", "12 years", "9 years"],
+          "correctIndex": 1,
+          "explanation": "72 \u00f7 9 = 8 years."
+        },
+        {
+          "question": "If prices rise about 6% a year, roughly how long until prices double?",
+          "options": ["About 3 years", "About 6 years", "About 12 years", "About 72 years"],
+          "correctIndex": 2,
+          "explanation": "72 \u00f7 6 = 12 years."
+        },
+        {
+          "question": "Why did Aarav end up with more than twice Rohan's amount, even though he had only twice the time?",
+          "options": ["Compounding makes growth speed up over time", "Aarav invested more money", "Aarav earned a higher return", "Rohan lost money"],
           "correctIndex": 0,
-          "explanation": "The SMART goal method."
+          "explanation": "Both invested the same amount at the same rate. The longer time let compounding build up."
         },
         {
-          "question": "Riya needs ₹24,000 more in 12 months. Monthly saving?",
-          "options": [
-            "₹1,000",
-            "₹2,000",
-            "₹3,000",
-            "₹24,000"
-          ],
+          "question": "Which statement about the Rule of 72 is true?",
+          "options": ["It gives an exact result every time", "It is a quick estimate, not an exact answer", "It guarantees your money will double", "It only works for 12% returns"],
           "correctIndex": 1,
-          "explanation": "₹24,000 ÷ 12 = ₹2,000."
+          "explanation": "The rule is a rough shortcut. Real returns are never guaranteed."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-7",
+      "title": "7. Understanding Asset Classes",
+      "intro": "Where do people put their money?",
+      "content": "\u26a1 MISSION BRIEFING: THE FIVE ASSET CLASSES\nAn asset class is a group of investments that share similar characteristics.\n1. Equity (Stocks): owning a small part of a company. Value can rise or fall. Generally higher risk.\n2. Debt: lending money to a government or company through instruments like bonds. The borrower agrees to repay on set terms. Generally lower risk than equity, depending on the issuer.\n3. Gold: a precious metal held as a store of value or for diversification. Its price can go up and down.\n4. Real Estate: houses, apartments or commercial buildings. Needs a lot of money and can be hard to sell quickly.\n5. Cash and Cash Equivalents: cash, savings accounts and short-term instruments. Easy to access, but inflation can reduce purchasing power.\n\n\ud83e\udd2f WOW FACT:\nGold has been used as money and jewellery for thousands of years, in cultures all over the world!\n\n\u26a1 FINANCIAL INTEL: AT A GLANCE (TENDENCIES, NOT RULES)\n\u2022 Cash: small price swings, easiest to access, growth usually lowest.\n\u2022 Debt: usually steadier than equity, moderate growth potential.\n\u2022 Gold: price moves up and down, and it does not pay regular income.\n\u2022 Real estate: needs a large amount of money and can take long to sell.\n\u2022 Equity: bigger ups and downs, higher growth potential over long periods, never guaranteed.\n\n\u26a1 FINANCIAL INTEL: THREE QUESTIONS FOR ANY ASSET\n1. How risky is it?\n2. How fast can I sell it?\n3. Does it earn income, or only change in price?\nThe Sharma family (fictional) keeps some money in savings for emergencies, some in debt instruments for steady growth, and a little in other assets. Different goals lead to different mixes. In Bull Run's simulator you practise with equity using simulated prices. Real investing involves real risk.\n\n\ud83d\udca1 CORE TAKEAWAY:\nEach asset class has its own mix of risk, return and ease of access. None is automatically right for everyone.",
+      "quiz": [
+        {
+          "question": "What is an asset class?",
+          "options": ["A school subject", "A group of investments that share similar characteristics", "A type of bank fee", "A single company's share price"],
+          "correctIndex": 1,
+          "explanation": "Asset classes group similar investments together, like equity or debt."
         },
         {
-          "question": "For a goal needed soon, what should be prioritised?",
-          "options": [
-            "Highest returns",
-            "Safety and easy access",
-            "Real estate",
-            "Small-cap stocks"
-          ],
+          "question": "Which asset class means lending money to a government or company?",
+          "options": ["Equity", "Gold", "Debt", "Real estate"],
+          "correctIndex": 2,
+          "explanation": "In debt instruments such as bonds, you lend money and the borrower agrees to repay on set terms."
+        },
+        {
+          "question": "Which asset class is generally expensive and hard to sell quickly?",
+          "options": ["Cash", "Real estate", "Savings accounts", "Short-term instruments"],
           "correctIndex": 1,
-          "explanation": "Short horizons favour safety and liquidity."
+          "explanation": "Property needs a lot of money and can take a long time to sell."
+        },
+        {
+          "question": "What is a drawback of holding only cash?",
+          "options": ["It is too risky", "It cannot be used to buy things", "It is impossible to access", "Inflation can reduce its purchasing power"],
+          "correctIndex": 3,
+          "explanation": "Cash is easy to access, but it may not keep up with rising prices."
+        },
+        {
+          "question": "Which statement about gold is correct?",
+          "options": ["Its price can fluctuate", "It never changes in price", "It always pays regular income", "It is a company share"],
+          "correctIndex": 0,
+          "explanation": "Gold prices move up and down, and gold does not pay regular income."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-8",
+      "title": "8. Understanding Risk and Return",
+      "intro": "Why can you earn more but also lose more?",
+      "content": "\u26a1 MISSION BRIEFING: RISK AND RETURN\nRisk: the possibility that an investment may not perform as expected, including losing money.\nReturn: money gained or lost over a period, usually shown as a percentage.\nExample: \u20b91,000 rises to \u20b91,200 = gain of \u20b9200 (20%). It falls to \u20b9800 = loss of \u20b9200 (20%).\n\n\u26a1 FINANCIAL INTEL: HOW TO CALCULATE RETURN\nReturn (%) = (Gain or loss \u00f7 Original amount) x 100\nExample: you put in \u20b92,000 and it becomes \u20b92,300. Gain = \u20b9300. \u20b9300 \u00f7 \u20b92,000 x 100 = 15%.\n\n\ud83e\udd2f WOW FACT:\nIf \u20b91,000 falls 50% to \u20b9500, it must gain 100% (not 50%!) to get back to \u20b91,000. Losses are harder to recover from than most people expect.\n\n\u26a1 FINANCIAL INTEL: LOSSES ARE HARDER TO RECOVER\n\u2022 \u20b91,000 falls 50% to \u20b9500. To return to \u20b91,000 it must gain 100%, because the gain is worked out on the smaller amount (\u20b9500 \u00f7 \u20b9500 = 100%).\n\u2022 \u20b91,000 falls 20% to \u20b9800. It needs a 25% rise to recover (\u20b9200 \u00f7 \u20b9800).\nThis is why protecting against big losses matters as much as chasing gains.\n\n\u26a1 FINANCIAL INTEL: THE RISK LADDER (GENERAL TENDENCY)\nFrom lower to higher risk, in general: cash, then debt, then equity. Lower-risk choices usually offer lower potential returns. Higher-risk choices offer the chance of higher returns, with bigger possible losses. This is a tendency, not a promise.\n\n\ud83e\uddea TRY IT: RETURN PRACTICE\nA game costs \u20b9500 and later sells for \u20b9400. Loss = \u20b9100. \u20b9100 \u00f7 \u20b9500 x 100 = a 20% loss. A fictional share price goes from \u20b9250 to \u20b9300. Gain = \u20b950. \u20b950 \u00f7 \u20b9250 x 100 = a 20% gain. Practise with made-up numbers until it feels easy. You will use this in the simulator, where prices are simulated, not real.\n\n\ud83d\udca1 CORE TAKEAWAY:\nThink about risk and return together. Higher potential returns generally come with higher risk, but higher risk never guarantees higher returns.",
+      "quiz": [
+        {
+          "question": "What is return?",
+          "options": ["The chance of losing money", "A fee paid to a broker", "The price of one share", "Money gained or lost over a period, usually shown as a percentage"],
+          "correctIndex": 3,
+          "explanation": "Return measures the gain or loss on money over a period, often as a percentage."
+        },
+        {
+          "question": "You put in \u20b92,000 and it becomes \u20b92,300. What is the return?",
+          "options": ["3%", "30%", "15%", "13%"],
+          "correctIndex": 2,
+          "explanation": "Gain \u20b9300 \u00f7 \u20b92,000 x 100 = 15%."
+        },
+        {
+          "question": "Which statement is correct?",
+          "options": ["Higher risk always gives higher returns", "Higher potential returns generally come with higher risk, but there is no guarantee", "Low risk always gives high returns", "Risk and return are unrelated"],
+          "correctIndex": 1,
+          "explanation": "Risk and return usually go together, but taking more risk never guarantees more return."
+        },
+        {
+          "question": "\u20b91,000 falls 50% to \u20b9500. What gain is needed to get back to \u20b91,000?",
+          "options": ["100%", "50%", "25%", "150%"],
+          "correctIndex": 0,
+          "explanation": "The gain is worked out on \u20b9500: \u20b9500 \u00f7 \u20b9500 = 100%."
+        },
+        {
+          "question": "\u20b91,000 falls 20% to \u20b9800. What rise is needed to recover?",
+          "options": ["20%", "10%", "30%", "25%"],
+          "correctIndex": 3,
+          "explanation": "\u20b9200 \u00f7 \u20b9800 = 25%."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-9",
+      "title": "9. Types of Risk and Your Risk Appetite",
+      "intro": "What can go wrong, and how much risk is right for you?",
+      "content": "\u26a1 MISSION BRIEFING: TYPES OF RISK\n\u2022 Market risk: overall market prices fall.\n\u2022 Business risk: a company faces difficulties, like falling sales.\n\u2022 Inflation risk: money loses purchasing power.\n\u2022 Liquidity risk: difficulty selling an asset quickly.\n\u2022 Interest rate risk: changing rates affect investment values, such as bond prices.\n\n\ud83e\udd2f WOW FACT:\nEven the 'safest-looking' choice, money sitting idle, carries a risk: inflation slowly shrinks what it can buy!\n\n\u26a1 FINANCIAL INTEL: SPOTTING RISK IN EVERYDAY LIFE\n\u2022 A cinema chain sells fewer tickets and its profits shrink: business risk.\n\u2022 A rare collectible card you cannot find a buyer for: liquidity risk.\n\u2022 Money sitting idle while prices rise: inflation risk.\n\u2022 A broad fall across many shares at the same time: market risk.\nOne investment can face several risks at once.\n\n\u26a1 FINANCIAL INTEL: RISK APPETITE\nRisk appetite is how much risk someone is comfortable taking and can financially afford. Aarav prefers stability and needs money soon. Ishaan has a longer goal and accepts ups and downs. Neither is automatically right.\nTwo things shape it:\n\u2022 Comfort: how would you feel if your money fell 20% for a while?\n\u2022 Ability: can you afford a loss without hurting your needs or goals?\nYour appetite can change as you grow older or your goals change.\n\n\u26a1 FINANCIAL INTEL: A SIMPLE SELF-CHECK\nBefore any money decision, ask yourself:\n1. When will I need this money?\n2. If its value fell 20%, could I cope?\n3. Do I understand how it works?\nIf the answers are 'soon', 'no' or 'not sure', lower-risk choices and more learning usually make sense. (Educational only, not advice.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe best decision suits your goal, time horizon and ability to handle risk. You cannot remove risk, but you can understand and manage it.",
+      "quiz": [
+        {
+          "question": "Which describes market risk?",
+          "options": ["One company's sales drop", "Overall market prices fall", "You cannot sell something quickly", "Prices of goods rise"],
+          "correctIndex": 1,
+          "explanation": "Market risk affects many investments together when overall prices fall."
+        },
+        {
+          "question": "Which is an example of liquidity risk?",
+          "options": ["A company reporting lower sales", "Prices of goods rising", "Interest rates staying the same", "Difficulty finding a buyer when you want to sell quickly"],
+          "correctIndex": 3,
+          "explanation": "Liquidity risk is the difficulty of selling an asset quickly."
+        },
+        {
+          "question": "A cinema chain sells fewer tickets and its profits fall. Which risk is this?",
+          "options": ["Inflation risk", "Liquidity risk", "Business risk", "Interest rate risk"],
+          "correctIndex": 2,
+          "explanation": "A company facing difficulties like falling sales is business risk."
+        },
+        {
+          "question": "What is risk appetite?",
+          "options": ["How much risk someone is comfortable taking and can afford", "The return an investment promises", "The number of investments owned", "The amount of money in a bank"],
+          "correctIndex": 0,
+          "explanation": "Risk appetite combines comfort with risk and the ability to afford a loss."
+        },
+        {
+          "question": "Aarav needs money soon, while Ishaan has a longer goal. Which statement is correct?",
+          "options": ["Aarav is always wrong", "Ishaan is always right", "Neither is automatically right; it depends on goals, time and comfort", "Everyone should have the same appetite"],
+          "correctIndex": 2,
+          "explanation": "Risk appetite is personal and depends on goals, time horizon and ability to bear risk."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-10",
+      "title": "10. Setting Financial Goals",
+      "intro": "How do you turn a money dream into a money plan?",
+      "content": "\u26a1 MISSION BRIEFING: THREE TYPES OF GOALS\n\u2022 Short-term: usually within 1 year (e.g. \u20b93,000 for headphones).\n\u2022 Medium-term: around 1-5 years (e.g. a laptop or a future education expense).\n\u2022 Long-term: more than 5 years (e.g. higher education, long-term financial security).\nThese are learning categories, not fixed rules.\n\n\ud83e\udd2f WOW FACT:\nA goal without a date is just a wish! Adding an amount and a deadline is what turns a dream into a plan.\n\n\u26a1 FINANCIAL INTEL: THE SMART METHOD\n\u2022 S - Specific: buy a laptop\n\u2022 M - Measurable: save \u20b930,000\n\u2022 A - Achievable: save an affordable amount regularly\n\u2022 R - Relevant: needed for studies\n\u2022 T - Time-bound: within 12 months\n\n\u26a1 FINANCIAL INTEL: VAGUE VS. SMART\nVague: 'I want to save some money.'\nSMART: 'I will save \u20b91,500 a month for 8 months to buy a \u20b912,000 phone.'\nThe SMART version tells you how much, by when and why. You can check your progress every month.\n\n\u26a1 FINANCIAL INTEL: PRIORITISING GOALS\nYou may have many goals at once. Prioritising means deciding which come first. Ask: Is it a need or a want? Does it have a deadline? What happens if I delay it?\nExample: school trip money due in 2 months comes before a gaming accessory with no deadline.\n\n\ud83e\uddea TRY IT: WRITE YOUR OWN SMART GOAL\nFill in the blanks: 'I will save \u20b9____ a month for ____ months to get ____ because ____.' Check the maths: monthly amount x months should equal the cost. If it does not, change the time or the amount.\n\n\u26a1 FINANCIAL INTEL: GOAL CHECK-UPS\nOnce a month, compare what you have saved with your plan. If you are behind, adjust the amount or the deadline instead of giving up. Celebrate small wins. They help you keep going.\n\n\ud83d\udca1 CORE TAKEAWAY:\nA goal with an amount, a deadline and a reason becomes a plan.",
+      "quiz": [
+        {
+          "question": "Which is usually called a long-term goal?",
+          "options": ["A goal within 1 year", "A goal more than 5 years away", "A goal due next week", "A goal with no amount"],
+          "correctIndex": 1,
+          "explanation": "In this course, long-term goals are those more than 5 years away."
+        },
+        {
+          "question": "What does SMART stand for in goal setting?",
+          "options": ["Simple, Money, Asset, Risk, Total", "Save, Manage, Allocate, Repeat, Track", "Small, Medium, Average, Rich, Tough", "Specific, Measurable, Achievable, Relevant, Time-bound"],
+          "correctIndex": 3,
+          "explanation": "SMART is a checklist for making goals clear and trackable."
+        },
+        {
+          "question": "Which goal is SMART?",
+          "options": ["Save some money", "Be rich one day", "Save \u20b91,500 a month for 8 months to buy a \u20b912,000 phone", "Buy a phone sometime"],
+          "correctIndex": 2,
+          "explanation": "It has an amount, a deadline, a method and a reason."
+        },
+        {
+          "question": "Which letter in SMART asks 'by when?'",
+          "options": ["T (Time-bound)", "S (Specific)", "M (Measurable)", "R (Relevant)"],
+          "correctIndex": 0,
+          "explanation": "Time-bound means the goal has a deadline."
+        },
+        {
+          "question": "What does prioritising goals mean?",
+          "options": ["Giving up all your goals", "Choosing only the most expensive goal", "Never writing goals down", "Deciding which goals are more important or urgent and doing them first"],
+          "correctIndex": 3,
+          "explanation": "Prioritising orders your goals by need, deadline and importance."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-11",
+      "title": "11. Case Study: The Laptop Challenge",
+      "intro": "Can you plan a \u20b930,000 goal step by step?",
+      "content": "\u26a1 MISSION BRIEFING: MATCHING GOALS WITH TIME\n\u2022 Need money soon? Prioritise safety and easy access.\n\u2022 More time? You can learn about investment options and their risks.\n\u2022 Long-term goal? Understand how inflation and compounding affect the amount needed.\n\n\ud83c\udf55 MINI CASE: THE LAPTOP CHALLENGE\nRiya wants a \u20b930,000 laptop in 12 months and has \u20b96,000 saved.\nStep 1: Amount still needed = \u20b930,000 - \u20b96,000 = \u20b924,000.\nStep 2: Monthly saving = \u20b924,000 \u00f7 12 months = \u20b92,000 per month.\nStep 3: Check if it is achievable. If \u20b92,000 is too much, she can extend the deadline, look for a cheaper laptop or find other ways to save.\n\n\ud83e\udd2f WOW FACT:\nGoal planning is just subtraction, division and review. No fancy maths needed, and it works for any goal!\n\n\u26a1 FINANCIAL INTEL: WHAT IF THINGS CHANGE?\n\u2022 Riya receives a \u20b91,000 gift. Now she needs \u20b923,000 \u00f7 12 = about \u20b91,917 a month.\n\u2022 Riya gives herself 15 months instead. \u20b924,000 \u00f7 15 = \u20b91,600 a month.\nSmall changes in the amount or the time change the monthly target. This is why goals are reviewed regularly.\n\n\u26a1 FINANCIAL INTEL: PRACTICE SCENARIOS\nScenario 1: Kabir needs \u20b95,000 for a school trip in 5 months and has \u20b91,000. \u20b94,000 \u00f7 5 = \u20b9800 a month. A short-term goal, so safety and easy access matter most.\nScenario 2: Ananya wants \u20b960,000 for a course in 3 years (36 months) and has nothing yet. \u20b960,000 \u00f7 36 = about \u20b91,667 a month, before counting any growth.\nScenario 3: A goal many years away. Inflation will likely raise the cost, so the target amount should be reviewed from time to time.\n\n\u26a1 FINANCIAL INTEL: THE GOAL-PLANNING FORMULA\nAmount needed = Cost - Already saved\nMonthly saving = Amount needed \u00f7 Months left\nCheck: is this monthly amount realistic for my income? If not, change one thing (time, cost or amount) and calculate again.\n\n\ud83d\udca1 CORE TAKEAWAY:\nGoal planning is subtraction, division and review. Always consider your goals, risk appetite and time horizon together.",
+      "quiz": [
+        {
+          "question": "Riya wants a \u20b930,000 laptop in 12 months and has \u20b96,000. How much must she save each month?",
+          "options": ["\u20b92,500", "\u20b93,000", "\u20b91,500", "\u20b92,000"],
+          "correctIndex": 3,
+          "explanation": "\u20b930,000 - \u20b96,000 = \u20b924,000. \u20b924,000 \u00f7 12 = \u20b92,000."
+        },
+        {
+          "question": "Riya gets a \u20b91,000 gift. About how much must she save per month now?",
+          "options": ["\u20b92,000", "\u20b91,000", "\u20b91,917", "\u20b92,083"],
+          "correctIndex": 2,
+          "explanation": "\u20b923,000 \u00f7 12 is about \u20b91,917."
+        },
+        {
+          "question": "Kabir needs \u20b95,000 in 5 months and has \u20b91,000. How much per month?",
+          "options": ["\u20b9800", "\u20b91,000", "\u20b9500", "\u20b94,000"],
+          "correctIndex": 0,
+          "explanation": "\u20b95,000 - \u20b91,000 = \u20b94,000. \u20b94,000 \u00f7 5 = \u20b9800."
+        },
+        {
+          "question": "For a goal that is needed soon, what should be prioritised?",
+          "options": ["The highest possible return", "Safety and easy access", "Locking money away for many years", "Taking as much risk as possible"],
+          "correctIndex": 1,
+          "explanation": "With little time to recover from losses, safety and access come first."
+        },
+        {
+          "question": "Ananya wants \u20b960,000 in 36 months and ignores growth. About how much per month?",
+          "options": ["\u20b91,000", "\u20b92,000", "\u20b9600", "\u20b91,667"],
+          "correctIndex": 3,
+          "explanation": "\u20b960,000 \u00f7 36 is about \u20b91,667."
+        }
+      ]
+    },
+    {
+      "id": "submod-1-12",
+      "title": "12. Module Recap: Common Money Mistakes and Putting It Together",
+      "intro": "What mistakes should you avoid, and how does it all fit together?",
+      "content": "\u26a1 MISSION BRIEFING: COMMON MONEY MISTAKES\n1. Spending first, saving what is left. Many people do better by setting aside savings first.\n2. Having no goal. Without a target, money slips away.\n3. Ignoring inflation. Idle money loses buying power over time.\n4. Starting late. Time is compounding's best friend.\n5. Chasing high returns without thinking of risk. Bigger possible returns mean bigger possible losses.\n6. No emergency cushion. A surprise cost can force bad decisions.\n7. Following the crowd or social media tips. Be careful of anyone promising guaranteed or very high returns. That is a warning sign.\n\n\ud83e\udd2f WOW FACT:\nSetting savings aside first is sometimes called 'paying yourself first'. It is one of the simplest money habits there is!\n\n\u26a1 FINANCIAL INTEL: MODULE RECAP\n\u2022 Money works as exchange, store of value and measure. Know needs from wants.\n\u2022 Saving protects; investing aims to grow, with risk.\n\u2022 Inflation lowers buying power; time value says money today is worth more.\n\u2022 Compounding is growth on growth; the Rule of 72 estimates doubling time.\n\u2022 Asset classes: equity, debt, gold, real estate and cash.\n\u2022 Risk and return go together; know the types of risk and your appetite.\n\u2022 SMART goals turn dreams into plans.\n\n\ud83c\udf55 MINI CASE: PUTTING IT ALL TOGETHER\nDev (fictional, 15) gets \u20b91,000 pocket money a month. He wants a \u20b96,000 bicycle in 12 months and has \u20b91,200 saved.\n\u2022 Goal: \u20b96,000 - \u20b91,200 = \u20b94,800. Over 12 months that is \u20b9400 a month.\n\u2022 Plan: he sets aside \u20b9400 first, then spends the remaining \u20b9600 on needs and wants.\n\u2022 Time: 12 months, so it is a short-term goal. Safety and easy access come first.\n\u2022 Cushion: he keeps a little extra aside for surprises.\nDev used goal setting, saving and the needs vs. wants idea in one plan.\n\n\ud83e\uddea TRY IT: YOUR ACTION LIST\n1. Write one SMART goal.\n2. List your needs and wants for this month.\n3. Decide a small amount to set aside first.\n4. Keep learning before you invest, and stay careful with tips.\n\n\ud83d\udca1 CORE TAKEAWAY:\nKnow where your money goes, set clear goals, respect inflation, use time wisely and never ignore risk. You are ready for the stock market module!",
+      "quiz": [
+        {
+          "question": "Which is a common money mistake?",
+          "options": ["Setting a clear goal", "Building an emergency cushion", "Spending first and saving only what is left", "Starting early"],
+          "correctIndex": 2,
+          "explanation": "Setting savings aside first usually works better than saving leftovers."
+        },
+        {
+          "question": "A post promises 'guaranteed to double your money in 6 months'. What should you do?",
+          "options": ["Put all your savings in at once", "Be careful, since very high guaranteed returns are a warning sign", "Share it with all your friends", "Treat it as a safe offer"],
+          "correctIndex": 1,
+          "explanation": "Real investments carry risk. Guaranteed very high returns are a classic warning sign."
+        },
+        {
+          "question": "Dev wants a \u20b96,000 bicycle in 12 months and has \u20b91,200. How much per month?",
+          "options": ["\u20b9500", "\u20b9600", "\u20b9300", "\u20b9400"],
+          "correctIndex": 3,
+          "explanation": "\u20b96,000 - \u20b91,200 = \u20b94,800. \u20b94,800 \u00f7 12 = \u20b9400."
+        },
+        {
+          "question": "Which best sums up this module?",
+          "options": ["Always choose the riskiest option", "Never spend any money", "Only the biggest investments matter", "Set clear goals and match them with time, risk and your comfort"],
+          "correctIndex": 3,
+          "explanation": "The module ties goals, time horizon and risk appetite together."
+        },
+        {
+          "question": "Which lesson explains why starting late can be costly?",
+          "options": ["Compounding gives early starters more time for growth", "Inflation falls over time", "Cash always grows fastest", "Risk disappears with time"],
+          "correctIndex": 0,
+          "explanation": "Because compounding builds on itself, more years mean more growth."
         }
       ]
     }

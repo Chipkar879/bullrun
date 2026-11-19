@@ -11,6 +11,18 @@ import m8 from '@/app/data/Mod_8.json';
 
 const MODS = [m1, m2, m3, m4, m5, m6, m7, m8];
 
+// Remove correct answers and explanations before data is sent to the browser.
+// Answers are checked on the server at /api/quiz-check.
+function stripAnswers(m) {
+  return {
+    ...m,
+    submodules: m.submodules.map(s => ({
+      ...s,
+      quiz: (s.quiz || []).map(({ question, options }) => ({ question, options })),
+    })),
+  };
+}
+
 function getTracks() {
   return MODS.map((m, i) => ({
     id: `track-${i + 1}`,
@@ -18,7 +30,7 @@ function getTracks() {
     level: `Module ${i + 1}`,
     title: m.title.replace(/^Module \d+:\s*/, ''),
     description: m.submodules.map(s => s.title.replace(/^\d+\.\s*/, '')).slice(0, 3).join(' · ') + ' …',
-    modules: [m],
+    modules: [stripAnswers(m)],
   }));
 }
 
