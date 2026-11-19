@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const SUPER_ADMIN_EMAIL = 'vikrantchipkar7@gmail.com';
+const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
 
 export async function middleware(req) {
   const res = NextResponse.next();

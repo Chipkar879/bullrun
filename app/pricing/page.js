@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
 // PERMANENT SUPER ADMIN IMMUNITY EMAIL
-const SUPER_ADMIN_EMAIL = 'vikrantchipkar7@gmail.com';
+const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
 
 const RS = '\u20B9';
 const TICK = '\u2713';
