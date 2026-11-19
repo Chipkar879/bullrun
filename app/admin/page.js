@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
 
 // ⚠️ SUPER ADMIN IMMUNITY EMAIL
-const SUPER_ADMIN_EMAIL = 'verymystery18@gmail.com';
+const SUPER_ADMIN_EMAIL = 'vikrantchipkar7@gmail.com';
 const REFRESH_MS = 10000;
 
 const inr = (value) =>
