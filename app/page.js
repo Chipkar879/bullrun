@@ -30,6 +30,286 @@ const RainingAsset = ({ icon, isMobileHidden }) => {
   );
 };
 
+// ---------- LIVE SIMULATED TICKER TAPE ----------
+const TICKER_BASE = [
+  { sym: 'ENERGIA', price: 1309.35 },
+  { sym: 'BHARATIX', price: 2874.1 },
+  { sym: 'AGRIVA', price: 642.8 },
+  { sym: 'METROFIN', price: 1921.55 },
+  { sym: 'PHARMEX', price: 987.25 },
+  { sym: 'TECH.CH', price: 12500.0 },
+  { sym: 'URBANOVA', price: 455.9 },
+  { sym: 'SOLARIS', price: 3310.4 },
+];
+
+const TickerTape = () => {
+  const [prices, setPrices] = useState(TICKER_BASE.map((t) => t.price));
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPrices((prev) => prev.map((p) => +(p * (1 + (Math.random() - 0.5) * 0.008)).toFixed(2)));
+    }, 1800);
+    return () => clearInterval(id);
+  }, []);
+
+  const items = TICKER_BASE.map((t, i) => {
+    const change = ((prices[i] - t.price) / t.price) * 100;
+    return { ...t, now: prices[i], change };
+  });
+
+  const row = (suffix) =>
+    items.map((t) => (
+      <span key={`${t.sym}-${suffix}`} className="inline-flex items-center gap-2 px-5 text-[11px] font-mono font-bold whitespace-nowrap">
+        <span className="text-slate-400">{t.sym}</span>
+        <span className="text-white">₹{t.now.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+        <span className={t.change >= 0 ? 'text-emerald-400' : 'text-rose-400'}>
+          {t.change >= 0 ? '▲' : '▼'} {Math.abs(t.change).toFixed(2)}%
+        </span>
+      </span>
+    ));
+
+  return (
+    <div className="relative z-10 mt-16 border-y border-bull-line bg-bull-surface/70 backdrop-blur-sm overflow-hidden py-2.5">
+      <div className="flex w-max animate-bullMarquee">
+        <div className="flex">{row('a')}</div>
+        <div className="flex">{row('b')}</div>
+      </div>
+      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bull-bg to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bull-bg to-transparent pointer-events-none" />
+    </div>
+  );
+};
+
+// ---------- LIVE TRADING ARENA DEMO + LEADERBOARD ----------
+const START_BALANCE = 50000;
+
+const LiveArena = () => {
+  const [price, setPrice] = useState(1309.35);
+  const [history, setHistory] = useState(Array(30).fill(1309.35));
+  const [wallet, setWallet] = useState(START_BALANCE);
+  const [shares, setShares] = useState(0);
+  const [players, setPlayers] = useState([
+    { name: 'Aarav K.', score: 61240 },
+    { name: 'Meera S.', score: 58910 },
+    { name: 'Rohan P.', score: 55300 },
+    { name: 'Ishita D.', score: 52875 },
+    { name: 'Kabir M.', score: 50410 },
+  ]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPrice((p) => {
+        const next = +(p * (1 + (Math.random() - 0.48) * 0.012)).toFixed(2);
+        setHistory((h) => [...h.slice(1), next]);
+        return next;
+      });
+    }, 1200);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPlayers((ps) => ps.map((p) => ({ ...p, score: Math.round(p.score * (1 + (Math.random() - 0.48) * 0.01)) })));
+    }, 2500);
+    return () => clearInterval(id);
+  }, []);
+
+  const buy = () => {
+    if (wallet >= price) {
+      setWallet((w) => +(w - price).toFixed(2));
+      setShares((s) => s + 1);
+    }
+  };
+  const sell = () => {
+    if (shares > 0) {
+      setWallet((w) => +(w + price).toFixed(2));
+      setShares((s) => s - 1);
+    }
+  };
+
+  const equity = wallet + shares * price;
+  const pnl = equity - START_BALANCE;
+  const min = Math.min(...history);
+  const max = Math.max(...history);
+  const range = max - min || 1;
+  const points = history.map((v, i) => `${(i / (history.length - 1)) * 400},${110 - ((v - min) / range) * 100}`).join(' ');
+  const up = history[history.length - 1] >= history[0];
+  const sorted = [...players].sort((a, b) => b.score - a.score);
+  const medals = ['🥇', '🥈', '🥉'];
+
+  return (
+    <section id="arena" className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 relative z-10 space-y-8 scroll-mt-24">
+      <div className="text-center space-y-2">
+        <span className="inline-block bg-bull-lime/20 text-bull-lime font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
+          Try It Live • No Signup
+        </span>
+        <h2 className="text-3xl font-black tracking-tight text-white font-poppins">Make Your First Trade Right Now</h2>
+        <p className="text-slate-400 text-xs max-w-md mx-auto font-medium">
+          Real-feeling price action, zero real money. Buy, sell and watch your sandbox portfolio move, then see how you rank.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        {/* TRADER */}
+        <div className="card lg:col-span-3 bg-bull-surface border-2 border-bull-line rounded-3xl p-6 shadow-2xl space-y-4 border-b-4 border-b-bull-lime-dark hover:border-bull-lime/50 transition-all duration-300">
+          <div className="flex justify-between items-start">
+            <div>
+              <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">ENERGIA • SIMULATED</span>
+              <div className="text-3xl font-black font-mono tracking-tight text-white mt-3">
+                ₹{price.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </div>
+            </div>
+            <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md animate-pulse">● Live Sandbox</span>
+          </div>
+
+          <div className="bg-bull-bg border border-bull-line rounded-2xl p-3">
+            <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="w-full h-28">
+              <polyline
+                points={points}
+                fill="none"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={up ? 'stroke-emerald-400' : 'stroke-rose-400'}
+                stroke="currentColor"
+              />
+            </svg>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="bg-bull-raised border border-bull-line rounded-xl p-2.5">
+              <p className="text-[9px] font-black uppercase tracking-wider text-slate-500">Cash</p>
+              <p className="text-xs font-mono font-black text-white">₹{Math.round(wallet).toLocaleString('en-IN')}</p>
+            </div>
+            <div className="bg-bull-raised border border-bull-line rounded-xl p-2.5">
+              <p className="text-[9px] font-black uppercase tracking-wider text-slate-500">Shares</p>
+              <p className="text-xs font-mono font-black text-white">{shares}</p>
+            </div>
+            <div className="bg-bull-raised border border-bull-line rounded-xl p-2.5">
+              <p className="text-[9px] font-black uppercase tracking-wider text-slate-500">P&amp;L</p>
+              <p className={`text-xs font-mono font-black ${pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                {pnl >= 0 ? '+' : '-'}₹{Math.abs(Math.round(pnl)).toLocaleString('en-IN')}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex gap-3">
+            <button onClick={buy} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider rounded-xl border-b-4 border-b-emerald-800 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+              Buy 1
+            </button>
+            <button onClick={sell} className="flex-1 py-3 bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider rounded-xl border-b-4 border-b-rose-800 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+              Sell 1
+            </button>
+          </div>
+        </div>
+
+        {/* LEADERBOARD */}
+        <div className="card lg:col-span-2 bg-bull-surface border-2 border-bull-line rounded-3xl p-6 shadow-2xl space-y-4 border-b-4 border-b-bull-line hover:border-bull-lime/50 transition-all duration-300">
+          <div className="flex items-center justify-between">
+            <h3 className="font-black text-base text-white font-poppins">🏆 Class Leaderboard</h3>
+            <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Sample</span>
+          </div>
+          <div className="space-y-2">
+            {sorted.map((p, i) => (
+              <div key={p.name} className="flex items-center justify-between bg-bull-raised border border-bull-line rounded-xl px-3 py-2.5 text-xs font-bold transition-all">
+                <span className="text-white">
+                  <span className="inline-block w-6">{medals[i] || `#${i + 1}`}</span>
+                  {p.name}
+                </span>
+                <span className="font-mono text-bull-lime">₹{p.score.toLocaleString('en-IN')}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
+            In a real classroom arena, every student starts with the same ₹50,000 wallet. Best strategy wins the bell.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ---------- VALUE STRIP ----------
+const ValueStrip = () => (
+  <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 relative z-10">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {[
+        { big: '₹0', small: 'Real money at risk' },
+        { big: '₹50K', small: 'Starting sandbox wallet' },
+        { big: '24/7', small: 'Practice anytime' },
+        { big: '1 Class', small: '= 1 live competition' },
+      ].map((s) => (
+        <div key={s.small} className="card bg-bull-surface border-2 border-bull-line rounded-2xl p-4 text-center shadow-lg hover:border-bull-lime/50 hover:-translate-y-1 transition-all duration-300">
+          <p className="text-2xl sm:text-3xl font-black font-poppins text-bull-lime tracking-tight">{s.big}</p>
+          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mt-1">{s.small}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+// ---------- RANK LADDER ----------
+const RANKS = [
+  { icon: '🌱', name: 'Rookie', req: 'Make your first trade', tag: 'Start here', pct: 15 },
+  { icon: '📊', name: 'Analyst', req: 'Grow your wallet by 10%', tag: 'Read the charts', pct: 40 },
+  { icon: '🧠', name: 'Strategist', req: 'Beat your class average', tag: 'Plan your moves', pct: 70 },
+  { icon: '👑', name: 'Market Legend', req: 'Top the class leaderboard', tag: 'Own the bell', pct: 100 },
+];
+
+const RankLadder = () => (
+  <section id="ranks" className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 relative z-10 space-y-8 scroll-mt-24">
+    <div className="text-center space-y-2">
+      <span className="inline-block bg-bull-lime/20 text-bull-lime font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
+        Level Up
+      </span>
+      <h2 className="text-3xl font-black tracking-tight text-white font-poppins">Climb From Rookie to Market Legend</h2>
+      <p className="text-slate-400 text-xs max-w-md mx-auto font-medium">
+        Every trade moves you up the ladder. Prove your strategy, unlock new ranks and put your name at the top of the class.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-5 relative">
+      {RANKS.map((r, i) => (
+        <div
+          key={r.name}
+          className={`card relative bg-bull-surface rounded-3xl p-5 space-y-3 shadow-xl hover:-translate-y-1 transition-all duration-300 ${
+            i === RANKS.length - 1
+              ? 'border-2 border-bull-lime/60 border-b-4 border-b-bull-lime-dark shadow-[0_15px_35px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)]'
+              : 'border-2 border-bull-line hover:border-bull-lime/50'
+          }`}
+        >
+          <div className="flex items-center justify-between">
+            <div className="h-12 w-12 rounded-2xl bg-bull-raised border border-bull-line flex items-center justify-center text-2xl">
+              {r.icon}
+            </div>
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Rank {i + 1}</span>
+          </div>
+          <h3 className="font-black text-base text-white font-poppins">{r.name}</h3>
+          <p className="text-xs text-slate-400 font-medium leading-relaxed">{r.req}</p>
+          <div className="space-y-1.5 pt-2 border-t border-bull-line">
+            <div className="flex justify-between text-[10px] font-black uppercase tracking-wider">
+              <span className="text-bull-lime">{r.tag}</span>
+              <span className="text-slate-500">{r.pct}%</span>
+            </div>
+            <div className="h-1.5 w-full bg-bull-raised rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-bull-lime to-bull-teal rounded-full" style={{ width: `${r.pct}%` }} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div className="text-center">
+      <Link
+        href="/signup"
+        className="inline-block px-8 py-3.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-xl shadow-lg border-b-2 border-b-bull-lime-dark hover:-translate-y-0.5 transition-all"
+      >
+        Start Your Climb
+      </Link>
+    </div>
+  </section>
+);
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState('stocks'); 
   const [user, setUser] = useState(null);
@@ -41,6 +321,13 @@ export default function Home() {
   const [allSchoolTeachers, setAllSchoolTeachers] = useState([]);
   const [pendingClassStudents, setPendingClassStudents] = useState([]);
   const [newClassName, setNewClassName] = useState('');
+
+  // Days left until modules launch
+  const [daysLeft, setDaysLeft] = useState(null);
+  useEffect(() => {
+    const target = new Date('2026-11-30T23:59:59+05:30').getTime();
+    setDaysLeft(Math.max(0, Math.ceil((target - Date.now()) / 86400000)));
+  }, []);
 
   // Sync state with active user sessions and visual cloud profiles
   useEffect(() => {
@@ -157,8 +444,33 @@ export default function Home() {
 
   const ASSET_TYPES = ['\u20B9', '$', '\uD83D\uDE80', '\uD83D\uDCC8', '\uD83D\uDCC9', '\u20BF', '\uD83D\uDCCA', '\uD83D\uDCBC', '\uD83D\uDCB3', '\uD83D\uDC8E'];
 
+  // Shared "coming soon" overlay for module cards
+  const ComingSoonBadge = () => (
+    <>
+      <span className="absolute top-4 right-4 bg-amber-950/60 border border-amber-900/60 text-amber-300 text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
+        🚧 Under Construction
+      </span>
+      <div className="pt-3 border-t border-bull-line space-y-1.5">
+        <div className="flex justify-between text-[10px] font-black uppercase tracking-wider">
+          <span className="text-slate-400">Expected: 30 Nov 2026</span>
+          <span className="text-bull-lime">{daysLeft !== null ? `${daysLeft} day${daysLeft === 1 ? '' : 's'} left` : '...'}</span>
+        </div>
+        <div className="h-1.5 w-full bg-bull-raised rounded-full overflow-hidden">
+          <div className="h-full w-2/3 bg-gradient-to-r from-bull-lime to-bull-teal rounded-full animate-pulse" />
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pb-20">
+      {/* Marquee keyframes */}
+      <style>{`
+        @keyframes bullMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .animate-bullMarquee { animation: bullMarquee 35s linear infinite; }
+        .animate-bullMarquee:hover { animation-play-state: paused; }
+      `}</style>
+
       <Navbar />
 
       {/* RAINING BACKGROUND MATRIX */}
@@ -325,6 +637,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LIVE TICKER TAPE */}
+      <TickerTape />
+
+      {/* VALUE STRIP */}
+      <ValueStrip />
+
       {/* TEACHER APPROVAL QUEUE CARD */}
       {profile?.role === 'teacher' && profile?.verification_status === 'approved' && pendingClassStudents.length > 0 && (
         <section className="max-w-md mx-auto px-4 sm:px-6 pt-6 relative z-20 animate-fadeInFast">
@@ -416,36 +734,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LIVE TRADING ARENA + LEADERBOARD */}
+      <LiveArena />
+
       {/* INTEGRATED LEARNING ACADEMY CARDS */}
       <section id="courses" className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 relative z-10 space-y-8 scroll-mt-24">
         <div className="text-center space-y-2">
           <h2 className="text-3xl font-black tracking-tight text-white font-poppins">Integrated Trading Academy</h2>
           <p className="text-slate-400 text-xs max-w-md mx-auto font-medium">Master tactical market theories through dynamic self-paced sandbox training paths.</p>
+          <span className="inline-block mt-2 bg-amber-950/40 border border-amber-900/60 text-amber-300 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+            🚧 Modules launching 30 Nov 2026
+          </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+          <div className="card relative bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
             <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">01</div>
             <h3 className="font-black text-base text-white font-poppins">Market Foundations</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Understand technical asset pricing loops, stock charts, order structures, and index operations across primary exchanges.</p>
             <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">8 Modules • Beginner</span></div>
+            <ComingSoonBadge />
           </div>
 
-          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+          <div className="card relative bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
             <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">02</div>
             <h3 className="font-black text-base text-white font-poppins">Technical Analysis</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Map patterns using support levels, moving averages, and volume indicators to execute quantitative simulator mock plays.</p>
             <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">12 Modules • Intermediate</span></div>
+            <ComingSoonBadge />
           </div>
 
-          <div className="card bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
+          <div className="card relative bg-bull-surface border-2 border-bull-line p-6 rounded-3xl space-y-4 shadow-xl hover:border-bull-lime/50 hover:-translate-y-1 hover:shadow-[0_15px_30px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)] transition-all duration-300">
             <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">03</div>
             <h3 className="font-black text-base text-white font-poppins">Portfolio Risk Management</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Mitigate drawdown via position sizing models, strict asset tracking ratios, and dynamic algorithmic hedging criteria.</p>
             <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">6 Modules • Advanced</span></div>
+            <ComingSoonBadge />
           </div>
         </div>
       </section>
+
+      {/* RANK LADDER */}
+      <RankLadder />
 
       {/* CAMPUS DEPLOYMENT BANNER CARD */}
       <section id="pricing" className="max-w-7xl mx-auto px-4 sm:px-6 pt-32 relative z-10 scroll-mt-24">
