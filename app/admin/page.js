@@ -21,6 +21,43 @@ const formatDuration = (seconds) => {
   return h + 'h ' + m + 'm';
 };
 
+// A student counts as "online" if the activity tracker (every 30 s) pinged in the last 90 s
+const ONLINE_MS = 90 * 1000;
+
+const timeAgo = (ms) => {
+  const sec = Math.max(0, Math.round(ms / 1000));
+  if (sec < 90) return 'just now';
+  const min = Math.round(sec / 60);
+  if (min < 60) return min + ' min ago';
+  const hr = Math.round(min / 60);
+  if (hr < 48) return hr + ' h ago';
+  return Math.round(hr / 24) + ' d ago';
+};
+
+// Lessons finished per module for one user, using the totals sent by the server
+const progressSummary = (uid, prog) => {
+  const mods = (prog && prog.users && prog.users[uid]) || {};
+  const totals = (prog && prog.totals) || {};
+  const nums = Object.keys(totals).map(Number).sort((a, b) => a - b);
+  let reached = 0;
+  let doneAll = 0;
+  let totalAll = 0;
+  nums.forEach((n) => {
+    const d = Number(mods[n] || 0);
+    doneAll += d;
+    totalAll += totals[n];
+    if (d > 0) reached = n;
+  });
+  return {
+    mods,
+    reached,
+    reachedDone: Number(mods[reached] || 0),
+    reachedTotal: totals[reached] || 0,
+    doneAll,
+    totalAll,
+  };
+};
+
 // Stable order: highest net worth first, ties broken by id (same as the leaderboard)
 const rankProfiles = (list) =>
   [...list]
@@ -71,6 +108,10 @@ export default function SuperAdminDashboard() {
   const [allProfiles, setAllProfiles] = useState([]);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [activity, setActivity] = useState({});
+  const [lastSeen, setLastSeen] = useState({});
+  const [progress, setProgress] = useState({ totals: {}, users: {} });
+  const [statusFilter, setStatusFilter] = useState('ALL');
+  const progressFetchedAt = useRef(0);
 
   // Global clock: makes cards flip to FROZEN the moment time runs out
   const [now, setNow] = useState(Date.now());
@@ -111,6 +152,24 @@ export default function SuperAdminDashboard() {
     );
   }, []);
 
+  const loadProgress = useCallback(async (force = false) => {
+    if (!force && Date.now() - progressFetchedAt.current < 25000) return;
+    progressFetchedAt.current = Date.now();
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData && sessionData.session ? sessionData.session.access_token : null;
+      if (!token) return;
+      const res = await fetch('/api/admin/user-progress', { headers: { Authorization: 'Bearer ' + token } });
+      if (!res.ok) {
+        console.warn('Module progress fetch failed (' + res.status + ')');
+        return;
+      }
+      setProgress(await res.json());
+    } catch (e) {
+      console.warn('Module progress fetch error', e);
+    }
+  }, []);
+
   const fetchMasterData = useCallback(async (silent = false) => {
     if (!silent) setLoading(true);
 
@@ -125,16 +184,19 @@ export default function SuperAdminDashboard() {
     setAllProfiles(rankProfiles(data || []));
     setLastUpdated(new Date());
     setLoading(false);
+    loadProgress(false);
 
     // Weekly time on site: last 7 IST days including today
     const cutoff = new Date(Date.now() + 5.5 * 3600 * 1000 - 6 * 86400 * 1000)
       .toISOString()
       .slice(0, 10);
 
-    const { data: rows, error: actError } = await supabase
-      .from('user_activity')
-      .select('user_id, seconds')
-      .gte('day', cutoff);
+    const readActivity = (cols) => supabase.from('user_activity').select(cols).gte('day', cutoff);
+    let { data: rows, error: actError } = await readActivity('user_id, seconds, last_seen');
+    if (actError) {
+      // the last_seen column has not been added yet: fall back to the old query
+      ({ data: rows, error: actError } = await readActivity('user_id, seconds'));
+    }
 
     if (actError) {
       console.warn('Activity fetch failed:', actError.message);
@@ -142,10 +204,16 @@ export default function SuperAdminDashboard() {
     }
 
     const totals = {};
+    const seenMap = {};
     (rows || []).forEach((r) => {
       totals[r.user_id] = (totals[r.user_id] || 0) + Number(r.seconds || 0);
+      if (r.last_seen) {
+        const t = new Date(r.last_seen).getTime();
+        if (!seenMap[r.user_id] || t > seenMap[r.user_id]) seenMap[r.user_id] = t;
+      }
     });
     setActivity(totals);
+    setLastSeen(seenMap);
   }, []);
 
   useEffect(() => {
@@ -398,11 +466,29 @@ export default function SuperAdminDashboard() {
 
       if (!matchesSearch) return false;
 
+      const frozenNow = getProfileFreezeStatus(p, now).isFrozen;
+      const seenAt = lastSeen[p.id];
+      const onlineNow = !!seenAt && now - seenAt < ONLINE_MS;
+      if (statusFilter === 'FROZEN' && !frozenNow) return false;
+      if (statusFilter === 'UNFROZEN' && frozenNow) return false;
+      if (statusFilter === 'ONLINE' && !onlineNow) return false;
+
       if (selectedSchoolFilter === 'ALL') return true;
       if (selectedSchoolFilter === 'PERSONAL') return p.role === 'personal' || !schoolIdentifier;
       return schoolIdentifier === selectedSchoolFilter;
     });
-  }, [allProfiles, searchQuery, selectedSchoolFilter]);
+  }, [allProfiles, searchQuery, selectedSchoolFilter, statusFilter, lastSeen, now]);
+
+  const statusCounts = useMemo(() => {
+    const c = { all: allProfiles.length, frozen: 0, unfrozen: 0, online: 0 };
+    allProfiles.forEach((p) => {
+      if (getProfileFreezeStatus(p, now).isFrozen) c.frozen += 1;
+      else c.unfrozen += 1;
+      const seenAt = lastSeen[p.id];
+      if (seenAt && now - seenAt < ONLINE_MS) c.online += 1;
+    });
+    return c;
+  }, [allProfiles, lastSeen, now]);
 
   if (loading) {
     return (
@@ -540,6 +626,27 @@ export default function SuperAdminDashboard() {
             </div>
           </div>
 
+          {/* STATUS TABS */}
+          <div className="space-y-2">
+            <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider font-mono">Filter By Status:</span>
+            <div className="flex flex-wrap gap-2 font-mono">
+              {[
+                ['ALL', 'All', statusCounts.all],
+                ['UNFROZEN', 'Unfrozen', statusCounts.unfrozen],
+                ['FROZEN', 'Frozen', statusCounts.frozen],
+                ['ONLINE', 'Online now', statusCounts.online],
+              ].map(([key, label, count]) => (
+                <button
+                  key={key}
+                  onClick={() => setStatusFilter(key)}
+                  className={'px-3.5 py-1.5 rounded-xl text-xs font-black uppercase border cursor-pointer ' + (statusFilter === key ? 'bg-bull-lime border-bull-lime-dark text-bull-ink' : 'bg-bull-raised border-bull-line text-slate-300 hover:border-bull-lime/50')}
+                >
+                  {label} ({count})
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* USER CARDS GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
             {filteredProfiles.map((p) => {
@@ -575,6 +682,21 @@ export default function SuperAdminDashboard() {
                       <span className="text-emerald-400">{inr(getNetWorth(p))}</span>
                       <span className="text-[10px] text-slate-500 block mt-0.5">Cash {inr(p.wallet_balance)}</span>
                       <span className="text-[10px] text-sky-400 block mt-0.5">Week: {formatDuration(activity[p.id])}</span>
+                      {(() => {
+                        const seenAt = lastSeen[p.id];
+                        const online = !!seenAt && now - seenAt < ONLINE_MS;
+                        const sum = progressSummary(p.id, progress);
+                        return (
+                          <>
+                            <span className={'text-[10px] block mt-0.5 ' + (online ? 'text-emerald-400' : 'text-slate-500')}>
+                              {online ? 'Online now' : seenAt ? 'Last seen ' + timeAgo(now - seenAt) : 'Not seen yet'}
+                            </span>
+                            <span className="text-[10px] text-bull-lime block mt-0.5">
+                              {sum.reached ? 'Module ' + sum.reached + ': ' + sum.reachedDone + '/' + sum.reachedTotal + ' (' + sum.doneAll + '/' + sum.totalAll + ' lessons)' : 'No lessons yet'}
+                            </span>
+                          </>
+                        );
+                      })()}
                     </div>
 
                     <div className="text-right">
@@ -625,6 +747,38 @@ export default function SuperAdminDashboard() {
               <div className="p-6 overflow-y-auto space-y-6 text-left flex-1 font-mono">
 
                 {/* ⚡ ADMIN CUSTOM ACCESS DURATION ACTIVATOR */}
+                {(() => {
+                  const sum = progressSummary(selectedProfile.id, progress);
+                  const nums = Object.keys(progress.totals || {}).map(Number).sort((a, b) => a - b);
+                  const seenAt = lastSeen[selectedProfile.id];
+                  return (
+                    <div className="p-5 bg-bull-raised border-2 border-bull-line rounded-2xl space-y-3 shadow-xl">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black uppercase text-bull-lime tracking-wider">Learning progress</span>
+                        <span className="text-[10px] text-slate-400">{sum.doneAll} / {sum.totalAll} lessons</span>
+                      </div>
+                      <p className="text-[11px] text-slate-400 font-sans">
+                        {seenAt && now - seenAt < ONLINE_MS ? 'Online now' : seenAt ? 'Last seen ' + timeAgo(now - seenAt) : 'Not seen yet'}
+                      </p>
+                      <div className="space-y-1.5">
+                        {nums.map((n) => {
+                          const d = Number(sum.mods[n] || 0);
+                          const t = progress.totals[n];
+                          return (
+                            <div key={n} className="flex items-center gap-2 text-[11px]">
+                              <span className="w-20 text-slate-300">Module {n}</span>
+                              <div className="flex-1 h-2 bg-bull-bg rounded-full overflow-hidden border border-bull-line">
+                                <div className={'h-full ' + (d >= t ? 'bg-emerald-400' : 'bg-bull-lime')} style={{ width: (t ? (d / t) * 100 : 0) + '%' }} />
+                              </div>
+                              <span className="w-12 text-right text-slate-400">{d}/{t}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
+
                 {!isSuperAdmin && (
                   <div className="p-5 bg-bull-raised border-2 border-bull-lime/40 rounded-2xl space-y-3 shadow-xl">
                     <span className="text-[10px] font-black uppercase text-bull-lime tracking-wider block">

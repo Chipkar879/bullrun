@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { supabase } from '@/lib/supabase';
 
 const STORE_KEY = 'bullrun_progress_v2';
 const XP_PER_LESSON = 100;
@@ -111,18 +112,8 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   const touchX = useRef(null);
   const trackRef = useRef(null);
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORE_KEY);
-      if (saved) {
-        const p = JSON.parse(saved);
-        if (Array.isArray(p)) setDone(p);
-      }
-    } catch (e) {
-      console.warn('Could not load progress', e);
-    }
-  }, []);
-
+  // The browser copy is only a cache so the page shows something instantly.
+  // The database is the truth, so progress follows the student to any device.
   const save = (list) => {
     try {
       localStorage.setItem(STORE_KEY, JSON.stringify(list));
@@ -130,6 +121,48 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
       console.warn('Could not save progress', e);
     }
   };
+
+  const authHeaders = async () => {
+    const { data } = await supabase.auth.getSession();
+    const token = data && data.session ? data.session.access_token : null;
+    return token ? { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token } : null;
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      let local = [];
+      try {
+        const saved = localStorage.getItem(STORE_KEY);
+        if (saved) {
+          const p = JSON.parse(saved);
+          if (Array.isArray(p)) local = p;
+        }
+      } catch (e) {
+        console.warn('Could not read saved progress', e);
+      }
+      if (local.length > 0) setDone(local);
+
+      try {
+        const headers = await authHeaders();
+        if (!headers) return;
+        const res = await fetch('/api/progress', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ importLocal: local }),
+        });
+        if (!res.ok) throw new Error('Progress sync failed (' + res.status + ')');
+        const data = await res.json();
+        if (!cancelled && Array.isArray(data.done)) {
+          setDone(data.done);
+          save(data.done);
+        }
+      } catch (e) {
+        console.warn('Could not sync progress', e);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   const scrollTracks = (dir) => {
     if (trackRef.current) {
@@ -185,16 +218,18 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     setChecking(true);
     setErr('');
     try {
+      const headers = await authHeaders();
+      if (!headers) throw new Error('Not logged in');
       const res = await fetch('/api/quiz-check', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ submoduleId: lesson.id, answers }),
       });
       if (!res.ok) throw new Error('Check failed');
       const data = await res.json();
       setResult(data);
       if (data.passed && !done.includes(lesson.id)) {
-        const updated = [...done, lesson.id];
+        const updated = Array.isArray(data.done) ? data.done : [...done, lesson.id];
         setDone(updated);
         save(updated);
         setXpPop(true);

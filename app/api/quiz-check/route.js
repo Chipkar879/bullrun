@@ -1,38 +1,56 @@
 import { NextResponse } from 'next/server';
-import m1 from '@/app/data/Mod_1.json';
-import m2 from '@/app/data/Mod_2.json';
-import m3 from '@/app/data/Mod_3.json';
-import m4 from '@/app/data/Mod_4.json';
-import m5 from '@/app/data/Mod_5.json';
-import m6 from '@/app/data/Mod_6.json';
-import m7 from '@/app/data/Mod_7.json';
-import m8 from '@/app/data/Mod_8.json';
+import { adminClient, userFromRequest } from '@/lib/supabaseServer';
+import { getLesson, ORDER } from '@/lib/moduleData';
+import { gradeQuiz, isUnlocked } from '@/lib/progressLogic';
 
-// Checks quiz answers on the server so correct answers are never sent to the browser
-// until the student has submitted.
-const SUBMODULES = [m1, m2, m3, m4, m5, m6, m7, m8].flatMap(m => m.submodules || []);
+export const dynamic = 'force-dynamic';
 
-export async function POST(request) {
+// Grades a quiz on the server and, if passed, saves the lesson to the database.
+export async function POST(req) {
   let body;
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: 'Bad request' }, { status: 400 });
+  try { body = await req.json(); } catch (e) { return NextResponse.json({ error: 'Bad request' }, { status: 400 }); }
+
+  const lesson = getLesson(body && body.submoduleId);
+  if (!lesson) return NextResponse.json({ error: 'Unknown lesson' }, { status: 404 });
+
+  let admin;
+  try { admin = adminClient(); } catch (e) {
+    console.error(e.message);
+    return NextResponse.json({ error: 'Server not configured' }, { status: 500 });
   }
 
-  const { submoduleId, answers } = body || {};
-  const sub = SUBMODULES.find(s => s.id === submoduleId);
-  if (!sub || !Array.isArray(sub.quiz) || !answers || typeof answers !== 'object') {
-    return NextResponse.json({ error: 'Unknown lesson' }, { status: 400 });
+  const user = await userFromRequest(req, admin);
+  if (!user) return NextResponse.json({ error: 'Please log in again' }, { status: 401 });
+
+  const { data: rows, error: readError } = await admin
+    .from('module_progress').select('submodule_id').eq('user_id', user.id);
+  if (readError) {
+    console.error('progress read failed', readError.message);
+    return NextResponse.json({ error: 'Could not read progress' }, { status: 500 });
+  }
+  const done = (rows || []).map((r) => r.submodule_id);
+
+  const graded = gradeQuiz(lesson.quiz, body.answers);
+  const unlocked = isUnlocked(ORDER, lesson.id, done);
+  const passed = graded.passed && unlocked;
+
+  let nowDone = done;
+  if (passed && !done.includes(lesson.id)) {
+    const { error: saveError } = await admin
+      .from('module_progress')
+      .upsert({ user_id: user.id, submodule_id: lesson.id, source: 'quiz' }, { onConflict: 'user_id,submodule_id', ignoreDuplicates: true });
+    if (saveError) {
+      console.error('progress save failed', saveError.message);
+      return NextResponse.json({ error: 'Could not save progress' }, { status: 500 });
+    }
+    nowDone = done.concat([lesson.id]);
   }
 
-  let correctCount = 0;
-  const results = sub.quiz.map((q, idx) => {
-    const correct = answers[idx] === q.correctIndex;
-    if (correct) correctCount++;
-    return { correct, correctIndex: q.correctIndex, explanation: q.explanation };
+  return NextResponse.json({
+    passed,
+    correctCount: graded.correctCount,
+    needed: graded.needed,
+    results: graded.results,
+    done: nowDone,
   });
-
-  const needed = Math.ceil(sub.quiz.length * 0.8);
-  return NextResponse.json({ results, correctCount, needed, passed: correctCount >= needed });
 }
