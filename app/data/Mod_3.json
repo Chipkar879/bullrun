@@ -4,206 +4,457 @@
   "submodules": [
     {
       "id": "submod-3-1",
-      "title": "1. Exchanges",
-      "intro": "Discover the important ideas behind exchanges.",
-      "content": "⚡ MISSION BRIEFING: EXCHANGES\n\nExchanges is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. NSE, BSE and their roles are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of NSE. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• NSE is the starting concept to understand.\n• BSE and their roles is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what exchanges means, then examines how nse, bse and their roles affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nExchanges helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "1. How a Market Works: Buyers, Sellers and Prices",
+      "intro": "How do buyers and sellers decide a price?",
+      "content": "\u26a1 MISSION BRIEFING: WHAT IS A MARKET?\nA market is any place or system where buyers and sellers meet to trade. It can be a vegetable market, an online shop or a stock exchange.\nA financial market is where things like shares and bonds are bought and sold.\n\n\ud83e\udd2f WOW FACT:\nA stock exchange is like a giant online mela. Millions of buy and sell orders meet every day, and computers match them in a blink!\n\n\u26a1 FINANCIAL INTEL: DEMAND, SUPPLY AND PRICE\n\u2022 Demand: how many people want to buy.\n\u2022 Supply: how many people want to sell.\n\u2022 If more people want to buy than sell, prices tend to rise. If more want to sell than buy, prices tend to fall.\nExample (fictional): tickets to a school cricket final are limited. Many students want them, so the price people offer goes up. Share prices move on the same idea.\n\n\u26a1 FINANCIAL INTEL: WHY MARKETS EXIST\n\u2022 Companies get a place to raise money.\n\u2022 Investors get a place to buy and sell.\n\u2022 Prices are found openly, which is called price discovery.\n\n\ud83e\uddea TRY IT: PLAY SHOPKEEPER\nImagine you sell mangoes. On a day when mangoes are scarce, would you raise or lower your price? Now imagine a huge harvest. What changes? You have just explained demand and supply.\n\n\ud83d\udca1 CORE TAKEAWAY:\nMarkets bring buyers and sellers together, and prices move with demand and supply.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying exchanges?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
+          "question": "What is a market?",
+          "options": ["A place or system where buyers and sellers meet to trade", "A type of bank account", "A government office", "A school exam"],
           "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "explanation": "A market is any place or system where buyers and sellers trade."
         },
         {
-          "question": "Which approach is most useful when learning about exchanges?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "More people want to buy a product than sell it. What tends to happen to its price?",
+          "options": ["It falls", "It stays frozen forever", "It tends to rise", "It becomes zero"],
+          "correctIndex": 2,
+          "explanation": "When demand is higher than supply, prices tend to rise."
+        },
+        {
+          "question": "What is 'supply' in a market?",
+          "options": ["How many people want to buy", "How many people want to sell", "The price on the tag", "The tax on a product"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Supply is about how much sellers are willing to offer."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "What does 'price discovery' mean?",
+          "options": ["Finding a coin on the road", "The government fixing every price", "A shop hiding its prices", "Prices being found openly through buyers and sellers trading"],
+          "correctIndex": 3,
+          "explanation": "In a market, trading between buyers and sellers helps find the price."
+        },
+        {
+          "question": "There is a huge harvest of mangoes and very few buyers. What will prices most likely do?",
+          "options": ["Tend to fall", "Rise sharply", "Stay exactly the same", "Disappear"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "When supply is much higher than demand, prices tend to fall."
         }
       ]
     },
     {
       "id": "submod-3-2",
-      "title": "2. Regulators",
-      "intro": "Discover the important ideas behind regulators.",
-      "content": "⚡ MISSION BRIEFING: REGULATORS\n\nRegulators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. SEBI, RBI and Ministry of Finance are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of SEBI. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• SEBI is the starting concept to understand.\n• RBI and Ministry of Finance is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what regulators means, then examines how sebi, rbi and ministry of finance affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nRegulators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "2. The Primary Market: How Companies Raise Money",
+      "intro": "How does a company sell its shares for the very first time?",
+      "content": "\u26a1 MISSION BRIEFING: THE PRIMARY MARKET\nThe primary market is where a company sells new shares directly to investors to raise money. The money goes to the company.\nWhen a company does this for the first time, it is called an IPO (Initial Public Offering).\n\n\ud83e\udd2f WOW FACT:\nBefore an IPO, a company is usually owned by a few people. After it, thousands of ordinary people can own a small slice of it!\n\n\u26a1 FINANCIAL INTEL: WHY DO COMPANIES DO AN IPO?\n\u2022 To raise money for growth, like new factories or new products.\n\u2022 To pay back loans.\n\u2022 To let early owners sell part of their stake.\nThe company must share details about its business and risks in a document called a prospectus.\n\n\u26a1 FINANCIAL INTEL: HOW AN IPO WORKS (SIMPLE VERSION)\n1. The company files its papers with the regulator, SEBI.\n2. It announces a price or a price range for each share.\n3. Investors apply during a set window.\n4. If more people apply than there are shares, not everyone gets shares. This is called oversubscription.\n5. The shares then get listed, which means they start trading on a stock exchange.\n\n\u26a1 FINANCIAL INTEL: IPOs ARE NOT A SURE THING\nA listed share can open above or below the issue price. An IPO being popular does not guarantee gains. Always read the risks section of the prospectus.\nExample (fictional): Spice Route Foods Ltd sells shares at \u20b9100 each. On listing day the price could be \u20b990 or \u20b9115. Nobody can promise which.\n\n\ud83d\udca1 CORE TAKEAWAY:\nIn the primary market, companies sell new shares and the money goes to the company. An IPO is the first such sale to the public, and it carries risk.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying regulators?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "In the primary market, who receives the money paid by investors?",
+          "options": ["Other investors", "The stock exchange", "The company issuing the shares", "The government"],
+          "correctIndex": 2,
+          "explanation": "In the primary market the company sells new shares and receives the money."
         },
         {
-          "question": "Which approach is most useful when learning about regulators?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What does IPO stand for?",
+          "options": ["Investor Profit Option", "Initial Public Offering", "Indian Price Order", "Internal Payment Outline"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "IPO means Initial Public Offering, the first sale of shares to the public."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "What is a prospectus?",
+          "options": ["A document with details about the business and its risks", "A type of share", "A bank loan", "A stock exchange"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "A prospectus tells investors about the company, how it will use the money and the risks."
+        },
+        {
+          "question": "More people apply for an IPO than there are shares. What is this called?",
+          "options": ["Delisting", "A circuit breaker", "A dividend", "Oversubscription"],
+          "correctIndex": 3,
+          "explanation": "When applications exceed the shares on offer, the IPO is oversubscribed and not everyone gets shares."
+        },
+        {
+          "question": "Which statement about IPOs is correct?",
+          "options": ["Every IPO gives a gain on listing day", "A popular IPO guarantees profit", "A listed share can open above or below its issue price", "IPOs have no risk"],
+          "correctIndex": 2,
+          "explanation": "Listing prices can be higher or lower than the issue price. Nothing is guaranteed."
         }
       ]
     },
     {
       "id": "submod-3-3",
-      "title": "3. Market Indices",
-      "intro": "Discover the important ideas behind market indices.",
-      "content": "⚡ MISSION BRIEFING: MARKET INDICES\n\nMarket Indices is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Nifty 50, Sensex, Bank Nifty and sectoral indices are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Nifty 50. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Nifty 50 is the starting concept to understand.\n• Sensex is another important element of this subject.\n• Bank Nifty and sectoral indices is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what market indices means, then examines how nifty 50, sensex, bank nifty and sectoral indices affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMarket Indices helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "3. The Secondary Market: Where Shares Are Traded",
+      "intro": "What happens to shares after the IPO?",
+      "content": "\u26a1 MISSION BRIEFING: THE SECONDARY MARKET\nAfter shares are listed, investors trade them with each other on a stock exchange. This is the secondary market.\nIn the secondary market the company does not receive the money. The money moves from the buyer to the seller.\n\n\ud83e\udd2f WOW FACT:\nWhen you buy a share on the exchange, you are not buying it from the company. You are buying it from another investor who wants to sell!\n\n\u26a1 FINANCIAL INTEL: PRIMARY VS. SECONDARY\n\u2022 Primary market: new shares, sold by the company, money goes to the company.\n\u2022 Secondary market: existing shares, traded between investors, money goes to the selling investor.\nThink of a new phone sold by the shop (primary) and a used phone sold by a friend (secondary).\n\n\u26a1 FINANCIAL INTEL: BID AND ASK\n\u2022 Bid: the highest price a buyer is willing to pay.\n\u2022 Ask (or offer): the lowest price a seller is willing to accept.\nA trade happens when a buyer and a seller agree on a price. The gap between bid and ask is called the spread.\n\n\u26a1 FINANCIAL INTEL: LIQUIDITY\nLiquidity means how easily you can buy or sell something without moving its price much. A share with many buyers and sellers is more liquid. A share few people trade can be harder to sell quickly. Remember liquidity risk from Module 1?\n\n\u26a1 FINANCIAL INTEL: TRADING HOURS (AS OF 2026)\nThe regular equity session on Indian exchanges runs on weekdays from 9:15 am to 3:30 pm, except market holidays. Timings can change, so always check the exchange website.\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe secondary market is where investors trade existing shares with each other. Liquidity tells you how easy it is to buy or sell.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying market indices?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "In the secondary market, where does the money from a trade go?",
+          "options": ["To the company", "To SEBI", "To the exchange", "To the investor who sold the shares"],
+          "correctIndex": 3,
+          "explanation": "In the secondary market, shares are traded between investors, so the seller receives the money."
         },
         {
-          "question": "Which approach is most useful when learning about market indices?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What is the 'bid' price?",
+          "options": ["The highest price a buyer is willing to pay", "The lowest price a seller will accept", "The company's issue price", "The fee paid to a broker"],
+          "correctIndex": 0,
+          "explanation": "Bid is what buyers offer. Ask is what sellers want."
+        },
+        {
+          "question": "What does liquidity mean?",
+          "options": ["How risky a share is", "How easily you can buy or sell without moving the price much", "How much a company earns", "The number of shares a company has"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A liquid asset can be bought or sold easily."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "question": "Which is a good comparison for the secondary market?",
+          "options": ["A shop selling a brand-new phone", "A phone company making phones", "A friend selling you a used phone", "A bank giving a loan"],
+          "correctIndex": 2,
+          "explanation": "Secondary market trades are between investors, like a used phone sold by a friend."
+        },
+        {
+          "question": "What is the gap between the bid and the ask called?",
+          "options": ["The dividend", "The prospectus", "The index", "The spread"],
+          "correctIndex": 3,
+          "explanation": "The difference between bid and ask is the spread."
         }
       ]
     },
     {
       "id": "submod-3-4",
-      "title": "4. Market Participants Roles",
-      "intro": "Discover the important ideas behind market participants roles.",
-      "content": "⚡ MISSION BRIEFING: MARKET PARTICIPANTS ROLES\n\nMarket Participants Roles is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. NSDL, CDSL, clearing corporations and depository participants are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of NSDL. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• NSDL is the starting concept to understand.\n• CDSL is another important element of this subject.\n• clearing corporations and depository participants is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what market participants roles means, then examines how nsdl, cdsl, clearing corporations and depository participants affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMarket Participants Roles helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "4. Stock Exchanges: NSE and BSE",
+      "intro": "Where exactly do shares get traded in India?",
+      "content": "\u26a1 MISSION BRIEFING: WHAT IS A STOCK EXCHANGE?\nA stock exchange is an organised marketplace where shares and other securities are listed and traded. It provides the platform, the rules and the systems that match buyers and sellers.\nIn India the two main stock exchanges are the NSE (National Stock Exchange) and the BSE (Bombay Stock Exchange).\n\n\ud83e\udd2f WOW FACT:\nThe BSE was set up in 1875, which makes it one of the oldest stock exchanges in Asia. Today trading is fully on computer screens, not shouting in a hall!\n\n\u26a1 FINANCIAL INTEL: WHAT AN EXCHANGE DOES\n\u2022 Lists companies that meet its standards.\n\u2022 Provides a screen-based system to match orders fairly.\n\u2022 Publishes prices so everyone can see them.\n\u2022 Watches for unusual trading and enforces rules.\nExchanges themselves are recognised and supervised by SEBI.\n\n\u26a1 FINANCIAL INTEL: NSE AND BSE SIDE BY SIDE\n\u2022 Both are recognised stock exchanges that run electronic trading.\n\u2022 Many companies are listed on both.\n\u2022 Each has its own well-known index (you will meet them in the next lesson).\nBecause both show prices openly, a share's price on the two exchanges stays very close.\n\n\u26a1 FINANCIAL INTEL: LISTED MEANS TRADING\nA company is listed when its shares are admitted for trading on an exchange. If a company is not listed, you cannot buy its shares on the exchange.\n\n\ud83e\uddea TRY IT: SPOT THE EXCHANGE\nOpen the official NSE or BSE website and look at the list of indices or a market holiday calendar. Notice how much information is free and public. Do not copy prices into Bull Run. Our simulator prices are simulated, not live.\n\n\ud83d\udca1 CORE TAKEAWAY:\nStock exchanges like NSE and BSE give investors a fair, open platform to trade listed shares, under SEBI's supervision.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying market participants roles?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about market participants roles?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What is a stock exchange?",
+          "options": ["A shop that sells gadgets", "An organised marketplace where listed securities are traded", "A type of savings account", "A tax office"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "An exchange is an organised platform where shares and other securities trade."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Which are the two main stock exchanges in India?",
+          "options": ["RBI and SEBI", "NSDL and CDSL", "NSE and BSE", "UPI and NEFT"],
+          "correctIndex": 2,
+          "explanation": "NSE and BSE are India's two main stock exchanges."
+        },
+        {
+          "question": "Who recognises and supervises stock exchanges in India?",
+          "options": ["SEBI", "The school board", "Individual brokers", "Social media"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "SEBI is the market regulator that oversees exchanges."
+        },
+        {
+          "question": "What does it mean when a company is 'listed'?",
+          "options": ["It has a long list of products", "Its owner is famous", "It has paid all its taxes", "Its shares are admitted for trading on an exchange"],
+          "correctIndex": 3,
+          "explanation": "Listed means the company's shares can be traded on a stock exchange."
+        },
+        {
+          "question": "Which of these is a job of a stock exchange?",
+          "options": ["Guaranteeing that every share will rise", "Setting your personal goals", "Providing a fair platform to match buyers and sellers", "Printing currency notes"],
+          "correctIndex": 2,
+          "explanation": "Exchanges provide the platform, systems and rules for trading. They never guarantee gains."
         }
       ]
     },
     {
       "id": "submod-3-5",
-      "title": "5. Investor Protection",
-      "intro": "Discover the important ideas behind investor protection.",
-      "content": "⚡ MISSION BRIEFING: INVESTOR PROTECTION\n\nInvestor Protection is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. SEBI rules, SCORES, insider trading and circuit breakers are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of SEBI rules. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• SEBI rules is the starting concept to understand.\n• SCORES is another important element of this subject.\n• insider trading and circuit breakers is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what investor protection means, then examines how sebi rules, scores, insider trading and circuit breakers affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nInvestor Protection helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "5. Market Indices: Reading the Market's Mood",
+      "intro": "What do people mean when they say 'the market is up today'?",
+      "content": "\u26a1 MISSION BRIEFING: WHAT IS AN INDEX?\nAn index is a basket of selected shares that shows how a part of the market is performing. When people say 'the market is up', they usually mean an index went up.\nIn India, the two best-known indices are the Nifty 50 (NSE, 50 large companies) and the Sensex (BSE, 30 large companies).\n\n\ud83e\udd2f WOW FACT:\nAn index is a bit like a class average. It does not tell you how every student did, but it tells you how the class did overall!\n\n\u26a1 FINANCIAL INTEL: HOW AN INDEX WORKS\nImagine a fictional index of 5 school-snack companies. If most of them rise in price, the index goes up. If most fall, it goes down.\nIndices are measured in points, not rupees. A move of 100 points is not \u20b9100.\nBigger companies usually have more weight, so they move the index more.\n\n\u26a1 FINANCIAL INTEL: WHY INDICES MATTER\n\u2022 They give a quick picture of market mood.\n\u2022 They act as a yardstick. People compare how an investment did against the index.\n\u2022 Some funds are built to follow an index.\nAn index going up does not mean every share in it went up.\n\n\u26a1 FINANCIAL INTEL: SECTOR AND BROAD INDICES\nBroad indices cover many sectors. Sector indices cover one area, like banking or IT. Companies in the same sector often move in a similar direction, but not always.\n\n\ud83e\uddea TRY IT: BUILD A MINI INDEX\nPick 5 fictional companies and make up a price for each. Add them up as your 'index'. Change two prices and see how the index moves. Notice that it moves in points.\n\n\ud83d\udca1 CORE TAKEAWAY:\nAn index is a basket that shows how part of the market is doing. It is measured in points and is a yardstick, not a promise.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying investor protection?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about investor protection?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What is a stock market index?",
+          "options": ["A fee paid to a broker", "A basket of selected shares that shows how part of the market is doing", "The price of one share", "A type of bank loan"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "An index tracks a group of shares to show overall market performance."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "The Nifty 50 belongs to which exchange?",
+          "options": ["BSE", "RBI", "SEBI", "NSE"],
+          "correctIndex": 3,
+          "explanation": "Nifty 50 is the NSE's index. The Sensex is the BSE's index."
+        },
+        {
+          "question": "Indices are measured in:",
+          "options": ["Rupees", "Points", "Kilograms", "Percent only"],
+          "correctIndex": 1,
+          "explanation": "An index level is shown in points. A 100-point move is not \u20b9100."
+        },
+        {
+          "question": "The index goes up today. Which statement is correct?",
+          "options": ["Every share in it went up", "You will definitely earn money", "Most or the bigger shares in it probably rose, but not necessarily all", "Prices will rise tomorrow too"],
+          "correctIndex": 2,
+          "explanation": "An index shows the overall picture. Individual shares can still fall."
+        },
+        {
+          "question": "How is an index like a class average?",
+          "options": ["It shows overall performance, not each individual's result", "It lists every student's marks", "It guarantees good results", "It never changes"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Like a class average, an index summarises a group without showing every member."
+        }
+      ]
+    },
+    {
+      "id": "submod-3-6",
+      "title": "6. Market Participants: Who Is Who",
+      "intro": "Who is buying and selling in the market?",
+      "content": "\u26a1 MISSION BRIEFING: THE PLAYERS\nThe market has many types of participants, each with a different role.\n\u2022 Retail investors: individuals like you and your family, investing their own money.\n\u2022 Institutional investors: big organisations such as mutual funds, insurance companies and pension funds that invest large pools of money.\n\u2022 Foreign investors: investors based outside India who invest in Indian markets under SEBI's rules.\n\u2022 Companies (issuers): businesses that list shares to raise money.\n\u2022 Intermediaries: brokers and others who help trades happen.\n\u2022 Regulators: bodies like SEBI that make and enforce the rules.\n\n\ud83e\udd2f WOW FACT:\nA mutual fund pools small amounts from thousands of people into one big fund. A student's \u20b9500 can sit next to a family's \u20b950,000 in the same fund!\n\n\u26a1 FINANCIAL INTEL: WHY SIZE MATTERS\nLarge institutions trade huge amounts. When they buy or sell a lot at once, prices can move. A single retail investor rarely moves the price of a large company.\nThis is one reason prices can change quickly even when nothing has changed in the company itself.\n\n\u26a1 FINANCIAL INTEL: DIFFERENT GOALS, DIFFERENT TIMELINES\n\u2022 A pension fund may invest for many decades.\n\u2022 A day trader may hold for minutes or hours.\n\u2022 A retail investor may invest for a goal years away.\nBuyers and sellers often have different time horizons, so one person's 'sell' can be another's 'buy'.\n\n\ud83e\uddea TRY IT: MATCH THE PLAYER\nPlay a game with a friend. One names a participant (mutual fund, broker, SEBI, retail investor) and the other says what it does. Try to explain each in one sentence.\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe market is a mix of individuals, institutions, companies, intermediaries and regulators, each playing a different role.",
+      "quiz": [
+        {
+          "question": "Who are retail investors?",
+          "options": ["Shopkeepers only", "Large organisations investing huge pools of money", "Individuals investing their own money", "Government regulators"],
+          "correctIndex": 2,
+          "explanation": "Retail investors are individuals investing their own money."
+        },
+        {
+          "question": "Which of these is an institutional investor?",
+          "options": ["A school student", "A mutual fund", "A corner shopkeeper", "A bus driver"],
+          "correctIndex": 1,
+          "explanation": "Mutual funds, insurers and pension funds invest large pools of money as institutions."
+        },
+        {
+          "question": "What does a mutual fund do?",
+          "options": ["Pools money from many people to invest it together", "Makes the market rules", "Lists companies on exchanges", "Prints share certificates"],
+          "correctIndex": 0,
+          "explanation": "A mutual fund collects money from many investors and invests it as one pool."
+        },
+        {
+          "question": "Why can large institutions affect prices?",
+          "options": ["They own the stock exchange", "They set prices by law", "They never trade", "They trade very large amounts at once"],
+          "correctIndex": 3,
+          "explanation": "Big buying or selling can move prices, especially in less liquid shares."
+        },
+        {
+          "question": "Which participant makes and enforces the rules of the market?",
+          "options": ["A retail investor", "A regulator such as SEBI", "A mutual fund", "A listed company"],
+          "correctIndex": 1,
+          "explanation": "Regulators like SEBI create and enforce market rules."
+        }
+      ]
+    },
+    {
+      "id": "submod-3-7",
+      "title": "7. Brokers, Depositories and Clearing: Behind the Scenes",
+      "intro": "What actually happens after you press Buy?",
+      "content": "\u26a1 MISSION BRIEFING: THE TRADE CHAIN\nWhen you buy a share, several organisations work together in seconds.\n\u2022 Broker: takes your order and sends it to the exchange. Brokers must be registered with SEBI.\n\u2022 Exchange: matches your order with a seller.\n\u2022 Clearing corporation: makes sure the trade is completed, so the buyer gets the shares and the seller gets the money.\n\u2022 Depository: keeps your shares safely in electronic form, in your demat account. India has two: NSDL and CDSL.\n\n\ud83e\udd2f WOW FACT:\nYour shares are not paper certificates anymore. They sit as electronic entries, a bit like money in a bank account!\n\n\u26a1 FINANCIAL INTEL: WHAT IS A DEMAT ACCOUNT?\n'Demat' is short for dematerialised. A demat account holds your shares electronically. You open it through a Depository Participant (DP), which is often your broker or a bank. You will learn how to open one in the next module.\n\n\u26a1 FINANCIAL INTEL: A TRADE, STEP BY STEP\n1. You place a buy order through your broker's app.\n2. The broker sends it to the exchange.\n3. The exchange matches it with a seller.\n4. The clearing corporation ensures money and shares change hands.\n5. The shares appear in your demat account.\nThis last step is called settlement. As of 2026, regular equity trades in India settle on the next working day (called T+1). Check the exchange or SEBI website, because settlement rules can change.\n\n\u26a1 FINANCIAL INTEL: WHY SO MANY STEPS?\nSplitting jobs between different organisations adds safety. The broker cannot simply keep your shares, because the depository holds them in your name.\n\n\ud83d\udca1 CORE TAKEAWAY:\nBrokers send orders, exchanges match them, clearing corporations complete them and depositories hold your shares safely in electronic form.",
+      "quiz": [
+        {
+          "question": "What does a broker do?",
+          "options": ["Makes laws for the market", "Prints currency", "Takes your order and sends it to the exchange", "Holds all shares permanently"],
+          "correctIndex": 2,
+          "explanation": "A broker is the intermediary that places your order on the exchange."
+        },
+        {
+          "question": "What does a depository do?",
+          "options": ["Matches buyers and sellers", "Keeps your shares safely in electronic form", "Sets the price of shares", "Gives investment tips"],
+          "correctIndex": 1,
+          "explanation": "Depositories like NSDL and CDSL hold shares electronically in demat accounts."
+        },
+        {
+          "question": "What is a demat account?",
+          "options": ["An account that holds your shares in electronic form", "A loan account", "A type of tax", "A paper share certificate"],
+          "correctIndex": 0,
+          "explanation": "Demat means dematerialised, so shares are held electronically."
+        },
+        {
+          "question": "What is the clearing corporation's main job?",
+          "options": ["Advertising companies", "Choosing which shares to buy", "Teaching investors", "Making sure the trade is completed with money and shares exchanged"],
+          "correctIndex": 3,
+          "explanation": "Clearing and settlement ensure the buyer gets shares and the seller gets money."
+        },
+        {
+          "question": "As of 2026, regular equity trades in India settle on which day?",
+          "options": ["After 30 days", "The same minute", "The next working day (T+1)", "After one year"],
+          "correctIndex": 2,
+          "explanation": "T+1 means settlement on the next working day. Rules can change, so always check official sources."
+        }
+      ]
+    },
+    {
+      "id": "submod-3-8",
+      "title": "8. SEBI: The Market Watchdog",
+      "intro": "Who makes sure the market plays fair?",
+      "content": "\u26a1 MISSION BRIEFING: WHO IS SEBI?\nSEBI stands for the Securities and Exchange Board of India. It is India's regulator for the securities (share) market. It was set up in 1988 and given legal powers by the SEBI Act, 1992.\n\n\ud83e\udd2f WOW FACT:\nThink of SEBI as the umpire in a cricket match. It does not play for any team. Its job is to make sure everyone follows the rules!\n\n\u26a1 FINANCIAL INTEL: SEBI'S THREE MAIN GOALS\n1. Protect the interests of investors.\n2. Promote the development of the securities market.\n3. Regulate the market so it works fairly.\n\n\u26a1 FINANCIAL INTEL: WHAT SEBI DOES\n\u2022 Makes rules for exchanges, brokers, mutual funds and companies that raise money from the public.\n\u2022 Registers and supervises market intermediaries, such as brokers and advisers.\n\u2022 Checks company papers before an IPO.\n\u2022 Investigates wrongdoing and can impose penalties.\n\u2022 Runs investor education and a complaint system for investors.\n\n\u26a1 FINANCIAL INTEL: WHAT SEBI CANNOT DO\nSEBI cannot guarantee that you will earn money or protect you from ordinary investment losses. Prices rise and fall. SEBI works to make sure the market is fair and honest, not to make sure every investment wins.\n\n\u26a1 FINANCIAL INTEL: SEBI VS. RBI\nSEBI looks after the securities market. The RBI (Reserve Bank of India) looks after banks and the country's money system. Different jobs, different watchdogs.\n\n\ud83e\uddea TRY IT: SPOT THE UMPIRE\nThink of a game you play. Who makes sure the rules are followed? What happens if someone cheats? Now compare it to how SEBI works in the market.\n\n\ud83d\udca1 CORE TAKEAWAY:\nSEBI is the market's umpire. It protects investors from unfair practices but cannot protect them from normal market risk.",
+      "quiz": [
+        {
+          "question": "What does SEBI stand for?",
+          "options": ["Stock Exchange Bank of India", "Securities and Exchange Board of India", "State Economic Bureau of India", "Share Exchange Board of Investors"],
+          "correctIndex": 1,
+          "explanation": "SEBI is the Securities and Exchange Board of India."
+        },
+        {
+          "question": "Which is one of SEBI's main goals?",
+          "options": ["Guaranteeing profits for investors", "Setting the price of every share", "Printing currency", "Protecting the interests of investors"],
+          "correctIndex": 3,
+          "explanation": "Protecting investors, developing the market and regulating it are SEBI's main goals."
+        },
+        {
+          "question": "Which statement about SEBI is correct?",
+          "options": ["It cannot guarantee that investments will make money", "It guarantees all investors earn profits", "It sets daily share prices", "It runs the biggest broker"],
+          "correctIndex": 0,
+          "explanation": "SEBI aims for a fair market, but investment risk still exists."
+        },
+        {
+          "question": "Which body looks after banks and the country's money system?",
+          "options": ["SEBI", "NSE", "RBI", "CDSL"],
+          "correctIndex": 2,
+          "explanation": "The RBI regulates banks and the money system. SEBI regulates the securities market."
+        },
+        {
+          "question": "Why is SEBI compared to an umpire?",
+          "options": ["It plays for the strongest team", "It makes sure everyone follows the rules", "It chooses winners", "It sells tickets"],
+          "correctIndex": 1,
+          "explanation": "An umpire keeps the game fair without playing for any side, like SEBI in the market."
+        }
+      ]
+    },
+    {
+      "id": "submod-3-9",
+      "title": "9. Safety Nets: Price Bands and Circuit Breakers",
+      "intro": "What stops prices from crashing or soaring out of control in minutes?",
+      "content": "\u26a1 MISSION BRIEFING: WHY SAFEGUARDS EXIST\nSometimes fear or excitement makes prices swing wildly. Exchanges use safeguards to give everyone time to think and to calm things down.\n\n\ud83e\udd2f WOW FACT:\nA circuit breaker works like the fuse in your home. When too much power flows, it trips to prevent damage!\n\n\u26a1 FINANCIAL INTEL: PRICE BANDS (CIRCUIT LIMITS ON ONE SHARE)\nFor many shares, the exchange sets a daily limit on how far the price can move up or down in one day. This is called a price band or circuit limit. When a share hits its limit, trading in it is restricted for that day.\nExample (fictional): a share closed yesterday at \u20b9100 and has a 10% band. 10% of \u20b9100 is \u20b910, so today it can only trade between \u20b990 and \u20b9110.\nBands differ from share to share, and exchanges can change them. As of 2026, common band levels include 2%, 5%, 10% and 20%, but always check the exchange website for a specific share.\n\n\u26a1 FINANCIAL INTEL: MARKET-WIDE CIRCUIT BREAKERS\nIf a major index falls or rises very sharply in a day, trading across the whole market can pause for a while. These pauses are triggered at set levels of movement in the index. Check the exchange website for the current levels and pause times, because they can be updated.\n\n\u26a1 FINANCIAL INTEL: WHAT THESE SAFEGUARDS DO AND DO NOT DO\n\u2022 They slow down panic and give time to think.\n\u2022 They do not stop prices from falling over several days.\n\u2022 They do not guarantee you can sell at the price you want. If a share is locked at its lower limit, there may be no buyers.\n\n\ud83e\uddea TRY IT: BAND CALCULATOR\nA fictional share closed at \u20b9250 with a 5% band. 5% of \u20b9250 = \u20b912.50. So today's range is \u20b9237.50 to \u20b9262.50.\n\n\ud83d\udca1 CORE TAKEAWAY:\nPrice bands and circuit breakers limit sudden swings and give the market time to cool down, but they do not remove risk.",
+      "quiz": [
+        {
+          "question": "What is a price band (circuit limit)?",
+          "options": ["A fee charged by brokers", "A daily limit on how far a share's price can move", "A type of index", "A tax on profits"],
+          "correctIndex": 1,
+          "explanation": "A price band restricts how far a share can move in a day."
+        },
+        {
+          "question": "A fictional share closed at \u20b9100 with a 10% band. What is today's allowed range?",
+          "options": ["\u20b980 to \u20b9120", "\u20b995 to \u20b9105", "\u20b950 to \u20b9150", "\u20b990 to \u20b9110"],
+          "correctIndex": 3,
+          "explanation": "10% of \u20b9100 is \u20b910, so the range is \u20b990 to \u20b9110."
+        },
+        {
+          "question": "Why are circuit breakers compared to a fuse at home?",
+          "options": ["They are made of wire", "They switch on lights", "They trip when things get too extreme, to prevent damage", "They only work at night"],
+          "correctIndex": 2,
+          "explanation": "Like a fuse, a circuit breaker steps in when swings become too large."
+        },
+        {
+          "question": "What can happen when a share is locked at its lower limit?",
+          "options": ["There may be no buyers, so you may not be able to sell", "The price is guaranteed to rise tomorrow", "The company pays you", "SEBI buys all the shares"],
+          "correctIndex": 0,
+          "explanation": "A lower circuit can mean sellers outnumber buyers, so selling can be difficult."
+        },
+        {
+          "question": "A fictional share closed at \u20b9250 with a 5% band. What is the upper limit?",
+          "options": ["\u20b9255", "\u20b9275", "\u20b9262.50", "\u20b9300"],
+          "correctIndex": 2,
+          "explanation": "5% of \u20b9250 = \u20b912.50, so the upper limit is \u20b9262.50."
+        }
+      ]
+    },
+    {
+      "id": "submod-3-10",
+      "title": "10. Market Misconduct: Rules You Must Never Break",
+      "intro": "What counts as cheating in the market?",
+      "content": "\u26a1 MISSION BRIEFING: FAIR PLAY MATTERS\nMarkets only work if people trust them. Some actions are illegal because they give unfair advantages or trick other investors. SEBI watches for these.\n\n\ud83e\udd2f WOW FACT:\nExchanges and SEBI use computer systems that scan millions of trades to spot unusual patterns. Cheating is easier to detect than most people think!\n\n\u26a1 FINANCIAL INTEL: INSIDER TRADING\nInsider trading means trading using important, non-public information about a company that could affect its share price.\nExample (fictional): an employee learns that a big deal will be announced next week and tells a cousin to buy shares before the public knows. This is unfair to everyone else and is illegal.\n\n\u26a1 FINANCIAL INTEL: MARKET MANIPULATION\nManipulation means trying to push a price up or down artificially to fool other investors.\n\u2022 Pump and dump: spreading excited messages to push a price up, then selling to the people who bought because of the hype.\n\u2022 Spreading false rumours to move a price.\n\n\u26a1 FINANCIAL INTEL: FRONT RUNNING\nFront running is when someone who knows about a large order that is about to be placed trades ahead of it for personal gain. It misuses a position of trust.\n\n\u26a1 FINANCIAL INTEL: WHY THE RULES EXIST\nThese rules protect ordinary investors. Breaking them can lead to penalties, bans from the market and legal action. Even sharing a 'hot tip' you got from an insider can create trouble for you.\n\n\ud83e\uddea TRY IT: THE FAIR GAME TEST\nImagine a school quiz where one team sees the answers beforehand. Is the result fair? Now think about why the same idea matters in the market.\n\n\ud83d\udca1 CORE TAKEAWAY:\nInsider trading, manipulation and front running are illegal because they cheat other investors. Trust is what keeps markets working.",
+      "quiz": [
+        {
+          "question": "What is insider trading?",
+          "options": ["Trading using important non-public information about a company", "Trading only with family", "Trading very early in the morning", "Trading in a school simulator"],
+          "correctIndex": 0,
+          "explanation": "Using important information that is not public to trade is unfair and illegal."
+        },
+        {
+          "question": "What is a pump and dump?",
+          "options": ["A legal way to build wealth", "Hype to push a price up, then selling to people who bought because of it", "A kind of mutual fund", "A government scheme"],
+          "correctIndex": 1,
+          "explanation": "In a pump and dump, hype inflates a price and the organisers sell to the people drawn in."
+        },
+        {
+          "question": "Why are rules against market misconduct needed?",
+          "options": ["To make trading boring", "To help brokers earn more", "To protect ordinary investors and keep the market fair", "To raise share prices"],
+          "correctIndex": 2,
+          "explanation": "Fair rules protect investors and keep trust in the market."
+        },
+        {
+          "question": "What is front running?",
+          "options": ["Running to the exchange building", "Trading first in the morning", "A type of IPO", "Trading ahead of a known large order to profit from it"],
+          "correctIndex": 3,
+          "explanation": "Front running misuses knowledge of a coming order for personal gain."
+        },
+        {
+          "question": "Your friend says he got a 'confirmed insider tip' about a company's secret deal. What is the wise response?",
+          "options": ["Stay away from it, since acting on such information can be illegal", "Buy the shares immediately", "Tell the whole school", "Borrow money to invest more"],
+          "correctIndex": 0,
+          "explanation": "Acting on non-public inside information is illegal and risky."
+        }
+      ]
+    },
+    {
+      "id": "submod-3-11",
+      "title": "11. Spotting Scams and Unregistered Advice",
+      "intro": "How do you tell real help from a trap?",
+      "content": "\u26a1 MISSION BRIEFING: THE SCAM RADAR\nScammers target beginners, including teenagers. They use pressure, excitement and fake promises. Learn the red flags and you will protect yourself and your family.\n\n\ud83e\udd2f WOW FACT:\nThe most common scam trick is not clever technology. It is rushing you, so you do not have time to think!\n\n\u26a1 FINANCIAL INTEL: RED FLAGS\n\u2022 Guaranteed or very high returns, like 'double your money in a month'.\n\u2022 Pressure to act now before the 'offer' ends.\n\u2022 Tips in social media or messaging groups from people you do not know.\n\u2022 Asking you to send money to a personal bank account or an unfamiliar app.\n\u2022 Asking for your OTP, PIN or passwords. A real broker never needs them from you.\n\u2022 Fake trading apps or websites that copy real ones.\n\n\u26a1 FINANCIAL INTEL: UNREGISTERED ADVICE\nIn India, people who give paid investment advice or research recommendations are generally required to be registered with SEBI. Many social media 'finfluencers' are not registered, and SEBI has taken action against unregistered advice. Even registered people cannot promise returns.\nBefore trusting any adviser, check whether they are registered on SEBI's official website.\n\n\u26a1 FINANCIAL INTEL: WHAT TO DO\n\u2022 Pause and talk to a parent or teacher before any money move.\n\u2022 Check registration on SEBI's official website.\n\u2022 Never share OTPs, PINs or passwords.\n\u2022 If you are cheated, tell an adult and report it. SEBI has an investor complaint system (SCORES), and the national cybercrime helpline in India is 1930.\n\n\u26a1 FINANCIAL INTEL: HOW BULL RUN FITS IN\nBull Run is an education platform with simulated prices. It does not give stock tips or ask for real money to trade. Use it to practise thinking, not to copy anyone's picks.\n\n\ud83d\udca1 CORE TAKEAWAY:\nGuaranteed returns, pressure and requests for OTPs are red flags. Check registration, pause and ask a trusted adult.",
+      "quiz": [
+        {
+          "question": "Which is a red flag for a scam?",
+          "options": ["A broker that shows its risks clearly", "A promise of guaranteed very high returns", "A parent helping you learn", "A bank statement"],
+          "correctIndex": 1,
+          "explanation": "No honest investment can guarantee very high returns."
+        },
+        {
+          "question": "Someone asks for your OTP to 'activate your investment'. What should you do?",
+          "options": ["Share it quickly", "Send it to a friend", "Never share it, since real brokers never need it from you", "Post it online"],
+          "correctIndex": 2,
+          "explanation": "OTPs, PINs and passwords must never be shared."
+        },
+        {
+          "question": "Before trusting an investment adviser, what should you check?",
+          "options": ["How many followers they have", "Whether their registration is shown on SEBI's official website", "How fancy their photos are", "How loudly they speak"],
+          "correctIndex": 1,
+          "explanation": "Paid advisers are generally required to be SEBI-registered, and you can verify this on SEBI's site."
+        },
+        {
+          "question": "A stranger in a messaging group says 'buy now, the offer ends in 10 minutes!'. What is the best response?",
+          "options": ["Act before the time runs out", "Invest your pocket money at once", "Tell everyone to join", "Pause, ignore the pressure and ask a trusted adult"],
+          "correctIndex": 3,
+          "explanation": "Pressure to rush is a classic scam tactic."
+        },
+        {
+          "question": "Why does Bull Run not give stock tips?",
+          "options": ["It is an education platform with simulated prices", "Tips are always correct", "Brokers forbid it", "Prices never change"],
+          "correctIndex": 0,
+          "explanation": "Bull Run is for learning and practice, not for advice or real trading."
+        }
+      ]
+    },
+    {
+      "id": "submod-3-12",
+      "title": "12. Module Recap: Following a Share from IPO to Your Demat",
+      "intro": "How does everything in this module fit together?",
+      "content": "\u26a1 MISSION BRIEFING: MODULE RECAP\n\u2022 Markets bring buyers and sellers together. Prices move with demand and supply.\n\u2022 Primary market: companies sell new shares and get the money (IPO).\n\u2022 Secondary market: investors trade existing shares with each other.\n\u2022 Exchanges (NSE and BSE) provide the platform. Indices like Nifty 50 and Sensex show market mood.\n\u2022 Participants: retail investors, institutions, companies, intermediaries and regulators.\n\u2022 Trade chain: broker, exchange, clearing corporation, depository.\n\u2022 SEBI protects investors and keeps the market fair. It cannot remove market risk.\n\u2022 Safeguards: price bands and circuit breakers.\n\u2022 Misconduct: insider trading, manipulation, front running.\n\u2022 Stay alert to scams and unregistered advice.\n\n\ud83e\udd2f WOW FACT:\nAll of these steps, from your order to the shares showing in your account, can happen within seconds on a busy market day!\n\n\ud83c\udf55 MINI CASE: THE JOURNEY OF A FICTIONAL SHARE\nSpice Route Foods Ltd (fictional) wants to build a new factory.\n\u2022 Step 1: It files papers and a prospectus with SEBI and sells shares to the public in an IPO. The money goes to the company.\n\u2022 Step 2: Its shares get listed on an exchange.\n\u2022 Step 3: Aanya places a buy order through her broker. The exchange matches her order with a seller in the secondary market.\n\u2022 Step 4: The clearing corporation completes the trade, and the shares appear in her demat account at the depository.\n\u2022 Step 5: If the price moves too far in a day, the price band stops it at the limit.\n\u2022 Step 6: A stranger messages Aanya promising 'guaranteed double returns'. She sees the red flags, does not reply and tells her parents.\n\n\ud83e\uddea TRY IT: DRAW THE JOURNEY\nOn paper, draw boxes for Company, SEBI, Exchange, Broker, Clearing Corporation and Depository. Draw arrows to show how an IPO and a later trade flow. Explain it to a family member in one minute.\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe market is a system of players and safeguards. Understanding who does what makes you a smarter, safer investor. Next up: how to get started with accounts and trading.",
+      "quiz": [
+        {
+          "question": "In the case study, where does the IPO money go?",
+          "options": ["To SEBI", "To the company", "To Aanya's broker", "To the depository"],
+          "correctIndex": 1,
+          "explanation": "In the primary market, the company receives the money from the IPO."
+        },
+        {
+          "question": "Which organisation holds Aanya's shares in electronic form?",
+          "options": ["The exchange", "SEBI", "The depository", "The company's factory"],
+          "correctIndex": 2,
+          "explanation": "Depositories like NSDL and CDSL hold shares in demat accounts."
+        },
+        {
+          "question": "Aanya buys a share on the exchange after listing. Which market is this?",
+          "options": ["Secondary market", "Primary market", "Barter market", "Black market"],
+          "correctIndex": 0,
+          "explanation": "Trading existing shares between investors takes place in the secondary market."
+        },
+        {
+          "question": "A stranger promises Aanya 'guaranteed double returns'. What does she do?",
+          "options": ["Sends them money", "Shares her OTP", "Joins their group immediately", "Spots the red flags, ignores it and tells her parents"],
+          "correctIndex": 3,
+          "explanation": "Guaranteed high returns are a warning sign. Telling a trusted adult is the right move."
+        },
+        {
+          "question": "Which best sums up SEBI's role?",
+          "options": ["It guarantees profits", "It keeps the market fair and protects investors, but cannot remove risk", "It sets the price of every share", "It chooses which companies win"],
+          "correctIndex": 1,
+          "explanation": "SEBI regulates and protects investors from unfair practices, but investment risk remains."
         }
       ]
     }

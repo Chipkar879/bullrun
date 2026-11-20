@@ -4,288 +4,457 @@
   "submodules": [
     {
       "id": "submod-4-1",
-      "title": "1. Account Setup",
-      "intro": "Discover the important ideas behind account setup.",
-      "content": "⚡ MISSION BRIEFING: ACCOUNT SETUP\n\nAccount Setup is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. KYC, demat account, trading account and linked bank account are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of KYC. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• KYC is the starting concept to understand.\n• demat account is another important element of this subject.\n• trading account and linked bank account is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what account setup means, then examines how kyc, demat account, trading account and linked bank account affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nAccount Setup helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "1. Ways to Participate: Direct Stocks vs Funds",
+      "intro": "Should you buy one company or a whole basket?",
+      "content": "\u26a1 MISSION BRIEFING: WAYS TO PARTICIPATE\nThere is more than one door into the stock market. In this lesson you compare buying shares of single companies (direct stocks) with buying a basket through a fund. Bull Run uses simulated prices, not live NSE data, and nothing here is advice to buy anything.\n\n\ud83e\udd2f WOW FACT:\nA mutual fund works like a group lunch order. Many people put money into one common pot, and a professional fund manager picks the food (the holdings) for everyone. Your share of the pot is counted in units.\n\n\u26a1 FINANCIAL INTEL: DIRECT STOCKS\nWhen you buy a share, you own a tiny piece of that one business. You choose the company, how many shares, and when to buy or sell. Prices move all through market hours. Your result depends on that one company, so the risk is higher and you can lose part or even all of your money.\n\n\u26a1 FINANCIAL INTEL: FUNDS\n\u2022 Mutual fund: pools money from many investors and spreads it across many companies or bonds. Its price is called NAV (Net Asset Value) and is usually worked out once a day after the market closes.\n\u2022 ETF (Exchange Traded Fund): a basket that trades on the exchange like a share, with a live price during market hours.\n\u2022 Funds charge a yearly fee (called an expense ratio). Fees quietly reduce your returns every year.\n\u2022 Funds are spread out, but they are not safe. If the whole market falls, most funds fall too.\n\n\ud83e\uddea TRY IT: THE 50% DROP\nRohan has \u20b91,000. Plan A: all of it in one company. Plan B: \u20b950 each in 20 companies through a fund. Suppose one company falls by 50%.\nPlan A loss: \u20b9500. Plan B loss: \u20b925 (half of \u20b950).\nNow think: what if the whole market falls? Both plans can lose. Spreading out reduces single-company risk, not market risk.\n\n\ud83d\udca1 CORE TAKEAWAY:\nDirect stocks put your result in one company's hands; funds spread it across many. Neither guarantees returns, and any real account must be opened and run by a parent or guardian.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying account setup?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about account setup?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What is a mutual fund?",
+          "options": ["One share of a single company", "A pool of many investors' money managed by a professional and spread over many holdings", "A savings account run by the government", "A loan given by a broker"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A mutual fund collects money from many people and a fund manager invests it across many holdings."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Rohan puts all his money in one company's shares. What is his main extra risk compared with a fund?",
+          "options": ["He will always pay more tax", "He cannot sell the shares", "Funds are guaranteed to rise", "His whole result depends on one company"],
+          "correctIndex": 3,
+          "explanation": "With one company there is no spreading. If that company does badly, his whole investment suffers."
+        },
+        {
+          "question": "How is the price (NAV) of a regular mutual fund usually set?",
+          "options": ["Worked out once a day after the market closes", "It changes every second like a share price", "The bank fixes it for a year", "It never changes"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "A regular mutual fund's NAV is calculated once per day. ETFs are the ones that have live prices."
+        },
+        {
+          "question": "What is special about an ETF?",
+          "options": ["It can never lose value", "It can only be bought by people over 60", "It trades on the exchange like a share during market hours", "It pays a fixed interest rate"],
+          "correctIndex": 2,
+          "explanation": "An ETF is a basket of holdings that is bought and sold on the exchange with a live price."
+        },
+        {
+          "question": "Which statement is true?",
+          "options": ["Funds guarantee a profit", "Both funds and direct stocks can lose value", "Direct stocks are always safer than funds", "Funds remove all market risk"],
+          "correctIndex": 1,
+          "explanation": "Spreading money out lowers single-company risk, but no market investment is risk free."
         }
       ]
     },
     {
       "id": "submod-4-2",
-      "title": "2. Choosing a Broker",
-      "intro": "Discover the important ideas behind choosing a broker.",
-      "content": "⚡ MISSION BRIEFING: CHOOSING A BROKER\n\nChoosing a Broker is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Discount vs full service, fees and platform features are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Discount vs full service. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Discount vs full service is the starting concept to understand.\n• fees and platform features is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what choosing a broker means, then examines how discount vs full service, fees and platform features affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nChoosing a Broker helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "2. The Three Accounts: Bank, Trading, Demat",
+      "intro": "Why do you need three accounts to own one share?",
+      "content": "\u26a1 MISSION BRIEFING: THREE ACCOUNTS, ONE SYSTEM\nTo buy a share in India, three accounts work together: a bank account, a trading account and a demat account. Think of them as three pipes in one water system. You met demat in Module 3. Now you will see how it fits with the other two.\n\n\ud83e\udd2f WOW FACT:\nBefore demat, shares were printed paper certificates. They could be lost, torn, stolen or forged, and moving them took weeks. Today your shares are simply electronic records, safe from fire and thieves.\n\n\u26a1 FINANCIAL INTEL: THE BANK ACCOUNT\nThis is where your money lives. When you buy shares, money goes out of your bank account (through your trading account). When you sell, the money comes back to the same linked bank account. It must be in the same name as your other accounts.\n\n\u26a1 FINANCIAL INTEL: THE TRADING ACCOUNT\nThis is the doorway to the market. You log into your broker's app or website and place buy and sell orders here. It does not store your shares. It only sends your orders to the exchange.\n\n\u26a1 FINANCIAL INTEL: THE DEMAT ACCOUNT\nThis is the locker that holds your shares electronically. It is kept with a Depository Participant (DP), often your broker or a bank. Behind the DP sit two national depositories, NSDL and CDSL, which keep the official records of who owns what.\n\n\ud83e\uddea TRY IT: FOLLOW THE FLOW\nWrite down where things move when a parent buys 5 shares of a fictional company for \u20b9500 each:\n1. \u20b92,500 leaves the bank account.\n2. The order is placed from the trading account.\n3. The 5 shares arrive in the demat account.\nNow reverse it for a sale. Where does the money end up?\n\n\ud83d\udca1 CORE TAKEAWAY:\nBank holds money, trading account places orders, demat holds shares. For anyone under 18, a parent or guardian opens and operates these accounts.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying choosing a broker?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "Which account holds your shares electronically?",
+          "options": ["Bank account", "Trading account", "Demat account", "Savings jar"],
+          "correctIndex": 2,
+          "explanation": "The demat account is the electronic locker where shares are stored."
         },
         {
-          "question": "Which approach is most useful when learning about choosing a broker?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Which account do you use to place buy and sell orders?",
+          "options": ["Trading account", "Demat account", "Fixed deposit", "Loan account"],
+          "correctIndex": 0,
+          "explanation": "Orders are placed through the trading account on the broker's app or website."
+        },
+        {
+          "question": "Which organisations keep the official electronic records of share ownership in India?",
+          "options": ["Only your local bank", "Shop owners", "The post office", "NSDL and CDSL"],
+          "correctIndex": 3,
+          "explanation": "NSDL and CDSL are the two depositories. Your DP connects you to them."
+        },
+        {
+          "question": "When shares are sold, where does the sale money finally go?",
+          "options": ["Into the demat account", "To the linked bank account", "To the exchange", "It disappears after 30 days"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "The sale money is paid out to your linked bank account."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "question": "Why is a demat account better than paper share certificates?",
+          "options": ["Paper certificates earn more", "It guarantees profits", "It is safer and faster, with no paper to lose or forge", "It removes all fees"],
+          "correctIndex": 2,
+          "explanation": "Electronic records cannot be torn, burnt or easily forged, and transfers are quick."
         }
       ]
     },
     {
       "id": "submod-4-3",
-      "title": "3. Trading Sessions and Timings",
-      "intro": "Discover the important ideas behind trading sessions and timings.",
-      "content": "⚡ MISSION BRIEFING: TRADING SESSIONS AND TIMINGS\n\nTrading Sessions and Timings is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Pre-open, normal market and closing session are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Pre-open. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Pre-open is the starting concept to understand.\n• normal market and closing session is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what trading sessions and timings means, then examines how pre-open, normal market and closing session affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nTrading Sessions and Timings helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "3. KYC and Account Opening",
+      "intro": "What happens when a parent opens an account for you?",
+      "content": "\u26a1 MISSION BRIEFING: KYC AND ACCOUNT OPENING\nBefore any broker lets someone invest, it must check who they are. This check is called KYC. This lesson explains it simply. As of 2026, in India people under 18 cannot sign financial contracts themselves, so a parent or guardian handles every step.\n\n\ud83e\udd2f WOW FACT:\nKYC records are stored with SEBI-registered KYC agencies, so once you are KYC verified, many other financial companies can often use that record. You usually do not repeat the full process every time.\n\n\u26a1 FINANCIAL INTEL: WHAT IS KYC?\nKYC means Know Your Customer. It exists to stop people from using fake or stolen identities and to keep the market safe. Typical items include:\n\u2022 PAN (Permanent Account Number)\n\u2022 Proof of identity and address\n\u2022 A photo and a signature\n\u2022 Bank account proof\nThe exact documents and steps can change, so always check the broker's current list.\n\n\u26a1 FINANCIAL INTEL: UNDER-18 ACCOUNTS (AS OF 2026)\n\u2022 A demat account can usually be opened in a minor's name, but a parent or legal guardian operates it until the child turns 18.\n\u2022 The trading account stays in the guardian's name.\n\u2022 Minors' accounts are limited. Risky activity such as intraday trading and futures and options is not allowed. Rules differ by broker, so ask them.\n\u2022 At 18, the person completes fresh KYC and takes control.\n\n\u26a1 FINANCIAL INTEL: STAY SAFE\n\u2022 Use only SEBI-registered brokers.\n\u2022 Never share your OTP, password or PIN with anyone, even someone who says they work for the broker.\n\u2022 Nobody honest asks you to pay a 'fee' to release profits.\n\n\ud83e\uddea TRY IT: THE PARENT CHECKLIST\nMake a list to discuss with a parent: PAN, address proof, bank details, mobile number linked to Aadhaar, email, and a recent photo. Which items do you think a broker needs for a child's account? Ask the broker to confirm.\n\n\ud83d\udca1 CORE TAKEAWAY:\nKYC proves who you are and keeps the market safe. Under 18, only a parent or guardian opens and operates accounts, and passwords and OTPs stay private.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying trading sessions and timings?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about trading sessions and timings?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What does KYC stand for?",
+          "options": ["Keep Your Cash", "Know Your Customer", "Key Yearly Check", "Know Your Company"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "KYC means Know Your Customer: a check of who the account holder really is."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Who opens and operates an investing account for someone under 18?",
+          "options": ["A parent or legal guardian", "The child alone", "A friend", "The stock exchange"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Minors cannot sign financial contracts, so a parent or legal guardian handles it."
+        },
+        {
+          "question": "A caller says he is from your broker and asks for your OTP. What should you do?",
+          "options": ["Share it if he sounds polite", "Share half of it", "Send it by message", "Never share it and tell a parent"],
+          "correctIndex": 3,
+          "explanation": "Brokers never need your OTP. Sharing it can let a fraudster take over the account."
+        },
+        {
+          "question": "What happens when a person with a minor's account turns 18?",
+          "options": ["The account is deleted", "Nothing ever changes", "They complete fresh KYC and take control", "The government takes over"],
+          "correctIndex": 2,
+          "explanation": "At 18 the person becomes an adult investor and completes KYC in their own name."
+        },
+        {
+          "question": "What is a sensible safety check before a family picks a broker?",
+          "options": ["Check that the broker is SEBI registered", "Choose whoever offers a guaranteed return", "Choose the one with the loudest ads", "Pick the one a stranger recommends online"],
+          "correctIndex": 0,
+          "explanation": "Only SEBI-registered brokers are allowed to do this work, and no one can guarantee returns."
         }
       ]
     },
     {
       "id": "submod-4-4",
-      "title": "4. Order Types",
-      "intro": "Discover the important ideas behind order types.",
-      "content": "⚡ MISSION BRIEFING: ORDER TYPES\n\nOrder Types is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Market, limit, stop-loss and GTT orders are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Market. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Market is the starting concept to understand.\n• limit is another important element of this subject.\n• stop-loss and GTT orders is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what order types means, then examines how market, limit, stop-loss and gtt orders affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nOrder Types helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "4. Choosing a Broker",
+      "intro": "What should a family compare before picking a broker?",
+      "content": "\u26a1 MISSION BRIEFING: CHOOSING A BROKER\nA broker is the SEBI-registered company that carries your orders to the exchange. Families usually choose between two broad types: discount brokers and full-service brokers. This lesson shows what to compare. It does not recommend any company.\n\n\ud83e\udd2f WOW FACT:\nA broker earns brokerage and charges whether your trade makes a profit or a loss. That is why brokers talk so much about how often you trade, and why a calm, slow approach is usually kinder to your wallet.\n\n\u26a1 FINANCIAL INTEL: DISCOUNT vs FULL-SERVICE\n\u2022 Discount broker: mostly app-based, low fees, you decide everything yourself. Fees can be a small flat amount per order, or even zero for some types of trades.\n\u2022 Full-service broker: offers research, advice and a relationship manager, but usually charges more.\nNeither type can promise profit. As of 2026, plans and prices change often, so check the current fee page.\n\n\u26a1 FINANCIAL INTEL: WHAT TO COMPARE\n\u2022 Brokerage per order\n\u2022 Account opening fee and yearly maintenance charge (AMC)\n\u2022 DP charge when you sell shares\n\u2022 App speed and reliability\n\u2022 Customer support\n\u2022 Learning material\n\u2022 SEBI registration\n\n\u26a1 FINANCIAL INTEL: RED FLAGS\nWalk away if someone promises guaranteed returns, sells secret tips, pushes you to borrow money, or pressures you to decide today.\n\n\ud83e\uddea TRY IT: FICTIONAL BROKER SHOWDOWN\nBroker A charges \u20b920 per order and no yearly fee. Broker B charges \u20b90 per order but \u20b9300 yearly. A family expects 4 orders in a year.\nBroker A: 4 x \u20b920 = \u20b980.\nBroker B: \u20b9300.\nWhich is cheaper? What if they expected 40 orders? Always do the maths for your own use.\n\n\ud83d\udca1 CORE TAKEAWAY:\nCompare fees, safety and support, not just advertising. Pick a SEBI-registered broker with a parent or guardian, and ignore anyone who promises guaranteed returns.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying order types?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "What is a discount broker usually known for?",
+          "options": ["Free shares for everyone", "Guaranteed profits", "Low fees and a mostly do-it-yourself, app-based service", "Personal advice from a manager every day"],
+          "correctIndex": 2,
+          "explanation": "Discount brokers keep costs low by offering mostly self-service apps."
         },
         {
-          "question": "Which approach is most useful when learning about order types?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What do full-service brokers typically offer?",
+          "options": ["Research and personal support, usually at higher cost", "Zero fees for every trade", "Guaranteed returns", "No SEBI rules"],
+          "correctIndex": 0,
+          "explanation": "Full-service brokers add research and advice, and usually charge more for it."
+        },
+        {
+          "question": "Which of these is a clear red flag?",
+          "options": ["A clear fee page", "A SEBI registration number", "A support phone number", "A promise of guaranteed returns"],
+          "correctIndex": 3,
+          "explanation": "No one can guarantee market returns. Such a promise is a classic warning sign."
+        },
+        {
+          "question": "When does a broker collect brokerage?",
+          "options": ["Only when you profit", "On both winning and losing trades", "Only when you lose", "Never"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Brokerage is a fee for carrying your order, so it is charged whatever the outcome."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "question": "In the TRY IT, a family places 4 orders. Broker A costs \u20b920 per order, Broker B costs \u20b9300 yearly. Which is cheaper for 4 orders?",
+          "options": ["Broker B at \u20b9300", "They cost the same", "Broker A at \u20b980", "Neither charges anything"],
+          "correctIndex": 2,
+          "explanation": "Broker A costs 4 x \u20b920 = \u20b980, much less than Broker B's \u20b9300."
         }
       ]
     },
     {
       "id": "submod-4-5",
-      "title": "5. Settlement",
-      "intro": "Discover the important ideas behind settlement.",
-      "content": "⚡ MISSION BRIEFING: SETTLEMENT\n\nSettlement is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. T+1 cycle, delivery and intraday trades are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of T+1 cycle. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• T+1 cycle is the starting concept to understand.\n• delivery and intraday trades is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what settlement means, then examines how t+1 cycle, delivery and intraday trades affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nSettlement helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "5. Reading a Stock Quote",
+      "intro": "What do all those numbers on a stock screen mean?",
+      "content": "\u26a1 MISSION BRIEFING: READING A STOCK QUOTE\nA stock quote is the scoreboard of a share. At first it looks like a wall of numbers, but each one answers a simple question. The examples use a fictional company and made-up prices. Bull Run prices are simulated, never live NSE data.\n\n\ud83e\udd2f WOW FACT:\nAt any moment a share has two prices, not one: the highest price buyers will pay (bid) and the lowest price sellers will accept (ask). The small gap between them is called the spread.\n\n\u26a1 FINANCIAL INTEL: THE PRICE NUMBERS\n\u2022 LTP (Last Traded Price): the price of the most recent trade.\n\u2022 Open: the first price of the day.\n\u2022 High: the highest price traded today.\n\u2022 Low: the lowest price traded today.\n\u2022 Close (or previous close): the final price of the last session. Today's change is measured against it.\n\n\u26a1 FINANCIAL INTEL: VOLUME, BID AND ASK\n\u2022 Volume: how many shares changed hands today. Higher volume usually means it is easier to buy and sell.\n\u2022 Bid: the best price a buyer is offering.\n\u2022 Ask (or offer): the best price a seller wants.\nIf you place a market buy, you generally pay near the ask. If you market sell, you generally get near the bid.\n\n\u26a1 FINANCIAL INTEL: A FICTIONAL QUOTE\nSunrise Foods Ltd (made up)\nPrevious close \u20b999 | Open \u20b9100 | High \u20b9105 | Low \u20b998 | LTP \u20b9103\nBid \u20b9102.95 | Ask \u20b9103.05 | Volume 2,50,000\nThe price is up \u20b94 from the previous close.\n\n\ud83e\uddea TRY IT: CALCULATE THE CHANGE\nChange % = (LTP - previous close) \u00f7 previous close x 100.\nFor Sunrise Foods: (103 - 99) \u00f7 99 x 100 = about 4%.\nNow try: previous close \u20b9200, LTP \u20b9210. What is the percentage change?\n\n\ud83d\udca1 CORE TAKEAWAY:\nA quote tells you where the price is now, where it has been today and how busy trading is. It never tells you where the price will go next.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying settlement?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "What does LTP mean?",
+          "options": ["Lowest Trading Price of the year", "Loan Transfer Process", "Listed Trading Permit", "Last Traded Price"],
+          "correctIndex": 3,
+          "explanation": "LTP is the price at which the most recent trade happened."
         },
         {
-          "question": "Which approach is most useful when learning about settlement?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What is the bid price?",
+          "options": ["The best price a buyer is offering", "The best price a seller is asking", "The day's highest price", "The company's total value"],
+          "correctIndex": 0,
+          "explanation": "The bid is the highest price buyers are currently offering. The ask is the sellers' side."
+        },
+        {
+          "question": "What does volume show?",
+          "options": ["The company's profit", "The loudness of market news", "How many shares were traded", "The price in rupees"],
+          "correctIndex": 2,
+          "explanation": "Volume counts the number of shares that changed hands."
+        },
+        {
+          "question": "What is a stock's 'High' for the day?",
+          "options": ["The price it opened at", "The highest price traded today", "The price it will reach tomorrow", "The previous day's close"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "High is the top price reached so far in the day. It is history, not a prediction."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "question": "Previous close is \u20b9200 and LTP is \u20b9210. What is the percentage change?",
+          "options": ["10%", "2.1%", "21%", "5%"],
+          "correctIndex": 3,
+          "explanation": "The rise is \u20b910 on \u20b9200, so 10 \u00f7 200 x 100 = 5%."
         }
       ]
     },
     {
       "id": "submod-4-6",
-      "title": "6. Costs and Charges",
-      "intro": "Discover the important ideas behind costs and charges.",
-      "content": "⚡ MISSION BRIEFING: COSTS AND CHARGES\n\nCosts and Charges is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Brokerage, STT, GST, stamp duty and DP charges are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Brokerage. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Brokerage is the starting concept to understand.\n• STT is another important element of this subject.\n• GST is another important element of this subject.\n• stamp duty and DP charges is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what costs and charges means, then examines how brokerage, stt, gst, stamp duty and dp charges affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nCosts and Charges helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "6. Order Types: Market, Limit, Stop-Loss",
+      "intro": "Do you want a sure trade, or a sure price?",
+      "content": "\u26a1 MISSION BRIEFING: ORDER TYPES\nWhen you place an order, you tell the exchange how you want it done. The three basics are market, limit and stop-loss orders. Each gives you control over one thing and takes away control over another. All prices below are made up.\n\n\ud83e\udd2f WOW FACT:\nA market order means 'any price is fine'. In a fast-moving market, the price you actually get can be different from the price you saw a second earlier. This difference is often called slippage.\n\n\u26a1 FINANCIAL INTEL: MARKET ORDER\nA market order trades right away at the best available price. You are sure it will happen (if there are sellers or buyers), but you are not sure of the exact price. It can be costly in a thinly traded share or a jumpy market.\n\n\u26a1 FINANCIAL INTEL: LIMIT ORDER\nYou set the price. A limit buy says 'buy only at this price or lower'. A limit sell says 'sell only at this price or higher'. You control the price, but the order may never execute if the market does not reach it.\n\n\u26a1 FINANCIAL INTEL: STOP-LOSS ORDER\nA stop-loss has a trigger price. When the price reaches the trigger, your sell order becomes active. It is designed to limit a loss. But it is not a magic shield: if a share suddenly drops far below your trigger, the sale can happen at a worse price than expected.\n\n\ud83e\uddea TRY IT: THREE SCENES\nBluewave Ltd (fictional) trades at \u20b9100.\n1. A parent places a limit buy at \u20b995. If the price stays above \u20b995, what happens? The order waits and may not execute.\n2. A market buy is placed. It executes at once near \u20b9100.\n3. A parent holding bought shares at \u20b9100 sets a stop-loss trigger at \u20b992. If the price falls to \u20b992, the sell order activates.\n\n\ud83d\udca1 CORE TAKEAWAY:\nMarket orders give speed, limit orders give price control, and stop-loss orders help limit losses. None of them removes risk or guarantees a profit.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying costs and charges?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about costs and charges?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What does a market order guarantee?",
+          "options": ["The exact price", "That it will be executed (if the market has willing buyers or sellers)", "A profit", "No charges"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A market order focuses on speed of execution, not on a fixed price."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "A limit buy is set at \u20b995 while the price is \u20b9100 and stays there. What happens?",
+          "options": ["It buys at \u20b9100 anyway", "It buys at \u20b9150", "It waits and may never execute", "It turns into a market order"],
+          "correctIndex": 2,
+          "explanation": "A limit buy will only trade at \u20b995 or lower, so it waits until the price comes down."
+        },
+        {
+          "question": "What is a stop-loss order mainly designed to do?",
+          "options": ["Limit a possible loss when the price falls to a trigger", "Guarantee a profit", "Stop the market from falling", "Give free shares"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "A stop-loss helps limit a loss, but it cannot stop prices from falling."
+        },
+        {
+          "question": "Which order type gives you control over the price you trade at?",
+          "options": ["Market order", "Open order", "Mystery order", "Limit order"],
+          "correctIndex": 3,
+          "explanation": "With a limit order you name the price. The trade-off is that it may not execute."
+        },
+        {
+          "question": "A share suddenly drops far below your stop-loss trigger. What can happen?",
+          "options": ["The exchange refunds the difference", "The sale may happen at a worse price than the trigger", "The order always executes at the trigger price exactly", "The share price rises"],
+          "correctIndex": 1,
+          "explanation": "In a sharp drop or gap, there may be no buyers at your trigger, so the exit price can be lower."
         }
       ]
     },
     {
       "id": "submod-4-7",
-      "title": "7. Reading a Trading Screen",
-      "intro": "Discover the important ideas behind reading a trading screen.",
-      "content": "⚡ MISSION BRIEFING: READING A TRADING SCREEN\n\nReading a Trading Screen is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Bid-ask, volume, OHLC and market depth are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Bid-ask. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Bid-ask is the starting concept to understand.\n• volume is another important element of this subject.\n• OHLC and market depth is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what reading a trading screen means, then examines how bid-ask, volume, ohlc and market depth affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nReading a Trading Screen helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "7. The Life of an Order",
+      "intro": "What really happens after you press Buy?",
+      "content": "\u26a1 MISSION BRIEFING: THE LIFE OF AN ORDER\nPressing Buy is only the start of a short journey. An order is placed, sent, matched, executed and finally settled. Knowing these steps helps you understand statuses like Pending or Executed. You met T+1 in Module 3. Here you see where it fits.\n\n\ud83e\udd2f WOW FACT:\nThe exchange's computers can match buyers and sellers in a tiny fraction of a second. Yet the final handover of shares and money (settlement) happens on the next working day.\n\n\u26a1 FINANCIAL INTEL: FIVE STEPS\n1. Placed: your broker's app checks you have enough money (or shares to sell).\n2. Sent: the order goes to the exchange and joins the order book.\n3. Matched: a buyer and a seller who agree on a price are paired. The best price goes first. At the same price, the earlier order goes first.\n4. Executed: the trade is done and you get a confirmation.\n5. Settled: shares and money formally change hands.\n\n\u26a1 FINANCIAL INTEL: ORDER STATUS WORDS\n\u2022 Pending or Open: waiting in the order book.\n\u2022 Partially executed: only some of your shares have traded so far.\n\u2022 Executed: fully done.\n\u2022 Cancelled: removed by you or the system.\n\u2022 Rejected: refused, often because of low funds or a wrong price.\n\n\u26a1 FINANCIAL INTEL: T+1 SETTLEMENT\nAs of 2026, regular share trades in India settle on T+1. That means the trade day (T) plus one working day. Weekends and exchange holidays do not count. After settlement the bought shares appear in your demat account, and money from a sale reaches your bank side.\n\n\ud83e\uddea TRY IT: COUNT THE DAYS\nA parent buys shares on Tuesday. T+1 is Wednesday.\nShares bought on Friday: T+1 is Monday, as long as Monday is not a market holiday.\nFind one more example using a holiday on a calendar.\n\n\ud83d\udca1 CORE TAKEAWAY:\nAn order moves from placed to matched to executed to settled. Execution is quick, settlement follows on the next working day, and no step removes market risk.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying reading a trading screen?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
+          "question": "Which of these happens first in the life of an order?",
+          "options": ["It is placed and checked by your broker's system", "It is settled", "It is taxed", "It is matched"],
           "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "explanation": "The order is placed first, then sent, matched, executed and settled."
         },
         {
-          "question": "Which approach is most useful when learning about reading a trading screen?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Two buy orders arrive at the same price. Which goes first?",
+          "options": ["The larger one always", "The one placed later", "A random one", "The one that arrived earlier"],
+          "correctIndex": 3,
+          "explanation": "The exchange gives priority to the best price, and then to the earlier order."
+        },
+        {
+          "question": "What does T+1 mean (as of 2026)?",
+          "options": ["One month after the trade", "One hour after the trade", "Trade day plus one working day", "The same minute as the trade"],
+          "correctIndex": 2,
+          "explanation": "Settlement takes place one working day after the trade day. Weekends and holidays are skipped."
+        },
+        {
+          "question": "A trade is made on Friday with no holidays coming. When does it settle on T+1?",
+          "options": ["Saturday", "Monday", "Sunday", "Friday night"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Saturday and Sunday are not working days, so T+1 lands on Monday."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "What does 'partially executed' mean?",
+          "options": ["The order was rejected", "The order was cancelled", "The order is settled", "Only some of the shares have traded so far"],
+          "correctIndex": 3,
+          "explanation": "Part of the quantity has found a match, while the rest is still waiting."
+        }
+      ]
+    },
+    {
+      "id": "submod-4-8",
+      "title": "8. Costs and Charges",
+      "intro": "Why is your profit smaller than the price difference?",
+      "content": "\u26a1 MISSION BRIEFING: COSTS AND CHARGES\nEvery trade has small costs attached. Each one looks tiny, but together they can eat into your result. This lesson names them in simple words. As of 2026 the exact rates differ by broker and trade type and can change, so check the broker's current charges page. Rupee amounts here are made up.\n\n\ud83e\udd2f WOW FACT:\nIf you buy a share and sell it at the exact same price, you still lose a little money because of charges. The price has to rise a bit just for you to break even.\n\n\u26a1 FINANCIAL INTEL: THE MAIN CHARGES\n\u2022 Brokerage: the broker's fee for carrying out your order.\n\u2022 STT (Securities Transaction Tax): a government tax charged on share trades.\n\u2022 Exchange transaction charges: a small fee that goes to the exchange.\n\u2022 SEBI turnover fee: a very small fee for the regulator.\n\u2022 GST: tax charged on the broker's fee and some other charges.\n\u2022 Stamp duty: a state-linked charge, usually on the buy side.\n\u2022 DP charges: a fee the depository participant charges when shares are sold out of your demat account.\n\n\u26a1 FINANCIAL INTEL: WHERE TO SEE THEM\nAfter trades, the broker sends a contract note. It lists every trade and every charge line by line. Many broker apps also have a brokerage calculator, so a family can estimate costs before trading. Read it each time.\n\n\ud83e\uddea TRY IT: FIND THE BREAK-EVEN\nA parent buys 10 shares of a fictional company at \u20b9200 each. Assume all charges for buying and selling add up to \u20b940.\nBreak-even rise per share = \u20b940 \u00f7 10 = \u20b94.\nSo the sale price must be at least \u20b9204 just to get back to zero. Now try \u20b960 of charges: what rise is needed?\n\n\ud83d\udca1 CORE TAKEAWAY:\nCosts are certain, while profits are not. Charges apply to winning and losing trades alike, so always know them before you trade.",
+      "quiz": [
+        {
+          "question": "Who receives the Securities Transaction Tax (STT)?",
+          "options": ["Your school", "The government", "Your bank manager", "The company whose shares you bought"],
+          "correctIndex": 1,
+          "explanation": "STT is a tax collected on share trades and paid to the government."
+        },
+        {
+          "question": "When is a DP charge usually applied?",
+          "options": ["Every time you open the app", "When you buy any share", "On your birthday", "When shares are sold out of the demat account"],
+          "correctIndex": 3,
+          "explanation": "The depository participant charges a small fee when shares leave your demat account in a sale."
+        },
+        {
+          "question": "Which document lists every trade and every charge?",
+          "options": ["A bank passbook", "A weather report", "The contract note", "A school report card"],
+          "correctIndex": 2,
+          "explanation": "The contract note is the broker's detailed record of each trade and its charges."
+        },
+        {
+          "question": "In the TRY IT, 10 shares and total charges of \u20b940. How much must the price rise per share just to break even?",
+          "options": ["\u20b94", "\u20b940", "\u20b90", "\u20b9400"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "\u20b940 of charges spread over 10 shares is \u20b94 per share."
+        },
+        {
+          "question": "Which statement is correct?",
+          "options": ["Charges apply only to winning trades", "Charges apply to winning and losing trades", "Charges disappear for small trades", "Only the broker pays the charges"],
+          "correctIndex": 1,
+          "explanation": "Costs are charged on the trade itself, so they apply whether it ends in profit or loss."
+        }
+      ]
+    },
+    {
+      "id": "submod-4-9",
+      "title": "9. Taxes in Simple Terms",
+      "intro": "When does the taxman want a share of your profit?",
+      "content": "\u26a1 MISSION BRIEFING: TAXES IN SIMPLE TERMS\nWhen shares are sold for a profit, that profit is called a capital gain, and the government may tax it. This lesson gives the basic idea only. Tax rules change often, so every number here is as of 2026 and must be checked with a parent or a tax professional. This is not tax advice.\n\n\ud83e\udd2f WOW FACT:\nYou normally pay capital gains tax only when you sell. A share that has gone up on screen but is still unsold is a paper gain, and a paper gain can disappear again.\n\n\u26a1 FINANCIAL INTEL: CAPITAL GAIN\nCapital gain = selling price - buying price (counting the costs). If the result is below zero, it is a capital loss. Losses can sometimes be used to reduce tax on gains, but the rules are detailed, so ask a professional.\n\n\u26a1 FINANCIAL INTEL: SHORT-TERM vs LONG-TERM (AS OF 2026)\nFor listed shares, the holding period decides the type:\n\u2022 Held 12 months or less: short-term capital gain, taxed at 20% (as of 2026).\n\u2022 Held more than 12 months: long-term capital gain, taxed at 12.5% on gains above \u20b91.25 lakh in a financial year (as of 2026). Smaller long-term gains in that year are not taxed.\nThese figures may change in future Budgets. Check the latest before relying on them.\n\n\u26a1 FINANCIAL INTEL: CHILDREN AND TAX\nIncome earned in a minor's name is usually added to a parent's income for tax. The family should ask a tax professional how this applies to them. Dividends and fund gains can have their own rules too.\n\n\ud83e\uddea TRY IT: TWO FICTIONAL SALES\nIsha's family sells shares held for 8 months with a gain of \u20b910,000. Using the 20% short-term rate above: \u20b910,000 x 20% = \u20b92,000 tax.\nAnother family sells shares held for 15 months with a gain of \u20b960,000 and has no other long-term gains that year. That is under the \u20b91.25 lakh limit, so no long-term tax applies under the rule above.\n\n\ud83d\udca1 CORE TAKEAWAY:\nTax depends on profit and holding period. Rules and rates change, so always check the latest and ask a parent or tax professional. Tax never makes a loss disappear, and no return is guaranteed.",
+      "quiz": [
+        {
+          "question": "What is a capital gain?",
+          "options": ["A bank's interest on a loan", "A fee paid to the broker", "A government gift", "The profit from selling an asset for more than you paid"],
+          "correctIndex": 3,
+          "explanation": "A capital gain is the profit made when an asset is sold above its purchase price."
+        },
+        {
+          "question": "As of 2026, for listed shares, what holding period counts as short-term?",
+          "options": ["More than 5 years", "12 months or less", "Exactly 1 day only", "Only weekends"],
+          "correctIndex": 1,
+          "explanation": "Listed shares held for 12 months or less produce short-term gains (as of 2026)."
+        },
+        {
+          "question": "As of 2026, what is the short-term capital gains tax rate on listed shares used in this lesson?",
+          "options": ["20%", "0%", "50%", "5%"],
+          "correctIndex": 0,
+          "explanation": "The lesson uses 20% (as of 2026). Rates can change, so always check the latest."
+        },
+        {
+          "question": "Using the lesson's 20% rate, what is the tax on a short-term gain of \u20b910,000?",
+          "options": ["\u20b9200", "\u20b920,000", "\u20b92,000", "\u20b9500"],
+          "correctIndex": 2,
+          "explanation": "\u20b910,000 x 20% = \u20b92,000."
+        },
+        {
+          "question": "What is the smartest step if a family is unsure how tax applies to them?",
+          "options": ["Guess a number", "Ask a parent or a tax professional and check current rules", "Ignore it", "Ask a stranger online"],
+          "correctIndex": 1,
+          "explanation": "Rules change and depend on each person's case, so check the latest and ask a qualified person."
+        }
+      ]
+    },
+    {
+      "id": "submod-4-10",
+      "title": "10. Trading Hours, Sessions and Market Holidays",
+      "intro": "When can you actually trade, and why does timing matter?",
+      "content": "\u26a1 MISSION BRIEFING: WHEN THE MARKET OPENS\nThe stock market is not open all day and night. It follows a timetable, and knowing it helps you understand why prices sometimes jump at the open. As of 2026 the main times below apply to the NSE and BSE equity markets, but exchanges can tweak sessions, so check their official sites.\n\n\ud83e\udd2f WOW FACT:\nThe exchanges are normally closed on weekends, yet they sometimes hold special sessions. A Sunday session was held on Budget Day in 2026, and a short Muhurat session is held around Diwali.\n\n\u26a1 FINANCIAL INTEL: THE DAILY TIMETABLE (AS OF 2026)\n\u2022 Pre-open session: about 9:00 to 9:15 AM. Orders are collected so an opening price can be fixed.\n\u2022 Regular session: 9:15 AM to 3:30 PM, Monday to Friday.\n\u2022 After 3:30 PM: closing price is worked out, and short closing or post-close sessions may follow. Details have changed in 2026, so check the exchange.\n\n\u26a1 FINANCIAL INTEL: HOLIDAYS\nThe market is closed on Saturdays, Sundays and exchange-declared holidays. The list for each year is published on the NSE and BSE websites. Remember T+1 counts only working days, so a holiday can delay settlement.\n\n\u26a1 FINANCIAL INTEL: ORDERS OUTSIDE HOURS\nSome brokers allow after-market orders (AMO). They wait in a queue and go to the exchange in the next session. The market can open higher or lower than the last close, so the price you expected may not be the price you get. This is called a gap. Price bands from Module 3 can also pause moves during the day.\n\n\ud83e\uddea TRY IT: PLAN A WEEK\nOpen the official holiday list with a parent. Count how many trading days there are in this month. Then answer: if a parent places an after-market order on Sunday evening, when will it first reach the exchange?\n\n\ud83d\udca1 CORE TAKEAWAY:\nRegular trading runs 9:15 AM to 3:30 PM on working weekdays (as of 2026). Always check official exchange sources for holidays and changes, and remember that overnight prices can gap.",
+      "quiz": [
+        {
+          "question": "As of 2026, what are the regular equity trading hours on the NSE and BSE?",
+          "options": ["10:00 AM to 12:00 PM", "6:00 AM to 6:00 PM", "24 hours a day", "9:15 AM to 3:30 PM, Monday to Friday"],
+          "correctIndex": 3,
+          "explanation": "The main equity session runs from 9:15 AM to 3:30 PM on working weekdays."
+        },
+        {
+          "question": "On which days is the regular market normally closed?",
+          "options": ["Saturdays, Sundays and exchange holidays", "Only Mondays", "Every Wednesday", "Only during exams"],
+          "correctIndex": 0,
+          "explanation": "The market is closed on weekends and on holidays declared by the exchange."
+        },
+        {
+          "question": "What happens to an after-market order (AMO)?",
+          "options": ["It is cancelled forever", "It is always filled at last night's price", "It waits and goes to the exchange in the next session", "It becomes a gift"],
+          "correctIndex": 2,
+          "explanation": "An AMO is queued and sent when the market next opens, and the price may differ from before."
+        },
+        {
+          "question": "What is the main purpose of the pre-open session?",
+          "options": ["To close the market early", "To collect orders so an opening price can be set", "To collect broker fees", "To give free tips"],
+          "correctIndex": 1,
+          "explanation": "Orders gathered between roughly 9:00 and 9:15 AM help fix the opening price."
+        },
+        {
+          "question": "Where should a family check the market holiday list and any timing changes?",
+          "options": ["A random social media post", "A friend's guess", "The official NSE and BSE websites", "A rumour group"],
+          "correctIndex": 2,
+          "explanation": "Official exchange sources are the reliable place for current dates and timings."
+        }
+      ]
+    },
+    {
+      "id": "submod-4-11",
+      "title": "11. Case Study: One Trade, Start to Finish",
+      "intro": "What does one full trade look like, with every cost?",
+      "content": "\u26a1 MISSION BRIEFING: FOLLOW ONE TRADE\nKavya, 16, watches while her father, Mr. Nair, shows her one trade in his own adult account. The company, prices and charges are all made up to teach the steps. They are not real rates and not a suggestion to buy anything.\n\n\ud83e\udd2f WOW FACT:\nEven a small \u20b92,000 trade has several different charge lines on its contract note. A trade can feel simple, yet it has a lot of tiny moving parts.\n\n\ud83c\udf55 MINI CASE: THE BUY\nMr. Nair decides to buy 10 shares of a fictional firm, Mangal Tea Ltd. The last price is \u20b9203. He places a limit buy order at \u20b9200, valid for the day.\n\u2022 10:05 AM: order placed, status Pending (price still above \u20b9200).\n\u2022 10:40 AM: the price dips to \u20b9200 and the order executes.\n\u2022 Share cost: 10 x \u20b9200 = \u20b92,000.\n\u2022 Assumed charges: \u20b912.\n\u2022 Total paid: \u20b92,012.\nOn the next working day (T+1), the 10 shares appear in his demat account.\n\n\ud83c\udf55 MINI CASE: THE SELL\nThree months later, he places a limit sell at \u20b9230 and it executes.\n\u2022 Sale value: 10 x \u20b9230 = \u20b92,300.\n\u2022 Assumed charges (including a DP charge): \u20b914.\n\u2022 Money received: \u20b92,286.\n\u2022 Profit after charges: \u20b92,286 - \u20b92,012 = \u20b9274.\nHe held for under 12 months, so it is a short-term gain. Using 20% (as of 2026), tax would be about \u20b955, leaving roughly \u20b9219. The family should confirm tax with a professional.\n\n\u26a1 FINANCIAL INTEL: WHAT IF IT HAD GONE WRONG?\nSuppose the sale had been at \u20b9190 with the same \u20b914 charges: 10 x \u20b9190 = \u20b91,900 - \u20b914 = \u20b91,886. Compared with \u20b92,012 paid, that is a loss of \u20b9126. Losses are real, and charges apply either way.\n\n\ud83e\uddea TRY IT: DO YOUR OWN MATH\nA fictional trade: buy 5 shares at \u20b9400 with \u20b98 charges, sell at \u20b9420 with \u20b99 charges. What is the profit after charges?\n(Answer: buy cost \u20b92,008, sale money \u20b92,091, profit \u20b983.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA full trade has an order, an execution, T+1 settlement, charges and possibly tax. Winning or losing, the steps are the same, and nothing is guaranteed.",
+      "quiz": [
+        {
+          "question": "Which order type did Mr. Nair use to buy?",
+          "options": ["A market order", "A stop-loss order", "A limit order", "A gift order"],
+          "correctIndex": 2,
+          "explanation": "He set the price himself at \u20b9200, so it was a limit order."
+        },
+        {
+          "question": "What was the total amount paid for the 10 shares, including charges?",
+          "options": ["\u20b92,012", "\u20b92,000", "\u20b9200", "\u20b92,300"],
+          "correctIndex": 0,
+          "explanation": "\u20b92,000 for the shares plus \u20b912 of charges gives \u20b92,012."
+        },
+        {
+          "question": "When did the bought shares appear in the demat account?",
+          "options": ["Instantly, within one second", "On the next working day (T+1)", "After one year", "Never"],
+          "correctIndex": 1,
+          "explanation": "Under T+1, settlement happens one working day after the trade."
+        },
+        {
+          "question": "After the sale at \u20b9230 and \u20b914 of charges, what was the profit after charges?",
+          "options": ["\u20b9300", "\u20b9230", "\u20b9500", "\u20b9274"],
+          "correctIndex": 3,
+          "explanation": "He received \u20b92,286 and paid \u20b92,012, so the profit was \u20b9274."
+        },
+        {
+          "question": "If the shares had been sold at \u20b9190 with the same \u20b914 charges, what would the result be?",
+          "options": ["A profit of \u20b9126", "A loss of \u20b9126", "A loss of \u20b9100", "No gain or loss"],
+          "correctIndex": 1,
+          "explanation": "The sale gives \u20b91,886 against \u20b92,012 paid, which is a loss of \u20b9126."
+        }
+      ]
+    },
+    {
+      "id": "submod-4-12",
+      "title": "12. Module Recap: Common Beginner Mistakes",
+      "intro": "How do you put it all together and avoid the usual traps?",
+      "content": "\u26a1 MISSION BRIEFING: PUTTING IT ALL TOGETHER\nYou now know the pipes, the paperwork, the numbers and the costs. This final lesson ties them into one picture and flags the mistakes beginners make most often. Remember: Bull Run uses simulated prices and is for learning only.\n\n\ud83e\udd2f WOW FACT:\nStudies by SEBI, India's market regulator, have found that a large majority of individual traders in futures and options lost money. Risky, fast trading is where beginners get hurt the most.\n\n\u26a1 FINANCIAL INTEL: THE BIG PICTURE\n1. A parent or guardian opens and operates real accounts for anyone under 18.\n2. Three accounts work together: bank, trading and demat.\n3. Choose a SEBI-registered broker after comparing fees.\n4. Read the quote: LTP, high, low, volume, bid and ask.\n5. Pick the right order type: market, limit or stop-loss.\n6. Know the order journey and T+1 settlement.\n7. Count the costs and the tax before you trade.\n8. Check the trading hours and holidays.\n\n\u26a1 FINANCIAL INTEL: COMMON BEGINNER MISTAKES\n\u2022 Borrowing money to trade. Debt makes losses bigger and harder to survive.\n\u2022 Following social media tips or 'guaranteed return' promises.\n\u2022 Putting all money in one company.\n\u2022 Ignoring charges and tax.\n\u2022 Using market orders in jumpy markets.\n\u2022 Trading with money needed for fees, food or school.\n\u2022 Sharing OTPs or passwords.\n\u2022 Panic selling after one bad day.\n\n\ud83e\uddea TRY IT: THE PRE-TRADE CHECK\nBefore every simulator trade, answer five questions in writing:\n1. Why am I making this trade?\n2. How much could I lose, and can I accept that?\n3. Which order type fits, and why?\n4. What will the costs be?\n5. When and why would I exit?\nIf you cannot answer all five, do not trade yet.\n\n\ud83d\udca1 CORE TAKEAWAY:\nGood trading habits start with safety, patience and knowing the costs. Never borrow to trade, never trust guaranteed returns, and always involve a parent or guardian for anything real.",
+      "quiz": [
+        {
+          "question": "Which money is appropriate to put into the market (with a guardian's involvement)?",
+          "options": ["Borrowed money", "Money meant for school fees", "Money needed for food", "Only money that can be risked without hurting daily life"],
+          "correctIndex": 3,
+          "explanation": "Markets can fall, so only spare money that is not needed for essentials should ever be at risk."
+        },
+        {
+          "question": "Why is borrowing money to trade dangerous?",
+          "options": ["Debt makes losses bigger and still has to be repaid", "Banks never lend", "It removes all taxes", "It guarantees profit"],
+          "correctIndex": 0,
+          "explanation": "If a trade loses, the loan still has to be repaid, so the damage grows."
+        },
+        {
+          "question": "A stranger messages you offering 'guaranteed returns' on a stock. What is this most likely?",
+          "options": ["A kind gift", "A government scheme", "A scam or misleading offer", "A broker notice"],
+          "correctIndex": 2,
+          "explanation": "No one can guarantee market returns. Such promises are common in scams."
+        },
+        {
+          "question": "What is the first step before any real account is opened for a person under 18?",
+          "options": ["Pick a stock tip online", "A parent or guardian takes charge and completes the process", "Share the OTP with a friend", "Borrow money"],
+          "correctIndex": 1,
+          "explanation": "Under 18, a parent or guardian opens and operates the accounts."
+        },
+        {
+          "question": "What kind of prices does the Bull Run simulator use?",
+          "options": ["Live NSE prices", "Exact BSE closing prices", "Secret broker prices", "Simulated prices made for learning"],
+          "correctIndex": 3,
+          "explanation": "Bull Run prices are simulated and are never live NSE data."
         }
       ]
     }
