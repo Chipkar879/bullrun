@@ -5,410 +5,456 @@
     {
       "id": "submod-6-1",
       "title": "1. Reading Financial Statements",
-      "intro": "Discover the important ideas behind reading financial statements.",
-      "content": "⚡ MISSION BRIEFING: READING FINANCIAL STATEMENTS\n\nReading Financial Statements is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Balance sheet, profit and loss and cash flow statement are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Balance sheet. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Balance sheet is the starting concept to understand.\n• profit and loss and cash flow statement is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what reading financial statements means, then examines how balance sheet, profit and loss and cash flow statement affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nReading Financial Statements helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "What do a company's three main reports tell you?",
+      "content": "\u26a1 MISSION BRIEFING: READING FINANCIAL STATEMENTS\nAfter studying the economy and the industry, analysts zoom in on one company. Its financial statements are like a health report: they show what it owns, what it earned and where its cash went. A listed Indian company publishes three main statements. All examples here are made up, and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nListed companies in India must publish their financial results every quarter, so you can follow a company's numbers four times a year instead of waiting for one annual report.\n\n\u26a1 FINANCIAL INTEL: THE BALANCE SHEET\nA balance sheet is a snapshot on one date. It lists:\n\u2022 Assets: what the company owns, such as cash, stock, machines and buildings.\n\u2022 Liabilities: what it owes, such as loans and unpaid bills.\n\u2022 Equity: what is left for the owners.\nThe rule is: Assets = Liabilities + Equity.\n\n\u26a1 FINANCIAL INTEL: PROFIT AND LOSS, AND CASH FLOW\n\u2022 Statement of Profit and Loss: covers a period, such as a quarter or a year. Revenue minus expenses gives profit.\n\u2022 Cash flow statement: tracks real cash coming in and going out, split into operating, investing and financing activities.\nProfit and cash are not the same thing, so check both.\n\n\ud83c\udf55 MINI CASE: A FICTIONAL BAKERY\nCrumb & Co Ltd (fictional) owns \u20b9500 of assets and owes \u20b9300. Its equity is 500 - 300 = \u20b9200. This year it earned \u20b91,000 from sales and spent \u20b9850 on costs, so its profit is \u20b9150. Whether it also collected that money in cash is a question for the cash flow statement.\n\n\ud83e\uddea TRY IT: BALANCE THE SHEET\nA fictional firm has assets of \u20b9800 and equity of \u20b9350. What are its liabilities? (Answer: 800 - 350 = \u20b9450.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe balance sheet shows a snapshot, the profit and loss statement shows performance over a period, and the cash flow statement shows real cash. Read all three together, because one statement never tells the whole story.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying reading financial statements?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about reading financial statements?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Which statement is a snapshot of assets and liabilities on one date?",
+          "options": ["Profit and loss statement", "Balance sheet", "Cash flow statement", "Director's letter"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "The balance sheet shows what a company owns and owes on a particular date."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Which equation always holds on a balance sheet?",
+          "options": ["Assets = Profit - Tax", "Assets = Revenue + Cash", "Assets = Liabilities + Equity", "Assets = Equity - Liabilities"],
+          "correctIndex": 2,
+          "explanation": "Everything a company owns is funded either by what it owes or by the owners' equity."
+        },
+        {
+          "question": "A firm has revenue of \u20b91,000 and expenses of \u20b9850. What is its profit?",
+          "options": ["\u20b9150", "\u20b91,850", "\u20b9850", "\u20b915"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "1,000 - 850 = \u20b9150."
+        },
+        {
+          "question": "Which statement tracks the real cash moving in and out of a company?",
+          "options": ["Balance sheet", "Profit and loss statement", "Cash flow statement", "Share certificate"],
+          "correctIndex": 2,
+          "explanation": "The cash flow statement shows actual cash from operating, investing and financing activities."
+        },
+        {
+          "question": "Why should you read all three statements together?",
+          "options": ["One statement is enough", "Each shows a different side, and profit is not the same as cash", "They always show identical numbers", "It is a legal rule for investors"],
+          "correctIndex": 1,
+          "explanation": "Each statement answers a different question, so together they give a fuller picture."
         }
       ]
     },
     {
       "id": "submod-6-2",
       "title": "2. Annual Report Sections",
-      "intro": "Discover the important ideas behind annual report sections.",
-      "content": "⚡ MISSION BRIEFING: ANNUAL REPORT SECTIONS\n\nAnnual Report Sections is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Directors report, auditors report and notes to accounts are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Directors report. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Directors report is the starting concept to understand.\n• auditors report and notes to accounts is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what annual report sections means, then examines how directors report, auditors report and notes to accounts affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nAnnual Report Sections helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Where do you look inside a company's annual report?",
+      "content": "\u26a1 MISSION BRIEFING: ANNUAL REPORT SECTIONS\nAn annual report is a long document that a listed company publishes every year. It is more than numbers. It also holds the management's story, the auditor's opinion and many small details. Knowing where to look saves time. All examples are fictional and this is not advice.\n\n\ud83e\udd2f WOW FACT:\nAnnual reports of listed Indian companies are free to read. You can usually find them on the company's website and on the NSE and BSE websites.\n\n\u26a1 FINANCIAL INTEL: THE MAIN SECTIONS\n\u2022 Directors' report: the board's summary of the year, including performance and dividends.\n\u2022 Management Discussion and Analysis (MD&A): management's view of the industry, risks, opportunities and outlook.\n\u2022 Corporate governance report: how the board is made up and how the company is run.\n\u2022 Auditor's report: an independent professional's opinion on whether the accounts give a fair picture.\n\u2022 Financial statements and notes to accounts: the numbers and the explanations behind them.\n\n\u26a1 FINANCIAL INTEL: WHY THE NOTES AND THE AUDITOR MATTER\nThe notes to accounts explain details that the main statements only summarise, such as loans, accounting policies, related-party transactions and possible future obligations. The auditor's report usually gives a clean opinion. A qualified opinion or an extra warning paragraph means the auditor found something worth reading carefully.\n\n\ud83c\udf55 MINI CASE: SKIPPING TO THE BACK\nAarav opens the fictional Blue Harbour Foods Ltd report and jumps straight to the auditor's report and the notes. He finds a note about a large loan to a related company. That is not proof of a problem, but it gives him a question to research.\n\n\ud83e\uddea TRY IT: WHERE WOULD YOU LOOK?\nMatch each question to a section: (a) What does management expect for the industry next year? (b) Did the auditor raise any concern? (c) What are the details behind the loan figure?\n(Answers: a = MD&A, b = auditor's report, c = notes to accounts.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nThe annual report is a toolkit. Use the MD&A for the story, the auditor's report for independent opinion and the notes for detail, and always read management's claims with a questioning mind.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying annual report sections?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about annual report sections?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Which section gives management's view of the industry, risks and outlook?",
+          "options": ["Auditor's report", "Management Discussion and Analysis", "Share certificate", "Balance sheet"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "The MD&A is where management discusses the business environment and outlook."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Who writes the auditor's report?",
+          "options": ["The company's marketing team", "The company's promoters", "A friend of the CEO", "An independent professional auditor"],
+          "correctIndex": 3,
+          "explanation": "An independent auditor gives an opinion on whether the accounts present a fair picture."
+        },
+        {
+          "question": "Where would you find details behind a loan figure on the balance sheet?",
+          "options": ["Notes to accounts", "The cover page", "The company logo page", "The list of awards"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "The notes explain the numbers in more detail."
+        },
+        {
+          "question": "What does a qualified opinion in an auditor's report suggest?",
+          "options": ["Everything is perfect", "The auditor found something worth reading carefully", "The company will always rise", "The report is not needed"],
+          "correctIndex": 1,
+          "explanation": "A qualified opinion flags an issue and is a prompt to investigate, not a verdict by itself."
+        },
+        {
+          "question": "Where can you usually find a listed company's annual report for free?",
+          "options": ["Only in a bank vault", "Only from a broker for a fee", "On the company website and exchange websites", "It is never public"],
+          "correctIndex": 2,
+          "explanation": "Listed companies publish annual reports publicly, including on NSE and BSE."
         }
       ]
     },
     {
       "id": "submod-6-3",
       "title": "3. Key Ratios",
-      "intro": "Discover the important ideas behind key ratios.",
-      "content": "⚡ MISSION BRIEFING: KEY RATIOS\n\nKey Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Understanding financial ratio categories are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Understanding financial ratio categories. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Understanding financial ratio categories is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what key ratios means, then examines how understanding financial ratio categories affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nKey Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "How do you turn raw numbers into comparable measures?",
+      "content": "\u26a1 MISSION BRIEFING: KEY RATIOS\nA big company and a small company cannot be compared by raw profit alone. A ratio divides one number by another so you can compare fairly. Ratios fall into groups, and each group answers one question about the business. All examples are fictional and not advice.\n\n\ud83e\udd2f WOW FACT:\nA \u20b9100 crore profit sounds huge, but on \u20b910,000 crore of sales it is a thin margin of 1%. The ratio tells you more than the raw number.\n\n\u26a1 FINANCIAL INTEL: THE FIVE FAMILIES OF RATIOS\n\u2022 Profitability: how much profit does the business keep?\n\u2022 Valuation: how expensive is the share relative to the business?\n\u2022 Liquidity: can it pay its short-term bills?\n\u2022 Leverage: how much does it rely on debt?\n\u2022 Efficiency: how well does it use its assets?\nThe next lessons cover each family in turn.\n\n\u26a1 FINANCIAL INTEL: HOW TO READ A RATIO\n\u2022 Compare with the company's own past years to see the trend.\n\u2022 Compare with similar companies in the same industry.\n\u2022 Never compare firms from very different industries, because normal ratios differ by industry.\n\u2022 One ratio rarely tells the full story.\n\n\ud83c\udf55 MINI CASE: BIG vs SMALL\nBigMart Ltd (fictional) earns \u20b950 profit on \u20b9500 sales. Corner Cart Ltd (fictional) earns \u20b95 profit on \u20b950 sales. BigMart has ten times the profit, but both keep 10 paise of every rupee of sales. On this measure they are equal.\n\n\ud83e\uddea TRY IT: FIND THE MARGIN\nProfit margin = profit \u00f7 sales x 100. A firm earns \u20b930 profit on \u20b9600 sales. What is its margin? (Answer: 30 \u00f7 600 x 100 = 5%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nRatios turn raw numbers into fair comparisons. Group them by the question they answer, compare them over time and against similar firms, and never rely on just one.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying key ratios?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about key ratios?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Why do analysts use ratios instead of raw numbers?",
+          "options": ["Ratios guarantee profits", "Ratios allow fair comparison between firms of different sizes", "Raw numbers are illegal", "Ratios are only for banks"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Dividing one number by another makes companies of different sizes comparable."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "A firm earns \u20b930 profit on \u20b9600 sales. What is its profit margin?",
+          "options": ["20%", "50%", "0.5%", "5%"],
+          "correctIndex": 3,
+          "explanation": "30 \u00f7 600 x 100 = 5%."
+        },
+        {
+          "question": "Which ratio family tells you whether a company can pay its short-term bills?",
+          "options": ["Liquidity", "Valuation", "Efficiency", "Profitability"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Liquidity ratios show the ability to meet short-term obligations."
+        },
+        {
+          "question": "What is a sensible way to judge a ratio?",
+          "options": ["Compare firms from any industry", "Look at one ratio only", "Compare with past years and with similar firms", "Ignore the trend"],
+          "correctIndex": 2,
+          "explanation": "Trends and peer comparisons give a ratio meaning."
+        },
+        {
+          "question": "Why avoid comparing firms from very different industries?",
+          "options": ["It is a crime", "Normal ratio levels differ across industries", "Ratios do not exist for them", "Only one industry has ratios"],
+          "correctIndex": 1,
+          "explanation": "A normal margin or debt level in one industry may look odd in another."
         }
       ]
     },
     {
       "id": "submod-6-4",
       "title": "4. Profitability Ratios",
-      "intro": "Discover the important ideas behind profitability ratios.",
-      "content": "⚡ MISSION BRIEFING: PROFITABILITY RATIOS\n\nProfitability Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. ROE, ROCE, net margin and operating margin are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of ROE. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• ROE is the starting concept to understand.\n• ROCE is another important element of this subject.\n• net margin and operating margin is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what profitability ratios means, then examines how roe, roce, net margin and operating margin affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nProfitability Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "How much profit does a business really keep?",
+      "content": "\u26a1 MISSION BRIEFING: PROFITABILITY RATIOS\nProfitability ratios show how well a company turns sales and capital into profit. They help answer a simple question: is this a business that keeps a healthy share of what it earns? All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nTwo companies can earn the same profit, yet one may have used far more money to earn it. Return ratios reveal that difference.\n\n\u26a1 FINANCIAL INTEL: MARGINS\n\u2022 Operating margin = operating profit \u00f7 revenue x 100. It shows profit from the core business before interest and tax.\n\u2022 Net profit margin = net profit \u00f7 revenue x 100. It shows what is left after all costs, interest and tax.\nHigher margins usually mean more room to absorb shocks, but typical margins differ a lot across industries.\n\n\u26a1 FINANCIAL INTEL: ROE AND ROCE\n\u2022 ROE (Return on Equity) = net profit \u00f7 shareholders' equity x 100. It shows profit earned on the owners' money.\n\u2022 ROCE (Return on Capital Employed) = operating profit (EBIT) \u00f7 capital employed x 100, where capital employed is roughly total assets minus current liabilities. It shows how well all the money in the business, including debt, is used.\nA high ROE built mainly on heavy debt can be risky, so look at debt as well.\n\n\ud83c\udf55 MINI CASE: SAME PROFIT, DIFFERENT USE\nQuickLoom Ltd and SlowLoom Ltd (both fictional) each earn \u20b930 profit. QuickLoom uses \u20b9200 of equity, so its ROE is 15%. SlowLoom needs \u20b9300 of equity, so its ROE is 10%. QuickLoom uses the owners' money more effectively.\n\n\ud83e\uddea TRY IT: FIND THE ROE\nA fictional firm earns \u20b924 profit on equity of \u20b9300. What is its ROE? (Answer: 24 \u00f7 300 x 100 = 8%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nMargins show how much profit a business keeps from sales, and ROE and ROCE show how well it uses money. Compare them over several years and with similar firms, and check debt before trusting a high ROE.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying profitability ratios?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
+          "question": "What does net profit margin measure?",
+          "options": ["Net profit as a share of revenue", "The share price", "The number of employees", "Total debt"],
           "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "explanation": "Net margin = net profit \u00f7 revenue x 100."
         },
         {
-          "question": "Which approach is most useful when learning about profitability ratios?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "A firm earns \u20b924 profit on equity of \u20b9300. What is its ROE?",
+          "options": ["12%", "8%", "24%", "30%"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "24 \u00f7 300 x 100 = 8%."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Revenue is \u20b9800 and net profit is \u20b980. What is the net margin?",
+          "options": ["80%", "1%", "10%", "0.1%"],
+          "correctIndex": 2,
+          "explanation": "80 \u00f7 800 x 100 = 10%."
+        },
+        {
+          "question": "What does ROCE look at?",
+          "options": ["Only the share price", "Only the owners' money", "Only sales growth", "Profit earned on all capital used, including debt"],
+          "correctIndex": 3,
+          "explanation": "ROCE compares operating profit with the total capital employed in the business."
+        },
+        {
+          "question": "Why be careful with a very high ROE?",
+          "options": ["It can be built on heavy debt, which adds risk", "It always means a bargain", "It means no tax is paid", "It never changes"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Debt can inflate ROE, so check the leverage behind it."
         }
       ]
     },
     {
       "id": "submod-6-5",
       "title": "5. Valuation Ratios",
-      "intro": "Discover the important ideas behind valuation ratios.",
-      "content": "⚡ MISSION BRIEFING: VALUATION RATIOS\n\nValuation Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. P/E, P/B, EV/EBITDA, PEG and dividend yield are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of P/E. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• P/E is the starting concept to understand.\n• P/B is another important element of this subject.\n• EV/EBITDA is another important element of this subject.\n• PEG and dividend yield is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what valuation ratios means, then examines how p/e, p/b, ev/ebitda, peg and dividend yield affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nValuation Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Is a share's price high or low compared with the business?",
+      "content": "\u26a1 MISSION BRIEFING: VALUATION RATIOS\nA great company can still be a poor purchase if its price is too high, and a weak company can look cheap for a reason. Valuation ratios compare a share's price with what the business earns or owns. They are tools for asking questions, not for deciding. All examples are fictional and not advice.\n\n\ud83e\udd2f WOW FACT:\nA low P/E does not always mean a bargain. Sometimes the market expects profits to fall, so the price is low for a reason.\n\n\u26a1 FINANCIAL INTEL: THE MAIN VALUATION RATIOS\n\u2022 P/E (Price to Earnings) = share price \u00f7 earnings per share (EPS). It shows how many rupees the market pays for each rupee of yearly profit.\n\u2022 P/B (Price to Book) = share price \u00f7 book value per share. It compares the price with the company's net assets.\n\u2022 EV/EBITDA = enterprise value \u00f7 EBITDA. It values the whole business, including debt, against operating earnings.\n\u2022 PEG = P/E \u00f7 expected yearly profit growth rate. It adjusts P/E for growth.\n\u2022 Dividend yield = dividend per share \u00f7 share price x 100.\n\n\u26a1 FINANCIAL INTEL: USING THEM WISELY\n\u2022 Compare a ratio with the same company's past and with similar firms.\n\u2022 Fast-growing firms often have higher P/E ratios.\n\u2022 Banks are often judged using P/B because their assets are mostly financial.\n\u2022 Profits can be unusual in one year, which distorts P/E.\n\n\ud83c\udf55 MINI CASE: SAME PRICE, DIFFERENT STORY\nTwo fictional firms each trade at \u20b9150 per share. GrowFast Ltd has EPS of \u20b95, so its P/E is 30. SteadyBrew Ltd has EPS of \u20b915, so its P/E is 10. The market pays more per rupee of profit for GrowFast, probably because it expects faster growth. That expectation may or may not come true.\n\n\ud83e\uddea TRY IT: FIND THE P/E\nA fictional share costs \u20b9150 and EPS is \u20b96. What is the P/E? (Answer: 150 \u00f7 6 = 25.) A share paying \u20b94 dividend at a price of \u20b9100 has a dividend yield of 4%.\n\n\ud83d\udca1 CORE TAKEAWAY:\nValuation ratios compare price with earnings, assets and growth. Use them alongside business quality, compare within the same industry, and remember that a cheap-looking ratio is a question, not a signal to buy.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying valuation ratios?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about valuation ratios?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "How is P/E calculated?",
+          "options": ["Profit \u00f7 Equity", "Share price \u00f7 Earnings per share", "Dividend \u00f7 Price", "Debt \u00f7 Equity"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "P/E = share price \u00f7 EPS."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "A share costs \u20b9150 and EPS is \u20b96. What is the P/E?",
+          "options": ["9", "900", "25", "156"],
+          "correctIndex": 2,
+          "explanation": "150 \u00f7 6 = 25."
+        },
+        {
+          "question": "A share pays a \u20b95 dividend and costs \u20b9100. What is the dividend yield?",
+          "options": ["5%", "20%", "0.5%", "50%"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "5 \u00f7 100 x 100 = 5%."
+        },
+        {
+          "question": "What does a low P/E always mean?",
+          "options": ["The share will certainly rise", "The company has no debt", "The share is always a bargain", "Nothing certain; it may reflect expected weak profits"],
+          "correctIndex": 3,
+          "explanation": "A low P/E can be a bargain or a warning, so it needs investigation."
+        },
+        {
+          "question": "Which ratio compares a share's price with the company's net assets per share?",
+          "options": ["PEG", "P/B", "Dividend yield", "Interest coverage"],
+          "correctIndex": 1,
+          "explanation": "P/B compares price with book value per share."
         }
       ]
     },
     {
       "id": "submod-6-6",
       "title": "6. Liquidity and Leverage",
-      "intro": "Discover the important ideas behind liquidity and leverage.",
-      "content": "⚡ MISSION BRIEFING: LIQUIDITY AND LEVERAGE\n\nLiquidity and Leverage is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Current ratio, debt-to-equity and interest coverage are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Current ratio. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Current ratio is the starting concept to understand.\n• debt-to-equity and interest coverage is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what liquidity and leverage means, then examines how current ratio, debt-to-equity and interest coverage affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nLiquidity and Leverage helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Can the company pay its bills, and how much does it owe?",
+      "content": "\u26a1 MISSION BRIEFING: LIQUIDITY AND LEVERAGE\nA company can be profitable and still get into trouble if it cannot pay its bills on time or if it owes too much. Liquidity looks at short-term bills. Leverage looks at how much a company relies on borrowed money. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nDebt is not always bad. Many healthy companies borrow to grow. The danger is borrowing more than the business can comfortably repay.\n\n\u26a1 FINANCIAL INTEL: LIQUIDITY\nCurrent ratio = current assets \u00f7 current liabilities.\n\u2022 Current assets: cash, stock and money to be received within a year.\n\u2022 Current liabilities: bills and loans due within a year.\nA ratio above 1 means current assets cover current bills. A ratio well below 1 can signal stress, though some businesses normally run low ratios.\n\n\u26a1 FINANCIAL INTEL: LEVERAGE\n\u2022 Debt-to-equity = total debt \u00f7 shareholders' equity. It shows how much debt there is for every rupee of the owners' money.\n\u2022 Interest coverage = operating profit (EBIT) \u00f7 interest expense. It shows how many times profit covers the interest bill.\nA higher coverage is safer. Very low coverage means a small fall in profit could make interest hard to pay.\nDebt-to-equity is not used the same way for banks, whose business is to borrow and lend.\n\n\ud83c\udf55 MINI CASE: TWO BUILDERS\nSolidBase Builders Ltd (fictional) has debt of \u20b9100 and equity of \u20b9200, so its debt-to-equity is 0.5. HighRise Homes Ltd (fictional) has debt of \u20b9400 and equity of \u20b9200, so its debt-to-equity is 2. If interest rates rise or sales slow, HighRise has less room to manage.\n\n\ud83e\uddea TRY IT: CURRENT RATIO AND COVERAGE\nA firm has current assets of \u20b9240 and current liabilities of \u20b9300. Current ratio = 240 \u00f7 300 = 0.8. Another firm has EBIT of \u20b990 and interest of \u20b930. Coverage = 90 \u00f7 30 = 3 times.\n\n\ud83d\udca1 CORE TAKEAWAY:\nLiquidity checks short-term safety and leverage checks long-term debt strain. Look at the trend and compare with similar firms, because normal levels differ by industry.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying liquidity and leverage?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
+          "question": "How is the current ratio calculated?",
+          "options": ["Current assets \u00f7 current liabilities", "Debt \u00f7 equity", "Profit \u00f7 sales", "Price \u00f7 earnings"],
           "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "explanation": "The current ratio compares short-term assets with short-term liabilities."
         },
         {
-          "question": "Which approach is most useful when learning about liquidity and leverage?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Current assets are \u20b9240 and current liabilities are \u20b9300. What is the current ratio?",
+          "options": ["1.25", "0.8", "540", "60"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "240 \u00f7 300 = 0.8."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Debt is \u20b9400 and equity is \u20b9200. What is the debt-to-equity ratio?",
+          "options": ["0.5", "200", "2", "600"],
+          "correctIndex": 2,
+          "explanation": "400 \u00f7 200 = 2."
+        },
+        {
+          "question": "EBIT is \u20b990 and interest expense is \u20b930. What is the interest coverage?",
+          "options": ["0.33 times", "120 times", "60 times", "3 times"],
+          "correctIndex": 3,
+          "explanation": "90 \u00f7 30 = 3 times."
+        },
+        {
+          "question": "What does very low interest coverage suggest?",
+          "options": ["A small fall in profit could make interest hard to pay", "The company has no debt", "The company is certain to grow", "Interest is free"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Low coverage means little cushion between profit and the interest bill."
         }
       ]
     },
     {
       "id": "submod-6-7",
       "title": "7. Efficiency Ratios",
-      "intro": "Discover the important ideas behind efficiency ratios.",
-      "content": "⚡ MISSION BRIEFING: EFFICIENCY RATIOS\n\nEfficiency Ratios is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Asset turnover, inventory days and receivable days are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Asset turnover. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Asset turnover is the starting concept to understand.\n• inventory days and receivable days is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what efficiency ratios means, then examines how asset turnover, inventory days and receivable days affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nEfficiency Ratios helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "How well does a company use what it owns?",
+      "content": "\u26a1 MISSION BRIEFING: EFFICIENCY RATIOS\nEfficiency ratios ask how well a company turns its assets, stock and customer bills into sales and cash. A company that wastes assets or waits too long for payment can look healthy on paper while cash gets stuck. All examples are fictional and not advice.\n\n\ud83e\udd2f WOW FACT:\nA business that collects money from customers faster can run on less borrowed money, even without selling anything extra.\n\n\u26a1 FINANCIAL INTEL: THE MAIN EFFICIENCY RATIOS\n\u2022 Asset turnover = revenue \u00f7 total assets. It shows how many rupees of sales each rupee of assets creates.\n\u2022 Inventory days = inventory \u00f7 cost of goods sold x 365. It shows how long stock sits before it is sold.\n\u2022 Receivable days = receivables \u00f7 revenue x 365. It shows how long customers take to pay.\n\n\u26a1 FINANCIAL INTEL: HOW TO READ THEM\n\u2022 Rising inventory days can mean slow sales or too much stock.\n\u2022 Rising receivable days can mean customers are paying late.\n\u2022 Normal levels differ a lot by industry. A grocery chain turns stock quickly, while a heavy machinery maker holds stock longer.\n\u2022 Watch the trend over several years.\n\n\ud83c\udf55 MINI CASE: THE SLOW PAYER\nSteadyCloth Ltd (fictional) sells \u20b9730 of cloth a year, and customers owe it \u20b960. Receivable days = 60 \u00f7 730 x 365 = 30 days. Next year receivables rise to \u20b9120 on the same sales, which is 60 days. Profit may look unchanged, but the company is waiting twice as long for its cash.\n\n\ud83e\uddea TRY IT: FIND THE DAYS\nA fictional firm has revenue of \u20b91,095 and receivables of \u20b990. Receivable days = 90 \u00f7 1,095 x 365 = 30 days. Another has revenue of \u20b91,000 and assets of \u20b9500. Asset turnover = 2.\n\n\ud83d\udca1 CORE TAKEAWAY:\nEfficiency ratios show how quickly a business turns assets into sales and sales into cash. Rising stock days or customer-payment days are worth investigating, but compare them with similar firms.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying efficiency ratios?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
+          "question": "What does asset turnover measure?",
+          "options": ["Sales created per rupee of assets", "The share price", "Total debt", "Dividend paid"],
           "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "explanation": "Asset turnover = revenue \u00f7 total assets."
         },
         {
-          "question": "Which approach is most useful when learning about efficiency ratios?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Revenue is \u20b91,000 and total assets are \u20b9500. What is the asset turnover?",
+          "options": ["0.5", "2", "500", "1,500"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "1,000 \u00f7 500 = 2."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "What do receivable days show?",
+          "options": ["How long stock sits unsold", "How many shares exist", "How long customers take to pay", "How long a loan lasts"],
+          "correctIndex": 2,
+          "explanation": "Receivable days measure the average time to collect money from customers."
+        },
+        {
+          "question": "Receivables are \u20b990 and revenue is \u20b91,095. What are the receivable days?",
+          "options": ["90", "12", "365", "30"],
+          "correctIndex": 3,
+          "explanation": "90 \u00f7 1,095 x 365 = 30 days."
+        },
+        {
+          "question": "What can rising inventory days suggest?",
+          "options": ["Slow sales or too much stock", "Guaranteed higher profit", "Customers pay faster", "No competition"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Stock staying longer before sale can mean weak demand or over-stocking."
         }
       ]
     },
     {
       "id": "submod-6-8",
       "title": "8. Qualitative Factors",
-      "intro": "Discover the important ideas behind qualitative factors.",
-      "content": "⚡ MISSION BRIEFING: QUALITATIVE FACTORS\n\nQualitative Factors is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Management, promoter holding, governance, moat and brand are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Management. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Management is the starting concept to understand.\n• promoter holding is another important element of this subject.\n• governance is another important element of this subject.\n• moat and brand is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what qualitative factors means, then examines how management, promoter holding, governance, moat and brand affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nQualitative Factors helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "What matters about a company that numbers cannot show?",
+      "content": "\u26a1 MISSION BRIEFING: QUALITATIVE FACTORS\nNumbers describe the past, but they cannot fully show the quality of people and the strength of a business. Qualitative factors are the things you judge by reading and thinking rather than by calculating. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nInvestor Warren Buffett popularised the idea of an 'economic moat', a lasting advantage that protects a business from competitors, like a moat around a castle.\n\n\u26a1 FINANCIAL INTEL: PEOPLE AND GOVERNANCE\n\u2022 Management: look at their track record, how they treat shareholders and whether they explain their results honestly.\n\u2022 Promoter holding: promoters are the founders or controlling owners. A meaningful holding can mean their interests line up with other shareholders, but the quality of the promoters matters more than the percentage.\n\u2022 Governance: an independent board, clear disclosures and fair dealing with related parties.\n\n\u26a1 FINANCIAL INTEL: MOAT AND BRAND\nA moat can come from:\n\u2022 A trusted brand that customers choose again and again.\n\u2022 Low costs that rivals cannot match.\n\u2022 Switching costs, where customers find it hard to leave.\n\u2022 Licences or technology that others cannot easily copy.\nA moat is never permanent. New technology or rules can weaken it.\n\n\ud83c\udf55 MINI CASE: TWO TOOTHPASTE MAKERS\nMintFresh Ltd (fictional) has a brand families have trusted for decades, so shops stock it and buyers pick it without thinking. NewFoam Ltd (fictional) has a similar product but no loyal base and spends heavily to attract customers. MintFresh appears to have a stronger moat. Whether that is already reflected in its price is a separate question.\n\n\ud83e\uddea TRY IT: SPOT THE MOAT\nWhich is more likely to be a moat: (a) a brand customers trust and reuse, or (b) a bright office building? (Answer: a.) Pick a company you know and write down one possible moat and one way it could weaken.\n\n\ud83d\udca1 CORE TAKEAWAY:\nGood numbers need good people and a durable advantage behind them. Study management, governance and the moat, but remember these judgments are opinions and can be wrong.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying qualitative factors?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
+          "question": "What is an economic moat?",
+          "options": ["A lasting advantage that protects a business from rivals", "A type of loan", "A government tax", "A stock exchange rule"],
           "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "explanation": "A moat is a durable competitive advantage."
         },
         {
-          "question": "Which approach is most useful when learning about qualitative factors?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Who are promoters?",
+          "options": ["Advertising agents", "The founders or controlling owners of a company", "Stock exchange staff", "Government auditors"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Promoters are the people or groups who founded or control the company."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Which of these could be a source of a moat?",
+          "options": ["A bright office", "A long list of awards only", "A trusted brand customers reuse", "A famous address"],
+          "correctIndex": 2,
+          "explanation": "A trusted brand that drives repeat buying is a common moat."
+        },
+        {
+          "question": "Is a moat permanent?",
+          "options": ["Yes, always", "Yes, if the company is old", "Yes, if the P/E is low", "No, new technology or rules can weaken it"],
+          "correctIndex": 3,
+          "explanation": "Advantages can erode over time, so they need to be rechecked."
+        },
+        {
+          "question": "Why are qualitative judgments risky to rely on alone?",
+          "options": ["They are opinions and can be wrong", "They are always exact", "They replace all numbers", "They are banned by SEBI"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "They involve judgment, so they work best alongside numbers and evidence."
         }
       ]
     },
     {
       "id": "submod-6-9",
       "title": "9. Shareholding Patterns",
-      "intro": "Discover the important ideas behind shareholding patterns.",
-      "content": "⚡ MISSION BRIEFING: SHAREHOLDING PATTERNS\n\nShareholding Patterns is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Promoters, FIIs, DIIs, public and pledged shares are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Promoters. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Promoters is the starting concept to understand.\n• FIIs is another important element of this subject.\n• DIIs is another important element of this subject.\n• public and pledged shares is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what shareholding patterns means, then examines how promoters, fiis, diis, public and pledged shares affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nShareholding Patterns helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Who owns a company, and why does it matter?",
+      "content": "\u26a1 MISSION BRIEFING: SHAREHOLDING PATTERNS\nA company's shareholding pattern shows who owns its shares. Listed companies in India report it to the exchanges every quarter, so you can see how ownership changes over time. Changes can raise useful questions, though they are never proof of what will happen. All examples are fictional and not advice.\n\n\ud83e\udd2f WOW FACT:\nShareholding patterns are filed quarterly with the exchanges and are free to view, so anyone can see whether big investors are buying or selling over time.\n\n\u26a1 FINANCIAL INTEL: WHO THE OWNERS ARE\n\u2022 Promoters: founders or controlling owners.\n\u2022 FPIs (Foreign Portfolio Investors, often still called FIIs): overseas funds and investors.\n\u2022 DIIs (Domestic Institutional Investors): Indian institutions such as mutual funds and insurance companies.\n\u2022 Public: everyone else, including small retail investors.\n\n\u26a1 FINANCIAL INTEL: PLEDGED SHARES\nSometimes promoters borrow money by pledging some of their shares to a lender as security. If the share price falls a lot, the lender may be able to sell those shares, which can add pressure on the price. A high pledged share of the promoters' holding is therefore a risk to examine.\nPledged % = pledged shares \u00f7 promoters' shares x 100.\n\n\ud83c\udf55 MINI CASE: READING THE TABLE\nOver four quarters, the fictional Kaveri Cement Ltd shows promoters steady at 55%, mutual funds rising from 8% to 12%, and foreign investors easing from 20% to 17%. This does not tell Aarav what to do. It gives him questions: why are domestic funds adding and foreign funds trimming?\n\n\ud83e\uddea TRY IT: FIND THE PLEDGE\nPromoters hold 5 crore shares and have pledged 2 crore. Pledged % = 2 \u00f7 5 x 100 = 40%. Now try: promoters hold 8 crore and pledged 2 crore. What is the pledged %? (Answer: 25%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nShareholding patterns show who owns a company and how that is changing. Watch promoter pledges and big shifts by institutions, and treat them as clues to research, not instructions.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying shareholding patterns?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
+          "question": "How often do listed companies report their shareholding pattern to the exchanges?",
+          "options": ["Every quarter", "Never", "Once in ten years", "Only when asked by a friend"],
           "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "explanation": "Shareholding patterns are filed quarterly."
         },
         {
-          "question": "Which approach is most useful when learning about shareholding patterns?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Which group includes mutual funds and insurance companies?",
+          "options": ["Promoters", "DIIs", "FPIs", "Retail traders only"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Domestic institutional investors include Indian mutual funds and insurers."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "What are pledged shares?",
+          "options": ["Shares given away free", "Shares removed from the exchange", "Shares offered to a lender as security for a loan", "Shares owned by the government"],
+          "correctIndex": 2,
+          "explanation": "Pledging means using shares as security to borrow money."
+        },
+        {
+          "question": "Promoters hold 5 crore shares and have pledged 2 crore. What is the pledged percentage?",
+          "options": ["25%", "2.5%", "60%", "40%"],
+          "correctIndex": 3,
+          "explanation": "2 \u00f7 5 x 100 = 40%."
+        },
+        {
+          "question": "Why can a high pledged share be a risk?",
+          "options": ["The lender may sell shares if the price falls a lot, adding pressure", "It guarantees a price rise", "It removes all debt", "It means the company is government-owned"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Forced selling by lenders can push the price down further."
         }
       ]
     },
     {
       "id": "submod-6-10",
       "title": "10. Red Flags",
-      "intro": "Discover the important ideas behind red flags.",
-      "content": "⚡ MISSION BRIEFING: RED FLAGS\n\nRed Flags is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. High debt, falling cash flows, auditor changes and related-party transactions are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of High debt. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• High debt is the starting concept to understand.\n• falling cash flows is another important element of this subject.\n• auditor changes and related-party transactions is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what red flags means, then examines how high debt, falling cash flows, auditor changes and related-party transactions affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nRed Flags helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Which warning signs should make you look more closely?",
+      "content": "\u26a1 MISSION BRIEFING: RED FLAGS\nA red flag is a warning sign that makes you look harder at a company. It is not proof of wrongdoing. Many healthy companies show one now and then. The danger is several flags together, or flags that keep repeating. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMost accounting problems that surprise investors left clues earlier, often in the notes to accounts or in the gap between profit and cash.\n\n\u26a1 FINANCIAL INTEL: WARNING SIGNS IN THE NUMBERS\n\u2022 Debt rising much faster than profit or sales.\n\u2022 Profit rising while operating cash flow keeps falling.\n\u2022 Receivable days or inventory days climbing for several periods.\n\u2022 Interest coverage shrinking toward 1.\n\u2022 A high share of promoter shares pledged.\n\n\u26a1 FINANCIAL INTEL: WARNING SIGNS IN THE PEOPLE AND PAPERWORK\n\u2022 Auditors resigning or being changed often, or a qualified audit opinion.\n\u2022 Large related-party transactions, where the company deals with firms linked to its promoters.\n\u2022 Frequent changes in accounting methods.\n\u2022 Top managers leaving suddenly and repeatedly.\n\u2022 Vague explanations from management when asked about results.\n\n\u26a1 FINANCIAL INTEL: WHAT TO DO WITH A FLAG\nWrite the flag down, look for an explanation in the annual report, see whether it repeats over several years and compare with similar firms. Treat it as a question, not a verdict.\n\n\ud83c\udf55 MINI CASE: THE QUIET GAP\nBrightLine Textiles Ltd (fictional) reports profit rising from \u20b9100 to \u20b9150 over three years, but operating cash flow falls from \u20b9110 to \u20b930. Receivable days have doubled. Meera notes this as a flag and researches why customers are paying so slowly.\n\n\ud83e\uddea TRY IT: FLAG OR NOT?\nWhich is a stronger reason to investigate: (a) a firm opens one new office, or (b) a firm's profit rises for three years while its cash flow falls every year? (Answer: b.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nRed flags are signals to research, not proof. Look for patterns across numbers, people and paperwork, and be most careful when several flags appear together.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying red flags?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about red flags?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What is a red flag in company analysis?",
+          "options": ["A guaranteed fraud", "A warning sign that deserves a closer look", "A government order", "A type of share"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A red flag is a prompt to investigate, not proof of wrongdoing."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Which combination is a stronger warning sign?",
+          "options": ["Profit and cash flow both rising", "Debt falling and margins steady", "A new product launch", "Profit rising for years while operating cash flow keeps falling"],
+          "correctIndex": 3,
+          "explanation": "A growing gap between profit and cash is worth investigating."
+        },
+        {
+          "question": "Why can frequent auditor changes be a concern?",
+          "options": ["They always mean fraud", "They can signal disagreements or problems worth checking", "They raise the share price", "They are required every month"],
+          "correctIndex": 1,
+          "explanation": "Repeated changes can hint at issues, so they deserve a closer look."
+        },
+        {
+          "question": "What are related-party transactions?",
+          "options": ["Sales to the public", "Payments to the tax office", "Deals between the company and firms linked to its promoters or directors", "Trades on the exchange"],
+          "correctIndex": 2,
+          "explanation": "They are dealings with linked parties, which need fair terms and clear disclosure."
+        },
+        {
+          "question": "What is a sensible response to a red flag?",
+          "options": ["Ignore it", "Check the explanation, see if it repeats and compare with peers", "Panic and decide instantly", "Assume the company is guilty"],
+          "correctIndex": 1,
+          "explanation": "Treat a flag as a question to research before reaching any conclusion."
+        }
+      ]
+    },
+    {
+      "id": "submod-6-11",
+      "title": "11. Cash Flow and Earnings Quality",
+      "intro": "Is a company's profit backed by real cash?",
+      "content": "\u26a1 MISSION BRIEFING: CASH FLOW AND EARNINGS QUALITY\nA company can show a profit on paper and still run short of cash. That is why analysts compare profit with the actual cash coming in. 'Earnings quality' means how well reported profit is backed by real cash. All companies here are fictional, and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA company can be profitable and still fail if customers pay late and it runs out of cash to pay its own bills.\n\n\u26a1 FINANCIAL INTEL: THE THREE CASH FLOWS\n\u2022 Operating cash flow (CFO): cash from the core business.\n\u2022 Investing cash flow: cash spent on or earned from assets such as machinery and property.\n\u2022 Financing cash flow: cash from loans, share issues, repayments and dividends.\nHealthy firms usually show positive operating cash flow over the years.\n\n\u26a1 FINANCIAL INTEL: FREE CASH FLOW\nFree cash flow (FCF) = operating cash flow - capital expenditure (money spent on machines, factories and similar assets). It shows the cash left after the business has paid to keep and grow itself.\n\n\u26a1 FINANCIAL INTEL: PROFIT vs CASH\nIf profit keeps rising but operating cash flow keeps falling, ask why. Sales may be made on credit that customers have not paid yet, or stock may be piling up. One year proves little, so look at several years.\n\n\ud83c\udf55 MINI CASE: TWO FICTIONAL FIRMS\nSteady Steel Ltd reports \u20b9100 profit and \u20b9110 operating cash flow. Its profit is backed by cash.\nPaperTrail Traders Ltd reports \u20b9100 profit but only \u20b920 operating cash flow, because customers have not paid. That gap is a question to investigate, not proof of a problem.\n\n\ud83e\uddea TRY IT: FREE CASH FLOW\nA fictional firm has operating cash flow of \u20b9500 and spends \u20b9200 on new machines. FCF = 500 - 200 = \u20b9300.\nNow try: operating cash flow \u20b980 and capital expenditure \u20b950. What is the FCF? (Answer: \u20b930.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nProfit is an opinion backed by accounting rules, and cash is a fact. Compare the two over several years, and treat large gaps as questions to research.",
+      "quiz": [
+        {
+          "question": "What does operating cash flow show?",
+          "options": ["Cash from the company's core business", "The share price", "Only loans taken", "The total number of shareholders"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Operating cash flow shows cash generated by the main business activities."
+        },
+        {
+          "question": "How is free cash flow calculated?",
+          "options": ["Profit + tax", "Operating cash flow - capital expenditure", "Sales - profit", "Debt + equity"],
+          "correctIndex": 1,
+          "explanation": "FCF is the cash left after spending on assets needed to run and grow the business."
+        },
+        {
+          "question": "Operating cash flow is \u20b980 and capital expenditure is \u20b950. What is the FCF?",
+          "options": ["\u20b9130", "\u20b950", "\u20b930", "\u20b980"],
+          "correctIndex": 2,
+          "explanation": "80 - 50 = \u20b930."
+        },
+        {
+          "question": "Profit keeps rising but operating cash flow keeps falling. What should you do?",
+          "options": ["Ignore it", "Assume everything is perfect", "Buy immediately", "Investigate why the two differ"],
+          "correctIndex": 3,
+          "explanation": "A growing gap may come from unpaid customer bills or piling stock, so it is worth checking."
+        },
+        {
+          "question": "Why look at several years of cash flow instead of one?",
+          "options": ["One year can be unusual and prove little", "Cash flow never changes", "Only the first year counts", "Regulators require it"],
+          "correctIndex": 0,
+          "explanation": "A single year can be distorted by one-off events, so a longer view is more reliable."
+        }
+      ]
+    },
+    {
+      "id": "submod-6-12",
+      "title": "12. Company Analysis Checklist",
+      "intro": "How do you put all the company clues together?",
+      "content": "\u26a1 MISSION BRIEFING: THE COMPANY CHECKLIST\nYou have studied statements, ratios, cash flow, management and red flags. This capstone puts them into one reusable checklist. The goal is to ask better questions, not to predict prices. All examples are fictional, and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nProfessional analysts rarely trust one ratio. They build a picture from many clues and stay ready to change their mind.\n\n\u26a1 FINANCIAL INTEL: THE CHECKLIST\n1. Business: what does it sell, and who buys it?\n2. Growth: are sales and profit rising over several years?\n3. Profitability: are margins, ROE and ROCE healthy compared with similar firms?\n4. Cash: is profit backed by operating cash flow?\n5. Debt: is debt manageable, and is interest comfortably covered?\n6. Valuation: is the price reasonable compared with earnings and with peers?\n7. People: how do management, governance and shareholding look?\n8. Red flags: anything unusual in the annual report or auditor notes?\n\n\u26a1 FINANCIAL INTEL: COMMON TRAPS\n\u2022 Judging by one ratio alone.\n\u2022 Comparing firms from very different industries.\n\u2022 Trusting a cheap-looking P/E without asking why it is low.\n\u2022 Forgetting that past results do not guarantee the future.\n\n\ud83c\udf55 MINI CASE: FILLING THE CHECKLIST\nMeera studies the fictional Gaon Grains Ltd. She notes steady sales growth, moderate debt and cash flow that follows profit. She also notes a high valuation and a recent auditor change. She ends with a list of questions to research, not a prediction.\n\n\ud83e\uddea TRY IT: YOUR OWN CHECKLIST\nPick a well-known company and fill each of the eight checklist points in one line using its public annual report. Finish with three questions you still cannot answer. Discuss it with a parent, teacher or guardian.\n\n\ud83d\udca1 CORE TAKEAWAY:\nCombine business, numbers, cash, people and red flags into one picture, and list what is still unknown. No checklist guarantees returns. Involve a parent or guardian in any real money decision.",
+      "quiz": [
+        {
+          "question": "What is the main goal of the company checklist?",
+          "options": ["To predict exact share prices", "To ask better questions about a company", "To guarantee profits", "To avoid all risk"],
+          "correctIndex": 1,
+          "explanation": "The checklist builds a fuller picture and highlights open questions."
+        },
+        {
+          "question": "Which item belongs on the checklist?",
+          "options": ["A rumour from a stranger", "The colour of the logo", "Whether profit is backed by operating cash flow", "A friend's mood"],
+          "correctIndex": 2,
+          "explanation": "Checking that profit is backed by cash is a core part of company analysis."
+        },
+        {
+          "question": "Which is a common trap?",
+          "options": ["Using many clues", "Writing down open questions", "Reading the annual report", "Judging a company by one ratio alone"],
+          "correctIndex": 3,
+          "explanation": "One ratio rarely tells the full story."
+        },
+        {
+          "question": "Why is comparing firms from very different industries risky?",
+          "options": ["Their ratios often mean different things", "It is illegal", "All firms are identical", "Ratios do not exist"],
+          "correctIndex": 0,
+          "explanation": "Normal margins and debt levels differ a lot between industries."
+        },
+        {
+          "question": "Does any checklist guarantee returns?",
+          "options": ["Yes, if completed perfectly", "No, investing always carries risk", "Yes, for large companies", "Yes, if used daily"],
+          "correctIndex": 1,
+          "explanation": "No method guarantees returns, so involve a parent or guardian in real money decisions."
         }
       ]
     }

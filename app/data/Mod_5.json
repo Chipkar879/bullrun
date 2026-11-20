@@ -5,205 +5,456 @@
     {
       "id": "submod-5-1",
       "title": "1. Macroeconomic Indicators",
-      "intro": "Discover the important ideas behind macroeconomic indicators.",
-      "content": "⚡ MISSION BRIEFING: MACROECONOMIC INDICATORS\n\nMacroeconomic Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. GDP, CPI, WPI, inflation, interest rates and fiscal deficit are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of GDP. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• GDP is the starting concept to understand.\n• CPI is another important element of this subject.\n• WPI is another important element of this subject.\n• inflation is another important element of this subject.\n• interest rates and fiscal deficit is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what macroeconomic indicators means, then examines how gdp, cpi, wpi, inflation, interest rates and fiscal deficit affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMacroeconomic Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Which big numbers show how the whole economy is doing?",
+      "content": "\u26a1 MISSION BRIEFING: MACROECONOMIC INDICATORS\nBefore studying any single company, smart analysts look at the whole economy first. 'Macro' means big picture. Indicators are numbers that show how the economy is doing, such as growth, prices and interest rates. All examples here are made up, and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIndia's GDP numbers are published by a government statistics office, and they are revised later as better data arrives. Even official first estimates can change.\n\n\u26a1 FINANCIAL INTEL: GDP AND GROWTH\nGDP (Gross Domestic Product) is the total value of all goods and services produced in a country in a period. The growth rate tells you how fast the economy is expanding. When the economy grows, many businesses can sell more, but strong GDP does not guarantee that any one share will rise.\n\n\u26a1 FINANCIAL INTEL: INFLATION, CPI AND WPI\n\u2022 Inflation: a general rise in prices over time. Each rupee buys less.\n\u2022 CPI (Consumer Price Index): tracks prices households pay for things like food, clothes and rent.\n\u2022 WPI (Wholesale Price Index): tracks prices of goods traded in bulk between businesses.\nCPI is the one people feel in daily life, and RBI watches inflation closely when it sets interest rates.\n\n\u26a1 FINANCIAL INTEL: INTEREST RATES AND FISCAL DEFICIT\n\u2022 Interest rate: RBI's key rate (the repo rate) is the rate at which it lends to banks. When it rises, loans usually become costlier, which can slow spending. When it falls, borrowing usually becomes cheaper.\n\u2022 Fiscal deficit: the gap when the government spends more than it earns (not counting borrowing). The gap is filled by borrowing, which can affect interest rates.\n\n\ud83e\uddea TRY IT: CALCULATE INFLATION\nA fictional shopping basket cost \u20b92,000 last year and costs \u20b92,120 now.\nInflation = (2,120 - 2,000) \u00f7 2,000 x 100 = 6%.\nNow try: a basket that rose from \u20b95,000 to \u20b95,250. What is the inflation? (Answer: 5%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nGDP, inflation, interest rates and the fiscal deficit describe the economic weather. They help you understand conditions, but they never guarantee what any share or the market will do.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying macroeconomic indicators?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about macroeconomic indicators?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What does GDP measure?",
+          "options": ["The number of companies listed on an exchange", "The total value of goods and services produced in a country in a period", "The money held by RBI", "The price of one share"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "GDP adds up the value of everything a country produces in a period."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Which index mainly tracks the prices households pay?",
+          "options": ["WPI", "GDP", "Fiscal deficit", "CPI"],
+          "correctIndex": 3,
+          "explanation": "CPI follows retail prices that households pay. WPI follows wholesale prices."
+        },
+        {
+          "question": "A basket cost \u20b92,000 last year and \u20b92,120 now. What is the inflation?",
+          "options": ["6%", "12%", "2.12%", "60%"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "The rise is \u20b9120 on \u20b92,000, which is 6%."
+        },
+        {
+          "question": "What usually happens to loans when RBI raises its key rate?",
+          "options": ["They become free", "They usually become cheaper", "They usually become costlier", "Nothing ever changes"],
+          "correctIndex": 2,
+          "explanation": "A higher key rate usually makes borrowing costlier across the economy."
+        },
+        {
+          "question": "What is a fiscal deficit?",
+          "options": ["When a company's profit falls", "When the government spends more than it earns, not counting borrowing", "When prices fall across the country", "When a share is removed from the exchange"],
+          "correctIndex": 1,
+          "explanation": "The fiscal deficit is the gap between government spending and its income, filled by borrowing."
         }
       ]
     },
     {
       "id": "submod-5-2",
       "title": "2. Economic Cycles",
-      "intro": "Discover the important ideas behind economic cycles.",
-      "content": "⚡ MISSION BRIEFING: ECONOMIC CYCLES\n\nEconomic Cycles is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Expansion, peak, recession and recovery are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Expansion. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Expansion is the starting concept to understand.\n• peak is another important element of this subject.\n• recession and recovery is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what economic cycles means, then examines how expansion, peak, recession and recovery affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nEconomic Cycles helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Why do good times and slow times keep taking turns?",
+      "content": "\u26a1 MISSION BRIEFING: ECONOMIC CYCLES\nEconomies do not grow in a straight line. They move in waves, with busy times and slow times. These waves are called economic cycles. Understanding them helps you see why some businesses do well in one phase and struggle in another. All companies here are fictional.\n\n\ud83e\udd2f WOW FACT:\nIndia's economy shrank over the full 2020-21 financial year during the COVID-19 disruption. That was a rare full-year fall, and the economy recovered in the years after.\n\n\u26a1 FINANCIAL INTEL: THE MAIN PHASES\n1. Expansion: the economy grows, people spend more, firms hire.\n2. Peak: growth is at its highest and starts to slow down.\n3. Recession: the economy shrinks or slows sharply. Spending and jobs fall. The lowest point is called the trough.\n4. Recovery: after the trough, the economy starts growing again.\nThen the cycle repeats. No two cycles last the same time.\n\n\u26a1 FINANCIAL INTEL: CLUES ANALYSTS WATCH\n\u2022 Jobs and incomes\n\u2022 Factory output and sales\n\u2022 Bank lending\n\u2022 Inflation and interest rates\nStock markets often move ahead of the economy because investors look to the future, so the market and the news can seem out of step.\n\n\ud83c\udf55 MINI CASE: TWO FICTIONAL COMPANIES\nSpice Route Hotels Ltd earns more when people travel and eat out. In a slowdown, families cut those trips, so its sales can fall quickly. This is called a cyclical business.\nDaily Dal Foods Ltd sells basic groceries. People keep buying food in every phase, so its sales change less. This is often called a defensive business.\nDefensive does not mean safe. It means sales are usually steadier. The share price can still fall.\n\n\ud83e\uddea TRY IT: LABEL THE PHASE\nName the phase: (a) factories hire more workers and sales rise; (b) sales fall for several quarters in a row; (c) sales begin to rise again after a long fall.\n(Answers: expansion, recession, recovery.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nEconomies move through expansion, peak, recession and recovery. Nobody can time these turns perfectly, so use cycles to understand risk, not to predict prices.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying economic cycles?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "Which phase usually comes right after the peak?",
+          "options": ["Expansion", "Recovery", "Recession or slowdown", "A permanent boom"],
+          "correctIndex": 2,
+          "explanation": "After growth peaks, the economy usually slows or shrinks, which is the recession phase."
         },
         {
-          "question": "Which approach is most useful when learning about economic cycles?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What does the recovery phase mean?",
+          "options": ["The economy starts growing again after a low point", "The economy stops forever", "Prices are fixed by law", "Every company becomes profitable"],
+          "correctIndex": 0,
+          "explanation": "Recovery is the turn upward after the trough."
+        },
+        {
+          "question": "Which fictional business is most likely to be cyclical?",
+          "options": ["A seller of basic salt and flour", "A pharmacy selling daily medicines", "A water supplier", "A luxury holiday resort"],
+          "correctIndex": 3,
+          "explanation": "Luxury travel is cut quickly when people spend less, so its sales swing with the cycle."
+        },
+        {
+          "question": "What does 'defensive business' usually mean?",
+          "options": ["It can never lose value", "Its sales are usually steadier through the cycle", "It is owned by the government", "It guarantees a profit"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Defensive means steadier sales, not safety. The share price can still fall."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "question": "Can anyone time economic cycles perfectly?",
+          "options": ["Yes, with one simple formula", "Yes, by reading the headlines", "No, the turns are hard to predict exactly", "Yes, RBI announces them in advance"],
+          "correctIndex": 2,
+          "explanation": "Turning points are uncertain, so cycles are better used to understand risk than to predict prices."
         }
       ]
     },
     {
       "id": "submod-5-3",
       "title": "3. Global Factors",
-      "intro": "Discover the important ideas behind global factors.",
-      "content": "⚡ MISSION BRIEFING: GLOBAL FACTORS\n\nGlobal Factors is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Crude oil, US Federal Reserve and geopolitical events are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Crude oil. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Crude oil is the starting concept to understand.\n• US Federal Reserve and geopolitical events is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what global factors means, then examines how crude oil, us federal reserve and geopolitical events affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nGlobal Factors helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "How can events far from India move Indian markets?",
+      "content": "\u26a1 MISSION BRIEFING: GLOBAL FACTORS\nIndia's market does not live in a bubble. Events far away, such as oil prices, US interest rates and wars, can reach Indian companies and the rupee. This lesson explains the main global links in simple words. Examples are fictional and not advice.\n\n\ud83e\udd2f WOW FACT:\nIndia imports most of the crude oil it uses. That means events in distant oil-producing regions can change the cost of fuel and transport at home.\n\n\u26a1 FINANCIAL INTEL: CRUDE OIL\nCrude oil is the raw material for petrol, diesel and many products such as plastics. When oil prices rise:\n\u2022 India pays more dollars for its imports.\n\u2022 Fuel and transport costs can rise, which can push up inflation.\n\u2022 Companies that use a lot of fuel can see their costs climb.\nWhen oil prices fall, the opposite can happen, but it is never automatic.\n\n\u26a1 FINANCIAL INTEL: THE US FEDERAL RESERVE AND THE RUPEE\nThe US Federal Reserve is America's central bank. When it raises interest rates, US investments can look more attractive, and some foreign investors may move money out of countries like India. That can put pressure on the rupee and on share prices. When the rupee weakens against the dollar, imports cost more rupees, while exporters may earn more rupees for the same dollars.\n\n\u26a1 FINANCIAL INTEL: GEOPOLITICAL EVENTS\nWars, trade disputes and sanctions can block shipping routes, raise prices and make investors nervous. Markets often react fast, and the first reaction can be bigger or smaller than the real long-term effect. That uncertainty is a risk in itself.\n\n\ud83e\uddea TRY IT: THE FUEL BILL\nSkyline Air Ltd (fictional) spends 30% of its costs on fuel. Fuel prices rise 10%. If everything else stays the same, total costs rise about 10% x 30% = 3%.\nNow try: fuel is 20% of costs and the fuel price rises 10%. How much do total costs rise? (Answer: 2%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nOil, US interest rates, the rupee and world events all link India to the global economy. They create risks and chances, but their effects are mixed and cannot be predicted exactly.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying global factors?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "Which statement about India and crude oil is correct?",
+          "options": ["India produces all the crude it needs", "India sells most of its crude to the US", "India does not use crude oil", "India imports most of the crude oil it uses"],
+          "correctIndex": 3,
+          "explanation": "India relies heavily on imported crude, so global oil prices matter at home."
         },
         {
-          "question": "Which approach is most useful when learning about global factors?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What can a rise in oil prices do?",
+          "options": ["Raise fuel and transport costs", "Make every share rise", "Always lower inflation", "Close the stock exchange"],
+          "correctIndex": 0,
+          "explanation": "Costlier oil can raise fuel and transport costs and push up prices."
+        },
+        {
+          "question": "What is the US Federal Reserve?",
+          "options": ["India's stock exchange", "A private US bank", "The central bank of the United States", "A department of SEBI"],
+          "correctIndex": 2,
+          "explanation": "The Federal Reserve is the US central bank. Its interest rate decisions affect money flows worldwide."
+        },
+        {
+          "question": "What does a weaker rupee against the dollar usually mean for imports?",
+          "options": ["Imports become cheaper", "Imports cost more rupees", "It has no effect on any company", "Inflation is cancelled"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "More rupees are needed to buy the same dollars, so imported goods cost more."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "question": "Fuel is 20% of a company's costs and the fuel price rises 10%. All else equal, how much do total costs rise?",
+          "options": ["10%", "20%", "0.2%", "2%"],
+          "correctIndex": 3,
+          "explanation": "10% of 20% is 2%."
         }
       ]
     },
     {
       "id": "submod-5-4",
       "title": "4. Industry Analysis",
-      "intro": "Discover the important ideas behind industry analysis.",
-      "content": "⚡ MISSION BRIEFING: INDUSTRY ANALYSIS\n\nIndustry Analysis is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Sector life cycle, competition, entry barriers and government policy are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Sector life cycle. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Sector life cycle is the starting concept to understand.\n• competition is another important element of this subject.\n• entry barriers and government policy is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what industry analysis means, then examines how sector life cycle, competition, entry barriers and government policy affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nIndustry Analysis helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Why study the whole industry before one company?",
+      "content": "\u26a1 MISSION BRIEFING: INDUSTRY ANALYSIS\nAn industry (or sector) is a group of companies doing similar business, such as banking, power or food. Even good companies can struggle in a tough industry, and average ones can look good in a booming one. So analysts study the industry before the company. All examples are fictional.\n\n\ud83e\udd2f WOW FACT:\nThe same news can help one industry and hurt another on the same day. Falling fuel prices may help airlines, while hurting companies that produce oil.\n\n\u26a1 FINANCIAL INTEL: THE SECTOR LIFE CYCLE\n1. Start-up: new, risky, few customers.\n2. Growth: demand rises fast and many new firms join.\n3. Maturity: growth slows and a few big firms dominate.\n4. Decline: demand shrinks as people switch to newer products.\nKnowing the stage helps you judge how fast sales may grow and how much risk to expect.\n\n\u26a1 FINANCIAL INTEL: COMPETITION AND ENTRY BARRIERS\n\u2022 Competition: with many sellers, firms may cut prices and earn thinner profits. With only a few, they often have more pricing power.\n\u2022 Entry barriers: things that make it hard for new firms to join, such as huge setup costs, licences, strong brands or special technology. High barriers can protect existing firms.\n\n\u26a1 FINANCIAL INTEL: GOVERNMENT POLICY\nRules, taxes, licences, subsidies and bans can change an industry's fortunes. A new safety rule may raise costs. A support scheme may lower them. Policy can change, and that is a risk.\n\n\ud83c\udf55 MINI CASE: STALL vs NETWORK\nChaiCorner (fictional) is a tea stall. Anyone with a small amount of money can start one, so competition is heavy and profits are thin.\nNetra Net Ltd (fictional) runs a nationwide internet network. Building one needs enormous money and approvals, so new rivals are rare.\nHigh barriers help existing firms, but they do not guarantee a profit.\n\n\ud83e\uddea TRY IT: SCORE AN INDUSTRY\nPick an industry such as food delivery or bus travel. Score each factor from 1 (weak) to 5 (strong): growth stage, competition level, entry barriers, policy support. What does your table tell you? What is still unknown?\n\n\ud83d\udca1 CORE TAKEAWAY:\nCheck an industry's life stage, competition, entry barriers and policy before judging a company. A strong industry does not protect a weak company, and a weak industry can hurt even a good one.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying industry analysis?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "question": "In which life-cycle stage does demand rise fast and many new firms join?",
+          "options": ["Decline", "Maturity", "Start-up only", "Growth"],
+          "correctIndex": 3,
+          "explanation": "The growth stage has rising demand and new entrants."
         },
         {
-          "question": "Which approach is most useful when learning about industry analysis?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "What are entry barriers?",
+          "options": ["Things that make it hard for new firms to enter an industry", "Fees paid to enter a stock exchange", "Gates at a factory", "Discounts for new customers"],
+          "correctIndex": 0,
+          "explanation": "Entry barriers, like huge costs or licences, make it hard for new competitors to join."
+        },
+        {
+          "question": "What does a large number of small sellers usually lead to?",
+          "options": ["Higher prices for everyone", "Heavier competition and thinner profits", "No competition at all", "Guaranteed profits"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Many sellers compete on price, which usually squeezes profits."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Why can government policy affect an industry?",
+          "options": ["It never matters", "Only the weather matters", "Rules, taxes or support schemes can raise or lower costs and demand", "Policy only affects banks"],
+          "correctIndex": 2,
+          "explanation": "Policy can change what an industry can do and what it costs."
+        },
+        {
+          "question": "What is typical in the maturity stage?",
+          "options": ["Growth slows and a few large firms dominate", "Every product is brand new", "Demand disappears completely", "No competition exists"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "In maturity, growth slows and the industry is led by a few big players."
         }
       ]
     },
     {
       "id": "submod-5-5",
       "title": "5. Top-down vs Bottom-up",
-      "intro": "Discover the important ideas behind top-down vs bottom-up.",
-      "content": "⚡ MISSION BRIEFING: TOP-DOWN VS BOTTOM-UP\n\nTop-down vs Bottom-up is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Two approaches to analysing investments are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Two approaches to analysing investments. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Two approaches to analysing investments is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what top-down vs bottom-up means, then examines how two approaches to analysing investments affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nTop-down vs Bottom-up helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "intro": "Do you start with the big picture or with one company?",
+      "content": "\u26a1 MISSION BRIEFING: TOP-DOWN vs BOTTOM-UP\nAnalysts usually follow one of two paths when studying an investment idea. Top-down starts with the big picture and zooms in. Bottom-up starts with one company and zooms out. Each path has strengths and blind spots. This lesson ties together the economy and industry ideas from this module. Nothing here is advice to buy or sell.\n\n\ud83e\udd2f WOW FACT:\nMany professional analysts use both approaches together. They check the big picture, then the company, and then the big picture again for anything they missed.\n\n\u26a1 FINANCIAL INTEL: TOP-DOWN\n1. Economy: growth, inflation, interest rates and global factors.\n2. Industry: life cycle, competition, barriers and policy.\n3. Company.\nStrength: it helps you avoid whole industries that are in trouble.\nWeakness: you can miss a strong company inside an unpopular industry, and big-picture forecasts are often wrong.\n\n\u26a1 FINANCIAL INTEL: BOTTOM-UP\n1. Company: its products, finances and management.\n2. Then check whether its industry and the economy help or hurt it.\nStrength: it focuses on real business quality.\nWeakness: you can overlook risks from the economy or the industry, such as a policy change that hits every firm in the sector.\n\n\ud83c\udf55 MINI CASE: AARAV AND MEERA\nAarav goes top-down. In a made-up scenario, interest rates are falling, so he studies industries that depend on loans, and then looks at companies in them.\nMeera goes bottom-up. She reads about Gaon Grains Ltd (fictional), likes how its business works, and then checks its industry and the economy.\nBoth end up with questions to research. Neither has proof of future gains.\n\n\ud83e\uddea TRY IT: CLASSIFY THE START\nWhich is top-down and which is bottom-up?\n(a) 'Inflation is easing, so which sectors may benefit?'\n(b) 'This company's sales have grown for five years. Why?'\n(Answers: a is top-down, b is bottom-up.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nTop-down goes from economy to industry to company, and bottom-up goes the other way. Use both to ask better questions, and remember that no method guarantees returns. Involve a parent or guardian in any real money decision.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying top-down vs bottom-up?",
-          "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about top-down vs bottom-up?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
-          ],
+          "question": "Where does a top-down analysis begin?",
+          "options": ["With one company's balance sheet", "With the economy", "With a share price chart", "With a friend's tip"],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Top-down starts with the economy, then moves to the industry, then the company."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
-          "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
-          ],
+          "question": "Where does a bottom-up analysis begin?",
+          "options": ["With global events", "With government policy", "With a single company", "With the exchange holiday list"],
+          "correctIndex": 2,
+          "explanation": "Bottom-up starts with the company and then checks the industry and economy."
+        },
+        {
+          "question": "What is a weakness of the top-down approach?",
+          "options": ["It can miss a strong company inside an unpopular industry", "It ignores the economy completely", "It always needs a loan", "It only works on weekends"],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Focusing on the big picture can hide good companies in out-of-favour industries."
+        },
+        {
+          "question": "'Inflation is easing, so which sectors may benefit?' is an example of which approach?",
+          "options": ["Bottom-up", "Neither approach", "Random guessing", "Top-down"],
+          "correctIndex": 3,
+          "explanation": "It starts from an economic condition and then narrows to sectors, which is top-down."
+        },
+        {
+          "question": "Does either approach guarantee profits?",
+          "options": ["Yes, top-down always does", "No, neither can guarantee returns", "Yes, bottom-up always does", "Yes, if used together"],
+          "correctIndex": 1,
+          "explanation": "Both methods only help you ask better questions. Investing always carries risk."
+        }
+      ]
+    },
+    {
+      "id": "submod-5-6",
+      "title": "6. Monetary Policy and RBI Tools",
+      "intro": "How does RBI steer money, loans and prices?",
+      "content": "\u26a1 MISSION BRIEFING: MONETARY POLICY\nMonetary policy means the steps a central bank takes to control the supply of money and the cost of borrowing. In India this is done by the Reserve Bank of India (RBI). Its main aims are keeping prices fairly stable and supporting growth. All examples are made up, and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nRBI's rate decisions are made by a committee called the Monetary Policy Committee (MPC), which meets several times a year and announces its decisions publicly.\n\n\u26a1 FINANCIAL INTEL: THE MAIN TOOLS\n\u2022 Repo rate: the rate at which RBI lends money to banks for the short term.\n\u2022 Reverse repo rate: the rate at which RBI borrows money from banks.\n\u2022 CRR (Cash Reserve Ratio): the share of a bank's deposits that it must keep with RBI as cash.\n\u2022 SLR (Statutory Liquidity Ratio): the share of deposits a bank must keep in safe assets such as government securities.\nHigher ratios leave banks less money to lend. Lower ratios leave more.\n\n\u26a1 FINANCIAL INTEL: TIGHT vs EASY\n\u2022 Tightening: RBI raises rates or ratios to cool inflation. Loans get costlier and spending can slow.\n\u2022 Easing: RBI lowers rates or ratios to support growth. Loans get cheaper and spending can rise.\nRate changes take time to spread through the economy, and their effects are never exact.\n\n\u26a1 FINANCIAL INTEL: WHY SHARE MARKETS CARE\nCompanies that borrow a lot, such as builders and carmakers, feel interest rate changes strongly. Higher rates raise their interest bills and can make customers' loans costlier too. Banks are affected differently, because they earn from the gap between lending and deposit rates.\n\n\ud83e\uddea TRY IT: LOAN COST\nGreenLeaf Builders Ltd (fictional) has a loan of \u20b91,00,000 at 8% a year. Yearly interest = 1,00,000 x 8% = \u20b98,000.\nNow try: the rate rises to 9%. What is the yearly interest? (Answer: \u20b99,000, which is \u20b91,000 more.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nRBI uses the repo rate, reverse repo rate, CRR and SLR to steer lending and inflation. Higher rates usually cool spending, and lower rates usually support it, but the effects take time and are uncertain.",
+      "quiz": [
+        {
+          "question": "Which institution runs monetary policy in India?",
+          "options": ["SEBI", "The Reserve Bank of India", "The stock exchange", "A private bank"],
+          "correctIndex": 1,
+          "explanation": "RBI is India's central bank and runs monetary policy."
+        },
+        {
+          "question": "What is the repo rate?",
+          "options": ["The tax on shares", "The rate banks charge for home loans only", "The rate at which RBI lends short-term money to banks", "The rate of inflation"],
+          "correctIndex": 2,
+          "explanation": "The repo rate is the rate at which RBI lends to banks for the short term."
+        },
+        {
+          "question": "What does CRR stand for?",
+          "options": ["Cash Reserve Ratio", "Credit Rating Report", "Central Rupee Rate", "Cost Recovery Rule"],
+          "correctIndex": 0,
+          "explanation": "CRR is the Cash Reserve Ratio, the share of deposits banks keep with RBI as cash."
+        },
+        {
+          "question": "RBI wants to cool inflation. Which step is it more likely to take?",
+          "options": ["Lower rates sharply and forever", "Raise rates or ratios", "Print unlimited shares", "Close all banks"],
+          "correctIndex": 1,
+          "explanation": "Tightening through higher rates or ratios usually cools spending and prices."
+        },
+        {
+          "question": "A \u20b91,00,000 loan at 8% rises to 9%. How much more is the yearly interest?",
+          "options": ["\u20b9100", "\u20b910,000", "\u20b980", "\u20b91,000"],
+          "correctIndex": 3,
+          "explanation": "1% of \u20b91,00,000 is \u20b91,000 more each year."
+        }
+      ]
+    },
+    {
+      "id": "submod-5-7",
+      "title": "7. Fiscal Policy and the Budget",
+      "intro": "How do government spending and taxes shape the economy?",
+      "content": "\u26a1 MISSION BRIEFING: FISCAL POLICY\nFiscal policy is how a government uses taxes and spending to influence the economy. In India, the Union Budget is presented every year and lays out what the government plans to earn and spend. Examples are made up and not advice.\n\n\ud83e\udd2f WOW FACT:\nGST (Goods and Services Tax) replaced many separate state and central taxes in India in 2017, turning a patchwork of taxes into one common system.\n\n\u26a1 FINANCIAL INTEL: WHERE THE MONEY COMES FROM\n\u2022 Direct taxes: paid straight to the government by people and companies, such as income tax and corporate tax.\n\u2022 Indirect taxes: included in the price of goods and services, such as GST.\n\u2022 Other income: fees, dividends from government-owned firms and similar sources.\n\n\u26a1 FINANCIAL INTEL: WHERE THE MONEY GOES\n\u2022 Capital spending: building roads, railways and power plants. This can help many industries.\n\u2022 Revenue spending: salaries, pensions, interest on past loans and subsidies.\nA budget that favours capital spending can boost demand for cement, steel and construction firms. Changes in taxes can raise or lower what people and firms keep.\n\n\u26a1 FINANCIAL INTEL: DEFICIT AND BORROWING\nWhen spending is bigger than income, the government borrows. Heavy borrowing can push up interest rates because the government competes with others for money. This is why analysts watch the fiscal deficit.\n\n\ud83e\uddea TRY IT: THE DEFICIT\nA fictional government plans to spend \u20b9100 and expects to earn \u20b980 (not counting borrowing). Fiscal deficit = 100 - 80 = \u20b920.\nNow try: spending \u20b9120 and earning \u20b9105. What is the deficit? (Answer: \u20b915.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nTaxes and spending are the government's levers. Budget choices can help some industries and hurt others, and a large deficit can affect interest rates. Read budget news carefully, because first reactions can be too strong.",
+      "quiz": [
+        {
+          "question": "What is fiscal policy?",
+          "options": ["How RBI sets the repo rate", "How a government uses taxes and spending to influence the economy", "How a company prices its shares", "How the rupee is printed"],
+          "correctIndex": 1,
+          "explanation": "Fiscal policy is about government taxes and spending."
+        },
+        {
+          "question": "Which of these is an indirect tax?",
+          "options": ["Income tax", "Corporate tax", "GST", "A salary"],
+          "correctIndex": 2,
+          "explanation": "GST is built into the price of goods and services, so it is an indirect tax."
+        },
+        {
+          "question": "Which is an example of capital spending?",
+          "options": ["Building a new highway", "Paying salaries", "Paying pensions", "Paying interest on old loans"],
+          "correctIndex": 0,
+          "explanation": "Capital spending creates lasting assets such as roads and railways."
+        },
+        {
+          "question": "Spending \u20b9120 and earning \u20b9105 (not counting borrowing) gives a deficit of:",
+          "options": ["\u20b9225", "\u20b95", "\u20b920", "\u20b915"],
+          "correctIndex": 3,
+          "explanation": "120 - 105 = \u20b915."
+        },
+        {
+          "question": "Why can a very large government deficit matter to markets?",
+          "options": ["It can push up interest rates because of heavy borrowing", "It makes every share rise", "It closes banks", "It has no effect at all"],
+          "correctIndex": 0,
+          "explanation": "Heavy government borrowing can raise borrowing costs for others."
+        }
+      ]
+    },
+    {
+      "id": "submod-5-8",
+      "title": "8. Currency and Exchange Rates",
+      "intro": "Why does the rupee's value against the dollar matter?",
+      "content": "\u26a1 MISSION BRIEFING: CURRENCY AND EXCHANGE RATES\nAn exchange rate tells you how much of one currency you need to buy another, for example how many rupees buy one US dollar. Because India trades with the world, the rupee's value affects costs, profits and prices. Examples are made up and not advice.\n\n\ud83e\udd2f WOW FACT:\nThe rupee's value is largely set by supply and demand in the currency market, and RBI sometimes steps in to smooth sharp swings.\n\n\u26a1 FINANCIAL INTEL: WHAT MOVES THE RUPEE\n\u2022 Trade: if India buys more from abroad than it sells, demand for dollars rises.\n\u2022 Foreign money flows: when foreign investors bring money in, the rupee can strengthen. When they take it out, it can weaken.\n\u2022 Oil prices and interest rates abroad.\n\u2022 Inflation at home compared with other countries.\n\n\u26a1 FINANCIAL INTEL: WINNERS AND LOSERS\nWhen the rupee weakens:\n\u2022 Importers pay more rupees for the same goods.\n\u2022 Exporters, such as IT services firms that earn in dollars, may earn more rupees.\nWhen the rupee strengthens, the effects reverse. Neither direction is good or bad for everyone.\n\n\u26a1 FINANCIAL INTEL: FOREX RESERVES\nForex reserves are foreign currencies and other foreign assets held by RBI. They act like a safety cushion that can help during sudden shocks.\n\n\ud83e\uddea TRY IT: IMPORT BILL\nA fictional firm imports goods worth $100. At \u20b980 per dollar it pays \u20b98,000. If the rupee weakens to \u20b985 per dollar, it pays 100 x 85 = \u20b98,500, which is \u20b9500 more.\nNow try: the goods are worth $200 and the rate moves from \u20b980 to \u20b985. How much more does the firm pay? (Answer: \u20b91,000.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA weaker rupee tends to hurt importers and help exporters, and a stronger rupee does the reverse. Currency moves are hard to predict, so they are a risk to understand, not a trick to time.",
+      "quiz": [
+        {
+          "question": "What does an exchange rate tell you?",
+          "options": ["How much of one currency buys another", "The interest on a loan", "A company's profit", "The price of petrol only"],
+          "correctIndex": 0,
+          "explanation": "It is the price of one currency in terms of another."
+        },
+        {
+          "question": "Who usually benefits from a weaker rupee?",
+          "options": ["Every importer", "Exporters who earn in dollars", "Nobody at all", "Only banks"],
+          "correctIndex": 1,
+          "explanation": "Exporters earn dollars, which convert into more rupees when the rupee weakens."
+        },
+        {
+          "question": "What are forex reserves?",
+          "options": ["A company's cash box", "Rupee notes in circulation", "Foreign currencies and assets held by RBI", "Shares held by SEBI"],
+          "correctIndex": 2,
+          "explanation": "Forex reserves are foreign assets held by the central bank as a cushion."
+        },
+        {
+          "question": "Imports worth $100 cost \u20b98,000 at \u20b980 per dollar. At \u20b985 per dollar, the cost is:",
+          "options": ["\u20b98,000", "\u20b97,500", "\u20b985", "\u20b98,500"],
+          "correctIndex": 3,
+          "explanation": "100 x 85 = \u20b98,500."
+        },
+        {
+          "question": "What can happen when foreign investors take money out of India?",
+          "options": ["The rupee can weaken", "The rupee always strengthens", "Inflation disappears", "Exports stop"],
+          "correctIndex": 0,
+          "explanation": "Selling rupee assets to take money out raises demand for dollars and can weaken the rupee."
+        }
+      ]
+    },
+    {
+      "id": "submod-5-9",
+      "title": "9. Leading, Coincident and Lagging Indicators",
+      "intro": "Which signals come early, and which arrive late?",
+      "content": "\u26a1 MISSION BRIEFING: TIMING OF INDICATORS\nNot all economic numbers arrive at the same point in the cycle. Some give early hints, some move with the economy, and some confirm what already happened. Knowing the difference stops you from reading old news as a new signal. Examples are made up and not advice.\n\n\ud83e\udd2f WOW FACT:\nStock markets are often called a leading signal because prices reflect what investors expect, not just what has already happened. They still give many false alarms.\n\n\u26a1 FINANCIAL INTEL: LEADING INDICATORS\nThese tend to change before the economy turns. Examples: new orders to factories, new loans taken for housing, business and consumer confidence surveys, and share market trends. They hint at what may come, but they can be wrong.\n\n\u26a1 FINANCIAL INTEL: COINCIDENT INDICATORS\nThese move together with the economy. Examples: industrial output, retail sales and incomes. They tell you how things are right now.\n\n\u26a1 FINANCIAL INTEL: LAGGING INDICATORS\nThese change after the economy has already turned. Examples: unemployment and the total of bank loans outstanding. They confirm a trend but do not warn about it. Inflation data is also often seen as slow to react to changes in demand.\n\n\ud83e\uddea TRY IT: SORT THE SIGNAL\nSort each as leading, coincident or lagging:\n(a) factory new orders rise sharply; (b) this quarter's factory output; (c) unemployment is still high after the economy has started recovering.\n(Answers: leading, coincident, lagging.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nLeading indicators hint, coincident ones show the present, and lagging ones confirm the past. Use them together, and never treat a single number as proof.",
+      "quiz": [
+        {
+          "question": "Which type of indicator tends to change before the economy turns?",
+          "options": ["Lagging", "Leading", "Coincident", "Fixed"],
+          "correctIndex": 1,
+          "explanation": "Leading indicators give early hints about where the economy may head."
+        },
+        {
+          "question": "Which is an example of a lagging indicator?",
+          "options": ["New factory orders", "Consumer confidence surveys", "Unemployment", "Share market trends"],
+          "correctIndex": 2,
+          "explanation": "Unemployment usually changes after the economy has already turned."
+        },
+        {
+          "question": "Industrial output is usually treated as which type?",
+          "options": ["Coincident", "Leading", "Lagging", "Meaningless"],
+          "correctIndex": 0,
+          "explanation": "Output moves with the economy, so it shows current conditions."
+        },
+        {
+          "question": "Why is it risky to rely on one leading indicator alone?",
+          "options": ["It never changes", "It is secret", "It can give false alarms and be wrong", "It is always perfect"],
+          "correctIndex": 2,
+          "explanation": "Leading signals are hints, not proof, so they can mislead."
+        },
+        {
+          "question": "What is the best way to use these indicators?",
+          "options": ["Pick the one you like", "Use them together and stay cautious", "Ignore them", "Only read lagging ones"],
+          "correctIndex": 1,
+          "explanation": "Using a mix gives a fuller, safer picture than any single number."
+        }
+      ]
+    },
+    {
+      "id": "submod-5-10",
+      "title": "10. Porter's Five Forces",
+      "intro": "What five pressures decide how profitable an industry can be?",
+      "content": "\u26a1 MISSION BRIEFING: PORTER'S FIVE FORCES\nProfessor Michael Porter described five forces that shape how much profit firms in an industry can keep. Looking at them one by one gives a clear picture of an industry's competition. All companies here are fictional, and this is not advice.\n\n\ud83e\udd2f WOW FACT:\nTwo industries can both grow fast, yet one can be far more profitable than the other, simply because the five forces are weaker in it.\n\n\u26a1 FINANCIAL INTEL: THE FIVE FORCES\n1. Rivalry among existing firms: more rivals and similar products usually mean price cuts and thinner profits.\n2. Threat of new entrants: if it is easy to join, new firms keep arriving and squeeze profits. High entry barriers reduce this threat.\n3. Threat of substitutes: other products that meet the same need. If there are good substitutes, firms cannot raise prices easily.\n4. Bargaining power of buyers: if customers are few and large, or can switch easily, they can demand lower prices.\n5. Bargaining power of suppliers: if only a few suppliers provide a key input, they can charge more, which raises costs for firms.\n\n\u26a1 FINANCIAL INTEL: HOW TO USE IT\nFor each force, ask whether it is strong or weak for the industry. Many strong forces suggest a tough industry for profits. Weak forces suggest firms may have more room. This is a thinking tool, not a formula.\n\n\ud83c\udf55 MINI CASE: BUS OPERATOR\nRoadRunner Buses Ltd (fictional) faces many rival bus firms (strong rivalry), easy entry for small operators (strong entry threat), trains as a substitute (strong substitutes), and customers who can switch easily (strong buyer power). Fuel suppliers have little pricing choice for it. Most forces are strong, so profits may be thin.\n\n\ud83e\uddea TRY IT: FORCE CHECK\nPick an industry such as mobile data plans. Rate each of the five forces from 1 (weak) to 5 (strong). Which two forces matter most? What would you still need to find out?\n\n\ud83d\udca1 CORE TAKEAWAY:\nFive forces - rivalry, new entrants, substitutes, buyers and suppliers - shape an industry's profit room. Strong forces usually mean tougher profits, but the framework only helps you ask better questions.",
+      "quiz": [
+        {
+          "question": "How many forces are in Porter's framework?",
+          "options": ["Three", "Four", "Five", "Seven"],
+          "correctIndex": 2,
+          "explanation": "The framework has five forces."
+        },
+        {
+          "question": "Which is NOT one of the five forces?",
+          "options": ["Threat of new entrants", "Threat of substitutes", "Bargaining power of buyers", "The colour of the company logo"],
+          "correctIndex": 3,
+          "explanation": "Logo colour is not part of the framework."
+        },
+        {
+          "question": "What does a strong threat of substitutes usually mean?",
+          "options": ["Firms can easily raise prices", "Firms cannot raise prices easily", "There are no customers", "Costs fall to zero"],
+          "correctIndex": 1,
+          "explanation": "If customers can switch to another product, firms have less pricing room."
+        },
+        {
+          "question": "If only a few suppliers provide a key input, what can happen?",
+          "options": ["Suppliers may charge more, raising firms' costs", "Firms' costs always fall", "Competition vanishes", "Buyers pay nothing"],
+          "correctIndex": 0,
+          "explanation": "Strong supplier power can push up the costs firms pay."
+        },
+        {
+          "question": "Many strong forces in an industry usually suggest:",
+          "options": ["Guaranteed profits", "Easy profits for all firms", "No competition", "A tougher environment for profits"],
+          "correctIndex": 3,
+          "explanation": "Strong forces squeeze profit room, though the tool is only a guide."
+        }
+      ]
+    },
+    {
+      "id": "submod-5-11",
+      "title": "11. Key Indian Sectors at a Glance",
+      "intro": "How do different sectors earn money and react to the economy?",
+      "content": "\u26a1 MISSION BRIEFING: KEY INDIAN SECTORS\nIndia's market has many sectors, and each earns money in its own way and reacts differently to the economy. This lesson gives a simple first look. It is a general overview, so real companies within a sector can differ a lot. All company names are fictional and this is not advice.\n\n\ud83e\udd2f WOW FACT:\nA single event can pull sectors in opposite directions. A weaker rupee can help firms that earn in dollars, while hurting firms that import a lot.\n\n\u26a1 FINANCIAL INTEL: SECTOR SNAPSHOTS\n\u2022 Banking and finance: earns mainly from interest on loans. Sensitive to interest rates, credit demand and bad loans.\n\u2022 IT services: sells software services, often to overseas clients and paid in foreign currency. Sensitive to global demand and the rupee.\n\u2022 FMCG (fast-moving consumer goods): sells everyday items like soap and snacks. Sales are usually steadier, but input costs can squeeze margins.\n\u2022 Automobiles: sells vehicles, often bought with loans. Sensitive to interest rates, fuel prices and incomes.\n\u2022 Pharmaceuticals: makes medicines. Sensitive to rules, approvals and global demand.\n\u2022 Energy and power: supplies fuel and electricity. Sensitive to commodity prices and government policy.\n\n\u26a1 FINANCIAL INTEL: LINKING SECTORS TO THE ECONOMY\nFalling interest rates can help sectors that depend on loans, such as autos and housing. Strong global demand can help exporters. Rising crude prices can hurt fuel-heavy firms. Match each sector to the forces that matter most for it.\n\n\ud83c\udf55 MINI CASE: TWO FICTIONAL FIRMS\nPixelWave Tech Ltd earns most of its money in dollars from overseas clients. A weaker rupee may lift its rupee earnings, but a global slowdown could reduce its orders.\nKaravan Motors Ltd sells cars, many on loan. Lower interest rates may help its sales, while higher fuel prices may hurt them.\n\n\ud83e\uddea TRY IT: MATCH THE SECTOR\nWhich sector is most likely to feel a rise in interest rates strongly: (a) a firm selling cars bought on loans, or (b) a firm selling table salt? (Answer: a.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nEach sector earns money differently and reacts to different parts of the economy. Learn what drives a sector before judging a company in it, and remember that firms in the same sector can be very different.",
+      "quiz": [
+        {
+          "question": "Which sector earns mainly from interest on loans?",
+          "options": ["FMCG", "Banking and finance", "Pharmaceuticals", "Energy and power"],
+          "correctIndex": 1,
+          "explanation": "Banks and lenders earn mostly from interest on the loans they give."
+        },
+        {
+          "question": "Which sector often earns in foreign currency from overseas clients?",
+          "options": ["Local salt sellers", "Government post offices", "IT services", "Street vendors"],
+          "correctIndex": 2,
+          "explanation": "Many IT services firms sell to overseas clients and are paid in foreign currency."
+        },
+        {
+          "question": "FMCG sales are usually:",
+          "options": ["Steadier, because people buy everyday items", "Zero in slow times", "Controlled by RBI", "Only for rich buyers"],
+          "correctIndex": 0,
+          "explanation": "Everyday goods keep selling in most phases, so sales are usually steadier."
+        },
+        {
+          "question": "Which sector is most sensitive to interest rates because buyers often take loans?",
+          "options": ["Salt and flour", "Water supply", "Automobiles", "Newspapers"],
+          "correctIndex": 2,
+          "explanation": "Vehicle purchases are often financed, so rate changes can affect demand."
+        },
+        {
+          "question": "Are all firms in the same sector alike?",
+          "options": ["Yes, always identical", "No, they can differ a lot", "Yes, by law", "Yes, in profits"],
+          "correctIndex": 1,
+          "explanation": "Firms in one sector can differ in size, costs, debt and management."
+        }
+      ]
+    },
+    {
+      "id": "submod-5-12",
+      "title": "12. Economy and Industry Checklist",
+      "intro": "How do you put all the big-picture ideas together?",
+      "content": "\u26a1 MISSION BRIEFING: THE FINAL CHECKLIST\nYou have now seen the economy and the industry from many angles. This capstone lesson puts everything into one simple checklist you can reuse. The goal is to ask better questions, not to predict prices. All examples are fictional, and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nProfessional analysts rarely trust one number. They build a picture from many small clues and stay ready to change their mind when new facts arrive.\n\n\u26a1 FINANCIAL INTEL: THE ECONOMY CHECKLIST\n1. Growth: is GDP growth speeding up, slowing or falling?\n2. Prices: is inflation rising or easing?\n3. Interest rates: is RBI tightening or easing?\n4. Government: what do the budget and policy changes mean?\n5. Rupee and world: how do oil, the dollar and global events matter?\n6. Cycle phase: expansion, peak, recession or recovery?\n\n\u26a1 FINANCIAL INTEL: THE INDUSTRY CHECKLIST\n1. Life stage: start-up, growth, maturity or decline?\n2. Five forces: which forces are strong and which are weak?\n3. Entry barriers: do they protect existing firms?\n4. Policy: could rules or taxes change things?\n5. Link to the economy: which indicators matter most for this sector?\n\n\u26a1 FINANCIAL INTEL: COMMON TRAPS\n\u2022 Reading one headline as the whole story.\n\u2022 Treating a strong industry as a guarantee for a weak company.\n\u2022 Confusing leading and lagging signals.\n\u2022 Forgetting that forecasts are often wrong.\n\n\ud83c\udf55 MINI CASE: FILLING THE CHECKLIST\nAnaya studies the fictional packaged-food industry. She notes steady demand, heavy rivalry, moderate entry barriers and rising input costs. She writes down what is still unknown, such as policy changes. She ends with a list of questions to research next, not a prediction.\n\n\ud83e\uddea TRY IT: YOUR OWN CHECKLIST\nChoose a sector such as banking or autos. Fill in the economy checklist and the industry checklist in one line each. Finish with three questions you still cannot answer. Show it to a parent, teacher or guardian and discuss it.\n\n\ud83d\udca1 CORE TAKEAWAY:\nCombine the economy view, the industry view and a list of open questions. A checklist helps you think clearly, but no method guarantees returns. Involve a parent or guardian in any real money decision.",
+      "quiz": [
+        {
+          "question": "What is the main goal of the final checklist?",
+          "options": ["To predict exact share prices", "To ask better questions", "To guarantee profits", "To avoid all risk"],
+          "correctIndex": 1,
+          "explanation": "The checklist helps you think clearly and ask better questions, not predict prices."
+        },
+        {
+          "question": "Which item belongs on the economy checklist?",
+          "options": ["The logo of a company", "A friend's opinion only", "Interest rates and RBI's stance", "A share's colour on a chart"],
+          "correctIndex": 2,
+          "explanation": "Interest rates and RBI's stance are part of the big-picture economy view."
+        },
+        {
+          "question": "Which item belongs on the industry checklist?",
+          "options": ["Life stage and the five forces", "The weather forecast only", "A celebrity's tweet", "The date of a festival"],
+          "correctIndex": 0,
+          "explanation": "Life stage and the five forces describe an industry's situation."
+        },
+        {
+          "question": "Which is a common trap?",
+          "options": ["Using many clues", "Writing down open questions", "Staying ready to change your mind", "Treating a strong industry as a guarantee for any company in it"],
+          "correctIndex": 3,
+          "explanation": "A strong industry does not protect a weak company."
+        },
+        {
+          "question": "Does any method or checklist guarantee returns?",
+          "options": ["Yes, if filled in perfectly", "No, investing always carries risk", "Yes, for big companies", "Yes, if you use top-down"],
+          "correctIndex": 1,
+          "explanation": "No method guarantees returns, so involve a parent or guardian in real money decisions."
         }
       ]
     }
