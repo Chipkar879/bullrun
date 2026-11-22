@@ -46,7 +46,7 @@ function isIndianMarketOpen(date = new Date()) {
   );
 }
 
-function PriceChart({ history, symbol, session }) {
+function PriceChart({ history, symbol, session, markers }) {
   const [hoverIndex, setHoverIndex] = useState(null);
   const svgRef = useRef(null);
 
@@ -93,6 +93,25 @@ function PriceChart({ history, symbol, session }) {
         : pad.left + (points.length <= 1 ? 0 : (index / (points.length - 1)) * plotWidth),
     y: pad.top + ((max - point.value) / range) * plotHeight,
   }));
+
+  // Your orders: O = buy, X = sell. Each sits on the line at the time of the order.
+  const markerPoints = (markers || [])
+    .map((m) => {
+      if (!coordinates.length) return null;
+      if (sessionSpan && (m.time < sessionStart || m.time > sessionStart + sessionSpan)) return null;
+      let best = null;
+      let bestDist = Infinity;
+      coordinates.forEach((c) => {
+        const d = Math.abs(Number(c.time) - m.time);
+        if (d < bestDist) { bestDist = d; best = c; }
+      });
+      if (!best) return null;
+      const x = sessionSpan
+        ? pad.left + ((m.time - sessionStart) / sessionSpan) * plotWidth
+        : best.x;
+      return { ...m, x, y: best.y };
+    })
+    .filter(Boolean);
 
   const smoothPath = coordinates.reduce((path, point, index, array) => {
     if (index === 0) return `M ${point.x} ${point.y}`;
@@ -171,6 +190,10 @@ function PriceChart({ history, symbol, session }) {
         </div>
 
         <div className="text-right shrink-0">
+          <div className={'text-sm font-black font-mono mb-1 ' + (rising ? 'text-emerald-300' : 'text-rose-300')}>
+            {(rising ? '+' : '') + (first ? (((last - first) / first) * 100).toFixed(2) : '0.00') + '%'}
+            <span className="ml-1 text-[10px] font-bold text-slate-500">in this view</span>
+          </div>
           <div className="text-[10px] text-slate-500 uppercase tracking-wider">Range</div>
           <div className="text-xs font-mono text-slate-300 mt-1">
             {money(rawMin)} – {money(rawMax)}
@@ -313,6 +336,31 @@ function PriceChart({ history, symbol, session }) {
               </>
             )}
           </g>
+
+          {markerPoints.map((m, i) => (
+            <g key={'mk-' + i}>
+              <title>
+                {(m.side === 'BUY' ? 'Bought ' : 'Sold ') + m.qty + ' at ' + money(m.price) + ' (' + formatTime(m.time, i) + ')'}
+              </title>
+              {m.side === 'BUY' ? (
+                <>
+                  <circle className="mk-halo" cx={m.x} cy={m.y} r="10" fill="var(--color-bull-teal)" fillOpacity="0.16" />
+                  <circle cx={m.x} cy={m.y} r="4.6" fill="var(--color-bull-teal)" stroke="var(--color-bull-bg)" strokeWidth="1.6" />
+                </>
+              ) : (
+                <>
+                  <circle className="mk-halo" cx={m.x} cy={m.y} r="9" fill="var(--color-bull-coral)" fillOpacity="0.14" />
+                  <path
+                    d={'M ' + (m.x - 3.2) + ' ' + (m.y - 3.2) + ' L ' + (m.x + 3.2) + ' ' + (m.y + 3.2) + ' M ' + (m.x + 3.2) + ' ' + (m.y - 3.2) + ' L ' + (m.x - 3.2) + ' ' + (m.y + 3.2)}
+                    stroke="var(--color-bull-coral)"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </>
+              )}
+            </g>
+          ))}
 
           {activePoint && (
             <g>
@@ -781,6 +829,41 @@ export default function RealSimulatorPage() {
   useEffect(() => {
     if (activePanel === 'history') loadHistory();
   }, [activePanel, executedReceipt, loadHistory]);
+
+  const [chartTrades, setChartTrades] = useState([]);
+
+  useEffect(() => {
+    if (!user) {
+      setChartTrades([]);
+      return undefined;
+    }
+    let cancelled = false;
+    (async () => {
+      const since = new Date(Date.now() - 86400000).toISOString();
+      const { data } = await supabase
+        .from('trade_history')
+        .select('side, qty, price, created_at')
+        .eq('user_id', user.id)
+        .eq('sym', selectedRealStock)
+        .gte('created_at', since)
+        .order('created_at', { ascending: true });
+      if (!cancelled) setChartTrades(data || []);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, selectedRealStock, executedReceipt]);
+
+  const chartMarkers = useMemo(
+    () =>
+      chartTrades.map((r) => ({
+        time: Math.floor(new Date(r.created_at).getTime() / 1000),
+        price: Number(r.price),
+        qty: Number(r.qty),
+        side: r.side,
+      })),
+    [chartTrades]
+  );
 
   const [report, setReport] = useState(null);
   const [reportLoading, setReportLoading] = useState(false);
@@ -1382,10 +1465,11 @@ export default function RealSimulatorPage() {
                 history={activeQuote.history}
                 symbol={selectedRealStock}
                 session={session}
+                markers={chartMarkers}
               />
 
               <div className="mt-3 text-[10px] text-slate-500">
-                {session?.range === '15m' ? 'The chart shows the last 15 minutes of the simulated market.' : session?.range === '1h' ? 'The chart shows the last hour of the simulated market.' : "The chart shows today's simulated day in India time, 00:00 to 24:00."} It is not a record of past trading sessions.
+                {session?.range === '15m' ? 'The chart shows the last 15 minutes of the simulated market.' : session?.range === '1h' ? 'The chart shows the last hour of the simulated market.' : "The chart shows today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. It is not a record of past trading sessions.
               </div>
 
               {(() => {

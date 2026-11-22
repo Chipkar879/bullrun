@@ -170,10 +170,16 @@ function buildAll(now, range) {
 
     // jumps: each event hits at the first tick that starts after the news time
     const jumps = new Map();
+    const RAMP_MS = 300000;
+    const rampTicks = Math.max(1, Math.round(RAMP_MS / tickMs));
     const addJump = (ev, size) => {
-      const idx = Math.ceil(ev.t / tickMs);
-      if (idx < first || idx > end) return;
-      jumps.set(idx, (jumps.get(idx) || 0) + ev.dir * ev.mag * size);
+      const start = Math.ceil(ev.t / tickMs);
+      const part = (ev.dir * ev.mag * size * 0.35) / rampTicks;
+      for (let j = 0; j < rampTicks; j += 1) {
+        const idx = start + j;
+        if (idx < first || idx > end) continue;
+        jumps.set(idx, (jumps.get(idx) || 0) + part);
+      }
     };
     const own = eventsIn(`a:${asset.sym}`, 0.006, fromMs, now);
     own.forEach((ev) => {
