@@ -782,6 +782,33 @@ export default function RealSimulatorPage() {
     if (activePanel === 'history') loadHistory();
   }, [activePanel, executedReceipt, loadHistory]);
 
+  const [report, setReport] = useState(null);
+  const [reportLoading, setReportLoading] = useState(false);
+  const [reportError, setReportError] = useState('');
+
+  const loadReport = useCallback(async () => {
+    if (!user) return;
+    setReportLoading(true);
+    try {
+      const { data: { session: authSession } } = await supabase.auth.getSession();
+      const res = await fetch('/api/report-card', {
+        cache: 'no-store',
+        headers: { Authorization: 'Bearer ' + (authSession?.access_token || '') },
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Could not build your report card.');
+      setReport(json);
+      setReportError('');
+    } catch (e) {
+      setReportError(e.message || 'Could not build your report card.');
+    }
+    setReportLoading(false);
+  }, [user]);
+
+  useEffect(() => {
+    if (activePanel === 'report') loadReport();
+  }, [activePanel, executedReceipt, loadReport]);
+
   const ownedRows = useMemo(
     () =>
       Object.values(realHoldings || {})
@@ -915,6 +942,9 @@ export default function RealSimulatorPage() {
         type,
         qty,
         price: quote.price,
+        marketPrice: quote.marketPrice,
+        slippageAmount: quote.slippageAmount,
+        slippageBps: quote.slippageBps,
         totalCost: quote.gross,
         costs: quote.fees,
         cashEffect: quote.cashEffect,
@@ -1049,7 +1079,7 @@ export default function RealSimulatorPage() {
           </div>
         )}
 
-        <div data-top-actions className="grid grid-cols-2 gap-3">
+        <div data-top-actions className="grid grid-cols-3 gap-2">
           <button
             onClick={() => setActivePanel(activePanel === 'owned' ? null : 'owned')}
             className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'owned' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
@@ -1061,6 +1091,12 @@ export default function RealSimulatorPage() {
             className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'history' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
           >
             Order history
+          </button>
+          <button
+            onClick={() => setActivePanel(activePanel === 'report' ? null : 'report')}
+            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'report' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
+          >
+            Report card
           </button>
         </div>
 
@@ -1220,6 +1256,11 @@ export default function RealSimulatorPage() {
                     <div><span className="block text-slate-400">Units</span><b>{pendingOrder.qty}</b></div>
                     <div><span className="block text-slate-400">Price per unit</span><b>{money(pendingOrder.price)}</b></div>
                   </div>
+                  {pendingOrder.marketPrice !== undefined && (
+                    <p className="text-[11px] text-slate-400">
+                      Screen price {money(pendingOrder.marketPrice)}. Your fill price is {money(pendingOrder.price)} because of slippage ({Number(pendingOrder.slippageBps || 0).toFixed(2)}%, about {money(pendingOrder.slippageAmount)} in total). Thin assets and big orders slip more.
+                    </p>
+                  )}
 
                   <div className="bg-bull-raised border border-bull-line p-4 rounded-xl text-xs space-y-1.5">
                     <div className="flex justify-between text-slate-300">
@@ -1450,6 +1491,52 @@ export default function RealSimulatorPage() {
                 <p className="text-[10px] text-slate-500 pt-3">
                   Profit and loss here is before selling charges. Sell all opens the order review so you can see the exact charges first.
                 </p>
+              </div>
+            )}
+
+            {activePanel === 'report' && (
+              <div>
+                <div className="flex justify-between items-center pb-3 border-b border-bull-line">
+                  <h3 className="font-black text-sm uppercase">Report card</h3>
+                  <span className="text-[10px] text-slate-400">Practice money only</span>
+                </div>
+                {reportError && <p className="text-xs text-rose-300 py-4">{reportError}</p>}
+                {reportLoading && !report && <p className="text-xs text-slate-400 py-4">Building your report card...</p>}
+                {report && (
+                  <div className="space-y-4 pt-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {[
+                        ['Realized gain (after charges)', money(report.realizedGain), report.realizedGain >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
+                        ['Estimated practice tax', money(report.estimatedTax), 'text-slate-100'],
+                        ['Gain after estimated tax', money(report.afterTaxGain), report.afterTaxGain >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
+                        ['Charges paid', money(report.chargesPaid), 'text-slate-100'],
+                        ['Slippage paid', money(report.slippagePaid), 'text-slate-100'],
+                        ['Win rate', report.winRatePct === null ? '-' : report.winRatePct + '% (' + report.wins + 'W / ' + report.losses + 'L)', 'text-slate-100'],
+                        ['Average holding time', report.avgHoldDays === null ? '-' : report.avgHoldDays + ' days', 'text-slate-100'],
+                        ['Orders', report.trades + ' (' + report.buys + ' buys, ' + report.sells + ' sells)', 'text-slate-100'],
+                      ].map(([label, value, color]) => (
+                        <div key={label} className="bg-bull-raised border border-bull-line rounded-xl p-3">
+                          <div className="text-[10px] font-black tracking-wider text-slate-500 uppercase">{label}</div>
+                          <div className={'text-sm font-black mt-1 font-mono ' + color}>{value}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
+                        <span className="block text-[10px] text-slate-500 uppercase font-black">Best sale</span>
+                        <b>{report.best ? report.best.sym + '  +' + money(report.best.gain) : '-'}</b>
+                      </div>
+                      <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
+                        <span className="block text-[10px] text-slate-500 uppercase font-black">Worst sale</span>
+                        <b>{report.worst ? report.worst.sym + '  -' + money(Math.abs(report.worst.gain)) : '-'}</b>
+                      </div>
+                    </div>
+                    <p className="text-[10px] text-slate-500 leading-relaxed">
+                      The tax figure is an estimate for learning. It is not taken from your cash. Gains from units held under {report.rates.shortDays} days use an invented {Math.round(report.rates.shortRate * 100)}% rate; longer holds use an invented {Math.round(report.rates.longRate * 100)}% rate; losses are not refunded. Your sells are matched to your earliest buys first.
+                      {report.unmatchedQty > 0 ? ' ' + report.unmatchedQty + ' sold units were bought before order history started and are left out.' : ''}
+                    </p>
+                  </div>
+                )}
               </div>
             )}
 

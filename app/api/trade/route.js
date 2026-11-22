@@ -1,8 +1,9 @@
 import { admin, getUserFromRequest } from '@/lib/supabaseAdmin';
 import { getServerPrices, recomputeNetWorth } from '@/lib/serverMarket';
-import { isTradable } from '@/lib/catalog';
+import { isTradable, ASSET_BY_SYM } from '@/lib/catalog';
 import {
   assetClassOf,
+  applySlippage,
   usesDeliveryRules,
   computeBuyCosts,
   computeSellCosts,
@@ -18,8 +19,10 @@ const round4 = (n) => Math.round((n + Number.EPSILON) * 10000) / 10000;
 
 // Works out the price, charges and cash effect. Used for both the preview and the real trade,
 // so the number the student sees before confirming is the number the server charges.
-async function buildQuote(userId, sym, side, qty, price) {
+async function buildQuote(userId, sym, side, qty, marketPrice) {
   const cls = assetClassOf(sym);
+  const slip = applySlippage({ side, price: marketPrice, qty, liq: ASSET_BY_SYM[sym]?.liq });
+  const price = slip.fillPrice;
   const gross = round2(price * qty);
 
   const { data: profile, error: profileError } = await admin
@@ -82,6 +85,9 @@ async function buildQuote(userId, sym, side, qty, price) {
       side,
       qty,
       price,
+      marketPrice,
+      slippageBps: slip.bps,
+      slippageAmount: slip.amount,
       assetClass: cls,
       gross,
       fees: { lines: costs.lines, total: costs.total },
@@ -136,11 +142,13 @@ export async function POST(req) {
       p_sym: sym,
       p_side: side,
       p_qty: qty,
-      p_price: price,
+      p_price: built.quote.price,
       p_fees: {
         total: built.costs.total,
         lines: built.costs.lines,
         class: built.quote.assetClass,
+        slippage: built.quote.slippageAmount,
+        market_price: built.quote.marketPrice,
       },
       p_intraday_qty: built.quote.intradayQty,
       p_kind: 'MARKET',
@@ -151,7 +159,9 @@ export async function POST(req) {
 
     return Response.json({
       balance: data.balance,
-      price,
+      price: built.quote.price,
+      marketPrice: built.quote.marketPrice,
+      slippageAmount: built.quote.slippageAmount,
       gross: data.gross,
       fees: built.quote.fees,
       cashEffect: built.quote.cashEffect,
