@@ -6,3 +6,6 @@ out/
 .env*.local
 .env.local
 _backup_before_fictional/
+
+audit_collect/
+audit_collect.zip
