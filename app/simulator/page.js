@@ -388,6 +388,7 @@ export default function RealSimulatorPage() {
   const [pendingOrder, setPendingOrder] = useState(null);
   const [processingStatusText, setProcessingStatusText] = useState('Preparing simulated order...');
   const [executedReceipt, setExecutedReceipt] = useState(null);
+  const [quoteLoading, setQuoteLoading] = useState(false);
   const [portfolioReady, setPortfolioReady] = useState(false);
   const [portfolioError, setPortfolioError] = useState('');
   const saveTimerRef = useRef(null);
@@ -475,56 +476,22 @@ export default function RealSimulatorPage() {
     }, 0)
   ), []);
 
-  const persistPortfolio = useCallback(async (userId, balance, holdings, priceMap) => {
-    if (!userId) return false;
-
-    const cash = Number(balance);
-    const holdingsValue = calculateHoldingsValue(holdings, priceMap);
-    const totalNetWorth = Number((cash + holdingsValue).toFixed(2));
-
-    if (!Number.isFinite(cash) || cash < 0 || !Number.isFinite(totalNetWorth)) {
-      console.error('Portfolio save skipped: invalid portfolio values.');
+  // Net worth is calculated and saved on the server. The browser never writes money.
+  const persistNetWorth = useCallback(async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      if (!token) return false;
+      const res = await fetch('/api/sync-networth', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return res.ok;
+    } catch (error) {
+      console.error('Net worth sync failed:', error);
       return false;
     }
-
-    const { error } = await supabase
-      .from('profiles')
-      .update({
-        wallet_balance: Number(cash.toFixed(2)),
-        net_worth: totalNetWorth,
-      })
-      .eq('id', userId);
-
-    if (error) {
-      console.error('Portfolio save failed:', error);
-      return false;
-    }
-
-    return true;
-  }, [calculateHoldingsValue]);
-
-  // Only updates net_worth. Cash is saved only when a trade happens, so a device
-  // with stale data can never overwrite the cash balance of another device.
-  const persistNetWorth = useCallback(async (userId, balance, holdings, priceMap) => {
-    if (!userId || !priceMap || !Object.keys(priceMap).length) return false;
-
-    const holdingsValue = calculateHoldingsValue(holdings, priceMap);
-    const totalNetWorth = Number((Number(balance) + holdingsValue).toFixed(2));
-
-    if (!Number.isFinite(totalNetWorth)) return false;
-
-    const { error } = await supabase
-      .from('profiles')
-      .update({ net_worth: totalNetWorth })
-      .eq('id', userId);
-
-    if (error) {
-      console.error('Net worth save failed:', error);
-      return false;
-    }
-
-    return true;
-  }, [calculateHoldingsValue]);
+  }, []);
 
   // The database is the single source of truth, so every device sees the same portfolio.
   const loadPortfolio = useCallback(async (userId) => {
@@ -606,22 +573,14 @@ export default function RealSimulatorPage() {
             return;
           }
 
-          let balance = restored.balance;
+          const balance = restored.balance;
 
           if (balance === null) {
-            const cached = localStorage.getItem(`bullrun_wallet_${currentUser.id}`);
-
-            balance =
-              cached === null || !Number.isFinite(Number(cached))
-                ? START_BALANCE
-                : Number(cached);
-
-            const { error } = await supabase
-              .from('profiles')
-              .update({ wallet_balance: balance, net_worth: balance })
-              .eq('id', currentUser.id);
-
-            if (error) console.error('Initial wallet save failed:', error);
+            setPortfolioReady(false);
+            setMarketMessage(
+              'Your practice wallet is not set up yet. Please log out and back in, or contact support.'
+            );
+            return;
           }
 
           if (!cancelled) {
@@ -815,13 +774,32 @@ export default function RealSimulatorPage() {
     history: [],
   };
 
+  const callTradeApi = async (body) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
+    if (!token) throw new Error('Please log in again to place orders.');
+
+    const res = await fetch('/api/trade', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.error || 'Order request failed.');
+    return json;
+  };
+
   const resetOrderDesk = () => {
     setOrderStage('IDLE');
     setPendingOrder(null);
     setExecutedReceipt(null);
   };
 
-  const initiateOrderReview = (type) => {
+  const initiateOrderReview = async (type) => {
+    if (quoteLoading) return;
     if (user && !portfolioReady) {
       alert('Your saved portfolio is still loading. Please try again in a moment.');
       return;
@@ -853,144 +831,79 @@ export default function RealSimulatorPage() {
       return;
     }
 
-    setPendingOrder({
-      sym: selectedRealStock,
-      name: activeAsset.name,
-      type,
-      qty,
-      price,
-      totalCost: total,
-    });
+    if (!user) {
+      alert('Please log in to place simulated orders.');
+      return;
+    }
 
-    setExecutedReceipt(null);
-    setOrderStage('REVIEW');
+    setQuoteLoading(true);
+    try {
+      const quote = await callTradeApi({
+        action: 'quote',
+        sym: selectedRealStock,
+        side: type,
+        qty,
+      });
+
+      if (quote.error) {
+        alert(quote.error);
+        return;
+      }
+
+      setPendingOrder({
+        sym: selectedRealStock,
+        name: activeAsset.name,
+        type,
+        qty,
+        price: quote.price,
+        totalCost: quote.gross,
+        costs: quote.fees,
+        cashEffect: quote.cashEffect,
+        intradayQty: quote.intradayQty,
+        deliveryQty: quote.deliveryQty,
+      });
+
+      setExecutedReceipt(null);
+      setOrderStage('REVIEW');
+    } catch (error) {
+      alert(error.message || 'Could not prepare this order.');
+    } finally {
+      setQuoteLoading(false);
+    }
   };
   const executeOrder = async () => {
     if (!pendingOrder || orderStage === 'PROCESSING') return;
 
     setOrderStage('PROCESSING');
-    setProcessingStatusText('Validating simulated order...');
-    await new Promise((resolve) => setTimeout(resolve, 350));
-
-    setProcessingStatusText('Applying simulated market fill...');
-    await new Promise((resolve) => setTimeout(resolve, 350));
+    setProcessingStatusText('Sending your order to the simulated market...');
 
     const { sym, type, qty } = pendingOrder;
-    const latestPrice = Number(prices[sym]?.price || pendingOrder.price);
-    const total = Number((latestPrice * qty).toFixed(2));
 
-    let newBalance = realBalance;
-    const holdings = { ...realHoldings };
+    try {
+      const result = await callTradeApi({ action: 'execute', sym, side: type, qty });
 
-    if (type === 'BUY') {
-      if (newBalance < total) {
-        alert('The price changed and your cash balance is now insufficient.');
-        resetOrderDesk();
-        return;
-      }
+      setRealBalance(Number(result.balance));
+      const latest = await loadPortfolio(user.id);
+      if (latest) setRealHoldings(latest.holdings);
 
-      newBalance = Number((newBalance - total).toFixed(2));
-
-      const old = holdings[sym];
-      const oldShares = Number(old?.shares || 0);
-      const shares = Number((oldShares + qty).toFixed(4));
-
-      const average = old
-        ? ((Number(old.avgPrice) * oldShares) + latestPrice * qty) / shares
-        : latestPrice;
-
-      holdings[sym] = {
+      setExecutedReceipt({
+        orderId: `SIM-${String(result.historyId || '').slice(0, 8).toUpperCase()}`,
+        timestamp: getIndiaClock(),
         sym,
-        shares,
-        avgPrice: Number(average.toFixed(2)),
-      };
-    } else {
-      const old = holdings[sym];
+        type,
+        qty,
+        price: Number(result.price),
+        totalCost: Number(result.gross),
+        feesTotal: Number(result.fees?.total || 0),
+        cashEffect: Number(result.cashEffect),
+        newBalance: Number(result.balance),
+      });
 
-      if (!old || Number(old.shares) < qty) {
-        alert('Not enough units remain in your portfolio.');
-        resetOrderDesk();
-        return;
-      }
-
-      newBalance = Number((newBalance + total).toFixed(2));
-
-      const remaining = Number((Number(old.shares) - qty).toFixed(4));
-
-      if (remaining <= 0.0001) {
-        delete holdings[sym];
-      } else {
-        holdings[sym] = { ...old, shares: remaining };
-      }
+      setOrderStage('SUCCESS');
+    } catch (error) {
+      alert(error.message || 'Order failed. Nothing was changed.');
+      resetOrderDesk();
     }
-
-    setRealBalance(newBalance);
-    setRealHoldings(holdings);
-
-    if (user) {
-      localStorage.setItem(`bullrun_wallet_${user.id}`, String(newBalance));
-      localStorage.setItem(
-        `bullrun_holdings_${user.id}`,
-        JSON.stringify(holdings)
-      );
-
-      const saveOk = await persistPortfolio(
-        user.id,
-        newBalance,
-        holdings,
-        prices
-      );
-
-      if (!saveOk) {
-        setMarketMessage(
-          'Order executed locally, but portfolio saving failed. Check the browser console.'
-        );
-      }
-
-      if (holdings[sym]) {
-        const { error } = await supabase
-          .from('user_holdings')
-          .upsert(
-            {
-              user_id: user.id,
-              sym,
-              shares: holdings[sym].shares,
-              avg_price: holdings[sym].avgPrice,
-              updated_at: new Date().toISOString(),
-            },
-            { onConflict: 'user_id,sym' }
-          );
-
-        if (error) console.error('Could not save holding:', error);
-      } else {
-        const { error } = await supabase
-          .from('user_holdings')
-          .delete()
-          .eq('user_id', user.id)
-          .eq('sym', sym);
-
-        if (error) console.error('Could not delete holding:', error);
-      }
-    } else {
-      localStorage.setItem('bullrun_guest_wallet', String(newBalance));
-      localStorage.setItem(
-        'bullrun_guest_holdings',
-        JSON.stringify(holdings)
-      );
-    }
-
-    setExecutedReceipt({
-      orderId: `SIM-${Math.floor(100000 + Math.random() * 900000)}`,
-      timestamp: getIndiaClock(),
-      sym,
-      type,
-      qty,
-      price: latestPrice,
-      totalCost: total,
-      newBalance,
-    });
-
-    setOrderStage('SUCCESS');
   };
 
   const processAndExecuteOrder = async () => {
@@ -1198,7 +1111,34 @@ export default function RealSimulatorPage() {
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-xs">
                     <div><span className="block text-slate-400">Units</span><b>{pendingOrder.qty}</b></div>
                     <div><span className="block text-slate-400">Price per unit</span><b>{money(pendingOrder.price)}</b></div>
-                    <div><span className="block text-slate-400">Total</span><b className="text-emerald-400">{money(pendingOrder.totalCost)}</b></div>
+                    <div><span className="block text-slate-400">Order value</span><b className="text-emerald-400">{money(pendingOrder.totalCost)}</b></div>
+                  </div>
+
+                  <div className="bg-bull-raised border border-bull-line p-4 rounded-xl text-xs space-y-1.5">
+                    <div className="flex justify-between text-slate-300">
+                      <span>Order value</span>
+                      <span>{money(pendingOrder.totalCost)}</span>
+                    </div>
+                    {(pendingOrder.costs?.lines || []).map((line) => (
+                      <div key={line.key} className="flex justify-between text-slate-400">
+                        <span>{line.label}</span>
+                        <span className={line.amount < 0 ? 'text-bull-teal' : ''}>
+                          {line.amount < 0 ? '-' : ''}{money(Math.abs(line.amount))}
+                        </span>
+                      </div>
+                    ))}
+                    <div className="flex justify-between border-t border-bull-line pt-1.5 font-black">
+                      <span>{pendingOrder.type === 'BUY' ? 'You pay in total' : 'You receive after charges'}</span>
+                      <span className="text-bull-lime">{money(pendingOrder.cashEffect)}</span>
+                    </div>
+                    {pendingOrder.intradayQty > 0 && (
+                      <p className="text-slate-400 pt-1">
+                        {pendingOrder.intradayQty} of these units were bought today, so they are treated as an intraday trade.
+                      </p>
+                    )}
+                    <p className="text-slate-500 pt-1">
+                      Practice charges, based on public broker price lists and simplified. Not real money.
+                    </p>
                   </div>
 
                   <p className="text-xs text-amber-300">
@@ -1243,7 +1183,9 @@ export default function RealSimulatorPage() {
                       ['Asset / side', `${executedReceipt.sym} / ${executedReceipt.type}`],
                       ['Units', executedReceipt.qty],
                       ['Execution price', money(executedReceipt.price)],
-                      ['Settlement total', money(executedReceipt.totalCost)],
+                      ['Order value', money(executedReceipt.totalCost)],
+                      ['Total charges', (executedReceipt.feesTotal < 0 ? '-' : '') + money(Math.abs(executedReceipt.feesTotal))],
+                      [executedReceipt.type === 'BUY' ? 'Cash paid' : 'Cash received', money(executedReceipt.cashEffect)],
                       ['Cash remaining', money(executedReceipt.newBalance)],
                       ['India time', executedReceipt.timestamp],
                     ].map(([label, value]) => (
