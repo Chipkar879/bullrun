@@ -116,7 +116,7 @@ function eventsIn(key, prob, fromMs, toMs) {
 
 // ---------- the engine ----------
 
-function buildAll(now, range) {
+function buildAll(now, range, scan) {
   const endBase = Math.floor(now / BASE_MS);
   const baseStart = endBase - NBASE + 1;
   const fromMs = baseStart * BASE_MS;
@@ -243,6 +243,24 @@ function buildAll(now, range) {
     return weights > 0 ? total / weights : 1;
   };
 
+  // Order scan: first tick at or after "from" where the price met the trigger (used by order filling).
+  if (scan) {
+    const results = {};
+    scan.forEach((o) => {
+      const asset = ASSET_BY_SYM[o.sym];
+      if (!asset) { results[o.id] = null; return; }
+      const lo = Math.max(Math.ceil(o.from / BASE_MS) * BASE_MS, fromMs);
+      const hi = Math.min(o.until, now);
+      let hit = null;
+      for (let t = lo; t <= hi; t += BASE_MS) {
+        const p = toPrice(asset.base, relAt(asset, t));
+        if (o.dir === 'above' ? p >= o.trigger : p <= o.trigger) { hit = { t, price: p }; break; }
+      }
+      results[o.id] = hit;
+    });
+    return { scan: results };
+  }
+
   // Fixed day axis: 00:00 to 24:00 India time.
   const dayStart = Math.floor((now + IST_MS) / DAY_MS) * DAY_MS - IST_MS;
   const dayEnd = dayStart + DAY_MS;
@@ -314,5 +332,29 @@ export async function GET(request) {
       { error: 'Could not generate simulated prices.' },
       { status: 500 }
     );
+  }
+}
+
+// Order filling asks: "when did each of these prices first meet its trigger?" Pure maths, no secrets.
+export async function POST(request) {
+  try {
+    const body = await request.json().catch(() => ({}));
+    const list = Array.isArray(body.scan) ? body.scan.slice(0, 1000) : [];
+    const scan = list
+      .map((o) => ({
+        id: String(o.id),
+        sym: String(o.sym),
+        dir: o.dir === 'above' ? 'above' : 'below',
+        trigger: Number(o.trigger),
+        from: Number(o.from),
+        until: Number(o.until),
+      }))
+      .filter((o) => Number.isFinite(o.trigger) && Number.isFinite(o.from) && Number.isFinite(o.until));
+    const currentTick = Math.floor(Date.now() / BASE_MS);
+    const data = buildAll(currentTick * BASE_MS, 'day', scan);
+    return NextResponse.json({ scan: data.scan }, { headers: { 'Cache-Control': 'no-store, max-age=0' } });
+  } catch (error) {
+    console.error('Order scan error:', error);
+    return NextResponse.json({ error: 'Scan failed.' }, { status: 500 });
   }
 }

@@ -831,6 +831,7 @@ export default function RealSimulatorPage() {
   }, [activePanel, executedReceipt, loadHistory]);
 
   const [chartTrades, setChartTrades] = useState([]);
+  const [chartRefresh, setChartRefresh] = useState(0);
 
   useEffect(() => {
     if (!user) {
@@ -852,7 +853,7 @@ export default function RealSimulatorPage() {
     return () => {
       cancelled = true;
     };
-  }, [user, selectedRealStock, executedReceipt]);
+  }, [user, selectedRealStock, executedReceipt, chartRefresh]);
 
   const chartMarkers = useMemo(
     () =>
@@ -891,6 +892,90 @@ export default function RealSimulatorPage() {
   useEffect(() => {
     if (activePanel === 'report') loadReport();
   }, [activePanel, executedReceipt, loadReport]);
+
+  // ---- pending orders (limit, stop-loss, take-profit): filled by the server ----
+  const [orderRows, setOrderRows] = useState([]);
+  const [orderKind, setOrderKind] = useState('LIMIT_BUY');
+  const [orderQty, setOrderQty] = useState('1');
+  const [orderTrigger, setOrderTrigger] = useState('');
+  const [orderNote, setOrderNote] = useState('');
+  const [orderBusy, setOrderBusy] = useState(false);
+
+  const callOrdersApi = useCallback(async (body) => {
+    const { data: { session: s } } = await supabase.auth.getSession();
+    const token = s?.access_token;
+    if (!token) throw new Error('Please log in again.');
+    const res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify(body),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.error || 'Order request failed.');
+    return json;
+  }, []);
+
+  const loadOrders = useCallback(async () => {
+    if (!user) return;
+    try {
+      const json = await callOrdersApi({ action: 'list' });
+      setOrderRows(json.orders || []);
+    } catch (e) {}
+  }, [user, callOrdersApi]);
+
+  const checkOrdersNow = useCallback(async () => {
+    if (!user || busyRef.current) return;
+    try {
+      const json = await callOrdersApi({ action: 'check' });
+      const n = (json.filled || []).length;
+      if (n > 0 || (json.failed || []).length > 0 || (json.expired || []).length > 0) {
+        if (n > 0) {
+          const restored = await loadPortfolio(user.id);
+          if (restored && restored.balance !== null && !busyRef.current) {
+            setRealHoldings(restored.holdings);
+            setRealBalance(restored.balance);
+          }
+          setChartRefresh((v) => v + 1);
+          setOrderNote(n + (n === 1 ? ' pending order was filled.' : ' pending orders were filled.') + ' See Order history.');
+        }
+        loadOrders();
+      }
+    } catch (e) {}
+  }, [user, callOrdersApi, loadOrders, loadPortfolio]);
+
+  useEffect(() => {
+    if (!user || !portfolioReady) return undefined;
+    checkOrdersNow();
+    loadOrders();
+    const timer = setInterval(checkOrdersNow, 60000);
+    return () => clearInterval(timer);
+  }, [user, portfolioReady, checkOrdersNow, loadOrders]);
+
+  const openOrders = orderRows.filter((o) => o.status === 'OPEN');
+
+  const placePendingOrder = async () => {
+    if (orderBusy) return;
+    setOrderBusy(true);
+    setOrderNote('');
+    try {
+      await callOrdersApi({ action: 'create', sym: selectedRealStock, kind: orderKind, qty: Number(orderQty), trigger: Number(orderTrigger) });
+      setOrderTrigger('');
+      setOrderNote('Order placed. It stays open for 24 hours.');
+      await loadOrders();
+    } catch (e) {
+      setOrderNote(e.message || 'Could not place the order.');
+    }
+    setOrderBusy(false);
+  };
+
+  const cancelPendingOrder = async (id) => {
+    try {
+      await callOrdersApi({ action: 'cancel', id });
+      await loadOrders();
+    } catch (e) {
+      setOrderNote(e.message || 'Could not cancel.');
+    }
+  };
 
   const ownedRows = useMemo(
     () =>
@@ -1162,7 +1247,7 @@ export default function RealSimulatorPage() {
           </div>
         )}
 
-        <div data-top-actions className="grid grid-cols-3 gap-2">
+        <div data-top-actions className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           <button
             onClick={() => setActivePanel(activePanel === 'owned' ? null : 'owned')}
             className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'owned' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
@@ -1180,6 +1265,12 @@ export default function RealSimulatorPage() {
             className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'report' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
           >
             Report card
+          </button>
+          <button
+            onClick={() => setActivePanel(activePanel === 'pending' ? null : 'pending')}
+            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'pending' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
+          >
+            Pending orders ({openOrders.length})
           </button>
         </div>
 
@@ -1574,6 +1665,97 @@ export default function RealSimulatorPage() {
                 </div>
                 <p className="text-[10px] text-slate-500 pt-3">
                   Profit and loss here is before selling charges. Sell all opens the order review so you can see the exact charges first.
+                </p>
+              </div>
+            )}
+
+            {activePanel === 'pending' && (
+              <div data-pending-panel>
+                <div className="flex justify-between items-center pb-3 border-b border-bull-line">
+                  <h3 className="font-black text-sm uppercase">Pending orders</h3>
+                  <span className="text-[10px] text-slate-400">Practice money only</span>
+                </div>
+
+                <div className="mt-3 bg-bull-raised border border-bull-line rounded-xl p-3 space-y-3">
+                  <div className="text-xs text-slate-300">
+                    <b>{activeAsset.name}</b> now {money(activeQuote.price)}. Change the asset from the market list above.
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <select
+                      value={orderKind}
+                      onChange={(e) => setOrderKind(e.target.value)}
+                      className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
+                    >
+                      <option value="LIMIT_BUY">Limit buy - buy when price falls to</option>
+                      <option value="LIMIT_SELL">Limit sell - sell when price rises to</option>
+                      <option value="STOP_LOSS">Stop-loss - sell when price falls to</option>
+                      <option value="TAKE_PROFIT">Take-profit - sell when price rises to</option>
+                    </select>
+                    <input
+                      type="number"
+                      min="0"
+                      step="any"
+                      value={orderQty}
+                      onChange={(e) => setOrderQty(e.target.value)}
+                      placeholder="Units"
+                      className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
+                    />
+                    <input
+                      type="number"
+                      min="0"
+                      step="any"
+                      value={orderTrigger}
+                      onChange={(e) => setOrderTrigger(e.target.value)}
+                      placeholder="Trigger price"
+                      className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
+                    />
+                  </div>
+                  <button
+                    onClick={placePendingOrder}
+                    disabled={orderBusy || !user}
+                    className="w-full py-2.5 rounded-xl text-xs font-black uppercase bg-bull-lime text-bull-ink disabled:opacity-50"
+                  >
+                    {orderBusy ? 'Placing...' : 'Place pending order'}
+                  </button>
+                  {orderNote && <p className="text-xs text-slate-300">{orderNote}</p>}
+                </div>
+
+                <div className="mt-4 text-[10px] font-black uppercase text-slate-400">Open orders</div>
+                {openOrders.length === 0 && <p className="text-xs text-slate-500 py-3">No open orders.</p>}
+                {openOrders.map((o) => (
+                  <div key={o.id} className="flex items-center justify-between gap-2 text-xs py-2 border-b border-bull-line">
+                    <div>
+                      <b>{o.sym}</b>{' '}
+                      <span className="text-slate-400">
+                        {({ LIMIT_BUY: 'Limit buy', LIMIT_SELL: 'Limit sell', STOP_LOSS: 'Stop-loss', TAKE_PROFIT: 'Take-profit' })[o.kind] || o.kind}
+                        {' '}{o.qty} units at {money(o.trigger_price)}
+                      </span>
+                      <div className="text-[10px] text-slate-500">
+                        Expires {new Date(new Date(o.created_at).getTime() + 86400000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} India time
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => cancelPendingOrder(o.id)}
+                      className="px-3 py-1.5 rounded-xl text-[10px] font-black uppercase border border-bull-line text-bull-coral"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ))}
+
+                <div className="mt-4 text-[10px] font-black uppercase text-slate-400">Recent results</div>
+                {orderRows.filter((o) => o.status !== 'OPEN').length === 0 && <p className="text-xs text-slate-500 py-3">Nothing yet.</p>}
+                {orderRows.filter((o) => o.status !== 'OPEN').slice(0, 10).map((o) => (
+                  <div key={o.id} className="flex justify-between gap-2 text-xs py-1.5 text-slate-300">
+                    <span>{o.sym} {o.kind.replace('_', ' ').toLowerCase()} {o.qty} at {money(o.trigger_price)}</span>
+                    <span className={o.status === 'FILLED' ? 'text-bull-teal font-black' : 'text-slate-500'}>
+                      {o.status === 'FILLED' ? 'Filled at ' + money(o.fill_price) : (o.note || o.status.toLowerCase())}
+                    </span>
+                  </div>
+                ))}
+
+                <p className="text-[10px] text-slate-500 pt-3">
+                  Orders last 24 hours. The server watches the simulated price: when it first meets your trigger, the order fills at that price, even if it happened while you were away. Slippage and practice charges apply. Cash is not set aside for a buy: you need enough cash at the moment it triggers, or the order fails. Stop-loss and take-profit orders sell what you own at the time.
                 </p>
               </div>
             )}
