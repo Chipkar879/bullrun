@@ -1,5 +1,6 @@
 import { admin, getUserFromRequest } from '@/lib/supabaseAdmin';
 import { getServerPrices, recomputeNetWorth } from '@/lib/serverMarket';
+import { isTradable } from '@/lib/catalog';
 import {
   assetClassOf,
   usesDeliveryRules,
@@ -112,6 +113,8 @@ export async function POST(req) {
     }
 
     const prices = await getServerPrices(new URL(req.url).origin);
+    if (!isTradable(sym)) return bad('This asset is view-only and cannot be traded.');
+
     const price = prices[sym];
     if (!price) return bad('Price not available');
 

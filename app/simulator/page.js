@@ -3,44 +3,11 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
+import { ASSETS, ASSET_BY_SYM, CATEGORIES } from '@/lib/catalog';
 
 const START_BALANCE = 50000;
 const PRICE_REFRESH_MS = 15000;
 const SAVE_DEBOUNCE_MS = 1000;
-
-const ASSETS = [
-  { sym: 'GOLDVLT', name: 'Gold Vault ETF', sector: 'Commodities / Gold ETF', category: 'Crypto & ETFs', cap: '₹12.4K Cr', pe: 'N/A', eps: 'N/A', div: '0.00%' },
-  { sym: 'SILVRVLT', name: 'Silver Vault ETF', sector: 'Commodities / Silver ETF', category: 'Crypto & ETFs', cap: '₹3.8K Cr', pe: 'N/A', eps: 'N/A', div: '0.00%' },
-  { sym: 'IRONWORKS', name: 'Ironworks Steel Ltd.', sector: 'Metals & Mining', category: 'Crypto & ETFs', cap: '₹1.9L Cr', pe: '42.1', eps: '3.8', div: '2.40%' },
-  { sym: 'ALUMINA', name: 'Alumina Metals Ltd.', sector: 'Aluminum & Copper', category: 'Crypto & ETFs', cap: '₹1.4L Cr', pe: '14.2', eps: '45.1', div: '0.55%' },
-  { sym: 'TERRAMIN', name: 'Terra Minerals Ltd.', sector: 'Diversified Metals', category: 'Crypto & ETFs', cap: '₹1.6L Cr', pe: '11.5', eps: '38.0', div: '6.50%' },
-  { sym: 'CARBONIA', name: 'Carbonia Coal Ltd.', sector: 'Energy & Mining', category: 'Crypto & ETFs', cap: '₹2.8L Cr', pe: '7.8', eps: '62.4', div: '5.20%' },
-  { sym: 'PRIMEBANK', name: 'Prime Bank Ltd.', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹5.9L Cr', pe: '15.8', eps: '49.2', div: '1.66%' },
-  { sym: 'UNITYBANK', name: 'Unity Bank Ltd.', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹7.8L Cr', pe: '16.1', eps: '68.2', div: '0.85%' },
-  { sym: 'NATBANK', name: 'National Savings Bank', sector: 'Banking & Finance', category: 'Banking & Finance', cap: '₹7.2L Cr', pe: '10.5', eps: '72.0', div: '1.70%' },
-  { sym: 'CREDITO', name: 'Credito Finance Ltd.', sector: 'NBFC / Lending', category: 'Banking & Finance', cap: '₹3.9L Cr', pe: '26.4', eps: '210.5', div: '0.35%' },
-  { sym: 'INFOSPHR', name: 'Infosphere Ltd.', sector: 'Information Technology', category: 'Tech & Telecom', cap: '₹4.3L Cr', pe: '14.7', eps: '71.4', div: '4.55%' },
-  { sym: 'TECHNOVA', name: 'Technova Consulting Services', sector: 'Information Technology', category: 'Tech & Telecom', cap: '₹7.8L Cr', pe: '15.8', eps: '136.0', div: '2.33%' },
-  { sym: 'SKYLINK', name: 'Skylink Telecom Ltd.', sector: 'Telecommunications', category: 'Tech & Telecom', cap: '₹8.1L Cr', pe: '54.0', eps: '24.1', div: '0.60%' },
-  { sym: 'ENERGIA', name: 'Energia Industries Ltd.', sector: 'Energy & Retail', category: 'Energy & Macro', cap: '₹17.9L Cr', pe: '37.7', eps: '35.2', div: '0.61%' },
-  { sym: 'PETROFLD', name: 'Petrofield Oil Ltd.', sector: 'Energy & Petroleum', category: 'Energy & Macro', cap: '₹72.4K Cr', pe: '12.1', eps: '42.8', div: '2.80%' },
-  { sym: 'VOLTARA', name: 'Voltara Power Ltd.', sector: 'Utilities & Power', category: 'Energy & Macro', cap: '₹3.7L Cr', pe: '18.2', eps: '21.0', div: '2.10%' },
-  { sym: 'HARBORLN', name: 'Harborline Ports Ltd.', sector: 'Infrastructure & Ports', category: 'Energy & Macro', cap: '₹2.9L Cr', pe: '32.4', eps: '38.2', div: '0.50%' },
-  { sym: 'VITACURE', name: 'Vitacure Pharma Ltd.', sector: 'Pharmaceuticals', category: 'Consumer & Pharma', cap: '₹3.6L Cr', pe: '34.2', eps: '41.0', div: '0.80%' },
-  { sym: 'AURUM', name: 'Aurum Timepieces Ltd.', sector: 'Consumer Durables', category: 'Consumer & Pharma', cap: '₹2.8L Cr', pe: '82.4', eps: '38.5', div: '0.35%' },
-  { sym: 'CONSUMEX', name: 'Consumex Goods Ltd.', sector: 'FMCG / Consumer', category: 'Consumer & Pharma', cap: '₹5.8L Cr', pe: '28.5', eps: '16.2', div: '3.10%' },
-  { sym: 'BUILDCRP', name: 'Buildcorp Engineering Ltd.', sector: 'Engineering & Infrastructure', category: 'Consumer & Pharma', cap: '₹4.9L Cr', pe: '31.2', eps: '92.0', div: '0.80%' },
-  { sym: 'MOTORIA', name: 'Motoria Autos India', sector: 'Automobiles', category: 'Consumer & Pharma', cap: '₹3.8L Cr', pe: '28.4', eps: '412.0', div: '1.00%' },
-];
-
-const CATEGORIES = [
-  'All Assets',
-  'Crypto & ETFs',
-  'Banking & Finance',
-  'Tech & Telecom',
-  'Energy & Macro',
-  'Consumer & Pharma',
-];
 
 const money = (value) =>
   `₹${Number(value || 0).toLocaleString('en-IN', {
@@ -79,7 +46,7 @@ function isIndianMarketOpen(date = new Date()) {
   );
 }
 
-function PriceChart({ history, symbol }) {
+function PriceChart({ history, symbol, session }) {
   const [hoverIndex, setHoverIndex] = useState(null);
   const svgRef = useRef(null);
 
@@ -115,9 +82,15 @@ function PriceChart({ history, symbol }) {
   const max = rawMax + padding;
   const range = max - min || 1;
 
+  const sessionStart = Number(session?.start);
+  const sessionSpan = session && Number(session.end) > sessionStart ? Number(session.end) - sessionStart : 0;
+
   const coordinates = points.map((point, index) => ({
     ...point,
-    x: pad.left + (points.length <= 1 ? 0 : (index / (points.length - 1)) * plotWidth),
+    x:
+      sessionSpan && Number.isFinite(Number(point.time))
+        ? pad.left + Math.max(0, Math.min(1, (Number(point.time) - sessionStart) / sessionSpan)) * plotWidth
+        : pad.left + (points.length <= 1 ? 0 : (index / (points.length - 1)) * plotWidth),
     y: pad.top + ((max - point.value) / range) * plotHeight,
   }));
 
@@ -142,11 +115,14 @@ function PriceChart({ history, symbol }) {
     const rect = svg.getBoundingClientRect();
     const relativeX = ((event.clientX - rect.left) / rect.width) * width;
     const plotX = Math.max(pad.left, Math.min(width - pad.right, relativeX));
-    const index = Math.round(
-      ((plotX - pad.left) / (plotWidth || 1)) * (coordinates.length - 1)
-    );
+    let index = 0;
+    let best = Infinity;
+    coordinates.forEach((c, i) => {
+      const d = Math.abs(c.x - plotX);
+      if (d < best) { best = d; index = i; }
+    });
 
-    setHoverIndex(Math.max(0, Math.min(coordinates.length - 1, index)));
+    setHoverIndex(index);
   };
 
   const formatTime = (time, index) => {
@@ -277,7 +253,11 @@ function PriceChart({ history, symbol }) {
                   fontSize="10"
                   fontFamily="monospace"
                 >
-                  {formatTime(point?.time, pointIndex)}
+                  {sessionSpan
+                    ? session.range && session.range !== 'day'
+                      ? formatTime(sessionStart + (sessionSpan * index) / 4, pointIndex)
+                      : index === 0 ? '00:00' : index === 4 ? '24:00' : formatTime(sessionStart + (sessionSpan * index) / 4, pointIndex)
+                    : formatTime(point?.time, pointIndex)}
                 </text>
               </g>
             );
@@ -377,9 +357,25 @@ export default function RealSimulatorPage() {
   const [realBalance, setRealBalance] = useState(START_BALANCE);
   const [realHoldings, setRealHoldings] = useState({});
   const [selectedRealStock, setSelectedRealStock] = useState('GOLDVLT');
-  const [selectedCategory, setSelectedCategory] = useState('All Assets');
+  const [selectedCategory, setSelectedCategory] = useState('Commodities');
   const [realQtyInput, setRealQtyInput] = useState('1');
   const [prices, setPrices] = useState({});
+  const [session, setSession] = useState(null);
+  const [news, setNews] = useState([]);
+  const [chartRange, setChartRange] = useState('day');
+
+  // Remember the chart range this browser chose last.
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('bullrun_chart_range');
+      if (saved === '15m' || saved === '1h' || saved === 'day') setChartRange(saved);
+    } catch (e) {}
+  }, []);
+
+  const chooseRange = (key) => {
+    setChartRange(key);
+    try { localStorage.setItem('bullrun_chart_range', key); } catch (e) {}
+  };
   const [marketMessage, setMarketMessage] = useState('');
   const [loadingPrices, setLoadingPrices] = useState(true);
   const [marketOpen, setMarketOpen] = useState(false);
@@ -389,6 +385,11 @@ export default function RealSimulatorPage() {
   const [processingStatusText, setProcessingStatusText] = useState('Preparing simulated order...');
   const [executedReceipt, setExecutedReceipt] = useState(null);
   const [quoteLoading, setQuoteLoading] = useState(false);
+  const [activePanel, setActivePanel] = useState(null);
+  const [historyRows, setHistoryRows] = useState([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [historyError, setHistoryError] = useState('');
+  const [historyFilter, setHistoryFilter] = useState('ALL');
   const [portfolioReady, setPortfolioReady] = useState(false);
   const [portfolioError, setPortfolioError] = useState('');
   const saveTimerRef = useRef(null);
@@ -667,7 +668,7 @@ export default function RealSimulatorPage() {
   }, [user, portfolioReady, loadPortfolio]);
   const fetchSimulatedPrices = useCallback(async () => {
     try {
-      const response = await fetch('/api/historical-prices', {
+      const response = await fetch('/api/historical-prices?range=' + chartRange, {
         cache: 'no-store',
       });
 
@@ -695,6 +696,8 @@ export default function RealSimulatorPage() {
 
       if (Object.keys(next).length) {
         setPrices(next);
+        setSession(json.session || null);
+        setNews(Array.isArray(json.news) ? json.news : []);
         setMarketMessage('');
       } else {
         setMarketMessage('The price service returned no usable simulated prices.');
@@ -707,7 +710,7 @@ export default function RealSimulatorPage() {
     } finally {
       setLoadingPrices(false);
     }
-  }, []);
+  }, [chartRange]);
 
   // Refresh on shared wall-clock boundaries (e.g. :00, :15, :30, :45 seconds),
   // so every device asks for the same price tick at the same moment.
@@ -757,11 +760,59 @@ export default function RealSimulatorPage() {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
   }, [realBalance, realHoldings, prices, user, portfolioReady, persistNetWorth]);
-  const filteredAssets = useMemo(
+  const loadHistory = useCallback(async () => {
+    if (!user) return;
+    setHistoryLoading(true);
+    const { data, error } = await supabase
+      .from('trade_history')
+      .select('id, sym, side, qty, price, gross, fees_total, asset_class, trade_type, realized_gross, created_at')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(100);
+    if (error) {
+      setHistoryError('Could not load your order history.');
+    } else {
+      setHistoryError('');
+      setHistoryRows(data || []);
+    }
+    setHistoryLoading(false);
+  }, [user]);
+
+  useEffect(() => {
+    if (activePanel === 'history') loadHistory();
+  }, [activePanel, executedReceipt, loadHistory]);
+
+  const ownedRows = useMemo(
     () =>
-      selectedCategory === 'All Assets'
-        ? ASSETS
-        : ASSETS.filter((asset) => asset.category === selectedCategory),
+      Object.values(realHoldings || {})
+        .filter((h) => Number(h.shares) > 0)
+        .map((h) => {
+          const meta = ASSET_BY_SYM[h.sym];
+          const price = Number(prices[h.sym]?.price || h.avgPrice || 0);
+          const shares = Number(h.shares);
+          const avg = Number(h.avgPrice || 0);
+          const value = price * shares;
+          const pnl = (price - avg) * shares;
+          const pnlPct = avg > 0 ? ((price - avg) / avg) * 100 : 0;
+          return {
+            sym: h.sym,
+            name: meta ? meta.name : h.sym,
+            category: meta ? meta.category : null,
+            tradable: meta ? meta.tradable : true,
+            shares,
+            avg,
+            price,
+            value,
+            pnl,
+            pnlPct,
+          };
+        })
+        .sort((a, b) => b.value - a.value),
+    [realHoldings, prices]
+  );
+
+  const filteredAssets = useMemo(
+    () => ASSETS.filter((asset) => asset.category === selectedCategory),
     [selectedCategory]
   );
 
@@ -798,15 +849,23 @@ export default function RealSimulatorPage() {
     setExecutedReceipt(null);
   };
 
-  const initiateOrderReview = async (type) => {
+  const initiateOrderReview = async (type, symOverride, qtyOverride) => {
     if (quoteLoading) return;
     if (user && !portfolioReady) {
       alert('Your saved portfolio is still loading. Please try again in a moment.');
       return;
     }
 
-    const price = Number(prices[selectedRealStock]?.price);
-    const qty = Number(realQtyInput);
+    const sym = symOverride || selectedRealStock;
+    const asset = ASSET_BY_SYM[sym] || activeAsset;
+
+    if (!asset.tradable) {
+      alert('This is a view-only index. Buy a fund that tracks it instead.');
+      return;
+    }
+
+    const price = Number(prices[sym]?.price);
+    const qty = Number(qtyOverride !== undefined ? qtyOverride : realQtyInput);
 
     if (!Number.isFinite(qty) || qty <= 0) {
       alert('Enter a valid quantity greater than zero.');
@@ -819,7 +878,7 @@ export default function RealSimulatorPage() {
     }
 
     const total = Number((price * qty).toFixed(2));
-    const holding = realHoldings[selectedRealStock];
+    const holding = realHoldings[sym];
 
     if (type === 'BUY' && total > realBalance) {
       alert('Insufficient cash balance.');
@@ -840,7 +899,7 @@ export default function RealSimulatorPage() {
     try {
       const quote = await callTradeApi({
         action: 'quote',
-        sym: selectedRealStock,
+        sym,
         side: type,
         qty,
       });
@@ -851,8 +910,8 @@ export default function RealSimulatorPage() {
       }
 
       setPendingOrder({
-        sym: selectedRealStock,
-        name: activeAsset.name,
+        sym,
+        name: asset.name,
         type,
         qty,
         price: quote.price,
@@ -871,6 +930,7 @@ export default function RealSimulatorPage() {
       setQuoteLoading(false);
     }
   };
+
   const executeOrder = async () => {
     if (!pendingOrder || orderStage === 'PROCESSING') return;
 
@@ -906,6 +966,31 @@ export default function RealSimulatorPage() {
     }
   };
 
+  const scrollToOrderDesk = () => {
+    setTimeout(() => {
+      const el = document.getElementById('order-desk');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  };
+
+  const openOwnedAsset = (row) => {
+    setSelectedRealStock(row.sym);
+    if (row.category) setSelectedCategory(row.category);
+    setActivePanel(null);
+    if (orderStage !== 'IDLE') resetOrderDesk();
+    scrollToOrderDesk();
+  };
+
+  const quickSell = (row) => {
+    setSelectedRealStock(row.sym);
+    if (row.category) setSelectedCategory(row.category);
+    setRealQtyInput(String(row.shares));
+    setActivePanel(null);
+    if (orderStage !== 'IDLE') resetOrderDesk();
+    scrollToOrderDesk();
+    initiateOrderReview('SELL', row.sym, row.shares);
+  };
+
   const processAndExecuteOrder = async () => {
     if (busyRef.current) return;
     busyRef.current = true;
@@ -922,7 +1007,7 @@ export default function RealSimulatorPage() {
   const netReturn = netWorth - START_BALANCE;
 
   return (
-    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-16">
+    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-28">
       <Navbar />
 
       <div className="max-w-[1240px] mx-auto px-4 pt-4 space-y-6">
@@ -949,7 +1034,7 @@ export default function RealSimulatorPage() {
         </header>
 
         <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs text-amber-200">
-          These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice.
+          These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice. Every company, currency, fund and index here is fictional.
         </div>
 
         {portfolioError && (
@@ -963,6 +1048,21 @@ export default function RealSimulatorPage() {
             {marketMessage}
           </div>
         )}
+
+        <div data-top-actions className="grid grid-cols-2 gap-3">
+          <button
+            onClick={() => setActivePanel(activePanel === 'owned' ? null : 'owned')}
+            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'owned' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
+          >
+            Owned assets ({ownedRows.length})
+          </button>
+          <button
+            onClick={() => setActivePanel(activePanel === 'history' ? null : 'history')}
+            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'history' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
+          >
+            Order history
+          </button>
+        </div>
 
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[
@@ -1040,7 +1140,7 @@ export default function RealSimulatorPage() {
             </div>
           </aside>
 
-          <section className="lg:col-span-2 space-y-6">
+          <section id="order-desk" className="lg:col-span-2 space-y-6 scroll-mt-24">
             <div className="bg-bull-surface border border-bull-line p-5 sm:p-6 rounded-3xl">
               {orderStage === 'IDLE' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1069,16 +1169,24 @@ export default function RealSimulatorPage() {
                       className="w-full border border-bull-line rounded-xl px-4 py-3 text-sm font-mono font-bold bg-bull-raised focus:outline-none focus:border-bull-lime"
                     />
 
+                    {!activeAsset.tradable && (
+                      <p className="text-xs text-amber-300">
+                        View-only index. To invest in it, buy the fund that tracks it (see the ETFs tab).
+                      </p>
+                    )}
+
                     <div className="flex gap-3">
                       <button
                         onClick={() => initiateOrderReview('BUY')}
-                        className="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white text-xs uppercase font-black py-3 rounded-xl"
+                        disabled={!activeAsset.tradable}
+                        className="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white text-xs uppercase font-black py-3 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         Buy asset
                       </button>
                       <button
                         onClick={() => initiateOrderReview('SELL')}
-                        className="flex-1 bg-rose-700 hover:bg-rose-600 text-white text-xs uppercase font-black py-3 rounded-xl"
+                        disabled={!activeAsset.tradable}
+                        className="flex-1 bg-rose-700 hover:bg-rose-600 text-white text-xs uppercase font-black py-3 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         Sell asset
                       </button>
@@ -1108,10 +1216,9 @@ export default function RealSimulatorPage() {
                     {pendingOrder.type} ORDER · {pendingOrder.name}
                   </h2>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-xs">
+                  <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-xs">
                     <div><span className="block text-slate-400">Units</span><b>{pendingOrder.qty}</b></div>
                     <div><span className="block text-slate-400">Price per unit</span><b>{money(pendingOrder.price)}</b></div>
-                    <div><span className="block text-slate-400">Order value</span><b className="text-emerald-400">{money(pendingOrder.totalCost)}</b></div>
                   </div>
 
                   <div className="bg-bull-raised border border-bull-line p-4 rounded-xl text-xs space-y-1.5">
@@ -1137,7 +1244,7 @@ export default function RealSimulatorPage() {
                       </p>
                     )}
                     <p className="text-slate-500 pt-1">
-                      Practice charges, based on public broker price lists and simplified. Not real money.
+                      Practice charges for a fictional market. All names and rates are invented. Not real money.
                     </p>
                   </div>
 
@@ -1216,22 +1323,226 @@ export default function RealSimulatorPage() {
                     Generated series · not exchange history
                   </p>
                 </div>
-                <span className="text-[10px] text-amber-300 font-bold">SIMULATION</span>
+                <div className="flex items-center gap-1.5">
+                  {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
+                    <button
+                      key={key}
+                      onClick={() => chooseRange(key)}
+                      className={'text-[10px] font-black uppercase px-3 py-1.5 rounded-xl ' + (chartRange === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line')}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <PriceChart
                 key={selectedRealStock}
                 history={activeQuote.history}
                 symbol={selectedRealStock}
+                session={session}
               />
 
               <div className="mt-3 text-[10px] text-slate-500">
-                The chart displays generated sample points from the local simulation API. It is not a record of past trading sessions.
+                {session?.range === '15m' ? 'The chart shows the last 15 minutes of the simulated market.' : session?.range === '1h' ? 'The chart shows the last hour of the simulated market.' : "The chart shows today's simulated day in India time, 00:00 to 24:00."} It is not a record of past trading sessions.
               </div>
+
+              {(() => {
+                const items = (news || [])
+                  .filter((n) => n.scope === 'market' || n.sym === selectedRealStock || (n.scope === 'sector' && n.category === activeAsset.category))
+                  .slice(0, 4);
+                return (
+                  <div className="mt-4 border-t border-bull-line pt-3">
+                    <div className="text-[10px] font-black uppercase text-slate-400 mb-2">Market news (simulated)</div>
+                    {items.length === 0 ? (
+                      <p className="text-xs text-slate-500">No news for this asset in the last 24 hours.</p>
+                    ) : (
+                      items.map((n) => (
+                        <div key={n.id} className="flex gap-2 text-xs py-1.5">
+                          <span className={'font-black ' + (n.direction > 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                            {n.direction > 0 ? '\u25B2' : '\u25BC'}
+                          </span>
+                          <span className="text-slate-200 flex-1">{n.headline}</span>
+                          <span className="text-slate-500 font-mono shrink-0">
+                            {new Date(n.time * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })}
+                          </span>
+                        </div>
+                      ))
+                    )}
+                    <p className="text-[10px] text-slate-500 mt-1">
+                      Invented headlines from a fictional newsroom. News is not advice and does not predict prices.
+                    </p>
+                  </div>
+                );
+              })()}
             </div>
           </section>
         </div>
       </div>
+
+      {activePanel && (
+        <div
+          className="fixed inset-0 z-40 flex items-end justify-center bg-black/60"
+          onClick={() => setActivePanel(null)}
+        >
+          <div
+            className="w-full max-w-[900px] max-h-[75vh] overflow-y-auto bg-bull-surface border border-bull-line rounded-t-3xl p-4 sm:p-5 pb-24"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {activePanel === 'owned' && (
+              <div>
+                <div className="flex justify-between items-center pb-3 border-b border-bull-line">
+                  <h3 className="font-black text-sm uppercase">Owned assets</h3>
+                  <span className="text-[10px] text-slate-400">
+                    Holdings value {money(holdingsValue)}
+                  </span>
+                </div>
+
+                {ownedRows.length === 0 && (
+                  <p className="text-xs text-slate-400 py-8 text-center">
+                    You do not own anything yet. Pick an asset and place a practice order.
+                  </p>
+                )}
+
+                <div className="divide-y divide-bull-line">
+                  {ownedRows.map((row) => (
+                    <div key={row.sym} className="py-3 flex flex-col sm:flex-row sm:items-center gap-3">
+                      <button
+                        onClick={() => openOwnedAsset(row)}
+                        className="text-left min-w-0 sm:w-1/3"
+                      >
+                        <div className="font-black text-sm">{row.sym}</div>
+                        <div className="text-[10px] text-slate-400 truncate">{row.name}</div>
+                      </button>
+
+                      <div className="grid grid-cols-3 gap-2 text-xs flex-1">
+                        <div>
+                          <span className="block text-[10px] text-slate-500">Units / avg</span>
+                          <b className="font-mono">{row.shares}</b>
+                          <span className="block text-[10px] text-slate-400 font-mono">{money(row.avg)}</span>
+                        </div>
+                        <div>
+                          <span className="block text-[10px] text-slate-500">Price / value</span>
+                          <b className="font-mono">{money(row.price)}</b>
+                          <span className="block text-[10px] text-slate-400 font-mono">{money(row.value)}</span>
+                        </div>
+                        <div>
+                          <span className="block text-[10px] text-slate-500">Profit / loss</span>
+                          <b className={'font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                            {(row.pnl >= 0 ? '+' : '-') + money(Math.abs(row.pnl))}
+                          </b>
+                          <span className={'block text-[10px] font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                            {(row.pnlPct >= 0 ? '+' : '') + row.pnlPct.toFixed(2) + '%'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => quickSell(row)}
+                        disabled={quoteLoading}
+                        className="bg-rose-700 hover:bg-rose-600 text-white text-[10px] uppercase font-black px-4 py-2.5 rounded-xl disabled:opacity-50"
+                      >
+                        Sell all
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[10px] text-slate-500 pt-3">
+                  Profit and loss here is before selling charges. Sell all opens the order review so you can see the exact charges first.
+                </p>
+              </div>
+            )}
+
+            {activePanel === 'history' && (
+              <div>
+                <div className="flex justify-between items-center pb-3 border-b border-bull-line gap-3">
+                  <h3 className="font-black text-sm uppercase">Order history</h3>
+                  <div className="flex gap-1.5">
+                    {[['ALL', 'All'], ['BUY', 'Buys'], ['SELL', 'Sells']].map(([key, label]) => (
+                      <button
+                        key={key}
+                        onClick={() => setHistoryFilter(key)}
+                        className={'text-[10px] font-black uppercase px-3 py-1.5 rounded-xl ' + (historyFilter === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line')}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {historyError && <p className="text-xs text-rose-300 py-4">{historyError}</p>}
+                {historyLoading && historyRows.length === 0 && (
+                  <p className="text-xs text-slate-400 py-8 text-center">Loading...</p>
+                )}
+                {!historyLoading && !historyError && historyRows.length === 0 && (
+                  <p className="text-xs text-slate-400 py-8 text-center">
+                    No orders yet. Your buys and sells will be listed here.
+                  </p>
+                )}
+
+                <div className="divide-y divide-bull-line">
+                  {historyRows
+                    .filter((row) => historyFilter === 'ALL' || row.side === historyFilter)
+                    .map((row) => {
+                      const fees = Number(row.fees_total || 0);
+                      const gross = Number(row.gross || 0);
+                      const cash = row.side === 'BUY' ? gross + fees : gross - fees;
+                      const showType =
+                        row.trade_type && (row.asset_class === 'equity' || row.asset_class === 'etf');
+                      const when = new Date(row.created_at).toLocaleString('en-IN', {
+                        timeZone: 'Asia/Kolkata',
+                        day: '2-digit',
+                        month: 'short',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true,
+                      });
+                      return (
+                        <div key={row.id} className="py-3 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs items-center">
+                          <div>
+                            <span className={'inline-block text-[10px] font-black px-2 py-0.5 rounded-md ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>
+                              {row.side === 'BUY' ? 'BOUGHT' : 'SOLD'}
+                            </span>
+                            <div className="font-black text-sm mt-1">{row.sym}</div>
+                            <div className="text-[10px] text-slate-500">{when}</div>
+                          </div>
+                          <div>
+                            <span className="block text-[10px] text-slate-500">Units at price</span>
+                            <b className="font-mono">{Number(row.qty)} @ {money(row.price)}</b>
+                          </div>
+                          <div>
+                            <span className="block text-[10px] text-slate-500">Order value</span>
+                            <b className="font-mono">{money(gross)}</b>
+                          </div>
+                          <div>
+                            <span className="block text-[10px] text-slate-500">Charges</span>
+                            <b className="font-mono">{(fees < 0 ? '-' : '') + money(Math.abs(fees))}</b>
+                            {showType && <span className="block text-[10px] text-slate-400">{row.trade_type}</span>}
+                          </div>
+                          <div>
+                            <span className="block text-[10px] text-slate-500">
+                              {row.side === 'BUY' ? 'Cash paid' : 'Cash received'}
+                            </span>
+                            <b className="font-mono">{money(cash)}</b>
+                            {row.side === 'SELL' && row.realized_gross !== null && row.realized_gross !== undefined && (
+                              <span className={'block text-[10px] font-mono ' + (Number(row.realized_gross) >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                                {'P/L before charges ' + (Number(row.realized_gross) >= 0 ? '+' : '-') + money(Math.abs(Number(row.realized_gross)))}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+                <p className="text-[10px] text-slate-500 pt-3">
+                  Shows your latest 100 orders. Dividends will appear here once they go live. Trades made before order history started are not listed.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
     </main>
   );
 }
