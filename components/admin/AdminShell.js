@@ -20,18 +20,18 @@ const NAV = [
   {
     group: 'Engagement',
     items: [
-      { href: '/admin/quiz', label: 'Quiz Arena', icon: '🎯', ready: false },
-      { href: '/admin/progress', label: 'Learning Progress', icon: '📚', ready: false },
-      { href: '/admin/schools', label: 'Schools & Classes', icon: '🏫', ready: false },
-      { href: '/admin/inactive', label: 'Inactive Users', icon: '💤', ready: false },
+      { href: '/admin/quiz', label: 'Quiz Arena', icon: '🎯', ready: true },
+      { href: '/admin/progress', label: 'Learning Progress', icon: '📚', ready: true },
+      { href: '/admin/schools', label: 'Schools & Classes', icon: '🏫', ready: true },
+      { href: '/admin/inactive', label: 'Inactive Users', icon: '💤', ready: true },
     ],
   },
   {
     group: 'Control',
     items: [
-      { href: '/admin/audit', label: 'Audit Log', icon: '🧾', ready: false },
-      { href: '/admin/announcements', label: 'Announcements', icon: '📢', ready: false },
-      { href: '/admin/settings', label: 'Settings', icon: '⚙️', ready: false },
+      { href: '/admin/audit', label: 'Audit Log', icon: '🧾', ready: true },
+      { href: '/admin/announcements', label: 'Announcements', icon: '📢', ready: true },
+      { href: '/admin/settings', label: 'Settings', icon: '⚙️', ready: true },
     ],
   },
 ];

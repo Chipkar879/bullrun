@@ -11,6 +11,22 @@ import {
 } from '@/lib/admin';
 
 const AdminContext = createContext(null);
+
+// Audit trail: never lets a logging failure break an admin action
+export async function logAction(action, target, details) {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    await supabase.from('admin_logs').insert({
+      admin_email: session?.user?.email || null,
+      action,
+      target_id: target && target.id ? String(target.id) : null,
+      target_label: target ? target.name || target.email || null : null,
+      details: details || null,
+    });
+  } catch (e) {
+    /* ignore */
+  }
+}
 export const useAdmin = () => useContext(AdminContext);
 
 export default function AdminProvider({ children }) {
@@ -206,6 +222,7 @@ export default function AdminProvider({ children }) {
       return false;
     }
     patchProfile(profile.id, fields);
+    logAction('grant_days', profile, n + ' days');
     showToast(`Granted ${n} days to ${profile.name || profile.email}`);
     return true;
   }, [patchProfile, showToast]);
@@ -230,6 +247,7 @@ export default function AdminProvider({ children }) {
       return false;
     }
     patchMany(safe, fields);
+    logAction('bulk_grant', null, n + ' days to ' + data.length + ' accounts: ' + data.map((r) => r.id).join(', '));
     showToast(`Granted ${n} days to ${data.length} account(s)`);
     return true;
   }, [allProfiles, patchMany, showToast]);
@@ -245,6 +263,7 @@ export default function AdminProvider({ children }) {
       return false;
     }
     patchMany(safe, fields);
+    logAction('bulk_freeze', null, data.length + ' accounts: ' + data.map((r) => r.id).join(', '));
     showToast(`Froze ${data.length} account(s)`);
     return true;
   }, [allProfiles, patchMany, showToast]);
@@ -267,6 +286,7 @@ export default function AdminProvider({ children }) {
       return false;
     }
     patchProfile(profile.id, fields);
+    logAction(freezing ? 'freeze' : 'unfreeze', profile);
     showToast(`Account ${freezing ? 'frozen' : 'unfrozen'}`);
     return true;
   }, [patchProfile, showToast]);
@@ -289,6 +309,7 @@ export default function AdminProvider({ children }) {
       return false;
     }
     setAllProfiles((prev) => rankProfiles(prev.filter((p) => p.id !== profile.id)));
+    logAction('delete_user', profile);
     showToast('Profile deleted');
     return true;
   }, [showToast]);
@@ -300,6 +321,7 @@ export default function AdminProvider({ children }) {
       return false;
     }
     patchProfile(teacherId, { verification_status: status });
+    logAction('teacher_' + status, { id: teacherId });
     showToast(`Teacher ${status}`);
     return true;
   }, [patchProfile, showToast]);

@@ -81,6 +81,8 @@ export const metadata = {
   },
 };
 
+import SiteStatus from '@/components/SiteStatus';
+
 export default function RootLayout({ children }) {
   return (
     <html
@@ -94,7 +96,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col bg-bull-bg text-slate-100 antialiased selection:bg-bull-lime selection:text-bull-ink">
         <ActivityTracker />
-        {children}
+        <SiteStatus />{children}
         <footer className="mt-auto border-t border-bull-line px-4 py-4 text-center text-xs leading-relaxed text-bull-muted">
           Bull Run is an educational game. All prices are simulated, no real money is used, and nothing here is investment advice. Not affiliated with NSE, BSE or SEBI.
         </footer>

@@ -3,46 +3,71 @@
 import { useState, useMemo } from 'react';
 import { useAdmin } from '@/components/admin/AdminProvider';
 import { getProfileFreezeStatus, formatLeft, timeAgo } from '@/lib/admin';
+import { Loading, PageHeader, Panel, pill, inputCls } from '@/components/admin/ui';
 
 export default function AccessPage() {
   const { loading, allProfiles, expiringSoon, grantDays, now, lastSeen } = useAdmin();
   const [tab, setTab] = useState('soon');
+  const [q, setQ] = useState('');
+  const [sort, setSort] = useState('urgent');
 
   const expired = useMemo(
-    () =>
-      allProfiles
-        .filter((p) => { const st = getProfileFreezeStatus(p, now); return st.isFrozen && !st.isSuperAdmin; })
-        .sort((a, b) => (lastSeen[b.id] || 0) - (lastSeen[a.id] || 0)),
-    [allProfiles, now, lastSeen]
+    () => allProfiles.filter((p) => { const st = getProfileFreezeStatus(p, now); return st.isFrozen && !st.isSuperAdmin; }),
+    [allProfiles, now]
   );
 
-  if (loading) return <p className="py-20 text-center text-xs font-bold text-slate-400 animate-pulse font-mono">Loading access data...</p>;
+  const rows = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    const base = tab === 'soon' ? expiringSoon : expired;
+    const list = base.filter((p) => {
+      if (!term) return true;
+      return (
+        (p.name || '').toLowerCase().includes(term) ||
+        (p.email || '').toLowerCase().includes(term) ||
+        (p.school_id || p.school_code || '').toLowerCase().includes(term)
+      );
+    });
+    const out = [...list];
+    if (sort === 'name') out.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    else if (sort === 'seen') out.sort((a, b) => (lastSeen[b.id] || 0) - (lastSeen[a.id] || 0));
+    else if (tab === 'soon') out.sort((a, b) => a.expiryMs - b.expiryMs);
+    else out.sort((a, b) => (lastSeen[b.id] || 0) - (lastSeen[a.id] || 0));
+    return out;
+  }, [tab, q, sort, expiringSoon, expired, lastSeen]);
 
-  const rows = tab === 'soon' ? expiringSoon : expired;
+  if (loading) return <Loading text="Loading access data..." />;
 
   return (
     <div className="space-y-6">
-      <div className="border-b border-bull-line pb-4">
-        <h1 className="text-3xl font-black tracking-tight text-white">Access & Expiry</h1>
-        <p className="mt-1 text-xs font-medium text-slate-400">Extend accounts that are about to lock, or revive ones that already did.</p>
-      </div>
+      <PageHeader title="Access & Expiry" subtitle="Extend accounts that are about to lock, or revive ones that already did." />
 
-      <div className="space-y-4 rounded-3xl border-2 border-bull-line bg-bull-surface p-6 shadow-2xl">
-        <div className="flex flex-wrap gap-2 font-mono">
-          {[['soon', `Expiring in 7 days (${expiringSoon.length})`], ['expired', `Frozen / Expired (${expired.length})`]].map(([k, l]) => (
-            <button
-              key={k}
-              onClick={() => setTab(k)}
-              className={`cursor-pointer rounded-xl border px-3.5 py-1.5 text-xs font-black uppercase ${tab === k ? 'border-bull-lime-dark bg-bull-lime text-bull-ink' : 'border-bull-line bg-bull-raised text-slate-300'}`}
-            >
-              {l}
-            </button>
-          ))}
+      <Panel>
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-wrap gap-2">
+            <button onClick={() => setTab('soon')} className={pill(tab === 'soon')}>Expiring in 7 days ({expiringSoon.length})</button>
+            <button onClick={() => setTab('expired')} className={pill(tab === 'expired')}>Frozen / Expired ({expired.length})</button>
+          </div>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <input
+              type="text"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="🔍 Search name, email, school..."
+              className={`${inputCls} md:w-64`}
+            />
+            <select value={sort} onChange={(e) => setSort(e.target.value)} className={inputCls}>
+              <option value="urgent">{tab === 'soon' ? 'Most urgent first' : 'Recently seen first'}</option>
+              <option value="name">Name A-Z</option>
+              <option value="seen">Recently seen</option>
+            </select>
+          </div>
         </div>
+
+        <p className="font-mono text-[10px] text-slate-500">Showing {rows.length} account(s)</p>
 
         {rows.length === 0 ? (
           <p className="py-4 font-mono text-xs font-medium text-slate-500">
-            {tab === 'soon' ? 'Nobody is about to expire. 🎉' : 'No frozen accounts.'}
+            {q ? 'No accounts match your search.' : tab === 'soon' ? 'Nobody is about to expire. 🎉' : 'No frozen accounts.'}
           </p>
         ) : (
           <div className="divide-y divide-bull-line overflow-hidden rounded-2xl border border-bull-line">
@@ -53,6 +78,7 @@ export default function AccessPage() {
                   <div className="min-w-0">
                     <p className="truncate text-sm font-black text-white">{p.name || 'Unnamed'}</p>
                     <p className="truncate font-mono text-[11px] text-slate-400">{p.email}</p>
+                    {(p.school_id || p.school_code) && <p className="font-mono text-[10px] text-slate-500">🏫 {p.school_id || p.school_code}</p>}
                   </div>
                   <div className="font-mono text-[11px] font-bold">
                     {tab === 'soon' ? (
@@ -70,7 +96,7 @@ export default function AccessPage() {
             })}
           </div>
         )}
-      </div>
+      </Panel>
     </div>
   );
 }
