@@ -521,14 +521,23 @@ export default function PricingPage() {
                 </div>
 
                 {validN ? (
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-4 bg-bull-teal hover:opacity-90 text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono transition-all block text-center"
-                  >
-                    {overMax ? 'Request Custom Quote' : 'Request School Plan \u2014 ' + fmt(calc.school) + '/month'}
-                  </a>
+                  overMax ? (
+                    <a
+                      href={whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-4 bg-bull-teal hover:opacity-90 text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono transition-all block text-center"
+                    >
+                      Request Custom Quote
+                    </a>
+                  ) : (
+                    <Link
+                      href="/signup"
+                      className="w-full py-4 bg-bull-teal hover:opacity-90 text-bull-ink text-xs font-black uppercase tracking-wider rounded-2xl font-mono transition-all block text-center"
+                    >
+                      {'Request School Plan \u2014 ' + fmt(calc.school) + '/month'}
+                    </Link>
+                  )
                 ) : (
                   <div className="w-full py-4 bg-bull-raised text-slate-600 text-xs font-black uppercase tracking-wider rounded-2xl font-mono block text-center border border-bull-line">
                     Enter student count
