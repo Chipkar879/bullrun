@@ -86,6 +86,7 @@ export default function Navbar() {
   useEffect(() => {
     if (!schoolRole) return;
     if (STUDENT_ONLY.some((p) => pathname === p || pathname.startsWith(p + '/'))) router.replace('/school');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schoolRole, pathname, router]);
 
   const schoolLinks =
