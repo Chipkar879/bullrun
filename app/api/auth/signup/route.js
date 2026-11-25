@@ -72,6 +72,26 @@ export async function POST(request) {
       }
     }
 
+    let schoolStatus = null;
+    if (role === 'student' || role === 'teacher') {
+      const { data: sch } = await admin
+        .from('schools')
+        .select('status, student_count')
+        .eq('code', schoolCode)
+        .maybeSingle();
+      if (!sch) return bad('This school code is not recognised.');
+      schoolStatus = sch.status;
+      if (!['approved_unpaid', 'active', 'grace'].includes(sch.status)) {
+        return bad('This school is not accepting new accounts right now. Please contact your school admin.');
+      }
+      if (role === 'student') {
+        const { data: seats } = await admin.rpc('school_seat_count', { p_code: schoolCode });
+        if (typeof seats === 'number' && seats >= sch.student_count) {
+          return bad('This school has reached its student limit. Please contact your school admin.');
+        }
+      }
+    }
+
     if (role === 'teacher') {
       if (!schoolCode) return bad('School code is required for admin accounts.');
       if (!documentUrl || documentUrl.length > 500 || !documentUrl.startsWith('https://')) {
@@ -107,7 +127,8 @@ export async function POST(request) {
       specific_class_id: role === 'student' && specificClassId ? specificClassId : null,
       verification_status: role === 'teacher' ? 'pending' : 'approved',
       verification_document_url: role === 'teacher' ? documentUrl : null,
-      student_approved: true
+      student_approved: true,
+      ...(usesSchool ? { is_premium: true, access_expires_at: (role === 'student' && schoolStatus === 'approved_unpaid') ? new Date(Date.now() + 3 * 86400000).toISOString() : null } : {})
     }]);
 
     if (profileError) {

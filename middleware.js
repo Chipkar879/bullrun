@@ -28,7 +28,8 @@ export async function middleware(req) {
     pathname === '/' ||
     pathname.startsWith('/pricing') ||
     pathname.startsWith('/signup') ||
-    pathname.startsWith('/auth');
+    pathname.startsWith('/auth') ||
+    pathname.startsWith('/school/register');
 
   // 3. Extract the auth token from cookies
   const allCookies = req.cookies.getAll();
@@ -96,6 +97,17 @@ export async function middleware(req) {
 
   if (profile) {
     if (profile.role === 'admin') return res;
+
+    // School admins and teachers supervise students. They do not play.
+    if (profile.role === 'school_admin' || profile.role === 'teacher') {
+      const blocked = ['/simulator', '/quiz', '/leaderboard', '/modules', '/arena'].some((p) => pathname.startsWith(p));
+      if (blocked) {
+        const dash = req.nextUrl.clone();
+        dash.pathname = '/school';
+        dash.search = '';
+        return NextResponse.redirect(dash);
+      }
+    }
 
     let expiryMs;
     if (profile.access_expires_at) {

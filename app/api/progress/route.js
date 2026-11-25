@@ -38,7 +38,7 @@ export async function POST(req) {
   try { body = await req.json(); } catch (e) { body = {}; }
 
   let done = ctx.done;
-  if (done.length === 0 && Array.isArray(body.importLocal) && body.importLocal.length > 0) {
+  if (false && Array.isArray(body.importLocal) && body.importLocal.length > 0) {
     const take = importablePrefix(ORDER, body.importLocal, done);
     if (take.length > 0) {
       const rows = take.map((id) => ({ user_id: ctx.user.id, submodule_id: id, source: 'import' }));

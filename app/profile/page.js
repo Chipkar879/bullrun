@@ -18,6 +18,7 @@ export default function ProfilePage() {
 
   // Performance Metrics 
   const [analytics, setAnalytics] = useState({ tier: 'Standard Sandboxer', multiplier: '1.0x', completionRate: '0%' });
+  const isStaff = profile.role === 'school_admin' || profile.role === 'teacher';
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -182,7 +183,7 @@ export default function ProfilePage() {
             </div>
             
             <div className="space-y-2 text-center sm:text-left">
-              <span className="bg-bull-raised text-bull-lime border border-bull-line text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner">
+              <span className={'bg-bull-raised text-bull-lime border border-bull-line text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner' + (isStaff ? ' hidden' : '')}>
                 🏆 {analytics.tier}
               </span>
               <h1 className="font-poppins font-black text-2xl sm:text-3xl text-white tracking-tight">
@@ -246,7 +247,7 @@ export default function ProfilePage() {
         )}
 
         {/* CORE METRICS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div style={isStaff ? { display: 'none' } : undefined} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
             <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">👑</div>
             <div>

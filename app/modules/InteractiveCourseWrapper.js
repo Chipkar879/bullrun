@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 
-const STORE_KEY = 'bullrun_progress_v2';
+const STORE_PREFIX = 'bullrun_progress_v3_';
+let storeKey = STORE_PREFIX + 'guest';
 const XP_PER_LESSON = 100;
 const XP_PER_LEVEL = 500;
 const LEVELS = ['Rookie Saver', 'Smart Spender', 'Market Explorer', 'Strategy Builder', 'Wall Street Architect'];
@@ -116,7 +117,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   // The database is the truth, so progress follows the student to any device.
   const save = (list) => {
     try {
-      localStorage.setItem(STORE_KEY, JSON.stringify(list));
+      localStorage.setItem(storeKey, JSON.stringify(list));
     } catch (e) {
       console.warn('Could not save progress', e);
     }
@@ -133,7 +134,11 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     (async () => {
       let local = [];
       try {
-        const saved = localStorage.getItem(STORE_KEY);
+        const { data: sess } = await supabase.auth.getSession();
+        const uid = sess && sess.session ? sess.session.user.id : null;
+        storeKey = STORE_PREFIX + (uid || 'guest');
+        try { localStorage.removeItem('bullrun_progress_v2'); } catch (e) { /* ignore */ }
+        const saved = localStorage.getItem(storeKey);
         if (saved) {
           const p = JSON.parse(saved);
           if (Array.isArray(p)) local = p;
@@ -149,7 +154,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
         const res = await fetch('/api/progress', {
           method: 'POST',
           headers,
-          body: JSON.stringify({ importLocal: local }),
+          body: JSON.stringify({}),
         });
         if (!res.ok) throw new Error('Progress sync failed (' + res.status + ')');
         const data = await res.json();

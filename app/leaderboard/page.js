@@ -40,6 +40,8 @@ function TrackBadge({ role }) {
 }
 
 function applyScope(query, scope, profile) {
+  // Staff are not paying students, so they never appear on any ranking.
+  query = query.not('role', 'in', '(teacher,school_admin)');
   if (scope === 'school' && profile?.school_id) {
     return query.eq('school_id', profile.school_id);
   }

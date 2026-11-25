@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import OnboardingTour from '@/components/OnboardingTour';
@@ -8,10 +8,13 @@ import BrandMark from '@/components/BrandMark';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [initials, setInitials] = useState('');
   const [loading, setLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [schoolRole, setSchoolRole] = useState(null);
+  const [classTabs, setClassTabs] = useState([]);
 
   useEffect(() => {
     const getSessionAndProfile = async () => {
@@ -22,9 +25,25 @@ export default function Navbar() {
           
           const { data: profile } = await supabase
             .from('profiles')
-            .select('name')
+            .select('name, role, verification_status')
             .eq('id', session.user.id)
             .maybeSingle();
+
+          const role = profile?.role || null;
+          setSchoolRole(role === 'school_admin' || role === 'teacher' ? role : null);
+          if (role === 'teacher') {
+            const { data: cls } = await supabase
+              .from('school_classes')
+              .select('id, class_name')
+              .eq('assigned_teacher_id', session.user.id);
+            setClassTabs(
+              (cls || [])
+                .filter((c) => !/^unassigned/i.test(c.class_name))
+                .sort((a, b) => String(a.class_name).localeCompare(String(b.class_name), undefined, { numeric: true }))
+            );
+          } else {
+            setClassTabs([]);
+          }
 
           if (profile?.name) {
             const nameParts = profile.name.trim().split(/\s+/);
@@ -52,6 +71,8 @@ export default function Navbar() {
       } else {
         setUser(null);
         setInitials('');
+        setSchoolRole(null);
+        setClassTabs([]);
       }
     });
 
@@ -59,6 +80,24 @@ export default function Navbar() {
   }, []);
 
   const closeMenu = () => setIsMobileMenuOpen(false);
+
+  // Teachers and school admins are staff, not paying students: keep them out of the student pages.
+  const STUDENT_ONLY = ['/modules', '/simulator', '/arena', '/quiz', '/leaderboard', '/pricing'];
+  useEffect(() => {
+    if (!schoolRole) return;
+    if (STUDENT_ONLY.some((p) => pathname === p || pathname.startsWith(p + '/'))) router.replace('/school');
+  }, [schoolRole, pathname, router]);
+
+  const schoolLinks =
+    schoolRole === 'school_admin'
+      ? [{ href: '/', label: 'Home' }, { href: '/school', label: 'School' }]
+      : [{ href: '/', label: 'Home' }, ...classTabs.map((c) => ({ href: '/school/class/' + c.id, label: classTabs.length === 1 ? 'Class' : (/^\d+$/.test(String(c.class_name).trim()) ? 'Grade ' + String(c.class_name).trim() : c.class_name) }))];
+  const isActiveLink = (href) =>
+    href === '/'
+      ? pathname === '/'
+      : href === '/school'
+        ? pathname === href || pathname.startsWith('/school/')
+        : pathname === href || pathname.startsWith(href + '/');
 
   return (
     <>
@@ -75,7 +114,14 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation Items */}
-          <nav className="hidden md:flex items-center gap-8 text-xs font-bold text-slate-400">
+          {schoolRole ? (
+            <nav className="hidden md:flex items-center gap-8 text-sm font-bold text-slate-400">
+              {schoolLinks.map((l) => (
+                <Link key={l.href} href={l.href} className={`pb-0.5 transition-all ${isActiveLink(l.href) ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>{l.label}</Link>
+              ))}
+            </nav>
+          ) : (
+          <nav style={loading ? { visibility: 'hidden' } : undefined} className="hidden md:flex items-center gap-8 text-xs font-bold text-slate-400">
             <Link href="/" className={`pb-0.5 transition-all ${pathname === '/' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Home</Link>
             <Link href="/modules" className={`pb-0.5 transition-all ${pathname === '/modules' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Modules</Link>
             <Link href="/simulator" className={`pb-0.5 transition-all ${pathname === '/simulator' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Simulator</Link>
@@ -95,6 +141,7 @@ export default function Navbar() {
 
             <Link href="/pricing" className={`pb-0.5 transition-all ${pathname === '/pricing' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Pricing</Link>
           </nav>
+          )}
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
@@ -137,6 +184,14 @@ export default function Navbar() {
 
         {/* Mobile Drawer */}
         <div className={`absolute top-full left-0 right-0 w-full bg-bull-surface border-b border-bull-line shadow-2xl p-5 flex flex-col gap-2.5 text-xs font-bold text-slate-300 md:hidden transition-all duration-300 origin-top ${isMobileMenuOpen ? 'scale-y-100 opacity-100 visible' : 'scale-y-0 opacity-0 invisible'}`}>
+          {schoolRole ? (
+            <>
+              {schoolLinks.map((l) => (
+                <Link key={l.href} href={l.href} onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${isActiveLink(l.href) ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>{l.label}</Link>
+              ))}
+            </>
+          ) : (
+          <>
           <Link href="/" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Home</Link>
           <Link href="/modules" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/modules' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Modules</Link>
           <Link href="/simulator" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/simulator' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Simulator</Link>
@@ -144,6 +199,7 @@ export default function Navbar() {
           <Link href="/quiz" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/quiz' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Daily Quiz <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
           <Link href="/leaderboard" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/leaderboard' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Leaderboard <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
           <Link href="/pricing" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/pricing' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Pricing</Link>
+        </>)}
         </div>
       </header>
 

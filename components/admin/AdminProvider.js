@@ -10,7 +10,7 @@ import {
   getProfileFreezeStatus,
 } from '@/lib/admin';
 
-const AdminContext = createContext(null);
+export const AdminContext = createContext(null);
 
 // Audit trail: never lets a logging failure break an admin action
 export async function logAction(action, target, details) {
