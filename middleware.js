@@ -119,12 +119,16 @@ export async function middleware(req) {
 
     const hasPremium = Boolean(profile.is_premium);
     const isTrialExpired = Date.now() >= expiryMs && !hasPremium;
-    
+
     // HARD ENFORCEMENT: If is_frozen is TRUE in Supabase, BLOCK IMMEDIATELY
     const isFrozen = Boolean(profile.is_frozen) || isTrialExpired;
 
     if (isFrozen) {
-      const isAllowedForFrozenUser = pathname === '/' || pathname.startsWith('/pricing');
+      // Frozen users can still open the home page, pricing, and their profile (so they can sign out).
+      const isAllowedForFrozenUser =
+        pathname === '/' ||
+        pathname.startsWith('/pricing') ||
+        pathname.startsWith('/profile');
       if (!isAllowedForFrozenUser) {
         const pricingUrl = req.nextUrl.clone();
         pricingUrl.pathname = '/pricing';
