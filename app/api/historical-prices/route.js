@@ -265,7 +265,7 @@ function buildAll(now, range, scan) {
   const dayStart = Math.floor((now + IST_MS) / DAY_MS) * DAY_MS - IST_MS;
   const dayEnd = dayStart + DAY_MS;
   const axis = RANGES[range]
-    ? { start: now - RANGES[range].ms, end: now, step: RANGES[range].step }
+    ? { start: Math.floor((now - RANGES[range].ms) / RANGES[range].step) * RANGES[range].step, end: now, step: RANGES[range].step }
     : { start: dayStart, end: dayEnd, step: HISTORY_STEP_MS };
 
   const prices = ASSETS.map((asset) => {

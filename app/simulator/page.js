@@ -1290,42 +1290,40 @@ export default function RealSimulatorPage() {
         {portfolioError && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">Portfolio load error: {portfolioError}</div>}
         {marketMessage && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300">{marketMessage}</div>}
 
-        {/* Row 1: net worth + insights | watchlist | my portfolio + cash */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:items-stretch">
-          <div className="lg:col-span-3 flex flex-col gap-4">
-            <div className={card + ' p-5'}>
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-slate-400 font-bold">Total net worth</div>
-                <span className="text-xs font-bold px-3 py-1 rounded-full bg-bull-raised border border-bull-line text-slate-300">Since start</span>
-              </div>
-              <div className="text-3xl font-black font-mono tabular-nums text-white mt-2 break-words">{money(netWorth)}</div>
-              <div className="flex items-center gap-2 mt-2 text-sm flex-wrap">
-                <span className={'px-2 py-0.5 rounded-full font-mono font-bold ' + (netReturn >= 0 ? 'bg-emerald-900/40 text-bull-teal' : 'bg-rose-900/40 text-bull-coral')}>
-                  {(returnPct >= 0 ? '↑ ' : '↓ ') + Math.abs(returnPct).toFixed(2) + '%'}
-                </span>
-                <span className="text-slate-400">started with <b className="text-slate-200">{money(START_BALANCE)}</b></span>
-              </div>
-              <div className="mt-4 space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-slate-400">Holdings value</span><span className="font-mono font-bold">{money(holdingsValue)}</span></div>
-                <div className="flex justify-between"><span className="text-slate-400">Net return</span><span className={'font-mono font-bold ' + (netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>{(netReturn >= 0 ? '+' : '-') + money(Math.abs(netReturn))}</span></div>
-                <div className="flex justify-between"><span className="text-slate-400">Pending orders</span><span className="font-mono font-bold">{openOrders.length}</span></div>
-              </div>
-              <button onClick={scrollToOrderDesk} className="mt-4 w-full bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black text-sm py-3 rounded-full">Trade now</button>
-            </div>
-
-            <div
-              className={card + ' p-5 flex-1 flex flex-col justify-between text-center overflow-hidden'}
-              style={{ backgroundImage: 'radial-gradient(ellipse at 50% 125%, rgba(163,230,53,0.30), transparent 62%)' }}
-            >
-              <div>
-                <div className="text-base font-black">Learn from your trades</div>
-                <p className="text-sm text-slate-400 mt-2">See your win rate, charges and slippage in plain numbers, then plan your next practice order.</p>
-              </div>
-              <button onClick={() => setActivePanel('report')} className="mt-4 mx-auto px-5 py-2.5 rounded-full text-sm font-black bg-bull-lime text-bull-ink hover:bg-bull-lime-light">Open report card</button>
+        {/* Four stat boxes */}
+        <section data-stat-boxes className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className={card + ' p-5'}>
+            <div className="text-sm font-bold text-slate-400">Net worth</div>
+            <div className="text-xl sm:text-2xl font-black font-mono tabular-nums text-white mt-2 break-words">{money(netWorth)}</div>
+            <div className="flex items-center gap-2 mt-2 text-xs flex-wrap">
+              <span className={'px-2 py-0.5 rounded-full font-mono font-bold ' + (netReturn >= 0 ? 'bg-emerald-900/40 text-bull-teal' : 'bg-rose-900/40 text-bull-coral')}>
+                {(returnPct >= 0 ? '↑ ' : '↓ ') + Math.abs(returnPct).toFixed(2) + '%'}
+              </span>
+              <span className="text-slate-400">started with {money(START_BALANCE)}</span>
             </div>
           </div>
+          <div className={card + ' p-5'}>
+            <div className="text-sm font-bold text-slate-400">Holdings value</div>
+            <div className="text-xl sm:text-2xl font-black font-mono tabular-nums text-white mt-2 break-words">{money(holdingsValue)}</div>
+            <div className="text-xs text-slate-400 mt-2">{ownedRows.length} {ownedRows.length === 1 ? 'asset' : 'assets'} owned</div>
+          </div>
+          <div className={card + ' p-5'}>
+            <div className="text-sm font-bold text-slate-400">Profit / loss</div>
+            <div className={'text-xl sm:text-2xl font-black font-mono tabular-nums mt-2 break-words ' + (netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+              {(netReturn >= 0 ? '+' : '-') + money(Math.abs(netReturn))}
+            </div>
+            <div className="text-xs text-slate-400 mt-2">{(returnPct >= 0 ? '+' : '') + returnPct.toFixed(2) + '% overall'}</div>
+          </div>
+          <div className="rounded-3xl p-5 bg-green-200 border border-green-300">
+            <div className="text-sm font-bold" style={{ color: '#14532d' }}>Available cash</div>
+            <div className="text-xl sm:text-2xl font-black font-mono tabular-nums mt-2 break-words" style={{ color: '#14532d' }}>{money(realBalance)}</div>
+            <div className="text-xs font-bold mt-2" style={{ color: '#166534' }}>Ready to invest</div>
+          </div>
+        </section>
 
-          <aside className={card + ' lg:col-span-5 p-4 relative min-h-[460px]'}>
+        {/* Row 1: net worth + insights | watchlist | my portfolio + cash */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:items-stretch">
+          <aside className={card + ' lg:col-span-8 p-4 relative min-h-[460px]'}>
             <div className="lg:absolute lg:inset-4 flex flex-col">
               <div className="flex justify-between items-center">
                 <span className="text-base font-black">Watchlist</span>
@@ -1402,13 +1400,7 @@ export default function RealSimulatorPage() {
               )}
             </div>
 
-            <div className="rounded-3xl p-5 bg-green-200 border border-green-300 flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <div className="text-sm font-bold" style={{ color: '#14532d' }}>Available cash</div>
-                <div className="text-xs font-bold" style={{ color: '#166534' }}>Ready to invest</div>
-              </div>
-              <div className="text-xl sm:text-2xl font-black font-mono tabular-nums break-words text-right" style={{ color: '#14532d' }}>{money(realBalance)}</div>
-            </div>
+            
           </div>
         </section>
 
