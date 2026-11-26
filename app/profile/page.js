@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
-import { AVATARS, BADGES, LEVELS, BB_TO_CASH, MIN_BB, avatarById } from '@/lib/gamification';
+import { AVATARS, BADGES, LEVELS, RARITY, BB_TO_CASH, MIN_BB, avatarById } from '@/lib/gamification';
 
 const inr = (n) => '\u20B9' + Math.round(Number(n) || 0).toLocaleString('en-IN');
 
@@ -18,6 +18,32 @@ function Avatar({ id, size = 'h-24 w-24', text = 'text-5xl' }) {
       aria-label={a.name}
     >
       {a.emoji}
+    </div>
+  );
+}
+
+function BadgeTile({ b, got }) {
+  const r = RARITY[b.rarity] || RARITY.common;
+  return (
+    <div
+      className={'rounded-2xl border p-3 text-center transition-transform ' + (got ? 'hover:-translate-y-1' : 'border-bull-line bg-bull-bg')}
+      style={got ? { borderColor: r.color, background: 'linear-gradient(160deg, ' + b.c[0] + '26, ' + b.c[1] + '40)', boxShadow: '0 0 20px ' + b.c[1] + '55' } : undefined}
+    >
+      <div
+        className={'mx-auto h-16 w-16 rounded-full grid place-items-center text-3xl ' + (got ? 'badge-pop' : 'bg-bull-raised border border-bull-line')}
+        style={got ? { background: 'linear-gradient(135deg, ' + b.c[0] + ', ' + b.c[1] + ')', boxShadow: '0 0 0 3px ' + r.color + ', 0 6px 16px ' + b.c[1] + '99' } : undefined}
+        aria-hidden="true"
+      >
+        <span className={got ? '' : 'grayscale opacity-40'}>{got ? b.icon : '\u{1F512}'}</span>
+      </div>
+      <p className={'text-sm font-black mt-2 ' + (got ? 'text-white' : 'text-slate-400')}>{b.name}</p>
+      <span
+        className="inline-block mt-1 rounded-full px-2 py-0.5 text-xs font-black"
+        style={{ color: got ? '#0B1220' : r.color, background: got ? r.color : 'transparent', border: got ? 'none' : '1px solid ' + r.color + '66' }}
+      >
+        {r.label}
+      </span>
+      <p className="text-xs text-slate-400 mt-1">{got ? 'Earned' : b.hint}</p>
     </div>
   );
 }
@@ -74,7 +100,7 @@ export default function ProfilePage() {
       if (ok) {
         setData(out);
         if (out.newlyEarned && out.newlyEarned.length) {
-          setToast('New badge: ' + out.newlyEarned.map((id) => BADGES.find((b) => b.id === id)?.name).filter(Boolean).join(', '));
+          setToast('New badge: ' + out.newlyEarned.map((id) => BADGES.find((x) => x.id === id)?.name).filter(Boolean).join(', '));
         }
       }
       const { count } = await supabase.from('profiles').select('id', { count: 'exact', head: true }).eq('role', next.role).gt('net_worth', next.netWorth);
@@ -98,11 +124,17 @@ export default function ProfilePage() {
     setTimeout(() => { setEditing(false); setStatus({ message: '', ok: false, busy: false }); }, 1200);
   };
 
+  // Instant switch: update the screen first, save in the background, roll back if refused
   const chooseAvatar = async (id) => {
-    const { ok, out } = await api('/api/badges', { action: 'avatar', id });
-    if (!ok) { setToast(out.error || 'Could not change avatar'); return; }
+    const prev = me.avatar;
+    if (id === prev) { setPicker(false); return; }
     setMe((m) => ({ ...m, avatar: id }));
     setPicker(false);
+    const { ok, out } = await api('/api/badges', { action: 'avatar', id });
+    if (!ok) {
+      setMe((m) => ({ ...m, avatar: prev }));
+      setToast(out.error || 'Could not change avatar');
+    }
   };
 
   const convert = async () => {
@@ -142,7 +174,7 @@ export default function ProfilePage() {
   }
 
   const lvl = data ? data.level : null;
-  const earnedCount = data ? data.badges.filter((b) => b.earned).length : 0;
+  const earnedCount = data ? data.badges.filter((x) => x.earned).length : 0;
   const bbNum = Math.floor(Number(bbInput)) || 0;
   const capLeft = data ? Math.max(0, data.bb.cap - data.bb.used30) : 0;
   const card = 'bg-bull-surface border border-bull-line rounded-3xl';
@@ -166,20 +198,20 @@ export default function ProfilePage() {
             <div className="relative self-center sm:self-auto">
               <Avatar id={me.avatar} />
               {!me.staff && (
-                <button onClick={() => setPicker(true)} aria-label="Edit avatar" className="absolute -bottom-2 -right-2 h-9 w-9 rounded-full bg-bull-lime text-bull-ink font-black text-sm shadow-lg grid place-items-center hover:scale-105 transition-transform">
+                <button onClick={() => setPicker(true)} aria-label="Edit avatar" className="absolute -bottom-2 -right-2 h-9 w-9 rounded-full bg-bull-lime text-bull-ink font-black text-xs shadow-lg grid place-items-center hover:scale-105 transition-transform">
                   Edit
                 </button>
               )}
             </div>
             <div className="flex-1 min-w-0 text-center sm:text-left space-y-2">
-              {lvl && <span className="inline-block bg-bull-raised border border-bull-line text-bull-lime text-xs font-bold px-3 py-1 rounded-full">Level {lvl.index + 1} - {lvl.name}</span>}
+              {lvl && <span className="inline-block bg-bull-raised border border-bull-line text-bull-lime text-xs font-bold px-3 py-1 rounded-full">Level {lvl.index + 1} of {LEVELS.length} - {lvl.name}</span>}
               <h1 className="text-2xl sm:text-3xl font-black text-white break-words">{me.name}</h1>
               {lvl && (
                 <div className="max-w-sm mx-auto sm:mx-0">
                   <div className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={lvl.pct} aria-label="XP progress">
-                    <div className="h-full rounded-full bg-bull-lime transition-all" style={{ width: lvl.pct + '%' }} />
+                    <div className="h-full rounded-full transition-all" style={{ width: lvl.pct + '%', background: 'linear-gradient(90deg, #B7F34A, #19C6B4)' }} />
                   </div>
-                  <p className="text-xs text-slate-400 mt-1.5">{data.xp} XP{lvl.next ? ' - ' + lvl.toNext + ' XP to ' + lvl.next : ' - top level reached'}</p>
+                  <p className="text-xs text-slate-400 mt-1.5">{data.xp.toLocaleString('en-IN')} XP{lvl.next ? ' - ' + lvl.toNext.toLocaleString('en-IN') + ' XP to ' + lvl.next : ' - top level reached'}</p>
                 </div>
               )}
             </div>
@@ -276,21 +308,19 @@ export default function ProfilePage() {
 
             {/* Badges */}
             <section className={card + ' p-6 space-y-4'}>
+              <style>{'@keyframes badgePop{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.07) rotate(-3deg)}}.badge-pop{animation:badgePop 2.6s ease-in-out infinite}@media (prefers-reduced-motion:reduce){.badge-pop{animation:none}}'}</style>
               <div className="flex items-baseline justify-between">
                 <h2 className="text-lg font-black text-white">Badges</h2>
-                <span className="text-sm text-slate-400">{earnedCount} of {BADGES.length} earned</span>
+                <span className="text-sm font-bold text-bull-lime">{earnedCount} of {BADGES.length} earned</span>
+              </div>
+              <div className="h-2.5 rounded-full bg-bull-raised border border-bull-line overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: Math.round((earnedCount / BADGES.length) * 100) + '%', background: 'linear-gradient(90deg, #B7F34A, #19C6B4, #B28DFF)' }} />
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-                {BADGES.map((b) => {
-                  const got = data && data.badges.find((x) => x.id === b.id)?.earned;
-                  return (
-                    <div key={b.id} className={'rounded-2xl border p-3 text-center ' + (got ? 'border-bull-lime/60 bg-bull-raised' : 'border-bull-line bg-bull-bg')}>
-                      <div className={'text-3xl ' + (got ? '' : 'grayscale opacity-40')} aria-hidden="true">{b.icon}</div>
-                      <p className={'text-sm font-bold mt-1 ' + (got ? 'text-white' : 'text-slate-400')}>{b.name}</p>
-                      <p className="text-xs text-slate-400 mt-0.5">{got ? 'Earned' : b.hint}</p>
-                    </div>
-                  );
-                })}
+                {BADGES
+                  .map((x) => ({ b: x, got: !!(data && data.badges.find((y) => y.id === x.id)?.earned) }))
+                  .sort((p, q) => Number(q.got) - Number(p.got))
+                  .map(({ b, got }) => <BadgeTile key={b.id} b={b} got={got} />)}
               </div>
             </section>
           </>
@@ -312,17 +342,17 @@ export default function ProfilePage() {
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
               {AVATARS.map((a) => {
-                const locked = !lvl || lvl.index < a.minLevel;
+                const locked = a.minLevel > 0 && (!lvl || lvl.index < a.minLevel);
                 return (
                   <button key={a.id} disabled={locked} onClick={() => chooseAvatar(a.id)} className={'rounded-2xl border p-2 text-center transition ' + (me.avatar === a.id ? 'border-bull-lime bg-bull-raised' : 'border-bull-line bg-bull-bg hover:border-bull-lime/50') + (locked ? ' opacity-50 cursor-not-allowed' : '')}>
                     <Avatar id={a.id} size="h-16 w-16 mx-auto" text="text-3xl" />
                     <p className="text-xs font-bold mt-1.5">{a.name}</p>
-                    <p className="text-xs text-slate-400">{locked ? 'Level ' + (a.minLevel + 1) : 'Free'}</p>
+                    <p className="text-xs text-slate-400">{locked ? 'Level ' + (a.minLevel + 1) : a.minLevel > 0 ? 'Unlocked' : 'Free'}</p>
                   </button>
                 );
               })}
             </div>
-            <p className="text-xs text-slate-400">Levels: {LEVELS.map((l, i) => (i + 1) + ' ' + l.name).join(', ')}. Earn XP from lessons, quizzes, trades and badges.</p>
+            <p className="text-xs text-slate-400">Earn XP from lessons, quizzes, trades and badges to level up and unlock more avatars.</p>
           </div>
         </div>
       )}

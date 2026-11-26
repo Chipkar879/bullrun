@@ -22,7 +22,7 @@ async function summary(user) {
   const done = (lessonsRes.data || []).map((r) => r.submodule_id);
   const trades = tradesRes.data || [];
   const quiz = quizRes.data || [];
-  const have = new Map((badgesRes.data || []).map((b) => [b.badge_id, b.earned_at]));
+  const have = new Map((badgesRes.data || []).map((x) => [x.badge_id, x.earned_at]));
 
   const totals = {};
   ORDER.forEach((id) => { const n = moduleNumber(id); if (n) totals[n] = (totals[n] || 0) + 1; });
@@ -40,25 +40,37 @@ async function summary(user) {
   const netWorth = Number(prof.data?.net_worth || 0);
   const rules = {
     first_lesson: done.length >= 1,
-    module_1: totals[1] > 0 && (doneByModule[1] || 0) >= totals[1],
+    ten_lessons: done.length >= 10,
+    fifty_lessons: done.length >= 50,
+    hundred_lessons: done.length >= 100,
+    all_lessons: ORDER.length > 0 && done.length >= ORDER.length,
     first_trade: trades.length >= 1,
     ten_trades: trades.length >= 10,
+    fifty_trades: trades.length >= 50,
+    hundred_trades: trades.length >= 100,
     diversified: sectors.size >= 3,
+    sector_5: sectors.size >= 5,
     in_profit: netWorth > START_BALANCE,
+    lakhpati: netWorth >= 100000,
     perfect_quiz: quiz.some((q) => q.total > 0 && q.score === q.total),
+    quiz_10: quiz.length >= 10,
+    quiz_30: quiz.length >= 30,
     streak_3: streak >= 3,
     streak_7: streak >= 7,
+    streak_30: streak >= 30,
+    bb_converter: (convRes.data || []).length > 0,
   };
+  for (let n = 1; n <= 12; n++) rules['module_' + n] = (totals[n] || 0) > 0 && (doneByModule[n] || 0) >= totals[n];
 
   const now = new Date().toISOString();
-  const fresh = BADGES.filter((b) => rules[b.id] && !have.has(b.id));
+  const fresh = BADGES.filter((x) => rules[x.id] && !have.has(x.id));
   if (fresh.length) {
-    await admin.from('user_badges').upsert(fresh.map((b) => ({ user_id: uid, badge_id: b.id })), { onConflict: 'user_id,badge_id', ignoreDuplicates: true });
-    fresh.forEach((b) => have.set(b.id, now));
+    await admin.from('user_badges').upsert(fresh.map((x) => ({ user_id: uid, badge_id: x.id })), { onConflict: 'user_id,badge_id', ignoreDuplicates: true });
+    fresh.forEach((x) => have.set(x.id, now));
   }
 
   const quizScore = quiz.reduce((a, q) => a + (q.score || 0), 0);
-  const xp = done.length * 20 + quizScore * 2 + quiz.length * 10 + Math.min(trades.length, 200) * 3 + have.size * 25;
+  const xp = done.length * 100 + Math.min(quizScore * 5 + quiz.length * 20, 3000) + Math.min(trades.length, 300) * 10 + have.size * 50;
 
   const since = Date.now() - 30 * 86400000;
   const used30 = (convRes.data || []).filter((c) => new Date(c.created_at).getTime() > since).reduce((a, c) => a + c.bb_spent, 0);
@@ -68,8 +80,8 @@ async function summary(user) {
     level: levelFor(xp),
     streak,
     avatar: prof.data?.avatar || 'calf',
-    badges: BADGES.map((b) => ({ id: b.id, earned: have.has(b.id), at: have.get(b.id) || null })),
-    newlyEarned: fresh.map((b) => b.id),
+    badges: BADGES.map((x) => ({ id: x.id, earned: have.has(x.id), at: have.get(x.id) || null })),
+    newlyEarned: fresh.map((x) => x.id),
     stats: { lessons: done.length, totalLessons: ORDER.length, trades: trades.length, quizDays: quiz.length, sectors: sectors.size },
     bb: { used30, cap: CAP_BB, history: (convRes.data || []).slice(0, 5) },
   };
@@ -84,8 +96,11 @@ export async function POST(req) {
     if (body.action === 'avatar') {
       const av = AVATARS.find((a) => a.id === body.id);
       if (!av) return Response.json({ error: 'Unknown avatar' }, { status: 400 });
-      const s = await summary(user);
-      if (s.level.index < av.minLevel) return Response.json({ error: 'That avatar is not unlocked yet' }, { status: 403 });
+      // Free avatars skip the heavy XP calculation, so switching is fast
+      if (av.minLevel > 0) {
+        const s = await summary(user);
+        if (s.level.index < av.minLevel) return Response.json({ error: 'That avatar is not unlocked yet' }, { status: 403 });
+      }
       const { error } = await admin.from('profiles').update({ avatar: av.id }).eq('id', user.id);
       if (error) throw error;
       return Response.json({ ok: true, avatar: av.id });
