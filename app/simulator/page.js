@@ -1410,7 +1410,8 @@ export default function RealSimulatorPage() {
             </aside>
 
             {/* My portfolio */}
-            <div className={card + ' lg:col-span-4 p-5 min-w-0'}>
+            <div className="lg:col-span-4 flex flex-col gap-4 min-w-0">
+              <div className={card + ' p-5 min-w-0'}>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-base font-semibold">My portfolio</h3>
                 <button onClick={() => setActivePanel('owned')} className="text-xs font-bold px-3 py-1.5 rounded-full bg-bull-raised border border-bull-line hover:border-bull-lime">See all</button>
@@ -1434,33 +1435,7 @@ export default function RealSimulatorPage() {
                 </div>
               )}
             </div>
-          </section>
-
-          {/* Row 2: chart | order ticket */}
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-4 items-start">
-            <section className={card + ' p-4 sm:p-6 min-w-0'}>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
-                <div className="min-w-0">
-                  <div className="text-xs uppercase font-black tracking-wider text-bull-lime">{activeAsset.sector}</div>
-                  <h2 className="text-xl sm:text-2xl font-semibold truncate">{activeAsset.name} <span className="text-slate-400 font-bold text-base">· {selectedRealStock}</span></h2>
-                  <div className="flex items-baseline gap-3 mt-1 flex-wrap">
-                    <span className="text-3xl sm:text-4xl font-semibold font-mono tabular-nums">{activeQuote.price ? money(activeQuote.price) : 'Loading price…'}</span>
-                    <span className={'text-base font-bold font-mono ' + (priceUp ? 'text-bull-teal' : 'text-bull-coral')}>{activeQuote.changePct}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1.5 shrink-0">
-                  {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
-                    <button key={key} onClick={() => chooseRange(key)} className={tabBtn(chartRange === key)}>{label}</button>
-                  ))}
-                </div>
-              </div>
-              <PriceChart key={selectedRealStock} history={activeQuote.history} symbol={selectedRealStock} session={session} markers={chartMarkers} />
-              <div className="mt-3 text-xs text-slate-400">
-                {session?.range === '15m' ? 'Last 15 minutes of the simulated market.' : session?.range === '1h' ? 'Last hour of the simulated market.' : "Today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. Generated series, not exchange history.
-              </div>
-            </section>
-
-            <aside id="order-desk" className="scroll-mt-24">
+          <aside id="order-desk" className="scroll-mt-24">
               <div className={card + ' p-5'}>
                 {orderStage === 'IDLE' && (
                   <div className="space-y-4">
@@ -1625,6 +1600,34 @@ export default function RealSimulatorPage() {
                 )}
               </div>
             </aside>
+            </div>
+          </section>
+
+          {/* Row 2: chart | order ticket */}
+          <div className="grid grid-cols-1 gap-4">
+            <section className={card + ' p-4 sm:p-6 min-w-0'}>
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
+                <div className="min-w-0">
+                  <div className="text-xs uppercase font-black tracking-wider text-bull-lime">{activeAsset.sector}</div>
+                  <h2 className="text-xl sm:text-2xl font-semibold truncate">{activeAsset.name} <span className="text-slate-400 font-bold text-base">· {selectedRealStock}</span></h2>
+                  <div className="flex items-baseline gap-3 mt-1 flex-wrap">
+                    <span className="text-3xl sm:text-4xl font-semibold font-mono tabular-nums">{activeQuote.price ? money(activeQuote.price) : 'Loading price…'}</span>
+                    <span className={'text-base font-bold font-mono ' + (priceUp ? 'text-bull-teal' : 'text-bull-coral')}>{activeQuote.changePct}</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
+                    <button key={key} onClick={() => chooseRange(key)} className={tabBtn(chartRange === key)}>{label}</button>
+                  ))}
+                </div>
+              </div>
+              <PriceChart key={selectedRealStock} history={activeQuote.history} symbol={selectedRealStock} session={session} markers={chartMarkers} />
+              <div className="mt-3 text-xs text-slate-400">
+                {session?.range === '15m' ? 'Last 15 minutes of the simulated market.' : session?.range === '1h' ? 'Last hour of the simulated market.' : "Today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. Generated series, not exchange history.
+              </div>
+            </section>
+
+            
           </div>
 
           {/* Row 3: recent orders */}
