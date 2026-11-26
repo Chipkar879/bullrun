@@ -201,7 +201,7 @@ function PriceChart({ history, symbol, session, markers }) {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-white/[0.06] bg-bull-bg overflow-hidden">
+      <div className="rounded-2xl border border-bull-line bg-bull-bg overflow-hidden">
         <svg
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
@@ -233,8 +233,8 @@ function PriceChart({ history, symbol, session, markers }) {
                   x2={width - pad.right + 5}
                   y1={y}
                   y2={y}
-                  stroke="#fff"
-                  strokeOpacity="0.075"
+                  stroke="var(--color-bull-line)"
+                  strokeOpacity="0.9"
                   strokeDasharray={index === 4 ? '0' : '3 6'}
                 />
                 <text
@@ -265,8 +265,8 @@ function PriceChart({ history, symbol, session, markers }) {
                   x2={x}
                   y1={pad.top}
                   y2={pad.top + plotHeight}
-                  stroke="#fff"
-                  strokeOpacity="0.035"
+                  stroke="var(--color-bull-line)"
+                  strokeOpacity="0.5"
                 />
                 <text
                   x={x}
@@ -1207,6 +1207,7 @@ export default function RealSimulatorPage() {
   const priceUp = !activeQuote.changePct?.startsWith('-');
   const returnPct = START_BALANCE > 0 ? (netReturn / START_BALANCE) * 100 : 0;
 
+  // ---------- layout helpers ----------
   const card = 'bg-bull-surface border border-bull-line rounded-3xl';
   const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', hourCycle: 'h23' }).format(new Date()));
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
@@ -1249,84 +1250,119 @@ export default function RealSimulatorPage() {
     return v.map((x, i) => (i ? 'L' : 'M') + ((i / (v.length - 1)) * 60).toFixed(1) + ' ' + (20 - ((x - mn) / (mx - mn || 1)) * 20).toFixed(1)).join(' ');
   };
   const tabBtn = (active) =>
-    'text-xs font-black uppercase px-3 py-2 rounded-full whitespace-nowrap ' +
-    (active ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-300 border border-bull-line hover:border-bull-lime/50');
+    'text-xs font-bold px-3 py-1.5 rounded-full whitespace-nowrap transition-colors ' +
+    (active ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line hover:border-bull-lime');
   const pill = (active) =>
-    'px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap ' +
-    (active ? 'bg-bull-lime text-bull-ink' : 'bg-bull-surface border border-bull-line text-slate-200 hover:border-bull-lime/50');
+    'px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-colors ' +
+    (active ? 'bg-bull-lime text-bull-ink' : 'bg-bull-surface border border-bull-line text-slate-300 hover:border-bull-lime');
+  const delta = (up) =>
+    'px-2 py-0.5 rounded-full text-xs font-bold font-mono ' + (up ? 'bg-emerald-900/40 text-bull-teal' : 'bg-rose-900/40 text-bull-coral');
+
+  const newsItems = (news || [])
+    .filter((n) => n.scope === 'market' || n.sym === selectedRealStock || (n.scope === 'sector' && n.category === activeAsset.category))
+    .slice(0, 4);
 
   return (
-    <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-28">
-      <Navbar />
-      <div className="max-w-[1360px] mx-auto px-4 pt-4 space-y-4">
-        <header className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
-              {greeting}{firstName ? ', ' : ''}<span className="text-bull-lime">{firstName}</span>
-            </h1>
-            <p className="text-slate-400 text-sm sm:text-base mt-1">Here is your practice portfolio overview. Generated prices, no live exchange execution.</p>
-          </div>
-          <div className="flex flex-wrap gap-2 items-center">
-            <div className="bg-bull-surface border border-bull-line px-4 py-2 rounded-full text-sm">
-              <span className="text-slate-400 mr-2">India time</span>
-              <span className="font-mono font-black text-white tabular-nums">{indiaTime}</span>
+    <>
+      <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-28">
+        <Navbar />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[65vh]"
+          style={{ background: 'radial-gradient(900px 440px at 50% 118%, rgba(163,230,53,0.16), transparent 65%)' }}
+        />
+        <div className="relative max-w-[1360px] mx-auto px-4 pt-4 space-y-4">
+          {/* Header */}
+          <header className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+                {greeting}{firstName ? ', ' : ''}<span className="text-bull-lime">{firstName}</span>
+              </h1>
+              <p className="text-slate-400 text-sm sm:text-base mt-1">Here is your practice portfolio overview. Generated prices, no live exchange execution.</p>
             </div>
-            <input
-              value={assetSearch}
-              onChange={(e) => setAssetSearch(e.target.value)}
-              placeholder="Search any asset"
-              aria-label="Search any asset"
-              className="bg-bull-surface border border-bull-line rounded-full px-4 py-2 text-sm w-full sm:w-64 focus:outline-none focus:border-bull-lime"
-            />
-          </div>
-        </header>
-
-        <div data-top-actions className="flex gap-2 overflow-x-auto pb-1">
-          {[['owned', 'Owned assets (' + ownedRows.length + ')'], ['history', 'Order history'], ['report', 'Report card'], ['pending', 'Pending orders (' + openOrders.length + ')']].map(([key, label]) => (
-            <button key={key} onClick={() => setActivePanel(activePanel === key ? null : key)} className={pill(activePanel === key)}>{label}</button>
-          ))}
-        </div>
-
-        {portfolioError && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">Portfolio load error: {portfolioError}</div>}
-        {marketMessage && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300">{marketMessage}</div>}
-
-        {/* Four stat boxes */}
-        <section data-stat-boxes className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <div className={card + ' p-5'}>
-            <div className="text-sm font-bold text-slate-400">Net worth</div>
-            <div className="text-xl sm:text-2xl font-black font-mono tabular-nums text-white mt-2 break-words">{money(netWorth)}</div>
-            <div className="flex items-center gap-2 mt-2 text-xs flex-wrap">
-              <span className={'px-2 py-0.5 rounded-full font-mono font-bold ' + (netReturn >= 0 ? 'bg-emerald-900/40 text-bull-teal' : 'bg-rose-900/40 text-bull-coral')}>
-                {(returnPct >= 0 ? '↑ ' : '↓ ') + Math.abs(returnPct).toFixed(2) + '%'}
+            <div className="flex flex-wrap gap-2 items-center">
+              <span className="inline-flex items-center gap-2 bg-bull-surface border border-bull-line px-4 py-2 rounded-full text-sm">
+                <span className="h-2 w-2 rounded-full bg-bull-teal" />
+                <span className="text-slate-300">Market open 24/7</span>
               </span>
-              <span className="text-slate-400">started with {money(START_BALANCE)}</span>
+              <span className="bg-bull-surface border border-bull-line px-4 py-2 rounded-full text-sm font-mono font-bold tabular-nums text-slate-200">{indiaTime}</span>
+              <input
+                value={assetSearch}
+                onChange={(e) => setAssetSearch(e.target.value)}
+                placeholder="Search any asset"
+                aria-label="Search any asset"
+                className="bg-bull-surface border border-bull-line rounded-full px-4 py-2 text-sm w-full sm:w-64 focus:outline-none focus:border-bull-lime"
+              />
             </div>
-          </div>
-          <div className={card + ' p-5'}>
-            <div className="text-sm font-bold text-slate-400">Holdings value</div>
-            <div className="text-xl sm:text-2xl font-black font-mono tabular-nums text-white mt-2 break-words">{money(holdingsValue)}</div>
-            <div className="text-xs text-slate-400 mt-2">{ownedRows.length} {ownedRows.length === 1 ? 'asset' : 'assets'} owned</div>
-          </div>
-          <div className={card + ' p-5'}>
-            <div className="text-sm font-bold text-slate-400">Profit / loss</div>
-            <div className={'text-xl sm:text-2xl font-black font-mono tabular-nums mt-2 break-words ' + (netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
-              {(netReturn >= 0 ? '+' : '-') + money(Math.abs(netReturn))}
-            </div>
-            <div className="text-xs text-slate-400 mt-2">{(returnPct >= 0 ? '+' : '') + returnPct.toFixed(2) + '% overall'}</div>
-          </div>
-          <div className="rounded-3xl p-5 bg-green-200 border border-green-300">
-            <div className="text-sm font-bold" style={{ color: '#14532d' }}>Available cash</div>
-            <div className="text-xl sm:text-2xl font-black font-mono tabular-nums mt-2 break-words" style={{ color: '#14532d' }}>{money(realBalance)}</div>
-            <div className="text-xs font-bold mt-2" style={{ color: '#166534' }}>Ready to invest</div>
-          </div>
-        </section>
+          </header>
 
-        {/* Row 1: net worth + insights | watchlist | my portfolio + cash */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:items-stretch">
-          <aside className={card + ' lg:col-span-8 p-4 relative min-h-[460px]'}>
-            <div className="lg:absolute lg:inset-4 flex flex-col">
+          {/* Pill tabs */}
+          <div data-top-actions className="flex gap-2 overflow-x-auto pb-1">
+            {[['owned', 'Owned assets (' + ownedRows.length + ')'], ['history', 'Order history'], ['report', 'Report card'], ['pending', 'Pending orders (' + openOrders.length + ')']].map(([key, label]) => (
+              <button key={key} onClick={() => setActivePanel(activePanel === key ? null : key)} className={pill(activePanel === key)}>{label}</button>
+            ))}
+          </div>
+
+          {portfolioError && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">Portfolio load error: {portfolioError}</div>}
+          {marketMessage && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300">{marketMessage}</div>}
+
+          {/* Row 1: net worth + news | watchlist | my portfolio */}
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:items-start">
+            <div className="lg:col-span-3 flex flex-col gap-4 min-w-0">
+              <div
+                className={card + ' p-5 overflow-hidden'}
+                style={{ backgroundImage: 'radial-gradient(130% 75% at 50% 125%, rgba(163,230,53,0.42), transparent 62%)' }}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm font-bold text-slate-400">Net worth</span>
+                  <span className={delta(netReturn >= 0)}>{(returnPct >= 0 ? '↑ ' : '↓ ') + Math.abs(returnPct).toFixed(2) + '%'}</span>
+                </div>
+                <div className="text-3xl font-semibold font-mono tabular-nums text-white mt-2 break-words">{money(netWorth)}</div>
+                <p className="text-xs text-slate-400 mt-1">Started with {money(START_BALANCE)}</p>
+
+                <dl className="mt-4 rounded-2xl bg-bull-surface/70 border border-bull-line divide-y divide-bull-line text-sm">
+                  <div className="flex items-center justify-between gap-2 px-4 py-3">
+                    <dt className="text-slate-400">Holdings value</dt>
+                    <dd className="font-bold font-mono tabular-nums">{money(holdingsValue)}</dd>
+                  </div>
+                  <div className="flex items-center justify-between gap-2 px-4 py-3">
+                    <dt className="text-slate-400">Profit / loss</dt>
+                    <dd className={'font-bold font-mono tabular-nums ' + (netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                      {(netReturn >= 0 ? '+' : '-') + money(Math.abs(netReturn))}
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="mt-3 rounded-2xl px-4 py-3.5 flex items-center justify-between gap-3 bg-green-200 border border-green-300">
+                  <div>
+                    <div className="text-sm font-bold" style={{ color: '#14532d' }}>Available cash</div>
+                    <div className="text-xs font-bold" style={{ color: '#166534' }}>Ready to invest</div>
+                  </div>
+                  <div className="text-base font-bold font-mono tabular-nums text-right break-words" style={{ color: '#14532d' }}>{money(realBalance)}</div>
+                </div>
+              </div>
+
+              <div className={card + ' p-4 sm:p-5'}>
+                <div className="text-base font-semibold mb-2">Market news (simulated)</div>
+                {newsItems.length === 0 ? (
+                  <p className="text-sm text-slate-400">No news for this asset in the last 24 hours.</p>
+                ) : (
+                  newsItems.map((n) => (
+                    <div key={n.id} className="flex gap-3 text-sm py-2 border-b border-bull-line last:border-0">
+                      <span className={'font-black ' + (n.direction > 0 ? 'text-bull-teal' : 'text-bull-coral')}>{n.direction > 0 ? '▲' : '▼'}</span>
+                      <span className="text-slate-200 flex-1">{n.headline}</span>
+                      <span className="text-slate-400 font-mono shrink-0">{new Date(n.time * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+                    </div>
+                  ))
+                )}
+                <p className="text-xs text-slate-400 mt-2">Invented headlines from a fictional newsroom. News is not advice and does not predict prices.</p>
+              </div>
+            </div>
+
+            {/* Watchlist */}
+            <aside className={card + ' lg:col-span-5 p-4 min-w-0'}>
               <div className="flex justify-between items-center">
-                <span className="text-base font-black">Watchlist</span>
+                <span className="text-base font-semibold">Watchlist</span>
                 <span className="text-xs text-bull-lime font-bold">{listAssets.length} assets</span>
               </div>
               <div className="flex gap-1.5 mt-3">
@@ -1339,7 +1375,7 @@ export default function RealSimulatorPage() {
                   <button key={category} onClick={() => { setAssetSearch(''); setSelectedCategory(category); }} className={tabBtn(!searchText && selectedCategory === category)}>{category}</button>
                 ))}
               </div>
-              <div className="max-h-[360px] lg:max-h-none lg:flex-1 lg:min-h-0 overflow-y-auto pr-1">
+              <div className="max-h-[420px] lg:max-h-[560px] overflow-y-auto pr-1">
                 {listAssets.length === 0 && <p className="text-sm text-slate-400 py-6 text-center">No assets match.</p>}
                 {listAssets.map((asset) => {
                   const quote = prices[asset.sym];
@@ -1351,11 +1387,11 @@ export default function RealSimulatorPage() {
                     <button
                       key={asset.sym}
                       onClick={() => { setSelectedRealStock(asset.sym); if (asset.category) setSelectedCategory(asset.category); if (orderStage !== 'IDLE') resetOrderDesk(); }}
-                      className={'w-full px-3 py-2.5 text-left flex items-center gap-3 rounded-2xl border my-1 ' + (selected ? 'bg-bull-raised border-bull-lime/70' : 'border-transparent hover:bg-bull-raised')}
+                      className={'w-full px-3 py-2.5 text-left flex items-center gap-3 rounded-2xl border my-1 transition-colors ' + (selected ? 'bg-bull-raised border-bull-lime' : 'border-transparent hover:bg-bull-raised')}
                     >
                       <span className="h-9 w-9 shrink-0 rounded-full bg-bull-raised border border-bull-line grid place-items-center text-xs font-black">{asset.sym.slice(0, 2)}</span>
                       <div className="min-w-0 flex-1">
-                        <div className="font-black text-sm">{asset.sym}</div>
+                        <div className="font-bold text-sm">{asset.sym}</div>
                         <div className="text-xs text-slate-400 truncate">{asset.name}{holding ? ' · owned ' + holding.shares : ''}</div>
                       </div>
                       {path && (
@@ -1364,606 +1400,579 @@ export default function RealSimulatorPage() {
                         </svg>
                       )}
                       <div className="text-right shrink-0">
-                        <div className="font-mono font-bold text-sm">{quote ? money(quote.price) : loadingPrices ? 'Loading…' : 'Unavailable'}</div>
+                        <div className="font-mono font-bold text-sm tabular-nums">{quote ? money(quote.price) : loadingPrices ? 'Loading…' : 'Unavailable'}</div>
                         <div className={'text-xs font-bold font-mono ' + (down ? 'text-bull-coral' : 'text-bull-teal')}>{quote?.changePct || '—'}</div>
                       </div>
                     </button>
                   );
                 })}
               </div>
-            </div>
-          </aside>
+            </aside>
 
-          <div className="lg:col-span-4 flex flex-col gap-4">
-            <div className={card + ' p-5 flex-1'}>
+            {/* My portfolio */}
+            <div className={card + ' lg:col-span-4 p-5 min-w-0'}>
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-base font-black">My portfolio</h3>
-                <button onClick={() => setActivePanel('owned')} className="text-xs font-bold px-3 py-1.5 rounded-full bg-bull-raised border border-bull-line hover:border-bull-lime/50">See all</button>
+                <h3 className="text-base font-semibold">My portfolio</h3>
+                <button onClick={() => setActivePanel('owned')} className="text-xs font-bold px-3 py-1.5 rounded-full bg-bull-raised border border-bull-line hover:border-bull-lime">See all</button>
               </div>
               {ownedRows.length === 0 ? (
-                <p className="text-sm text-slate-400 py-8 text-center">Nothing owned yet. Pick an asset and place a practice order.</p>
+                <p className="text-sm text-slate-400 py-10 text-center">Nothing owned yet. Pick an asset and place a practice order.</p>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
-                  {ownedRows.slice(0, 4).map((row) => (
-                    <button key={row.sym} onClick={() => openOwnedAsset(row)} className="text-left bg-bull-raised border border-bull-line rounded-2xl p-3 min-w-0 hover:border-bull-lime/50">
+                  {ownedRows.slice(0, 6).map((row) => (
+                    <button key={row.sym} onClick={() => openOwnedAsset(row)} className="text-left bg-bull-raised border border-bull-line rounded-2xl p-3 min-w-0 hover:border-bull-lime transition-colors">
                       <div className="flex items-center justify-between gap-2">
                         <span className="h-8 w-8 rounded-full bg-bull-surface border border-bull-line grid place-items-center text-xs font-black">{row.sym.slice(0, 2)}</span>
-                        <span className={'text-xs font-bold font-mono px-2 py-0.5 rounded-full ' + (row.pnl >= 0 ? 'bg-emerald-900/40 text-bull-teal' : 'bg-rose-900/40 text-bull-coral')}>
+                        <span className={delta(row.pnl >= 0)}>
                           {(row.pnlPct >= 0 ? '+' : '') + row.pnlPct.toFixed(2) + '%'}
                         </span>
                       </div>
-                      <div className="text-base font-black font-mono mt-2 truncate">{money(row.value)}</div>
+                      <div className="text-base font-bold font-mono mt-2 truncate">{money(row.value)}</div>
                       <div className="text-xs text-slate-400 flex justify-between mt-0.5 gap-2"><span className="truncate">{row.sym}</span><span className="shrink-0">Units {row.shares}</span></div>
                     </button>
                   ))}
                 </div>
               )}
             </div>
-
-            
-          </div>
-        </section>
-
-        {/* Row 2: chart | order ticket + news */}
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-4 items-start">
-          <section className={card + ' p-4 sm:p-6 min-w-0'}>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
-              <div className="min-w-0">
-                <div className="text-xs uppercase font-black tracking-wider text-bull-lime">{activeAsset.sector}</div>
-                <h2 className="text-xl sm:text-2xl font-black truncate">{activeAsset.name} <span className="text-slate-400 font-bold text-base">· {selectedRealStock}</span></h2>
-                <div className="flex items-baseline gap-3 mt-1 flex-wrap">
-                  <span className="text-3xl sm:text-4xl font-black font-mono tabular-nums">{activeQuote.price ? money(activeQuote.price) : 'Loading price…'}</span>
-                  <span className={'text-base font-bold font-mono ' + (priceUp ? 'text-bull-teal' : 'text-bull-coral')}>{activeQuote.changePct}</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
-                  <button key={key} onClick={() => chooseRange(key)} className={tabBtn(chartRange === key)}>{label}</button>
-                ))}
-              </div>
-            </div>
-            <PriceChart key={selectedRealStock} history={activeQuote.history} symbol={selectedRealStock} session={session} markers={chartMarkers} />
-            <div className="mt-3 text-xs text-slate-400">
-              {session?.range === '15m' ? 'Last 15 minutes of the simulated market.' : session?.range === '1h' ? 'Last hour of the simulated market.' : "Today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. Generated series, not exchange history.
-            </div>
           </section>
 
-          <aside id="order-desk" className="scroll-mt-24 space-y-4">
-            <div className={card + ' p-5'}>
-              {orderStage === 'IDLE' && (
-                <div className="space-y-4">
-                  <div className="flex justify-between items-baseline">
-                    <h3 className="text-lg font-black">Order ticket</h3>
-                    <span className="text-sm font-black text-bull-lime">{selectedRealStock}</span>
-                  </div>
-                  <div className="text-2xl font-black font-mono tabular-nums">
-                    {activeQuote.price ? money(activeQuote.price) : 'Loading price…'}
-                  </div>
-
-                  <div>
-                    <label htmlFor="order-quantity" className="block text-xs font-black uppercase text-slate-300 mb-1.5">
-                      Order size / units
-                    </label>
-                    <input
-                      id="order-quantity"
-                      type="number"
-                      min="0.001"
-                      step="any"
-                      value={realQtyInput}
-                      onChange={(event) => setRealQtyInput(event.target.value)}
-                      className="w-full border border-bull-line rounded-xl px-4 py-3 text-base font-mono font-bold bg-bull-raised focus:outline-none focus:border-bull-lime"
-                    />
-                    {activeQuote.price && Number(realQtyInput) > 0 && (
-                      <div className="text-sm text-slate-400 mt-1.5">
-                        Approx. value <b className="text-slate-200 font-mono">{money(Number(realQtyInput) * activeQuote.price)}</b>
-                      </div>
-                    )}
-                  </div>
-
-                  {!activeAsset.tradable && (
-                    <p className="text-sm text-amber-300">
-                      View-only index. To invest in it, buy the fund that tracks it (see the ETFs tab).
-                    </p>
-                  )}
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <button
-                      onClick={() => initiateOrderReview('BUY')}
-                      disabled={!activeAsset.tradable}
-                      className="bg-emerald-700 hover:bg-emerald-600 text-white text-sm uppercase font-black py-3.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                      Buy
-                    </button>
-                    <button
-                      onClick={() => initiateOrderReview('SELL')}
-                      disabled={!activeAsset.tradable}
-                      className="bg-rose-700 hover:bg-rose-600 text-white text-sm uppercase font-black py-3.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                      Sell
-                    </button>
+          {/* Row 2: chart | order ticket */}
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-4 items-start">
+            <section className={card + ' p-4 sm:p-6 min-w-0'}>
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
+                <div className="min-w-0">
+                  <div className="text-xs uppercase font-black tracking-wider text-bull-lime">{activeAsset.sector}</div>
+                  <h2 className="text-xl sm:text-2xl font-semibold truncate">{activeAsset.name} <span className="text-slate-400 font-bold text-base">· {selectedRealStock}</span></h2>
+                  <div className="flex items-baseline gap-3 mt-1 flex-wrap">
+                    <span className="text-3xl sm:text-4xl font-semibold font-mono tabular-nums">{activeQuote.price ? money(activeQuote.price) : 'Loading price…'}</span>
+                    <span className={'text-base font-bold font-mono ' + (priceUp ? 'text-bull-teal' : 'text-bull-coral')}>{activeQuote.changePct}</span>
                   </div>
                 </div>
-              )}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
+                    <button key={key} onClick={() => chooseRange(key)} className={tabBtn(chartRange === key)}>{label}</button>
+                  ))}
+                </div>
+              </div>
+              <PriceChart key={selectedRealStock} history={activeQuote.history} symbol={selectedRealStock} session={session} markers={chartMarkers} />
+              <div className="mt-3 text-xs text-slate-400">
+                {session?.range === '15m' ? 'Last 15 minutes of the simulated market.' : session?.range === '1h' ? 'Last hour of the simulated market.' : "Today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. Generated series, not exchange history.
+              </div>
+            </section>
 
-              {orderStage === 'REVIEW' && pendingOrder && (
-                <div className="space-y-4">
-                  <h3 className="font-black text-lg">
-                    {pendingOrder.type} order · {pendingOrder.name}
-                  </h3>
-
-                  <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-sm">
-                    <div><span className="block text-slate-400">Units</span><b>{pendingOrder.qty}</b></div>
-                    <div><span className="block text-slate-400">Price per unit</span><b>{money(pendingOrder.price)}</b></div>
-                  </div>
-                  {pendingOrder.marketPrice !== undefined && (
-                    <p className="text-xs text-slate-400">
-                      Screen price {money(pendingOrder.marketPrice)}. Your fill price is {money(pendingOrder.price)} because of slippage ({Number(pendingOrder.slippageBps || 0).toFixed(2)}%, about {money(pendingOrder.slippageAmount)} in total). Thin assets and big orders slip more.
-                    </p>
-                  )}
-
-                  <div className="bg-bull-raised border border-bull-line p-4 rounded-xl text-sm space-y-1.5">
-                    <div className="flex justify-between text-slate-300">
-                      <span>Order value</span>
-                      <span>{money(pendingOrder.totalCost)}</span>
+            <aside id="order-desk" className="scroll-mt-24">
+              <div className={card + ' p-5'}>
+                {orderStage === 'IDLE' && (
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-baseline">
+                      <h3 className="text-lg font-semibold">Order ticket</h3>
+                      <span className="text-sm font-black text-bull-lime">{selectedRealStock}</span>
                     </div>
-                    {(pendingOrder.costs?.lines || []).map((line) => (
-                      <div key={line.key} className="flex justify-between text-slate-400">
-                        <span>{line.label}</span>
-                        <span className={line.amount < 0 ? 'text-bull-teal' : ''}>
-                          {line.amount < 0 ? '-' : ''}{money(Math.abs(line.amount))}
-                        </span>
-                      </div>
-                    ))}
-                    <div className="flex justify-between border-t border-bull-line pt-1.5 font-black">
-                      <span>{pendingOrder.type === 'BUY' ? 'You pay in total' : 'You receive after charges'}</span>
-                      <span className="text-bull-lime">{money(pendingOrder.cashEffect)}</span>
+                    <div className="text-2xl font-semibold font-mono tabular-nums">
+                      {activeQuote.price ? money(activeQuote.price) : 'Loading price…'}
                     </div>
-                    {pendingOrder.intradayQty > 0 && (
-                      <p className="text-xs text-slate-400 pt-1">
-                        {pendingOrder.intradayQty} of these units were bought today, so they are treated as an intraday trade.
+
+                    <div>
+                      <label htmlFor="order-quantity" className="block text-xs font-black uppercase text-slate-300 mb-1.5">
+                        Order size / units
+                      </label>
+                      <input
+                        id="order-quantity"
+                        type="number"
+                        min="0.001"
+                        step="any"
+                        value={realQtyInput}
+                        onChange={(event) => setRealQtyInput(event.target.value)}
+                        className="w-full border border-bull-line rounded-xl px-4 py-3 text-base font-mono font-bold bg-bull-raised focus:outline-none focus:border-bull-lime"
+                      />
+                      {activeQuote.price && Number(realQtyInput) > 0 && (
+                        <div className="text-sm text-slate-400 mt-1.5">
+                          Approx. value <b className="text-slate-200 font-mono">{money(Number(realQtyInput) * activeQuote.price)}</b>
+                        </div>
+                      )}
+                    </div>
+
+                    {!activeAsset.tradable && (
+                      <p className="text-sm text-amber-300">
+                        View-only index. To invest in it, buy the fund that tracks it (see the ETFs tab).
                       </p>
                     )}
-                    <p className="text-xs text-slate-400 pt-1">
-                      Practice charges for a fictional market. All names and rates are invented. Not real money.
-                    </p>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => initiateOrderReview('BUY')}
+                        disabled={!activeAsset.tradable}
+                        className="bg-emerald-700 hover:bg-emerald-600 text-white text-sm uppercase font-black py-3.5 rounded-full disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        Buy
+                      </button>
+                      <button
+                        onClick={() => initiateOrderReview('SELL')}
+                        disabled={!activeAsset.tradable}
+                        className="bg-rose-700 hover:bg-rose-600 text-white text-sm uppercase font-black py-3.5 rounded-full disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        Sell
+                      </button>
+                    </div>
                   </div>
-
-                  <p className="text-sm text-amber-300">
-                    This is a simulated practice order, not an order sent to an exchange.
-                  </p>
-
-                  <div className="flex gap-3">
-                    <button
-                      onClick={processAndExecuteOrder}
-                      className="flex-1 bg-emerald-700 hover:bg-emerald-600 py-3 rounded-xl text-sm font-black uppercase"
-                    >
-                      Confirm order
-                    </button>
-                    <button
-                      onClick={resetOrderDesk}
-                      className="px-5 bg-bull-raised border border-bull-line rounded-xl text-sm font-bold"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {orderStage === 'PROCESSING' && (
-                <div className="py-10 text-center">
-                  <div className="animate-spin h-10 w-10 border-4 border-bull-lime/20 border-t-bull-lime rounded-full mx-auto mb-4" />
-                  <b className="text-base">{processingStatusText}</b>
-                  <p className="text-sm text-slate-400 mt-2">
-                    Updating the practice portfolio…
-                  </p>
-                </div>
-              )}
-
-              {orderStage === 'SUCCESS' && executedReceipt && (
-                <div className="space-y-4">
-                  <div className="text-emerald-300 font-black text-base">
-                    Simulated order completed · {executedReceipt.orderId}
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-sm">
-                    {[
-                      ['Asset / side', `${executedReceipt.sym} / ${executedReceipt.type}`],
-                      ['Units', executedReceipt.qty],
-                      ['Execution price', money(executedReceipt.price)],
-                      ['Order value', money(executedReceipt.totalCost)],
-                      ['Total charges', (executedReceipt.feesTotal < 0 ? '-' : '') + money(Math.abs(executedReceipt.feesTotal))],
-                      [executedReceipt.type === 'BUY' ? 'Cash paid' : 'Cash received', money(executedReceipt.cashEffect)],
-                      ['Cash remaining', money(executedReceipt.newBalance)],
-                      ['India time', executedReceipt.timestamp],
-                    ].map(([label, value]) => (
-                      <div key={label}>
-                        <span className="block text-slate-400">{label}</span>
-                        <b>{value}</b>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={resetOrderDesk}
-                    className="w-full bg-bull-lime hover:bg-bull-lime-light text-bull-ink px-5 py-3 rounded-xl text-sm font-black uppercase"
-                  >
-                    Done / new order
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {(() => {
-              const items = (news || [])
-                .filter((n) => n.scope === 'market' || n.sym === selectedRealStock || (n.scope === 'sector' && n.category === activeAsset.category))
-                .slice(0, 4);
-              return (
-                <div className={card + ' p-4 sm:p-5'}>
-                  <div className="text-base font-black mb-2">Market news (simulated)</div>
-                  {items.length === 0 ? (
-                    <p className="text-sm text-slate-400">No news for this asset in the last 24 hours.</p>
-                  ) : (
-                    items.map((n) => (
-                      <div key={n.id} className="flex gap-3 text-sm py-2 border-b border-bull-line last:border-0">
-                        <span className={'font-black ' + (n.direction > 0 ? 'text-bull-teal' : 'text-bull-coral')}>{n.direction > 0 ? '▲' : '▼'}</span>
-                        <span className="text-slate-200 flex-1">{n.headline}</span>
-                        <span className="text-slate-400 font-mono shrink-0">{new Date(n.time * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })}</span>
-                      </div>
-                    ))
-                  )}
-                  <p className="text-xs text-slate-400 mt-2">Invented headlines from a fictional newsroom. News is not advice and does not predict prices.</p>
-                </div>
-              );
-            })()}
-          </aside>
-        </div>
-
-        {/* Row 3: recent orders */}
-        <section className={card + ' p-4 sm:p-5'}>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
-            <h3 className="text-lg font-black">Recent orders</h3>
-            <div className="flex gap-2">
-              <input value={orderSearch} onChange={(e) => setOrderSearch(e.target.value)} placeholder="Search asset" aria-label="Search orders" className="bg-bull-raised border border-bull-line rounded-full px-4 py-2 text-sm w-full sm:w-48 focus:outline-none focus:border-bull-lime" />
-              <select value={historyFilter} onChange={(e) => setHistoryFilter(e.target.value)} aria-label="Filter orders" className="bg-bull-raised border border-bull-line rounded-full px-3 py-2 text-sm">
-                <option value="ALL">All</option>
-                <option value="BUY">Buys</option>
-                <option value="SELL">Sells</option>
-              </select>
-            </div>
-          </div>
-          {!user ? (
-            <p className="text-sm text-slate-400 py-6 text-center">Log in to see your orders.</p>
-          ) : recentRows.length === 0 ? (
-            <p className="text-sm text-slate-400 py-6 text-center">{historyLoading ? 'Loading…' : 'No orders yet. Your buys and sells will be listed here.'}</p>
-          ) : (
-            <div className="overflow-x-auto rounded-2xl border border-bull-line">
-              <table className="w-full text-sm min-w-[640px]">
-                <thead className="bg-bull-raised text-slate-400 text-xs">
-                  <tr>{['Asset', 'Side', 'Units', 'Price', 'Order value', 'Status', 'Date'].map((h) => <th key={h} className="text-left font-bold px-4 py-3">{h}</th>)}</tr>
-                </thead>
-                <tbody>
-                  {recentRows.map((row) => (
-                    <tr key={row.id} className="border-t border-bull-line">
-                      <td className="px-4 py-3 font-black">{row.sym}</td>
-                      <td className="px-4 py-3"><span className={'text-xs font-black px-2 py-0.5 rounded-full ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>{row.side === 'BUY' ? 'Bought' : 'Sold'}</span></td>
-                      <td className="px-4 py-3 font-mono">{Number(row.qty)}</td>
-                      <td className="px-4 py-3 font-mono">{money(row.price)}</td>
-                      <td className="px-4 py-3 font-mono">{money(row.gross)}</td>
-                      <td className="px-4 py-3"><span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-bull-teal" />Completed</span></td>
-                      <td className="px-4 py-3 text-slate-400 whitespace-nowrap">{new Date(row.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true })}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </section>
-
-        <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs sm:text-sm text-amber-200">
-          These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice. Every company, currency, fund and index here is fictional.
-        </div>
-      </div>
-
-      {activePanel && (
-        <div
-          className="fixed inset-0 z-40 flex items-end justify-center bg-black/60"
-          onClick={() => setActivePanel(null)}
-        >
-          <div
-            className="w-full max-w-[900px] max-h-[75vh] overflow-y-auto bg-bull-surface border border-bull-line rounded-t-3xl p-4 sm:p-5 pb-24"
-            onClick={(event) => event.stopPropagation()}
-          >
-            {activePanel === 'owned' && (
-              <div>
-                <div className="flex justify-between items-center pb-3 border-b border-bull-line">
-                  <h3 className="font-black text-sm uppercase">Owned assets</h3>
-                  <span className="text-xs text-slate-400">
-                    Holdings value {money(holdingsValue)}
-                  </span>
-                </div>
-
-                {ownedRows.length === 0 && (
-                  <p className="text-xs text-slate-400 py-8 text-center">
-                    You do not own anything yet. Pick an asset and place a practice order.
-                  </p>
                 )}
 
-                <div className="divide-y divide-bull-line">
-                  {ownedRows.map((row) => (
-                    <div key={row.sym} className="py-3 flex flex-col sm:flex-row sm:items-center gap-3">
-                      <button
-                        onClick={() => openOwnedAsset(row)}
-                        className="text-left min-w-0 sm:w-1/3"
-                      >
-                        <div className="font-black text-sm">{row.sym}</div>
-                        <div className="text-xs text-slate-400 truncate">{row.name}</div>
-                      </button>
+                {orderStage === 'REVIEW' && pendingOrder && (
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg">
+                      {pendingOrder.type} order · {pendingOrder.name}
+                    </h3>
 
-                      <div className="grid grid-cols-3 gap-2 text-xs flex-1">
-                        <div>
-                          <span className="block text-xs text-slate-500">Units / avg</span>
-                          <b className="font-mono">{row.shares}</b>
-                          <span className="block text-xs text-slate-400 font-mono">{money(row.avg)}</span>
-                        </div>
-                        <div>
-                          <span className="block text-xs text-slate-500">Price / value</span>
-                          <b className="font-mono">{money(row.price)}</b>
-                          <span className="block text-xs text-slate-400 font-mono">{money(row.value)}</span>
-                        </div>
-                        <div>
-                          <span className="block text-xs text-slate-500">Profit / loss</span>
-                          <b className={'font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
-                            {(row.pnl >= 0 ? '+' : '-') + money(Math.abs(row.pnl))}
-                          </b>
-                          <span className={'block text-xs font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
-                            {(row.pnlPct >= 0 ? '+' : '') + row.pnlPct.toFixed(2) + '%'}
+                    <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-sm">
+                      <div><span className="block text-slate-400">Units</span><b>{pendingOrder.qty}</b></div>
+                      <div><span className="block text-slate-400">Price per unit</span><b>{money(pendingOrder.price)}</b></div>
+                    </div>
+                    {pendingOrder.marketPrice !== undefined && (
+                      <p className="text-xs text-slate-400">
+                        Screen price {money(pendingOrder.marketPrice)}. Your fill price is {money(pendingOrder.price)} because of slippage ({Number(pendingOrder.slippageBps || 0).toFixed(2)}%, about {money(pendingOrder.slippageAmount)} in total). Thin assets and big orders slip more.
+                      </p>
+                    )}
+
+                    <div className="bg-bull-raised border border-bull-line p-4 rounded-xl text-sm space-y-1.5">
+                      <div className="flex justify-between text-slate-300">
+                        <span>Order value</span>
+                        <span>{money(pendingOrder.totalCost)}</span>
+                      </div>
+                      {(pendingOrder.costs?.lines || []).map((line) => (
+                        <div key={line.key} className="flex justify-between text-slate-400">
+                          <span>{line.label}</span>
+                          <span className={line.amount < 0 ? 'text-bull-teal' : ''}>
+                            {line.amount < 0 ? '-' : ''}{money(Math.abs(line.amount))}
                           </span>
                         </div>
+                      ))}
+                      <div className="flex justify-between border-t border-bull-line pt-1.5 font-black">
+                        <span>{pendingOrder.type === 'BUY' ? 'You pay in total' : 'You receive after charges'}</span>
+                        <span className="text-bull-lime">{money(pendingOrder.cashEffect)}</span>
                       </div>
+                      {pendingOrder.intradayQty > 0 && (
+                        <p className="text-xs text-slate-400 pt-1">
+                          {pendingOrder.intradayQty} of these units were bought today, so they are treated as an intraday trade.
+                        </p>
+                      )}
+                      <p className="text-xs text-slate-400 pt-1">
+                        Practice charges for a fictional market. All names and rates are invented. Not real money.
+                      </p>
+                    </div>
 
+                    <p className="text-sm text-amber-300">
+                      This is a simulated practice order, not an order sent to an exchange.
+                    </p>
+
+                    <div className="flex gap-3">
                       <button
-                        onClick={() => quickSell(row)}
-                        disabled={quoteLoading}
-                        className="bg-rose-700 hover:bg-rose-600 text-white text-xs uppercase font-black px-4 py-2.5 rounded-xl disabled:opacity-50"
+                        onClick={processAndExecuteOrder}
+                        className="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white py-3 rounded-full text-sm font-black uppercase"
                       >
-                        Sell all
+                        Confirm order
+                      </button>
+                      <button
+                        onClick={resetOrderDesk}
+                        className="px-5 bg-bull-raised border border-bull-line rounded-full text-sm font-bold"
+                      >
+                        Cancel
                       </button>
                     </div>
-                  ))}
-                </div>
-                <p className="text-xs text-slate-500 pt-3">
-                  Profit and loss here is before selling charges. Sell all opens the order review so you can see the exact charges first.
-                </p>
-              </div>
-            )}
-
-            {activePanel === 'pending' && (
-              <div data-pending-panel>
-                <div className="flex justify-between items-center pb-3 border-b border-bull-line">
-                  <h3 className="font-black text-sm uppercase">Pending orders</h3>
-                  <span className="text-xs text-slate-400">Practice money only</span>
-                </div>
-
-                <div className="mt-3 bg-bull-raised border border-bull-line rounded-xl p-3 space-y-3">
-                  <div className="text-xs text-slate-300">
-                    <b>{activeAsset.name}</b> now {money(activeQuote.price)}. Change the asset from the market list above.
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    <select
-                      value={orderKind}
-                      onChange={(e) => setOrderKind(e.target.value)}
-                      className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
-                    >
-                      <option value="LIMIT_BUY">Limit buy - buy when price falls to</option>
-                      <option value="LIMIT_SELL">Limit sell - sell when price rises to</option>
-                      <option value="STOP_LOSS">Stop-loss - sell when price falls to</option>
-                      <option value="TAKE_PROFIT">Take-profit - sell when price rises to</option>
-                    </select>
-                    <input
-                      type="number"
-                      min="0"
-                      step="any"
-                      value={orderQty}
-                      onChange={(e) => setOrderQty(e.target.value)}
-                      placeholder="Units"
-                      className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
-                    />
-                    <input
-                      type="number"
-                      min="0"
-                      step="any"
-                      value={orderTrigger}
-                      onChange={(e) => setOrderTrigger(e.target.value)}
-                      placeholder="Trigger price"
-                      className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
-                    />
-                  </div>
-                  <button
-                    onClick={placePendingOrder}
-                    disabled={orderBusy || !user}
-                    className="w-full py-2.5 rounded-xl text-xs font-black uppercase bg-bull-lime text-bull-ink disabled:opacity-50"
-                  >
-                    {orderBusy ? 'Placing...' : 'Place pending order'}
-                  </button>
-                  {orderNote && <p className="text-xs text-slate-300">{orderNote}</p>}
-                </div>
+                )}
 
-                <div className="mt-4 text-xs font-black uppercase text-slate-400">Open orders</div>
-                {openOrders.length === 0 && <p className="text-xs text-slate-500 py-3">No open orders.</p>}
-                {openOrders.map((o) => (
-                  <div key={o.id} className="flex items-center justify-between gap-2 text-xs py-2 border-b border-bull-line">
-                    <div>
-                      <b>{o.sym}</b>{' '}
-                      <span className="text-slate-400">
-                        {({ LIMIT_BUY: 'Limit buy', LIMIT_SELL: 'Limit sell', STOP_LOSS: 'Stop-loss', TAKE_PROFIT: 'Take-profit' })[o.kind] || o.kind}
-                        {' '}{o.qty} units at {money(o.trigger_price)}
-                      </span>
-                      <div className="text-xs text-slate-500">
-                        Expires {new Date(new Date(o.created_at).getTime() + 86400000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} India time
-                      </div>
+                {orderStage === 'PROCESSING' && (
+                  <div className="py-10 text-center">
+                    <div className="animate-spin h-10 w-10 border-4 border-bull-lime/20 border-t-bull-lime rounded-full mx-auto mb-4" />
+                    <b className="text-base">{processingStatusText}</b>
+                    <p className="text-sm text-slate-400 mt-2">
+                      Updating the practice portfolio…
+                    </p>
+                  </div>
+                )}
+
+                {orderStage === 'SUCCESS' && executedReceipt && (
+                  <div className="space-y-4">
+                    <div className="text-emerald-300 font-black text-base">
+                      Simulated order completed · {executedReceipt.orderId}
                     </div>
-                    <button
-                      onClick={() => cancelPendingOrder(o.id)}
-                      className="px-3 py-1.5 rounded-xl text-xs font-black uppercase border border-bull-line text-bull-coral"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                ))}
 
-                <div className="mt-4 text-xs font-black uppercase text-slate-400">Recent results</div>
-                {orderRows.filter((o) => o.status !== 'OPEN').length === 0 && <p className="text-xs text-slate-500 py-3">Nothing yet.</p>}
-                {orderRows.filter((o) => o.status !== 'OPEN').slice(0, 10).map((o) => (
-                  <div key={o.id} className="flex justify-between gap-2 text-xs py-1.5 text-slate-300">
-                    <span>{o.sym} {o.kind.replace('_', ' ').toLowerCase()} {o.qty} at {money(o.trigger_price)}</span>
-                    <span className={o.status === 'FILLED' ? 'text-bull-teal font-black' : 'text-slate-500'}>
-                      {o.status === 'FILLED' ? 'Filled at ' + money(o.fill_price) : (o.note || o.status.toLowerCase())}
-                    </span>
-                  </div>
-                ))}
-
-                <p className="text-xs text-slate-500 pt-3">
-                  Orders last 24 hours. The server watches the simulated price: when it first meets your trigger, the order fills at that price, even if it happened while you were away. Slippage and practice charges apply. Cash is not set aside for a buy: you need enough cash at the moment it triggers, or the order fails. Stop-loss and take-profit orders sell what you own at the time.
-                </p>
-              </div>
-            )}
-
-            {activePanel === 'report' && (
-              <div>
-                <div className="flex justify-between items-center pb-3 border-b border-bull-line">
-                  <h3 className="font-black text-sm uppercase">Report card</h3>
-                  <span className="text-xs text-slate-400">Practice money only</span>
-                </div>
-                {reportError && <p className="text-xs text-rose-300 py-4">{reportError}</p>}
-                {reportLoading && !report && <p className="text-xs text-slate-400 py-4">Building your report card...</p>}
-                {report && (
-                  <div className="space-y-4 pt-3">
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-sm">
                       {[
-                        ['Realized gain (after charges)', money(report.realizedGain), report.realizedGain >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
-                        ['Estimated practice tax', money(report.estimatedTax), 'text-slate-100'],
-                        ['Gain after estimated tax', money(report.afterTaxGain), report.afterTaxGain >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
-                        ['Charges paid', money(report.chargesPaid), 'text-slate-100'],
-                        ['Slippage paid', money(report.slippagePaid), 'text-slate-100'],
-                        ['Win rate', report.winRatePct === null ? '-' : report.winRatePct + '% (' + report.wins + 'W / ' + report.losses + 'L)', 'text-slate-100'],
-                        ['Average holding time', report.avgHoldDays === null ? '-' : report.avgHoldDays + ' days', 'text-slate-100'],
-                        ['Orders', report.trades + ' (' + report.buys + ' buys, ' + report.sells + ' sells)', 'text-slate-100'],
-                      ].map(([label, value, color]) => (
-                        <div key={label} className="bg-bull-raised border border-bull-line rounded-xl p-3">
-                          <div className="text-xs font-black tracking-wider text-slate-500 uppercase">{label}</div>
-                          <div className={'text-sm font-black mt-1 font-mono ' + color}>{value}</div>
+                        ['Asset / side', `${executedReceipt.sym} / ${executedReceipt.type}`],
+                        ['Units', executedReceipt.qty],
+                        ['Execution price', money(executedReceipt.price)],
+                        ['Order value', money(executedReceipt.totalCost)],
+                        ['Total charges', (executedReceipt.feesTotal < 0 ? '-' : '') + money(Math.abs(executedReceipt.feesTotal))],
+                        [executedReceipt.type === 'BUY' ? 'Cash paid' : 'Cash received', money(executedReceipt.cashEffect)],
+                        ['Cash remaining', money(executedReceipt.newBalance)],
+                        ['India time', executedReceipt.timestamp],
+                      ].map(([label, value]) => (
+                        <div key={label}>
+                          <span className="block text-slate-400">{label}</span>
+                          <b>{value}</b>
                         </div>
                       ))}
                     </div>
-                    <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
-                        <span className="block text-xs text-slate-500 uppercase font-black">Best sale</span>
-                        <b>{report.best ? report.best.sym + '  +' + money(report.best.gain) : '-'}</b>
-                      </div>
-                      <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
-                        <span className="block text-xs text-slate-500 uppercase font-black">Worst sale</span>
-                        <b>{report.worst ? report.worst.sym + '  -' + money(Math.abs(report.worst.gain)) : '-'}</b>
-                      </div>
-                    </div>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      The tax figure is an estimate for learning. It is not taken from your cash. Gains from units held under {report.rates.shortDays} days use an invented {Math.round(report.rates.shortRate * 100)}% rate; longer holds use an invented {Math.round(report.rates.longRate * 100)}% rate; losses are not refunded. Your sells are matched to your earliest buys first.
-                      {report.unmatchedQty > 0 ? ' ' + report.unmatchedQty + ' sold units were bought before order history started and are left out.' : ''}
-                    </p>
+
+                    <button
+                      onClick={resetOrderDesk}
+                      className="w-full bg-bull-lime hover:bg-bull-lime-light text-bull-ink px-5 py-3 rounded-full text-sm font-black uppercase"
+                    >
+                      Done / new order
+                    </button>
                   </div>
                 )}
               </div>
-            )}
+            </aside>
+          </div>
 
-            {activePanel === 'history' && (
-              <div>
-                <div className="flex justify-between items-center pb-3 border-b border-bull-line gap-3">
-                  <h3 className="font-black text-sm uppercase">Order history</h3>
-                  <div className="flex gap-1.5">
-                    {[['ALL', 'All'], ['BUY', 'Buys'], ['SELL', 'Sells']].map(([key, label]) => (
-                      <button
-                        key={key}
-                        onClick={() => setHistoryFilter(key)}
-                        className={'text-xs font-black uppercase px-3 py-1.5 rounded-xl ' + (historyFilter === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line')}
-                      >
-                        {label}
-                      </button>
+          {/* Row 3: recent orders */}
+          <section className={card + ' p-4 sm:p-5'}>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+              <h3 className="text-lg font-semibold">Recent orders</h3>
+              <div className="flex gap-2">
+                <input value={orderSearch} onChange={(e) => setOrderSearch(e.target.value)} placeholder="Search asset" aria-label="Search orders" className="bg-bull-raised border border-bull-line rounded-full px-4 py-2 text-sm w-full sm:w-48 focus:outline-none focus:border-bull-lime" />
+                <select value={historyFilter} onChange={(e) => setHistoryFilter(e.target.value)} aria-label="Filter orders" className="bg-bull-raised border border-bull-line rounded-full px-3 py-2 text-sm">
+                  <option value="ALL">All</option>
+                  <option value="BUY">Buys</option>
+                  <option value="SELL">Sells</option>
+                </select>
+              </div>
+            </div>
+            {!user ? (
+              <p className="text-sm text-slate-400 py-6 text-center">Log in to see your orders.</p>
+            ) : recentRows.length === 0 ? (
+              <p className="text-sm text-slate-400 py-6 text-center">{historyLoading ? 'Loading…' : 'No orders yet. Your buys and sells will be listed here.'}</p>
+            ) : (
+              <div className="overflow-x-auto rounded-2xl border border-bull-line">
+                <table className="w-full text-sm min-w-[640px]">
+                  <thead className="bg-bull-raised text-slate-400 text-xs">
+                    <tr>{['Asset', 'Side', 'Units', 'Price', 'Order value', 'Status', 'Date'].map((h) => <th key={h} className="text-left font-bold px-4 py-3">{h}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {recentRows.map((row) => (
+                      <tr key={row.id} className="border-t border-bull-line">
+                        <td className="px-4 py-3 font-bold">{row.sym}</td>
+                        <td className="px-4 py-3"><span className={'text-xs font-black px-2 py-0.5 rounded-full ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>{row.side === 'BUY' ? 'Bought' : 'Sold'}</span></td>
+                        <td className="px-4 py-3 font-mono">{Number(row.qty)}</td>
+                        <td className="px-4 py-3 font-mono">{money(row.price)}</td>
+                        <td className="px-4 py-3 font-mono">{money(row.gross)}</td>
+                        <td className="px-4 py-3"><span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-bull-teal" />Completed</span></td>
+                        <td className="px-4 py-3 text-slate-400 whitespace-nowrap">{new Date(row.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true })}</td>
+                      </tr>
                     ))}
-                  </div>
-                </div>
-
-                {historyError && <p className="text-xs text-rose-300 py-4">{historyError}</p>}
-                {historyLoading && historyRows.length === 0 && (
-                  <p className="text-xs text-slate-400 py-8 text-center">Loading...</p>
-                )}
-                {!historyLoading && !historyError && historyRows.length === 0 && (
-                  <p className="text-xs text-slate-400 py-8 text-center">
-                    No orders yet. Your buys and sells will be listed here.
-                  </p>
-                )}
-
-                <div className="divide-y divide-bull-line">
-                  {historyRows
-                    .filter((row) => historyFilter === 'ALL' || row.side === historyFilter)
-                    .map((row) => {
-                      const fees = Number(row.fees_total || 0);
-                      const gross = Number(row.gross || 0);
-                      const cash = row.side === 'BUY' ? gross + fees : gross - fees;
-                      const showType =
-                        row.trade_type && (row.asset_class === 'equity' || row.asset_class === 'etf');
-                      const when = new Date(row.created_at).toLocaleString('en-IN', {
-                        timeZone: 'Asia/Kolkata',
-                        day: '2-digit',
-                        month: 'short',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true,
-                      });
-                      return (
-                        <div key={row.id} className="py-3 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs items-center">
-                          <div>
-                            <span className={'inline-block text-xs font-black px-2 py-0.5 rounded-md ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>
-                              {row.side === 'BUY' ? 'BOUGHT' : 'SOLD'}
-                            </span>
-                            <div className="font-black text-sm mt-1">{row.sym}</div>
-                            <div className="text-xs text-slate-500">{when}</div>
-                          </div>
-                          <div>
-                            <span className="block text-xs text-slate-500">Units at price</span>
-                            <b className="font-mono">{Number(row.qty)} @ {money(row.price)}</b>
-                          </div>
-                          <div>
-                            <span className="block text-xs text-slate-500">Order value</span>
-                            <b className="font-mono">{money(gross)}</b>
-                          </div>
-                          <div>
-                            <span className="block text-xs text-slate-500">Charges</span>
-                            <b className="font-mono">{(fees < 0 ? '-' : '') + money(Math.abs(fees))}</b>
-                            {showType && <span className="block text-xs text-slate-400">{row.trade_type}</span>}
-                          </div>
-                          <div>
-                            <span className="block text-xs text-slate-500">
-                              {row.side === 'BUY' ? 'Cash paid' : 'Cash received'}
-                            </span>
-                            <b className="font-mono">{money(cash)}</b>
-                            {row.side === 'SELL' && row.realized_gross !== null && row.realized_gross !== undefined && (
-                              <span className={'block text-xs font-mono ' + (Number(row.realized_gross) >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
-                                {'P/L before charges ' + (Number(row.realized_gross) >= 0 ? '+' : '-') + money(Math.abs(Number(row.realized_gross)))}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
-                </div>
-                <p className="text-xs text-slate-500 pt-3">
-                  Shows your latest 100 orders. Dividends will appear here once they go live. Trades made before order history started are not listed.
-                </p>
+                  </tbody>
+                </table>
               </div>
             )}
+          </section>
+
+          <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs sm:text-sm text-amber-200">
+            These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice. Every company, currency, fund and index here is fictional.
           </div>
         </div>
-      )}
 
-    </main>
+        {activePanel && (
+          <div
+            className="fixed inset-0 z-40 flex items-end justify-center bg-black/50"
+            onClick={() => setActivePanel(null)}
+          >
+            <div
+              className="w-full max-w-[900px] max-h-[75vh] overflow-y-auto bg-bull-surface border border-bull-line rounded-t-3xl p-4 sm:p-5 pb-24"
+              onClick={(event) => event.stopPropagation()}
+            >
+              {activePanel === 'owned' && (
+                <div>
+                  <div className="flex justify-between items-center pb-3 border-b border-bull-line">
+                    <h3 className="font-black text-sm uppercase">Owned assets</h3>
+                    <span className="text-xs text-slate-400">
+                      Holdings value {money(holdingsValue)}
+                    </span>
+                  </div>
+
+                  {ownedRows.length === 0 && (
+                    <p className="text-xs text-slate-400 py-8 text-center">
+                      You do not own anything yet. Pick an asset and place a practice order.
+                    </p>
+                  )}
+
+                  <div className="divide-y divide-bull-line">
+                    {ownedRows.map((row) => (
+                      <div key={row.sym} className="py-3 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <button
+                          onClick={() => openOwnedAsset(row)}
+                          className="text-left min-w-0 sm:w-1/3"
+                        >
+                          <div className="font-black text-sm">{row.sym}</div>
+                          <div className="text-xs text-slate-400 truncate">{row.name}</div>
+                        </button>
+
+                        <div className="grid grid-cols-3 gap-2 text-xs flex-1">
+                          <div>
+                            <span className="block text-xs text-slate-500">Units / avg</span>
+                            <b className="font-mono">{row.shares}</b>
+                            <span className="block text-xs text-slate-400 font-mono">{money(row.avg)}</span>
+                          </div>
+                          <div>
+                            <span className="block text-xs text-slate-500">Price / value</span>
+                            <b className="font-mono">{money(row.price)}</b>
+                            <span className="block text-xs text-slate-400 font-mono">{money(row.value)}</span>
+                          </div>
+                          <div>
+                            <span className="block text-xs text-slate-500">Profit / loss</span>
+                            <b className={'font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                              {(row.pnl >= 0 ? '+' : '-') + money(Math.abs(row.pnl))}
+                            </b>
+                            <span className={'block text-xs font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                              {(row.pnlPct >= 0 ? '+' : '') + row.pnlPct.toFixed(2) + '%'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => quickSell(row)}
+                          disabled={quoteLoading}
+                          className="bg-rose-700 hover:bg-rose-600 text-white text-xs uppercase font-black px-4 py-2.5 rounded-xl disabled:opacity-50"
+                        >
+                          Sell all
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 pt-3">
+                    Profit and loss here is before selling charges. Sell all opens the order review so you can see the exact charges first.
+                  </p>
+                </div>
+              )}
+
+              {activePanel === 'pending' && (
+                <div data-pending-panel>
+                  <div className="flex justify-between items-center pb-3 border-b border-bull-line">
+                    <h3 className="font-black text-sm uppercase">Pending orders</h3>
+                    <span className="text-xs text-slate-400">Practice money only</span>
+                  </div>
+
+                  <div className="mt-3 bg-bull-raised border border-bull-line rounded-xl p-3 space-y-3">
+                    <div className="text-xs text-slate-300">
+                      <b>{activeAsset.name}</b> now {money(activeQuote.price)}. Change the asset from the market list above.
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      <select
+                        value={orderKind}
+                        onChange={(e) => setOrderKind(e.target.value)}
+                        className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
+                      >
+                        <option value="LIMIT_BUY">Limit buy - buy when price falls to</option>
+                        <option value="LIMIT_SELL">Limit sell - sell when price rises to</option>
+                        <option value="STOP_LOSS">Stop-loss - sell when price falls to</option>
+                        <option value="TAKE_PROFIT">Take-profit - sell when price rises to</option>
+                      </select>
+                      <input
+                        type="number"
+                        min="0"
+                        step="any"
+                        value={orderQty}
+                        onChange={(e) => setOrderQty(e.target.value)}
+                        placeholder="Units"
+                        className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
+                      />
+                      <input
+                        type="number"
+                        min="0"
+                        step="any"
+                        value={orderTrigger}
+                        onChange={(e) => setOrderTrigger(e.target.value)}
+                        placeholder="Trigger price"
+                        className="bg-bull-bg border border-bull-line rounded-xl px-3 py-2 text-xs text-slate-100"
+                      />
+                    </div>
+                    <button
+                      onClick={placePendingOrder}
+                      disabled={orderBusy || !user}
+                      className="w-full py-2.5 rounded-xl text-xs font-black uppercase bg-bull-lime text-bull-ink disabled:opacity-50"
+                    >
+                      {orderBusy ? 'Placing...' : 'Place pending order'}
+                    </button>
+                    {orderNote && <p className="text-xs text-slate-300">{orderNote}</p>}
+                  </div>
+
+                  <div className="mt-4 text-xs font-black uppercase text-slate-400">Open orders</div>
+                  {openOrders.length === 0 && <p className="text-xs text-slate-500 py-3">No open orders.</p>}
+                  {openOrders.map((o) => (
+                    <div key={o.id} className="flex items-center justify-between gap-2 text-xs py-2 border-b border-bull-line">
+                      <div>
+                        <b>{o.sym}</b>{' '}
+                        <span className="text-slate-400">
+                          {({ LIMIT_BUY: 'Limit buy', LIMIT_SELL: 'Limit sell', STOP_LOSS: 'Stop-loss', TAKE_PROFIT: 'Take-profit' })[o.kind] || o.kind}
+                          {' '}{o.qty} units at {money(o.trigger_price)}
+                        </span>
+                        <div className="text-xs text-slate-500">
+                          Expires {new Date(new Date(o.created_at).getTime() + 86400000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} India time
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => cancelPendingOrder(o.id)}
+                        className="px-3 py-1.5 rounded-xl text-xs font-black uppercase border border-bull-line text-bull-coral"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ))}
+
+                  <div className="mt-4 text-xs font-black uppercase text-slate-400">Recent results</div>
+                  {orderRows.filter((o) => o.status !== 'OPEN').length === 0 && <p className="text-xs text-slate-500 py-3">Nothing yet.</p>}
+                  {orderRows.filter((o) => o.status !== 'OPEN').slice(0, 10).map((o) => (
+                    <div key={o.id} className="flex justify-between gap-2 text-xs py-1.5 text-slate-300">
+                      <span>{o.sym} {o.kind.replace('_', ' ').toLowerCase()} {o.qty} at {money(o.trigger_price)}</span>
+                      <span className={o.status === 'FILLED' ? 'text-bull-teal font-black' : 'text-slate-500'}>
+                        {o.status === 'FILLED' ? 'Filled at ' + money(o.fill_price) : (o.note || o.status.toLowerCase())}
+                      </span>
+                    </div>
+                  ))}
+
+                  <p className="text-xs text-slate-500 pt-3">
+                    Orders last 24 hours. The server watches the simulated price: when it first meets your trigger, the order fills at that price, even if it happened while you were away. Slippage and practice charges apply. Cash is not set aside for a buy: you need enough cash at the moment it triggers, or the order fails. Stop-loss and take-profit orders sell what you own at the time.
+                  </p>
+                </div>
+              )}
+
+              {activePanel === 'report' && (
+                <div>
+                  <div className="flex justify-between items-center pb-3 border-b border-bull-line">
+                    <h3 className="font-black text-sm uppercase">Report card</h3>
+                    <span className="text-xs text-slate-400">Practice money only</span>
+                  </div>
+                  {reportError && <p className="text-xs text-rose-300 py-4">{reportError}</p>}
+                  {reportLoading && !report && <p className="text-xs text-slate-400 py-4">Building your report card...</p>}
+                  {report && (
+                    <div className="space-y-4 pt-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        {[
+                          ['Realized gain (after charges)', money(report.realizedGain), report.realizedGain >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
+                          ['Estimated practice tax', money(report.estimatedTax), 'text-slate-100'],
+                          ['Gain after estimated tax', money(report.afterTaxGain), report.afterTaxGain >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
+                          ['Charges paid', money(report.chargesPaid), 'text-slate-100'],
+                          ['Slippage paid', money(report.slippagePaid), 'text-slate-100'],
+                          ['Win rate', report.winRatePct === null ? '-' : report.winRatePct + '% (' + report.wins + 'W / ' + report.losses + 'L)', 'text-slate-100'],
+                          ['Average holding time', report.avgHoldDays === null ? '-' : report.avgHoldDays + ' days', 'text-slate-100'],
+                          ['Orders', report.trades + ' (' + report.buys + ' buys, ' + report.sells + ' sells)', 'text-slate-100'],
+                        ].map(([label, value, color]) => (
+                          <div key={label} className="bg-bull-raised border border-bull-line rounded-xl p-3">
+                            <div className="text-xs font-black tracking-wider text-slate-500 uppercase">{label}</div>
+                            <div className={'text-sm font-black mt-1 font-mono ' + color}>{value}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 text-xs">
+                        <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
+                          <span className="block text-xs text-slate-500 uppercase font-black">Best sale</span>
+                          <b>{report.best ? report.best.sym + '  +' + money(report.best.gain) : '-'}</b>
+                        </div>
+                        <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
+                          <span className="block text-xs text-slate-500 uppercase font-black">Worst sale</span>
+                          <b>{report.worst ? report.worst.sym + '  -' + money(Math.abs(report.worst.gain)) : '-'}</b>
+                        </div>
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        The tax figure is an estimate for learning. It is not taken from your cash. Gains from units held under {report.rates.shortDays} days use an invented {Math.round(report.rates.shortRate * 100)}% rate; longer holds use an invented {Math.round(report.rates.longRate * 100)}% rate; losses are not refunded. Your sells are matched to your earliest buys first.
+                        {report.unmatchedQty > 0 ? ' ' + report.unmatchedQty + ' sold units were bought before order history started and are left out.' : ''}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {activePanel === 'history' && (
+                <div>
+                  <div className="flex justify-between items-center pb-3 border-b border-bull-line gap-3">
+                    <h3 className="font-black text-sm uppercase">Order history</h3>
+                    <div className="flex gap-1.5">
+                      {[['ALL', 'All'], ['BUY', 'Buys'], ['SELL', 'Sells']].map(([key, label]) => (
+                        <button
+                          key={key}
+                          onClick={() => setHistoryFilter(key)}
+                          className={'text-xs font-black uppercase px-3 py-1.5 rounded-xl ' + (historyFilter === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line')}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {historyError && <p className="text-xs text-rose-300 py-4">{historyError}</p>}
+                  {historyLoading && historyRows.length === 0 && (
+                    <p className="text-xs text-slate-400 py-8 text-center">Loading...</p>
+                  )}
+                  {!historyLoading && !historyError && historyRows.length === 0 && (
+                    <p className="text-xs text-slate-400 py-8 text-center">
+                      No orders yet. Your buys and sells will be listed here.
+                    </p>
+                  )}
+
+                  <div className="divide-y divide-bull-line">
+                    {historyRows
+                      .filter((row) => historyFilter === 'ALL' || row.side === historyFilter)
+                      .map((row) => {
+                        const fees = Number(row.fees_total || 0);
+                        const gross = Number(row.gross || 0);
+                        const cash = row.side === 'BUY' ? gross + fees : gross - fees;
+                        const showType =
+                          row.trade_type && (row.asset_class === 'equity' || row.asset_class === 'etf');
+                        const when = new Date(row.created_at).toLocaleString('en-IN', {
+                          timeZone: 'Asia/Kolkata',
+                          day: '2-digit',
+                          month: 'short',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          hour12: true,
+                        });
+                        return (
+                          <div key={row.id} className="py-3 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs items-center">
+                            <div>
+                              <span className={'inline-block text-xs font-black px-2 py-0.5 rounded-md ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>
+                                {row.side === 'BUY' ? 'BOUGHT' : 'SOLD'}
+                              </span>
+                              <div className="font-black text-sm mt-1">{row.sym}</div>
+                              <div className="text-xs text-slate-500">{when}</div>
+                            </div>
+                            <div>
+                              <span className="block text-xs text-slate-500">Units at price</span>
+                              <b className="font-mono">{Number(row.qty)} @ {money(row.price)}</b>
+                            </div>
+                            <div>
+                              <span className="block text-xs text-slate-500">Order value</span>
+                              <b className="font-mono">{money(gross)}</b>
+                            </div>
+                            <div>
+                              <span className="block text-xs text-slate-500">Charges</span>
+                              <b className="font-mono">{(fees < 0 ? '-' : '') + money(Math.abs(fees))}</b>
+                              {showType && <span className="block text-xs text-slate-400">{row.trade_type}</span>}
+                            </div>
+                            <div>
+                              <span className="block text-xs text-slate-500">
+                                {row.side === 'BUY' ? 'Cash paid' : 'Cash received'}
+                              </span>
+                              <b className="font-mono">{money(cash)}</b>
+                              {row.side === 'SELL' && row.realized_gross !== null && row.realized_gross !== undefined && (
+                                <span className={'block text-xs font-mono ' + (Number(row.realized_gross) >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                                  {'P/L before charges ' + (Number(row.realized_gross) >= 0 ? '+' : '-') + money(Math.abs(Number(row.realized_gross)))}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                  <p className="text-xs text-slate-500 pt-3">
+                    Shows your latest 100 orders. Dividends will appear here once they go live. Trades made before order history started are not listed.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </main>
+    </>
   );
 }
