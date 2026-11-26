@@ -1340,9 +1340,9 @@ export default function RealSimulatorPage() {
 
           <div className="lg:col-span-4 grid grid-cols-2 gap-3">
             <div className="rounded-3xl p-5 text-emerald-950 bg-green-200 border border-green-300 flex flex-col justify-between min-h-[150px]">
-              <div className="text-sm font-bold text-emerald-900">Available cash</div>
+              <div className="text-sm font-bold" style={{ color: '#14532d' }}>Available cash</div>
               <div className="text-xl sm:text-2xl font-black font-mono tabular-nums break-words" style={{ color: '#14532d' }}>{money(realBalance)}</div>
-              <div className="text-xs text-emerald-800">Ready to invest</div>
+              <div className="text-xs font-bold" style={{ color: '#166534' }}>Ready to invest</div>
             </div>
             {[
               ['Holdings value', money(holdingsValue), 'text-white', ownedRows.length + ' assets'],
@@ -1377,8 +1377,9 @@ export default function RealSimulatorPage() {
         </section>
 
         {/* Row 2: watchlist, chart + news, order ticket */}
-        <div className="grid grid-cols-1 lg:grid-cols-[360px_minmax(0,1fr)_300px] gap-4 items-start">
-          <aside className={card + ' order-3 lg:order-1 p-4 h-fit'}>
+        <div className="grid grid-cols-1 lg:grid-cols-[360px_minmax(0,1fr)_300px] gap-4 items-start lg:items-stretch">
+          <aside className={card + ' order-3 lg:order-1 p-4 relative'}>
+            <div className="lg:absolute lg:inset-4 flex flex-col">
             <div className="flex justify-between items-center text-base font-black">
               <span>Watchlist</span>
               <span className="text-xs text-bull-lime font-bold">{filteredAssets.length} assets</span>
@@ -1388,7 +1389,7 @@ export default function RealSimulatorPage() {
                 <button key={category} onClick={() => setSelectedCategory(category)} className={tabBtn(selectedCategory === category)}>{category}</button>
               ))}
             </div>
-            <div className="max-h-[420px] lg:max-h-[620px] overflow-y-auto pr-1 space-y-2">
+            <div className="max-h-[420px] lg:max-h-none lg:flex-1 lg:min-h-0 overflow-y-auto pr-1 space-y-2">
               {filteredAssets.map((asset) => {
                 const quote = prices[asset.sym];
                 const holding = realHoldings[asset.sym];
@@ -1421,6 +1422,7 @@ export default function RealSimulatorPage() {
                 );
               })}
             </div>
+          </div>
           </aside>
 
           <section className="order-1 lg:order-2 space-y-4 min-w-0">
