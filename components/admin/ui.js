@@ -41,9 +41,9 @@ export function Panel({ title, right, children, className = '' }) {
 export function Kpi({ label, value, sub, tone = 'text-white' }) {
   return (
     <div className="rounded-2xl border-2 border-bull-line bg-bull-surface p-4 shadow-xl">
-      <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono">{label}</p>
+      <p className="text-xs font-black uppercase tracking-wider text-slate-400 font-mono">{label}</p>
       <p className={`mt-1 font-mono text-3xl font-black ${tone}`}>{value}</p>
-      {sub && <p className="mt-0.5 text-[10px] font-mono text-slate-500">{sub}</p>}
+      {sub && <p className="mt-0.5 text-xs font-mono text-slate-500">{sub}</p>}
     </div>
   );
 }

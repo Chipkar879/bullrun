@@ -70,7 +70,7 @@ export default function SchoolsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-bull-raised text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono">
+              <tr className="bg-bull-raised text-xs font-black uppercase tracking-wider text-slate-400 font-mono">
                 <th className="p-3">School</th><th className="p-3 text-right">Students</th><th className="p-3 text-right">Teachers</th>
                 <th className="p-3 text-right">Active (7d)</th><th className="p-3 text-right">Frozen</th><th className="p-3 text-right">Avg net worth</th><th className="p-3 text-right">Avg progress</th>
               </tr>
@@ -90,9 +90,9 @@ export default function SchoolsPage() {
                   {open === g.key && (
                     <tr key={g.key + '-classes'} className="bg-bull-bg/60">
                       <td colSpan={7} className="p-3">
-                        <table className="w-full text-left text-[11px]">
+                        <table className="w-full text-left text-xs">
                           <thead>
-                            <tr className="text-[10px] font-black uppercase text-slate-500 font-mono">
+                            <tr className="text-xs font-black uppercase text-slate-500 font-mono">
                               <th className="p-2">Class</th><th className="p-2 text-right">Students</th><th className="p-2 text-right">Active (7d)</th><th className="p-2 text-right">Avg net worth</th><th className="p-2 text-right">Avg progress</th>
                             </tr>
                           </thead>

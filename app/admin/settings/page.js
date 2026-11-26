@@ -68,7 +68,7 @@ export default function SettingsPage() {
             <div key={f.key} className="grid gap-2 border-b border-bull-line pb-5 last:border-0 last:pb-0 md:grid-cols-[260px_1fr] md:items-start">
               <div>
                 <p className="text-xs font-black text-white">{f.label}</p>
-                <p className="mt-0.5 font-sans text-[11px] text-slate-500">{f.help}</p>
+                <p className="mt-0.5 font-sans text-xs text-slate-500">{f.help}</p>
               </div>
               <div>
                 {f.type === 'number' && (
@@ -92,7 +92,7 @@ export default function SettingsPage() {
         <div className="flex items-center gap-3 pt-2">
           <button disabled={busy || dirty.length === 0} onClick={save} className="cursor-pointer rounded-xl bg-bull-lime px-6 py-3 text-xs font-black uppercase tracking-wider text-bull-ink shadow-md hover:bg-bull-lime-light disabled:cursor-not-allowed disabled:opacity-40">Save changes</button>
           {dirty.length > 0 && <button onClick={() => setDraft(saved)} className="cursor-pointer text-xs font-bold text-slate-400 hover:underline">Discard</button>}
-          <span className="font-mono text-[11px] text-slate-500">{dirty.length ? `${dirty.length} unsaved change(s)` : 'All saved'}</span>
+          <span className="font-mono text-xs text-slate-500">{dirty.length ? `${dirty.length} unsaved change(s)` : 'All saved'}</span>
         </div>
       </Panel>
     </div>

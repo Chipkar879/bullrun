@@ -381,7 +381,7 @@ function SignupForm() {
                   <div key={lvl} className={`w-3.5 h-4 rounded-sm transition-colors duration-200 ${passScore >= lvl ? (passScore === 4 ? 'bg-emerald-500' : passScore >= 2 ? 'bg-amber-400' : 'bg-rose-600') : 'bg-bull-line'}`} />
                 ))}
               </div>
-              <p className="text-[10px] font-mono font-black text-slate-300 uppercase tracking-widest">{passLabels[passScore]}</p>
+              <p className="text-xs font-mono font-black text-slate-300 uppercase tracking-widest">{passLabels[passScore]}</p>
             </div>
 
           </div>
@@ -403,7 +403,7 @@ function SignupForm() {
 
             <form onSubmit={handlePasswordResetRequest} className="space-y-4">
               <div>
-                <label className="block text-[11px] font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">Verify Full Email Handle</label>
+                <label className="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">Verify Full Email Handle</label>
                 <input 
                   type="email" 
                   required 
@@ -459,7 +459,7 @@ function SignupForm() {
                       key={option.key}
                       type="button"
                       onClick={() => chooseGroup(option.key)}
-                      className={`py-2.5 text-[11px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${accountGroup === option.key ? 'bg-bull-lime text-bull-ink shadow-md' : 'text-slate-400 hover:text-white'}`}
+                      className={`py-2.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${accountGroup === option.key ? 'bg-bull-lime text-bull-ink shadow-md' : 'text-slate-400 hover:text-white'}`}
                     >
                       {option.label}
                     </button>
@@ -477,7 +477,7 @@ function SignupForm() {
                         key={option.key}
                         type="button"
                         onClick={() => chooseSchoolRole(option.key)}
-                        className={`py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${schoolRole === option.key ? 'bg-bull-raised text-white border border-bull-lime/50' : 'text-slate-400 hover:text-white border border-transparent'}`}
+                        className={`py-2 text-xs font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${schoolRole === option.key ? 'bg-bull-raised text-white border border-bull-lime/50' : 'text-slate-400 hover:text-white border border-transparent'}`}
                       >
                         {option.label}
                       </button>
@@ -490,7 +490,7 @@ function SignupForm() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {!isLogin && (
                 <div>
-                  <label className="block text-[11px] font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">Full Name</label>
+                  <label className="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">Full Name</label>
                   <input 
                     type="text" 
                     required 
@@ -506,7 +506,7 @@ function SignupForm() {
               )}
 
               <div>
-                <label className="block text-[11px] font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">Email Address</label>
+                <label className="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">Email Address</label>
                 <input 
                   type="email" 
                   required 
@@ -523,7 +523,7 @@ function SignupForm() {
 
               {!isLogin && accountGroup === 'school' && (
                 <div className="animate-fadeInFast">
-                  <label className="block text-[11px] font-black uppercase text-bull-lime tracking-wider mb-1 font-mono">Master School Hub Code</label>
+                  <label className="block text-xs font-black uppercase text-bull-lime tracking-wider mb-1 font-mono">Master School Hub Code</label>
                   <input type="text" required className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-mono uppercase focus:outline-none focus:border-bull-lime" placeholder="E.G. DPS-MUMBAI" 
                     onChange={(e) => setFormData({ ...formData, schoolCode: e.target.value })}
                     onBlur={(e) => handleSchoolCodeBlur(e.target.value)} 
@@ -534,7 +534,7 @@ function SignupForm() {
 
               {!isLogin && accountType === 'student' && availableClasses.length > 0 && (
                 <div className="animate-fadeInFast">
-                  <label className="block text-[11px] font-black uppercase text-emerald-400 tracking-wider mb-1 font-mono">Select Your Classroom</label>
+                  <label className="block text-xs font-black uppercase text-emerald-400 tracking-wider mb-1 font-mono">Select Your Classroom</label>
                   <select required className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime" onChange={(e) => setFormData({ ...formData, specificClassId: e.target.value })}>
                     <option value="">-- Choose Class --</option>
                     {availableClasses.map((c) => (
@@ -546,19 +546,19 @@ function SignupForm() {
 
               {!isLogin && accountType === 'teacher' && (
                 <div className="animate-fadeInFast">
-                  <label className="block text-[11px] font-black uppercase text-amber-400 tracking-wider mb-1 font-mono">Upload Appointment Letter Proof (PDF/Image)</label>
+                  <label className="block text-xs font-black uppercase text-amber-400 tracking-wider mb-1 font-mono">Upload Appointment Letter Proof (PDF/Image)</label>
                   <input type="file" required accept="image/*,application/pdf" className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-bull-raised file:text-amber-400" onChange={(e) => setDocumentFile(e.target.files[0])} />
                 </div>
               )}
 
               <div>
                 <div className="flex justify-between items-center mb-1">
-                  <label className="block text-[11px] font-black uppercase text-slate-400 tracking-wider font-mono">Security Password</label>
+                  <label className="block text-xs font-black uppercase text-slate-400 tracking-wider font-mono">Security Password</label>
                   {isLogin && (
                     <button 
                       type="button" 
                       onClick={initForgotPasswordFlow}
-                      className="text-[10px] font-bold text-bull-lime hover:underline focus:outline-none font-mono cursor-pointer"
+                      className="text-xs font-bold text-bull-lime hover:underline focus:outline-none font-mono cursor-pointer"
                     >
                       Forgot Password?
                     </button>

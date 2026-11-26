@@ -183,7 +183,7 @@ export default function ProfilePage() {
             </div>
             
             <div className="space-y-2 text-center sm:text-left">
-              <span className={'bg-bull-raised text-bull-lime border border-bull-line text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner' + (isStaff ? ' hidden' : '')}>
+              <span className={'bg-bull-raised text-bull-lime border border-bull-line text-xs uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner' + (isStaff ? ' hidden' : '')}>
                 🏆 {analytics.tier}
               </span>
               <h1 className="font-poppins font-black text-2xl sm:text-3xl text-white tracking-tight">
@@ -218,7 +218,7 @@ export default function ProfilePage() {
               📝 Edit Personal Profile Records
             </h3>
             <div className="space-y-1.5">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Account Display Name</label>
+              <label className="text-xs font-black text-slate-400 uppercase tracking-wider">Account Display Name</label>
               <input 
                 type="text" 
                 value={editName}
@@ -251,21 +251,21 @@ export default function ProfilePage() {
           <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
             <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">👑</div>
             <div>
-              <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Bazaar Bucks Balance</p>
+              <p className="text-xs font-black uppercase text-slate-500 tracking-wider">Bazaar Bucks Balance</p>
               <h3 className="text-xl font-black font-mono text-white">{profile.quiz_points || 0} BB</h3>
             </div>
           </div>
           <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
             <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">⚡</div>
             <div>
-              <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Payout Multiplier</p>
+              <p className="text-xs font-black uppercase text-slate-500 tracking-wider">Payout Multiplier</p>
               <h3 className="text-xl font-black font-mono text-emerald-400">{analytics.multiplier}</h3>
             </div>
           </div>
           <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
             <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">📈</div>
             <div>
-              <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Quiz Completion Rate</p>
+              <p className="text-xs font-black uppercase text-slate-500 tracking-wider">Quiz Completion Rate</p>
               <h3 className="text-xl font-black font-mono text-bull-lime">{analytics.completionRate}</h3>
             </div>
           </div>
@@ -279,28 +279,28 @@ export default function ProfilePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-1.5">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">System Username Identification</label>
+              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">System Username Identification</label>
               <div className="p-4 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-bold select-all">
                 {profile.name}
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">Registered Email Handle</label>
+              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">Registered Email Handle</label>
               <div className="p-4 bg-bull-raised border border-bull-line text-slate-400 rounded-xl text-sm font-semibold select-none font-mono">
                 {profile.email}
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">Account Initialization Stamp</label>
+              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">Account Initialization Stamp</label>
               <div className="p-4 bg-bull-raised border border-bull-line text-slate-300 rounded-xl text-sm font-bold select-none">
                 {profile.joined}
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider">Current Selected Workspace Track</label>
+              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">Current Selected Workspace Track</label>
               <div className="p-4 bg-bull-raised border border-bull-line text-bull-lime rounded-xl text-sm font-black uppercase select-none tracking-wider">
                 {profile.role} Profile Mode
               </div>

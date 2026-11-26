@@ -48,9 +48,9 @@ export default function TeachersPage() {
                 <div className="space-y-1">
                   <p className="text-sm font-black text-white">{t.name || 'Unnamed'}</p>
                   <p className="font-mono font-medium text-slate-400">{t.email}</p>
-                  {(t.school_code || t.school_id) && <p className="font-mono text-[11px] text-slate-500">🏫 {t.school_code || t.school_id}</p>}
+                  {(t.school_code || t.school_id) && <p className="font-mono text-xs text-slate-500">🏫 {t.school_code || t.school_id}</p>}
                   {t.verification_document_url && (
-                    <a href={t.verification_document_url} target="_blank" rel="noreferrer" className="inline-block pt-1 text-[11px] font-bold text-bull-lime hover:underline">
+                    <a href={t.verification_document_url} target="_blank" rel="noreferrer" className="inline-block pt-1 text-xs font-bold text-bull-lime hover:underline">
                       📂 View Appointment Letter Proof
                     </a>
                   )}

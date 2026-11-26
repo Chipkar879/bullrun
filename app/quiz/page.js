@@ -460,16 +460,16 @@ export default function DailyQuiz() {
         {profile && !quizActive && (
           <div className="max-w-md mx-auto bg-bull-surface border-2 border-bull-line border-b-2 border-b-bull-lime-dark text-white rounded-2xl p-4 flex items-center justify-between shadow-2xl">
             <div>
-              <p className="text-[10px] uppercase font-black tracking-wider text-slate-400">Your Current Status</p>
+              <p className="text-xs uppercase font-black tracking-wider text-slate-400">Your Current Status</p>
               <h4 className="text-sm font-black text-white">{profile.name || 'Anonymous Trader'}</h4>
             </div>
             <div className="flex gap-4 text-right">
               <div>
-                <p className="text-[10px] uppercase font-black tracking-wider text-slate-400">Rank</p>
+                <p className="text-xs uppercase font-black tracking-wider text-slate-400">Rank</p>
                 <p className="text-sm font-mono font-black text-amber-400">#{userRank}</p>
               </div>
               <div>
-                <p className="text-[10px] uppercase font-black tracking-wider text-slate-400">Balance</p>
+                <p className="text-xs uppercase font-black tracking-wider text-slate-400">Balance</p>
                 <p className="text-sm font-mono font-black text-bull-lime">{profile.quiz_points || 0} BB</p>
               </div>
             </div>
@@ -487,7 +487,7 @@ export default function DailyQuiz() {
           <div className="space-y-6">
             {/* ticker tape */}
             <div className="relative overflow-hidden rounded-full border border-bull-line bg-bull-surface/80 backdrop-blur py-2">
-              <div className="marquee-track flex w-max gap-8 whitespace-nowrap px-4 text-[11px] font-black uppercase tracking-widest text-slate-400">
+              <div className="marquee-track flex w-max gap-8 whitespace-nowrap px-4 text-xs font-black uppercase tracking-widest text-slate-400">
                 {[...TICKER_ITEMS, ...TICKER_ITEMS].map((t, i) => (
                   <span key={i} className={i % 3 === 0 ? 'text-bull-lime' : i % 3 === 1 ? 'text-amber-300' : 'text-slate-400'}>{t}</span>
                 ))}
@@ -497,7 +497,7 @@ export default function DailyQuiz() {
             </div>
 
             <div className="text-center space-y-4 max-w-xl mx-auto">
-              <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-[11px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner">
+              <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-xs uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-400" />
@@ -522,7 +522,7 @@ export default function DailyQuiz() {
                   backgroundSize: '32px 32px',
                 }}
               />
-              <div className="relative flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
+              <div className="relative flex items-center justify-between text-xs font-black uppercase tracking-widest">
                 <span className="text-slate-400">Your Growth · Last {GROWTH_DAYS} Days</span>
                 <span className="rounded-full border border-emerald-800 bg-emerald-950/60 px-2 py-0.5 text-emerald-300">
                   {user ? `${growth.gained > 0 ? '▲' : '▬'} +${growth.gained} BB · Total ${growth.balance} BB` : 'Login to track growth'}
@@ -548,7 +548,7 @@ export default function DailyQuiz() {
                 })}
 
                 {growth.candles.map((c) => (
-                  <text key={`l-${c.key}`} x={c.x} y="194" textAnchor="middle" fontSize="9" fontWeight="700" fill="#64748b">
+                  <text key={`l-${c.key}`} x={c.x} y="194" textAnchor="middle" fontSize="12" fontWeight="700" fill="#64748b">
                     {c.label}
                   </text>
                 ))}
@@ -563,10 +563,10 @@ export default function DailyQuiz() {
               </svg>
 
               {/* floating badges */}
-              <div className="floaty absolute right-4 top-14 hidden sm:flex items-center gap-1.5 rounded-xl border border-amber-700/60 bg-amber-950/70 px-3 py-1.5 text-[11px] font-black text-amber-300 shadow-lg backdrop-blur">
+              <div className="floaty absolute right-4 top-14 hidden sm:flex items-center gap-1.5 rounded-xl border border-amber-700/60 bg-amber-950/70 px-3 py-1.5 text-xs font-black text-amber-300 shadow-lg backdrop-blur">
                 🏆 +1 BB per correct answer
               </div>
-              <div className="floaty absolute left-4 bottom-4 hidden sm:flex items-center gap-1.5 rounded-xl border border-sky-800/60 bg-sky-950/70 px-3 py-1.5 text-[11px] font-black text-sky-300 shadow-lg backdrop-blur" style={{ animationDelay: '-2s' }}>
+              <div className="floaty absolute left-4 bottom-4 hidden sm:flex items-center gap-1.5 rounded-xl border border-sky-800/60 bg-sky-950/70 px-3 py-1.5 text-xs font-black text-sky-300 shadow-lg backdrop-blur" style={{ animationDelay: '-2s' }}>
                 ❄️ Freeze time · 🌓 50:50 · ⏩ Skip
               </div>
             </div>
@@ -580,7 +580,7 @@ export default function DailyQuiz() {
               ].map((s) => (
                 <div key={s.l} className="rounded-2xl border border-bull-line bg-bull-surface/80 p-3 text-center backdrop-blur">
                   <p className={`font-mono text-2xl font-black ${s.c}`}>{s.v}</p>
-                  <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">{s.l}</p>
+                  <p className="text-xs font-black uppercase tracking-wider text-slate-400">{s.l}</p>
                 </div>
               ))}
             </div>
@@ -589,7 +589,7 @@ export default function DailyQuiz() {
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               {hasPlayedToday ? (
                 <div className="rounded-2xl border border-bull-line bg-bull-surface px-6 py-3 text-center shadow-inner">
-                  <p className="text-[10px] font-black uppercase tracking-wider text-slate-500">🔒 Attempted today · next quiz in</p>
+                  <p className="text-xs font-black uppercase tracking-wider text-slate-500">🔒 Attempted today · next quiz in</p>
                   <p className="font-mono text-xl font-black text-bull-lime">{nextQuizIn}</p>
                 </div>
               ) : (
@@ -626,7 +626,7 @@ export default function DailyQuiz() {
             <div className="flex items-start justify-between border-b border-bull-line pb-3">
               <div>
                 <h3 className="font-poppins text-base font-black text-white">Your Last 7 Days</h3>
-                <p className="text-[10px] font-medium text-slate-400">Daily accuracy and Bazaar Bucks earned.</p>
+                <p className="text-xs font-medium text-slate-400">Daily accuracy and Bazaar Bucks earned.</p>
               </div>
               <button onClick={() => setShowHistory(false)} className="text-xs font-bold text-bull-lime hover:underline">Close</button>
             </div>
@@ -637,19 +637,19 @@ export default function DailyQuiz() {
               <>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-xl border border-bull-line bg-bull-raised p-3">
-                    <p className="text-[10px] font-black uppercase text-slate-400">Played</p>
+                    <p className="text-xs font-black uppercase text-slate-400">Played</p>
                     <p className="font-mono text-xl font-black text-white">{playedDays.length}<span className="text-sm text-slate-500"> / 7</span></p>
                   </div>
                   <div className="rounded-xl border border-emerald-900/60 bg-emerald-950/40 p-3">
-                    <p className="text-[10px] font-black uppercase text-emerald-400">Week Earned</p>
+                    <p className="text-xs font-black uppercase text-emerald-400">Week Earned</p>
                     <p className="font-mono text-xl font-black text-emerald-300">+{weekPoints} BB</p>
                   </div>
                   <div className="rounded-xl border border-bull-line bg-bull-raised p-3">
-                    <p className="text-[10px] font-black uppercase text-bull-lime">Avg Accuracy</p>
+                    <p className="text-xs font-black uppercase text-bull-lime">Avg Accuracy</p>
                     <p className="font-mono text-xl font-black text-white">{weekAvg}%</p>
                   </div>
                   <div className="rounded-xl border border-amber-900/60 bg-amber-950/40 p-3">
-                    <p className="text-[10px] font-black uppercase text-amber-400">Streak</p>
+                    <p className="text-xs font-black uppercase text-amber-400">Streak</p>
                     <p className="font-mono text-xl font-black text-amber-300">🔥 {streak}d</p>
                   </div>
                 </div>
@@ -661,7 +661,7 @@ export default function DailyQuiz() {
                       const pct = d.rec ? Math.max(8, (d.rec.score / d.rec.total) * 100) : 0;
                       return (
                         <div key={d.key} className="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
-                          <span className="font-mono text-[10px] font-black text-slate-300">{d.rec ? d.rec.score : '–'}</span>
+                          <span className="font-mono text-xs font-black text-slate-300">{d.rec ? d.rec.score : '–'}</span>
                           <div className="relative flex w-full max-w-[44px] flex-1 items-end overflow-hidden rounded-t-lg bg-bull-raised/60">
                             {d.rec && (
                               <div
@@ -670,9 +670,9 @@ export default function DailyQuiz() {
                               />
                             )}
                           </div>
-                          <div className={`text-center text-[10px] font-black uppercase leading-tight ${d.isToday ? 'text-bull-lime' : 'text-slate-500'}`}>
+                          <div className={`text-center text-xs font-black uppercase leading-tight ${d.isToday ? 'text-bull-lime' : 'text-slate-500'}`}>
                             {d.weekday}
-                            <div className="font-mono text-[9px] font-bold opacity-70">{d.day}</div>
+                            <div className="font-mono text-xs font-bold opacity-70">{d.day}</div>
                           </div>
                         </div>
                       );
@@ -686,7 +686,7 @@ export default function DailyQuiz() {
                     <div key={d.key} className={`flex items-center justify-between px-4 py-3 text-xs ${d.isToday ? 'bg-bull-lime/10' : 'bg-bull-raised/40'}`}>
                       <div className="flex items-center gap-3">
                         <span className="w-14 font-black text-white">{d.weekday} {d.day}</span>
-                        {d.isToday && <span className="rounded bg-bull-lime px-1.5 py-0.5 text-[9px] font-black uppercase text-bull-ink">Today</span>}
+                        {d.isToday && <span className="rounded bg-bull-lime px-1.5 py-0.5 text-xs font-black uppercase text-bull-ink">Today</span>}
                       </div>
                       {d.rec ? (
                         <div className="flex items-center gap-4 font-mono font-bold">
@@ -695,14 +695,14 @@ export default function DailyQuiz() {
                           <span className="text-emerald-300">+{d.rec.points} BB</span>
                         </div>
                       ) : (
-                        <span className="text-[11px] font-bold text-slate-600">{d.isToday ? 'Not played yet' : 'Missed'}</span>
+                        <span className="text-xs font-bold text-slate-600">{d.isToday ? 'Not played yet' : 'Missed'}</span>
                       )}
                     </div>
                   ))}
                 </div>
 
                 {bestDay && (
-                  <p className="text-center text-[11px] font-bold text-amber-300">
+                  <p className="text-center text-xs font-bold text-amber-300">
                     ⭐ Best day: {bestDay.weekday} {bestDay.day} with {bestDay.rec.score}/{bestDay.rec.total}
                   </p>
                 )}
@@ -722,15 +722,15 @@ export default function DailyQuiz() {
 
             <div className="grid grid-cols-2 gap-3 text-left">
               <div className="rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                <p className="text-[10px] font-black uppercase text-slate-400">Accuracy</p>
+                <p className="text-xs font-black uppercase text-slate-400">Accuracy</p>
                 <p className="font-mono text-xl font-black text-white">{score} / {questions.length}</p>
               </div>
               <div className="rounded-xl border border-emerald-900/60 bg-emerald-950/40 p-3.5">
-                <p className="text-[10px] font-black uppercase text-emerald-400">Earned Payout</p>
+                <p className="text-xs font-black uppercase text-emerald-400">Earned Payout</p>
                 <p className="font-mono text-xl font-black text-emerald-400">+{pointsEarned} BB</p>
               </div>
               <div className="col-span-2 rounded-xl border border-bull-line bg-bull-raised p-3.5 text-center">
-                <p className="text-[10px] font-black uppercase text-bull-lime">Total Run Time Invested</p>
+                <p className="text-xs font-black uppercase text-bull-lime">Total Run Time Invested</p>
                 <p className="font-mono text-lg font-black text-amber-300">{formatTime(totalTimeSpent)}</p>
               </div>
             </div>
@@ -761,12 +761,12 @@ export default function DailyQuiz() {
             <div className="flex items-center justify-between rounded-2xl border-2 border-bull-line bg-bull-surface px-6 py-4 shadow-xl">
               <div className="text-xs font-bold text-slate-300">
                 Question <span className="font-mono text-sm font-black text-bull-lime">{currentIdx + 1}</span> / {questions.length}
-                {apiError && <span className="ml-2 rounded border border-amber-900/60 bg-amber-950/40 px-2 py-0.5 text-[10px] text-amber-400">Local Mode</span>}
+                {apiError && <span className="ml-2 rounded border border-amber-900/60 bg-amber-950/40 px-2 py-0.5 text-xs text-amber-400">Local Mode</span>}
               </div>
               <div className={`flex items-center gap-1.5 rounded-full border px-4 py-1.5 font-mono text-xs font-black tracking-wider transition-all ${
                 timeLeft <= 60 ? 'animate-pulse border-rose-900/80 bg-rose-950/60 text-rose-400' : 'border-bull-line bg-bull-raised text-white'
               }`}>
-                ⏰ {formatTime(timeLeft)} {isTimerFrozen && <span className="ml-1 animate-bounce rounded bg-sky-600 px-1 py-0.5 text-[10px] text-white">FROZEN</span>}
+                ⏰ {formatTime(timeLeft)} {isTimerFrozen && <span className="ml-1 animate-bounce rounded bg-sky-600 px-1 py-0.5 text-xs text-white">FROZEN</span>}
               </div>
             </div>
 
@@ -779,7 +779,7 @@ export default function DailyQuiz() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-4 rounded-2xl border border-bull-line bg-bull-surface p-3">
-              <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Tactical Add-ons:</span>
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400">Tactical Add-ons:</span>
               {[
                 { key: 'fiftyFifty', label: '🌓 50:50', fn: useFiftyFifty, extra: false },
                 { key: 'freezeTime', label: '❄️ Time Freeze', fn: useTimeFreeze, extra: isTimerFrozen },
@@ -789,7 +789,7 @@ export default function DailyQuiz() {
                   key={p.key}
                   disabled={powerUps[p.key] <= 0 || selectedAnswer !== null || p.extra}
                   onClick={p.fn}
-                  className={`rounded-xl border px-3 py-1.5 text-[10px] font-black uppercase tracking-wider transition-all ${
+                  className={`rounded-xl border px-3 py-1.5 text-xs font-black uppercase tracking-wider transition-all ${
                     powerUps[p.key] > 0 ? 'border-bull-line bg-bull-raised text-slate-200 shadow-sm hover:border-bull-lime/50' : 'cursor-not-allowed border-transparent bg-bull-surface text-slate-600'
                   }`}
                 >
@@ -833,7 +833,7 @@ export default function DailyQuiz() {
                       className={`flex items-center justify-between rounded-2xl border-2 p-4 text-left text-xs font-bold transition-all sm:text-sm ${optionStyle}`}
                     >
                       <div className="flex items-center gap-3">
-                        <span className={`flex h-6 w-6 items-center justify-center rounded-lg border text-[10px] font-black ${
+                        <span className={`flex h-6 w-6 items-center justify-center rounded-lg border text-xs font-black ${
                           isSelected ? 'border-bull-lime bg-bull-lime text-bull-ink' : 'border-bull-line bg-bull-surface text-slate-400'
                         }`}>{optionLetter}</span>
                         <span>{choiceString}</span>
@@ -853,7 +853,7 @@ export default function DailyQuiz() {
             <div className="flex items-center justify-between border-b border-bull-line pb-3">
               <div>
                 <h3 className="font-poppins text-base font-black text-white">Bazaar Bucks (BB) Standings</h3>
-                <p className="text-[10px] font-medium text-slate-400">Top quiz masters ranked by cumulative correct payouts.</p>
+                <p className="text-xs font-medium text-slate-400">Top quiz masters ranked by cumulative correct payouts.</p>
               </div>
               <button onClick={() => setShowQuizLeaderboard(false)} className="text-xs font-bold text-bull-lime hover:underline">Close Table</button>
             </div>
@@ -861,7 +861,7 @@ export default function DailyQuiz() {
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="bg-bull-raised text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  <tr className="bg-bull-raised text-xs font-black uppercase tracking-wider text-slate-400">
                     <th className="w-14 p-3 text-center">Rank</th>
                     <th className="p-3">Trader</th>
                     <th className="p-3">Track</th>
@@ -875,7 +875,7 @@ export default function DailyQuiz() {
                         {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`} {trader.id === user?.id && '⭐'}
                       </td>
                       <td className="p-3 font-black text-white">{trader.name ? trader.name : 'Anonymous Trader'}</td>
-                      <td className="p-3 font-mono text-[10px] uppercase text-slate-400">{trader.role}</td>
+                      <td className="p-3 font-mono text-xs uppercase text-slate-400">{trader.role}</td>
                       <td className="p-3 text-right font-mono font-black text-bull-lime">{trader.quiz_points || 0} BB</td>
                     </tr>
                   ))}

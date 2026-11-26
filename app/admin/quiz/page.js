@@ -124,11 +124,11 @@ export default function QuizArenaPage() {
           <div className="flex h-40 items-end justify-between gap-1.5">
             {stats.days.map((d) => (
               <div key={d.key} className="flex h-full flex-1 flex-col items-center justify-end gap-1">
-                <span className="font-mono text-[9px] font-black text-slate-300">{d.count}</span>
+                <span className="font-mono text-xs font-black text-slate-300">{d.count}</span>
                 <div className="flex w-full flex-1 items-end overflow-hidden rounded-t bg-bull-raised/60">
                   <div className="w-full rounded-t" style={{ height: `${d.count ? Math.max(6, (d.count / maxDay) * 100) : 0}%`, background: 'linear-gradient(to top,#65a30d,#bef264)' }} />
                 </div>
-                <span className={`text-[9px] font-black uppercase ${d.key === today ? 'text-bull-lime' : 'text-slate-500'}`}>{d.label}</span>
+                <span className={`text-xs font-black uppercase ${d.key === today ? 'text-bull-lime' : 'text-slate-500'}`}>{d.label}</span>
               </div>
             ))}
           </div>
@@ -138,11 +138,11 @@ export default function QuizArenaPage() {
           <div className="flex h-40 items-end justify-between gap-1">
             {stats.dist.map((d) => (
               <div key={d.score} className="flex h-full flex-1 flex-col items-center justify-end gap-1">
-                <span className="font-mono text-[9px] font-black text-slate-300">{d.count || ''}</span>
+                <span className="font-mono text-xs font-black text-slate-300">{d.count || ''}</span>
                 <div className="flex w-full flex-1 items-end overflow-hidden rounded-t bg-bull-raised/60">
                   <div className="w-full rounded-t" style={{ height: `${d.count ? Math.max(6, (d.count / maxDist) * 100) : 0}%`, background: d.score >= 10 ? 'linear-gradient(to top,#65a30d,#bef264)' : d.score >= 6 ? 'linear-gradient(to top,#d97706,#fcd34d)' : 'linear-gradient(to top,#be123c,#fda4af)' }} />
                 </div>
-                <span className="font-mono text-[9px] font-black text-slate-500">{d.score}</span>
+                <span className="font-mono text-xs font-black text-slate-500">{d.score}</span>
               </div>
             ))}
           </div>
@@ -182,9 +182,9 @@ export default function QuizArenaPage() {
               <p className="font-mono text-slate-400">Balance: <span className="font-black text-bull-lime">{sel.quiz_points || 0} BB</span> · Last quiz: {sel.last_quiz_date || 'never'}</p>
               <p className="font-mono text-slate-400">Today: {selRec ? `${selRec.score}/${selRec.total} · ${selRec.points} BB · ${mmss(selRec.time_spent || 0)}` : 'not played'}</p>
               <div className="flex flex-wrap gap-2 font-mono">
-                <button disabled={busy} onClick={resetToday} className="cursor-pointer rounded-lg border border-rose-900 bg-rose-950 px-3 py-1.5 text-[11px] font-black uppercase text-rose-400 disabled:opacity-50">Reset today</button>
+                <button disabled={busy} onClick={resetToday} className="cursor-pointer rounded-lg border border-rose-900 bg-rose-950 px-3 py-1.5 text-xs font-black uppercase text-rose-400 disabled:opacity-50">Reset today</button>
                 <input type="number" value={delta} onChange={(e) => setDelta(e.target.value)} placeholder="+5 / -3" className="w-24 rounded-lg border border-bull-line bg-bull-surface px-2 py-1.5 text-center text-white focus:outline-none" />
-                <button disabled={busy} onClick={adjustBB} className="cursor-pointer rounded-lg bg-emerald-600 px-3 py-1.5 text-[11px] font-black uppercase text-white disabled:opacity-50">Adjust BB</button>
+                <button disabled={busy} onClick={adjustBB} className="cursor-pointer rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-black uppercase text-white disabled:opacity-50">Adjust BB</button>
               </div>
             </div>
           )}

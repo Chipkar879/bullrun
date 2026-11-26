@@ -29,7 +29,7 @@ export default function NotFound() {
 
         {/* Dynamic Resource Redirect Links */}
         <div className="space-y-3">
-          <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+          <div className="text-xs font-black text-slate-500 uppercase tracking-widest">
             Safe Target Portals
           </div>
           

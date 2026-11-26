@@ -73,7 +73,7 @@ export default function ProgressPage() {
             const lost = prev ? prev.started - m.started : 0;
             return (
               <div key={m.n} className="space-y-1.5">
-                <div className="flex items-center justify-between text-[11px] font-mono">
+                <div className="flex items-center justify-between text-xs font-mono">
                   <span className="font-black text-white">Module {m.n} <span className="font-medium text-slate-500">({m.total} lessons)</span></span>
                   <span className="text-slate-400">
                     started <b className="text-bull-lime">{m.started}</b> · completed <b className="text-emerald-400">{m.completed}</b>
@@ -94,7 +94,7 @@ export default function ProgressPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-bull-raised text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono">
+              <tr className="bg-bull-raised text-xs font-black uppercase tracking-wider text-slate-400 font-mono">
                 <th className="p-3">School</th><th className="p-3 text-right">Students</th><th className="p-3 text-right">Started</th><th className="p-3 text-right">Finished all</th><th className="p-3">Avg completion</th>
               </tr>
             </thead>
@@ -108,7 +108,7 @@ export default function ProgressPage() {
                   <td className="p-3">
                     <div className="flex items-center gap-2">
                       <div className="h-2 w-28 overflow-hidden rounded-full border border-bull-line bg-bull-bg"><div className="h-full bg-bull-lime" style={{ width: `${g.pct}%` }} /></div>
-                      <span className="font-mono text-[11px]">{g.pct}%</span>
+                      <span className="font-mono text-xs">{g.pct}%</span>
                     </div>
                   </td>
                 </tr>

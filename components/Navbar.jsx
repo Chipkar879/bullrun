@@ -131,13 +131,13 @@ export default function Navbar() {
             {/* Daily Quiz Link + NEW Tag */}
             <Link href="/quiz" className={`pb-0.5 transition-all flex items-center gap-1 ${pathname === '/quiz' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>
               Daily Quiz
-              <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded font-mono">NEW</span>
+              <span className="text-xs bg-bull-coral text-bull-ink font-black px-1 rounded font-mono">NEW</span>
             </Link>
 
             {/* Leaderboard Link + NEW Tag */}
             <Link href="/leaderboard" className={`pb-0.5 transition-all flex items-center gap-1 ${pathname === '/leaderboard' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>
               Leaderboard
-              <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded font-mono">NEW</span>
+              <span className="text-xs bg-bull-coral text-bull-ink font-black px-1 rounded font-mono">NEW</span>
             </Link>
 
             <Link href="/pricing" className={`pb-0.5 transition-all ${pathname === '/pricing' ? 'text-bull-lime border-b-2 border-bull-lime' : 'hover:text-white'}`}>Pricing</Link>
@@ -163,7 +163,7 @@ export default function Navbar() {
                 onClick={closeMenu}
               >
                 <div className="h-full w-full bg-bull-raised border border-bull-line rounded-[11px] flex items-center justify-center">
-                  <span className="text-[10px] font-black tracking-wider text-bull-lime select-none">
+                  <span className="text-xs font-black tracking-wider text-bull-lime select-none">
                     {initials}
                   </span>
                 </div>
@@ -197,8 +197,8 @@ export default function Navbar() {
           <Link href="/modules" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/modules' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Modules</Link>
           <Link href="/simulator" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/simulator' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Simulator</Link>
           <Link href="/arena" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/arena' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Arena</Link>
-          <Link href="/quiz" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/quiz' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Daily Quiz <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
-          <Link href="/leaderboard" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/leaderboard' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Leaderboard <span className="text-[10px] bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
+          <Link href="/quiz" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/quiz' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Daily Quiz <span className="text-xs bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
+          <Link href="/leaderboard" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/leaderboard' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Leaderboard <span className="text-xs bg-bull-coral text-bull-ink font-black px-1 rounded ml-1 font-mono">NEW</span></Link>
           <Link href="/pricing" onClick={closeMenu} className={`p-2.5 rounded-xl transition-colors ${pathname === '/pricing' ? 'bg-bull-raised text-bull-lime border border-bull-line' : 'hover:bg-bull-raised'}`}>Pricing</Link>
         </>)}
         </div>

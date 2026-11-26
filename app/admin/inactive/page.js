@@ -106,14 +106,14 @@ export default function InactivePage() {
             {list.map((r) => (
               <div key={r.p.id} className="flex flex-col items-start justify-between gap-3 bg-bull-raised/50 px-4 py-3 text-xs md:flex-row md:items-center">
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-black text-white">{r.p.name || 'Unnamed'} <span className="ml-1 rounded-full border border-bull-line bg-bull-surface px-2 py-0.5 font-mono text-[9px] uppercase text-bull-lime">{r.p.role}</span></p>
-                  <p className="truncate font-mono text-[11px] text-slate-400">{r.p.email}</p>
+                  <p className="truncate text-sm font-black text-white">{r.p.name || 'Unnamed'} <span className="ml-1 rounded-full border border-bull-line bg-bull-surface px-2 py-0.5 font-mono text-xs uppercase text-bull-lime">{r.p.role}</span></p>
+                  <p className="truncate font-mono text-xs text-slate-400">{r.p.email}</p>
                 </div>
-                <div className="font-mono text-[11px] font-bold">
+                <div className="font-mono text-xs font-bold">
                   <span className={r.ago === null || r.ago >= 14 ? 'text-rose-400' : 'text-amber-300'}>{r.ago === null ? 'No activity in 60d' : `${r.ago}d ago`}</span>
                   <span className={`ml-3 ${r.frozen ? 'text-rose-400' : 'text-emerald-400'}`}>{r.frozen ? 'FROZEN 🔒' : 'ACTIVE 🔓'}</span>
                 </div>
-                <button onClick={() => grantDays(r.p, 7)} className="cursor-pointer rounded-lg bg-emerald-600 px-3 py-1.5 font-mono text-[11px] font-black uppercase text-white hover:bg-emerald-700">+7 days</button>
+                <button onClick={() => grantDays(r.p, 7)} className="cursor-pointer rounded-lg bg-emerald-600 px-3 py-1.5 font-mono text-xs font-black uppercase text-white hover:bg-emerald-700">+7 days</button>
               </div>
             ))}
           </div>

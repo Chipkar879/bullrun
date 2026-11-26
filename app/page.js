@@ -59,7 +59,7 @@ const TickerTape = () => {
 
   const row = (suffix) =>
     items.map((t) => (
-      <span key={`${t.sym}-${suffix}`} className="inline-flex items-center gap-2 px-5 text-[11px] font-mono font-bold whitespace-nowrap">
+      <span key={`${t.sym}-${suffix}`} className="inline-flex items-center gap-2 px-5 text-xs font-mono font-bold whitespace-nowrap">
         <span className="text-slate-400">{t.sym}</span>
         <span className="text-white">₹{t.now.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
         <span className={t.change >= 0 ? 'text-emerald-400' : 'text-rose-400'}>
@@ -140,7 +140,7 @@ const LiveArena = () => {
   return (
     <section id="arena" className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 relative z-10 space-y-8 scroll-mt-24">
       <div className="text-center space-y-2">
-        <span className="inline-block bg-bull-lime/20 text-bull-lime font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
+        <span className="inline-block bg-bull-lime/20 text-bull-lime font-mono font-black text-xs uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
           Try It Live • No Signup
         </span>
         <h2 className="text-3xl font-black tracking-tight text-white font-poppins">Make Your First Trade Right Now</h2>
@@ -159,7 +159,7 @@ const LiveArena = () => {
                 ₹{price.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
             </div>
-            <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md animate-pulse">● Live Sandbox</span>
+            <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md animate-pulse">● Live Sandbox</span>
           </div>
 
           <div className="bg-bull-bg border border-bull-line rounded-2xl p-3">
@@ -178,15 +178,15 @@ const LiveArena = () => {
 
           <div className="grid grid-cols-3 gap-3 text-center">
             <div className="bg-bull-raised border border-bull-line rounded-xl p-2.5">
-              <p className="text-[9px] font-black uppercase tracking-wider text-slate-500">Cash</p>
+              <p className="text-xs font-black uppercase tracking-wider text-slate-500">Cash</p>
               <p className="text-xs font-mono font-black text-white">₹{Math.round(wallet).toLocaleString('en-IN')}</p>
             </div>
             <div className="bg-bull-raised border border-bull-line rounded-xl p-2.5">
-              <p className="text-[9px] font-black uppercase tracking-wider text-slate-500">Shares</p>
+              <p className="text-xs font-black uppercase tracking-wider text-slate-500">Shares</p>
               <p className="text-xs font-mono font-black text-white">{shares}</p>
             </div>
             <div className="bg-bull-raised border border-bull-line rounded-xl p-2.5">
-              <p className="text-[9px] font-black uppercase tracking-wider text-slate-500">P&amp;L</p>
+              <p className="text-xs font-black uppercase tracking-wider text-slate-500">P&amp;L</p>
               <p className={`text-xs font-mono font-black ${pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                 {pnl >= 0 ? '+' : '-'}₹{Math.abs(Math.round(pnl)).toLocaleString('en-IN')}
               </p>
@@ -207,7 +207,7 @@ const LiveArena = () => {
         <div className="card lg:col-span-2 bg-bull-surface border-2 border-bull-line rounded-3xl p-6 shadow-2xl space-y-4 border-b-4 border-b-bull-line hover:border-bull-lime/50 transition-all duration-300">
           <div className="flex items-center justify-between">
             <h3 className="font-black text-base text-white font-poppins">🏆 Class Leaderboard</h3>
-            <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Sample</span>
+            <span className="text-xs font-black uppercase tracking-wider text-slate-500">Sample</span>
           </div>
           <div className="space-y-2">
             {sorted.map((p, i) => (
@@ -220,7 +220,7 @@ const LiveArena = () => {
               </div>
             ))}
           </div>
-          <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
+          <p className="text-xs text-slate-500 font-medium leading-relaxed">
             In a real classroom arena, every student starts with the same ₹50,000 wallet. Best strategy wins the bell.
           </p>
         </div>
@@ -241,7 +241,7 @@ const ValueStrip = () => (
       ].map((s) => (
         <div key={s.small} className="card bg-bull-surface border-2 border-bull-line rounded-2xl p-4 text-center shadow-lg hover:border-bull-lime/50 hover:-translate-y-1 transition-all duration-300">
           <p className="text-2xl sm:text-3xl font-black font-poppins text-bull-lime tracking-tight">{s.big}</p>
-          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mt-1">{s.small}</p>
+          <p className="text-xs font-black uppercase tracking-wider text-slate-400 mt-1">{s.small}</p>
         </div>
       ))}
     </div>
@@ -259,7 +259,7 @@ const RANKS = [
 const RankLadder = () => (
   <section id="ranks" className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 relative z-10 space-y-8 scroll-mt-24">
     <div className="text-center space-y-2">
-      <span className="inline-block bg-bull-lime/20 text-bull-lime font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
+      <span className="inline-block bg-bull-lime/20 text-bull-lime font-mono font-black text-xs uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
         Level Up
       </span>
       <h2 className="text-3xl font-black tracking-tight text-white font-poppins">Climb From Rookie to Market Legend</h2>
@@ -282,12 +282,12 @@ const RankLadder = () => (
             <div className="h-12 w-12 rounded-2xl bg-bull-raised border border-bull-line flex items-center justify-center text-2xl">
               {r.icon}
             </div>
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Rank {i + 1}</span>
+            <span className="text-xs font-black uppercase tracking-widest text-slate-500">Rank {i + 1}</span>
           </div>
           <h3 className="font-black text-base text-white font-poppins">{r.name}</h3>
           <p className="text-xs text-slate-400 font-medium leading-relaxed">{r.req}</p>
           <div className="space-y-1.5 pt-2 border-t border-bull-line">
-            <div className="flex justify-between text-[10px] font-black uppercase tracking-wider">
+            <div className="flex justify-between text-xs font-black uppercase tracking-wider">
               <span className="text-bull-lime">{r.tag}</span>
               <span className="text-slate-500">{r.pct}%</span>
             </div>
@@ -447,11 +447,11 @@ export default function Home() {
   // Shared "coming soon" overlay for module cards
   const ComingSoonBadge = () => (
     <>
-      <span className="absolute top-4 right-4 bg-amber-950/60 border border-amber-900/60 text-amber-300 text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
+      <span className="absolute top-4 right-4 bg-amber-950/60 border border-amber-900/60 text-amber-300 text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
         🚧 Under Construction
       </span>
       <div className="pt-3 border-t border-bull-line space-y-1.5">
-        <div className="flex justify-between text-[10px] font-black uppercase tracking-wider">
+        <div className="flex justify-between text-xs font-black uppercase tracking-wider">
           <span className="text-slate-400">Expected: 30 Nov 2026</span>
           <span className="text-bull-lime">{daysLeft !== null ? `${daysLeft} day${daysLeft === 1 ? '' : 's'} left` : '...'}</span>
         </div>
@@ -497,7 +497,7 @@ export default function Home() {
           
           {/* BADGE */}
           <div>
-            <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-[11px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-lg border-b-2 border-b-bull-lime-dark hover:border-bull-lime transition-all duration-300">
+            <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-xs uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-lg border-b-2 border-b-bull-lime-dark hover:border-bull-lime transition-all duration-300">
               🚀 The Ultimate Classroom Sandbox Arena
             </span>
           </div>
@@ -558,17 +558,17 @@ export default function Home() {
 
               <div className="flex items-center justify-between border-b border-bull-line pb-3">
                 <div>
-                  <p className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Active User</p>
+                  <p className="text-xs font-black uppercase text-slate-500 tracking-wider">Active User</p>
                   <h3 className="text-base font-poppins font-black text-white">{profile?.name || 'Workspace Account'}</h3>
                 </div>
-                <span className="px-2.5 py-0.5 bg-bull-raised border border-bull-line rounded-full text-[10px] font-black uppercase tracking-wider text-bull-lime shadow-md">
+                <span className="px-2.5 py-0.5 bg-bull-raised border border-bull-line rounded-full text-xs font-black uppercase tracking-wider text-bull-lime shadow-md">
                   {profile?.role || 'Personal'} Track
                 </span>
               </div>
               
               {((profile?.role === 'student' && profile?.student_approved) || profile?.role === 'personal') && (
                 <div className="bg-gradient-to-br from-bull-raised to-bull-surface p-4 rounded-xl text-white shadow-md space-y-1 border border-bull-lime/40 border-b-2 border-b-bull-lime-dark">
-                  <p className="text-[10px] font-black uppercase tracking-wider text-rose-200/80">Available Sandbox Balance</p>
+                  <p className="text-xs font-black uppercase tracking-wider text-rose-200/80">Available Sandbox Balance</p>
                   <p className="text-2xl font-poppins font-black tracking-tight font-mono">
                     ₹{(profile?.wallet_balance || 50000).toLocaleString('en-IN')}
                   </p>
@@ -584,7 +584,7 @@ export default function Home() {
               {profile?.role === 'teacher' && profile?.verification_status === 'approved' && (
                 <div className="space-y-4 pt-1 border-t border-bull-line">
                   <div className="bg-bull-raised p-3 rounded-xl border border-bull-line space-y-2">
-                    <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider">🏢 School Class Matrix (Hub: {profile.school_id})</p>
+                    <p className="text-xs font-black uppercase text-slate-400 tracking-wider">🏢 School Class Matrix (Hub: {profile.school_id})</p>
                     <div className="flex gap-2">
                       <input type="text" className="px-2.5 py-1.5 bg-bull-surface border border-bull-line text-white rounded-xl text-xs font-bold focus:outline-none focus:border-bull-lime w-full" placeholder="Add Class (e.g. Class 9-A)" value={newClassName} onChange={(e) => setNewClassName(e.target.value)} />
                       <button onClick={handleCreateClassContainer} className="px-3 py-1.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-bold text-xs rounded-xl whitespace-nowrap">Create</button>
@@ -592,12 +592,12 @@ export default function Home() {
 
                     <div className="space-y-1.5 pt-1.5 max-h-36 overflow-y-auto divide-y divide-bull-line">
                       {schoolClasses.length === 0 ? (
-                        <p className="text-[10px] text-slate-500 font-medium py-1">No classrooms added under this school code yet.</p>
+                        <p className="text-xs text-slate-500 font-medium py-1">No classrooms added under this school code yet.</p>
                       ) : (
                         schoolClasses.map((c) => (
-                          <div key={c.id} className="flex flex-col gap-1 pt-1.5 text-[11px] font-bold">
+                          <div key={c.id} className="flex flex-col gap-1 pt-1.5 text-xs font-bold">
                             <span className="text-white">🏫 {c.class_name}</span>
-                            <select className="bg-bull-surface border border-bull-line p-1 rounded-lg text-[10px] text-slate-400 font-medium focus:outline-none w-full" value={c.assigned_teacher_id || ''} onChange={(e) => handleTeacherAssignToClass(c.id, e.target.value)}>
+                            <select className="bg-bull-surface border border-bull-line p-1 rounded-lg text-xs text-slate-400 font-medium focus:outline-none w-full" value={c.assigned_teacher_id || ''} onChange={(e) => handleTeacherAssignToClass(c.id, e.target.value)}>
                               <option value="">-- Assign Managing Teacher --</option>
                               {allSchoolTeachers.map(t => <option key={t.id} value={t.id}>{t.name} ({t.email})</option>)}
                             </select>
@@ -612,14 +612,14 @@ export default function Home() {
               {/* DANGER ZONE: ACCOUNT DELETION */}
               <div className="p-3.5 border border-rose-900/30 bg-rose-950/20 rounded-2xl space-y-1">
                 <h4 className="text-xs font-black text-rose-400 uppercase tracking-wider">⚠️ Danger Zone</h4>
-                <p className="text-[10px] text-slate-400 font-medium">Wiping your account is immediate, final, and deletes all user and database data.</p>
-                <button onClick={handlePermanentDeletion} className="mt-1 px-3 py-1.5 bg-rose-700 hover:bg-rose-800 text-white font-black text-[10px] rounded-xl transition-all">
+                <p className="text-xs text-slate-400 font-medium">Wiping your account is immediate, final, and deletes all user and database data.</p>
+                <button onClick={handlePermanentDeletion} className="mt-1 px-3 py-1.5 bg-rose-700 hover:bg-rose-800 text-white font-black text-xs rounded-xl transition-all">
                   Delete My Account Completely
                 </button>
               </div>
 
               <div className="flex gap-2 items-center justify-between pt-1 border-t border-bull-line">
-                <div className="text-[10px] text-slate-500 font-medium truncate max-w-[60%] font-mono">
+                <div className="text-xs text-slate-500 font-medium truncate max-w-[60%] font-mono">
                   {user.email}
                 </div>
                 <button
@@ -627,7 +627,7 @@ export default function Home() {
                     await supabase.auth.signOut();
                     window.location.reload();
                   }}
-                  className="px-3 py-1.5 bg-bull-raised border border-bull-line hover:bg-rose-950/40 hover:text-rose-400 text-slate-400 text-[10px] font-bold rounded-lg transition-all"
+                  className="px-3 py-1.5 bg-bull-raised border border-bull-line hover:bg-rose-950/40 hover:text-rose-400 text-slate-400 text-xs font-bold rounded-lg transition-all"
                 >
                   Sign Out
                 </button>
@@ -653,9 +653,9 @@ export default function Home() {
                 <div key={student.id} className="p-2.5 bg-bull-raised border border-bull-line rounded-xl flex items-center justify-between gap-2 text-xs font-bold">
                   <div className="truncate">
                     <p className="text-white truncate">{student.name}</p>
-                    <p className="text-[10px] text-slate-500 font-mono font-medium truncate">{student.email}</p>
+                    <p className="text-xs text-slate-500 font-mono font-medium truncate">{student.email}</p>
                   </div>
-                  <button onClick={() => handleApproveStudent(student.id)} className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-bold whitespace-nowrap transition-all">Approve Position</button>
+                  <button onClick={() => handleApproveStudent(student.id)} className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold whitespace-nowrap transition-all">Approve Position</button>
                 </div>
               ))}
             </div>
@@ -672,7 +672,7 @@ export default function Home() {
 
         <div className="card bg-bull-surface border-2 border-bull-line rounded-3xl shadow-2xl w-full max-w-4xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center border-b-4 border-b-bull-line hover:border-bull-lime/50 hover:shadow-[0_20px_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] transition-all duration-300">
           <div className="col-span-1 space-y-3">
-            <div className="text-[11px] font-black uppercase text-slate-500 tracking-wider px-1">Choose a practice desk:</div>
+            <div className="text-xs font-black uppercase text-slate-500 tracking-wider px-1">Choose a practice desk:</div>
             <button
               onClick={() => setActiveTab('stocks')}
               className={`w-full flex justify-between items-center px-4 py-3.5 rounded-2xl border text-left text-xs uppercase tracking-wider font-black transition-all ${activeTab === 'stocks' ? 'bg-bull-lime/20 border-bull-lime/50 text-bull-lime shadow-md' : 'bg-bull-raised border-bull-line text-slate-400 hover:bg-bull-line'}`}
@@ -694,14 +694,14 @@ export default function Home() {
               <div className="space-y-4 animate-fadeInFast w-full">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">ENERGIA • SIMULATED</span>
-                  <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">● Practice Mode</span>
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">● Practice Mode</span>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sample Simulated Price</div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Sample Simulated Price</div>
                   <div className="text-3xl font-black font-mono tracking-tight text-white">₹1,309.35</div>
                   <div className="text-xs font-bold text-emerald-400 font-mono">+₹12.40 (+0.95%)</div>
                 </div>
-                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-bull-line text-[11px] font-mono text-slate-400">
+                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-bull-line text-xs font-mono text-slate-400">
                   <div>Prev Close: <span className="text-white font-bold">₹1,296.95</span></div>
                   <div>Day Volume: <span className="text-white font-bold">4.2M Shares</span></div>
                 </div>
@@ -712,14 +712,14 @@ export default function Home() {
               <div className="space-y-4 animate-fadeInFast w-full">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-black bg-bull-raised text-rose-300 border border-bull-line px-2.5 py-1 rounded-md tracking-wider">TECH.CHALLENGE • HIGH-BETA</span>
-                  <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md animate-pulse">⚡ Arena Ticking</span>
+                  <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md animate-pulse">⚡ Arena Ticking</span>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Simulated Price Scale</div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Simulated Price Scale</div>
                   <div className="text-3xl font-black font-mono tracking-tight text-white">₹12,500.00</div>
                   <div className="text-xs font-bold text-rose-500 font-mono">-₹2,500.00 (-20.00%)</div>
                 </div>
-                <div className="p-2.5 bg-rose-500/5 border border-rose-500/10 rounded-xl text-[11px] text-rose-400 leading-relaxed font-semibold">
+                <div className="p-2.5 bg-rose-500/5 border border-rose-500/10 rounded-xl text-xs text-rose-400 leading-relaxed font-semibold">
                   📢 System Event Broadcast: Tech sector crash initiated! TECH drops 20% over current challenge lifecycle step.
                 </div>
               </div>
@@ -742,7 +742,7 @@ export default function Home() {
         <div className="text-center space-y-2">
           <h2 className="text-3xl font-black tracking-tight text-white font-poppins">Integrated Trading Academy</h2>
           <p className="text-slate-400 text-xs max-w-md mx-auto font-medium">Master tactical market theories through dynamic self-paced sandbox training paths.</p>
-          <span className="inline-block mt-2 bg-amber-950/40 border border-amber-900/60 text-amber-300 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+          <span className="inline-block mt-2 bg-amber-950/40 border border-amber-900/60 text-amber-300 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full">
             🚧 Modules launching 30 Nov 2026
           </span>
         </div>
@@ -752,7 +752,7 @@ export default function Home() {
             <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">01</div>
             <h3 className="font-black text-base text-white font-poppins">Market Foundations</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Understand technical asset pricing loops, stock charts, order structures, and index operations across primary exchanges.</p>
-            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">8 Modules • Beginner</span></div>
+            <div className="pt-2"><span className="text-xs font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">8 Modules • Beginner</span></div>
             <ComingSoonBadge />
           </div>
 
@@ -760,7 +760,7 @@ export default function Home() {
             <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">02</div>
             <h3 className="font-black text-base text-white font-poppins">Technical Analysis</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Map patterns using support levels, moving averages, and volume indicators to execute quantitative simulator mock plays.</p>
-            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">12 Modules • Intermediate</span></div>
+            <div className="pt-2"><span className="text-xs font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">12 Modules • Intermediate</span></div>
             <ComingSoonBadge />
           </div>
 
@@ -768,7 +768,7 @@ export default function Home() {
             <div className="h-10 w-10 rounded-xl bg-bull-raised border border-bull-line text-bull-lime flex items-center justify-center text-lg font-black">03</div>
             <h3 className="font-black text-base text-white font-poppins">Portfolio Risk Management</h3>
             <p className="text-xs text-slate-400 leading-relaxed font-medium">Mitigate drawdown via position sizing models, strict asset tracking ratios, and dynamic algorithmic hedging criteria.</p>
-            <div className="pt-2"><span className="text-[10px] font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">6 Modules • Advanced</span></div>
+            <div className="pt-2"><span className="text-xs font-black uppercase tracking-wider bg-bull-raised border border-bull-line text-rose-300 px-2.5 py-1 rounded-md">6 Modules • Advanced</span></div>
             <ComingSoonBadge />
           </div>
         </div>
@@ -781,7 +781,7 @@ export default function Home() {
       <section id="pricing" className="max-w-7xl mx-auto px-4 sm:px-6 pt-32 relative z-10 scroll-mt-24">
         <div className="card bg-gradient-to-br from-bull-surface to-bull-raised border-2 border-bull-line text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 group border-b-4 border-b-bull-lime-dark hover:border-bull-lime transition-all duration-300">
           <div className="space-y-3 max-w-xl text-center md:text-left z-10">
-            <span className="bg-bull-lime/20 text-bull-lime font-mono font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
+            <span className="bg-bull-lime/20 text-bull-lime font-mono font-black text-xs uppercase tracking-widest px-3 py-1 rounded border border-bull-lime/40">
               Campus Classroom Access
             </span>
             <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight text-white font-poppins">Launch Custom Classroom Tournaments</h2>

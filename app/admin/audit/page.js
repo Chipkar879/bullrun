@@ -84,7 +84,7 @@ export default function AuditPage() {
               const [label, tone] = LABELS[r.action] || [r.action, 'text-slate-300'];
               return (
                 <div key={r.id} className="grid gap-1 bg-bull-raised/50 px-4 py-3 text-xs md:grid-cols-[170px_150px_1fr] md:items-center md:gap-4">
-                  <span className="font-mono text-[11px] text-slate-400">{new Date(r.created_at).toLocaleString('en-IN')}</span>
+                  <span className="font-mono text-xs text-slate-400">{new Date(r.created_at).toLocaleString('en-IN')}</span>
                   <span className={`font-black ${tone}`}>{label}</span>
                   <span className="min-w-0 truncate font-bold text-white">
                     {r.target_label || '—'}

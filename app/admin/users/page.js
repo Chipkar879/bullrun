@@ -142,7 +142,7 @@ export default function UsersPage() {
         </div>
 
         <div className="space-y-2">
-          <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Filter By School Code:</span>
+          <span className="text-xs font-black uppercase tracking-wider text-slate-500 font-mono">Filter By School Code:</span>
           <div className="flex flex-wrap gap-2 font-mono">
             <button onClick={() => setSchoolFilter('ALL')} className={`cursor-pointer rounded-xl border px-3.5 py-1.5 text-xs font-black uppercase ${schoolFilter === 'ALL' ? pillOn : pillOff}`}>All Users ({allProfiles.length})</button>
             <button onClick={() => setSchoolFilter('PERSONAL')} className={`cursor-pointer rounded-xl border px-3.5 py-1.5 text-xs font-black uppercase ${schoolFilter === 'PERSONAL' ? pillOn : pillOff}`}>Personal Track</button>
@@ -153,7 +153,7 @@ export default function UsersPage() {
         </div>
 
         <div className="space-y-2">
-          <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Filter By Status:</span>
+          <span className="text-xs font-black uppercase tracking-wider text-slate-500 font-mono">Filter By Status:</span>
           <div className="flex flex-wrap gap-2 font-mono">
             {[['ALL', 'All', statusCounts.all], ['UNFROZEN', 'Unfrozen', statusCounts.unfrozen], ['FROZEN', 'Frozen', statusCounts.frozen], ['ONLINE', 'Online now', statusCounts.online]].map(([k, l, c]) => (
               <button key={k} onClick={() => setStatusFilter(k)} className={`cursor-pointer rounded-xl border px-3.5 py-1.5 text-xs font-black uppercase ${statusFilter === k ? pillOn : pillOff}`}>{l} ({c})</button>
@@ -213,31 +213,31 @@ export default function UsersPage() {
                     )}
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="rounded border border-bull-line bg-bull-surface px-1.5 py-0.5 font-mono text-[10px] font-black text-bull-lime">#{p.rank}</span>
+                        <span className="rounded border border-bull-line bg-bull-surface px-1.5 py-0.5 font-mono text-xs font-black text-bull-lime">#{p.rank}</span>
                         <h3 className="truncate text-sm font-black text-white group-hover:text-bull-lime">{p.name || 'Unnamed Account'}</h3>
                       </div>
-                      <p className="mt-1 truncate font-mono text-[11px] text-slate-400">{p.email}</p>
+                      <p className="mt-1 truncate font-mono text-xs text-slate-400">{p.email}</p>
                     </div>
                   </div>
-                  <span className="rounded-full border border-bull-line bg-bull-surface px-2.5 py-0.5 font-mono text-[10px] font-black uppercase text-bull-lime">{p.role}</span>
+                  <span className="rounded-full border border-bull-line bg-bull-surface px-2.5 py-0.5 font-mono text-xs font-black uppercase text-bull-lime">{p.role}</span>
                 </div>
 
                 <div className="flex items-center justify-between border-t border-bull-line pt-2 font-mono text-xs font-bold">
                   <div>
-                    <span className="block text-[10px] uppercase text-slate-500">Net Worth</span>
+                    <span className="block text-xs uppercase text-slate-500">Net Worth</span>
                     <span className="text-emerald-400">{inr(getNetWorth(p))}</span>
-                    <span className="mt-0.5 block text-[10px] text-slate-500">Cash {inr(p.wallet_balance)}</span>
-                    <span className="mt-0.5 block text-[10px] text-sky-400">Week: {formatDuration(activity[p.id])}</span>
-                    <span className={`mt-0.5 block text-[10px] ${online ? 'text-emerald-400' : 'text-slate-500'}`}>
+                    <span className="mt-0.5 block text-xs text-slate-500">Cash {inr(p.wallet_balance)}</span>
+                    <span className="mt-0.5 block text-xs text-sky-400">Week: {formatDuration(activity[p.id])}</span>
+                    <span className={`mt-0.5 block text-xs ${online ? 'text-emerald-400' : 'text-slate-500'}`}>
                       {online ? 'Online now' : seenAt ? 'Last seen ' + timeAgo(now - seenAt) : 'Not seen yet'}
                     </span>
-                    <span className="mt-0.5 block text-[10px] text-bull-lime">
+                    <span className="mt-0.5 block text-xs text-bull-lime">
                       {sum.reached ? `Module ${sum.reached}: ${sum.reachedDone}/${sum.reachedTotal} (${sum.doneAll}/${sum.totalAll} lessons)` : 'No lessons yet'}
                     </span>
                   </div>
                   <div className="text-right">
-                    <span className="block text-[10px] uppercase text-slate-500">Status</span>
-                    <span className={`rounded border px-2 py-0.5 text-[10px] font-black uppercase ${
+                    <span className="block text-xs uppercase text-slate-500">Status</span>
+                    <span className={`rounded border px-2 py-0.5 text-xs font-black uppercase ${
                       isSuperAdmin ? 'border-sky-800 bg-sky-950 text-sky-400'
                         : isFrozen ? 'animate-pulse border-rose-800 bg-rose-950 text-rose-400'
                         : 'border-emerald-800 bg-emerald-950 text-emerald-400'
@@ -281,10 +281,10 @@ export default function UsersPage() {
               <div className="flex-1 space-y-6 overflow-y-auto p-6 text-left font-mono">
                 <div className="space-y-3 rounded-2xl border-2 border-bull-line bg-bull-raised p-5 shadow-xl">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-bull-lime">Learning progress</span>
-                    <span className="text-[10px] text-slate-400">{sum.doneAll} / {sum.totalAll} lessons</span>
+                    <span className="text-xs font-black uppercase tracking-wider text-bull-lime">Learning progress</span>
+                    <span className="text-xs text-slate-400">{sum.doneAll} / {sum.totalAll} lessons</span>
                   </div>
-                  <p className="font-sans text-[11px] text-slate-400">
+                  <p className="font-sans text-xs text-slate-400">
                     {isOnline(lastSeen, sel.id, now) ? 'Online now' : seenAt ? 'Last seen ' + timeAgo(now - seenAt) : 'Not seen yet'}
                   </p>
                   <div className="space-y-1.5">
@@ -292,7 +292,7 @@ export default function UsersPage() {
                       const done = Number(sum.mods[n] || 0);
                       const t = progress.totals[n];
                       return (
-                        <div key={n} className="flex items-center gap-2 text-[11px]">
+                        <div key={n} className="flex items-center gap-2 text-xs">
                           <span className="w-20 text-slate-300">Module {n}</span>
                           <div className="h-2 flex-1 overflow-hidden rounded-full border border-bull-line bg-bull-bg">
                             <div className={'h-full ' + (done >= t ? 'bg-emerald-400' : 'bg-bull-lime')} style={{ width: (t ? (done / t) * 100 : 0) + '%' }} />
@@ -306,7 +306,7 @@ export default function UsersPage() {
 
                 {!st.isSuperAdmin && (
                   <div className="space-y-3 rounded-2xl border-2 border-bull-lime/40 bg-bull-raised p-5 shadow-xl">
-                    <span className="block text-[10px] font-black uppercase tracking-wider text-bull-lime">⚡ Custom Access Duration</span>
+                    <span className="block text-xs font-black uppercase tracking-wider text-bull-lime">⚡ Custom Access Duration</span>
                     <p className="font-sans text-xs font-medium text-slate-300">Days of unfrozen access to grant this account:</p>
                     <div className="flex gap-2">
                       <input type="number" min="1" max="365" value={customDays} onChange={(e) => setCustomDays(e.target.value)} className="w-28 rounded-xl border border-bull-line bg-bull-surface px-3 py-2 text-center text-sm font-black text-white focus:border-bull-lime focus:outline-none" />
@@ -321,7 +321,7 @@ export default function UsersPage() {
                   <div className="flex items-center justify-between rounded-2xl border border-bull-line bg-bull-raised p-4">
                     <div>
                       <span className="block text-xs font-black text-white">Manual Freeze Switch</span>
-                      <span className="font-sans text-[10px] text-slate-400">
+                      <span className="font-sans text-xs text-slate-400">
                         Status: <span className={st.isFrozen ? 'font-bold text-rose-400' : 'font-bold text-emerald-400'}>{st.isFrozen ? 'FROZEN 🔒' : 'ACTIVE / UNFROZEN 🔓'}</span>
                       </span>
                     </div>
@@ -336,16 +336,16 @@ export default function UsersPage() {
 
                 <div className="grid grid-cols-1 gap-4 text-xs font-bold md:grid-cols-2">
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">School Code</span>
+                    <span className="text-xs uppercase text-slate-500">School Code</span>
                     <p className="text-white">{sel.school_code || sel.school_id || 'Personal Track'}</p>
                   </div>
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">Classroom ID</span>
+                    <span className="text-xs uppercase text-slate-500">Classroom ID</span>
                     <p className="text-white">{sel.specific_class_id || 'Unassigned'}</p>
                   </div>
 
                   <div className="col-span-1 space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5 md:col-span-2">
-                    <span className="block text-[10px] uppercase text-slate-500">Exact Time Remaining Before Freeze</span>
+                    <span className="block text-xs uppercase text-slate-500">Exact Time Remaining Before Freeze</span>
                     {st.isSuperAdmin || st.isPermanent ? (
                       <p className="font-bold text-amber-400">{st.isSuperAdmin ? '👑 Permanent Access (Super Admin)' : '♾️ Permanent Premium Access'}</p>
                     ) : st.isFrozen ? (
@@ -356,32 +356,32 @@ export default function UsersPage() {
                   </div>
 
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">Net Worth (live)</span>
+                    <span className="text-xs uppercase text-slate-500">Net Worth (live)</span>
                     <p className="text-emerald-400">{inr(getNetWorth(sel))}</p>
                   </div>
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">Wallet Balance (cash)</span>
+                    <span className="text-xs uppercase text-slate-500">Wallet Balance (cash)</span>
                     <p className="text-white">{inr(sel.wallet_balance)}</p>
                   </div>
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">Quiz Bazaar Bucks</span>
+                    <span className="text-xs uppercase text-slate-500">Quiz Bazaar Bucks</span>
                     <p className="text-bull-lime">{sel.quiz_points || 0} BB</p>
                   </div>
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">Last Quiz</span>
+                    <span className="text-xs uppercase text-slate-500">Last Quiz</span>
                     <p className="text-white">{sel.last_quiz_date || 'Never'}</p>
                   </div>
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">Time on site (last 7 days)</span>
+                    <span className="text-xs uppercase text-slate-500">Time on site (last 7 days)</span>
                     <p className="text-sky-400">{formatDuration(activity[sel.id])}</p>
                   </div>
                   <div className="space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5">
-                    <span className="text-[10px] uppercase text-slate-500">Average per day (7-day)</span>
+                    <span className="text-xs uppercase text-slate-500">Average per day (7-day)</span>
                     <p className="text-sky-400">{formatDuration((activity[sel.id] || 0) / 7)}</p>
                   </div>
                   <div className="col-span-1 space-y-1 rounded-xl border border-bull-line bg-bull-raised p-3.5 md:col-span-2">
-                    <span className="text-[10px] uppercase text-slate-500">Registration Date</span>
-                    <p className="text-[11px] text-slate-300">{sel.created_at ? new Date(sel.created_at).toLocaleDateString() : 'N/A'}</p>
+                    <span className="text-xs uppercase text-slate-500">Registration Date</span>
+                    <p className="text-xs text-slate-300">{sel.created_at ? new Date(sel.created_at).toLocaleDateString() : 'N/A'}</p>
                   </div>
                 </div>
               </div>

@@ -19,7 +19,7 @@ async function call(method, body) {
 }
 
 const fmt = (d) => (d ? new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '-');
-const btn = 'cursor-pointer rounded-lg border border-bull-line bg-bull-raised px-3 py-1.5 font-mono text-[11px] font-black uppercase text-slate-200 disabled:opacity-50';
+const btn = 'cursor-pointer rounded-lg border border-bull-line bg-bull-raised px-3 py-1.5 font-mono text-xs font-black uppercase text-slate-200 disabled:opacity-50';
 
 export default function SchoolRequestsPage() {
   const [data, setData] = useState(null);
@@ -118,7 +118,7 @@ export default function SchoolRequestsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-bull-raised font-mono text-[10px] font-black uppercase tracking-wider text-slate-400">
+              <tr className="bg-bull-raised font-mono text-xs font-black uppercase tracking-wider text-slate-400">
                 <th className="p-3">School</th><th className="p-3">Code</th><th className="p-3">Status</th>
                 <th className="p-3 text-right">Seats</th><th className="p-3 text-right">Price</th><th className="p-3">Due / Paid until</th><th className="p-3">Actions</th>
               </tr>
@@ -145,7 +145,7 @@ export default function SchoolRequestsPage() {
                     {s.status === 'expired' && (
                       <button disabled={busy} className={btn} onClick={() => act({ action: 'restart', school_id: s.id }, `Give ${s.name} another 3 days to pay?`)}>Restart</button>
                     )}
-                    {s.status === 'rejected' && <span className="font-mono text-[11px] text-slate-500">{s.rejection_reason}</span>}
+                    {s.status === 'rejected' && <span className="font-mono text-xs text-slate-500">{s.rejection_reason}</span>}
                   </td>
                 </tr>
               ))}

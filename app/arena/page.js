@@ -24,7 +24,7 @@ function ArenaPriceChart({ stock }) {
     <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 min-w-0">
       <div className="flex justify-between items-start gap-2 mb-4">
         <div>
-          <p className="text-[10px] uppercase tracking-widest font-black text-slate-500">
+          <p className="text-xs uppercase tracking-widest font-black text-slate-500">
             Simulated Price
           </p>
           <p className="text-2xl font-black font-mono text-white mt-1">
@@ -81,7 +81,7 @@ function ArenaPriceChart({ stock }) {
         </svg>
       </div>
 
-      <div className="flex justify-between text-[10px] text-slate-500 mt-3">
+      <div className="flex justify-between text-xs text-slate-500 mt-3">
         <span>Earlier ticks</span>
         <span>Latest tick</span>
       </div>
@@ -101,7 +101,7 @@ function ArenaPriceChart({ stock }) {
         </div>
       </div>
 
-      <p className="text-[10px] text-slate-600 mt-4">
+      <p className="text-xs text-slate-600 mt-4">
         Illustrative simulated prices, not live exchange data.
       </p>
     </div>
@@ -428,12 +428,12 @@ export default function ArenaPage() {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-3 bg-bull-surface border border-bull-line px-4 py-2 rounded-2xl shadow-xl w-fit">
                 <div className="text-xs">
-                  <span className="text-slate-400 block text-[10px] uppercase font-black">Timeline Progress</span>
+                  <span className="text-slate-400 block text-xs uppercase font-black">Timeline Progress</span>
                   <span className="font-mono font-black text-white">Day {day} / 30</span>
                 </div>
                 <div className="h-6 w-[1px] bg-bull-line" />
                 <div className="text-xs">
-                  <span className="text-slate-400 block text-[10px] uppercase font-black">Next Tick</span>
+                  <span className="text-slate-400 block text-xs uppercase font-black">Next Tick</span>
                   <span className="font-mono font-black text-bull-lime">{autoSecsLeft}s</span>
                 </div>
               </div>
@@ -457,19 +457,19 @@ export default function ArenaPage() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
-              <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Arena Cash</span>
+              <span className="text-xs font-black tracking-wider text-slate-500 uppercase">Arena Cash</span>
               <div className="text-lg font-black mt-1 font-mono text-white">₹{gameBalance.toLocaleString('en-IN')}</div>
             </div>
             <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
-              <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Holdings Worth</span>
+              <span className="text-xs font-black tracking-wider text-slate-500 uppercase">Holdings Worth</span>
               <div className="text-lg font-black mt-1 font-mono text-white">₹{getGameHoldingsValue().toLocaleString('en-IN')}</div>
             </div>
             <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
-              <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total Net Worth</span>
+              <span className="text-xs font-black tracking-wider text-slate-500 uppercase">Total Net Worth</span>
               <div className="text-lg font-black mt-1 font-mono text-bull-lime">₹{currentTotalGameVal.toLocaleString('en-IN')}</div>
             </div>
             <div className="bg-bull-surface border border-bull-line rounded-2xl p-4 shadow-xl">
-              <span className="text-[10px] font-black tracking-wider text-slate-500 uppercase">Net Profit / Loss</span>
+              <span className="text-xs font-black tracking-wider text-slate-500 uppercase">Net Profit / Loss</span>
               <div className={`text-lg font-black mt-1 font-mono ${(currentTotalGameVal - START_GAME) >= 0 ? 'text-emerald-400' : 'text-rose-500'}`}>
                 ₹{(currentTotalGameVal - START_GAME).toLocaleString('en-IN')}
               </div>
@@ -500,10 +500,10 @@ export default function ArenaPage() {
                         </div>
                         <div>
                           <h3 className="font-black text-white text-xs group-hover:text-bull-lime transition-colors">{st.sym}</h3>
-                          <p className="text-[10px] text-slate-400 font-medium truncate max-w-[70px]">{st.name}</p>
+                          <p className="text-xs text-slate-400 font-medium truncate max-w-[70px]">{st.name}</p>
                         </div>
                       </div>
-                      <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-lg font-mono border ${isUp ? 'text-emerald-400 bg-emerald-950/40 border-emerald-900/60' : 'text-rose-400 bg-rose-950/40 border-rose-900/60'}`}>
+                      <span className={`text-xs font-black px-1.5 py-0.5 rounded-lg font-mono border ${isUp ? 'text-emerald-400 bg-emerald-950/40 border-emerald-900/60' : 'text-rose-400 bg-rose-950/40 border-rose-900/60'}`}>
                         {st.changePct}
                       </span>
                     </div>
@@ -523,7 +523,7 @@ export default function ArenaPage() {
                       })}
                     </div>
 
-                    <div className="flex justify-between items-center pt-1 border-t border-bull-line text-[10px]">
+                    <div className="flex justify-between items-center pt-1 border-t border-bull-line text-xs">
                       <div>
                         <span className="font-mono font-black text-white">₹{st.price.toLocaleString('en-IN')}</span>
                       </div>
@@ -655,7 +655,7 @@ export default function ArenaPage() {
                     {activeModalStockData.icon}
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-bull-lime bg-bull-raised border border-bull-line px-2 py-0.5 rounded">
+                    <span className="text-xs font-black uppercase tracking-wider text-bull-lime bg-bull-raised border border-bull-line px-2 py-0.5 rounded">
                       {activeModalStockData.sector}
                     </span>
                     <h2 className="text-xl font-black text-white mt-1">
@@ -670,13 +670,13 @@ export default function ArenaPage() {
 
                 <div className="grid grid-cols-2 gap-4 bg-bull-raised p-4 rounded-2xl border border-bull-line font-mono text-xs">
                   <div>
-                    <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Current Asset Rate</span>
+                    <span className="text-xs text-slate-500 uppercase font-black font-sans block">Current Asset Rate</span>
                     <span className="text-lg font-black text-white">
                       ₹{activeModalStockData.price.toLocaleString('en-IN')}
                     </span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-500 uppercase font-black font-sans block">Owned In Position</span>
+                    <span className="text-xs text-slate-500 uppercase font-black font-sans block">Owned In Position</span>
                     <span className="text-lg font-black text-bull-lime">
                       {activeModalHolding ? `${activeModalHolding.shares} Units` : '0 Units'}
                     </span>
@@ -684,7 +684,7 @@ export default function ArenaPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  <label className="text-xs font-black uppercase tracking-wider text-slate-400">
                     Order Quantity Size
                   </label>
                   <div className="flex flex-wrap gap-2">

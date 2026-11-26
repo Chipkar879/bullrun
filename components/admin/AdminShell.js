@@ -80,7 +80,7 @@ function Inner({ children }) {
           {NAV.map((g) => (
             <div key={g.group} className="space-y-1">
               {!collapsed && (
-                <p className="px-3 text-[10px] font-black uppercase tracking-widest text-slate-500 font-mono">{g.group}</p>
+                <p className="px-3 text-xs font-black uppercase tracking-widest text-slate-500 font-mono">{g.group}</p>
               )}
               {g.items.map((item) => {
                 const active = item.ready && isActive(item);
@@ -91,10 +91,10 @@ function Inner({ children }) {
                     <span className="text-base leading-none">{item.icon}</span>
                     {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
                     {!collapsed && count > 0 && (
-                      <span className="rounded-full bg-amber-400 px-1.5 py-0.5 text-[10px] font-black text-bull-ink">{count}</span>
+                      <span className="rounded-full bg-amber-400 px-1.5 py-0.5 text-xs font-black text-bull-ink">{count}</span>
                     )}
                     {!collapsed && !item.ready && (
-                      <span className="rounded border border-bull-line px-1.5 py-0.5 text-[9px] font-black uppercase text-slate-500">Soon</span>
+                      <span className="rounded border border-bull-line px-1.5 py-0.5 text-xs font-black uppercase text-slate-500">Soon</span>
                     )}
                   </>
                 );
@@ -123,7 +123,7 @@ function Inner({ children }) {
 
         <div className="border-t border-bull-line p-3 space-y-2">
           {!collapsed && (
-            <div className="px-2 text-[10px] font-mono text-slate-500">
+            <div className="px-2 text-xs font-mono text-slate-500">
               <span className="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
               LIVE · {lastUpdated ? lastUpdated.toLocaleTimeString('en-IN') : '--'}
             </div>

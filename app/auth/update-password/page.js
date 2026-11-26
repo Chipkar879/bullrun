@@ -123,7 +123,7 @@ export default function UpdatePasswordPage() {
           ) : (
             <form onSubmit={handleUpdatePassword} className="space-y-4">
               <div>
-                <label className="block text-[11px] font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">
+                <label className="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">
                   New Password
                 </label>
                 <input
@@ -138,7 +138,7 @@ export default function UpdatePasswordPage() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">
+                <label className="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1 font-mono">
                   Confirm New Password
                 </label>
                 <input

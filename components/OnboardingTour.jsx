@@ -160,11 +160,11 @@ export default function OnboardingTour() {
         {/* HEADER BADGES */}
         <div className="flex justify-between items-center border-b border-bull-line pb-3">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-bull-lime bg-bull-raised border border-bull-lime/30 px-3 py-1 rounded-full">
+            <span className="text-xs font-black uppercase tracking-widest text-bull-lime bg-bull-raised border border-bull-lime/30 px-3 py-1 rounded-full">
               {step.badge}
             </span>
             {step.isNew && (
-              <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-0.5 rounded-full animate-pulse">
+              <span className="text-xs font-black uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-0.5 rounded-full animate-pulse">
                 ✦ NEW FEATURE
               </span>
             )}

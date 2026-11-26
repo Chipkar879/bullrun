@@ -271,23 +271,23 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-2xl bg-bull-bg border border-bull-lime/50 flex items-center justify-center text-2xl br-glow">{'\ud83d\udc02'}</div>
             <div>
-              <span className="text-[10px] font-black tracking-widest text-bull-lime uppercase block font-mono">LEVEL {level}</span>
+              <span className="text-xs font-black tracking-widest text-bull-lime uppercase block font-mono">LEVEL {level}</span>
               <h3 className="text-base sm:text-lg font-black text-white">{levelName}</h3>
             </div>
           </div>
           <div className="flex items-center gap-3 font-mono text-xs">
             <div className="bg-bull-bg border border-bull-line px-3.5 py-1.5 rounded-xl">
-              <span className="text-slate-500 text-[10px] block uppercase font-black font-sans">Total XP</span>
+              <span className="text-slate-500 text-xs block uppercase font-black font-sans">Total XP</span>
               <span className="font-black text-amber-400">{'\ud83d\udd25'} {xp}</span>
             </div>
             <div className="bg-bull-bg border border-bull-line px-3.5 py-1.5 rounded-xl">
-              <span className="text-slate-500 text-[10px] block uppercase font-black font-sans">Lessons</span>
+              <span className="text-slate-500 text-xs block uppercase font-black font-sans">Lessons</span>
               <span className="font-black text-emerald-400">{done.length} / {allLessons.length}</span>
             </div>
           </div>
         </div>
         <div>
-          <div className="flex justify-between text-[10px] font-mono text-slate-500 mb-1">
+          <div className="flex justify-between text-xs font-mono text-slate-500 mb-1">
             <span>NEXT LEVEL</span>
             <span>{xp % XP_PER_LEVEL} / {XP_PER_LEVEL} XP</span>
           </div>
@@ -336,7 +336,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   <h2 className="font-black text-base text-white leading-tight">{track.title}</h2>
                 </div>
                 <div className="mt-4">
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400 mb-1">
+                  <div className="flex justify-between text-xs font-mono text-slate-400 mb-1">
                     <span>{got}/{subs.length} DONE</span>
                     <span>{Math.round(pct)}%</span>
                   </div>
@@ -389,8 +389,8 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-black text-sm text-white leading-tight">{s.title.replace(/^\d+\.\s*/, '')}</h4>
-                    <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">{s.intro}</p>
-                    <span className="text-[10px] font-mono font-black text-amber-400 mt-1.5 block">{ok ? 'PASSED' : '+100 XP'}</span>
+                    <p className="text-xs text-slate-400 mt-1 line-clamp-2">{s.intro}</p>
+                    <span className="text-xs font-mono font-black text-amber-400 mt-1.5 block">{ok ? 'PASSED' : '+100 XP'}</span>
                   </div>
                 </button>
               );
@@ -412,7 +412,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
             <div className="px-5 pt-4 pb-3 bg-bull-raised border-b border-bull-line">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
-                  <span className="text-[10px] font-black uppercase text-bull-lime tracking-widest font-mono">
+                  <span className="text-xs font-black uppercase text-bull-lime tracking-widest font-mono">
                     {mode === 'read' ? 'STORY MODE' : 'QUIZ MODE'}
                   </span>
                   <h3 className="font-black text-base sm:text-lg text-white leading-tight truncate">{lesson.title}</h3>
@@ -444,7 +444,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     <div className="flex items-center gap-3">
                       <span className="text-4xl br-pop">{st.icon}</span>
                       <div>
-                        <div className="text-[10px] font-mono font-black uppercase tracking-widest opacity-70">{st.label}</div>
+                        <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70">{st.label}</div>
                         <h4 className="text-white font-black text-base sm:text-xl leading-tight">{b.head}</h4>
                       </div>
                     </div>
@@ -455,7 +455,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
               {mode === 'quiz' && !result && quiz[qIdx] && (
                 <div key={qIdx} className="br-slide space-y-4">
-                  <div className="flex items-center justify-between font-mono text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <div className="flex items-center justify-between font-mono text-xs font-black uppercase tracking-widest text-slate-400">
                     <span>QUESTION {qIdx + 1} / {quiz.length}</span>
                     <span className="text-amber-400">{Object.keys(answers).length} ANSWERED</span>
                   </div>
@@ -503,7 +503,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                           <p className="text-xs text-slate-300">
                             Answer: <span className="font-black text-emerald-300">{q.options[r.correctIndex]}</span>
                           </p>
-                          <p className="text-[11px] text-slate-400 leading-relaxed">{'\ud83d\udca1'} {r.explanation}</p>
+                          <p className="text-xs text-slate-400 leading-relaxed">{'\ud83d\udca1'} {r.explanation}</p>
                         </div>
                       );
                     })}

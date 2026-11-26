@@ -58,7 +58,7 @@ function TrackBadge({ role }) {
 
   return (
     <span
-      className={`inline-block rounded-full border px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${style}`}
+      className={`inline-block rounded-full border px-2.5 py-0.5 text-xs font-black uppercase tracking-wider ${style}`}
     >
       {label}
     </span>
@@ -399,7 +399,7 @@ export default function Leaderboard() {
       <section className="relative max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
         <header className="text-center space-y-3">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="inline-block rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-bull-lime">
+            <span className="inline-block rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-xs font-black uppercase tracking-widest text-bull-lime">
               {'\u{1F3C6}'} Real-Time Arena Rankings
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-bull-line bg-bull-surface px-3 py-1.5 text-xs font-bold text-slate-300">
@@ -563,7 +563,7 @@ export default function Leaderboard() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-bull-raised text-[10px] uppercase text-slate-400">
+                <thead className="bg-bull-raised text-xs uppercase text-slate-400">
                   <tr>
                     <th className="p-4 text-center">Rank</th>
                     <th className="p-4">Trader</th>
@@ -593,7 +593,7 @@ export default function Leaderboard() {
                                 onClick={() =>
                                   setBottomCount((count) => count + TOP_STEP)
                                 }
-                                className="mt-1 rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-bull-lime/50 hover:text-white"
+                                className="mt-1 rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-xs font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-bull-lime/50 hover:text-white"
                               >
                                 Show {TOP_STEP} more below
                               </button>
@@ -627,7 +627,7 @@ export default function Leaderboard() {
                                 onClick={() =>
                                   setTopCount((count) => count + TOP_STEP)
                                 }
-                                className="mt-1 rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-bull-lime/50 hover:text-white"
+                                className="mt-1 rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-xs font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-bull-lime/50 hover:text-white"
                               >
                                 Show {TOP_STEP} more
                               </button>

@@ -41,7 +41,7 @@ export default function ModulesPage() {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="space-y-2 mb-10 text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-[10px] uppercase tracking-widest font-black px-3.5 py-1 rounded-full shadow-inner mb-2 font-mono">🎓 Bull Run</span>
+          <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-xs uppercase tracking-widest font-black px-3.5 py-1 rounded-full shadow-inner mb-2 font-mono">🎓 Bull Run</span>
           <h1 className="font-poppins font-black text-3xl sm:text-4xl text-white tracking-tight">Interactive Learning Arena</h1>
           <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-medium">Complete modules and submodules sequentially to earn XP and unlock the next ones.</p>
         </div>

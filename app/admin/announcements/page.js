@@ -74,7 +74,7 @@ export default function AnnouncementsPage() {
 
       <Panel title="📢 New announcement">
         <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={3} maxLength={300} placeholder="e.g. New quiz questions drop at 9 AM tomorrow!" className={`${inputCls} w-full resize-none`} />
-        <p className="text-right font-mono text-[10px] text-slate-500">{message.length}/300</p>
+        <p className="text-right font-mono text-xs text-slate-500">{message.length}/300</p>
         <div className="grid gap-3 md:grid-cols-4">
           <select value={level} onChange={(e) => setLevel(e.target.value)} className={inputCls}>
             <option value="info">ℹ️ Info (blue)</option>
@@ -112,15 +112,15 @@ export default function AnnouncementsPage() {
                 <div key={r.id} className="flex flex-col items-start justify-between gap-3 bg-bull-raised/50 px-4 py-3 text-xs md:flex-row md:items-center">
                   <div className="min-w-0">
                     <p className={`font-bold ${LEVEL_TONE[r.level] || 'text-white'}`}>{r.message}</p>
-                    <p className="mt-1 font-mono text-[10px] text-slate-500">
+                    <p className="mt-1 font-mono text-xs text-slate-500">
                       {r.audience === 'all' ? 'Everyone' : `${r.audience}: ${r.target}`} · {new Date(r.created_at).toLocaleString('en-IN')}
                       {r.expires_at ? ` · until ${new Date(r.expires_at).toLocaleString('en-IN')}` : ''}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 font-mono">
-                    <span className={`text-[11px] font-black ${tone}`}>{st}</span>
-                    <button onClick={() => toggle(r)} className="cursor-pointer rounded-lg border border-bull-line bg-bull-surface px-3 py-1.5 text-[11px] font-black uppercase text-slate-300">{r.active ? 'Turn off' : 'Turn on'}</button>
-                    <button onClick={() => remove(r)} className="cursor-pointer rounded-lg border border-rose-900 bg-rose-950 px-3 py-1.5 text-[11px] font-black uppercase text-rose-400">Delete</button>
+                    <span className={`text-xs font-black ${tone}`}>{st}</span>
+                    <button onClick={() => toggle(r)} className="cursor-pointer rounded-lg border border-bull-line bg-bull-surface px-3 py-1.5 text-xs font-black uppercase text-slate-300">{r.active ? 'Turn off' : 'Turn on'}</button>
+                    <button onClick={() => remove(r)} className="cursor-pointer rounded-lg border border-rose-900 bg-rose-950 px-3 py-1.5 text-xs font-black uppercase text-rose-400">Delete</button>
                   </div>
                 </div>
               );

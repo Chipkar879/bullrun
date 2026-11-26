@@ -63,7 +63,7 @@ export default function AccessPage() {
           </div>
         </div>
 
-        <p className="font-mono text-[10px] text-slate-500">Showing {rows.length} account(s)</p>
+        <p className="font-mono text-xs text-slate-500">Showing {rows.length} account(s)</p>
 
         {rows.length === 0 ? (
           <p className="py-4 font-mono text-xs font-medium text-slate-500">
@@ -77,10 +77,10 @@ export default function AccessPage() {
                 <div key={p.id} className="flex flex-col items-start justify-between gap-3 bg-bull-raised/50 px-4 py-3 text-xs md:flex-row md:items-center">
                   <div className="min-w-0">
                     <p className="truncate text-sm font-black text-white">{p.name || 'Unnamed'}</p>
-                    <p className="truncate font-mono text-[11px] text-slate-400">{p.email}</p>
-                    {(p.school_id || p.school_code) && <p className="font-mono text-[10px] text-slate-500">🏫 {p.school_id || p.school_code}</p>}
+                    <p className="truncate font-mono text-xs text-slate-400">{p.email}</p>
+                    {(p.school_id || p.school_code) && <p className="font-mono text-xs text-slate-500">🏫 {p.school_id || p.school_code}</p>}
                   </div>
-                  <div className="font-mono text-[11px] font-bold">
+                  <div className="font-mono text-xs font-bold">
                     {tab === 'soon' ? (
                       <span className={urgent ? 'animate-pulse text-rose-400' : 'text-amber-300'}>⏳ {formatLeft(p.expiryMs - now)} left</span>
                     ) : (
@@ -88,8 +88,8 @@ export default function AccessPage() {
                     )}
                   </div>
                   <div className="flex gap-2 font-mono">
-                    <button onClick={() => grantDays(p, 7)} className="cursor-pointer rounded-lg bg-emerald-600 px-3 py-1.5 text-[11px] font-black uppercase text-white hover:bg-emerald-700">+7 days</button>
-                    <button onClick={() => grantDays(p, 30)} className="cursor-pointer rounded-lg border border-bull-lime/50 bg-bull-surface px-3 py-1.5 text-[11px] font-black uppercase text-bull-lime hover:bg-bull-raised">+30 days</button>
+                    <button onClick={() => grantDays(p, 7)} className="cursor-pointer rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-black uppercase text-white hover:bg-emerald-700">+7 days</button>
+                    <button onClick={() => grantDays(p, 30)} className="cursor-pointer rounded-lg border border-bull-lime/50 bg-bull-surface px-3 py-1.5 text-xs font-black uppercase text-bull-lime hover:bg-bull-raised">+30 days</button>
                   </div>
                 </div>
               );

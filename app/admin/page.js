@@ -8,9 +8,9 @@ import { getProfileFreezeStatus, getNetWorth, inr, istDayKey, isOnline, localDay
 function Kpi({ label, value, sub, tone = 'text-white' }) {
   return (
     <div className="rounded-2xl border-2 border-bull-line bg-bull-surface p-4 shadow-xl">
-      <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono">{label}</p>
+      <p className="text-xs font-black uppercase tracking-wider text-slate-400 font-mono">{label}</p>
       <p className={`mt-1 font-mono text-3xl font-black ${tone}`}>{value}</p>
-      {sub && <p className="mt-0.5 text-[10px] font-mono text-slate-500">{sub}</p>}
+      {sub && <p className="mt-0.5 text-xs font-mono text-slate-500">{sub}</p>}
     </div>
   );
 }
@@ -59,7 +59,7 @@ export default function OverviewPage() {
   return (
     <div className="space-y-8">
       <div className="border-b border-bull-line pb-4">
-        <span className="mb-2 inline-block rounded-full border border-bull-line bg-bull-raised px-3 py-1 text-[10px] font-black uppercase tracking-widest text-bull-lime font-mono">
+        <span className="mb-2 inline-block rounded-full border border-bull-line bg-bull-raised px-3 py-1 text-xs font-black uppercase tracking-widest text-bull-lime font-mono">
           🛡️ Super Admin Clearance
         </span>
         <h1 className="text-3xl font-black tracking-tight text-white">Overview</h1>
@@ -82,11 +82,11 @@ export default function OverviewPage() {
         <div className="mt-5 flex h-40 items-end justify-between gap-3">
           {stats.days.map((d) => (
             <div key={d.key} className="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
-              <span className="font-mono text-[10px] font-black text-slate-300">{d.count}</span>
+              <span className="font-mono text-xs font-black text-slate-300">{d.count}</span>
               <div className="flex w-full max-w-[48px] flex-1 items-end overflow-hidden rounded-t-lg bg-bull-raised/60">
                 <div className="w-full rounded-t-lg" style={{ height: `${d.count ? Math.max(6, (d.count / maxDau) * 100) : 0}%`, background: 'linear-gradient(to top,#65a30d,#bef264)' }} />
               </div>
-              <span className="text-[10px] font-black uppercase text-slate-500">{d.label}</span>
+              <span className="text-xs font-black uppercase text-slate-500">{d.label}</span>
             </div>
           ))}
         </div>
