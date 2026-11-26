@@ -7,6 +7,7 @@ import { supabase } from '@/lib/supabase';
 import { AVATARS, BADGES, LEVELS, RARITY, BB_TO_CASH, MIN_BB, avatarById } from '@/lib/gamification';
 
 const inr = (n) => '\u20B9' + Math.round(Number(n) || 0).toLocaleString('en-IN');
+const announceAvatar = (id) => window.dispatchEvent(new CustomEvent('bullrun-avatar', { detail: id }));
 
 function Avatar({ id, size = 'h-24 w-24', text = 'text-5xl' }) {
   const a = avatarById(id);
@@ -124,15 +125,17 @@ export default function ProfilePage() {
     setTimeout(() => { setEditing(false); setStatus({ message: '', ok: false, busy: false }); }, 1200);
   };
 
-  // Instant switch: update the screen first, save in the background, roll back if refused
+  // Instant switch: update the screen and the header first, save in the background, roll back if refused
   const chooseAvatar = async (id) => {
     const prev = me.avatar;
     if (id === prev) { setPicker(false); return; }
     setMe((m) => ({ ...m, avatar: id }));
+    announceAvatar(id);
     setPicker(false);
     const { ok, out } = await api('/api/badges', { action: 'avatar', id });
     if (!ok) {
       setMe((m) => ({ ...m, avatar: prev }));
+      announceAvatar(prev);
       setToast(out.error || 'Could not change avatar');
     }
   };

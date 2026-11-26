@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { avatarById } from '@/lib/gamification';
 import OnboardingTour from '@/components/OnboardingTour';
 import BrandMark from '@/components/BrandMark';
 
@@ -11,6 +12,7 @@ export default function Navbar() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [initials, setInitials] = useState('');
+  const [avatar, setAvatar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [schoolRole, setSchoolRole] = useState(null);
@@ -25,12 +27,14 @@ export default function Navbar() {
           
           const { data: profile } = await supabase
             .from('profiles')
-            .select('name, role, verification_status')
+            .select('name, role, verification_status, avatar')
             .eq('id', session.user.id)
             .maybeSingle();
 
           const role = profile?.role || null;
-          setSchoolRole(role === 'school_admin' || role === 'teacher' ? role : null);
+          const isStaff = role === 'school_admin' || role === 'teacher';
+          setSchoolRole(isStaff ? role : null);
+          setAvatar(isStaff ? null : (profile?.avatar || 'calf'));
           if (role === 'teacher') {
             const { data: cls } = await supabase
               .from('school_classes')
@@ -71,12 +75,20 @@ export default function Navbar() {
       } else {
         setUser(null);
         setInitials('');
+        setAvatar(null);
         setSchoolRole(null);
         setClassTabs([]);
       }
     });
 
-    return () => subscription.unsubscribe();
+    // The profile page announces avatar changes so the header switches instantly
+    const onAvatar = (e) => { if (e.detail) setAvatar(e.detail); };
+    window.addEventListener('bullrun-avatar', onAvatar);
+
+    return () => {
+      subscription.unsubscribe();
+      window.removeEventListener('bullrun-avatar', onAvatar);
+    };
   }, []);
 
   const closeMenu = () => setIsMobileMenuOpen(false);
@@ -99,6 +111,8 @@ export default function Navbar() {
       : href === '/school'
         ? pathname === href || pathname.startsWith('/school/')
         : pathname === href || pathname.startsWith(href + '/');
+
+  const av = avatar ? avatarById(avatar) : null;
 
   return (
     <>
@@ -156,9 +170,20 @@ export default function Navbar() {
               >
                 Sign In
               </Link>
+            ) : av ? (
+              <Link
+                href="/profile"
+                aria-label="Your profile"
+                className="h-9 w-9 rounded-xl grid place-items-center text-xl shadow-sm ring-1 ring-white/20 transition-all duration-200 hover:scale-105 active:scale-95 select-none outline-none"
+                style={{ background: 'linear-gradient(135deg, ' + av.from + ', ' + av.to + ')' }}
+                onClick={closeMenu}
+              >
+                <span aria-hidden="true">{av.emoji}</span>
+              </Link>
             ) : (
               <Link
                 href="/profile"
+                aria-label="Your profile"
                 className="h-8 w-8 rounded-xl bg-gradient-to-tr from-bull-lime to-bull-teal p-[1px] shadow-sm transition-all duration-200 hover:scale-105 active:scale-95 flex items-center justify-center select-none outline-none"
                 onClick={closeMenu}
               >
