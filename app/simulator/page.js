@@ -1238,217 +1238,219 @@ export default function RealSimulatorPage() {
   const priceUp = !activeQuote.changePct?.startsWith('-');
   const returnPct = START_BALANCE > 0 ? (netReturn / START_BALANCE) * 100 : 0;
 
+  const card = 'bg-bull-surface border border-bull-line rounded-3xl';
+  const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', hourCycle: 'h23' }).format(new Date()));
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const [profileName, setProfileName] = useState('');
+  useEffect(() => {
+    if (!user) { setProfileName(''); return undefined; }
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabase.from('profiles').select('*').eq('id', user.id).maybeSingle();
+      if (cancelled || !data) return;
+      setProfileName(String(data.full_name || data.name || data.display_name || data.username || ''));
+    })();
+    return () => { cancelled = true; };
+  }, [user]);
+  const meta = user?.user_metadata || {};
+  const rawName = profileName || meta.full_name || meta.name || meta.display_name || meta.username || '';
+  const firstName = String(rawName).trim().split(/\s+/)[0] || '';
+  const [orderSearch, setOrderSearch] = useState('');
+  useEffect(() => { loadHistory(); }, [loadHistory, executedReceipt]);
+  const recentRows = historyRows
+    .filter((r) => (historyFilter === 'ALL' || r.side === historyFilter) && String(r.sym).toLowerCase().includes(orderSearch.trim().toLowerCase()))
+    .slice(0, 8);
+  const spark = (h) => {
+    const v = (h || []).map((p) => Number(p.close ?? p.price)).filter(Number.isFinite);
+    if (v.length < 2) return '';
+    const mn = Math.min(...v);
+    const mx = Math.max(...v);
+    return v.map((x, i) => (i ? 'L' : 'M') + ((i / (v.length - 1)) * 60).toFixed(1) + ' ' + (20 - ((x - mn) / (mx - mn || 1)) * 20).toFixed(1)).join(' ');
+  };
   const tabBtn = (active) =>
-    'text-xs font-black uppercase px-3 py-2 rounded-xl whitespace-nowrap ' +
+    'text-xs font-black uppercase px-3 py-2 rounded-full whitespace-nowrap ' +
     (active ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-300 border border-bull-line hover:border-bull-lime/50');
+  const pill = (active) =>
+    'px-4 py-2 rounded-full text-sm font-bold ' +
+    (active ? 'bg-bull-lime text-bull-ink' : 'bg-bull-surface border border-bull-line text-slate-200 hover:border-bull-lime/50');
 
   return (
     <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-28">
       <Navbar />
-
-      <div className="max-w-[1360px] mx-auto px-4 pt-4 space-y-5">
-        <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
+      <div className="max-w-[1360px] mx-auto px-4 pt-4 space-y-4">
+        <header className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-              <span className="text-bull-lime">BULL RUN</span> TRADING FLOOR
-            </h1>
-            <p className="text-slate-400 text-sm mt-1">
-              Practice with generated prices. No live exchange execution.
-            </p>
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white">{greeting}{firstName ? ', ' + firstName : ''}</h1>
+            <p className="text-slate-400 text-sm sm:text-base mt-1">Practice with generated prices. No live exchange execution.</p>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-            <div className="bg-bull-surface border border-bull-line px-4 py-2 rounded-xl text-sm">
-              <span className="text-slate-400 mr-2">INDIA TIME</span>
+          <div className="flex flex-wrap gap-2 items-center">
+            <div className="bg-bull-surface border border-bull-line px-4 py-2 rounded-full text-sm">
+              <span className="text-slate-400 mr-2">India time</span>
               <span className="font-mono font-black text-white tabular-nums">{indiaTime}</span>
             </div>
-            <div className="border px-4 py-2 rounded-xl text-sm font-bold bg-emerald-950/40 border-emerald-800/60 text-emerald-300">
-              SIMULATED MARKET OPEN 24/7
+            <div className="px-4 py-2 rounded-full text-sm font-bold bg-emerald-950/40 border border-emerald-800/60 text-emerald-300">
+              Simulated market open 24/7
             </div>
           </div>
         </header>
 
-        {portfolioError && (
-          <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">
-            Portfolio load error: {portfolioError}
-          </div>
-        )}
+        {portfolioError && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">Portfolio load error: {portfolioError}</div>}
+        {marketMessage && <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300">{marketMessage}</div>}
 
-        {marketMessage && (
-          <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300">
-            {marketMessage}
-          </div>
-        )}
-
-        {/* Summary strip: net worth is the hero number */}
-        <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <div className="col-span-2 lg:col-span-1 bg-bull-surface border border-bull-lime/40 rounded-2xl p-4 sm:p-5">
-            <div className="text-xs font-black tracking-wider text-slate-400 uppercase">Account net worth</div>
-            <div className="text-2xl sm:text-3xl font-black mt-1 font-mono text-white tabular-nums">{money(netWorth)}</div>
-            <div className="text-sm mt-1 text-slate-400">
-              Started with <b className="text-slate-200">{money(START_BALANCE)}</b>
-              <span className={'ml-2 font-mono font-bold ' + (netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
-                {(returnPct >= 0 ? '+' : '') + returnPct.toFixed(2) + '%'}
-              </span>
-            </div>
-          </div>
-          {[
-            ['Available cash', money(realBalance), 'text-white'],
-            ['Holdings value', money(holdingsValue), 'text-white'],
-            ['Net return', (netReturn >= 0 ? '+' : '-') + money(Math.abs(netReturn)), netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
-          ].map(([label, value, color]) => (
-            <div key={label} className="bg-bull-surface border border-bull-line rounded-2xl p-4 sm:p-5">
-              <div className="text-xs font-black tracking-wider text-slate-400 uppercase">{label}</div>
-              <div className={'text-xl sm:text-2xl font-black mt-1 font-mono tabular-nums ' + color}>{value}</div>
-            </div>
-          ))}
-        </section>
-
-        <div data-top-actions className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {[
-            ['owned', 'Owned assets (' + ownedRows.length + ')'],
-            ['history', 'Order history'],
-            ['report', 'Report card'],
-            ['pending', 'Pending orders (' + openOrders.length + ')'],
-          ].map(([key, label]) => (
-            <button
-              key={key}
-              onClick={() => setActivePanel(activePanel === key ? null : key)}
-              className={'py-3 rounded-xl text-sm font-black uppercase ' + (activePanel === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200 hover:border-bull-lime/50')}
-            >
-              {label}
-            </button>
+        <div data-top-actions className="flex gap-2 overflow-x-auto pb-1">
+          {[['owned', 'Owned assets (' + ownedRows.length + ')'], ['history', 'Order history'], ['report', 'Report card'], ['pending', 'Pending orders (' + openOrders.length + ')']].map(([key, label]) => (
+            <button key={key} onClick={() => setActivePanel(activePanel === key ? null : key)} className={pill(activePanel === key) + ' whitespace-nowrap'}>{label}</button>
           ))}
         </div>
 
-        {/* Chart first. Watchlist left, chart centre, order ticket right. */}
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_340px] gap-5 items-start">
-          {/* WATCHLIST */}
-          <aside className="order-3 lg:order-1 bg-bull-surface border border-bull-line rounded-3xl p-4 h-fit">
-            <div className="flex justify-between items-center pb-3 border-b border-bull-line text-sm font-black uppercase">
-              <span>Watchlist</span>
-              <span className="text-bull-lime">{filteredAssets.length} assets</span>
+        {/* Row 1: net worth, KPIs, practice time */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div className={card + ' p-5 lg:col-span-4'}>
+            <div className="text-sm text-slate-400 font-bold">Total net worth</div>
+            <div className="text-3xl sm:text-4xl font-black font-mono tabular-nums text-white mt-1">{money(netWorth)}</div>
+            <div className="flex items-center gap-2 mt-2 text-sm flex-wrap">
+              <span className={'px-2 py-0.5 rounded-full font-mono font-bold ' + (netReturn >= 0 ? 'bg-emerald-900/40 text-bull-teal' : 'bg-rose-900/40 text-bull-coral')}>
+                {(returnPct >= 0 ? '↑ ' : '↓ ') + Math.abs(returnPct).toFixed(2) + '%'}
+              </span>
+              <span className="text-slate-400">since you started with <b className="text-slate-200">{money(START_BALANCE)}</b></span>
             </div>
+            <div className="grid grid-cols-2 gap-3 mt-4">
+              <button onClick={scrollToOrderDesk} className="bg-bull-lime hover:bg-bull-lime-light text-bull-ink font-black text-sm py-3 rounded-full">Trade now</button>
+              <button onClick={() => setActivePanel('owned')} className="bg-bull-raised border border-bull-line text-slate-200 font-bold text-sm py-3 rounded-full hover:border-bull-lime/50">View holdings</button>
+            </div>
+            <div className="mt-4 bg-bull-raised border border-bull-line rounded-2xl p-3">
+              <div className="text-xs font-bold text-slate-400 mb-2">Holdings <span className="text-slate-500">| {ownedRows.length} assets</span></div>
+              {ownedRows.length === 0 ? (
+                <p className="text-sm text-slate-400">Nothing owned yet. Pick an asset and place a practice order.</p>
+              ) : (
+                <div className="grid grid-cols-3 gap-2">
+                  {ownedRows.slice(0, 3).map((row) => (
+                    <button key={row.sym} onClick={() => openOwnedAsset(row)} className="text-left bg-bull-surface border border-bull-line rounded-xl p-2.5 min-w-0">
+                      <div className="text-xs font-black truncate">{row.sym}</div>
+                      <div className="text-sm font-mono font-bold truncate">{money(row.value)}</div>
+                      <div className={'text-xs font-mono font-bold ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                        {(row.pnlPct >= 0 ? '+' : '') + row.pnlPct.toFixed(2) + '%'}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
 
+          <div className="lg:col-span-4 grid grid-cols-2 gap-3">
+            <div className="rounded-3xl p-5 text-emerald-950 bg-green-200 border border-green-300 flex flex-col justify-between min-h-[150px]">
+              <div className="text-sm font-bold text-emerald-900">Available cash</div>
+              <div className="text-xl sm:text-2xl font-black font-mono tabular-nums break-words" style={{ color: '#14532d' }}>{money(realBalance)}</div>
+              <div className="text-xs text-emerald-800">Ready to invest</div>
+            </div>
+            {[
+              ['Holdings value', money(holdingsValue), 'text-white', ownedRows.length + ' assets'],
+              ['Net return', (netReturn >= 0 ? '+' : '-') + money(Math.abs(netReturn)), netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral', (returnPct >= 0 ? '+' : '') + returnPct.toFixed(2) + '% overall'],
+              ['Pending orders', String(openOrders.length), 'text-white', 'Open for 24 hours'],
+            ].map(([label, value, color, sub]) => (
+              <div key={label} className={card + ' p-5 flex flex-col justify-between min-h-[150px]'}>
+                <div className="text-sm font-bold text-slate-300">{label}</div>
+                <div className={'text-xl sm:text-2xl font-black font-mono tabular-nums break-words ' + color}>{value}</div>
+                <div className="text-xs text-slate-400">{sub}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className={card + ' p-5 lg:col-span-4 space-y-3'}>
+            <div className="flex justify-between items-baseline">
+              <h3 className="text-base font-black">Daily practice time</h3>
+              <span className="text-sm font-mono font-bold tabular-nums">{meterMinutes} / {DAILY_LIMIT_MIN} min</span>
+            </div>
+            <div className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={DAILY_LIMIT_MIN} aria-valuenow={Math.min(meterMinutes, DAILY_LIMIT_MIN)} aria-label="Practice time used today">
+              <div className={'h-full rounded-full transition-all ' + meterBar} style={{ width: meterPct + '%' }} />
+            </div>
+            <p className={'text-sm ' + (meterState === 'over' ? 'text-bull-coral' : meterState === 'near' ? 'text-amber-300' : 'text-slate-400')}>
+              {meterState === 'over'
+                ? 'You have used your daily practice time. Take a break, review your report card, and come back tomorrow. Trading is not locked.'
+                : meterState === 'near'
+                  ? 'Only ' + meterLeft + ' min left today. Good time to review your trades.'
+                  : meterLeft + ' min of practice left today. Short, focused sessions build better habits.'}
+            </p>
+            <p className="text-xs text-slate-400">Counts time with this page open. Resets at midnight India time.</p>
+          </div>
+        </section>
+
+        {/* Row 2: watchlist, chart + news, order ticket */}
+        <div className="grid grid-cols-1 lg:grid-cols-[360px_minmax(0,1fr)_300px] gap-4 items-start">
+          <aside className={card + ' order-3 lg:order-1 p-4 h-fit'}>
+            <div className="flex justify-between items-center text-base font-black">
+              <span>Watchlist</span>
+              <span className="text-xs text-bull-lime font-bold">{filteredAssets.length} assets</span>
+            </div>
             <div className="flex gap-1.5 overflow-x-auto py-3">
               {CATEGORIES.map((category) => (
-                <button key={category} onClick={() => setSelectedCategory(category)} className={tabBtn(selectedCategory === category)}>
-                  {category}
-                </button>
+                <button key={category} onClick={() => setSelectedCategory(category)} className={tabBtn(selectedCategory === category)}>{category}</button>
               ))}
             </div>
-
-            <div className="max-h-[420px] lg:max-h-[640px] overflow-y-auto pr-1">
+            <div className="max-h-[420px] lg:max-h-[620px] overflow-y-auto pr-1 space-y-2">
               {filteredAssets.map((asset) => {
                 const quote = prices[asset.sym];
                 const holding = realHoldings[asset.sym];
                 const selected = selectedRealStock === asset.sym;
-
+                const down = quote?.changePct?.startsWith('-');
+                const path = spark(quote?.history);
                 return (
                   <button
                     key={asset.sym}
-                    onClick={() => {
-                      setSelectedRealStock(asset.sym);
-                      if (orderStage !== 'IDLE') resetOrderDesk();
-                    }}
-                    className={'w-full p-3 text-left flex justify-between items-center rounded-xl my-1 ' + (selected ? 'bg-bull-raised border border-bull-lime/60' : 'border border-transparent hover:bg-bull-raised')}
+                    onClick={() => { setSelectedRealStock(asset.sym); if (orderStage !== 'IDLE') resetOrderDesk(); }}
+                    className={'w-full p-3 text-left rounded-2xl border ' + (selected ? 'bg-bull-raised border-bull-lime/70' : 'bg-bull-bg border-bull-line hover:border-bull-lime/40')}
                   >
-                    <div className="min-w-0 pr-2">
-                      <div className="font-black text-base">{asset.sym}</div>
-                      <div className="text-xs text-slate-400 truncate">{asset.name}</div>
-                      {holding && <div className="text-xs text-bull-teal mt-0.5">Owned: {holding.shares}</div>}
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="font-mono font-bold text-sm">
-                        {quote ? money(quote.price) : loadingPrices ? 'Loading…' : 'Unavailable'}
+                    <div className="flex justify-between items-start gap-2">
+                      <div className="min-w-0">
+                        <div className="font-black text-base">{asset.sym}</div>
+                        <div className="text-xs text-slate-400 truncate">{asset.name}</div>
                       </div>
-                      <div className={'text-xs font-bold font-mono ' + (quote?.changePct?.startsWith('-') ? 'text-bull-coral' : 'text-bull-teal')}>
-                        {quote?.changePct || '—'}
-                      </div>
+                      {path && (
+                        <svg width="60" height="22" viewBox="0 0 60 22" className="shrink-0" aria-hidden="true">
+                          <path d={path} fill="none" stroke={down ? 'var(--color-bull-coral)' : 'var(--color-bull-teal)'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" transform="translate(0 1)" />
+                        </svg>
+                      )}
                     </div>
+                    <div className="flex justify-between items-end mt-2">
+                      <span className="font-mono font-bold text-sm">{quote ? money(quote.price) : loadingPrices ? 'Loading…' : 'Unavailable'}</span>
+                      <span className={'text-xs font-bold font-mono px-2 py-0.5 rounded-full ' + (down ? 'bg-rose-900/40 text-bull-coral' : 'bg-emerald-900/40 text-bull-teal')}>{quote?.changePct || '—'}</span>
+                    </div>
+                    {holding && <div className="text-xs text-bull-teal mt-1">Owned: {holding.shares}</div>}
                   </button>
                 );
               })}
             </div>
           </aside>
 
-          {/* CHART (main focus) */}
-          <section className="order-1 lg:order-2 space-y-5 min-w-0">
-            <div className="bg-bull-bg border border-bull-line rounded-3xl overflow-hidden p-4 sm:p-6">
+          <section className="order-1 lg:order-2 space-y-4 min-w-0">
+            <div className={card + ' p-4 sm:p-6'}>
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
                 <div className="min-w-0">
                   <div className="text-xs uppercase font-black tracking-wider text-bull-lime">{activeAsset.sector}</div>
-                  <h2 className="text-xl sm:text-2xl font-black truncate">
-                    {activeAsset.name} <span className="text-slate-400 font-bold text-base">· {selectedRealStock}</span>
-                  </h2>
+                  <h2 className="text-xl sm:text-2xl font-black truncate">{activeAsset.name} <span className="text-slate-400 font-bold text-base">· {selectedRealStock}</span></h2>
                   <div className="flex items-baseline gap-3 mt-1 flex-wrap">
-                    <span className="text-3xl sm:text-4xl font-black font-mono tabular-nums">
-                      {activeQuote.price ? money(activeQuote.price) : 'Loading price…'}
-                    </span>
-                    <span className={'text-base font-bold font-mono ' + (priceUp ? 'text-bull-teal' : 'text-bull-coral')}>
-                      {activeQuote.changePct}
-                    </span>
+                    <span className="text-3xl sm:text-4xl font-black font-mono tabular-nums">{activeQuote.price ? money(activeQuote.price) : 'Loading price…'}</span>
+                    <span className={'text-base font-bold font-mono ' + (priceUp ? 'text-bull-teal' : 'text-bull-coral')}>{activeQuote.changePct}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5 shrink-0">
                   {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
-                    <button key={key} onClick={() => chooseRange(key)} className={tabBtn(chartRange === key)}>
-                      {label}
-                    </button>
+                    <button key={key} onClick={() => chooseRange(key)} className={tabBtn(chartRange === key)}>{label}</button>
                   ))}
                 </div>
               </div>
-
-              <PriceChart
-                key={selectedRealStock}
-                history={activeQuote.history}
-                symbol={selectedRealStock}
-                session={session}
-                markers={chartMarkers}
-              />
-
+              <PriceChart key={selectedRealStock} history={activeQuote.history} symbol={selectedRealStock} session={session} markers={chartMarkers} />
               <div className="mt-3 text-xs text-slate-400">
-                {session?.range === '15m' ? 'The chart shows the last 15 minutes of the simulated market.' : session?.range === '1h' ? 'The chart shows the last hour of the simulated market.' : "The chart shows today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. Generated series, not exchange history.
+                {session?.range === '15m' ? 'Last 15 minutes of the simulated market.' : session?.range === '1h' ? 'Last hour of the simulated market.' : "Today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. Generated series, not exchange history.
               </div>
             </div>
 
-            {(() => {
-              const items = (news || [])
-                .filter((n) => n.scope === 'market' || n.sym === selectedRealStock || (n.scope === 'sector' && n.category === activeAsset.category))
-                .slice(0, 4);
-              return (
-                <div className="bg-bull-surface border border-bull-line rounded-3xl p-4 sm:p-5">
-                  <div className="text-sm font-black uppercase text-slate-300 mb-2">Market news (simulated)</div>
-                  {items.length === 0 ? (
-                    <p className="text-sm text-slate-400">No news for this asset in the last 24 hours.</p>
-                  ) : (
-                    items.map((n) => (
-                      <div key={n.id} className="flex gap-3 text-sm py-2 border-b border-bull-line last:border-0">
-                        <span className={'font-black ' + (n.direction > 0 ? 'text-bull-teal' : 'text-bull-coral')}>
-                          {n.direction > 0 ? '▲' : '▼'}
-                        </span>
-                        <span className="text-slate-200 flex-1">{n.headline}</span>
-                        <span className="text-slate-400 font-mono shrink-0">
-                          {new Date(n.time * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })}
-                        </span>
-                      </div>
-                    ))
-                  )}
-                  <p className="text-xs text-slate-400 mt-2">
-                    Invented headlines from a fictional newsroom. News is not advice and does not predict prices.
-                  </p>
-                </div>
-              );
-            })()}
-
-            <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs sm:text-sm text-amber-200">
-              These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice. Every company, currency, fund and index here is fictional.
-            </div>
+            
           </section>
 
-          {/* ORDER TICKET + TIME METER */}
-          <aside id="order-desk" className="order-2 lg:order-3 space-y-5 scroll-mt-24 lg:sticky lg:top-24">
-            <div className="bg-bull-surface border border-bull-line p-5 rounded-3xl">
+          <aside id="order-desk" className="order-2 lg:order-3 scroll-mt-24 space-y-4">
+            <div className={card + ' p-5'}>
               {orderStage === 'IDLE' && (
                 <div className="space-y-4">
                   <div className="flex justify-between items-baseline">
@@ -1611,35 +1613,74 @@ export default function RealSimulatorPage() {
                 </div>
               )}
             </div>
-
-            {/* Practice-time meter: replaces the old Asset profile box */}
-            <div className="bg-bull-surface border border-bull-line p-5 rounded-3xl space-y-3">
-              <div className="flex justify-between items-baseline">
-                <h3 className="text-sm font-black uppercase text-slate-300">Today&apos;s practice time</h3>
-                <span className="text-sm font-mono font-bold text-white tabular-nums">
-                  {meterMinutes} / {DAILY_LIMIT_MIN} min
-                </span>
-              </div>
-              <div
-                className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden"
-                role="progressbar"
-                aria-valuemin={0}
-                aria-valuemax={DAILY_LIMIT_MIN}
-                aria-valuenow={Math.min(meterMinutes, DAILY_LIMIT_MIN)}
-                aria-label="Practice time used today"
-              >
-                <div className={'h-full rounded-full transition-all ' + meterBar} style={{ width: meterPct + '%' }} />
-              </div>
-              <p className={'text-sm ' + (meterState === 'over' ? 'text-bull-coral' : meterState === 'near' ? 'text-amber-300' : 'text-slate-400')}>
-                {meterState === 'over'
-                  ? 'You have used your daily practice time. Take a break, review your report card, and come back tomorrow. Trading is not locked.'
-                  : meterState === 'near'
-                    ? 'Only ' + meterLeft + ' min left today. Good time to review your trades.'
-                    : meterLeft + ' min of practice left today. Short, focused sessions build better habits.'}
-              </p>
-              <p className="text-xs text-slate-400">Counts time with this page open. Resets at midnight India time.</p>
-            </div>
+                      {(() => {
+              const items = (news || [])
+                .filter((n) => n.scope === 'market' || n.sym === selectedRealStock || (n.scope === 'sector' && n.category === activeAsset.category))
+                .slice(0, 4);
+              return (
+                <div className={card + ' p-4 sm:p-5'}>
+                  <div className="text-base font-black mb-2">Market news (simulated)</div>
+                  {items.length === 0 ? (
+                    <p className="text-sm text-slate-400">No news for this asset in the last 24 hours.</p>
+                  ) : (
+                    items.map((n) => (
+                      <div key={n.id} className="flex gap-3 text-sm py-2 border-b border-bull-line last:border-0">
+                        <span className={'font-black ' + (n.direction > 0 ? 'text-bull-teal' : 'text-bull-coral')}>{n.direction > 0 ? '▲' : '▼'}</span>
+                        <span className="text-slate-200 flex-1">{n.headline}</span>
+                        <span className="text-slate-400 font-mono shrink-0">{new Date(n.time * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+                      </div>
+                    ))
+                  )}
+                  <p className="text-xs text-slate-400 mt-2">Invented headlines from a fictional newsroom. News is not advice and does not predict prices.</p>
+                </div>
+              );
+            })()}
           </aside>
+        </div>
+
+        {/* Recent orders table */}
+        <section className={card + ' p-4 sm:p-5'}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+            <h3 className="text-lg font-black">Recent orders</h3>
+            <div className="flex gap-2">
+              <input value={orderSearch} onChange={(e) => setOrderSearch(e.target.value)} placeholder="Search asset" aria-label="Search orders" className="bg-bull-raised border border-bull-line rounded-full px-4 py-2 text-sm w-full sm:w-48 focus:outline-none focus:border-bull-lime" />
+              <select value={historyFilter} onChange={(e) => setHistoryFilter(e.target.value)} aria-label="Filter orders" className="bg-bull-raised border border-bull-line rounded-full px-3 py-2 text-sm">
+                <option value="ALL">All</option>
+                <option value="BUY">Buys</option>
+                <option value="SELL">Sells</option>
+              </select>
+            </div>
+          </div>
+          {!user ? (
+            <p className="text-sm text-slate-400 py-6 text-center">Log in to see your orders.</p>
+          ) : recentRows.length === 0 ? (
+            <p className="text-sm text-slate-400 py-6 text-center">{historyLoading ? 'Loading…' : 'No orders yet. Your buys and sells will be listed here.'}</p>
+          ) : (
+            <div className="overflow-x-auto rounded-2xl border border-bull-line">
+              <table className="w-full text-sm min-w-[640px]">
+                <thead className="bg-bull-raised text-slate-400 text-xs">
+                  <tr>{['Asset', 'Side', 'Units', 'Price', 'Order value', 'Status', 'Date'].map((h) => <th key={h} className="text-left font-bold px-4 py-3">{h}</th>)}</tr>
+                </thead>
+                <tbody>
+                  {recentRows.map((row) => (
+                    <tr key={row.id} className="border-t border-bull-line">
+                      <td className="px-4 py-3 font-black">{row.sym}</td>
+                      <td className="px-4 py-3"><span className={'text-xs font-black px-2 py-0.5 rounded-full ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>{row.side === 'BUY' ? 'Bought' : 'Sold'}</span></td>
+                      <td className="px-4 py-3 font-mono">{Number(row.qty)}</td>
+                      <td className="px-4 py-3 font-mono">{money(row.price)}</td>
+                      <td className="px-4 py-3 font-mono">{money(row.gross)}</td>
+                      <td className="px-4 py-3"><span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-bull-teal" />Completed</span></td>
+                      <td className="px-4 py-3 text-slate-400 whitespace-nowrap">{new Date(row.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true })}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs sm:text-sm text-amber-200">
+          These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice. Every company, currency, fund and index here is fictional.
         </div>
       </div>
 
