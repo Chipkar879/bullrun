@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase';
 import { ASSETS, ASSET_BY_SYM, CATEGORIES } from '@/lib/catalog';
 
 const START_BALANCE = 50000;
+const DAILY_LIMIT_MIN = 60;
 const PRICE_REFRESH_MS = 15000;
 const SAVE_DEBOUNCE_MS = 1000;
 
@@ -52,7 +53,7 @@ function PriceChart({ history, symbol, session, markers }) {
 
   const width = 760;
   const height = 300;
-  const pad = { top: 22, right: 82, bottom: 30, left: 12 };
+  const pad = { top: 22, right: 96, bottom: 32, left: 12 };
   const plotWidth = width - pad.left - pad.right;
   const plotHeight = height - pad.top - pad.bottom;
 
@@ -178,12 +179,12 @@ function PriceChart({ history, symbol, session, markers }) {
     <div className="relative w-full">
       <div className="flex items-center justify-between gap-3 mb-3">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500 font-bold">
+          <div className="text-xs uppercase tracking-[0.18em] text-slate-500 font-bold">
             Generated price series
           </div>
           <div className={`text-lg sm:text-xl font-black font-mono mt-1 ${rising ? 'text-emerald-300' : 'text-rose-300'}`}>
             {money(last)}
-            <span className="ml-2 text-[10px] font-bold tracking-wide text-slate-500">
+            <span className="ml-2 text-xs font-bold tracking-wide text-slate-500">
               {rising ? '↗ UPTREND' : '↘ DOWNTREND'}
             </span>
           </div>
@@ -192,9 +193,9 @@ function PriceChart({ history, symbol, session, markers }) {
         <div className="text-right shrink-0">
           <div className={'text-sm font-black font-mono mb-1 ' + (rising ? 'text-emerald-300' : 'text-rose-300')}>
             {(rising ? '+' : '') + (first ? (((last - first) / first) * 100).toFixed(2) : '0.00') + '%'}
-            <span className="ml-1 text-[10px] font-bold text-slate-500">in this view</span>
+            <span className="ml-1 text-xs font-bold text-slate-500">in this view</span>
           </div>
-          <div className="text-[10px] text-slate-500 uppercase tracking-wider">Range</div>
+          <div className="text-xs text-slate-500 uppercase tracking-wider">Range</div>
           <div className="text-xs font-mono text-slate-300 mt-1">
             {money(rawMin)} – {money(rawMax)}
           </div>
@@ -241,7 +242,7 @@ function PriceChart({ history, symbol, session, markers }) {
                   x={width - pad.right + 12}
                   y={y + 4}
                   fill="#64748b"
-                  fontSize="10"
+                  fontSize="13"
                   fontFamily="monospace"
                 >
                   {value.toLocaleString('en-IN', {
@@ -273,7 +274,7 @@ function PriceChart({ history, symbol, session, markers }) {
                   y={height - 8}
                   textAnchor={index === 0 ? 'start' : index === 4 ? 'end' : 'middle'}
                   fill="#64748b"
-                  fontSize="10"
+                  fontSize="13"
                   fontFamily="monospace"
                 >
                   {sessionSpan
@@ -377,7 +378,7 @@ function PriceChart({ history, symbol, session, markers }) {
                 x={width - pad.right + 10}
                 y={Math.max(pad.top + 14, Math.min(pad.top + plotHeight - 7, activePoint.y + 4))}
                 fill={lineColor}
-                fontSize="10"
+                fontSize="13"
                 fontWeight="700"
                 fontFamily="monospace"
               >
@@ -390,7 +391,7 @@ function PriceChart({ history, symbol, session, markers }) {
         </svg>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-[10px] text-slate-500">
+      <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs text-slate-500">
         <div className="flex items-center gap-2">
           <span className="inline-block h-2 w-2 rounded-full" style={{ background: lineColor }} />
           <span>{symbol} · {points.length} generated points</span>
@@ -1200,118 +1201,144 @@ export default function RealSimulatorPage() {
     }
   };
 
+  // Practice-time meter: counts seconds this page is open and visible, per India day.
+  const [practiceSeconds, setPracticeSeconds] = useState(0);
+  useEffect(() => {
+    const dayKey = () =>
+      'bullrun_sim_seconds_' + new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
+    const read = () => {
+      try {
+        return Number(window.localStorage.getItem(dayKey())) || 0;
+      } catch {
+        return 0;
+      }
+    };
+    setPracticeSeconds(read());
+    const id = setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
+      const next = read() + 1;
+      try {
+        window.localStorage.setItem(dayKey(), String(next));
+      } catch {}
+      setPracticeSeconds(next);
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   const holdingsValue = getHoldingsValue();
   const netWorth = Number((realBalance + holdingsValue).toFixed(2));
   const netReturn = netWorth - START_BALANCE;
+
+  // ---- Practice-time meter (soft limit: it warns, it never locks trading) ----
+  const meterMinutes = Math.floor(practiceSeconds / 60);
+  const meterPct = Math.min(100, Math.round((practiceSeconds / (DAILY_LIMIT_MIN * 60)) * 100));
+  const meterLeft = Math.max(0, DAILY_LIMIT_MIN - meterMinutes);
+  const meterState = meterPct >= 100 ? 'over' : meterPct >= 80 ? 'near' : 'ok';
+  const meterBar = meterState === 'over' ? 'bg-bull-coral' : meterState === 'near' ? 'bg-amber-400' : 'bg-bull-lime';
+  const priceUp = !activeQuote.changePct?.startsWith('-');
+  const returnPct = START_BALANCE > 0 ? (netReturn / START_BALANCE) * 100 : 0;
+
+  const tabBtn = (active) =>
+    'text-xs font-black uppercase px-3 py-2 rounded-xl whitespace-nowrap ' +
+    (active ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-300 border border-bull-line hover:border-bull-lime/50');
 
   return (
     <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 pb-28">
       <Navbar />
 
-      <div className="max-w-[1240px] mx-auto px-4 pt-4 space-y-6">
-        <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-bull-line pb-4">
+      <div className="max-w-[1360px] mx-auto px-4 pt-4 space-y-5">
+        <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
           <div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
-              <span className="text-bull-lime">BULL RUN</span> MULTI-ASSET SIMULATOR
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+              <span className="text-bull-lime">BULL RUN</span> TRADING FLOOR
             </h1>
-            <p className="text-slate-400 text-xs mt-1">
+            <p className="text-slate-400 text-sm mt-1">
               Practice with generated prices. No live exchange execution.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-            <div className="bg-bull-surface border border-bull-line px-3.5 py-2 rounded-xl text-xs">
-              <span className="text-slate-500 mr-2">INDIA TIME</span>
+            <div className="bg-bull-surface border border-bull-line px-4 py-2 rounded-xl text-sm">
+              <span className="text-slate-400 mr-2">INDIA TIME</span>
               <span className="font-mono font-black text-white tabular-nums">{indiaTime}</span>
             </div>
-
-            <div className={`border px-3.5 py-2 rounded-xl text-xs font-bold ${marketOpen ? 'bg-emerald-950/40 border-emerald-800/60 text-emerald-300' : 'bg-amber-950/40 border-amber-800/60 text-amber-300'}`}>
-              {marketOpen ? 'SIMULATED MARKET OPEN 24/7' : 'SIMULATED MARKET OPEN 24/7'}
+            <div className="border px-4 py-2 rounded-xl text-sm font-bold bg-emerald-950/40 border-emerald-800/60 text-emerald-300">
+              SIMULATED MARKET OPEN 24/7
             </div>
           </div>
         </header>
 
-        <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs text-amber-200">
-          These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice. Every company, currency, fund and index here is fictional.
-        </div>
-
         {portfolioError && (
-          <div className="p-3 rounded-xl text-xs bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">
+          <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300 break-words">
             Portfolio load error: {portfolioError}
           </div>
         )}
 
         {marketMessage && (
-          <div className="p-3 rounded-xl text-xs bg-rose-950/40 border border-rose-900/60 text-rose-300">
+          <div className="p-3 rounded-xl text-sm bg-rose-950/40 border border-rose-900/60 text-rose-300">
             {marketMessage}
           </div>
         )}
 
-        <div data-top-actions className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <button
-            onClick={() => setActivePanel(activePanel === 'owned' ? null : 'owned')}
-            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'owned' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
-          >
-            Owned assets ({ownedRows.length})
-          </button>
-          <button
-            onClick={() => setActivePanel(activePanel === 'history' ? null : 'history')}
-            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'history' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
-          >
-            Order history
-          </button>
-          <button
-            onClick={() => setActivePanel(activePanel === 'report' ? null : 'report')}
-            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'report' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
-          >
-            Report card
-          </button>
-          <button
-            onClick={() => setActivePanel(activePanel === 'pending' ? null : 'pending')}
-            className={'py-3 rounded-xl text-xs font-black uppercase ' + (activePanel === 'pending' ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200')}
-          >
-            Pending orders ({openOrders.length})
-          </button>
-        </div>
-
-        <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Summary strip: net worth is the hero number */}
+        <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="col-span-2 lg:col-span-1 bg-bull-surface border border-bull-lime/40 rounded-2xl p-4 sm:p-5">
+            <div className="text-xs font-black tracking-wider text-slate-400 uppercase">Account net worth</div>
+            <div className="text-2xl sm:text-3xl font-black mt-1 font-mono text-white tabular-nums">{money(netWorth)}</div>
+            <div className="text-sm mt-1 text-slate-400">
+              Started with <b className="text-slate-200">{money(START_BALANCE)}</b>
+              <span className={'ml-2 font-mono font-bold ' + (netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                {(returnPct >= 0 ? '+' : '') + returnPct.toFixed(2) + '%'}
+              </span>
+            </div>
+          </div>
           {[
-            ['Available Cash', realBalance, 'text-white'],
-            ['Holdings Value', holdingsValue, 'text-white'],
-            ['Account Net Worth', netWorth, 'text-emerald-400'],
-            ['Net Return', netReturn, netReturn >= 0 ? 'text-emerald-400' : 'text-rose-400'],
+            ['Available cash', money(realBalance), 'text-white'],
+            ['Holdings value', money(holdingsValue), 'text-white'],
+            ['Net return', (netReturn >= 0 ? '+' : '-') + money(Math.abs(netReturn)), netReturn >= 0 ? 'text-bull-teal' : 'text-bull-coral'],
           ].map(([label, value, color]) => (
-            <div key={label} className="bg-bull-surface border border-bull-line rounded-2xl p-4">
-              <div className="text-[10px] font-black tracking-wider text-slate-500 uppercase">
-                {label}
-              </div>
-              <div className={`text-lg font-black mt-1 font-mono ${color}`}>
-                {money(value)}
-              </div>
+            <div key={label} className="bg-bull-surface border border-bull-line rounded-2xl p-4 sm:p-5">
+              <div className="text-xs font-black tracking-wider text-slate-400 uppercase">{label}</div>
+              <div className={'text-xl sm:text-2xl font-black mt-1 font-mono tabular-nums ' + color}>{value}</div>
             </div>
           ))}
         </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <aside className="bg-bull-surface border border-bull-line rounded-3xl p-4 h-fit">
-            <div className="flex justify-between items-center pb-3 border-b border-bull-line text-xs font-black uppercase">
-              <span>Asset Watchlist</span>
+        <div data-top-actions className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {[
+            ['owned', 'Owned assets (' + ownedRows.length + ')'],
+            ['history', 'Order history'],
+            ['report', 'Report card'],
+            ['pending', 'Pending orders (' + openOrders.length + ')'],
+          ].map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setActivePanel(activePanel === key ? null : key)}
+              className={'py-3 rounded-xl text-sm font-black uppercase ' + (activePanel === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised border border-bull-line text-slate-200 hover:border-bull-lime/50')}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Chart first. Watchlist left, chart centre, order ticket right. */}
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_340px] gap-5 items-start">
+          {/* WATCHLIST */}
+          <aside className="order-3 lg:order-1 bg-bull-surface border border-bull-line rounded-3xl p-4 h-fit">
+            <div className="flex justify-between items-center pb-3 border-b border-bull-line text-sm font-black uppercase">
+              <span>Watchlist</span>
               <span className="text-bull-lime">{filteredAssets.length} assets</span>
             </div>
 
             <div className="flex gap-1.5 overflow-x-auto py-3">
               {CATEGORIES.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`text-[10px] font-black uppercase px-3 py-1.5 rounded-xl whitespace-nowrap ${selectedCategory === category ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line'}`}
-                >
+                <button key={category} onClick={() => setSelectedCategory(category)} className={tabBtn(selectedCategory === category)}>
                   {category}
                 </button>
               ))}
             </div>
 
-            <div className="divide-y divide-bull-line max-h-[520px] overflow-y-auto">
+            <div className="max-h-[420px] lg:max-h-[640px] overflow-y-auto pr-1">
               {filteredAssets.map((asset) => {
                 const quote = prices[asset.sym];
                 const holding = realHoldings[asset.sym];
@@ -1324,23 +1351,18 @@ export default function RealSimulatorPage() {
                       setSelectedRealStock(asset.sym);
                       if (orderStage !== 'IDLE') resetOrderDesk();
                     }}
-                    className={`w-full p-3 text-left flex justify-between items-center rounded-xl my-1 ${selected ? 'bg-bull-raised border border-bull-lime/50' : 'hover:bg-bull-raised'}`}
+                    className={'w-full p-3 text-left flex justify-between items-center rounded-xl my-1 ' + (selected ? 'bg-bull-raised border border-bull-lime/60' : 'border border-transparent hover:bg-bull-raised')}
                   >
                     <div className="min-w-0 pr-2">
-                      <div className="font-black text-sm">{asset.sym}</div>
-                      <div className="text-[10px] text-slate-400 truncate">{asset.name}</div>
-                      {holding && (
-                        <div className="text-[10px] text-emerald-400 mt-1">
-                          Owned: {holding.shares}
-                        </div>
-                      )}
+                      <div className="font-black text-base">{asset.sym}</div>
+                      <div className="text-xs text-slate-400 truncate">{asset.name}</div>
+                      {holding && <div className="text-xs text-bull-teal mt-0.5">Owned: {holding.shares}</div>}
                     </div>
-
                     <div className="text-right shrink-0">
-                      <div className="font-mono font-bold text-xs">
+                      <div className="font-mono font-bold text-sm">
                         {quote ? money(quote.price) : loadingPrices ? 'Loading…' : 'Unavailable'}
                       </div>
-                      <div className={`text-[10px] font-bold font-mono ${quote?.changePct?.startsWith('-') ? 'text-rose-400' : 'text-emerald-400'}`}>
+                      <div className={'text-xs font-bold font-mono ' + (quote?.changePct?.startsWith('-') ? 'text-bull-coral' : 'text-bull-teal')}>
                         {quote?.changePct || '—'}
                       </div>
                     </div>
@@ -1350,23 +1372,95 @@ export default function RealSimulatorPage() {
             </div>
           </aside>
 
-          <section id="order-desk" className="lg:col-span-2 space-y-6 scroll-mt-24">
-            <div className="bg-bull-surface border border-bull-line p-5 sm:p-6 rounded-3xl">
-              {orderStage === 'IDLE' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div className="text-[10px] uppercase font-black text-bull-lime">
-                      {activeAsset.sector}
-                    </div>
-                    <h2 className="text-xl font-black">{activeAsset.name}</h2>
-                    <div className="text-3xl font-black font-mono">
+          {/* CHART (main focus) */}
+          <section className="order-1 lg:order-2 space-y-5 min-w-0">
+            <div className="bg-bull-bg border border-bull-line rounded-3xl overflow-hidden p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
+                <div className="min-w-0">
+                  <div className="text-xs uppercase font-black tracking-wider text-bull-lime">{activeAsset.sector}</div>
+                  <h2 className="text-xl sm:text-2xl font-black truncate">
+                    {activeAsset.name} <span className="text-slate-400 font-bold text-base">· {selectedRealStock}</span>
+                  </h2>
+                  <div className="flex items-baseline gap-3 mt-1 flex-wrap">
+                    <span className="text-3xl sm:text-4xl font-black font-mono tabular-nums">
                       {activeQuote.price ? money(activeQuote.price) : 'Loading price…'}
-                    </div>
-                    <div className={`text-sm font-bold ${activeQuote.changePct?.startsWith('-') ? 'text-rose-400' : 'text-emerald-400'}`}>
+                    </span>
+                    <span className={'text-base font-bold font-mono ' + (priceUp ? 'text-bull-teal' : 'text-bull-coral')}>
                       {activeQuote.changePct}
-                    </div>
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
+                    <button key={key} onClick={() => chooseRange(key)} className={tabBtn(chartRange === key)}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-                    <label htmlFor="order-quantity" className="block text-[10px] font-black uppercase text-slate-400">
+              <PriceChart
+                key={selectedRealStock}
+                history={activeQuote.history}
+                symbol={selectedRealStock}
+                session={session}
+                markers={chartMarkers}
+              />
+
+              <div className="mt-3 text-xs text-slate-400">
+                {session?.range === '15m' ? 'The chart shows the last 15 minutes of the simulated market.' : session?.range === '1h' ? 'The chart shows the last hour of the simulated market.' : "The chart shows today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. Generated series, not exchange history.
+              </div>
+            </div>
+
+            {(() => {
+              const items = (news || [])
+                .filter((n) => n.scope === 'market' || n.sym === selectedRealStock || (n.scope === 'sector' && n.category === activeAsset.category))
+                .slice(0, 4);
+              return (
+                <div className="bg-bull-surface border border-bull-line rounded-3xl p-4 sm:p-5">
+                  <div className="text-sm font-black uppercase text-slate-300 mb-2">Market news (simulated)</div>
+                  {items.length === 0 ? (
+                    <p className="text-sm text-slate-400">No news for this asset in the last 24 hours.</p>
+                  ) : (
+                    items.map((n) => (
+                      <div key={n.id} className="flex gap-3 text-sm py-2 border-b border-bull-line last:border-0">
+                        <span className={'font-black ' + (n.direction > 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                          {n.direction > 0 ? '▲' : '▼'}
+                        </span>
+                        <span className="text-slate-200 flex-1">{n.headline}</span>
+                        <span className="text-slate-400 font-mono shrink-0">
+                          {new Date(n.time * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })}
+                        </span>
+                      </div>
+                    ))
+                  )}
+                  <p className="text-xs text-slate-400 mt-2">
+                    Invented headlines from a fictional newsroom. News is not advice and does not predict prices.
+                  </p>
+                </div>
+              );
+            })()}
+
+            <div className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-3 text-xs sm:text-sm text-amber-200">
+              These are illustrative simulated prices and generated chart points, not verified historical exchange data or investment advice. Every company, currency, fund and index here is fictional.
+            </div>
+          </section>
+
+          {/* ORDER TICKET + TIME METER */}
+          <aside id="order-desk" className="order-2 lg:order-3 space-y-5 scroll-mt-24 lg:sticky lg:top-24">
+            <div className="bg-bull-surface border border-bull-line p-5 rounded-3xl">
+              {orderStage === 'IDLE' && (
+                <div className="space-y-4">
+                  <div className="flex justify-between items-baseline">
+                    <h3 className="text-lg font-black">Order ticket</h3>
+                    <span className="text-sm font-black text-bull-lime">{selectedRealStock}</span>
+                  </div>
+                  <div className="text-2xl font-black font-mono tabular-nums">
+                    {activeQuote.price ? money(activeQuote.price) : 'Loading price…'}
+                  </div>
+
+                  <div>
+                    <label htmlFor="order-quantity" className="block text-xs font-black uppercase text-slate-300 mb-1.5">
                       Order size / units
                     </label>
                     <input
@@ -1376,67 +1470,57 @@ export default function RealSimulatorPage() {
                       step="any"
                       value={realQtyInput}
                       onChange={(event) => setRealQtyInput(event.target.value)}
-                      className="w-full border border-bull-line rounded-xl px-4 py-3 text-sm font-mono font-bold bg-bull-raised focus:outline-none focus:border-bull-lime"
+                      className="w-full border border-bull-line rounded-xl px-4 py-3 text-base font-mono font-bold bg-bull-raised focus:outline-none focus:border-bull-lime"
                     />
-
-                    {!activeAsset.tradable && (
-                      <p className="text-xs text-amber-300">
-                        View-only index. To invest in it, buy the fund that tracks it (see the ETFs tab).
-                      </p>
+                    {activeQuote.price && Number(realQtyInput) > 0 && (
+                      <div className="text-sm text-slate-400 mt-1.5">
+                        Approx. value <b className="text-slate-200 font-mono">{money(Number(realQtyInput) * activeQuote.price)}</b>
+                      </div>
                     )}
-
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => initiateOrderReview('BUY')}
-                        disabled={!activeAsset.tradable}
-                        className="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white text-xs uppercase font-black py-3 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
-                      >
-                        Buy asset
-                      </button>
-                      <button
-                        onClick={() => initiateOrderReview('SELL')}
-                        disabled={!activeAsset.tradable}
-                        className="flex-1 bg-rose-700 hover:bg-rose-600 text-white text-xs uppercase font-black py-3 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
-                      >
-                        Sell asset
-                      </button>
-                    </div>
                   </div>
 
-                  <div className="bg-bull-raised border border-bull-line p-4 rounded-2xl space-y-3 text-xs">
-                    <h3 className="font-black uppercase text-slate-400">Asset profile</h3>
-                    {[
-                      ['Market cap', activeAsset.cap],
-                      ['P/E', activeAsset.pe],
-                      ['EPS', activeAsset.eps === 'N/A' ? 'N/A' : `₹${activeAsset.eps}`],
-                      ['Dividend yield', activeAsset.div],
-                    ].map(([label, value]) => (
-                      <div key={label} className="flex justify-between border-b border-bull-line pb-2 last:border-0">
-                        <span className="text-slate-400">{label}</span>
-                        <b>{value}</b>
-                      </div>
-                    ))}
+                  {!activeAsset.tradable && (
+                    <p className="text-sm text-amber-300">
+                      View-only index. To invest in it, buy the fund that tracks it (see the ETFs tab).
+                    </p>
+                  )}
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <button
+                      onClick={() => initiateOrderReview('BUY')}
+                      disabled={!activeAsset.tradable}
+                      className="bg-emerald-700 hover:bg-emerald-600 text-white text-sm uppercase font-black py-3.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      Buy
+                    </button>
+                    <button
+                      onClick={() => initiateOrderReview('SELL')}
+                      disabled={!activeAsset.tradable}
+                      className="bg-rose-700 hover:bg-rose-600 text-white text-sm uppercase font-black py-3.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      Sell
+                    </button>
                   </div>
                 </div>
               )}
 
               {orderStage === 'REVIEW' && pendingOrder && (
-                <div className="space-y-5">
-                  <h2 className="font-black text-lg">
-                    {pendingOrder.type} ORDER · {pendingOrder.name}
-                  </h2>
+                <div className="space-y-4">
+                  <h3 className="font-black text-lg">
+                    {pendingOrder.type} order · {pendingOrder.name}
+                  </h3>
 
-                  <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-xs">
+                  <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-sm">
                     <div><span className="block text-slate-400">Units</span><b>{pendingOrder.qty}</b></div>
                     <div><span className="block text-slate-400">Price per unit</span><b>{money(pendingOrder.price)}</b></div>
                   </div>
                   {pendingOrder.marketPrice !== undefined && (
-                    <p className="text-[11px] text-slate-400">
+                    <p className="text-xs text-slate-400">
                       Screen price {money(pendingOrder.marketPrice)}. Your fill price is {money(pendingOrder.price)} because of slippage ({Number(pendingOrder.slippageBps || 0).toFixed(2)}%, about {money(pendingOrder.slippageAmount)} in total). Thin assets and big orders slip more.
                     </p>
                   )}
 
-                  <div className="bg-bull-raised border border-bull-line p-4 rounded-xl text-xs space-y-1.5">
+                  <div className="bg-bull-raised border border-bull-line p-4 rounded-xl text-sm space-y-1.5">
                     <div className="flex justify-between text-slate-300">
                       <span>Order value</span>
                       <span>{money(pendingOrder.totalCost)}</span>
@@ -1454,29 +1538,29 @@ export default function RealSimulatorPage() {
                       <span className="text-bull-lime">{money(pendingOrder.cashEffect)}</span>
                     </div>
                     {pendingOrder.intradayQty > 0 && (
-                      <p className="text-slate-400 pt-1">
+                      <p className="text-xs text-slate-400 pt-1">
                         {pendingOrder.intradayQty} of these units were bought today, so they are treated as an intraday trade.
                       </p>
                     )}
-                    <p className="text-slate-500 pt-1">
+                    <p className="text-xs text-slate-400 pt-1">
                       Practice charges for a fictional market. All names and rates are invented. Not real money.
                     </p>
                   </div>
 
-                  <p className="text-xs text-amber-300">
+                  <p className="text-sm text-amber-300">
                     This is a simulated practice order, not an order sent to an exchange.
                   </p>
 
                   <div className="flex gap-3">
                     <button
                       onClick={processAndExecuteOrder}
-                      className="flex-1 bg-emerald-700 hover:bg-emerald-600 py-3 rounded-xl text-xs font-black uppercase"
+                      className="flex-1 bg-emerald-700 hover:bg-emerald-600 py-3 rounded-xl text-sm font-black uppercase"
                     >
-                      Confirm simulated order
+                      Confirm order
                     </button>
                     <button
                       onClick={resetOrderDesk}
-                      className="px-5 bg-bull-raised border border-bull-line rounded-xl text-xs font-bold"
+                      className="px-5 bg-bull-raised border border-bull-line rounded-xl text-sm font-bold"
                     >
                       Cancel
                     </button>
@@ -1487,8 +1571,8 @@ export default function RealSimulatorPage() {
               {orderStage === 'PROCESSING' && (
                 <div className="py-10 text-center">
                   <div className="animate-spin h-10 w-10 border-4 border-bull-lime/20 border-t-bull-lime rounded-full mx-auto mb-4" />
-                  <b>{processingStatusText}</b>
-                  <p className="text-xs text-slate-400 mt-2">
+                  <b className="text-base">{processingStatusText}</b>
+                  <p className="text-sm text-slate-400 mt-2">
                     Updating the practice portfolio…
                   </p>
                 </div>
@@ -1496,11 +1580,11 @@ export default function RealSimulatorPage() {
 
               {orderStage === 'SUCCESS' && executedReceipt && (
                 <div className="space-y-4">
-                  <div className="text-emerald-300 font-black">
+                  <div className="text-emerald-300 font-black text-base">
                     Simulated order completed · {executedReceipt.orderId}
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-xs">
+                  <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-sm">
                     {[
                       ['Asset / side', `${executedReceipt.sym} / ${executedReceipt.type}`],
                       ['Units', executedReceipt.qty],
@@ -1520,7 +1604,7 @@ export default function RealSimulatorPage() {
 
                   <button
                     onClick={resetOrderDesk}
-                    className="bg-bull-lime hover:bg-bull-lime-light text-bull-ink px-5 py-3 rounded-xl text-xs font-black uppercase"
+                    className="w-full bg-bull-lime hover:bg-bull-lime-light text-bull-ink px-5 py-3 rounded-xl text-sm font-black uppercase"
                   >
                     Done / new order
                   </button>
@@ -1528,71 +1612,34 @@ export default function RealSimulatorPage() {
               )}
             </div>
 
-            <div className="bg-bull-bg border border-bull-line rounded-3xl overflow-hidden p-4 sm:p-6">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
-                <div>
-                  <h3 className="font-black text-sm">
-                    {selectedRealStock} · Simulated price history
-                  </h3>
-                  <p className="text-[10px] text-slate-500 mt-1">
-                    Generated series · not exchange history
-                  </p>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  {[['15m', '15 min'], ['1h', '1 hour'], ['day', 'Day']].map(([key, label]) => (
-                    <button
-                      key={key}
-                      onClick={() => chooseRange(key)}
-                      className={'text-[10px] font-black uppercase px-3 py-1.5 rounded-xl ' + (chartRange === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line')}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
+            {/* Practice-time meter: replaces the old Asset profile box */}
+            <div className="bg-bull-surface border border-bull-line p-5 rounded-3xl space-y-3">
+              <div className="flex justify-between items-baseline">
+                <h3 className="text-sm font-black uppercase text-slate-300">Today&apos;s practice time</h3>
+                <span className="text-sm font-mono font-bold text-white tabular-nums">
+                  {meterMinutes} / {DAILY_LIMIT_MIN} min
+                </span>
               </div>
-
-              <PriceChart
-                key={selectedRealStock}
-                history={activeQuote.history}
-                symbol={selectedRealStock}
-                session={session}
-                markers={chartMarkers}
-              />
-
-              <div className="mt-3 text-[10px] text-slate-500">
-                {session?.range === '15m' ? 'The chart shows the last 15 minutes of the simulated market.' : session?.range === '1h' ? 'The chart shows the last hour of the simulated market.' : "The chart shows today's simulated day in India time, 00:00 to 24:00."} A green dot marks a buy and a red x marks a sale. It is not a record of past trading sessions.
+              <div
+                className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={DAILY_LIMIT_MIN}
+                aria-valuenow={Math.min(meterMinutes, DAILY_LIMIT_MIN)}
+                aria-label="Practice time used today"
+              >
+                <div className={'h-full rounded-full transition-all ' + meterBar} style={{ width: meterPct + '%' }} />
               </div>
-
-              {(() => {
-                const items = (news || [])
-                  .filter((n) => n.scope === 'market' || n.sym === selectedRealStock || (n.scope === 'sector' && n.category === activeAsset.category))
-                  .slice(0, 4);
-                return (
-                  <div className="mt-4 border-t border-bull-line pt-3">
-                    <div className="text-[10px] font-black uppercase text-slate-400 mb-2">Market news (simulated)</div>
-                    {items.length === 0 ? (
-                      <p className="text-xs text-slate-500">No news for this asset in the last 24 hours.</p>
-                    ) : (
-                      items.map((n) => (
-                        <div key={n.id} className="flex gap-2 text-xs py-1.5">
-                          <span className={'font-black ' + (n.direction > 0 ? 'text-bull-teal' : 'text-bull-coral')}>
-                            {n.direction > 0 ? '\u25B2' : '\u25BC'}
-                          </span>
-                          <span className="text-slate-200 flex-1">{n.headline}</span>
-                          <span className="text-slate-500 font-mono shrink-0">
-                            {new Date(n.time * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false })}
-                          </span>
-                        </div>
-                      ))
-                    )}
-                    <p className="text-[10px] text-slate-500 mt-1">
-                      Invented headlines from a fictional newsroom. News is not advice and does not predict prices.
-                    </p>
-                  </div>
-                );
-              })()}
+              <p className={'text-sm ' + (meterState === 'over' ? 'text-bull-coral' : meterState === 'near' ? 'text-amber-300' : 'text-slate-400')}>
+                {meterState === 'over'
+                  ? 'You have used your daily practice time. Take a break, review your report card, and come back tomorrow. Trading is not locked.'
+                  : meterState === 'near'
+                    ? 'Only ' + meterLeft + ' min left today. Good time to review your trades.'
+                    : meterLeft + ' min of practice left today. Short, focused sessions build better habits.'}
+              </p>
+              <p className="text-xs text-slate-400">Counts time with this page open. Resets at midnight India time.</p>
             </div>
-          </section>
+          </aside>
         </div>
       </div>
 
@@ -1609,7 +1656,7 @@ export default function RealSimulatorPage() {
               <div>
                 <div className="flex justify-between items-center pb-3 border-b border-bull-line">
                   <h3 className="font-black text-sm uppercase">Owned assets</h3>
-                  <span className="text-[10px] text-slate-400">
+                  <span className="text-xs text-slate-400">
                     Holdings value {money(holdingsValue)}
                   </span>
                 </div>
@@ -1628,26 +1675,26 @@ export default function RealSimulatorPage() {
                         className="text-left min-w-0 sm:w-1/3"
                       >
                         <div className="font-black text-sm">{row.sym}</div>
-                        <div className="text-[10px] text-slate-400 truncate">{row.name}</div>
+                        <div className="text-xs text-slate-400 truncate">{row.name}</div>
                       </button>
 
                       <div className="grid grid-cols-3 gap-2 text-xs flex-1">
                         <div>
-                          <span className="block text-[10px] text-slate-500">Units / avg</span>
+                          <span className="block text-xs text-slate-500">Units / avg</span>
                           <b className="font-mono">{row.shares}</b>
-                          <span className="block text-[10px] text-slate-400 font-mono">{money(row.avg)}</span>
+                          <span className="block text-xs text-slate-400 font-mono">{money(row.avg)}</span>
                         </div>
                         <div>
-                          <span className="block text-[10px] text-slate-500">Price / value</span>
+                          <span className="block text-xs text-slate-500">Price / value</span>
                           <b className="font-mono">{money(row.price)}</b>
-                          <span className="block text-[10px] text-slate-400 font-mono">{money(row.value)}</span>
+                          <span className="block text-xs text-slate-400 font-mono">{money(row.value)}</span>
                         </div>
                         <div>
-                          <span className="block text-[10px] text-slate-500">Profit / loss</span>
+                          <span className="block text-xs text-slate-500">Profit / loss</span>
                           <b className={'font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
                             {(row.pnl >= 0 ? '+' : '-') + money(Math.abs(row.pnl))}
                           </b>
-                          <span className={'block text-[10px] font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                          <span className={'block text-xs font-mono ' + (row.pnl >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
                             {(row.pnlPct >= 0 ? '+' : '') + row.pnlPct.toFixed(2) + '%'}
                           </span>
                         </div>
@@ -1656,14 +1703,14 @@ export default function RealSimulatorPage() {
                       <button
                         onClick={() => quickSell(row)}
                         disabled={quoteLoading}
-                        className="bg-rose-700 hover:bg-rose-600 text-white text-[10px] uppercase font-black px-4 py-2.5 rounded-xl disabled:opacity-50"
+                        className="bg-rose-700 hover:bg-rose-600 text-white text-xs uppercase font-black px-4 py-2.5 rounded-xl disabled:opacity-50"
                       >
                         Sell all
                       </button>
                     </div>
                   ))}
                 </div>
-                <p className="text-[10px] text-slate-500 pt-3">
+                <p className="text-xs text-slate-500 pt-3">
                   Profit and loss here is before selling charges. Sell all opens the order review so you can see the exact charges first.
                 </p>
               </div>
@@ -1673,7 +1720,7 @@ export default function RealSimulatorPage() {
               <div data-pending-panel>
                 <div className="flex justify-between items-center pb-3 border-b border-bull-line">
                   <h3 className="font-black text-sm uppercase">Pending orders</h3>
-                  <span className="text-[10px] text-slate-400">Practice money only</span>
+                  <span className="text-xs text-slate-400">Practice money only</span>
                 </div>
 
                 <div className="mt-3 bg-bull-raised border border-bull-line rounded-xl p-3 space-y-3">
@@ -1720,7 +1767,7 @@ export default function RealSimulatorPage() {
                   {orderNote && <p className="text-xs text-slate-300">{orderNote}</p>}
                 </div>
 
-                <div className="mt-4 text-[10px] font-black uppercase text-slate-400">Open orders</div>
+                <div className="mt-4 text-xs font-black uppercase text-slate-400">Open orders</div>
                 {openOrders.length === 0 && <p className="text-xs text-slate-500 py-3">No open orders.</p>}
                 {openOrders.map((o) => (
                   <div key={o.id} className="flex items-center justify-between gap-2 text-xs py-2 border-b border-bull-line">
@@ -1730,20 +1777,20 @@ export default function RealSimulatorPage() {
                         {({ LIMIT_BUY: 'Limit buy', LIMIT_SELL: 'Limit sell', STOP_LOSS: 'Stop-loss', TAKE_PROFIT: 'Take-profit' })[o.kind] || o.kind}
                         {' '}{o.qty} units at {money(o.trigger_price)}
                       </span>
-                      <div className="text-[10px] text-slate-500">
+                      <div className="text-xs text-slate-500">
                         Expires {new Date(new Date(o.created_at).getTime() + 86400000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} India time
                       </div>
                     </div>
                     <button
                       onClick={() => cancelPendingOrder(o.id)}
-                      className="px-3 py-1.5 rounded-xl text-[10px] font-black uppercase border border-bull-line text-bull-coral"
+                      className="px-3 py-1.5 rounded-xl text-xs font-black uppercase border border-bull-line text-bull-coral"
                     >
                       Cancel
                     </button>
                   </div>
                 ))}
 
-                <div className="mt-4 text-[10px] font-black uppercase text-slate-400">Recent results</div>
+                <div className="mt-4 text-xs font-black uppercase text-slate-400">Recent results</div>
                 {orderRows.filter((o) => o.status !== 'OPEN').length === 0 && <p className="text-xs text-slate-500 py-3">Nothing yet.</p>}
                 {orderRows.filter((o) => o.status !== 'OPEN').slice(0, 10).map((o) => (
                   <div key={o.id} className="flex justify-between gap-2 text-xs py-1.5 text-slate-300">
@@ -1754,7 +1801,7 @@ export default function RealSimulatorPage() {
                   </div>
                 ))}
 
-                <p className="text-[10px] text-slate-500 pt-3">
+                <p className="text-xs text-slate-500 pt-3">
                   Orders last 24 hours. The server watches the simulated price: when it first meets your trigger, the order fills at that price, even if it happened while you were away. Slippage and practice charges apply. Cash is not set aside for a buy: you need enough cash at the moment it triggers, or the order fails. Stop-loss and take-profit orders sell what you own at the time.
                 </p>
               </div>
@@ -1764,7 +1811,7 @@ export default function RealSimulatorPage() {
               <div>
                 <div className="flex justify-between items-center pb-3 border-b border-bull-line">
                   <h3 className="font-black text-sm uppercase">Report card</h3>
-                  <span className="text-[10px] text-slate-400">Practice money only</span>
+                  <span className="text-xs text-slate-400">Practice money only</span>
                 </div>
                 {reportError && <p className="text-xs text-rose-300 py-4">{reportError}</p>}
                 {reportLoading && !report && <p className="text-xs text-slate-400 py-4">Building your report card...</p>}
@@ -1782,22 +1829,22 @@ export default function RealSimulatorPage() {
                         ['Orders', report.trades + ' (' + report.buys + ' buys, ' + report.sells + ' sells)', 'text-slate-100'],
                       ].map(([label, value, color]) => (
                         <div key={label} className="bg-bull-raised border border-bull-line rounded-xl p-3">
-                          <div className="text-[10px] font-black tracking-wider text-slate-500 uppercase">{label}</div>
+                          <div className="text-xs font-black tracking-wider text-slate-500 uppercase">{label}</div>
                           <div className={'text-sm font-black mt-1 font-mono ' + color}>{value}</div>
                         </div>
                       ))}
                     </div>
                     <div className="grid grid-cols-2 gap-3 text-xs">
                       <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
-                        <span className="block text-[10px] text-slate-500 uppercase font-black">Best sale</span>
+                        <span className="block text-xs text-slate-500 uppercase font-black">Best sale</span>
                         <b>{report.best ? report.best.sym + '  +' + money(report.best.gain) : '-'}</b>
                       </div>
                       <div className="bg-bull-raised border border-bull-line rounded-xl p-3">
-                        <span className="block text-[10px] text-slate-500 uppercase font-black">Worst sale</span>
+                        <span className="block text-xs text-slate-500 uppercase font-black">Worst sale</span>
                         <b>{report.worst ? report.worst.sym + '  -' + money(Math.abs(report.worst.gain)) : '-'}</b>
                       </div>
                     </div>
-                    <p className="text-[10px] text-slate-500 leading-relaxed">
+                    <p className="text-xs text-slate-500 leading-relaxed">
                       The tax figure is an estimate for learning. It is not taken from your cash. Gains from units held under {report.rates.shortDays} days use an invented {Math.round(report.rates.shortRate * 100)}% rate; longer holds use an invented {Math.round(report.rates.longRate * 100)}% rate; losses are not refunded. Your sells are matched to your earliest buys first.
                       {report.unmatchedQty > 0 ? ' ' + report.unmatchedQty + ' sold units were bought before order history started and are left out.' : ''}
                     </p>
@@ -1815,7 +1862,7 @@ export default function RealSimulatorPage() {
                       <button
                         key={key}
                         onClick={() => setHistoryFilter(key)}
-                        className={'text-[10px] font-black uppercase px-3 py-1.5 rounded-xl ' + (historyFilter === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line')}
+                        className={'text-xs font-black uppercase px-3 py-1.5 rounded-xl ' + (historyFilter === key ? 'bg-bull-lime text-bull-ink' : 'bg-bull-raised text-slate-400 border border-bull-line')}
                       >
                         {label}
                       </button>
@@ -1853,32 +1900,32 @@ export default function RealSimulatorPage() {
                       return (
                         <div key={row.id} className="py-3 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs items-center">
                           <div>
-                            <span className={'inline-block text-[10px] font-black px-2 py-0.5 rounded-md ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>
+                            <span className={'inline-block text-xs font-black px-2 py-0.5 rounded-md ' + (row.side === 'BUY' ? 'bg-emerald-900/50 text-bull-teal' : 'bg-rose-900/50 text-bull-coral')}>
                               {row.side === 'BUY' ? 'BOUGHT' : 'SOLD'}
                             </span>
                             <div className="font-black text-sm mt-1">{row.sym}</div>
-                            <div className="text-[10px] text-slate-500">{when}</div>
+                            <div className="text-xs text-slate-500">{when}</div>
                           </div>
                           <div>
-                            <span className="block text-[10px] text-slate-500">Units at price</span>
+                            <span className="block text-xs text-slate-500">Units at price</span>
                             <b className="font-mono">{Number(row.qty)} @ {money(row.price)}</b>
                           </div>
                           <div>
-                            <span className="block text-[10px] text-slate-500">Order value</span>
+                            <span className="block text-xs text-slate-500">Order value</span>
                             <b className="font-mono">{money(gross)}</b>
                           </div>
                           <div>
-                            <span className="block text-[10px] text-slate-500">Charges</span>
+                            <span className="block text-xs text-slate-500">Charges</span>
                             <b className="font-mono">{(fees < 0 ? '-' : '') + money(Math.abs(fees))}</b>
-                            {showType && <span className="block text-[10px] text-slate-400">{row.trade_type}</span>}
+                            {showType && <span className="block text-xs text-slate-400">{row.trade_type}</span>}
                           </div>
                           <div>
-                            <span className="block text-[10px] text-slate-500">
+                            <span className="block text-xs text-slate-500">
                               {row.side === 'BUY' ? 'Cash paid' : 'Cash received'}
                             </span>
                             <b className="font-mono">{money(cash)}</b>
                             {row.side === 'SELL' && row.realized_gross !== null && row.realized_gross !== undefined && (
-                              <span className={'block text-[10px] font-mono ' + (Number(row.realized_gross) >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
+                              <span className={'block text-xs font-mono ' + (Number(row.realized_gross) >= 0 ? 'text-bull-teal' : 'text-bull-coral')}>
                                 {'P/L before charges ' + (Number(row.realized_gross) >= 0 ? '+' : '-') + money(Math.abs(Number(row.realized_gross)))}
                               </span>
                             )}
@@ -1887,7 +1934,7 @@ export default function RealSimulatorPage() {
                       );
                     })}
                 </div>
-                <p className="text-[10px] text-slate-500 pt-3">
+                <p className="text-xs text-slate-500 pt-3">
                   Shows your latest 100 orders. Dividends will appear here once they go live. Trades made before order history started are not listed.
                 </p>
               </div>
