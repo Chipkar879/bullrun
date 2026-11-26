@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { supabase } from '@/lib/supabase';
 import { useAdmin } from '@/components/admin/AdminProvider';
 import {
   SUPER_ADMIN_EMAIL, getProfileFreezeStatus, getNetWorth, inr, formatDuration,
@@ -32,6 +33,18 @@ export default function UsersPage() {
   const [picked, setPicked] = useState(new Set());
   const [bulkDays, setBulkDays] = useState('30');
 
+  const removeUser = async (u) => {
+    if (!window.confirm('Permanently delete ' + (u.name || u.email) + '? This removes their login too.')) return;
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/admin/delete-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (session?.access_token || '') },
+      body: JSON.stringify({ userId: u.id }),
+    });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok) { window.alert('Delete failed: ' + (out.error || res.status)); return; }
+    window.location.reload();
+  };
   const selectedProfile = useMemo(() => allProfiles.find((p) => p.id === selectedId) || null, [allProfiles, selectedId]);
 
   const schoolList = useMemo(() => {
@@ -388,7 +401,7 @@ export default function UsersPage() {
 
               <div className="flex items-center justify-between gap-3 border-t border-bull-line bg-bull-raised p-6 font-mono">
                 <button
-                  onClick={async () => { if (await deleteProfile(sel)) setSelectedId(null); }}
+                  onClick={() => removeUser(sel)}
                   className="cursor-pointer rounded-xl bg-rose-700 px-4 py-2 text-xs font-black uppercase text-white hover:bg-rose-800"
                 >
                   Delete Dossier

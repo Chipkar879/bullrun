@@ -137,6 +137,17 @@ export async function middleware(req) {
     }
   }
 
+  // NO PROFILE: a deleted or half-deleted account must not get in
+  if (!profile) {
+    const okNoProfile = pathname === '/' || pathname.startsWith('/pricing') || pathname.startsWith('/profile');
+    if (!okNoProfile) {
+      const url = req.nextUrl.clone();
+      url.pathname = '/pricing';
+      url.search = '';
+      return NextResponse.redirect(url);
+    }
+  }
+
   return res;
 }
 
