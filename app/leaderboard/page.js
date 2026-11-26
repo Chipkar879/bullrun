@@ -6,7 +6,6 @@ import Navbar from '@/components/Navbar';
 
 const TOP_STEP = 5;
 const NEIGHBOURS = 1;
-const START_BALANCE = 50000;
 const FIELDS =
   'id, name, role, school_id, specific_class_id, wallet_balance, net_worth';
 const MEDALS = ['\u{1F947}', '\u{1F948}', '\u{1F949}'];
@@ -50,9 +49,6 @@ const PODIUM = {
 const formatMoney = (value) =>
   '\u20B9' +
   Number(value || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 });
-
-const returnOf = (value) =>
-  START_BALANCE > 0 ? ((Number(value || 0) - START_BALANCE) / START_BALANCE) * 100 : 0;
 
 function TrackBadge({ role }) {
   const key = role || 'personal';
@@ -373,7 +369,6 @@ export default function Leaderboard() {
   const aheadGap = aheadEntry
     ? Number(aheadEntry.trader.net_worth ?? aheadEntry.trader.wallet_balance ?? 0) - myValue
     : 0;
-  const myReturn = returnOf(myValue);
 
   return (
     <main className="min-h-screen bg-bull-bg text-slate-100 font-sans pt-24 pb-20 relative overflow-hidden">
@@ -468,7 +463,6 @@ export default function Leaderboard() {
               const style = PODIUM[rank];
               const value = trader.net_worth ?? trader.wallet_balance ?? 0;
               const isCurrentUser = trader.id === user?.id;
-              const gain = returnOf(value);
 
               return (
                 <div
@@ -511,15 +505,7 @@ export default function Leaderboard() {
                       {formatMoney(value)}
                     </div>
 
-                    <div
-                      className={
-                        'mt-1 text-xs font-bold font-mono ' +
-                        (gain >= 0 ? 'text-emerald-400' : 'text-rose-400')
-                      }
-                    >
-                      {(gain >= 0 ? '+' : '') + gain.toFixed(2) + '%'}
                     </div>
-                  </div>
                 </div>
               );
             })}
@@ -553,16 +539,6 @@ export default function Leaderboard() {
               </div>
 
               <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-                <span
-                  className={
-                    'rounded-full border px-3 py-1.5 text-xs font-bold font-mono ' +
-                    (myReturn >= 0
-                      ? 'border-emerald-800/60 bg-emerald-950/40 text-emerald-300'
-                      : 'border-rose-900/60 bg-rose-950/40 text-rose-300')
-                  }
-                >
-                  {(myReturn >= 0 ? '+' : '') + myReturn.toFixed(2) + '% since start'}
-                </span>
                 <span className="rounded-full border border-bull-line bg-bull-raised px-3 py-1.5 text-xs font-bold text-slate-300">
                   {myEntry.rank === 1
                     ? "You're in the lead"
@@ -664,7 +640,6 @@ export default function Leaderboard() {
                       const isCurrentUser = trader.id === user?.id;
                       const value =
                         trader.net_worth ?? trader.wallet_balance ?? 0;
-                      const gain = returnOf(value);
                       const podiumRing =
                         rank <= 3 && !isCurrentUser
                           ? { boxShadow: `inset 3px 0 0 ${PODIUM[rank].ring}` }
@@ -715,15 +690,7 @@ export default function Leaderboard() {
                                 maximumFractionDigits: 2,
                               })}
                             </div>
-                            <div
-                              className={
-                                'mt-0.5 text-xs font-bold font-mono ' +
-                                (gain >= 0 ? 'text-emerald-400' : 'text-rose-400')
-                              }
-                            >
-                              {(gain >= 0 ? '+' : '') + gain.toFixed(2) + '%'}
-                            </div>
-                          </td>
+                            </td>
                         </tr>
                       );
                     })
