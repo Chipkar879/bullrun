@@ -1,314 +1,331 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
-import { useRouter } from 'next/navigation';
+import { AVATARS, BADGES, LEVELS, BB_TO_CASH, MIN_BB, avatarById } from '@/lib/gamification';
+
+const inr = (n) => '\u20B9' + Math.round(Number(n) || 0).toLocaleString('en-IN');
+
+function Avatar({ id, size = 'h-24 w-24', text = 'text-5xl' }) {
+  const a = avatarById(id);
+  return (
+    <div
+      className={size + ' ' + text + ' rounded-3xl grid place-items-center shadow-lg select-none'}
+      style={{ background: 'linear-gradient(135deg, ' + a.from + ', ' + a.to + ')' }}
+      role="img"
+      aria-label={a.name}
+    >
+      {a.emoji}
+    </div>
+  );
+}
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [profile, setProfile] = useState({ name: '', email: '', joined: '', role: 'personal', quiz_points: 0 });
-  const [initials, setInitials] = useState('');
   const [loading, setLoading] = useState(true);
-  
-  // Edit Mode States
-  const [isEditing, setIsEditing] = useState(false);
+  const [me, setMe] = useState(null);
+  const [data, setData] = useState(null);
+  const [rank, setRank] = useState(null);
+  const [toast, setToast] = useState('');
+  const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState('');
-  const [updateStatus, setUpdateStatus] = useState({ message: '', success: false, loading: false });
+  const [status, setStatus] = useState({ message: '', ok: false, busy: false });
+  const [picker, setPicker] = useState(false);
+  const [bbInput, setBbInput] = useState('');
+  const [conv, setConv] = useState({ message: '', ok: false, busy: false });
 
-  // Performance Metrics 
-  const [analytics, setAnalytics] = useState({ tier: 'Standard Sandboxer', multiplier: '1.0x', completionRate: '0%' });
-  const isStaff = profile.role === 'school_admin' || profile.role === 'teacher';
+  const api = useCallback(async (url, body) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (session?.access_token || '') },
+      body: JSON.stringify(body || {}),
+    });
+    const out = await res.json().catch(() => ({}));
+    return { ok: res.ok, out };
+  }, []);
+
+  const loadAll = useCallback(async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.user) { router.push('/signup?mode=login'); return; }
+    const { data: p } = await supabase
+      .from('profiles')
+      .select('name, created_at, quiz_points, role, wallet_balance, net_worth, avatar')
+      .eq('id', session.user.id)
+      .maybeSingle();
+    const staff = p?.role === 'school_admin' || p?.role === 'teacher';
+    const next = {
+      name: p?.name || 'Bull Run trader',
+      email: session.user.email,
+      joined: new Date(p?.created_at || session.user.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }),
+      role: p?.role || 'student',
+      staff,
+      bb: Number(p?.quiz_points || 0),
+      cash: Number(p?.wallet_balance || 0),
+      netWorth: Number(p?.net_worth || 0),
+      avatar: p?.avatar || 'calf',
+    };
+    setMe(next);
+    setEditName(next.name);
+    if (!staff) {
+      const { ok, out } = await api('/api/badges');
+      if (ok) {
+        setData(out);
+        if (out.newlyEarned && out.newlyEarned.length) {
+          setToast('New badge: ' + out.newlyEarned.map((id) => BADGES.find((b) => b.id === id)?.name).filter(Boolean).join(', '));
+        }
+      }
+      const { count } = await supabase.from('profiles').select('id', { count: 'exact', head: true }).eq('role', next.role).gt('net_worth', next.netWorth);
+      setRank((count || 0) + 1);
+    }
+  }, [api, router]);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (!session?.user) {
-          router.push('/signup?mode=login');
-          return;
-        }
+    loadAll().catch((e) => console.error('Profile load error', e)).finally(() => setLoading(false));
+  }, [loadAll]);
 
-        const { data: dbProfile } = await supabase
-          .from('profiles')
-          .select('name, created_at, quiz_points, role')
-          .eq('id', session.user.id)
-          .maybeSingle();
-
-        const accountName = dbProfile?.name || "Bull Run Trader";
-        const accountEmail = session.user.email;
-        const rawDate = dbProfile?.created_at || session.user.created_at;
-        const totalPoints = dbProfile?.quiz_points || 0;
-        
-        const formattedDate = new Date(rawDate).toLocaleDateString('en-IN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        });
-
-        // 1. CALCULATE DAYS SINCE REGISTRATION
-        const createdDate = new Date(rawDate);
-        const todayDate = new Date();
-        const diffTime = Math.abs(todayDate - createdDate);
-        const totalDaysSinceRegistered = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
-
-        // 2. CALCULATE DAYS QUIZ PLAYED
-        const estimatedDaysPlayed = totalPoints > 0 ? Math.max(1, Math.floor(totalPoints / 1000)) : 0; 
-        let dynamicRate = Math.min(100, Math.round((estimatedDaysPlayed * 100) / totalDaysSinceRegistered));
-
-        // Dynamic Tiering Calculations
-        let userTier = 'Standard Sandboxer';
-        let pointMultiplier = '1.0x';
-        if (totalPoints >= 5000) { userTier = 'Apex Market Master'; pointMultiplier = '2.5x'; }
-        else if (totalPoints >= 2500) { userTier = 'Alpha Portfolio Lead'; pointMultiplier = '1.8x'; }
-        else if (totalPoints >= 1000) { userTier = 'Veteran Arbitrageur'; pointMultiplier = '1.3x'; }
-
-        const nameParts = accountName.trim().split(/\s+/);
-        const userInitials = nameParts.length > 1 
-          ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
-          : nameParts[0].substring(0, 2).toUpperCase();
-
-        setProfile({
-          name: accountName,
-          email: accountEmail,
-          joined: formattedDate,
-          role: dbProfile?.role || 'personal',
-          quiz_points: totalPoints
-        });
-        setEditName(accountName);
-        setInitials(userInitials);
-        setAnalytics({
-          tier: userTier,
-          multiplier: pointMultiplier,
-          completionRate: `${dynamicRate}%`
-        });
-      } catch (err) {
-        console.error("Profile view loading error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserProfile();
-  }, [router]);
-
-  const handleSaveChanges = async (e) => {
+  const saveName = async (e) => {
     e.preventDefault();
     if (!editName.trim()) return;
-    setUpdateStatus({ message: '', success: false, loading: true });
-
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session?.user) throw new Error("No active session found.");
-
-      const { error } = await supabase
-        .from('profiles')
-        .update({ name: editName.trim() })
-        .eq('id', session.user.id);
-
-      if (error) throw error;
-
-      setProfile(prev => ({ ...prev, name: editName.trim() }));
-      
-      const nameParts = editName.trim().split(/\s+/);
-      const userInitials = nameParts.length > 1 
-        ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
-        : nameParts[0].substring(0, 2).toUpperCase();
-      setInitials(userInitials);
-
-      setUpdateStatus({ message: 'Profile dossier updated successfully! ✨', success: true, loading: false });
-      setTimeout(() => {
-        setIsEditing(false);
-        setUpdateStatus({ message: '', success: false, loading: false });
-      }, 1500);
-
-    } catch (err) {
-      setUpdateStatus({ message: err.message || 'Failed to update changes.', success: false, loading: false });
-    }
+    setStatus({ message: '', ok: false, busy: true });
+    const { data: { session } } = await supabase.auth.getSession();
+    const { error } = await supabase.from('profiles').update({ name: editName.trim() }).eq('id', session.user.id);
+    if (error) { setStatus({ message: error.message, ok: false, busy: false }); return; }
+    setMe((m) => ({ ...m, name: editName.trim() }));
+    setStatus({ message: 'Name updated.', ok: true, busy: false });
+    setTimeout(() => { setEditing(false); setStatus({ message: '', ok: false, busy: false }); }, 1200);
   };
 
-  const handleSignOut = async () => {
+  const chooseAvatar = async (id) => {
+    const { ok, out } = await api('/api/badges', { action: 'avatar', id });
+    if (!ok) { setToast(out.error || 'Could not change avatar'); return; }
+    setMe((m) => ({ ...m, avatar: id }));
+    setPicker(false);
+  };
+
+  const convert = async () => {
+    const bb = Math.floor(Number(bbInput));
+    setConv({ message: '', ok: false, busy: true });
+    const { ok, out } = await api('/api/convert-bb', { bb });
+    if (!ok) { setConv({ message: out.error || 'Conversion failed', ok: false, busy: false }); return; }
+    setConv({ message: 'Converted ' + out.bb_spent + ' BB into ' + inr(out.cash_added) + ' of practice cash.', ok: true, busy: false });
+    setBbInput('');
+    await loadAll();
+  };
+
+  const signOut = async () => {
     try {
       await supabase.auth.signOut();
-      if (typeof window !== 'undefined') {
-        window.localStorage.clear();
-        window.sessionStorage.clear();
-        const cookies = document.cookie.split(";");
-        const targetPaths = ['/', '/simulator', '/quiz', '/modules', '/leaderboard', '/profile'];
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i];
-          const eqPos = cookie.indexOf("=");
-          const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
-          targetPaths.forEach(path => {
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${path}; SameSite=Lax; Secure`;
-          });
-        }
-      }
+      window.localStorage.clear();
+      window.sessionStorage.clear();
     } catch (err) {
-      console.error("Signout security loop crash:", err);
+      console.error('Sign out error', err);
     } finally {
       window.location.href = '/signup';
     }
   };
 
-  if (loading) {
+  if (loading || !me) {
     return (
-      <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative">
+      <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans">
         <Navbar />
-        <div className="max-w-4xl mx-auto px-6 pt-32 pb-24 flex justify-center">
-          <div className="space-y-4 text-center">
-            <div className="w-12 h-12 border-4 border-bull-lime border-t-transparent rounded-full animate-spin mx-auto"></div>
-            <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Decrypting Secured Trading Dossier...</p>
+        <div className="max-w-5xl mx-auto px-6 pt-32 pb-24 flex justify-center">
+          <div className="text-center space-y-3">
+            <div className="w-12 h-12 border-4 border-bull-lime border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-slate-400 text-sm">Loading your profile...</p>
           </div>
         </div>
       </main>
     );
   }
 
+  const lvl = data ? data.level : null;
+  const earnedCount = data ? data.badges.filter((b) => b.earned).length : 0;
+  const bbNum = Math.floor(Number(bbInput)) || 0;
+  const capLeft = data ? Math.max(0, data.bb.cap - data.bb.used30) : 0;
+  const card = 'bg-bull-surface border border-bull-line rounded-3xl';
+
   return (
     <main className="min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-24 pb-20">
       <Navbar />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-5 animate-fadeInFast">
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 animate-fadeInFast">
-        
-        {/* HERO BANNER PROFILE CARD */}
-        <div className="bg-bull-surface border-2 border-bull-line p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden border-b-4 border-b-bull-lime-dark">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-bull-lime/15 rounded-full blur-3xl pointer-events-none"></div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-6 relative z-10">
-            <div className="w-24 h-24 bg-gradient-to-tr from-bull-raised to-bull-bg text-bull-lime border-2 border-bull-line rounded-2xl font-poppins font-black text-4xl flex items-center justify-center shadow-xl select-none">
-              {initials}
-            </div>
-            
-            <div className="space-y-2 text-center sm:text-left">
-              <span className={'bg-bull-raised text-bull-lime border border-bull-line text-xs uppercase tracking-widest font-black px-3 py-1 rounded-full shadow-inner' + (isStaff ? ' hidden' : '')}>
-                🏆 {analytics.tier}
-              </span>
-              <h1 className="font-poppins font-black text-2xl sm:text-3xl text-white tracking-tight">
-                {profile.name}
-              </h1>
-              <p className="text-slate-400 text-xs font-bold">
-                Network Stream ID: <span className="text-bull-lime font-mono">BR-{profile.role.toUpperCase()}-ACTIVE</span>
-              </p>
-            </div>
+        {toast && (
+          <div className="flex items-center justify-between gap-3 rounded-2xl border border-bull-lime/50 bg-bull-raised px-4 py-3 text-sm font-bold text-white" role="status">
+            <span>{toast}</span>
+            <button onClick={() => setToast('')} className="text-xs text-slate-400 hover:text-white" aria-label="Dismiss">Close</button>
           </div>
-
-          <div className="flex gap-3 relative z-10">
-            <button
-              onClick={() => setIsEditing(!isEditing)}
-              className="text-xs font-black uppercase tracking-wider text-slate-200 border border-bull-line bg-bull-raised hover:border-bull-lime/50 hover:text-white px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap"
-            >
-              {isEditing ? 'Cancel Edit' : 'Modify Details ⚙️'}
-            </button>
-            <button
-              onClick={handleSignOut}
-              className="text-xs font-black uppercase tracking-wider text-rose-400 border border-rose-900/40 bg-rose-950/20 hover:bg-rose-950/50 px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-
-        {/* INTERACTIVE EDITING PORTAL PANEL */}
-        {isEditing && (
-          <form onSubmit={handleSaveChanges} className="bg-bull-surface border-2 border-bull-lime/50 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4 animate-scaleUp">
-            <h3 className="font-poppins font-black text-lg text-white flex items-center gap-2">
-              📝 Edit Personal Profile Records
-            </h3>
-            <div className="space-y-1.5">
-              <label className="text-xs font-black text-slate-400 uppercase tracking-wider">Account Display Name</label>
-              <input 
-                type="text" 
-                value={editName}
-                required
-                maxLength={40}
-                onChange={(e) => setEditName(e.target.value)}
-                className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-bold focus:outline-none focus:border-bull-lime transition-colors"
-                placeholder="Update your name"
-              />
-            </div>
-            
-            {updateStatus.message && (
-              <p className={`text-xs font-bold p-3 rounded-xl border ${updateStatus.success ? 'bg-emerald-950/40 border-emerald-900 text-emerald-400' : 'bg-rose-950/40 border-rose-900 text-rose-400'}`}>
-                {updateStatus.message}
-              </p>
-            )}
-
-            <button 
-              type="submit" 
-              disabled={updateStatus.loading}
-              className="px-6 py-3 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-xs font-black uppercase tracking-wider rounded-xl transition shadow-md disabled:opacity-50"
-            >
-              {updateStatus.loading ? 'Saving Dossier Changes...' : 'Commit Changes'}
-            </button>
-          </form>
         )}
 
-        {/* CORE METRICS GRID */}
-        <div style={isStaff ? { display: 'none' } : undefined} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">👑</div>
-            <div>
-              <p className="text-xs font-black uppercase text-slate-500 tracking-wider">Bazaar Bucks Balance</p>
-              <h3 className="text-xl font-black font-mono text-white">{profile.quiz_points || 0} BB</h3>
+        {/* Header */}
+        <section className={card + ' p-6 sm:p-8 relative overflow-hidden'}>
+          <div className="absolute -top-20 -right-16 w-64 h-64 rounded-full bg-bull-lime/15 blur-3xl pointer-events-none" />
+          <div className="relative flex flex-col sm:flex-row sm:items-center gap-5">
+            <div className="relative self-center sm:self-auto">
+              <Avatar id={me.avatar} />
+              {!me.staff && (
+                <button onClick={() => setPicker(true)} aria-label="Edit avatar" className="absolute -bottom-2 -right-2 h-9 w-9 rounded-full bg-bull-lime text-bull-ink font-black text-sm shadow-lg grid place-items-center hover:scale-105 transition-transform">
+                  Edit
+                </button>
+              )}
             </div>
-          </div>
-          <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">⚡</div>
-            <div>
-              <p className="text-xs font-black uppercase text-slate-500 tracking-wider">Payout Multiplier</p>
-              <h3 className="text-xl font-black font-mono text-emerald-400">{analytics.multiplier}</h3>
+            <div className="flex-1 min-w-0 text-center sm:text-left space-y-2">
+              {lvl && <span className="inline-block bg-bull-raised border border-bull-line text-bull-lime text-xs font-bold px-3 py-1 rounded-full">Level {lvl.index + 1} - {lvl.name}</span>}
+              <h1 className="text-2xl sm:text-3xl font-black text-white break-words">{me.name}</h1>
+              {lvl && (
+                <div className="max-w-sm mx-auto sm:mx-0">
+                  <div className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={lvl.pct} aria-label="XP progress">
+                    <div className="h-full rounded-full bg-bull-lime transition-all" style={{ width: lvl.pct + '%' }} />
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1.5">{data.xp} XP{lvl.next ? ' - ' + lvl.toNext + ' XP to ' + lvl.next : ' - top level reached'}</p>
+                </div>
+              )}
             </div>
-          </div>
-          <div className="bg-bull-surface border border-bull-line p-5 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="text-3xl p-3 bg-bull-raised border border-bull-line rounded-xl">📈</div>
-            <div>
-              <p className="text-xs font-black uppercase text-slate-500 tracking-wider">Quiz Completion Rate</p>
-              <h3 className="text-xl font-black font-mono text-bull-lime">{analytics.completionRate}</h3>
-            </div>
-          </div>
-        </div>
-
-        {/* CORE DETAILS DATA MATRIX */}
-        <section className="bg-bull-surface border border-bull-line rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-          <h2 className="font-poppins font-black text-lg text-white border-b border-bull-line pb-4 flex items-center gap-2">
-            🛡️ Confidential Credentials Matrix
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-1.5">
-              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">System Username Identification</label>
-              <div className="p-4 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-bold select-all">
-                {profile.name}
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">Registered Email Handle</label>
-              <div className="p-4 bg-bull-raised border border-bull-line text-slate-400 rounded-xl text-sm font-semibold select-none font-mono">
-                {profile.email}
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">Account Initialization Stamp</label>
-              <div className="p-4 bg-bull-raised border border-bull-line text-slate-300 rounded-xl text-sm font-bold select-none">
-                {profile.joined}
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-black text-slate-500 uppercase tracking-wider">Current Selected Workspace Track</label>
-              <div className="p-4 bg-bull-raised border border-bull-line text-bull-lime rounded-xl text-sm font-black uppercase select-none tracking-wider">
-                {profile.role} Profile Mode
-              </div>
+            <div className="flex gap-2 justify-center">
+              <button onClick={() => setEditing(!editing)} className="text-sm font-bold text-slate-200 border border-bull-line bg-bull-raised hover:border-bull-lime/50 px-4 py-2 rounded-xl transition">{editing ? 'Cancel' : 'Edit name'}</button>
+              <button onClick={signOut} className="text-sm font-bold text-rose-400 border border-rose-900/40 bg-rose-950/20 hover:bg-rose-950/50 px-4 py-2 rounded-xl transition">Sign out</button>
             </div>
           </div>
         </section>
 
+        {editing && (
+          <form onSubmit={saveName} className={card + ' p-6 space-y-3 animate-scaleUp border-bull-lime/50'}>
+            <label htmlFor="dn" className="text-sm font-bold text-slate-300">Display name</label>
+            <input id="dn" value={editName} onChange={(e) => setEditName(e.target.value)} required maxLength={40} className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm font-bold focus:outline-none focus:border-bull-lime" />
+            {status.message && <p className={'text-sm font-bold ' + (status.ok ? 'text-emerald-400' : 'text-rose-400')}>{status.message}</p>}
+            <button type="submit" disabled={status.busy} className="px-5 py-2.5 bg-bull-lime hover:bg-bull-lime-light text-bull-ink text-sm font-black rounded-xl disabled:opacity-50">{status.busy ? 'Saving...' : 'Save name'}</button>
+          </form>
+        )}
+
+        {me.staff ? (
+          <section className={card + ' p-6 space-y-2'}>
+            <h2 className="text-lg font-black text-white">Your account</h2>
+            <p className="text-sm text-slate-300">Email: <span className="font-mono">{me.email}</span></p>
+            <p className="text-sm text-slate-300">Role: {me.role === 'teacher' ? 'Teacher' : 'School admin'}</p>
+            <p className="text-sm text-slate-300">Joined: {me.joined}</p>
+          </section>
+        ) : (
+          <>
+            {/* Stats */}
+            <section className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+              {[
+                ['Net worth', inr(me.netWorth), 'text-white'],
+                ['Practice cash', inr(me.cash), 'text-white'],
+                ['Bazaar Bucks', me.bb + ' BB', 'text-bull-lime'],
+                ['Quiz streak', (data ? data.streak : 0) + ' days', 'text-amber-300'],
+                ['Rank', rank ? '#' + rank : '-', 'text-emerald-400'],
+              ].map(([l, v, c]) => (
+                <div key={l} className={card + ' p-4'}>
+                  <p className="text-xs font-bold text-slate-400">{l}</p>
+                  <p className={'text-xl font-black font-mono tabular-nums mt-1 break-words ' + c}>{v}</p>
+                </div>
+              ))}
+            </section>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+              {/* Learning and trading */}
+              <section className={card + ' p-6 space-y-4'}>
+                <h2 className="text-lg font-black text-white">Your progress</h2>
+                {data && (
+                  <>
+                    <div>
+                      <div className="flex justify-between text-sm"><span className="text-slate-300">Lessons passed</span><span className="font-mono font-bold">{data.stats.lessons} / {data.stats.totalLessons}</span></div>
+                      <div className="h-2.5 mt-1.5 rounded-full bg-bull-raised border border-bull-line overflow-hidden"><div className="h-full bg-bull-lime" style={{ width: (data.stats.totalLessons ? (data.stats.lessons / data.stats.totalLessons) * 100 : 0) + '%' }} /></div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      {[['Trades', data.stats.trades], ['Sectors', data.stats.sectors], ['Quiz days', data.stats.quizDays]].map(([l, v]) => (
+                        <div key={l} className="bg-bull-raised border border-bull-line rounded-2xl py-3">
+                          <p className="text-xl font-black font-mono">{v}</p>
+                          <p className="text-xs text-slate-400">{l}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+                <div className="flex flex-wrap gap-2 pt-1">
+                  <a href="/modules" className="px-4 py-2 rounded-xl bg-bull-lime text-bull-ink text-sm font-black hover:bg-bull-lime-light">Continue learning</a>
+                  <a href="/simulator" className="px-4 py-2 rounded-xl border border-bull-line bg-bull-raised text-sm font-bold hover:border-bull-lime/50">Open simulator</a>
+                </div>
+              </section>
+
+              {/* BB wallet */}
+              <section className={card + ' p-6 space-y-3'}>
+                <h2 className="text-lg font-black text-white">Bazaar Bucks wallet</h2>
+                <p className="text-sm text-slate-300">1 BB = {inr(BB_TO_CASH)} of practice cash. You have <span className="font-mono font-bold text-bull-lime">{me.bb} BB</span>.</p>
+                <div className="flex gap-2">
+                  <input type="number" min={MIN_BB} step="1" value={bbInput} onChange={(e) => setBbInput(e.target.value)} placeholder={'Min ' + MIN_BB + ' BB'} aria-label="BB to convert" className="flex-1 min-w-0 px-4 py-2.5 bg-bull-raised border border-bull-line rounded-xl text-sm font-bold focus:outline-none focus:border-bull-lime" />
+                  <button onClick={convert} disabled={conv.busy || bbNum < MIN_BB || bbNum > me.bb} className="px-4 py-2.5 rounded-xl bg-bull-lime text-bull-ink text-sm font-black disabled:opacity-40">{conv.busy ? 'Converting...' : 'Convert'}</button>
+                </div>
+                {bbNum >= MIN_BB && <p className="text-sm text-slate-300">You will get {inr(bbNum * BB_TO_CASH)} of practice cash.</p>}
+                {conv.message && <p className={'text-sm font-bold ' + (conv.ok ? 'text-emerald-400' : 'text-rose-400')}>{conv.message}</p>}
+                {data && <p className="text-xs text-slate-400">You can still convert {capLeft} BB in the next 30 days.</p>}
+                {data && data.bb.history.length > 0 && (
+                  <ul className="divide-y divide-bull-line border border-bull-line rounded-2xl overflow-hidden text-sm">
+                    {data.bb.history.map((h, i) => (
+                      <li key={i} className="flex justify-between px-3 py-2 bg-bull-raised/50">
+                        <span className="text-slate-300">{new Date(h.created_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</span>
+                        <span className="font-mono">-{h.bb_spent} BB, +{inr(h.cash_added)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            </div>
+
+            {/* Badges */}
+            <section className={card + ' p-6 space-y-4'}>
+              <div className="flex items-baseline justify-between">
+                <h2 className="text-lg font-black text-white">Badges</h2>
+                <span className="text-sm text-slate-400">{earnedCount} of {BADGES.length} earned</span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {BADGES.map((b) => {
+                  const got = data && data.badges.find((x) => x.id === b.id)?.earned;
+                  return (
+                    <div key={b.id} className={'rounded-2xl border p-3 text-center ' + (got ? 'border-bull-lime/60 bg-bull-raised' : 'border-bull-line bg-bull-bg')}>
+                      <div className={'text-3xl ' + (got ? '' : 'grayscale opacity-40')} aria-hidden="true">{b.icon}</div>
+                      <p className={'text-sm font-bold mt-1 ' + (got ? 'text-white' : 'text-slate-400')}>{b.name}</p>
+                      <p className="text-xs text-slate-400 mt-0.5">{got ? 'Earned' : b.hint}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          </>
+        )}
+
+        <section className={card + ' p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm'}>
+          <div><p className="text-xs font-bold text-slate-400">Email</p><p className="font-mono break-all">{me.email}</p></div>
+          <div><p className="text-xs font-bold text-slate-400">Joined</p><p>{me.joined}</p></div>
+          <div><p className="text-xs font-bold text-slate-400">About the money</p><p className="text-slate-300">All cash here is practice money. Nothing is bought with real money.</p></div>
+        </section>
       </div>
+
+      {picker && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-bull-bg/80 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-label="Choose your avatar" onClick={() => setPicker(false)}>
+          <div className={card + ' w-full max-w-lg max-h-[85vh] overflow-y-auto p-6 space-y-4 shadow-2xl'} onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-black text-white">Choose your avatar</h2>
+              <button onClick={() => setPicker(false)} className="text-sm text-slate-400 hover:text-white" aria-label="Close">Close</button>
+            </div>
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+              {AVATARS.map((a) => {
+                const locked = !lvl || lvl.index < a.minLevel;
+                return (
+                  <button key={a.id} disabled={locked} onClick={() => chooseAvatar(a.id)} className={'rounded-2xl border p-2 text-center transition ' + (me.avatar === a.id ? 'border-bull-lime bg-bull-raised' : 'border-bull-line bg-bull-bg hover:border-bull-lime/50') + (locked ? ' opacity-50 cursor-not-allowed' : '')}>
+                    <Avatar id={a.id} size="h-16 w-16 mx-auto" text="text-3xl" />
+                    <p className="text-xs font-bold mt-1.5">{a.name}</p>
+                    <p className="text-xs text-slate-400">{locked ? 'Level ' + (a.minLevel + 1) : 'Free'}</p>
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-xs text-slate-400">Levels: {LEVELS.map((l, i) => (i + 1) + ' ' + l.name).join(', ')}. Earn XP from lessons, quizzes, trades and badges.</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

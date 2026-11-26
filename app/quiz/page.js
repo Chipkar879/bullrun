@@ -232,21 +232,19 @@ export default function DailyQuiz() {
     const u = userRef.current;
     if (u) {
       const todayStr = toLocalDateStr();
-      const updatedPoints = (profileRef.current?.quiz_points || 0) + calculatedPoints;
-
-      await supabase.from('profiles').update({
-        quiz_points: updatedPoints,
-        last_quiz_date: todayStr,
-      }).eq('id', u.id);
-
-      await supabase.from('quiz_history').upsert({
-        user_id: u.id,
-        quiz_date: todayStr,
-        score: finalScore,
-        total,
-        points: calculatedPoints,
-        time_spent: spent,
-      }, { onConflict: 'user_id,quiz_date' });
+      let updatedPoints = profileRef.current?.quiz_points || 0;
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        const res = await fetch('/api/quiz-complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (session?.access_token || '') },
+          body: JSON.stringify({ score: finalScore, total, timeSpent: spent }),
+        });
+        const out = await res.json().catch(() => ({}));
+        if (res.ok && typeof out.quizPoints === 'number') updatedPoints = out.quizPoints;
+      } catch (err) {
+        console.error('Quiz save failed', err);
+      }
 
       setProfile((prev) => ({ ...prev, quiz_points: updatedPoints, last_quiz_date: todayStr }));
       setHasPlayedToday(true);
