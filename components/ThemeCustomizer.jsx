@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { FONTS, loadFont, saveFont, applyFont, loadPreviewFonts } from '@/lib/fonts';
 
 const ROLES = [
   { key: 'accent', label: 'Accent', hint: 'Buttons, active tabs, XP and rewards' },
@@ -44,6 +45,14 @@ export default function ThemeCustomizer() {
   const [drafts, setDrafts] = useState({});
   const buttonRef = useRef(null);
   const panelRef = useRef(null);
+  const [font, setFont] = useState('default');
+  useEffect(() => {
+    const id = loadFont();
+    setFont(id);
+    applyFont(id);
+  }, []);
+  useEffect(() => { if (open) loadPreviewFonts(); }, [open]);
+  const chooseFont = (id) => { setFont(id); saveFont(id); applyFont(id); };
 
   const t = typeof window !== 'undefined' ? window.BullRunTheme : null;
 
@@ -215,6 +224,24 @@ export default function ThemeCustomizer() {
                 />
               </div>
             ))}
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-xs font-bold text-bull-muted">Font</p>
+            <div className="grid grid-cols-2 gap-2">
+              {FONTS.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => chooseFont(f.id)}
+                  aria-pressed={font === f.id}
+                  className={'flex items-center gap-2 rounded-xl border px-3 py-2 text-left text-xs font-bold text-white transition-colors cursor-pointer ' + (font === f.id ? 'border-bull-lime bg-bull-raised' : 'border-bull-line bg-bull-bg hover:border-bull-lime/50')}
+                >
+                  <span className="text-lg leading-none" style={{ fontFamily: f.stack || 'inherit' }}>Aa</span>
+                  <span className="truncate">{f.name}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="space-y-2 rounded-2xl border border-bull-line bg-bull-bg p-3">
