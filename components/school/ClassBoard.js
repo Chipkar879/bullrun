@@ -25,8 +25,10 @@ const grad = (i) => {
   return 'linear-gradient(135deg, hsl(' + h + ' 85% 62%), hsl(' + ((h + 45) % 360) + ' 85% 55%))';
 };
 const initials = (name) => {
-  const parts = String(name).match(/[A-Za-z0-9]+/g) || ['?'];
-  return parts.slice(0, 3).map((p) => p[0]).join('').toUpperCase();
+  const tokens = String(name).match(/[A-Za-z]+|\d+/g) || ['?'];
+  let out = tokens.map((t) => (/^\d/.test(t) ? t : t[0])).join('');
+  if (out.length < 2 && /^[A-Za-z]{2,}$/.test(tokens[0])) out = tokens[0].slice(0, 2);
+  return out.slice(0, 4).toUpperCase();
 };
 
 const inputCls =
