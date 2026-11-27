@@ -59,24 +59,17 @@ const buildGrowth = (rows, balance) => {
     return { ...k, pts, open, close: running };
   });
 
-  const min = raw[0].open;
-  const max = Math.max(raw[raw.length - 1].close, min + 1);
-  const y = (v) => 170 - ((v - min) / (max - min)) * 140;
+  // DAILY_BARS: bar height = that day's score, so a missed day is an empty slot
+  const top = Math.max(15, ...raw.map((c) => c.pts));
   const step = 480 / GROWTH_DAYS;
-
-  const candles = raw.map((c, i) => ({
-    ...c,
-    x: 20 + i * step + step / 2,
-    wickTop: y(c.close) - 3,
-    wickBottom: y(c.open) + 3,
-    bodyTop: y(c.close),
-    bodyHeight: Math.max(2, y(c.open) - y(c.close)),
-    closeY: y(c.close),
-  }));
+  const candles = raw.map((c, i) => {
+    const h = c.pts > 0 ? Math.max(4, (c.pts / top) * 140) : 0;
+    return { ...c, x: 20 + i * step + step / 2, bodyTop: 170 - h, bodyHeight: h, wickTop: 170, wickBottom: 170, closeY: 170 - h };
+  });
 
   return {
     candles,
-    path: candles.map((c, i) => `${i === 0 ? 'M' : 'L'}${c.x},${c.closeY}`).join(' '),
+    path: '',
     gained: raw[raw.length - 1].close - raw[0].open,
     balance: raw[raw.length - 1].close,
     hasData: rows.length > 0,
@@ -545,6 +538,13 @@ export default function DailyQuiz() {
                   );
                 })}
 
+                {growth.candles.filter((c) => c.pts === 0).map((c) => (
+                  <g key={'m-' + c.key}>
+                    <title>No quiz played</title>
+                    <circle cx={c.x} cy="176" r="3.5" fill="#FF765E" opacity="0.9" />
+                  </g>
+                ))}
+
                 {growth.candles.map((c) => (
                   <text key={`l-${c.key}`} x={c.x} y="194" textAnchor="middle" fontSize="12" fontWeight="700" fill="#64748b">
                     {c.label}
@@ -561,10 +561,10 @@ export default function DailyQuiz() {
               </svg>
 
               {/* floating badges */}
-              <div className="floaty absolute right-4 top-14 hidden sm:flex items-center gap-1.5 rounded-xl border border-amber-700/60 bg-amber-950/70 px-3 py-1.5 text-xs font-black text-amber-300 shadow-lg backdrop-blur">
+              <div className="floaty absolute right-4 top-14 hidden items-center gap-1.5 rounded-xl border border-amber-700/60 bg-amber-950/70 px-3 py-1.5 text-xs font-black text-amber-300 shadow-lg backdrop-blur">
                 🏆 +1 BB per correct answer
               </div>
-              <div className="floaty absolute left-4 bottom-4 hidden sm:flex items-center gap-1.5 rounded-xl border border-sky-800/60 bg-sky-950/70 px-3 py-1.5 text-xs font-black text-sky-300 shadow-lg backdrop-blur" style={{ animationDelay: '-2s' }}>
+              <div className="floaty absolute left-4 bottom-4 hidden items-center gap-1.5 rounded-xl border border-sky-800/60 bg-sky-950/70 px-3 py-1.5 text-xs font-black text-sky-300 shadow-lg backdrop-blur" style={{ animationDelay: '-2s' }}>
                 ❄️ Freeze time · 🌓 50:50 · ⏩ Skip
               </div>
             </div>
