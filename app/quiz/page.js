@@ -560,7 +560,7 @@ export default function DailyQuiz() {
                             {c.pts > 0 ? (
                               <g>
                                 <rect x={px(i) - 7} y={B - h} width="14" height={h} rx="4" fill={barColor2(c.pts)} />
-                                <text x={px(i)} y={B - h - 5} textAnchor="middle" fontSize="12" fontWeight="800" fill="#64748b">{c.pts}</text>
+                                
                               </g>
                             ) : (
                               <circle cx={px(i)} cy={B + 6} r="3.5" fill="#FF765E" opacity="0.9" />
@@ -574,6 +574,19 @@ export default function DailyQuiz() {
                           {cs.map((c, i) => <circle key={'d' + c.key} cx={px(i)} cy={ty(c.close)} r="3" fill="#f59e0b" stroke="#fff" strokeWidth="1" />)}
                         </g>
                       )}
+                      {/* VALUE_LABELS */}
+                      {cs.map((c, i) => {
+                        if (!(c.pts > 0)) return null;
+                        const h = Math.max(4, (c.pts / 15) * H);
+                        const inside = h >= 26;
+                        const cy = inside ? B - h + 15 : B - h - 14;
+                        return (
+                          <g key={'v' + c.key}>
+                            {!inside && <rect x={px(i) - 12} y={cy - 9} width="24" height="18" rx="6" fill="#ffffff" opacity="0.92" />}
+                            <text x={px(i)} y={cy + 4} textAnchor="middle" fontSize="13" fontWeight="900" fill={inside ? '#14210a' : '#334155'}>{c.pts}</text>
+                          </g>
+                        );
+                      })}
                       {cs.map((c, i) => (
                         <text key={'l' + c.key} x={px(i)} y="198" textAnchor="middle" fontSize="12" fontWeight={i === cs.length - 1 ? '900' : '700'} fill={i === cs.length - 1 ? '#65a30d' : '#64748b'}>{c.label}</text>
                       ))}
