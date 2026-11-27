@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import { supabase } from '@/lib/supabase';
 
 const natural = (a, b) => String(a.class_name).localeCompare(String(b.class_name), undefined, { numeric: true });
 
-export default function SchoolShell({ adminOnly = false, teacherOnly = false, children }) {
+export default function SchoolShell({ active, adminOnly = false, teacherOnly = false, children }) {
   const router = useRouter();
   const [raw, setRaw] = useState(null);
   const [error, setError] = useState('');
@@ -43,6 +44,15 @@ export default function SchoolShell({ adminOnly = false, teacherOnly = false, ch
     window.location.href = '/';
   }
 
+  const tab = (href, label, key) => (
+    <Link
+      href={href}
+      className={'rounded-lg px-4 py-2 text-sm font-black transition ' + (active === key ? 'bg-bull-lime text-bull-ink' : 'border border-bull-line bg-bull-raised text-slate-300 hover:text-white')}
+    >
+      {label}
+    </Link>
+  );
+
   return (
     <main className="min-h-screen bg-bull-bg text-slate-200">
       <Navbar />
@@ -67,6 +77,12 @@ export default function SchoolShell({ adminOnly = false, teacherOnly = false, ch
                 Sign out
               </button>
             </div>
+            {isAdmin && (
+              <nav className="flex gap-2">
+                {tab('/school', 'Home', 'home')}
+                {tab('/school/students', 'Students', 'students')}
+              </nav>
+            )}
             {typeof children === 'function' ? children({ data, isAdmin, reload: load }) : children}
           </>
         )}

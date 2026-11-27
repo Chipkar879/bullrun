@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import SchoolShell from '@/components/school/SchoolShell';
 import ClassBoard from '@/components/school/ClassBoard';
-import { inr, fmtDate, mean, worth } from '@/components/school/format';
+import { inr, mean, worth } from '@/components/school/format';
 
 function Kpi({ label, value }) {
   return (
@@ -36,21 +36,7 @@ function Home({ data, isAdmin }) {
               <Link href="/school/manage" className="font-bold underline">Open the School tab</Link>
             </p>
           )}
-
           <ClassBoard />
-
-          <details className="rounded-2xl border border-bull-line bg-bull-surface p-4 text-sm">
-            <summary className="cursor-pointer font-bold text-slate-300">School plan, users and access</summary>
-            <div className="mt-3 space-y-2">
-              <div className="flex flex-wrap gap-2">
-                <Link href="/school/manage" className="inline-block rounded-lg bg-bull-lime px-4 py-2 text-sm font-bold text-bull-ink">Teachers, classes and students</Link>
-                <Link href="/school/admin" className="inline-block rounded-lg border border-bull-line bg-bull-raised px-4 py-2 text-sm font-bold text-white">Users, access and progress</Link>
-              </div>
-              {school.paid_until && <p>Paid until <strong className="text-white">{fmtDate(school.paid_until)}</strong>.</p>}
-              {school.payment_due_at && <p>Payment due by <strong className="text-white">{fmtDate(school.payment_due_at)}</strong>.</p>}
-              {school.locked_price && <p>Plan price {inr(school.locked_price)} per 30 days.</p>}
-            </div>
-          </details>
         </>
       ) : (
         <section className="space-y-3">
