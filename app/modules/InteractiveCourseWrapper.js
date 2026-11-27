@@ -28,8 +28,8 @@ const CSS = `
 const KIND = {
   mission:  { icon: '\ud83d\ude80', label: 'Mission Briefing', box: 'bg-gradient-to-br from-bull-raised to-bull-bg border-bull-lime/50 text-slate-200' },
   intel:    { icon: '\u26a1',       label: 'Financial Intel',  box: 'bg-bull-surface border-bull-line text-slate-200' },
-  wow:      { icon: '\ud83e\udd2f', label: 'Wow Fact',         box: 'bg-gradient-to-br from-fuchsia-950/60 to-bull-bg border-fuchsia-500/50 text-fuchsia-100' },
-  try:      { icon: '\ud83e\uddea', label: 'Try It',           box: 'bg-gradient-to-br from-sky-950/60 to-bull-bg border-sky-500/50 text-sky-100' },
+  wow:      { icon: '\ud83e\udd2f', label: 'Wow Fact',         box: 'bg-gradient-to-br from-[#f5d0fe] to-[#e9d5ff] border-fuchsia-500 text-[#4a044e] shadow-md' },
+  try:      { icon: '\ud83e\uddea', label: 'Try It',           box: 'bg-gradient-to-br from-[#bae6fd] to-[#e0f2fe] border-sky-500 text-[#0c4a6e] shadow-md' },
   case:     { icon: '\ud83c\udf55', label: 'Mini Case',        box: 'bg-gradient-to-br from-amber-950/50 to-bull-bg border-amber-500/50 text-amber-100' },
   takeaway: { icon: '\ud83d\udca1', label: 'Core Takeaway',    box: 'bg-gradient-to-br from-emerald-950/60 to-bull-bg border-emerald-500/60 text-emerald-100' },
 };
