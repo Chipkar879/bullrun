@@ -26,12 +26,12 @@ const CSS = `
 `;
 
 const KIND = {
-  mission:  { icon: '\ud83d\ude80', label: 'Mission Briefing', box: 'bg-gradient-to-br from-bull-raised to-bull-bg border-bull-lime/50 text-slate-200' },
-  intel:    { icon: '\u26a1',       label: 'Financial Intel',  box: 'bg-bull-surface border-bull-line text-slate-200' },
-  wow:      { icon: '\ud83e\udd2f', label: 'Wow Fact',         box: 'bg-gradient-to-br from-fuchsia-950/60 to-bull-bg border-fuchsia-500/50 text-fuchsia-100' },
-  try:      { icon: '\ud83e\uddea', label: 'Try It',           box: 'bg-gradient-to-br from-sky-950/60 to-bull-bg border-sky-500/50 text-sky-100' },
-  case:     { icon: '\ud83c\udf55', label: 'Mini Case',        box: 'bg-gradient-to-br from-amber-950/50 to-bull-bg border-amber-500/50 text-amber-100' },
-  takeaway: { icon: '\ud83d\udca1', label: 'Core Takeaway',    box: 'bg-gradient-to-br from-emerald-950/60 to-bull-bg border-emerald-500/60 text-emerald-100' },
+  mission:  { icon: '\ud83d\ude80', label: 'Mission Briefing', box: 'bg-gradient-to-br from-lime-200 via-lime-100 to-white border-lime-500 text-slate-800 shadow-md shadow-lime-500/20' },
+  intel:    { icon: '\u26a1',       label: 'Financial Intel',  box: 'bg-gradient-to-br from-slate-200 via-slate-100 to-white border-slate-400 text-slate-800 shadow-md shadow-slate-500/20' },
+  wow:      { icon: '\ud83e\udd2f', label: 'Wow Fact',         box: 'bg-gradient-to-br from-fuchsia-300 via-fuchsia-100 to-white border-fuchsia-500 text-fuchsia-950 shadow-md shadow-fuchsia-500/20' },
+  try:      { icon: '\ud83e\uddea', label: 'Try It',           box: 'bg-gradient-to-br from-sky-300 via-sky-100 to-white border-sky-500 text-sky-950 shadow-md shadow-sky-500/20' },
+  case:     { icon: '\ud83c\udf55', label: 'Mini Case',        box: 'bg-gradient-to-br from-amber-300 via-amber-100 to-white border-amber-500 text-amber-950 shadow-md shadow-amber-500/20' },
+  takeaway: { icon: '\ud83d\udca1', label: 'Core Takeaway',    box: 'bg-gradient-to-br from-emerald-300 via-emerald-100 to-white border-emerald-600 text-emerald-950 shadow-md shadow-emerald-500/20' },
 };
 
 function parseBlocks(content) {
@@ -87,9 +87,9 @@ function CardBody({ lines, big }) {
         const isBullet = l.charAt(0) === '\u2022' || /^\d+\.\s/.test(l);
         if (isBullet) {
           return (
-            <div key={i} className="flex items-start gap-2.5 bg-bull-bg/70 border border-bull-line rounded-xl p-3 text-xs sm:text-sm">
-              <span className="text-bull-lime font-black font-mono">{'\u27a4'}</span>
-              <span className="leading-relaxed text-slate-100">{l.replace(/^[\u2022]\s*/, '')}</span>
+            <div key={i} className="flex items-start gap-2.5 bg-white/80 border border-slate-300 rounded-xl p-3 text-xs sm:text-sm">
+              <span className="text-lime-600 font-black font-mono">{'\u27a4'}</span>
+              <span className="leading-relaxed text-[#1e293b]">{l.replace(/^[\u2022]\s*/, '')}</span>
             </div>
           );
         }
@@ -449,8 +449,10 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     <div className="flex items-center gap-3">
                       <Mascot mood={card === 0 && lesson.mascot ? lesson.mascot : MOOD_BY_KIND[b.kind]} size={72} fallback={st.icon} />
                       <div>
-                        <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70">{st.label}</div>
-                        <h4 className="text-white font-black text-base sm:text-xl leading-tight">{b.head}</h4>
+                        <div className={'font-mono font-black uppercase tracking-widest ' + (b.head.toUpperCase() === st.label.toUpperCase() ? 'text-base sm:text-xl text-[#0f172a]' : 'text-xs opacity-70')}>{st.label}</div>
+                        {b.head.toUpperCase() !== st.label.toUpperCase() && (
+                          <h4 className="text-[#0f172a] font-black text-base sm:text-xl leading-tight">{b.head}</h4>
+                        )}
                       </div>
                     </div>
                     <CardBody lines={b.body} big={b.kind === 'wow' || b.kind === 'takeaway'} />
