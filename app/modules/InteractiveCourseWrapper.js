@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
+import Mascot from '@/components/Mascot';
 
 const STORE_PREFIX = 'bullrun_progress_v3_';
 let storeKey = STORE_PREFIX + 'guest';
@@ -51,6 +52,10 @@ function parseBlocks(content) {
       return { kind, head, body: lines.slice(1).map((l) => l.trim()).filter(Boolean) };
     });
 }
+
+// Default mascot mood per card type. A lesson can set its own opening mood
+// with a "mascot" field in the JSON (used on the first card).
+const MOOD_BY_KIND = { mission: 'curious', intel: 'explaining', wow: 'excited', try: 'thinking', case: 'curious', takeaway: 'proud' };
 
 function Confetti() {
   const bits = useMemo(
@@ -269,7 +274,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
       <div className="bg-gradient-to-r from-bull-surface via-bull-raised to-bull-surface border border-bull-line p-5 rounded-3xl shadow-2xl space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-2xl bg-bull-bg border border-bull-lime/50 flex items-center justify-center text-2xl br-glow">{'\ud83d\udc02'}</div>
+            <div className="h-12 w-12 rounded-2xl bg-bull-bg border border-bull-lime/50 flex items-center justify-center text-2xl br-glow"><Mascot mood="cool" size={40} fallback={'\ud83d\udc02'} /></div>
             <div>
               <span className="text-xs font-black tracking-widest text-bull-lime uppercase block font-mono">LEVEL {level}</span>
               <h3 className="text-base sm:text-lg font-black text-white">{levelName}</h3>
@@ -442,7 +447,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                 return (
                   <div key={card} className={'br-slide rounded-3xl border p-5 sm:p-6 space-y-4 ' + st.box}>
                     <div className="flex items-center gap-3">
-                      <span className="text-4xl br-pop">{st.icon}</span>
+                      <Mascot mood={card === 0 && lesson.mascot ? lesson.mascot : MOOD_BY_KIND[b.kind]} size={72} fallback={st.icon} />
                       <div>
                         <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70">{st.label}</div>
                         <h4 className="text-white font-black text-base sm:text-xl leading-tight">{b.head}</h4>
@@ -459,7 +464,10 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     <span>QUESTION {qIdx + 1} / {quiz.length}</span>
                     <span className="text-amber-400">{Object.keys(answers).length} ANSWERED</span>
                   </div>
-                  <h4 className="text-white font-black text-base sm:text-lg leading-snug">{quiz[qIdx].question}</h4>
+                  <div className="flex items-start gap-3">
+                    <Mascot mood="encouraging" size={56} fallback={'\ud83d\udc02'} />
+                    <h4 className="text-white font-black text-base sm:text-lg leading-snug">{quiz[qIdx].question}</h4>
+                  </div>
                   <div className="space-y-2.5">
                     {quiz[qIdx].options.map((opt, oi) => {
                       const sel = answers[qIdx] === oi;
@@ -487,7 +495,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
               {mode === 'quiz' && result && (
                 <div className="space-y-5 br-slide">
                   <div className="text-center space-y-2 py-2">
-                    <div className="text-6xl br-pop">{result.passed ? '\ud83c\udfc6' : '\ud83d\udcaa'}</div>
+                    <div className="flex justify-center"><Mascot mood={result.passed ? (result.correctCount === quiz.length ? 'trophy' : 'celebrating') : 'oops'} size={140} fallback={result.passed ? '\ud83c\udfc6' : '\ud83d\udcaa'} /></div>
                     <h4 className="text-white font-black text-2xl">{result.passed ? 'MISSION COMPLETE!' : 'So close! Try again.'}</h4>
                     <p className="font-mono text-sm text-slate-300">
                       Score: <span className="font-black text-bull-lime">{result.correctCount} / {quiz.length}</span> (need {result.needed})
