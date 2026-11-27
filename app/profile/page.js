@@ -214,7 +214,7 @@ export default function ProfilePage() {
                   <div className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={lvl.pct} aria-label="XP progress">
                     <div className="h-full rounded-full transition-all" style={{ width: lvl.pct + '%', background: 'linear-gradient(90deg, #B7F34A, #19C6B4)' }} />
                   </div>
-                  <p className="text-xs text-slate-400 mt-1.5">{data.xp.toLocaleString('en-IN')} XP{lvl.next ? ' - ' + lvl.toNext.toLocaleString('en-IN') + ' XP to ' + lvl.next : ' - top level reached'}</p>
+                  <p className="text-sm text-slate-400 mt-1.5"><b className="font-black text-white">{data.xp.toLocaleString('en-IN')} XP</b>{lvl.next ? ' (' + lvl.toNext.toLocaleString('en-IN') + ' XP left to ' + lvl.next + ')' : ' (top level reached)'}</p>
                 </div>
               )}
             </div>
