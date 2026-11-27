@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import SchoolShell from '@/components/school/SchoolShell';
-import SchoolUsersSection from '@/components/school/SchoolUsersSection';
+import ClassBoard from '@/components/school/ClassBoard';
 import { inr, fmtDate, mean, worth } from '@/components/school/format';
 
 function Kpi({ label, value }) {
@@ -29,20 +29,29 @@ function Home({ data, isAdmin }) {
       </div>
 
       {isAdmin ? (
-        <section className="space-y-2 rounded-2xl border border-bull-line bg-bull-surface p-4 text-sm">
-          <Link href="/school/manage" className="inline-block rounded-lg bg-bull-lime px-4 py-2 text-sm font-bold text-bull-ink">Teachers, classes and students</Link>
-          <Link href="/school/admin" className="ml-2 inline-block rounded-lg border border-bull-line bg-bull-raised px-4 py-2 text-sm font-bold text-white">Users, access and progress</Link>
-          {school.paid_until && <p>Paid until <strong className="text-white">{fmtDate(school.paid_until)}</strong>.</p>}
-          {school.payment_due_at && <p>Payment due by <strong className="text-white">{fmtDate(school.payment_due_at)}</strong>.</p>}
-          {school.locked_price && <p>Plan price {inr(school.locked_price)} per 30 days.</p>}
+        <>
           {pending > 0 && (
-            <p className="text-amber-300">
+            <p className="rounded-2xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-300">
               {pending} teacher{pending === 1 ? '' : 's'} waiting for approval.{' '}
-              <Link href="/school/manage" className="underline">Open the School tab</Link>
+              <Link href="/school/manage" className="font-bold underline">Open the School tab</Link>
             </p>
           )}
-          {!school.paid_until && !school.payment_due_at && !school.locked_price && pending === 0 && <p className="text-slate-400">Nothing needs your attention.</p>}
-        </section>
+
+          <ClassBoard />
+
+          <details className="rounded-2xl border border-bull-line bg-bull-surface p-4 text-sm">
+            <summary className="cursor-pointer font-bold text-slate-300">School plan, users and access</summary>
+            <div className="mt-3 space-y-2">
+              <div className="flex flex-wrap gap-2">
+                <Link href="/school/manage" className="inline-block rounded-lg bg-bull-lime px-4 py-2 text-sm font-bold text-bull-ink">Teachers, classes and students</Link>
+                <Link href="/school/admin" className="inline-block rounded-lg border border-bull-line bg-bull-raised px-4 py-2 text-sm font-bold text-white">Users, access and progress</Link>
+              </div>
+              {school.paid_until && <p>Paid until <strong className="text-white">{fmtDate(school.paid_until)}</strong>.</p>}
+              {school.payment_due_at && <p>Payment due by <strong className="text-white">{fmtDate(school.payment_due_at)}</strong>.</p>}
+              {school.locked_price && <p>Plan price {inr(school.locked_price)} per 30 days.</p>}
+            </div>
+          </details>
+        </>
       ) : (
         <section className="space-y-3">
           <h2 className="text-base font-black text-white">Your classes</h2>
@@ -61,8 +70,6 @@ function Home({ data, isAdmin }) {
           </div>
         </section>
       )}
-
-      {isAdmin && <SchoolUsersSection />}
     </div>
   );
 }
