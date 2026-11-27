@@ -532,7 +532,7 @@ function SignupForm() {
                 </div>
               )}
 
-              {!isLogin && accountType === 'student' && availableClasses.length > 0 && (
+              {false && (
                 <div className="animate-fadeInFast">
                   <label className="block text-xs font-black uppercase text-emerald-400 tracking-wider mb-1 font-mono">Select Your Classroom</label>
                   <select required className="w-full px-4 py-3 bg-bull-raised border border-bull-line text-white rounded-xl text-sm focus:outline-none focus:border-bull-lime" onChange={(e) => setFormData({ ...formData, specificClassId: e.target.value })}>

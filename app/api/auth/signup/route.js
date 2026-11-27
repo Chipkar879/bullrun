@@ -37,7 +37,7 @@ export async function POST(request) {
     const password = typeof body.password === 'string' ? body.password : '';
     const role = body.role;
     const schoolCode = typeof body.schoolCode === 'string' ? body.schoolCode.trim().toUpperCase() : '';
-    const specificClassId = body.specificClassId ? String(body.specificClassId).slice(0, 64) : null;
+    const specificClassId = null; // placement is decided by school invites, not by the student
     const documentUrl = typeof body.documentUrl === 'string' ? body.documentUrl.trim() : '';
 
     if (!ALLOWED_ROLES.includes(role)) return bad('Invalid account type.');
