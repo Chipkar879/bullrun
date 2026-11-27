@@ -520,45 +520,77 @@ export default function DailyQuiz() {
                 </span>
               </div>
 
-              <svg viewBox="0 0 520 200" className="relative mt-3 w-full" role="img" aria-label="Your BB growth candlestick chart">
+              <svg viewBox="0 0 520 210" className="relative mt-3 w-full" role="img" aria-label="Daily quiz score bars with your running BB total as a line">
+                {/* GROWTH_V2 */}
                 <defs>
                   <linearGradient id="lineGlow" x1="0" x2="1">
                     <stop offset="0%" stopColor="#fcd34d" />
-                    <stop offset="100%" stopColor="#bef264" />
+                    <stop offset="100%" stopColor="#f59e0b" />
                   </linearGradient>
                 </defs>
-
-                {growth.candles.map((c, i) => {
-                  const color = c.pts > 0 ? '#a3e635' : '#64748b';
+                {(() => {
+                  const cs = growth.candles;
+                  const L = 40, R = 470, B = 170, H = 140;
+                  const step = (R - L) / cs.length;
+                  const px = (i) => L + i * step + step / 2;
+                  const lo = cs[0].open;
+                  const hi = Math.max(cs[cs.length - 1].close, lo + 1);
+                  const ty = (v) => B - ((v - lo) / (hi - lo)) * H;
+                  const barColor2 = (p) => (p >= 10 ? '#a3e635' : p >= 5 ? '#fcd34d' : '#FF765E');
+                  const line = cs.map((c, i) => (i ? 'L' : 'M') + px(i).toFixed(1) + ' ' + ty(c.close).toFixed(1)).join(' ');
                   return (
-                    <g key={c.key} className="candle" style={{ animationDelay: `${i * 0.05}s` }}>
-                      <line x1={c.x} x2={c.x} y1={c.wickTop} y2={c.wickBottom} stroke={color} strokeWidth="1.5" />
-                      <rect x={c.x - 6} y={c.bodyTop} width="12" height={c.bodyHeight} rx="2" fill={color} opacity="0.9" />
+                    <g>
+                      {[0, 5, 10, 15].map((v) => (
+                        <g key={'g' + v}>
+                          <line x1={L} x2={R} y1={B - (v / 15) * H} y2={B - (v / 15) * H} stroke="#64748b" strokeOpacity="0.25" strokeDasharray={v === 0 ? '0' : '3 4'} />
+                          <text x={L - 8} y={B - (v / 15) * H + 4} textAnchor="end" fontSize="12" fontWeight="700" fill="#64748b">{v}</text>
+                        </g>
+                      ))}
+                      {growth.hasData && (
+                        <g>
+                          <text x={R + 8} y={ty(hi) + 4} fontSize="12" fontWeight="800" fill="#d97706">{hi}</text>
+                          <text x={R + 8} y={ty(lo) + 4} fontSize="12" fontWeight="800" fill="#d97706">{lo}</text>
+                        </g>
+                      )}
+                      {cs.map((c, i) => {
+                        const h = c.pts > 0 ? Math.max(4, (c.pts / 15) * H) : 0;
+                        return (
+                          <g key={c.key} className="candle" style={{ animationDelay: (i * 0.05) + 's' }}>
+                            <title>{c.key + ': ' + (c.pts > 0 ? c.pts + ' BB' : 'No quiz played')}</title>
+                            {c.pts > 0 ? (
+                              <g>
+                                <rect x={px(i) - 7} y={B - h} width="14" height={h} rx="4" fill={barColor2(c.pts)} />
+                                <text x={px(i)} y={B - h - 5} textAnchor="middle" fontSize="12" fontWeight="800" fill="#64748b">{c.pts}</text>
+                              </g>
+                            ) : (
+                              <circle cx={px(i)} cy={B + 6} r="3.5" fill="#FF765E" opacity="0.9" />
+                            )}
+                          </g>
+                        );
+                      })}
+                      {growth.hasData && (
+                        <g>
+                          <path d={line} pathLength="1" fill="none" stroke="url(#lineGlow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="pulse-line" />
+                          {cs.map((c, i) => <circle key={'d' + c.key} cx={px(i)} cy={ty(c.close)} r="3" fill="#f59e0b" stroke="#fff" strokeWidth="1" />)}
+                        </g>
+                      )}
+                      {cs.map((c, i) => (
+                        <text key={'l' + c.key} x={px(i)} y="198" textAnchor="middle" fontSize="12" fontWeight={i === cs.length - 1 ? '900' : '700'} fill={i === cs.length - 1 ? '#65a30d' : '#64748b'}>{c.label}</text>
+                      ))}
+                      {!growth.hasData && (
+                        <text x="255" y="95" textAnchor="middle" fontSize="12" fontWeight="800" fill="#94a3b8">
+                          {user ? 'Play your first quiz to start your growth chart' : 'Login to see your growth'}
+                        </text>
+                      )}
                     </g>
                   );
-                })}
-
-                {growth.candles.filter((c) => c.pts === 0).map((c) => (
-                  <g key={'m-' + c.key}>
-                    <title>No quiz played</title>
-                    <circle cx={c.x} cy="176" r="3.5" fill="#FF765E" opacity="0.9" />
-                  </g>
-                ))}
-
-                {growth.candles.map((c) => (
-                  <text key={`l-${c.key}`} x={c.x} y="194" textAnchor="middle" fontSize="12" fontWeight="700" fill="#64748b">
-                    {c.label}
-                  </text>
-                ))}
-
-                <path d={growth.path} pathLength="1" fill="none" stroke="url(#lineGlow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="pulse-line" style={{ filter: 'drop-shadow(0 0 6px rgba(190,242,100,0.7))' }} />
-
-                {!growth.hasData && (
-                  <text x="260" y="95" textAnchor="middle" fontSize="12" fontWeight="800" fill="#94a3b8">
-                    {user ? 'Play your first quiz to start your growth chart' : 'Login to see your growth'}
-                  </text>
-                )}
+                })()}
               </svg>
+              <div className="relative mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-bold text-slate-400">
+                <span className="inline-flex items-center gap-1.5"><span className="h-3 w-3 rounded-sm bg-bull-lime" />Daily score (left)</span>
+                <span className="inline-flex items-center gap-1.5"><span className="h-0.5 w-5 rounded bg-amber-400" />Running total (right)</span>
+                <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-bull-coral" />Missed day</span>
+              </div>
 
               {/* floating badges */}
               <div className="floaty absolute right-4 top-14 hidden items-center gap-1.5 rounded-xl border border-amber-700/60 bg-amber-950/70 px-3 py-1.5 text-xs font-black text-amber-300 shadow-lg backdrop-blur">
