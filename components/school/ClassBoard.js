@@ -477,6 +477,7 @@ export default function ClassBoard() {
           </div>
         )}
 
+        {data.canCreate !== false && (
         <button
           onClick={() => setShowNew(true)}
           className="cb-rise group flex min-h-[188px] flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-bull-line bg-bull-surface/40 p-5 text-slate-400 transition duration-300 hover:border-bull-lime hover:bg-bull-lime/5 hover:text-bull-lime"
@@ -487,6 +488,7 @@ export default function ClassBoard() {
           </span>
           <span className="text-sm font-black">Add class</span>
         </button>
+        )}
       </div>
 
       {pending && (

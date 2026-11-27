@@ -12,16 +12,39 @@ const natural = (a, b) => String(a.class_name).localeCompare(String(b.class_name
 async function getSchool(req) {
   const user = await getUserFromRequest(req);
   if (!user) return { error: fail('Please log in again', 401) };
-  const { data: me } = await admin.from('profiles').select('id, role').eq('id', user.id).maybeSingle();
-  if (!me || me.role !== 'school_admin') return { error: fail('Only the school admin can do this.', 403) };
-  const { data: school } = await admin
-    .from('schools')
-    .select('id, name, code, student_count')
-    .eq('admin_user_id', user.id)
-    .limit(1)
+  const { data: me } = await admin
+    .from('profiles')
+    .select('id, role, school_id, verification_status')
+    .eq('id', user.id)
     .maybeSingle();
-  if (!school || !school.code) return { error: fail('No school is linked to your account.', 403) };
-  return { user, school };
+  if (!me) return { error: fail('Account not found.', 403) };
+
+  if (me.role === 'school_admin') {
+    const { data: school } = await admin
+      .from('schools')
+      .select('id, name, code, student_count')
+      .eq('admin_user_id', user.id)
+      .limit(1)
+      .maybeSingle();
+    if (!school || !school.code) return { error: fail('No school is linked to your account.', 403) };
+    return { user, school };
+  }
+
+  if (me.role === 'teacher') {
+    if (['pending', 'rejected'].includes(me.verification_status)) {
+      return { error: fail('Your account is waiting for approval.', 403) };
+    }
+    if (!me.school_id) return { error: fail('No school is linked to your account.', 403) };
+    const { data: school } = await admin
+      .from('schools')
+      .select('id, name, code, student_count')
+      .eq('code', me.school_id)
+      .maybeSingle();
+    if (!school || !school.code) return { error: fail('No school is linked to your account.', 403) };
+    return { user, school: { ...school, scopeTeacherId: user.id } };
+  }
+
+  return { error: fail('Not allowed.', 403) };
 }
 
 async function buildPayload(school) {
@@ -54,7 +77,8 @@ async function buildPayload(school) {
   const teacherById = Object.fromEntries(teachers.map((t) => [t.id, t]));
 
   const hidden = new Set(allClasses.filter((c) => /^unassigned/i.test(c.class_name)).map((c) => String(c.id)));
-  const classes = allClasses.filter((c) => !hidden.has(String(c.id))).sort(natural);
+  const classes = allClasses.filter((c) => !hidden.has(String(c.id))).sort(natural)
+    .filter((c) => !school.scopeTeacherId || String(c.assigned_teacher_id) === String(school.scopeTeacherId));
   const visibleIds = new Set(classes.map((c) => String(c.id)));
 
   const out = classes.map((c) => {
@@ -79,13 +103,14 @@ async function buildPayload(school) {
     };
   });
 
-  const unassigned = students
+  const unassigned = (school.scopeTeacherId ? [] : students)
     .filter((s) => !s.specific_class_id || !visibleIds.has(String(s.specific_class_id)))
     .map((s) => ({ id: s.id, name: s.name, email: s.email }));
 
   return {
     school: { name: school.name, code: school.code, student_count: school.student_count },
     seatsUsed: students.length,
+    canCreate: !school.scopeTeacherId,
     classes: out,
     unassigned,
   };
@@ -95,10 +120,11 @@ async function ownClass(school, id) {
   if (id === undefined || id === null || id === '') return null;
   const { data } = await admin
     .from('school_classes')
-    .select('id, class_name')
+    .select('id, class_name, assigned_teacher_id')
     .eq('id', id)
     .eq('school_code', school.code)
     .maybeSingle();
+  if (data && school.scopeTeacherId && String(data.assigned_teacher_id) !== String(school.scopeTeacherId)) return null;
   return data || null;
 }
 
@@ -121,6 +147,7 @@ export async function POST(req) {
   try {
     // ------------------------------------------------------------ create class
     if (body.action === 'create_class') {
+      if (school.scopeTeacherId) return fail('Only the school admin can create classes.', 403);
       const class_name = clean(body.class_name);
       const teacher_name = clean(body.teacher_name);
       const teacher_email = clean(body.teacher_email).toLowerCase();
@@ -193,6 +220,7 @@ export async function POST(req) {
 
       if (reg) {
         if (String(reg.specific_class_id) === String(cls.id)) return fail('That student is already in this class.');
+        if (school.scopeTeacherId && reg.specific_class_id) return fail('That student is already in another class. Ask the school admin to move them.');
         const { error } = await admin.from('profiles').update({ specific_class_id: cls.id }).eq('id', reg.id);
         if (error) return fail(error.message, 500);
         return NextResponse.json({
@@ -231,6 +259,10 @@ export async function POST(req) {
 
     // ------------------------------------------------------------ remove invite
     if (body.action === 'remove_invite') {
+      if (school.scopeTeacherId) {
+        const { data: iv } = await admin.from('school_invites').select('class_id').eq('id', body.invite_id).maybeSingle();
+        if (!iv || !(await ownClass(school, iv.class_id))) return fail('Invite not found.', 404);
+      }
       const { error } = await admin
         .from('school_invites')
         .delete()
@@ -243,6 +275,7 @@ export async function POST(req) {
 
     // ------------------------------------------------------------ assign unassigned student
     if (body.action === 'assign') {
+      if (school.scopeTeacherId) return fail('Only the school admin can move students.', 403);
       const cls = await ownClass(school, body.class_id);
       if (!cls) return fail('Class not found.', 404);
       const { data: st } = await admin

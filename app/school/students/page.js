@@ -178,5 +178,5 @@ function Students() {
 }
 
 export default function StudentsPage() {
-  return <SchoolShell active="students" adminOnly>{() => <Students />}</SchoolShell>;
+  return <SchoolShell active="students">{() => <Students />}</SchoolShell>;
 }

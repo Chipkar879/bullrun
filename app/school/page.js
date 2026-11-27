@@ -39,22 +39,7 @@ function Home({ data, isAdmin }) {
           <ClassBoard />
         </>
       ) : (
-        <section className="space-y-3">
-          <h2 className="text-base font-black text-white">Your classes</h2>
-          {classes.length === 0 && <p className="text-sm text-slate-400">No classes are assigned to you yet.</p>}
-          <div className="grid gap-3 md:grid-cols-2">
-            {classes.map((c) => {
-              const list = students.filter((s) => String(s.specific_class_id) === String(c.id));
-              return (
-                <Link key={c.id} href={'/school/class/' + c.id}
-                  className="rounded-2xl border border-bull-line bg-bull-surface p-4 transition-colors hover:border-bull-lime/60">
-                  <p className="text-lg font-black text-white">{c.class_name}</p>
-                  <p className="text-sm text-slate-400">{list.length} students | {list.filter((s) => s.week_seconds > 0).length} active this week</p>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
+        <ClassBoard />
       )}
     </div>
   );

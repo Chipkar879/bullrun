@@ -77,7 +77,7 @@ export default function SchoolShell({ active, adminOnly = false, teacherOnly = f
                 Sign out
               </button>
             </div>
-            {isAdmin && (
+            {!!data.role && (
               <nav className="flex gap-2">
                 {tab('/school', 'Home', 'home')}
                 {tab('/school/students', 'Students', 'students')}
