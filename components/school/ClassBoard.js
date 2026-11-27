@@ -297,6 +297,10 @@ export default function ClassBoard() {
   const [openId, setOpenId] = useState(null);
   const [toast, setToast] = useState('');
   const toastTimer = useRef(null);
+  const [dragId, setDragId] = useState(null);
+  const [overId, setOverId] = useState(null);
+  const [pending, setPending] = useState(null);
+  const [moving, setMoving] = useState(false);
 
   const flash = useCallback((m) => {
     setToast(m);
@@ -332,6 +336,23 @@ export default function ClassBoard() {
     } catch (e) {
       flash(e.message);
     }
+  }
+
+  function askMove(student, cls) {
+    if (!student || !cls) return;
+    setPending({ student, cls });
+  }
+
+  async function confirmMove() {
+    if (!pending) return;
+    setMoving(true);
+    try {
+      apply(await api('POST', { action: 'assign', student_id: pending.student.id, class_id: pending.cls.id }));
+    } catch (e) {
+      flash(e.message);
+    }
+    setMoving(false);
+    setPending(null);
   }
 
   if (err && !data) {
@@ -376,8 +397,17 @@ export default function ClassBoard() {
             <button
               key={c.id}
               onClick={() => setOpenId(c.id)}
+              onDragOver={(e) => { if (dragId) { e.preventDefault(); setOverId(c.id); } }}
+              onDragLeave={() => setOverId((v) => (String(v) === String(c.id) ? null : v))}
+              onDrop={(e) => {
+                e.preventDefault();
+                const st = data.unassigned.find((s) => String(s.id) === String(dragId));
+                setOverId(null);
+                setDragId(null);
+                askMove(st, c);
+              }}
               className="cb-rise group relative overflow-hidden rounded-2xl border border-bull-line bg-bull-surface p-5 text-left transition duration-300 hover:-translate-y-1 hover:border-bull-lime/60 hover:shadow-[0_18px_40px_-18px_rgba(190,242,100,0.35)]"
-              style={{ animationDelay: i * 60 + 'ms' }}
+              style={{ animationDelay: i * 60 + 'ms', ...(overId !== null && String(overId) === String(c.id) ? { borderColor: '#bef264', transform: 'scale(1.03)', boxShadow: '0 0 0 3px rgba(190,242,100,.35)' } : null) }}
             >
               <div className="absolute inset-x-0 top-0 h-1" style={{ background: grad(i) }} />
               <div className="flex items-start gap-3">
@@ -401,6 +431,52 @@ export default function ClassBoard() {
           );
         })}
 
+        {data.unassigned.length > 0 && (
+          <div
+            className="cb-rise relative overflow-hidden rounded-2xl border-2 border-dashed border-amber-400/50 bg-amber-400/5 p-5"
+            style={{ animationDelay: data.classes.length * 60 + 'ms' }}
+          >
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-lg font-black text-white">Unassigned</p>
+              <Chip tone="amber">{data.unassigned.length}</Chip>
+            </div>
+            <p className="mt-1 text-xs text-slate-400">Drag a student onto a class to place them.</p>
+            <ul className="mt-3 max-h-52 space-y-2 overflow-y-auto pr-1">
+              {data.unassigned.map((s) => (
+                <li
+                  key={s.id}
+                  draggable
+                  onDragStart={(e) => {
+                    setDragId(s.id);
+                    e.dataTransfer.setData('text/plain', String(s.id));
+                    e.dataTransfer.effectAllowed = 'move';
+                  }}
+                  onDragEnd={() => { setDragId(null); setOverId(null); }}
+                  className="flex cursor-grab items-center gap-2 rounded-xl border border-bull-line bg-bull-bg/70 px-2.5 py-2 active:cursor-grabbing"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bull-raised text-xs font-black text-white">
+                    {String(s.name || s.email || '?')[0].toUpperCase()}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-bold text-white">{s.name || s.email}</span>
+                    <span className="block truncate text-[11px] text-slate-400">{s.email}</span>
+                  </span>
+                  <select
+                    value=""
+                    onChange={(e) => askMove(s, data.classes.find((x) => String(x.id) === e.target.value))}
+                    className="max-w-[92px] rounded-lg border border-bull-line bg-bull-bg px-1.5 py-1 text-[11px] font-bold text-slate-200 outline-none focus:border-bull-lime"
+                  >
+                    <option value="" disabled>Move to...</option>
+                    {data.classes.map((c) => (
+                      <option key={c.id} value={c.id}>{c.class_name}</option>
+                    ))}
+                  </select>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <button
           onClick={() => setShowNew(true)}
           className="cb-rise group flex min-h-[188px] flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-bull-line bg-bull-surface/40 p-5 text-slate-400 transition duration-300 hover:border-bull-lime hover:bg-bull-lime/5 hover:text-bull-lime"
@@ -413,30 +489,34 @@ export default function ClassBoard() {
         </button>
       </div>
 
-      {data.unassigned.length > 0 && (
-        <div className="space-y-2 rounded-2xl border border-bull-line bg-bull-surface p-4">
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-sm font-black text-white">Unassigned students</p>
-            <Chip tone="amber">{data.unassigned.length}</Chip>
+      {pending && (
+        <Modal onClose={() => { if (!moving) setPending(null); }} tab="Confirm move">
+          <div className="space-y-5">
+            <h3 className="pr-8 text-xl font-black text-white">Are you sure?</h3>
+            <p className="text-sm text-slate-300">
+              Move <strong className="text-white">{pending.student.name || pending.student.email}</strong> into{' '}
+              <strong className="text-bull-lime">{pending.cls.class_name}</strong>?
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setPending(null)}
+                disabled={moving}
+                className="rounded-xl border border-bull-line bg-bull-raised px-4 py-3 text-sm font-black text-slate-200 transition hover:text-white disabled:opacity-60"
+              >
+                No
+              </button>
+              <button
+                type="button"
+                onClick={confirmMove}
+                disabled={moving}
+                className="rounded-xl bg-bull-lime px-4 py-3 text-sm font-black text-bull-ink transition hover:brightness-110 disabled:opacity-60"
+              >
+                {moving ? 'Moving...' : 'Yes'}
+              </button>
+            </div>
           </div>
-          <p className="text-xs text-slate-400">These students registered with your school code but their email did not match any invite.</p>
-          <ul className="space-y-2">
-            {data.unassigned.map((s) => (
-              <PersonRow key={s.id} name={s.name} email={s.email}>
-                <select
-                  defaultValue=""
-                  onChange={(e) => assign(s.id, e.target.value)}
-                  className="rounded-lg border border-bull-line bg-bull-bg px-2 py-1.5 text-xs font-bold text-slate-200 outline-none focus:border-bull-lime"
-                >
-                  <option value="" disabled>Move to...</option>
-                  {data.classes.map((c) => (
-                    <option key={c.id} value={c.id}>{c.class_name}</option>
-                  ))}
-                </select>
-              </PersonRow>
-            ))}
-          </ul>
-        </div>
+        </Modal>
       )}
 
       {showNew && <NewClassDialog onClose={() => setShowNew(false)} onData={apply} />}
