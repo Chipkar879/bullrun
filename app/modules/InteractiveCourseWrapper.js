@@ -26,12 +26,12 @@ const CSS = `
 `;
 
 const KIND = {
-  mission:  { icon: '\ud83d\ude80', label: 'Mission Briefing', box: 'bg-gradient-to-br from-lime-200 via-lime-100 to-white border-lime-500 text-slate-800 shadow-md shadow-lime-500/20' },
-  intel:    { icon: '\u26a1',       label: 'Financial Intel',  box: 'bg-gradient-to-br from-slate-200 via-slate-100 to-white border-slate-400 text-slate-800 shadow-md shadow-slate-500/20' },
-  wow:      { icon: '\ud83e\udd2f', label: 'Wow Fact',         box: 'bg-gradient-to-br from-fuchsia-300 via-fuchsia-100 to-white border-fuchsia-500 text-fuchsia-950 shadow-md shadow-fuchsia-500/20' },
-  try:      { icon: '\ud83e\uddea', label: 'Try It',           box: 'bg-gradient-to-br from-sky-300 via-sky-100 to-white border-sky-500 text-sky-950 shadow-md shadow-sky-500/20' },
-  case:     { icon: '\ud83c\udf55', label: 'Mini Case',        box: 'bg-gradient-to-br from-amber-300 via-amber-100 to-white border-amber-500 text-amber-950 shadow-md shadow-amber-500/20' },
-  takeaway: { icon: '\ud83d\udca1', label: 'Core Takeaway',    box: 'bg-gradient-to-br from-emerald-300 via-emerald-100 to-white border-emerald-600 text-emerald-950 shadow-md shadow-emerald-500/20' },
+  mission:  { icon: '\ud83d\ude80', label: 'Mission Briefing', box: 'bg-gradient-to-br from-bull-raised to-bull-bg border-bull-lime/50 text-slate-200' },
+  intel:    { icon: '\u26a1',       label: 'Financial Intel',  box: 'bg-bull-surface border-bull-line text-slate-200' },
+  wow:      { icon: '\ud83e\udd2f', label: 'Wow Fact',         box: 'bg-gradient-to-br from-fuchsia-950/60 to-bull-bg border-fuchsia-500/50 text-fuchsia-100' },
+  try:      { icon: '\ud83e\uddea', label: 'Try It',           box: 'bg-gradient-to-br from-sky-950/60 to-bull-bg border-sky-500/50 text-sky-100' },
+  case:     { icon: '\ud83c\udf55', label: 'Mini Case',        box: 'bg-gradient-to-br from-amber-950/50 to-bull-bg border-amber-500/50 text-amber-100' },
+  takeaway: { icon: '\ud83d\udca1', label: 'Core Takeaway',    box: 'bg-gradient-to-br from-emerald-950/60 to-bull-bg border-emerald-500/60 text-emerald-100' },
 };
 
 function parseBlocks(content) {
@@ -87,9 +87,9 @@ function CardBody({ lines, big }) {
         const isBullet = l.charAt(0) === '\u2022' || /^\d+\.\s/.test(l);
         if (isBullet) {
           return (
-            <div key={i} className="flex items-start gap-2.5 bg-white/80 border border-slate-300 rounded-xl p-3 text-xs sm:text-sm">
-              <span className="text-lime-600 font-black font-mono">{'\u27a4'}</span>
-              <span className="leading-relaxed text-[#1e293b]">{l.replace(/^[\u2022]\s*/, '')}</span>
+            <div key={i} className="flex items-start gap-2.5 bg-bull-bg/70 border border-bull-line rounded-xl p-3 text-xs sm:text-sm">
+              <span className="text-bull-lime font-black font-mono">{'\u27a4'}</span>
+              <span className="leading-relaxed text-slate-100">{l.replace(/^[\u2022]\s*/, '')}</span>
             </div>
           );
         }
@@ -384,7 +384,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   className={'text-left p-4 rounded-2xl border transition-all flex gap-3 items-start ' +
                     (open
                       ? ok
-                        ? 'bg-emerald-50 border-emerald-500 hover:border-emerald-600'
+                        ? 'bg-emerald-950/20 border-emerald-800/60 hover:border-emerald-500'
                         : 'bg-bull-raised border-bull-line hover:border-bull-lime hover:scale-[1.02]'
                       : 'bg-bull-surface/40 border-bull-line/40 opacity-30 cursor-not-allowed')}
                 >
@@ -393,9 +393,9 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     {ok ? '\u2713' : open ? i + 1 : '\ud83d\udd12'}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-black text-sm text-[#0f172a] leading-tight">{s.title.replace(/^\d+\.\s*/, '')}</h4>
-                    <p className="text-xs text-slate-600 mt-1 line-clamp-2">{s.intro}</p>
-                    <span className="text-xs font-mono font-black text-amber-600 mt-1.5 block">{ok ? 'PASSED' : '+100 XP'}</span>
+                    <h4 className="font-black text-sm text-white leading-tight">{s.title.replace(/^\d+\.\s*/, '')}</h4>
+                    <p className="text-xs text-slate-400 mt-1 line-clamp-2">{s.intro}</p>
+                    <span className="text-xs font-mono font-black text-amber-400 mt-1.5 block">{ok ? 'PASSED' : '+100 XP'}</span>
                   </div>
                 </button>
               );
@@ -449,10 +449,8 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     <div className="flex items-center gap-3">
                       <Mascot mood={card === 0 && lesson.mascot ? lesson.mascot : MOOD_BY_KIND[b.kind]} size={72} fallback={st.icon} />
                       <div>
-                        <div className={'font-mono font-black uppercase tracking-widest ' + (b.head.toUpperCase() === st.label.toUpperCase() ? 'text-base sm:text-xl text-[#0f172a]' : 'text-xs opacity-70')}>{st.label}</div>
-                        {b.head.toUpperCase() !== st.label.toUpperCase() && (
-                          <h4 className="text-[#0f172a] font-black text-base sm:text-xl leading-tight">{b.head}</h4>
-                        )}
+                        <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70">{st.label}</div>
+                        <h4 className="text-white font-black text-base sm:text-xl leading-tight">{b.head}</h4>
                       </div>
                     </div>
                     <CardBody lines={b.body} big={b.kind === 'wow' || b.kind === 'takeaway'} />
@@ -462,13 +460,13 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
               {mode === 'quiz' && !result && quiz[qIdx] && (
                 <div key={qIdx} className="br-slide space-y-4">
-                  <div className="flex items-center justify-between font-mono text-xs font-black uppercase tracking-widest text-slate-600">
+                  <div className="flex items-center justify-between font-mono text-xs font-black uppercase tracking-widest text-slate-400">
                     <span>QUESTION {qIdx + 1} / {quiz.length}</span>
-                    <span className="text-amber-700">{Object.keys(answers).length} ANSWERED</span>
+                    <span className="text-amber-400">{Object.keys(answers).length} ANSWERED</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Mascot mood="encouraging" size={56} fallback={'\ud83d\udc02'} />
-                    <h4 className="text-[#0f172a] font-black text-base sm:text-lg leading-snug">{quiz[qIdx].question}</h4>
+                    <h4 className="text-white font-black text-base sm:text-lg leading-snug">{quiz[qIdx].question}</h4>
                   </div>
                   <div className="space-y-2.5">
                     {quiz[qIdx].options.map((opt, oi) => {
@@ -479,10 +477,10 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                           onClick={() => setAnswers((p) => ({ ...p, [qIdx]: oi }))}
                           className={'w-full text-left p-3.5 rounded-2xl border text-sm flex items-center gap-3 transition-all ' +
                             (sel
-                              ? 'bg-lime-200 border-lime-500 text-[#0f172a] font-bold scale-[1.01] shadow-md'
-                              : 'bg-white border-slate-300 text-[#1e293b] hover:border-lime-500')}
+                              ? 'bg-bull-lime/20 border-bull-lime text-white font-bold scale-[1.01]'
+                              : 'bg-bull-raised border-bull-line text-slate-300 hover:border-bull-lime/60')}
                         >
-                          <span className={'h-7 w-7 shrink-0 rounded-lg flex items-center justify-center font-mono font-black text-xs ' + (sel ? 'bg-lime-500 text-[#0f172a]' : 'bg-slate-200 text-slate-600')}>
+                          <span className={'h-7 w-7 shrink-0 rounded-lg flex items-center justify-center font-mono font-black text-xs ' + (sel ? 'bg-bull-lime text-bull-ink' : 'bg-bull-bg text-slate-400')}>
                             {String.fromCharCode(65 + oi)}
                           </span>
                           <span>{opt}</span>
@@ -490,7 +488,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                       );
                     })}
                   </div>
-                  {err && <p className="text-xs text-rose-600 font-bold">{err}</p>}
+                  {err && <p className="text-xs text-rose-400 font-bold">{err}</p>}
                 </div>
               )}
 
@@ -498,22 +496,22 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                 <div className="space-y-5 br-slide">
                   <div className="text-center space-y-2 py-2">
                     <div className="flex justify-center"><Mascot mood={result.passed ? (result.correctCount === quiz.length ? 'trophy' : 'celebrating') : 'oops'} size={140} fallback={result.passed ? '\ud83c\udfc6' : '\ud83d\udcaa'} /></div>
-                    <h4 className="text-[#0f172a] font-black text-2xl">{result.passed ? 'MISSION COMPLETE!' : 'So close! Try again.'}</h4>
-                    <p className="font-mono text-sm text-slate-700">
-                      Score: <span className="font-black text-lime-700">{result.correctCount} / {quiz.length}</span> (need {result.needed})
+                    <h4 className="text-white font-black text-2xl">{result.passed ? 'MISSION COMPLETE!' : 'So close! Try again.'}</h4>
+                    <p className="font-mono text-sm text-slate-300">
+                      Score: <span className="font-black text-bull-lime">{result.correctCount} / {quiz.length}</span> (need {result.needed})
                     </p>
-                    {result.passed && <p className="font-mono font-black text-amber-600">+100 XP {'\ud83d\udd25'}</p>}
+                    {result.passed && <p className="font-mono font-black text-amber-400">+100 XP {'\ud83d\udd25'}</p>}
                   </div>
                   <div className="space-y-3">
                     {quiz.map((q, qi) => {
                       const r = result.results[qi];
                       return (
-                        <div key={qi} className={'p-4 rounded-2xl border space-y-2 ' + (r.correct ? 'bg-emerald-50 border-emerald-500' : 'bg-rose-50 border-rose-400')}>
-                          <p className="text-sm font-bold text-[#0f172a]">{r.correct ? '\u2705' : '\u274c'} {qi + 1}. {q.question}</p>
-                          <p className="text-xs text-slate-700">
-                            Answer: <span className="font-black text-emerald-700">{q.options[r.correctIndex]}</span>
+                        <div key={qi} className={'p-4 rounded-2xl border space-y-2 ' + (r.correct ? 'bg-emerald-950/30 border-emerald-700/60' : 'bg-rose-950/30 border-rose-700/60')}>
+                          <p className="text-sm font-bold text-white">{r.correct ? '\u2705' : '\u274c'} {qi + 1}. {q.question}</p>
+                          <p className="text-xs text-slate-300">
+                            Answer: <span className="font-black text-emerald-300">{q.options[r.correctIndex]}</span>
                           </p>
-                          <p className="text-xs text-slate-600 leading-relaxed">{'\ud83d\udca1'} {r.explanation}</p>
+                          <p className="text-xs text-slate-400 leading-relaxed">{'\ud83d\udca1'} {r.explanation}</p>
                         </div>
                       );
                     })}
