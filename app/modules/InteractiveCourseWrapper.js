@@ -57,6 +57,9 @@ function parseBlocks(content) {
 // with a "mascot" field in the JSON (used on the first card).
 const MOOD_BY_KIND = { mission: 'curious', intel: 'explaining', wow: 'excited', try: 'thinking', case: 'curious', takeaway: 'proud' };
 
+// Fixed title colours so dark mode cannot turn them white.
+const TITLE_COLOR = { wow: '#4a044e', try: '#0c4a6e' };
+
 function Confetti() {
   const bits = useMemo(
     () =>
@@ -449,8 +452,8 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     <div className="flex items-center gap-3">
                       <Mascot mood={card === 0 && lesson.mascot ? lesson.mascot : MOOD_BY_KIND[b.kind]} size={72} fallback={st.icon} />
                       <div>
-                        <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70">{st.label}</div>
-                        <h4 className="text-white font-black text-base sm:text-xl leading-tight">{b.head}</h4>
+                        <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70" style={TITLE_COLOR[b.kind] ? { color: TITLE_COLOR[b.kind] } : undefined}>{st.label}</div>
+                        <h4 className="text-white font-black text-base sm:text-xl leading-tight" style={TITLE_COLOR[b.kind] ? { color: TITLE_COLOR[b.kind] } : undefined}>{b.head}</h4>
                       </div>
                     </div>
                     <CardBody lines={b.body} big={b.kind === 'wow' || b.kind === 'takeaway'} />
