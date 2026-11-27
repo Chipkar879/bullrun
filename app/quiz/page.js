@@ -520,7 +520,7 @@ export default function DailyQuiz() {
                 </span>
               </div>
 
-              <svg viewBox="0 0 520 210" className="relative mt-3 w-full" role="img" aria-label="Daily quiz score bars with your running BB total as a line">
+              <svg viewBox="0 0 520 210" className="relative mt-3 w-full" role="img" aria-label="Daily quiz score bars with a trend line that drops on missed days">
                 {/* GROWTH_V2 */}
                 <defs>
                   <linearGradient id="lineGlow" x1="0" x2="1">
@@ -537,7 +537,8 @@ export default function DailyQuiz() {
                   const hi = Math.max(cs[cs.length - 1].close, lo + 1);
                   const ty = (v) => B - ((v - lo) / (hi - lo)) * H;
                   const barColor2 = (p) => (p >= 10 ? '#a3e635' : p >= 5 ? '#fcd34d' : '#FF765E');
-                  const line = cs.map((c, i) => (i ? 'L' : 'M') + px(i).toFixed(1) + ' ' + ty(c.close).toFixed(1)).join(' ');
+                  const dy = (c) => B - (Math.min(c.pts, 15) / 15) * H; /* DAILY_LINE */
+                  const line = cs.map((c, i) => (i ? 'L' : 'M') + px(i).toFixed(1) + ' ' + dy(c).toFixed(1)).join(' ');
                   return (
                     <g>
                       {[0, 5, 10, 15].map((v) => (
@@ -548,8 +549,8 @@ export default function DailyQuiz() {
                       ))}
                       {growth.hasData && (
                         <g>
-                          <text x={R + 8} y={ty(hi) + 4} fontSize="12" fontWeight="800" fill="#d97706">{hi}</text>
-                          <text x={R + 8} y={ty(lo) + 4} fontSize="12" fontWeight="800" fill="#d97706">{lo}</text>
+                          
+                          
                         </g>
                       )}
                       {cs.map((c, i) => {
@@ -571,7 +572,7 @@ export default function DailyQuiz() {
                       {growth.hasData && (
                         <g>
                           <path d={line} pathLength="1" fill="none" stroke="url(#lineGlow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="pulse-line" />
-                          {cs.map((c, i) => <circle key={'d' + c.key} cx={px(i)} cy={ty(c.close)} r="3" fill="#f59e0b" stroke="#fff" strokeWidth="1" />)}
+                          {cs.map((c, i) => <circle key={'d' + c.key} cx={px(i)} cy={dy(c)} r="3" fill="#f59e0b" stroke="#fff" strokeWidth="1" />)}
                         </g>
                       )}
                       {/* VALUE_LABELS */}
@@ -600,8 +601,8 @@ export default function DailyQuiz() {
                 })()}
               </svg>
               <div className="relative mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-bold text-slate-400">
-                <span className="inline-flex items-center gap-1.5"><span className="h-3 w-3 rounded-sm bg-bull-lime" />Daily score (left)</span>
-                <span className="inline-flex items-center gap-1.5"><span className="h-0.5 w-5 rounded bg-amber-400" />Running total (right)</span>
+                <span className="inline-flex items-center gap-1.5"><span className="h-3 w-3 rounded-sm bg-bull-lime" />Daily score</span>
+                <span className="inline-flex items-center gap-1.5"><span className="h-0.5 w-5 rounded bg-amber-400" />Daily trend</span>
                 <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-bull-coral" />Missed day</span>
               </div>
 
