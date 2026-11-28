@@ -1,0 +1,762 @@
+{
+  "id": "mod-12",
+  "title": "Taxes, Regulation and Building Your Plan",
+  "submodules": [
+    {
+      "id": "submod-12-1",
+      "title": "1. Why Taxes and Costs Matter",
+      "intro": "Is the profit you see the profit you keep?",
+      "content": "\u26a1 MISSION BRIEFING: WHY TAXES AND COSTS MATTER\nThe profit shown on a screen is a gross number. What you actually keep is the net number, after charges and taxes. Smart investors think in net terms from the start, because costs and taxes quietly take a slice of every result. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nSecurities Transaction Tax (STT) is charged on many trades even when the trade ends in a loss.\n\n\u26a1 FINANCIAL INTEL: GROSS VERSUS NET\n\u2022 Gross return: the result before costs and taxes.\n\u2022 Net return = gross return - costs - taxes.\n\u2022 Two people with the same gross return can keep very different amounts.\n\n\u26a1 FINANCIAL INTEL: THE MAIN LEAKS\n\u2022 Brokerage and other charges on each trade.\n\u2022 STT, a small tax on the value of many trades.\n\u2022 Fund expense ratios, which you met in Module 9.\n\u2022 Capital gains tax when you sell at a profit.\n\u2022 Tax on dividends and interest.\n\n\u26a1 FINANCIAL INTEL: THE HABIT TO BUILD\n\u2022 Before any trade, ask what the net result would be after charges and tax.\n\u2022 Fewer trades usually means lower costs and simpler taxes.\n\u2022 Keep records of every trade, because you or your family will need them at tax time.\n\n\ud83c\udf55 MINI CASE: GROSS TO NET\nIn her fictional simulator story, Meera makes a headline gain of \u20b920,000. Charges take \u20b92,000, so the gain left is \u20b918,000. Short-term capital gains tax at 20% takes 0.20 x 18,000 = \u20b93,600. Her net result is 20,000 - 2,000 - 3,600 = \u20b914,400, which is 72% of the headline figure. Aarav had only looked at the \u20b920,000.\n\n\ud83e\uddea TRY IT: FIND THE NET\nA fictional trade has a gross gain of \u20b910,000 and charges of \u20b91,000. Short-term capital gains tax of 20% applies to the \u20b99,000 left. What is the net result?\n(Answer: tax = 0.20 x 9,000 = \u20b91,800. Net = 10,000 - 1,000 - 1,800 = \u20b97,200.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nThink in net returns, after charges and tax. Keep records, trade less and always check the latest rules.",
+      "quiz": [
+        {
+          "question": "What is net return?",
+          "options": [
+            "Gross return minus costs and taxes",
+            "Gross return plus costs",
+            "The price of a share",
+            "The same as gross return"
+          ],
+          "correctIndex": 0,
+          "explanation": "Net return is what is left after costs and taxes."
+        },
+        {
+          "question": "A gross gain is \u20b920,000, charges are \u20b92,000 and tax is \u20b93,600. What is the net result?",
+          "options": [
+            "\u20b918,000",
+            "\u20b916,400",
+            "\u20b914,400",
+            "\u20b920,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "20,000 - 2,000 - 3,600 = \u20b914,400."
+        },
+        {
+          "question": "Which of these reduces what you keep from a trade?",
+          "options": [
+            "Charges and taxes",
+            "A higher gross gain",
+            "A lower price",
+            "A longer lesson"
+          ],
+          "correctIndex": 0,
+          "explanation": "Charges and taxes both come out of your gain."
+        },
+        {
+          "question": "Why keep records of every trade?",
+          "options": [
+            "For fun",
+            "Brokers delete them",
+            "You will need them at tax time",
+            "Prices change daily"
+          ],
+          "correctIndex": 2,
+          "explanation": "Records support tax calculations and filing."
+        },
+        {
+          "question": "Are tax rules fixed forever?",
+          "options": [
+            "Yes, always",
+            "Only in March",
+            "Only for shares",
+            "No, they change, so check the latest rules"
+          ],
+          "correctIndex": 3,
+          "explanation": "Budgets and laws can change rates and rules."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-2",
+      "title": "2. Capital Gains: Short-Term and Long-Term",
+      "intro": "Does it matter how long you hold a share before selling?",
+      "content": "\u26a1 MISSION BRIEFING: CAPITAL GAINS: SHORT-TERM AND LONG-TERM\nA capital gain is the profit when you sell an asset for more than you paid. In India, the tax depends on how long you held it. For listed shares and equity mutual funds, holding for more than 12 months counts as long-term, and long-term gains get a lower rate. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nGains up to \u20b91.25 lakh a year from long-term equity are currently exempt from tax.\n\n\u26a1 FINANCIAL INTEL: THE RULES FOR LISTED EQUITY (LATE 2026)\n\u2022 Held for 12 months or less: short-term capital gain (STCG), taxed at 20%.\n\u2022 Held for more than 12 months: long-term capital gain (LTCG), taxed at 12.5% on gains above \u20b91.25 lakh in a financial year.\n\u2022 These rates exclude surcharge and cess, which can add a little more.\n\n\u26a1 FINANCIAL INTEL: HOW TO CALCULATE\n\u2022 Gain = selling price - buying price.\n\u2022 STCG tax = gain x 20%.\n\u2022 LTCG tax = (total long-term gain - \u20b91,25,000) x 12.5%, if the gain is above \u20b91,25,000.\n\u2022 The tax is due on gains you have realised, which means you sold.\n\n\u26a1 FINANCIAL INTEL: WHAT THIS TEACHES\n\u2022 Holding a little longer can cut the tax rate a lot.\n\u2022 Do not let tax alone drive a decision. A bad investment is still bad after a tax saving.\n\u2022 Budgets can change these numbers, so check each year.\n\n\ud83c\udf55 MINI CASE: TWO HOLDING PERIODS\nA fictional investor buys shares for \u20b91,00,000 and sells them 8 months later for \u20b91,30,000. The gain is \u20b930,000, short-term, so the tax is 0.20 x 30,000 = \u20b96,000. Another investor holds for 14 months and makes a gain of \u20b91,50,000. The taxable part is 1,50,000 - 1,25,000 = \u20b925,000, so the tax is 0.125 x 25,000 = \u20b93,125.\n\n\ud83e\uddea TRY IT: TAX THE GAIN\nA fictional investor has a long-term equity gain of \u20b92,25,000 in one year. What is the tax? Then, what is the tax on a long-term gain of \u20b91,00,000?\n(Answer: for \u20b92,25,000, the taxable part is 2,25,000 - 1,25,000 = \u20b91,00,000, so tax = 0.125 x 1,00,000 = \u20b912,500. For \u20b91,00,000, the gain is below the exemption, so the tax is \u20b90.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nFor listed shares, holding more than 12 months gives a lower long-term rate and an annual exemption. Check each year's rules and do not let tax drive a bad decision.",
+      "quiz": [
+        {
+          "question": "For listed shares, when is a gain long-term?",
+          "options": [
+            "After 1 month",
+            "After 12 months",
+            "After 1 week",
+            "Never"
+          ],
+          "correctIndex": 1,
+          "explanation": "Held for more than 12 months counts as long-term."
+        },
+        {
+          "question": "What is the short-term capital gains tax rate on listed equity in this lesson?",
+          "options": [
+            "10%",
+            "12.5%",
+            "20%",
+            "30%"
+          ],
+          "correctIndex": 2,
+          "explanation": "STCG on listed equity is 20%, as of late 2026."
+        },
+        {
+          "question": "A long-term equity gain is \u20b91,50,000. What is the taxable part after the \u20b91,25,000 exemption?",
+          "options": [
+            "\u20b925,000",
+            "\u20b91,50,000",
+            "\u20b91,25,000",
+            "\u20b975,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "1,50,000 - 1,25,000 = \u20b925,000."
+        },
+        {
+          "question": "A short-term gain is \u20b930,000. What is the tax at 20%?",
+          "options": [
+            "\u20b93,000",
+            "\u20b96,000",
+            "\u20b912,000",
+            "\u20b915,000"
+          ],
+          "correctIndex": 1,
+          "explanation": "0.20 x 30,000 = \u20b96,000."
+        },
+        {
+          "question": "A long-term gain is \u20b91,00,000. What is the tax, given the \u20b91,25,000 exemption?",
+          "options": [
+            "\u20b912,500",
+            "\u20b920,000",
+            "\u20b92,500",
+            "\u20b90"
+          ],
+          "correctIndex": 3,
+          "explanation": "The gain is below the exemption, so no tax."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-3",
+      "title": "3. Dividends, Interest and Other Income",
+      "intro": "Is all investment income taxed the same way?",
+      "content": "\u26a1 MISSION BRIEFING: DIVIDENDS, INTEREST AND OTHER INCOME\nNot all investment income is taxed like capital gains. Dividends from shares and interest from bank deposits are generally added to your income and taxed at your slab rate. Gains from most debt mutual funds are also taxed at slab rate. Knowing the type of income helps you compare options fairly. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nTwo investments with the same 7% return can leave you with different amounts, because of how each is taxed.\n\n\u26a1 FINANCIAL INTEL: SLAB RATE\n\u2022 Your slab rate is the tax rate that applies to your income level.\n\u2022 Dividends and bank interest are added to your income and taxed at that rate.\n\u2022 Slab rates differ by person, so the same dividend can be taxed differently for different people.\n\n\u26a1 FINANCIAL INTEL: DIFFERENT INVESTMENTS, DIFFERENT TAX\n\u2022 Listed shares and equity funds: capital gains rules, plus tax on dividends.\n\u2022 Bank fixed deposits: interest taxed at slab rate, and the bank may deduct TDS.\n\u2022 Most debt mutual funds: gains taxed at slab rate.\n\u2022 Always compare returns after tax, not before.\n\n\u26a1 FINANCIAL INTEL: TDS\n\u2022 TDS means tax deducted at source. The payer deducts some tax before paying you.\n\u2022 It is not an extra tax. It counts towards your tax bill, and any excess can be claimed back by filing a return.\n\n\ud83c\udf55 MINI CASE: THE SAME DIVIDEND, TWO TAX BILLS\nA fictional dividend of \u20b910,000 is paid. For someone in a 10% slab, the tax is 0.10 x 10,000 = \u20b91,000, so they keep \u20b99,000. For someone in a 30% slab, the tax is 0.30 x 10,000 = \u20b93,000, so they keep \u20b97,000. Meera notes that comparing investments means comparing what each person keeps after tax.\n\n\ud83e\uddea TRY IT: KEEP WHAT AFTER TAX\nA fictional fixed deposit pays \u20b98,000 interest in a year. For someone in a 20% slab, what is the tax and what is kept?\n(Answer: tax = 0.20 x 8,000 = \u20b91,600. Kept = 8,000 - 1,600 = \u20b96,400.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nDifferent incomes are taxed in different ways. Compare returns after tax, and understand what TDS is.",
+      "quiz": [
+        {
+          "question": "How are dividends and bank interest generally taxed?",
+          "options": [
+            "Not taxed",
+            "At your slab rate",
+            "At exactly 5%",
+            "Only at expiry"
+          ],
+          "correctIndex": 1,
+          "explanation": "They are added to your income and taxed at your slab rate."
+        },
+        {
+          "question": "A \u20b910,000 dividend is taxed at a 30% slab. What is the tax?",
+          "options": [
+            "\u20b91,000",
+            "\u20b92,000",
+            "\u20b93,000",
+            "\u20b97,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "0.30 x 10,000 = \u20b93,000."
+        },
+        {
+          "question": "What does TDS mean?",
+          "options": [
+            "Total Daily Sales",
+            "Tax deducted at source",
+            "Trading Day Summary",
+            "Transfer Deposit Slip"
+          ],
+          "correctIndex": 1,
+          "explanation": "TDS is tax deducted by the payer before paying you."
+        },
+        {
+          "question": "A \u20b98,000 interest is taxed at 20%. How much is kept?",
+          "options": [
+            "\u20b91,600",
+            "\u20b96,400",
+            "\u20b98,000",
+            "\u20b94,000"
+          ],
+          "correctIndex": 1,
+          "explanation": "8,000 - 1,600 = \u20b96,400."
+        },
+        {
+          "question": "Why compare returns after tax?",
+          "options": [
+            "Taxes are optional",
+            "Taxes do not change results",
+            "Different investments are taxed differently, which changes what you keep",
+            "Banks demand it"
+          ],
+          "correctIndex": 2,
+          "explanation": "Tax treatment changes the amount you actually keep."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-4",
+      "title": "4. Setting Off Losses",
+      "intro": "Can a loss on one share reduce the tax on another?",
+      "content": "\u26a1 MISSION BRIEFING: SETTING OFF LOSSES\nLosses are not only painful. They can also reduce your tax. In India, capital losses can be set off against capital gains in the same year, and some can be carried forward. Knowing the rules helps you plan, but it never makes a loss a good thing. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nCurrently, an unused capital loss can be carried forward for up to 8 years, but only if the return is filed on time.\n\n\u26a1 FINANCIAL INTEL: SET-OFF RULES (LATE 2026)\n\u2022 Short-term capital loss can be set off against both short-term and long-term gains.\n\u2022 Long-term capital loss can be set off only against long-term gains.\n\u2022 Capital losses cannot be set off against salary or other regular income.\n\n\u26a1 FINANCIAL INTEL: CARRY FORWARD\n\u2022 Losses that cannot be fully used this year can be carried forward to future years.\n\u2022 To keep the right to carry forward, the return must be filed on time.\n\u2022 Keep clear records of every loss.\n\n\u26a1 FINANCIAL INTEL: A CAUTION\n\u2022 Do not sell a good investment just to book a loss for tax.\n\u2022 A tax saving is small next to a lost opportunity.\n\u2022 Ask a parent or a qualified professional when real tax filing is involved.\n\n\ud83c\udf55 MINI CASE: NETTING A LOSS\nA fictional investor has a short-term gain of \u20b930,000 and a short-term loss of \u20b912,000 in the same year. The net short-term gain is 30,000 - 12,000 = \u20b918,000, and the tax at 20% is 0.20 x 18,000 = \u20b93,600, instead of \u20b96,000 without the loss. Aarav asks if he can use a long-term loss against a short-term gain. Meera says no, because a long-term loss can only reduce long-term gains.\n\n\ud83e\uddea TRY IT: CAN IT BE SET OFF\nA fictional investor has a long-term capital loss of \u20b910,000 and a short-term capital gain of \u20b910,000. Can the loss be set off against the gain? What is the tax on the short-term gain at 20%?\n(Answer: no, a long-term loss can be set off only against long-term gains. The tax on the short-term gain is 0.20 x 10,000 = \u20b92,000.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nCapital losses can reduce capital gains tax under set-off rules, and some can be carried forward if returns are filed on time. Never keep or sell an investment only for tax reasons.",
+      "quiz": [
+        {
+          "question": "A short-term capital loss can be set off against...",
+          "options": [
+            "Only short-term gains",
+            "Both short-term and long-term gains",
+            "Only salary",
+            "Nothing"
+          ],
+          "correctIndex": 1,
+          "explanation": "Short-term losses can reduce either kind of gain."
+        },
+        {
+          "question": "A long-term capital loss can be set off against...",
+          "options": [
+            "Short-term gains",
+            "Salary",
+            "Only long-term gains",
+            "Dividends"
+          ],
+          "correctIndex": 2,
+          "explanation": "Long-term losses can only reduce long-term gains."
+        },
+        {
+          "question": "A short-term gain is \u20b930,000 and a short-term loss is \u20b912,000. What is the net gain?",
+          "options": [
+            "\u20b918,000",
+            "\u20b942,000",
+            "\u20b912,000",
+            "\u20b930,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "30,000 - 12,000 = \u20b918,000."
+        },
+        {
+          "question": "What must you do to be able to carry a loss forward?",
+          "options": [
+            "Nothing",
+            "File the return on time",
+            "Sell more shares",
+            "Open a new account"
+          ],
+          "correctIndex": 1,
+          "explanation": "A timely return is required to carry losses forward."
+        },
+        {
+          "question": "Why should you not sell a good investment only to book a loss?",
+          "options": [
+            "Selling is banned",
+            "Losses are taxed double",
+            "Brokers refuse",
+            "A small tax saving can cost you a bigger lost opportunity"
+          ],
+          "correctIndex": 3,
+          "explanation": "Tax should not outweigh the investment merits."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-5",
+      "title": "5. Trading Costs and Charges",
+      "intro": "What does each trade really cost?",
+      "content": "\u26a1 MISSION BRIEFING: TRADING COSTS AND CHARGES\nEvery trade has costs beyond the share price. Some are small, but they repeat with each trade, and they apply even when you lose. Knowing them helps you see why frequent trading is harder than it looks. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA buy-and-sell round trip needs the price to rise a little just to cover the charges before you make any profit.\n\n\u26a1 FINANCIAL INTEL: THE CHARGES\n\u2022 Brokerage: the broker's fee, which varies by broker.\n\u2022 STT (Securities Transaction Tax): a government tax on trades.\n\u2022 Exchange and SEBI charges, GST on certain fees and stamp duty on purchases.\n\u2022 Demat charges, such as a fee when shares are sold.\n\n\u26a1 FINANCIAL INTEL: STT RATES (AS OF 2026)\n\u2022 Equity delivery: 0.1% on both the buy and the sell.\n\u2022 Equity intraday: 0.025% on the sell side only.\n\u2022 Futures: 0.05% on the sell side, raised from 0.02% from 1 April 2026.\n\u2022 Options: 0.15% on the premium when sold, raised from 0.10% from 1 April 2026.\n\n\u26a1 FINANCIAL INTEL: BREAKEVEN FROM COSTS\n\u2022 Break-even % = total round-trip charges \u00f7 amount invested x 100.\n\u2022 The higher the break-even, the harder it is to profit from small moves.\n\u2022 Costs are certain, while profits are not.\n\n\ud83c\udf55 MINI CASE: THE ROUND TRIP\nMeera's fictional delivery trade buys shares worth \u20b950,000 and sells them for \u20b955,000. STT on the buy is 0.1% x 50,000 = \u20b950, and on the sell is 0.1% x 55,000 = \u20b955, a total of \u20b9105. Say other charges bring the total round-trip cost to \u20b9300. The break-even is 300 \u00f7 50,000 x 100 = 0.6%, so the price must rise 0.6% just to cover costs.\n\n\ud83e\uddea TRY IT: CALCULATE THE STT\nA fictional trader sells an intraday position worth \u20b91,00,000. What is the STT at 0.025%? Another trader sells a futures position worth \u20b92,00,000. What is the STT at 0.05%?\n(Answer: intraday STT = 0.025% x 1,00,000 = \u20b925. Futures STT = 0.05% x 2,00,000 = \u20b9100.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nCharges repeat with every trade and apply even to losing trades. Know the costs, since they set a break-even that the price must clear first.",
+      "quiz": [
+        {
+          "question": "What is STT?",
+          "options": [
+            "A broker's bonus",
+            "A tax on securities transactions",
+            "A type of share",
+            "A bank loan"
+          ],
+          "correctIndex": 1,
+          "explanation": "Securities Transaction Tax is charged on many trades."
+        },
+        {
+          "question": "Equity delivery STT is 0.1% on each side. What is the STT on a \u20b950,000 purchase?",
+          "options": [
+            "\u20b950",
+            "\u20b95",
+            "\u20b9500",
+            "\u20b925"
+          ],
+          "correctIndex": 0,
+          "explanation": "0.1% x 50,000 = \u20b950."
+        },
+        {
+          "question": "Intraday STT is 0.025% on the sell side. What is it on a \u20b91,00,000 sale?",
+          "options": [
+            "\u20b9250",
+            "\u20b9100",
+            "\u20b925",
+            "\u20b92.50"
+          ],
+          "correctIndex": 2,
+          "explanation": "0.025% x 1,00,000 = \u20b925."
+        },
+        {
+          "question": "Futures STT is 0.05%. What is it on a \u20b92,00,000 sale?",
+          "options": [
+            "\u20b9500",
+            "\u20b950",
+            "\u20b91,000",
+            "\u20b9100"
+          ],
+          "correctIndex": 3,
+          "explanation": "0.05% x 2,00,000 = \u20b9100."
+        },
+        {
+          "question": "Round-trip costs are \u20b9300 on \u20b950,000. What price rise is needed to break even?",
+          "options": [
+            "6%",
+            "0.6%",
+            "3%",
+            "0.06%"
+          ],
+          "correctIndex": 1,
+          "explanation": "300 \u00f7 50,000 x 100 = 0.6%."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-6",
+      "title": "6. Investor or Trader: How Tax Differs",
+      "intro": "Is tax on a long-term investor the same as on an active trader?",
+      "content": "\u26a1 MISSION BRIEFING: INVESTOR OR TRADER: HOW TAX DIFFERS\nThe tax system treats long-term investors and active traders differently. Share investments are usually taxed as capital gains. Income from futures and options is generally treated as business income. Derivatives are only for adults, and this lesson is for understanding, not for trading. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nEven though F&O profit is business income, you cannot use F&O losses to cancel capital gains from delivery trades, because they are taxed in separate baskets.\n\n\u26a1 FINANCIAL INTEL: INVESTORS\n\u2022 Delivery-based share and fund investments are taxed as capital gains.\n\u2022 Holding period decides short-term or long-term treatment.\n\u2022 Many small investors only need simple capital gains reports.\n\n\u26a1 FINANCIAL INTEL: TRADERS\n\u2022 Futures and options income is generally treated as non-speculative business income, taxed at slab rate.\n\u2022 Intraday equity trading is generally treated as speculative business income.\n\u2022 Business losses may be carried forward under certain rules, if returns are filed on time.\n\u2022 Traders often need a more detailed return and a qualified tax professional.\n\n\u26a1 FINANCIAL INTEL: WHY IT MATTERS\n\u2022 Active trading adds tax paperwork as well as costs.\n\u2022 Tax liability can arise even in a year with a poor overall result, depending on how gains and losses are classified.\n\u2022 For learners, the best practice is a simulator, and a parent or guardian should be part of any real step.\n\n\ud83c\udf55 MINI CASE: TWO YEARS OF F&O\nA fictional adult trader loses \u20b960,000 in F&O in year one. In year two, the net F&O profit is \u20b91,00,000. Under the carry-forward rule, the loss can be set off, if returns were filed on time, leaving 1,00,000 - 60,000 = \u20b940,000 taxable. At a hypothetical slab rate of 20%, the tax is 0.20 x 40,000 = \u20b98,000. Without the carry-forward, the tax would have been 0.20 x 1,00,000 = \u20b920,000. Meera notes that this is a lot of paperwork for something so risky.\n\n\ud83e\uddea TRY IT: COMPARE THE TWO\nA fictional adult has a net F&O profit of \u20b91,50,000 and a hypothetical slab rate of 20%. What is the tax? How is that different from the way a delivery investor with a long-term gain of \u20b91,50,000 is taxed?\n(Answer: F&O tax = 0.20 x 1,50,000 = \u20b930,000 at the hypothetical slab rate. The investor's LTCG tax is 0.125 x (1,50,000 - 1,25,000) = \u20b93,125, because of the lower long-term rate and exemption.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nInvestors and traders are taxed differently. Active trading adds paperwork and cost on top of risk, so keep derivatives to a simulator until you are an adult.",
+      "quiz": [
+        {
+          "question": "How is futures and options income generally treated for tax?",
+          "options": [
+            "As a gift",
+            "As business income",
+            "As tax-free income",
+            "As a loan"
+          ],
+          "correctIndex": 1,
+          "explanation": "F&O income is generally treated as business income."
+        },
+        {
+          "question": "How are delivery-based share investments usually taxed?",
+          "options": [
+            "As capital gains",
+            "As salary",
+            "As rent",
+            "Not taxed"
+          ],
+          "correctIndex": 0,
+          "explanation": "Delivery investments produce capital gains."
+        },
+        {
+          "question": "What may let a trader reduce a future year's tax after a loss?",
+          "options": [
+            "Nothing",
+            "Quitting the account",
+            "Carrying the loss forward, if returns were filed on time",
+            "Selling shares"
+          ],
+          "correctIndex": 2,
+          "explanation": "Business losses may be carried forward under the rules."
+        },
+        {
+          "question": "A net F&O profit of \u20b91,50,000 at a hypothetical 20% slab. What is the tax?",
+          "options": [
+            "\u20b93,000",
+            "\u20b915,000",
+            "\u20b920,000",
+            "\u20b930,000"
+          ],
+          "correctIndex": 3,
+          "explanation": "0.20 x 1,50,000 = \u20b930,000."
+        },
+        {
+          "question": "What is the best place for a learner to practise derivatives?",
+          "options": [
+            "A simulator, with a parent or guardian involved",
+            "A friend's account",
+            "A group chat",
+            "A borrowed account"
+          ],
+          "correctIndex": 0,
+          "explanation": "Derivatives are for adults, and a simulator is the safe way to learn."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-7",
+      "title": "7. Minors, Parents and Clubbing of Income",
+      "intro": "What are the rules when the investor is under 18?",
+      "content": "\u26a1 MISSION BRIEFING: MINORS, PARENTS AND CLUBBING OF INCOME\nIn India, a minor cannot trade independently. A parent or legal guardian opens and operates any account on the minor's behalf, and the minor's investment income is generally added to a parent's income for tax. This lesson explains the rules so you can talk about them with your family. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA minor demat account is not a way to avoid tax, because income from it is generally added to the higher-earning parent's income.\n\n\u26a1 FINANCIAL INTEL: MINOR DEMAT ACCOUNTS\n\u2022 Opened in the child's name, but operated by a parent or legal guardian until the child turns 18.\n\u2022 The child needs a PAN, and the guardian completes the paperwork.\n\u2022 Intraday trading and F&O are generally not allowed in a minor's account.\n\u2022 At 18, the account is converted to a normal one after the required formalities.\n\n\u26a1 FINANCIAL INTEL: CLUBBING OF INCOME\n\u2022 Income from a minor's investments, such as dividends and capital gains, is generally added to the income of the parent with the higher income.\n\u2022 A small exemption per child may apply, so check the current rules.\n\u2022 Income a child earns from their own talent or skill, like acting or sport, is generally treated differently.\n\n\u26a1 FINANCIAL INTEL: WHAT YOU CAN DO NOW\n\u2022 Practise on the Bull Run simulator, which uses no real money.\n\u2022 Talk to your parents or guardians about goals and savings.\n\u2022 Learn the rules now, so you are ready at 18.\n\n\ud83c\udf55 MINI CASE: THE CHILD'S DIVIDEND\nA fictional child's demat account, run by a parent, receives a dividend of \u20b910,000. This is added to the income of the parent who earns more. If that parent's slab rate is 30%, the tax is about 0.30 x 10,000 = \u20b93,000, before any small exemption. Aarav says it is the child's money, so it should be tax-free. Meera explains that the clubbing rule treats it differently.\n\n\ud83e\uddea TRY IT: WHO PAYS\nA fictional minor's account earns a capital gain of \u20b920,000 that is clubbed with a parent in a 20% slab. Roughly how much tax does the parent pay, before any exemption, and who operates the account?\n(Answer: roughly 0.20 x 20,000 = \u20b94,000. The parent or legal guardian operates the account until the child turns 18.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA minor's account is operated by a parent or guardian, and its income is generally taxed in the higher-earning parent's hands. Learn now, and practise on a simulator.",
+      "quiz": [
+        {
+          "question": "Who operates a minor's demat account?",
+          "options": [
+            "The child alone",
+            "A friend",
+            "A parent or legal guardian",
+            "The exchange"
+          ],
+          "correctIndex": 2,
+          "explanation": "A parent or guardian handles everything until the child turns 18."
+        },
+        {
+          "question": "How is a minor's investment income generally taxed?",
+          "options": [
+            "It is added to the higher-earning parent's income",
+            "It is tax-free always",
+            "It is taxed at 100%",
+            "It is ignored"
+          ],
+          "correctIndex": 0,
+          "explanation": "This is the clubbing of income rule."
+        },
+        {
+          "question": "A \u20b910,000 dividend is clubbed with a parent in a 30% slab. About how much tax?",
+          "options": [
+            "\u20b91,000",
+            "\u20b9300",
+            "\u20b93,000",
+            "\u20b910,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "0.30 x 10,000 = \u20b93,000, before any small exemption."
+        },
+        {
+          "question": "Which trading is generally not allowed in a minor's account?",
+          "options": [
+            "Buying a share",
+            "Receiving a dividend",
+            "Holding a fund",
+            "Intraday trading and F&O"
+          ],
+          "correctIndex": 3,
+          "explanation": "These are generally for adults only."
+        },
+        {
+          "question": "What happens to the account at 18?",
+          "options": [
+            "It is deleted",
+            "It becomes a normal account after the required formalities",
+            "It is frozen forever",
+            "It doubles in value"
+          ],
+          "correctIndex": 1,
+          "explanation": "The account is converted when the child becomes an adult."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-8",
+      "title": "8. Who Regulates the Market?",
+      "intro": "Who makes sure the market plays by the rules?",
+      "content": "\u26a1 MISSION BRIEFING: WHO REGULATES THE MARKET?\nMarkets need referees. In India, several bodies have different jobs, and knowing who does what tells you where to look for rules, registration and help. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nSEBI was set up in 1988 and was given legal powers by the SEBI Act of 1992.\n\n\u26a1 FINANCIAL INTEL: THE MAIN BODIES\n\u2022 SEBI (Securities and Exchange Board of India): regulates securities markets, brokers, mutual funds and advisers, and protects investors.\n\u2022 RBI (Reserve Bank of India): the central bank, which regulates banks and money matters.\n\u2022 IRDAI regulates insurance. PFRDA regulates pensions.\n\u2022 Exchanges (NSE and BSE) run the trading platforms.\n\n\u26a1 FINANCIAL INTEL: THE PLUMBING\n\u2022 Depositories (NSDL and CDSL) hold shares in electronic form.\n\u2022 Clearing corporations make sure trades are settled.\n\u2022 AMFI is the industry body for mutual funds.\n\n\u26a1 FINANCIAL INTEL: REGISTRATION CHECK\n\u2022 Brokers, advisers and research analysts must be registered with SEBI to offer their services.\n\u2022 SEBI's website has a list of registered intermediaries.\n\u2022 If someone is not registered but gives paid investment advice, treat that as a warning sign.\n\n\ud83c\udf55 MINI CASE: CHECKING A BROKER\nMeera's fictional family wants to open an account and she asks who is allowed to run it. She learns the broker must be SEBI-registered, the shares will sit with a depository like NSDL or CDSL, and trades will happen on NSE or BSE. When a stranger in a chat group offers 'guaranteed' tips for a fee, she checks SEBI's list and finds no entry. She stays away.\n\n\ud83e\uddea TRY IT: MATCH THE JOB\nWhich body does each job? (a) regulates banks, (b) regulates the securities market and protects investors, (c) holds shares electronically, (d) runs the trading platform.\n(Answer: (a) RBI, (b) SEBI, (c) a depository such as NSDL or CDSL, (d) an exchange such as NSE or BSE.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nDifferent bodies regulate banks, markets, insurance and pensions. Always check whether an adviser or broker is SEBI-registered.",
+      "quiz": [
+        {
+          "question": "Which body regulates the securities market in India?",
+          "options": [
+            "RBI",
+            "SEBI",
+            "IRDAI",
+            "AMFI"
+          ],
+          "correctIndex": 1,
+          "explanation": "SEBI regulates securities markets and protects investors."
+        },
+        {
+          "question": "Who regulates banks in India?",
+          "options": [
+            "RBI",
+            "NSE",
+            "NSDL",
+            "SEBI"
+          ],
+          "correctIndex": 0,
+          "explanation": "RBI is the central bank and bank regulator."
+        },
+        {
+          "question": "What do NSDL and CDSL do?",
+          "options": [
+            "Run the exchange",
+            "Regulate insurance",
+            "Hold shares in electronic form",
+            "Set tax rates"
+          ],
+          "correctIndex": 2,
+          "explanation": "They are depositories."
+        },
+        {
+          "question": "Which are the two main stock exchanges in India?",
+          "options": [
+            "RBI and SEBI",
+            "AMFI and IRDAI",
+            "NSDL and CDSL",
+            "NSE and BSE"
+          ],
+          "correctIndex": 3,
+          "explanation": "NSE and BSE run the trading platforms."
+        },
+        {
+          "question": "What is a good first check for someone offering paid investment advice?",
+          "options": [
+            "Their number of followers",
+            "Whether they are SEBI-registered",
+            "Their profile picture",
+            "Their promised returns"
+          ],
+          "correctIndex": 1,
+          "explanation": "Registered advisers appear on SEBI's list."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-9",
+      "title": "9. Your Rights and Safety Nets",
+      "intro": "What can you do if something goes wrong?",
+      "content": "\u26a1 MISSION BRIEFING: YOUR RIGHTS AND SAFETY NETS\nInvestors have rights, and the system has safety nets. Knowing them in advance makes you harder to fool and quicker to act. A parent or guardian should always be involved in real accounts. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nSEBI runs an online complaint system called SCORES, and it also supports an online dispute resolution process for investor complaints.\n\n\u26a1 FINANCIAL INTEL: YOUR BASIC RIGHTS\n\u2022 To receive contract notes and statements for your trades.\n\u2022 To be given clear information about charges and risks.\n\u2022 To make a complaint and have it looked at.\n\u2022 To nominate someone to receive your investments if something happens to you.\n\n\u26a1 FINANCIAL INTEL: IF THERE IS A PROBLEM\n\u2022 First, write to the broker or company and keep a copy.\n\u2022 If it is not solved, escalate through SEBI's complaint system (SCORES) or the online dispute resolution process.\n\u2022 Keep contract notes, statements, emails and screenshots as evidence.\n\n\u26a1 FINANCIAL INTEL: STAYING SAFE\n\u2022 Check your statements every month.\n\u2022 Turn on two-factor login and never share OTPs or passwords.\n\u2022 Be careful about giving anyone power of attorney over your account.\n\u2022 Use only registered intermediaries and official apps.\n\n\ud83c\udf55 MINI CASE: CHECKING THE CONTRACT NOTE\nIn a fictional story, Aarav's parent checks a contract note showing 100 shares bought at \u20b9250, but the order was placed at \u20b9245. The difference is (250 - 245) x 100 = \u20b9500. They write to the broker with the order screenshot, and the broker replies. Because they kept records, the issue is solved. Had it not been, they could escalate through SEBI's complaint system.\n\n\ud83e\uddea TRY IT: WHAT WOULD YOU DO\nA fictional message says, 'Your demat account is blocked. Share your OTP now to unblock it.' What should you do, and who should you tell?\n(Answer: never share the OTP. Do not click any links. Contact your broker only through their official app or website, and tell a parent or guardian straight away.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nKeep records, check statements, protect OTPs and know the steps for a complaint. Registration and good habits are your best safety nets.",
+      "quiz": [
+        {
+          "question": "What is the first step when you have a problem with a broker?",
+          "options": [
+            "Delete your records",
+            "Write to the broker and keep a copy",
+            "Post online",
+            "Pay extra"
+          ],
+          "correctIndex": 1,
+          "explanation": "A written complaint creates a record."
+        },
+        {
+          "question": "What is SCORES?",
+          "options": [
+            "A game",
+            "A type of share",
+            "SEBI's online complaint system",
+            "A bank loan"
+          ],
+          "correctIndex": 2,
+          "explanation": "SCORES is SEBI's complaint platform."
+        },
+        {
+          "question": "An order was at \u20b9245 but the contract note shows \u20b9250 for 100 shares. What is the difference?",
+          "options": [
+            "\u20b9500",
+            "\u20b95",
+            "\u20b950",
+            "\u20b95,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "(250 - 245) x 100 = \u20b9500."
+        },
+        {
+          "question": "A message asks for your OTP to 'unblock' your account. What should you do?",
+          "options": [
+            "Send it quickly",
+            "Reply with your password",
+            "Forward it to friends",
+            "Never share it and tell a parent or guardian"
+          ],
+          "correctIndex": 3,
+          "explanation": "OTPs must never be shared."
+        },
+        {
+          "question": "Why keep contract notes and statements?",
+          "options": [
+            "They are decorations",
+            "They are evidence if there is a dispute",
+            "They cost money",
+            "They expire daily"
+          ],
+          "correctIndex": 1,
+          "explanation": "Records support any complaint."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-10",
+      "title": "10. Market Rules and Unfair Practices",
+      "intro": "What is allowed in the market, and what is not?",
+      "content": "\u26a1 MISSION BRIEFING: MARKET RULES AND UNFAIR PRACTICES\nMarkets have rules about how trades settle and about fair play. Some actions are illegal, such as trading on secret information. Knowing the basics keeps you safe and shows why regulators exist. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA trade in the Indian cash market usually settles in one working day, a system called T+1.\n\n\u26a1 FINANCIAL INTEL: HOW TRADING WORKS\n\u2022 Normal trading hours are 9:15 am to 3:30 pm, after a pre-open session from 9:00 to 9:15.\n\u2022 T+1 settlement: shares bought on a Monday normally reach your demat on the next working day.\n\u2022 Many shares have daily price bands that limit how far the price can move in one day.\n\n\u26a1 FINANCIAL INTEL: UNFAIR PRACTICES\n\u2022 Insider trading: trading on important information that is not yet public, such as unreleased results. It is illegal.\n\u2022 Price manipulation: creating false activity to move a price, such as pump and dump.\n\u2022 Front running: trading ahead of a large order that you know about.\n\u2022 SEBI can impose penalties and bans for such practices.\n\n\u26a1 FINANCIAL INTEL: WHAT TO REMEMBER\n\u2022 If you receive information that feels secret, do not trade on it and do not pass it on.\n\u2022 If a deal depends on rushing and secrecy, it is a red flag.\n\u2022 Honest research from public sources is always fine.\n\n\ud83c\udf55 MINI CASE: THE SECRET RESULTS\nIn a fictional story, a company employee knows that results due next week will be very strong. If he buys shares before the news is public, that is insider trading. A friend who hears it and buys can also be in trouble. Meera only trades on public information. Another example: a share at \u20b9200 with a 10% daily band can move between 200 - 20 = \u20b9180 and 200 + 20 = \u20b9220 that day.\n\n\ud83e\uddea TRY IT: FIND THE BAND\nA fictional share closes at \u20b9500 and has a 20% daily price band. What is the range for the next day? What does insider trading mean?\n(Answer: the range is 500 - 100 = \u20b9400 to 500 + 100 = \u20b9600. Insider trading means trading on important non-public information, which is illegal.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nSettlement rules, price bands and fair-play laws protect the market. Never trade on secret information, and avoid anything built on pressure and secrecy.",
+      "quiz": [
+        {
+          "question": "What is insider trading?",
+          "options": [
+            "Trading in the evening",
+            "Trading on important non-public information",
+            "Trading in a group",
+            "A type of fund"
+          ],
+          "correctIndex": 1,
+          "explanation": "It uses secret information that can move a price."
+        },
+        {
+          "question": "What does T+1 settlement mean?",
+          "options": [
+            "A trade settles one working day later",
+            "A trade settles in a year",
+            "A trade never settles",
+            "A trade costs 1 rupee"
+          ],
+          "correctIndex": 0,
+          "explanation": "Cash market trades usually settle on the next working day."
+        },
+        {
+          "question": "A share at \u20b9200 has a 10% daily band. What is the lower limit?",
+          "options": [
+            "\u20b9190",
+            "\u20b9100",
+            "\u20b9180",
+            "\u20b9220"
+          ],
+          "correctIndex": 2,
+          "explanation": "200 - 20 = \u20b9180."
+        },
+        {
+          "question": "A share closes at \u20b9500 with a 20% band. What is the upper limit?",
+          "options": [
+            "\u20b9550",
+            "\u20b9525",
+            "\u20b9700",
+            "\u20b9600"
+          ],
+          "correctIndex": 3,
+          "explanation": "500 + 100 = \u20b9600."
+        },
+        {
+          "question": "What should you do if you receive secret information about a company?",
+          "options": [
+            "Do not trade on it or pass it on",
+            "Buy at once",
+            "Tell everyone",
+            "Borrow money to buy"
+          ],
+          "correctIndex": 0,
+          "explanation": "Trading on secrets is illegal."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-11",
+      "title": "11. Goals, Inflation and Time Horizons",
+      "intro": "How do you decide what to save for and how to invest it?",
+      "content": "\u26a1 MISSION BRIEFING: GOALS, INFLATION AND TIME HORIZONS\nGood plans start with goals, not with shares. Each goal has an amount, a date and a different tolerance for risk. Inflation also raises the cost of future goals, so what costs a rupee today will cost more later. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nThe Rule of 72 gives a quick estimate: divide 72 by the yearly return to find about how many years it takes money to double.\n\n\u26a1 FINANCIAL INTEL: GOALS AND TIME HORIZONS\n\u2022 Short term (under 3 years): keep money safe in savings or low-risk options, not in shares.\n\u2022 Medium term (3 to 7 years): a mix.\n\u2022 Long term (7 years or more): more room for equity, because there is time to recover from falls.\n\u2022 These are common guidelines, not fixed rules.\n\n\u26a1 FINANCIAL INTEL: INFLATION\n\u2022 Future cost = today's cost x (1 + inflation) raised to the number of years.\n\u2022 Plan goals in future money, not in today's money.\n\u2022 Money that earns less than inflation loses buying power.\n\n\u26a1 FINANCIAL INTEL: THE SAFETY LAYER\n\u2022 Emergency fund first: often 3 to 6 months of expenses, kept safe and easy to reach.\n\u2022 Insurance questions belong with parents or guardians.\n\u2022 Only invest money you will not need soon.\n\n\ud83c\udf55 MINI CASE: THE COLLEGE COST\nMeera's fictional goal is a course that costs \u20b91,00,000 today. With inflation at 6% a year, in 10 years it will cost about 1,00,000 x 1.06 to the power of 10, roughly \u20b91,79,085. A laptop she wants in 1 year, costing \u20b960,000, should not be in shares because the time is too short. Rule of 72: at 8% a year, money doubles in about 72 \u00f7 8 = 9 years.\n\n\ud83e\uddea TRY IT: ESTIMATE THE DOUBLING\nUsing the Rule of 72, about how many years does money take to double at 12% a year? What does the monthly expenses of \u20b930,000 mean for a 6-month emergency fund?\n(Answer: 72 \u00f7 12 = 6 years. A 6-month emergency fund is 6 x 30,000 = \u20b91,80,000.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nStart with goals, dates and inflation, then match each goal to the right level of risk. Build an emergency fund first.",
+      "quiz": [
+        {
+          "question": "Where should money needed within 1 year usually be kept?",
+          "options": [
+            "All in shares",
+            "In derivatives",
+            "In a safe, low-risk place",
+            "In a tip group"
+          ],
+          "correctIndex": 2,
+          "explanation": "Short goals cannot wait out market falls."
+        },
+        {
+          "question": "Using the Rule of 72, how long does money take to double at 8% a year?",
+          "options": [
+            "12 years",
+            "9 years",
+            "6 years",
+            "72 years"
+          ],
+          "correctIndex": 1,
+          "explanation": "72 \u00f7 8 = 9 years."
+        },
+        {
+          "question": "A cost of \u20b91,00,000 grows with 6% inflation for 10 years. About what is it then?",
+          "options": [
+            "\u20b91,06,000",
+            "\u20b91,60,000",
+            "\u20b91,79,085",
+            "\u20b92,50,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "1,00,000 x 1.06 to the power of 10 is about \u20b91,79,085."
+        },
+        {
+          "question": "Monthly expenses are \u20b930,000. What is a 6-month emergency fund?",
+          "options": [
+            "\u20b91,80,000",
+            "\u20b960,000",
+            "\u20b93,00,000",
+            "\u20b990,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "6 x 30,000 = \u20b91,80,000."
+        },
+        {
+          "question": "What is true about inflation?",
+          "options": [
+            "It lowers prices every year",
+            "It never matters",
+            "It raises the cost of future goals",
+            "It only affects shares"
+          ],
+          "correctIndex": 2,
+          "explanation": "Inflation makes future goals cost more."
+        }
+      ]
+    },
+    {
+      "id": "submod-12-12",
+      "title": "12. Your Complete Investing Plan",
+      "intro": "Can you pull the whole journey into one page you can follow?",
+      "content": "\u26a1 MISSION BRIEFING: YOUR COMPLETE INVESTING PLAN\nYou have travelled from saving and spending to markets, analysis, risk, psychology, tax and rules. This final lesson puts everything on one page: a plan you can write, share with a parent or guardian, and review. A plan does not guarantee profit. It guards you against your own worst moments. Tax rules change often, so rates here are as of late 2026 and you should always check the latest rules or ask a qualified tax professional. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA short written plan that you actually follow often beats a clever plan that lives only in your head.\n\n\u26a1 FINANCIAL INTEL: THE ONE-PAGE PLAN\n1. Goals: what, how much, and by when?\n2. Safety first: emergency fund and insurance, discussed with a parent or guardian.\n3. Asset allocation: your split between equity, debt, gold and cash.\n4. Instruments: for example low-cost index funds and a regular SIP.\n5. Costs and tax: expected net returns after charges and tax.\n6. Risk rules: maximum risk per idea and maximum size per holding.\n7. Behaviour rules: waiting period, checklist and journal.\n8. Review: dates to check progress and rebalance.\n\n\u26a1 FINANCIAL INTEL: PATIENT VERSUS BUSY\n\u2022 Long holding periods mean lower tax rates and fewer charges.\n\u2022 Low-cost funds keep more of the return with you.\n\u2022 Frequent trading adds charges, higher short-term tax and more emotional mistakes.\n\n\u26a1 FINANCIAL INTEL: BEFORE ANY REAL MONEY\n\u2022 Practise on the simulator first.\n\u2022 Involve a parent or guardian, because accounts for minors are operated by them.\n\u2022 Use only SEBI-registered intermediaries and official apps.\n\u2022 Check the latest tax rules, or ask a qualified professional.\n\n\ud83c\udf55 MINI CASE: TWO STYLES, ONE YEAR\nBoth Meera and Aarav make a fictional 10% gross gain on \u20b91,00,000, which is \u20b910,000. Meera holds an index fund for over 12 months. The fund cost is \u20b9500 and her gain is within the \u20b91.25 lakh exemption, so tax is \u20b90 and she keeps \u20b99,500. Aarav trades actively. Trading charges are \u20b93,000, and short-term tax at 20% on the remaining \u20b97,000 is \u20b91,400, so he keeps 10,000 - 3,000 - 1,400 = \u20b95,600 (simplified). Same market, very different results.\n\n\ud83e\uddea TRY IT: BUILD YOUR OWN\nWrite your one-page plan using the eight lines above for a simulator account. Then compute the net result for a fictional \u20b91,00,000 held over 12 months with a gross gain of \u20b912,000, fund costs of \u20b9600 and no tax because the gain is within the exemption.\n(Answer: net = 12,000 - 600 = \u20b911,400, which is 11.4% on \u20b91,00,000. Share your plan with a parent, teacher or guardian and review it every few months.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA written plan ties goals, risk, costs, tax, behaviour and review together. No plan guarantees profit, so practise on a simulator, check the latest rules and involve a parent or guardian in every real money decision. Congratulations on finishing the Bull Run modules!",
+      "quiz": [
+        {
+          "question": "What is the purpose of the one-page plan?",
+          "options": [
+            "To guarantee profit",
+            "To tie goals, risk, costs, tax and behaviour rules into one routine",
+            "To replace research",
+            "To predict prices"
+          ],
+          "correctIndex": 1,
+          "explanation": "A plan keeps your choices consistent."
+        },
+        {
+          "question": "A gross gain is \u20b910,000, fund cost is \u20b9500 and there is no tax. What is the net?",
+          "options": [
+            "\u20b99,500",
+            "\u20b910,500",
+            "\u20b95,000",
+            "\u20b910,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "10,000 - 500 = \u20b99,500."
+        },
+        {
+          "question": "Which style usually costs less in charges and tax?",
+          "options": [
+            "Frequent short-term trading",
+            "Holding low-cost funds for the long term",
+            "Trading every day",
+            "Chasing tips"
+          ],
+          "correctIndex": 1,
+          "explanation": "Long holding and low costs keep more of your return."
+        },
+        {
+          "question": "A gross gain is \u20b912,000 and cost is \u20b9600 with no tax. What is the net percentage on \u20b91,00,000?",
+          "options": [
+            "12%",
+            "6%",
+            "11.4%",
+            "10.4%"
+          ],
+          "correctIndex": 2,
+          "explanation": "11,400 \u00f7 1,00,000 x 100 = 11.4%."
+        },
+        {
+          "question": "Does any plan guarantee profit?",
+          "options": [
+            "Yes, if followed daily",
+            "Yes, with index funds",
+            "Yes, if written down",
+            "No, risk remains, so practise on a simulator and involve a parent or guardian"
+          ],
+          "correctIndex": 3,
+          "explanation": "No plan removes risk."
+        }
+      ]
+    }
+  ]
+}

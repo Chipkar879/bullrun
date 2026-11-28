@@ -10,8 +10,10 @@ import m7 from '@/app/data/Mod_7.json';
 import m8 from '@/app/data/Mod_8.json';
 import m9 from '@/app/data/Mod_9.json';
 import m10 from '@/app/data/Mod_10.json';
+import m11 from '@/app/data/Mod_11.json';
+import m12 from '@/app/data/Mod_12.json';
 
-const MODS = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10];
+const MODS = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12];
 
 // Remove correct answers and explanations before data is sent to the browser.
 // Answers are checked on the server at /api/quiz-check.
