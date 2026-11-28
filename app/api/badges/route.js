@@ -1,12 +1,14 @@
 import { admin, getUserFromRequest } from '@/lib/supabaseAdmin';
 import { ORDER } from '@/lib/moduleData';
-import { moduleNumber } from '@/lib/progressLogic';
+import { moduleNumber, lessonXpMap } from '@/lib/progressLogic';
 import { ASSET_BY_SYM } from '@/lib/catalog';
 import { BADGES, AVATARS, CAP_BB, levelFor } from '@/lib/gamification';
 import { getRank } from '@/lib/ranks';
 
 export const dynamic = 'force-dynamic';
 const START_BALANCE = 50000;
+// XP for each lesson: every module adds up to 1200, with more for the harder lessons at the end
+const LESSON_XP = lessonXpMap(ORDER);
 const istDay = (offset = 0) => new Date(Date.now() + 19800000 - offset * 86400000).toISOString().slice(0, 10);
 
 async function summary(user) {
@@ -72,7 +74,8 @@ async function summary(user) {
   }
 
   const quizScore = quiz.reduce((a, q) => a + (q.score || 0), 0);
-  const gross = done.length * 100 + Math.min(quizScore * 5 + quiz.length * 20, 3000) + Math.min(trades.length, 300) * 10 + have.size * 50;
+  const lessonXp = done.reduce((a, id) => a + (LESSON_XP[id] || 0), 0);
+  const gross = lessonXp + Math.min(quizScore * 5 + quiz.length * 20, 3000) + Math.min(trades.length, 300) * 10 + have.size * 50;
   // Penalties lower XP, but never below the start of the rank already reached
   const lostTotal = (penRes.data || []).reduce((a, r) => a + r.amount, 0);
   const xp = Math.max(getRank(gross).rank.min, gross - lostTotal);
