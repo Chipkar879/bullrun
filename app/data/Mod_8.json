@@ -1,455 +1,760 @@
 {
   "id": "mod-8",
-  "title": "Technical Analysis",
+  "title": "Technical Analysis II - Patterns and Trading Setups",
   "submodules": [
     {
       "id": "submod-8-1",
-      "title": "1. Foundations",
-      "intro": "Discover the important ideas behind foundations.",
-      "content": "⚡ MISSION BRIEFING: FOUNDATIONS\n\nFoundations is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Dow Theory, price action and trends are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Dow Theory. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Dow Theory is the starting concept to understand.\n• price action and trends is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what foundations means, then examines how dow theory, price action and trends affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nFoundations helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "1. Single Candlestick Patterns",
+      "intro": "What can one candle hint at when it appears in the right place?",
+      "content": "\u26a1 MISSION BRIEFING: SINGLE CANDLESTICK PATTERNS\nSome single candles have special shapes that analysts watch, because the shape shows who won the fight between buyers and sellers during the period. A shape alone is only a hint. Where it appears matters just as much. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA hammer and a hanging man look exactly the same. Only the trend before them tells you which one it is.\n\n\u26a1 FINANCIAL INTEL: THE SHAPES\n\u2022 Doji: open and close are almost equal, so the body is tiny. It shows indecision.\n\u2022 Hammer: a small body near the top and a long lower wick (about twice the body or more), seen after a fall. Sellers pushed down, but buyers pushed back.\n\u2022 Hanging man: the same shape, but after a rise. It is a warning that buyers may be tiring.\n\u2022 Shooting star: a small body near the bottom and a long upper wick, after a rise. Buyers pushed up, but sellers pushed back.\n\u2022 Marubozu: a long body with almost no wicks. One side controlled the whole session.\n\n\u26a1 FINANCIAL INTEL: CONTEXT RULES\n\u2022 The same shape means different things in different places. A hammer near support is more interesting than a hammer in the middle of nowhere.\n\u2022 Wait for the next candle to confirm, such as a close above the hammer's high.\n\u2022 One candle is a weak signal alone. Combine it with levels and volume.\n\n\ud83c\udf55 MINI CASE: A HAMMER AT SUPPORT\nThe fictional GreenGrid Ltd falls for weeks to support near \u20b9200. One day it opens at \u20b9204, dips to \u20b9192 and closes at \u20b9203, with a high of \u20b9205. The body is 204 - 203 = \u20b91, and the lower wick is 203 - 192 = \u20b911, which is far more than twice the body. That is a hammer at support. The next day it closes at \u20b9208, above the hammer's high of \u20b9205. Meera takes that as confirmation, though not a guarantee.\n\n\ud83e\uddea TRY IT: HAMMER OR HANGING MAN?\nAfter weeks of rising, a fictional share opens at \u20b9100, reaches \u20b9101, falls to \u20b980 and closes at \u20b999. What pattern is this, and what should you do before acting?\n(Answer: the body is 1 and the lower wick is 99 - 80 = 19. The shape is a hammer shape, but after a rise it is called a hanging man, a warning. Wait for confirmation, such as a lower close next day.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA candle shape shows who won the session, but its meaning depends on the trend before it and the level it appears at. Wait for confirmation and combine it with other clues.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying foundations?",
+          "question": "A candle with almost equal open and close and a tiny body is called...",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about foundations?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "Marubozu",
+            "Doji",
+            "Hammer",
+            "Gap"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A doji shows indecision, with the open and close nearly the same."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "What does a hammer look like?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "A big body with no wicks",
+            "A long upper wick and no body",
+            "A small body near the top and a long lower wick, usually after a fall",
+            "A gap at the open"
+          ],
+          "correctIndex": 2,
+          "explanation": "A hammer has a small body and a long lower wick after a decline."
+        },
+        {
+          "question": "Why do a hammer and a hanging man look the same but mean different things?",
+          "options": [
+            "The trend before them differs: hammer after a fall, hanging man after a rise",
+            "Only the colour differs",
+            "The company name differs",
+            "They mean the same thing"
           ],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "Context, meaning the prior trend, decides which one it is."
+        },
+        {
+          "question": "What does a marubozu show?",
+          "options": [
+            "Perfect indecision",
+            "A dividend",
+            "Zero volume",
+            "One side controlled the session, with almost no wicks"
+          ],
+          "correctIndex": 3,
+          "explanation": "A marubozu has a long body and almost no wicks."
+        },
+        {
+          "question": "What helps most before acting on a single candle?",
+          "options": [
+            "Ignoring where it appeared",
+            "Buying instantly",
+            "Confirmation from the next candle, a nearby level and volume",
+            "Guessing from its colour"
+          ],
+          "correctIndex": 2,
+          "explanation": "Confirmation and context make a single candle more reliable."
         }
       ]
     },
     {
       "id": "submod-8-2",
-      "title": "2. Charts",
-      "intro": "Discover the important ideas behind charts.",
-      "content": "⚡ MISSION BRIEFING: CHARTS\n\nCharts is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Line, bar, candlestick and timeframes are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Line. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Line is the starting concept to understand.\n• bar is another important element of this subject.\n• candlestick and timeframes is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what charts means, then examines how line, bar, candlestick and timeframes affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nCharts helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "2. Multi-Candle Patterns",
+      "intro": "What do two or three candles together tell you?",
+      "content": "\u26a1 MISSION BRIEFING: MULTI-CANDLE PATTERNS\nPatterns built from two or three candles tell a fuller story than one candle. They show how the balance between buyers and sellers shifts over a few sessions. As always, they are clues, not promises. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA pattern called 'harami' takes its name from a Japanese word often translated as 'pregnant', because the small candle sits inside the big one.\n\n\u26a1 FINANCIAL INTEL: TWO-CANDLE PATTERNS\n\u2022 Bullish engulfing: after a fall, a green candle whose body fully covers the previous red body.\n\u2022 Bearish engulfing: after a rise, a red candle whose body fully covers the previous green body.\n\u2022 Harami: a small candle inside the body of the previous large candle. It shows a pause that may come before a turn.\n\n\u26a1 FINANCIAL INTEL: THREE-CANDLE PATTERNS\n\u2022 Morning star: a long red candle, then a small-bodied candle, then a long green candle that closes well into the first red body. It may mark a bottom.\n\u2022 Evening star: the mirror image after a rise. It may mark a top.\n\u2022 Three white soldiers: three long green candles, each closing higher. Three black crows: three long red candles, each closing lower.\n\n\u26a1 FINANCIAL INTEL: USING THEM WELL\n\u2022 Look for them near support or resistance, not in the middle of a range.\n\u2022 Higher volume on the second candle makes an engulfing pattern more convincing.\n\u2022 Wait for confirmation and set a stop-loss.\n\u2022 No pattern always works. You will learn to test them in the backtesting lesson.\n\n\ud83c\udf55 MINI CASE: A BULLISH ENGULFING\nThe fictional Rapid Rail Ltd has been falling. Day 1 is a red candle: open \u20b9150, close \u20b9142. Day 2 is a green candle: open \u20b9140, close \u20b9154. The Day 2 body runs from 140 to 154, which fully covers the Day 1 body of 142 to 150. That is a bullish engulfing pattern. It appears near support and on double the usual volume, so Meera notes it. She still waits for the next day to confirm.\n\n\ud83e\uddea TRY IT: NAME THE PATTERN\nA fictional share has been rising. Day 1 is green: open \u20b980, close \u20b988. Day 2 is red: open \u20b990, close \u20b978. Does Day 2 engulf Day 1, and what is it called?\n(Answer: the Day 2 body, 78 to 90, covers the Day 1 body, 80 to 88. It is a bearish engulfing pattern, a possible warning after a rise.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nTwo- and three-candle patterns describe a shift in control between buyers and sellers. Use them at meaningful levels, check volume, and wait for confirmation.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying charts?",
+          "question": "What is a bullish engulfing pattern?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
+            "Two dojis in a row",
+            "A gap down at the open",
+            "A red candle after a rise that covers a green body",
+            "A green candle whose body fully covers the previous red body, after a fall"
           ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "correctIndex": 3,
+          "explanation": "The second candle's body covers the first candle's body and the move is upward."
         },
         {
-          "question": "Which approach is most useful when learning about charts?",
+          "question": "In a harami, the second candle is...",
           "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "Much larger than the first",
+            "Small and inside the body of the previous large candle",
+            "Always a gap",
+            "Always red"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A harami is a small candle sitting inside a large candle's body."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "Which three-candle pattern may mark a bottom?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "Morning star",
+            "Hanging man",
+            "Doji",
+            "Marubozu"
           ],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "A morning star is a three-candle bottom pattern."
+        },
+        {
+          "question": "What are three black crows?",
+          "options": [
+            "Three long green candles",
+            "Three dojis",
+            "Three long red candles, each closing lower",
+            "Three gaps up"
+          ],
+          "correctIndex": 2,
+          "explanation": "Three black crows are three long red candles with lower closes."
+        },
+        {
+          "question": "What makes an engulfing pattern more convincing?",
+          "options": [
+            "It appears at random",
+            "It appears near a support level and on higher volume",
+            "It has very low volume",
+            "It appears with no prior trend"
+          ],
+          "correctIndex": 1,
+          "explanation": "Location and volume add weight to the signal."
         }
       ]
     },
     {
       "id": "submod-8-3",
-      "title": "3. Candlestick Patterns",
-      "intro": "Discover the important ideas behind candlestick patterns.",
-      "content": "⚡ MISSION BRIEFING: CANDLESTICK PATTERNS\n\nCandlestick Patterns is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Doji, hammer, engulfing and star patterns are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Doji. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Doji is the starting concept to understand.\n• hammer is another important element of this subject.\n• engulfing and star patterns is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what candlestick patterns means, then examines how doji, hammer, engulfing and star patterns affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nCandlestick Patterns helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "3. Fibonacci Retracements",
+      "intro": "How far might a price fall back before the trend continues?",
+      "content": "\u26a1 MISSION BRIEFING: FIBONACCI RETRACEMENTS\nAfter a big move, price often pulls back part of the way before continuing. Fibonacci retracements use a few special ratios to mark where that pullback might pause. Many traders use them, which is part of why those levels get noticed. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nThe Fibonacci sequence was brought to Europe by Leonardo of Pisa, known as Fibonacci, in his book Liber Abaci in 1202.\n\n\u26a1 FINANCIAL INTEL: WHERE THE RATIOS COME FROM\nThe sequence goes 1, 1, 2, 3, 5, 8, 13, 21, 34 and so on. Each number is the sum of the previous two. Divide a number by the next one and you get about 0.618 (21 \u00f7 34 = 0.618). Divide it by the number two places later and you get about 0.382 (13 \u00f7 34 = 0.382).\n\n\u26a1 FINANCIAL INTEL: THE RETRACEMENT LEVELS\n\u2022 Common levels: 23.6%, 38.2%, 50%, 61.8% and 78.6%.\n\u2022 The 50% level is not a true Fibonacci ratio, but traders use it widely.\n\u2022 In an uptrend, pick a clear swing low and swing high, and measure the levels down from the high.\n\u2022 A shallow pullback (to about 38.2%) suggests a strong trend. A pullback deeper than 61.8% puts the trend in doubt.\n\n\u26a1 FINANCIAL INTEL: CAUTIONS\n\u2022 With so many levels on a chart, price will often touch one by chance.\n\u2022 Use them together with support and resistance, candle patterns and volume.\n\u2022 The 161.8% extension is sometimes used as a rough target after the old high breaks.\n\n\ud83c\udf55 MINI CASE: MEASURING A PULLBACK\nThe fictional Sundar Foods Ltd rises from \u20b9100 to \u20b9200, a move of \u20b9100. The 38.2% level is 200 - 38.2 = \u20b9161.8. The 50% level is \u20b9150. The 61.8% level is 200 - 61.8 = \u20b9138.2. Price falls to \u20b9150 and prints a hammer candle on higher volume. Meera sees a level, a candle and volume all lining up, which is more interesting than the level alone.\n\n\ud83e\uddea TRY IT: FIND THE LEVEL\nA fictional share rises from \u20b9400 to \u20b9500. Where is the 61.8% retracement, and where is the 50% level?\n(Answers: the move is \u20b9100, so 61.8% is 500 - 61.8 = \u20b9438.2, and 50% is \u20b9450.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nFibonacci levels give a map of possible pause points in a pullback. They work best when other clues agree, and no level is guaranteed to hold.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying candlestick patterns?",
+          "question": "How is each number in the Fibonacci sequence formed?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
+            "Doubling the previous number",
+            "Subtracting 1 from the previous",
+            "Adding the previous two numbers",
+            "A random pick"
           ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "correctIndex": 2,
+          "explanation": "Each number is the sum of the two before it."
         },
         {
-          "question": "Which approach is most useful when learning about candlestick patterns?",
+          "question": "Which is the best-known Fibonacci retracement ratio?",
           "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "99%",
+            "5%",
+            "150%",
+            "61.8%"
+          ],
+          "correctIndex": 3,
+          "explanation": "61.8% is the best known retracement level."
+        },
+        {
+          "question": "A rise from \u20b9100 to \u20b9200 pulls back 50%. Where is the price?",
+          "options": [
+            "\u20b9150",
+            "\u20b9100",
+            "\u20b950",
+            "\u20b9250"
+          ],
+          "correctIndex": 0,
+          "explanation": "The move is \u20b9100, and 50% of it is \u20b950, so 200 - 50 = \u20b9150."
+        },
+        {
+          "question": "A pullback goes deeper than 61.8%. What may it suggest?",
+          "options": [
+            "A guaranteed rise",
+            "The trend may be in doubt",
+            "Volume is zero",
+            "Dividends are due"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A deep pullback weakens the case for trend continuation."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "Why use Fibonacci levels together with other tools?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "Fibonacci is illegal alone",
+            "They replace stop-losses",
+            "With many levels on a chart, price often touches one by chance, so confirmation matters",
+            "They always fail"
           ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "correctIndex": 2,
+          "explanation": "Confirmation from candles, volume and other levels improves the reading."
         }
       ]
     },
     {
       "id": "submod-8-4",
-      "title": "4. Support, Resistance and Trendlines",
-      "intro": "Discover the important ideas behind support, resistance and trendlines.",
-      "content": "⚡ MISSION BRIEFING: SUPPORT, RESISTANCE AND TRENDLINES\n\nSupport, Resistance and Trendlines is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Understanding important price zones are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Understanding important price zones. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Understanding important price zones is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what support, resistance and trendlines means, then examines how understanding important price zones affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nSupport, Resistance and Trendlines helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "4. Gaps and Opening Moves",
+      "intro": "What happens when the price opens far from yesterday's close?",
+      "content": "\u26a1 MISSION BRIEFING: GAPS\nA gap appears when a share opens clearly above yesterday's high or below yesterday's low, leaving empty space on the chart. Gaps usually follow news that arrived while the market was closed, such as results or global market moves. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nThe NSE pre-open session runs from 9:00 am to 9:15 am and helps decide the opening price, so a gap is often decided before normal trading starts.\n\n\u26a1 FINANCIAL INTEL: MEASURING A GAP\n\u2022 Gap up: the price opens above the previous day's high.\n\u2022 Gap down: the price opens below the previous day's low.\n\u2022 Gap % = (today's open - previous close) \u00f7 previous close x 100.\n\n\u26a1 FINANCIAL INTEL: TYPES OF GAPS\n\u2022 Common gap: happens inside a range and often closes quickly.\n\u2022 Breakaway gap: leaps out of a pattern or range, usually on high volume.\n\u2022 Runaway gap: appears in the middle of a strong trend.\n\u2022 Exhaustion gap: appears near the end of a long move and is followed by a reversal.\n\n\u26a1 FINANCIAL INTEL: FILLING THE GAP\n'Filling' a gap means price returns to cover the empty space. Many gaps do get filled, but some stay open for months, so 'all gaps fill' is a myth. The first minutes after an opening gap are often wild, and chasing them is risky.\n\n\ud83c\udf55 MINI CASE: THE RESULTS GAP\nThe fictional MetroSteel Ltd closes at \u20b9200 with a high of \u20b9205. After strong results, it opens at \u20b9210. The gap is (210 - 200) \u00f7 200 x 100 = 5%. It also opens above the old high, so there is real empty space. Aarav wants to buy at once. Meera waits and watches whether the first 15 minutes hold, because opening moves can reverse quickly.\n\n\ud83e\uddea TRY IT: MEASURE THE GAP\nA fictional share closes at \u20b9500 and opens at \u20b9480 next day. Is it a gap up or a gap down, and what is the gap %?\n(Answer: a gap down. (480 - 500) \u00f7 500 x 100 = -4%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nGaps reflect news and sentiment that arrived while the market was closed. Measure them, learn the types, and be careful about chasing the first minutes of trading.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying support, resistance and trendlines?",
+          "question": "What is a gap up?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about support, resistance and trendlines?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "Price opens below the previous low",
+            "Price opens above the previous day's high, leaving empty space",
+            "A dividend is paid",
+            "The exchange is closed"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A gap up is an opening above the prior high."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "Previous close is \u20b9200 and the open is \u20b9210. What is the gap %?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "10%",
+            "0.5%",
+            "5%",
+            "2.1%"
+          ],
+          "correctIndex": 2,
+          "explanation": "(210 - 200) \u00f7 200 x 100 = 5%."
+        },
+        {
+          "question": "Which gap leaps out of a pattern or range on high volume?",
+          "options": [
+            "Breakaway gap",
+            "Common gap",
+            "Dividend gap",
+            "Tax gap"
           ],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "That is a breakaway gap."
+        },
+        {
+          "question": "Do all gaps always get filled?",
+          "options": [
+            "Yes, within a day",
+            "Yes, within a week",
+            "Only gaps down",
+            "No, some stay open for a long time"
+          ],
+          "correctIndex": 3,
+          "explanation": "Many gaps fill, but not all of them."
+        },
+        {
+          "question": "Why be careful about buying in the first minutes after a gap?",
+          "options": [
+            "Orders are banned",
+            "Opening minutes are often volatile and the move can reverse quickly",
+            "Trading costs nothing then",
+            "Volume is always zero"
+          ],
+          "correctIndex": 1,
+          "explanation": "Early moves can be sharp and can reverse."
         }
       ]
     },
     {
       "id": "submod-8-5",
-      "title": "5. Chart Patterns",
-      "intro": "Discover the important ideas behind chart patterns.",
-      "content": "⚡ MISSION BRIEFING: CHART PATTERNS\n\nChart Patterns is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Head and shoulders, double tops, triangles, flags and cup and handle are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Head and shoulders. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Head and shoulders is the starting concept to understand.\n• double tops is another important element of this subject.\n• triangles is another important element of this subject.\n• flags and cup and handle is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what chart patterns means, then examines how head and shoulders, double tops, triangles, flags and cup and handle affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nChart Patterns helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "5. Breakouts and Retests",
+      "intro": "How do you tell a real breakout from a false one?",
+      "content": "\u26a1 MISSION BRIEFING: BREAKOUTS AND RETESTS\nPrices often rest in a sideways range before making a bigger move. A breakout happens when price leaves that range. Some breakouts keep going and many fail, so how you check the move matters more than the move itself. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMany breakouts come back to test the broken level before moving on, which is why patient traders often wait for the retest.\n\n\u26a1 FINANCIAL INTEL: CONSOLIDATION\nA consolidation is a sideways range between support and resistance. The longer and tighter the range, the more energy may be stored for the move out. 'May' is the key word, because the direction is never certain.\n\n\u26a1 FINANCIAL INTEL: CONFIRMING A BREAKOUT\n\u2022 Price should close beyond the level, not just poke through it with a wick.\n\u2022 Volume should be above its average.\n\u2022 The breakout candle should have a strong body.\n\u2022 The move should fit the bigger trend, such as a breakout up in an uptrend.\n\n\u26a1 FINANCIAL INTEL: THE RETEST\nAfter a breakout, price often returns to the old resistance to test it as new support. If it holds, that gives a second entry with a closer stop-loss. If price falls back inside the range, it was a false breakout. A common target is the height of the range projected from the breakout level.\n\n\ud83c\udf55 MINI CASE: RANGE, BREAKOUT, RETEST\nThe fictional GreenGrid Ltd moves between \u20b9180 and \u20b9200 for six weeks. It closes at \u20b9204 on 2.5 times the usual volume. Next, it dips back to \u20b9201 and holds, with a green candle. Meera plans: enter at \u20b9202, stop-loss at \u20b9197, and a target of 200 + 20 = \u20b9220, using the range height. Risk is \u20b95 and reward is \u20b918, so reward is about 3.6 times the risk.\n\n\ud83e\uddea TRY IT: PLAN THE TRADE\nA fictional share trades between \u20b990 and \u20b9100, then breaks out and retests at \u20b9101. The stop is \u20b997. Using the range height as the target, what is the target and the risk-reward?\n(Answers: range height = 10, so the target is 100 + 10 = \u20b9110. Risk = 101 - 97 = \u20b94 and reward = 110 - 101 = \u20b99, so reward is 9 \u00f7 4 = 2.25 times the risk.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA breakout is only the start of the story. Look for a strong close, higher volume and a successful retest, and always know where you will exit if it fails.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying chart patterns?",
+          "question": "What is a consolidation?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
+            "A stock split",
+            "A price crash",
+            "A dividend payout",
+            "Price moving sideways in a range"
           ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "correctIndex": 3,
+          "explanation": "A consolidation is a sideways range between support and resistance."
         },
         {
-          "question": "Which approach is most useful when learning about chart patterns?",
+          "question": "Which breakout is generally more convincing?",
           "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "A close above resistance on above-average volume",
+            "A wick above resistance on low volume",
+            "A rumour",
+            "A gap on no news"
+          ],
+          "correctIndex": 0,
+          "explanation": "A closing break on higher volume carries more weight."
+        },
+        {
+          "question": "What is a retest?",
+          "options": [
+            "A test of a student",
+            "Price returns to the broken level to see whether old resistance now acts as support",
+            "A new IPO",
+            "A tax filing"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A retest checks the broken level from the other side."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "A range of \u20b9180 to \u20b9200 breaks upward. What is the rule-of-thumb target?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "\u20b9240",
+            "\u20b9200",
+            "\u20b9220",
+            "\u20b9180"
           ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "correctIndex": 2,
+          "explanation": "The range height is 20, so 200 + 20 = \u20b9220."
+        },
+        {
+          "question": "Entry \u20b9202, stop \u20b9197, target \u20b9220. Reward is about how many times the risk?",
+          "options": [
+            "1 time",
+            "0.5 times",
+            "10 times",
+            "3.6 times"
+          ],
+          "correctIndex": 3,
+          "explanation": "Risk is 5 and reward is 18, and 18 \u00f7 5 = 3.6."
         }
       ]
     },
     {
       "id": "submod-8-6",
-      "title": "6. Indicators",
-      "intro": "Discover the important ideas behind indicators.",
-      "content": "⚡ MISSION BRIEFING: INDICATORS\n\nIndicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Purpose and limitations of technical indicators are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Purpose and limitations of technical indicators. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Purpose and limitations of technical indicators is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what indicators means, then examines how purpose and limitations of technical indicators affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nIndicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "6. Pullbacks and Trend Entries",
+      "intro": "Is a dip in an uptrend a chance or a warning?",
+      "content": "\u26a1 MISSION BRIEFING: PULLBACKS AND TREND ENTRIES\nIn an uptrend, price rarely moves in a straight line. It rises, dips, and rises again. A pullback is one of those dips. Many traders prefer to enter on a pullback, not by chasing a rising price, because the stop-loss can sit closer to the entry. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA stop-loss placed just under a pullback low can be much closer than one placed after a long, straight run, which often means a better risk-reward.\n\n\u26a1 FINANCIAL INTEL: PULLBACK OR REVERSAL?\n\u2022 Pullback: a temporary dip while the series of higher lows stays intact.\n\u2022 Reversal: price makes a lower low and breaks the uptrend.\n\u2022 Depth of pullback = (high - pullback low) \u00f7 (high - starting low) x 100.\n\n\u26a1 FINANCIAL INTEL: WHERE PULLBACKS OFTEN PAUSE\n\u2022 Near a rising 20-day or 50-day moving average.\n\u2022 At an old resistance that has turned into support.\n\u2022 Near the 38.2% to 61.8% Fibonacci levels.\n\u2022 On a rising trendline.\n\n\u26a1 FINANCIAL INTEL: A PULLBACK CHECKLIST\n\u2022 The higher timeframe is in an uptrend.\n\u2022 Volume is lighter during the dip.\n\u2022 A bullish candle appears at support.\n\u2022 The stop-loss sits below the pullback low.\n\u2022 The possible reward is clearly larger than the risk.\n\n\ud83c\udf55 MINI CASE: BUYING THE DIP\nThe fictional Rapid Rail Ltd rises from \u20b9300 to \u20b9360, a rise of \u20b960. It then dips to \u20b9342, which is 18 down, or 18 \u00f7 60 = 30% of the rise. Volume is light, and price touches its rising 20-day average. A green candle forms. Meera plans: entry \u20b9345, stop \u20b9338, target \u20b9360. Risk is \u20b97 and reward is \u20b915, so reward is about 2.1 times the risk.\n\n\ud83e\uddea TRY IT: MEASURE THE DEPTH\nA fictional share rises from \u20b9200 to \u20b9300 and then pulls back to \u20b9262. How deep is the pullback?\n(Answer: (300 - 262) \u00f7 100 x 100 = 38%, a fairly shallow pullback close to the 38.2% level.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA pullback can offer a calmer entry into an existing trend. Check that the trend is intact, look for support and a bullish candle, and set your stop below the dip.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying indicators?",
+          "question": "What is a pullback in an uptrend?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
+            "A permanent fall",
+            "A new IPO",
+            "A temporary dip while the pattern of higher lows holds",
+            "A tax"
           ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "correctIndex": 2,
+          "explanation": "A pullback is a temporary dip inside a larger uptrend."
         },
         {
-          "question": "Which approach is most useful when learning about indicators?",
+          "question": "Which signal suggests an uptrend may be breaking?",
           "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "A higher low",
+            "A rising moving average",
+            "Lighter volume during the dip",
+            "A new lower low below the previous swing low"
+          ],
+          "correctIndex": 3,
+          "explanation": "A lower low breaks the pattern of higher lows."
+        },
+        {
+          "question": "Where do pullbacks often pause?",
+          "options": [
+            "Near rising moving averages or old resistance that became support",
+            "At random numbers",
+            "Never",
+            "Only at \u20b9100"
+          ],
+          "correctIndex": 0,
+          "explanation": "Rising averages and flipped levels are common pause points."
+        },
+        {
+          "question": "A share rises from \u20b9300 to \u20b9360 and pulls back to \u20b9342. How much of the rise was given back?",
+          "options": [
+            "18%",
+            "30%",
+            "60%",
+            "5%"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "18 \u00f7 60 = 30%."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "Why can a pullback entry give a better risk-reward than chasing?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "The stop-loss can sit closer to the entry",
+            "It removes all risk",
+            "Taxes are lower",
+            "SEBI requires it"
           ],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "A closer stop reduces risk per share for the same target."
         }
       ]
     },
     {
       "id": "submod-8-7",
-      "title": "7. Trend Indicators",
-      "intro": "Discover the important ideas behind trend indicators.",
-      "content": "⚡ MISSION BRIEFING: TREND INDICATORS\n\nTrend Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. SMA, EMA and MACD are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of SMA. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• SMA is the starting concept to understand.\n• EMA and MACD is another important element of this subject.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what trend indicators means, then examines how sma, ema and macd affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nTrend Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "7. Pivot Points and VWAP",
+      "intro": "Which levels do day traders watch, and how are they worked out?",
+      "content": "\u26a1 MISSION BRIEFING: PIVOT POINTS AND VWAP\nDay traders like levels they can compute before the market opens. Pivot points come from yesterday's prices. VWAP is a running average through the day. Both are intraday tools. Intraday trading is risky, so treat these as practice tools for a simulator and not as a way to earn quick money. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMany day traders watch the same pivot levels, because the formula uses only yesterday's high, low and close.\n\n\u26a1 FINANCIAL INTEL: PIVOT POINTS\n\u2022 Pivot (P) = (High + Low + Close) \u00f7 3.\n\u2022 First resistance R1 = 2 x P - Low. First support S1 = 2 x P - High.\n\u2022 Second resistance R2 = P + (High - Low). Second support S2 = P - (High - Low).\n\u2022 Price above the pivot gives a bullish bias for the day. Price below it gives a bearish bias.\n\n\u26a1 FINANCIAL INTEL: VWAP\nVWAP (Volume Weighted Average Price) is the average price of the day, weighted by how many shares traded at each price. It starts again every morning. Price above VWAP suggests buyers are in control, and below it suggests sellers are. Large investors also use it to check whether they bought at a fair average price.\n\n\u26a1 FINANCIAL INTEL: CAUTIONS\n\u2022 Intraday trading is high risk, and SEBI studies have found that most individual short-term traders lose money.\n\u2022 Levels are zones, not exact lines.\n\u2022 Practise on a simulator first, and involve a parent or guardian before any real money decision.\n\n\ud83c\udf55 MINI CASE: A DAY'S LEVELS\nYesterday the fictional Sundar Foods Ltd had a high of \u20b9210, a low of \u20b9190 and a close of \u20b9200. P = (210 + 190 + 200) \u00f7 3 = \u20b9200. R1 = 400 - 190 = \u20b9210. S1 = 400 - 210 = \u20b9190. R2 = 200 + 20 = \u20b9220. S2 = 200 - 20 = \u20b9180. For VWAP, if 100 shares trade at \u20b950 and 300 shares at \u20b952, VWAP = (100 x 50 + 300 x 52) \u00f7 400 = 20,600 \u00f7 400 = \u20b951.5.\n\n\ud83e\uddea TRY IT: COMPUTE THE PIVOT\nA fictional share had a high of \u20b9120, a low of \u20b9100 and a close of \u20b9110. Find P, R1 and S1.\n(Answers: P = 330 \u00f7 3 = \u20b9110. R1 = 220 - 100 = \u20b9120. S1 = 220 - 120 = \u20b9100.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nPivot points and VWAP give a simple frame for a trading day. They are tools for practice and study, and intraday trading remains risky.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying trend indicators?",
+          "question": "How is the pivot point calculated?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about trend indicators?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "High minus Low",
+            "(High + Low + Close) \u00f7 3",
+            "Close \u00f7 Open",
+            "Volume x Price"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Pivot = (High + Low + Close) \u00f7 3."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "Yesterday's high was \u20b9210, low \u20b9190 and close \u20b9200. What is the pivot?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "\u20b9190",
+            "\u20b9210",
+            "\u20b9200",
+            "\u20b9600"
+          ],
+          "correctIndex": 2,
+          "explanation": "600 \u00f7 3 = \u20b9200."
+        },
+        {
+          "question": "R1 = 2 x P - Low. With P = \u20b9200 and Low = \u20b9190, what is R1?",
+          "options": [
+            "\u20b9210",
+            "\u20b9190",
+            "\u20b9200",
+            "\u20b9220"
           ],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "400 - 190 = \u20b9210."
+        },
+        {
+          "question": "100 shares trade at \u20b950 and 300 shares at \u20b952. What is the VWAP?",
+          "options": [
+            "\u20b951",
+            "\u20b952",
+            "\u20b950",
+            "\u20b951.5"
+          ],
+          "correctIndex": 3,
+          "explanation": "(5,000 + 15,600) \u00f7 400 = \u20b951.5."
+        },
+        {
+          "question": "Why should intraday tools be practised on a simulator first?",
+          "options": [
+            "It is guaranteed profit",
+            "Intraday trading is risky, and studies show most individual short-term traders lose money",
+            "Banks demand it",
+            "It has no risk"
+          ],
+          "correctIndex": 1,
+          "explanation": "Short-term trading carries high risk, so practice comes first."
         }
       ]
     },
     {
       "id": "submod-8-8",
-      "title": "8. Momentum Indicators",
-      "intro": "Discover the important ideas behind momentum indicators.",
-      "content": "⚡ MISSION BRIEFING: MOMENTUM INDICATORS\n\nMomentum Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. RSI and stochastic oscillator are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of RSI and stochastic oscillator. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• RSI and stochastic oscillator is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what momentum indicators means, then examines how rsi and stochastic oscillator affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nMomentum Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "8. Market Breadth and Index Trends",
+      "intro": "Is the whole market moving, or only a few big shares?",
+      "content": "\u26a1 MISSION BRIEFING: MARKET BREADTH AND INDEX TRENDS\nA single share rarely moves alone. The overall market sets the mood, and many shares tend to follow it. Index charts show the direction of the market, and breadth shows how many shares are taking part. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nAn index can rise even when most of its shares fall, because a few giant companies carry a lot of weight.\n\n\u26a1 FINANCIAL INTEL: THE MAIN INDICES\n\u2022 Nifty 50: 50 large companies listed on the NSE.\n\u2022 Sensex: 30 large companies listed on the BSE.\n\u2022 Both give bigger companies more weight, so a few heavy names can move the whole index.\n\n\u26a1 FINANCIAL INTEL: BREADTH\n\u2022 Advance/decline ratio = number of shares rising \u00f7 number of shares falling.\n\u2022 Share of stocks above the 200-day average: the higher it is, the broader the strength.\n\u2022 A healthy rally has wide participation. A narrow rally, where few shares do the lifting, is a reason for caution.\n\n\u26a1 FINANCIAL INTEL: USING MARKET CONTEXT\n\u2022 Check the index trend on a higher timeframe before choosing a share.\n\u2022 When the index is weak, even good-looking charts of shares can fail more often.\n\u2022 Context improves your odds a little. It does not predict anything for certain.\n\n\ud83c\udf55 MINI CASE: TWO DAYS, ONE INDEX\nOn one day the Nifty rises 1%, but 800 shares advance and 1,200 fall. The advance/decline ratio is 800 \u00f7 1,200 = 0.67. The rise came from a few heavy names, so breadth is narrow. On another day the Nifty rises 1% with 1,500 shares advancing and 500 declining, a ratio of 3. That is a broad, healthier move.\n\n\ud83e\uddea TRY IT: COUNT THE BREADTH\nAdvancing shares are 1,200 and declining shares are 800. What is the ratio? Also, 36 of the 50 Nifty shares are above their 200-day averages. What percentage is that?\n(Answers: 1,200 \u00f7 800 = 1.5, and 36 \u00f7 50 x 100 = 72%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nLook at the market before the share. Check the index trend and the breadth, and treat narrow rallies with extra care.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying momentum indicators?",
+          "question": "How many companies are in the Nifty 50?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
-          ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
-        },
-        {
-          "question": "Which approach is most useful when learning about momentum indicators?",
-          "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "30",
+            "50",
+            "500",
+            "100"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "The Nifty 50 has 50 companies."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "About how many large BSE companies does the Sensex track?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "100",
+            "50",
+            "30",
+            "500"
+          ],
+          "correctIndex": 2,
+          "explanation": "The Sensex tracks 30 large companies."
+        },
+        {
+          "question": "Advances are 1,200 and declines are 800. What is the advance/decline ratio?",
+          "options": [
+            "1.5",
+            "0.67",
+            "2",
+            "400"
           ],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "1,200 \u00f7 800 = 1.5."
+        },
+        {
+          "question": "The index rises but most shares fall. What does this suggest?",
+          "options": [
+            "A strong broad rally",
+            "A market holiday",
+            "Zero volume",
+            "Narrow breadth, a reason for caution"
+          ],
+          "correctIndex": 3,
+          "explanation": "A few heavyweights are lifting the index while most shares lag."
+        },
+        {
+          "question": "36 of 50 shares are above their 200-day average. What percentage is that?",
+          "options": [
+            "36%",
+            "72%",
+            "50%",
+            "86%"
+          ],
+          "correctIndex": 1,
+          "explanation": "36 \u00f7 50 x 100 = 72%."
         }
       ]
     },
     {
       "id": "submod-8-9",
-      "title": "9. Volatility Indicators",
-      "intro": "Discover the important ideas behind volatility indicators.",
-      "content": "⚡ MISSION BRIEFING: VOLATILITY INDICATORS\n\nVolatility Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. Bollinger Bands and ATR are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of Bollinger Bands and ATR. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• Bollinger Bands and ATR is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what volatility indicators means, then examines how bollinger bands and atr affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nVolatility Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "9. Relative Strength and Sector Rotation",
+      "intro": "Is a share leading the market or lagging behind it?",
+      "content": "\u26a1 MISSION BRIEFING: RELATIVE STRENGTH AND SECTORS\nA share's chart only tells part of the story. Relative strength compares it with the market or with its sector. Leaders tend to hold up better when the market dips and may rise faster when it recovers, but this is a tendency and not a rule. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA share can fall and still be a strong performer if the market fell by more.\n\n\u26a1 FINANCIAL INTEL: RELATIVE PERFORMANCE\nCompare returns over the same period. If a share rises 12% while the Nifty rises 8%, it outperformed by 4 percentage points. If a share falls 2% while the Nifty falls 5%, it also outperformed, by 3 percentage points.\n\n\u26a1 FINANCIAL INTEL: THE RELATIVE STRENGTH LINE\nDivide the share's price by the index level every day and plot the result. A rising line means the share is beating the index. A falling line means it is lagging. Many analysts prefer to look for shares whose line is rising.\n\n\u26a1 FINANCIAL INTEL: SECTORS\n\u2022 NSE has sector indices such as Nifty Bank, Nifty IT, Nifty Auto, Nifty FMCG and Nifty Pharma.\n\u2022 Sector rotation means market leadership moves from one sector to another over time.\n\u2022 Past leaders can become laggards, and timing the rotation is difficult. Use sector charts to see where strength is, not to predict where it moves next.\n\n\ud83c\udf55 MINI CASE: LEADER AND LAGGARD\nOver three months the Nifty rises 4%. The fictional Sundar Foods Ltd rises 10%, so it outperformed by 10 - 4 = 6 percentage points. The fictional Rapid Rail Ltd falls 2%, so it lagged by 4 - (-2) = 6 percentage points. Meera adds Sundar Foods to her watchlist and asks why Rapid Rail is lagging, rather than assuming it will catch up.\n\n\ud83e\uddea TRY IT: WHO LED?\nOver a quarter the Nifty IT index rises 9% and the Nifty FMCG index rises 3%. Which led, and by how many points? Also, a share falls 2% while the Nifty falls 5%. Did it outperform?\n(Answers: IT led by 6 points. Yes, the share outperformed by 3 points.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nRelative strength shows leaders and laggards. Compare shares with the index and sectors, and remember that leadership changes.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying volatility indicators?",
+          "question": "A share rises 12% and the Nifty rises 8%. By how much did the share outperform?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
+            "20 percentage points",
+            "1.5 percentage points",
+            "4 percentage points",
+            "0 points"
           ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "correctIndex": 2,
+          "explanation": "12 - 8 = 4 percentage points."
         },
         {
-          "question": "Which approach is most useful when learning about volatility indicators?",
+          "question": "A share falls 2% while the Nifty falls 5%. What happened?",
           "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "It underperformed by 3 points",
+            "It matched the market",
+            "It rose",
+            "It outperformed by 3 points"
+          ],
+          "correctIndex": 3,
+          "explanation": "It fell less than the market, so it outperformed by 3 points."
+        },
+        {
+          "question": "What does a rising relative strength line (share price \u00f7 index) show?",
+          "options": [
+            "The share is outperforming the index",
+            "The share is bankrupt",
+            "Volume is zero",
+            "The index fell"
+          ],
+          "correctIndex": 0,
+          "explanation": "A rising ratio means the share is doing better than the index."
+        },
+        {
+          "question": "Which of these is an NSE sector index?",
+          "options": [
+            "Nifty Moon",
+            "Nifty Bank",
+            "Nifty Rocket",
+            "Nifty Dragon"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "Nifty Bank is a sector index."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "What is sector rotation?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "A company changing its name",
+            "A tax on sectors",
+            "Market leadership moving from one sector to another over time",
+            "A type of stock split"
           ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "correctIndex": 2,
+          "explanation": "Different sectors take turns leading the market."
         }
       ]
     },
     {
       "id": "submod-8-10",
-      "title": "10. Volume Indicators",
-      "intro": "Discover the important ideas behind volume indicators.",
-      "content": "⚡ MISSION BRIEFING: VOLUME INDICATORS\n\nVolume Indicators is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. OBV and volume profile are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of OBV and volume profile. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• OBV and volume profile is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what volume indicators means, then examines how obv and volume profile affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nVolume Indicators helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "10. ADX and the Stochastic Oscillator",
+      "intro": "How strong is the trend, and is price stretched in a range?",
+      "content": "\u26a1 MISSION BRIEFING: ADX AND STOCHASTIC\nTwo more indicators help you choose the right tool for the situation. ADX tells you how strong a trend is. The Stochastic oscillator tells you where the price sits inside its recent range. Knowing which tool fits which market saves you from many false signals. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nJ. Welles Wilder, who created the RSI, also created the ADX in the same year, 1978.\n\n\u26a1 FINANCIAL INTEL: ADX: TREND STRENGTH\n\u2022 ADX (Average Directional Index) runs from 0 to 100 and measures how strong a trend is, not its direction.\n\u2022 Below about 20: weak or no trend. Above about 25: a trending market. Above about 40: a very strong trend.\n\u2022 Two helper lines, +DI and -DI, show whether buyers or sellers are stronger.\n\u2022 High ADX favours trend tools like moving averages. Low ADX favours range tools like support, resistance and RSI.\n\n\u26a1 FINANCIAL INTEL: THE STOCHASTIC OSCILLATOR\n\u2022 George Lane developed it. It compares today's close with the high-low range of the last 14 periods.\n\u2022 %K = (Close - Lowest low) \u00f7 (Highest high - Lowest low) x 100.\n\u2022 Above 80 is the overbought zone and below 20 is the oversold zone. %D is a 3-period average of %K, and crossovers between them are used as signals.\n\u2022 Like RSI, it can stay at extremes for long in a strong trend.\n\n\u26a1 FINANCIAL INTEL: PICKING AND MIXING\nDo not stack many indicators that say the same thing. One trend tool plus one momentum tool is usually enough. More lines on a chart often add confusion, not information.\n\n\ud83c\udf55 MINI CASE: CHOOSING THE TOOL\nThe fictional GreenGrid Ltd moves sideways with an ADX of 12, so Meera uses support, resistance and the stochastic oscillator. A breakout begins and ADX climbs to 30, so she switches to trend tools like moving averages. For the stochastic reading, the 14-day low is \u20b990, the high is \u20b9110 and the close is \u20b9104. %K = (104 - 90) \u00f7 (110 - 90) x 100 = 14 \u00f7 20 x 100 = 70.\n\n\ud83e\uddea TRY IT: FIND %K\nA fictional share has a 14-day low of \u20b940, a high of \u20b960 and a close of \u20b946. What is %K, and which zone is it in? What does an ADX of 18 suggest?\n(Answers: (46 - 40) \u00f7 20 x 100 = 30, which is neither overbought nor oversold. An ADX of 18 suggests a weak trend.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nADX measures trend strength and the stochastic oscillator shows where price sits in its range. Use the right type of tool for the market, and avoid piling up similar indicators.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying volume indicators?",
+          "question": "What does ADX measure?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
+            "Trend direction only",
+            "Total volume",
+            "Company profit",
+            "Trend strength, not its direction"
           ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "correctIndex": 3,
+          "explanation": "ADX shows how strong a trend is, not which way it points."
         },
         {
-          "question": "Which approach is most useful when learning about volume indicators?",
+          "question": "An ADX above 25 generally suggests...",
           "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "A trending market",
+            "A sideways market",
+            "A holiday",
+            "No data"
+          ],
+          "correctIndex": 0,
+          "explanation": "Above about 25 usually means a trend is in place."
+        },
+        {
+          "question": "The 14-day low is \u20b990, the high is \u20b9110 and the close is \u20b9104. What is the stochastic %K?",
+          "options": [
+            "40",
+            "14",
+            "70",
+            "104"
+          ],
+          "correctIndex": 2,
+          "explanation": "(104 - 90) \u00f7 20 x 100 = 70."
+        },
+        {
+          "question": "Who developed the Stochastic oscillator?",
+          "options": [
+            "Warren Buffett",
+            "George Lane",
+            "Charles Dow",
+            "Gerald Appel"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "George Lane developed the Stochastic oscillator."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "Why avoid stacking many similar indicators?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "It is illegal",
+            "They cost money each day",
+            "They never show anything",
+            "They often say the same thing, adding confusion and not new information"
           ],
-          "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "correctIndex": 3,
+          "explanation": "Similar indicators overlap, so extra ones add little."
         }
       ]
     },
     {
       "id": "submod-8-11",
-      "title": "11. Limitations of Technical Analysis",
-      "intro": "Discover the important ideas behind limitations of technical analysis.",
-      "content": "⚡ MISSION BRIEFING: LIMITATIONS OF TECHNICAL ANALYSIS\n\nLimitations of Technical Analysis is an important part of understanding the Indian stock market. Before studying any company or investment, it is useful to understand this concept and why it matters. What charts cannot predict are connected ideas that help explain how financial markets work.\n\n• Start by understanding the meaning of What charts cannot predict. It describes one of the basic ideas behind this topic.\n\n• The other concepts explain how this idea connects with companies, investors and the wider financial system.\n\n• In India, investors can encounter these concepts while learning about NSE, BSE and listed companies. Always understand the underlying idea rather than relying only on market headlines.\n\n⚡ FINANCIAL INTEL: KEY CONCEPTS\n\n• What charts cannot predict is the starting concept to understand.\n\n• Different financial concepts should be studied together because one number or indicator rarely explains the complete situation.\n\n• Use reliable company disclosures and official exchange or regulator information when researching real examples.\n\n🍕 CASE STUDY: LEARNING THROUGH AN EXAMPLE\n\nImagine Aarav is studying a fictional Indian company. He first learns what limitations of technical analysis means, then examines how what charts cannot predict affect the company's situation. He compares the available information instead of making a decision based on one headline. This helps him understand the topic more carefully.\n\n⚠️ CRITICAL WARNING:\n\n• A financial concept does not guarantee a particular market outcome.\n\n• Do not treat educational examples as recommendations to buy or sell securities.\n\n• Investing involves risk, and minors should involve a parent or guardian in financial matters.\n\n💡 CORE TAKEAWAY:\n\nLimitations of Technical Analysis helps build a stronger understanding of the stock market. Learn the meaning, understand the related concepts and evaluate information carefully.",
+      "title": "11. Backtesting and Overfitting",
+      "intro": "How do you check an idea before risking money on it?",
+      "content": "\u26a1 MISSION BRIEFING: BACKTESTING AND OVERFITTING\nBacktesting means writing down exact trading rules and testing them on past data to see how they would have done. It is a way to find out whether an idea has any edge before you trust it. It has traps, and learning them is half the skill. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA strategy that looks perfect on past data can still fail on new data. This is called overfitting, or curve fitting.\n\n\u26a1 FINANCIAL INTEL: HOW TO BACKTEST\n\u2022 Write exact rules: entry, exit, stop-loss and position size. 'Buy when it looks strong' cannot be tested.\n\u2022 Test on many trades, not a handful.\n\u2022 Keep some data aside that you did not use to design the rules (out-of-sample), and test there too.\n\u2022 Then practise forward on a simulator before any real money.\n\n\u26a1 FINANCIAL INTEL: COMMON TRAPS\n\u2022 Overfitting: tuning the rules until they fit the past perfectly but fail on new data.\n\u2022 Too few trades: a few results prove very little.\n\u2022 Survivorship bias: testing only on shares that still exist today.\n\u2022 Ignoring costs: brokerage, taxes and slippage all reduce results.\n\u2022 Lookahead: using information that was not available at the time.\n\n\u26a1 FINANCIAL INTEL: EXPECTANCY\nExpectancy = win rate x average win - loss rate x average loss. It is the average result per trade. If it is not clearly positive after costs, the rule is not worth using.\n\n\ud83c\udf55 MINI CASE: A RULE THAT DID NOT SURVIVE COSTS\nMeera tests a pullback rule on 30 trades. The win rate is 40%, the average win is \u20b9300 and the average loss is \u20b9150. Expectancy = 0.4 x 300 - 0.6 x 150 = 120 - 90 = \u20b930 per trade. But costs are \u20b935 per trade, so the net result is 30 - 35 = -\u20b95 per trade. The rule loses money once costs are included, so she does not use it.\n\n\ud83e\uddea TRY IT: CALCULATE EXPECTANCY\nA fictional rule wins 50% of the time with an average win of \u20b9200 and an average loss of \u20b9100. What is the expectancy per trade?\n(Answer: 0.5 x 200 - 0.5 x 100 = 100 - 50 = \u20b950 per trade, before costs.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nBacktesting turns an opinion into evidence. Use exact rules, plenty of trades and out-of-sample checks, and always include costs.",
       "quiz": [
         {
-          "question": "What is the main purpose of studying limitations of technical analysis?",
+          "question": "What is backtesting?",
           "options": [
-            "To understand an important financial concept",
-            "To guarantee investment returns",
-            "To predict every market movement",
-            "To avoid analysing information"
+            "Predicting tomorrow's news",
+            "Reading annual reports",
+            "Testing exact trading rules on past data",
+            "Buying at the opening bell"
           ],
-          "correctIndex": 0,
-          "explanation": "Studying this topic builds financial knowledge but cannot guarantee market outcomes."
+          "correctIndex": 2,
+          "explanation": "Backtesting applies defined rules to past data."
         },
         {
-          "question": "Which approach is most useful when learning about limitations of technical analysis?",
+          "question": "What is overfitting?",
           "options": [
-            "Rely on rumours",
-            "Understand the concepts and examine reliable information",
-            "Follow every market headline",
-            "Assume all companies behave identically"
+            "Tuning rules so tightly to past data that they fail on new data",
+            "Eating too much",
+            "Using too little data",
+            "Trading too little"
+          ],
+          "correctIndex": 0,
+          "explanation": "Overfitted rules look perfect on the past and fail in the future."
+        },
+        {
+          "question": "Why is a test with only 5 trades weak?",
+          "options": [
+            "Five is a lucky number",
+            "Too few trades to prove anything reliable",
+            "Tests need exactly five trades",
+            "It breaks a rule"
           ],
           "correctIndex": 1,
-          "explanation": "Understanding concepts and checking reliable information leads to better analysis."
+          "explanation": "A small sample can be dominated by luck."
         },
         {
-          "question": "Which organisation operates as a securities market regulator in India?",
+          "question": "A rule wins 40%, with an average win of \u20b9300 and an average loss of \u20b9150. What is the expectancy per trade?",
           "options": [
-            "SEBI",
-            "A private stockbroker",
-            "A retail investor",
-            "A listed company"
+            "\u20b9120",
+            "\u20b990",
+            "\u20b9150",
+            "\u20b930"
+          ],
+          "correctIndex": 3,
+          "explanation": "0.4 x 300 - 0.6 x 150 = 120 - 90 = \u20b930."
+        },
+        {
+          "question": "Expectancy is \u20b930 per trade and costs are \u20b935 per trade. What is the net result?",
+          "options": [
+            "+\u20b95 per trade",
+            "+\u20b965 per trade",
+            "-\u20b95 per trade",
+            "Exactly \u20b90"
+          ],
+          "correctIndex": 2,
+          "explanation": "30 - 35 = -\u20b95, so the rule loses money after costs."
+        }
+      ]
+    },
+    {
+      "id": "submod-8-12",
+      "title": "12. Your Technical Analysis Checklist and Journal",
+      "intro": "How do you put every chart clue into one repeatable routine?",
+      "content": "\u26a1 MISSION BRIEFING: THE TECHNICAL CHECKLIST\nYou have studied trends, levels, candles, patterns, indicators and testing. This capstone puts them into a checklist and a journal you can reuse. The goal is a calm, repeatable routine, not perfect prediction. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMany professional traders keep a journal, because it shows their own repeated habits, both good and bad.\n\n\u26a1 FINANCIAL INTEL: THE CHECKLIST\n1. Trend: what does the higher timeframe say?\n2. Levels: where are support and resistance?\n3. Pattern: is there a candle or chart pattern at a meaningful level?\n4. Volume: does it support the move?\n5. Indicators: does one trend tool and one momentum tool agree?\n6. Market: how are the Nifty, breadth and the sector?\n7. Plan: entry, stop-loss, target and position size, written down.\n8. Risk: is the reward clearly bigger than the risk, with only a small share of capital at stake?\n\n\u26a1 FINANCIAL INTEL: THE JOURNAL\nAfter every trade, write the date, the share, your reason, entry, stop, target, result, how you felt and what you would change. Review the journal once a month. Your own records show which setups work for you and which mistakes repeat.\n\n\u26a1 FINANCIAL INTEL: COMMON TRAPS\n\u2022 Skipping the plan.\n\u2022 Revenge trading: trading to win back a loss, often without a plan.\n\u2022 Changing rules in the middle of a trade.\n\u2022 Trusting one tool alone.\n\u2022 Forgetting that the business and the news matter too.\n\n\ud83c\udf55 MINI CASE: LEARNING FROM THE JOURNAL\nMeera takes 20 practice trades on her simulator and wins 9, a win rate of 9 \u00f7 20 x 100 = 45%. Her journal shows that 5 of her losses came from entries made before the candle confirmed. She adds a rule: wait for confirmation. The journal turned vague regret into a specific fix.\n\n\ud83e\uddea TRY IT: BUILD YOUR OWN\nPick a chart you know and fill in each of the eight checklist lines in one sentence. Then place three practice trades on your simulator and journal each one. Discuss your notes with a parent, teacher or guardian.\n\n\ud83d\udca1 CORE TAKEAWAY:\nA checklist keeps your analysis consistent and a journal keeps you honest. No method guarantees profit, so practise on a simulator and involve a parent or guardian in any real money decision.",
+      "quiz": [
+        {
+          "question": "What is the purpose of the technical checklist?",
+          "options": [
+            "Predict exact prices",
+            "Combine trend, levels, patterns, volume, market context and a risk plan into one decision",
+            "Guarantee profit",
+            "Replace stop-losses"
+          ],
+          "correctIndex": 1,
+          "explanation": "The checklist brings all the clues and the risk plan together."
+        },
+        {
+          "question": "What should a trading journal record?",
+          "options": [
+            "Only the profits",
+            "Only share prices",
+            "Reason, entry, stop, target, result and what you felt",
+            "Only news headlines"
+          ],
+          "correctIndex": 2,
+          "explanation": "A full record shows what you did and why."
+        },
+        {
+          "question": "Out of 20 trades, 9 are wins. What is the win rate?",
+          "options": [
+            "45%",
+            "9%",
+            "20%",
+            "55%"
           ],
           "correctIndex": 0,
-          "explanation": "SEBI regulates India's securities market."
+          "explanation": "9 \u00f7 20 x 100 = 45%."
+        },
+        {
+          "question": "What is revenge trading?",
+          "options": [
+            "A trading course",
+            "Selling for a profit",
+            "A tax on losses",
+            "Trading to win back a loss, often without a plan"
+          ],
+          "correctIndex": 3,
+          "explanation": "It is emotional trading after a loss."
+        },
+        {
+          "question": "Does any checklist guarantee profits?",
+          "options": [
+            "Yes, if followed daily",
+            "No, risk always remains, so practise on a simulator and involve a parent or guardian",
+            "Yes, for large companies",
+            "Yes, with enough indicators"
+          ],
+          "correctIndex": 1,
+          "explanation": "No method removes risk."
         }
       ]
     }
