@@ -5,10 +5,10 @@ import Navbar from '@/components/Navbar';
 import Mascot from '@/components/Mascot';
 import {
   START_CASH, DAYS, MODES, MISSIONS, TROPHIES,
-  reducer, standings, netWorth, finalScore, multiplier, money, signed,
+  reducer, standings, netWorth, finalScore, newsTouches, money, signed,
 } from '@/lib/arenaGame';
 
-const SAVE_KEY = 'bullrun_arena_v2';
+const SAVE_KEY = 'bullrun_arena_v3';
 const SIZES = [
   { v: 0.25, label: '25%' },
   { v: 0.5, label: '50%' },
@@ -124,7 +124,7 @@ const buyBtn = 'rounded-xl bg-bull-lime text-bull-ink font-black text-xs upperca
 const sellBtn = 'rounded-xl bg-rose-700 text-white font-black text-xs uppercase py-2.5 transition active:scale-90 hover:brightness-110 disabled:opacity-25 cursor-pointer disabled:cursor-not-allowed';
 
 function Lobby({ save, onStart, onClose }) {
-  const [mode, setMode] = useState('blitz');
+  const [mode, setMode] = useState('classic');
   return (
     <div className="max-w-2xl mx-auto px-4 pt-6 space-y-5">
       <div className={card + ' relative rounded-3xl p-6 sm:p-8 text-center space-y-5 border-2 border-b-4 border-b-bull-lime-dark ar-pop'}>
@@ -138,7 +138,7 @@ function Lobby({ save, onStart, onClose }) {
           </span>
           <h1 className="text-3xl sm:text-4xl font-black text-white">Enter The Arena</h1>
           <p className="text-sm text-slate-400 max-w-md mx-auto">
-            Beat the news, chain winning trades and knock out four computer rivals. All money here is practice money.
+            Read the headlines, pick your moment and beat four computer rivals. All money here is practice money.
           </p>
         </div>
 
@@ -151,7 +151,7 @@ function Lobby({ save, onStart, onClose }) {
               onClick={() => setMode(m.id)}
               className={'rounded-2xl border-2 p-4 transition cursor-pointer ' + (mode === m.id ? 'border-bull-lime bg-bull-raised scale-[1.02]' : 'border-bull-line hover:border-bull-lime/60')}
             >
-              <span className="block text-lg font-black text-white">{m.id === 'blitz' ? '\u{1F525} ' : '\u{1F9E0} '}{m.name}</span>
+              <span className="block text-lg font-black text-white">{m.id === 'fast' ? '\u{1F525} ' : '\u{1F9E0} '}{m.name}</span>
               <span className="block text-xs text-slate-400">{m.blurb}</span>
               <span className="mt-2 block text-xs font-black text-bull-lime">
                 {save.best[m.id] ? 'Best score: ' + save.best[m.id].toLocaleString('en-IN') : 'No score yet'}
@@ -166,8 +166,8 @@ function Lobby({ save, onStart, onClose }) {
 
         <ul className="grid gap-2 sm:grid-cols-3 text-left text-xs text-slate-300">
           {[
-            ['\u{1F4F0}', 'News warns you 5 seconds early. Confirmed is safer than Rumour.'],
-            ['\u{1F525}', 'Close winning positions in a row for up to 5x points.'],
+            ['\u{1F4F0}', 'Headlines drop without warning, like real life. Read them, then decide.'],
+            ['\u{1F3E2}', 'Spread your money across 12 companies in 6 sectors.'],
             ['\u{1F3AF}', 'Finish 3 secret missions each match for bonus points.'],
           ].map(([icon, text]) => (
             <li key={icon} className="rounded-xl border border-bull-line bg-bull-raised p-3"><span className="mr-1">{icon}</span>{text}</li>
@@ -178,7 +178,7 @@ function Lobby({ save, onStart, onClose }) {
       <div className={card + ' rounded-3xl p-5 space-y-3'}>
         <div className="flex items-baseline justify-between">
           <h2 className="text-sm font-black uppercase tracking-wider text-white">Trophy cabinet</h2>
-          <span className="text-xs font-black text-bull-lime">{save.trophies.length} of {TROPHIES.length}</span>
+          <span className="text-xs font-black text-bull-lime">{TROPHIES.filter((t) => save.trophies.includes(t.id)).length} of {TROPHIES.length}</span>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {TROPHIES.map((t) => {
@@ -198,51 +198,38 @@ function Lobby({ save, onStart, onClose }) {
   );
 }
 
-function NewsDesk({ game, size, dispatch }) {
-  const n = game.news;
-  const f = game.flash;
-  const owned = n && n.sym !== 'ALL' ? game.holdings[n.sym] : null;
-  // Fixed height, so the buttons below never jump while you are tapping
+function NewsDesk({ game }) {
+  const log = game.newsLog;
+  const n = log[0];
+  const age = n ? game.clock - n.at : 0;
+  const fresh = !!n && age < 12;
+  const who = (x) => {
+    const st = x.sym ? game.stocks.find((s) => s.sym === x.sym) : null;
+    return st ? st.name : x.sector === 'ALL' ? 'Whole market' : x.sector + ' sector';
+  };
+  // Fixed height, so nothing jumps around while you are tapping
   return (
-    <div className="min-h-[132px] sm:min-h-[108px] flex" aria-live="polite">
+    <div className="min-h-[92px] flex" aria-live="polite">
       {n ? (
-        <div key={n.hitsAt} className="ar-pop ar-alert relative w-full overflow-hidden rounded-2xl border-2 border-amber-500 bg-bull-surface p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-3">
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-wider">
-              <span className="text-amber-400">{'\u{1F6A8}'} Breaking, hits in {Math.max(0, n.hitsAt - game.clock)}s</span>
-              <span className={'rounded-full border px-2 py-0.5 ' + (n.confirmed ? 'border-emerald-500 text-emerald-400' : 'border-bull-line text-slate-400')}>
-                {n.confirmed ? '\u{2705} Confirmed' : '\u{1F914} Rumour'}
-              </span>
-            </div>
-            <p className="text-base sm:text-lg font-black text-white leading-tight mt-1">
-              {n.sym === 'ALL' ? 'All companies' : n.sym}: {n.text} {n.pct > 0 ? '\u{1F4C8}' : '\u{1F4C9}'}
-            </p>
+        <div key={n.id} className={'ar-pop w-full rounded-2xl border-2 bg-bull-surface p-3 sm:p-4 ' + (fresh ? 'ar-alert border-amber-500' : 'border-bull-line')}>
+          <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-wider">
+            <span className={fresh ? 'text-amber-400' : 'text-slate-400'}>{'\u{1F4F0}'} {fresh ? 'Just in' : 'Latest news'}</span>
+            <span className="rounded-full border border-bull-line px-2 py-0.5 text-slate-300">{who(n)}</span>
+            <span className="text-slate-500">Day {n.day}, {age}s ago</span>
           </div>
-          {n.sym !== 'ALL' && (
-            <div className="grid grid-cols-2 gap-2 sm:w-52">
-              <button type="button" className={buyBtn} onClick={() => dispatch({ type: 'buy', sym: n.sym, size })}>Buy {n.sym}</button>
-              <button type="button" className={sellBtn} disabled={!owned} onClick={() => dispatch({ type: 'sell', sym: n.sym })}>Sell all</button>
-            </div>
+          <p className="mt-1 text-base sm:text-lg font-black text-white leading-tight">{n.text}</p>
+          {log.length > 1 && (
+            <p className="hidden sm:block mt-1 truncate text-xs text-slate-500">Earlier: {log.slice(1, 3).map((x) => x.text).join('  |  ')}</p>
           )}
-          <span className="ar-drain absolute bottom-0 left-0 h-1.5 w-full bg-amber-500" style={{ animationDuration: '5s' }} />
-        </div>
-      ) : f ? (
-        <div key={f.until} className={'ar-pop w-full rounded-2xl border-2 p-4 flex flex-col justify-center ' + (f.up ? 'border-emerald-500 bg-emerald-950/50' : 'border-rose-500 bg-rose-950/50')}>
-          <p className={'text-lg font-black ' + (f.up ? 'text-emerald-300' : 'text-rose-300')}>
-            {f.real ? (f.up ? '\u{1F680} It happened!' : '\u{1F4A5} It happened!') : '\u{1F921} Fake news!'} {f.sym === 'ALL' ? 'The whole market' : f.sym} {f.up ? 'jumps' : 'drops'}
-          </p>
-          <p className="text-xs font-bold text-slate-300">{f.real ? f.text : 'The story was false: ' + f.text}</p>
         </div>
       ) : (
         <div className="w-full rounded-2xl border-2 border-dashed border-bull-line p-4 grid place-items-center text-xs font-black uppercase tracking-widest text-slate-500">
-          {'\u{1F4E1}'} Listening for market news...
+          {'\u{1F4E1}'} Newsroom is quiet. Headlines can land at any moment...
         </div>
       )}
     </div>
   );
-}
-
-function Results({ game, save, record, onAgain, onLobby }) {
+}function Results({ game, save, record, onAgain, onLobby }) {
   const r = game.result;
   const headline = r.place === 1 ? 'Arena Champion!' : r.place === 2 ? 'So close to the crown!' : r.worth >= START_CASH ? 'Match complete!' : 'Tough market!';
   const best = save.best[game.mode] || 0;
@@ -271,7 +258,7 @@ function Results({ game, save, record, onAgain, onLobby }) {
             ['Net worth', money(r.worth)],
             ['Profit / loss', signed(r.worth - START_CASH)],
             ['Place', '#' + r.place + ' of 5'],
-            ['Best streak', game.stats.bestStreak + (game.stats.bestStreak === 1 ? ' win' : ' wins')],
+            ['Missions', game.missions.filter((m) => m.done).length + ' of ' + game.missions.length],
           ].map(([label, value]) => (
             <div key={label} className="rounded-xl border border-bull-line bg-bull-raised p-3">
               <p className="text-xs text-slate-400">{label}</p>
@@ -463,7 +450,7 @@ export default function ArenaPage() {
   const ahead = place > 1 ? table[place - 2] : null;
   const open = game && openSym ? game.stocks.find((s) => s.sym === openSym) : null;
   const openHold = open ? game.holdings[open.sym] : null;
-  const fire = game && game.streak >= 3;
+  
 
   return (
     <main className={'min-h-screen bg-bull-bg text-slate-100 antialiased font-sans relative max-w-full overflow-x-hidden pt-20 ' + (phase === 'RUNNING' ? 'pb-52 sm:pb-44' : 'pb-24')}>
@@ -493,9 +480,7 @@ export default function ArenaPage() {
                 <span key={finalScore(game)} className="rounded-xl border border-bull-line bg-bull-raised px-3 py-1.5 font-mono text-xs font-black text-white">
                   {'\u{2B50}'} {finalScore(game).toLocaleString('en-IN')}
                 </span>
-                <span className={'rounded-xl border px-3 py-1.5 text-xs font-black ' + (fire ? 'ar-fire border-orange-500 bg-orange-500 text-white' : 'border-bull-line bg-bull-raised text-slate-300')}>
-                  {'\u{1F525}'} {game.streak}{game.streak > 1 ? ' (x' + multiplier(game.streak) + ')' : ''}
-                </span>
+                
                 <button type="button" onClick={toggleMute} aria-label={save.mute ? 'Turn sound on' : 'Turn sound off'} className="h-9 w-9 rounded-xl border border-bull-line bg-bull-raised cursor-pointer">
                   {save.mute ? '\u{1F507}' : '\u{1F50A}'}
                 </button>
@@ -523,8 +508,8 @@ export default function ArenaPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-            <div className="lg:col-span-2 space-y-3">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-3">
+            <div className="min-w-0 space-y-3">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-black uppercase tracking-wider text-slate-400">Buy size</span>
                 {SIZES.map((s) => (
@@ -534,12 +519,12 @@ export default function ArenaPage() {
                 ))}
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                 {game.stocks.map((st) => {
                   const hold = game.holdings[st.sym];
                   const ch = dayChange(st);
                   const gain = hold ? Math.round((st.price - hold.avg) * hold.shares) : 0;
-                  const hot = game.news && game.news.sym === st.sym;
+                  const hot = newsTouches(game.news, st);
                   const last = st.history[st.history.length - 2];
                   return (
                     <div key={st.sym} className={'rounded-2xl border-2 bg-bull-surface p-2.5 flex flex-col gap-2 min-w-0 ' + (hot ? 'ar-alert border-amber-500' : hold ? (gain >= 0 ? 'border-emerald-500' : 'border-rose-500') : 'border-bull-line')}>
