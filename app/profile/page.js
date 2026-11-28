@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import RankBadge from '@/components/RankBadge';
+import { RANKS, getRank } from '@/lib/ranks';
 import { supabase } from '@/lib/supabase';
 import { AVATARS, BADGES, LEVELS, RARITY, BB_TO_CASH, MIN_BB, avatarById } from '@/lib/gamification';
 
@@ -177,6 +179,7 @@ export default function ProfilePage() {
   }
 
   const lvl = data ? data.level : null;
+  const rk = data ? getRank(data.xp) : null;
   const earnedCount = data ? data.badges.filter((x) => x.earned).length : 0;
   const bbNum = Math.floor(Number(bbInput)) || 0;
   const capLeft = data ? Math.max(0, data.bb.cap - data.bb.used30) : 0;
@@ -207,14 +210,19 @@ export default function ProfilePage() {
               )}
             </div>
             <div className="flex-1 min-w-0 text-center sm:text-left space-y-2">
-              {lvl && <span className="inline-block bg-bull-raised border border-bull-line text-bull-lime text-xs font-bold px-3 py-1 rounded-full">Level {lvl.index + 1} of {LEVELS.length} - {lvl.name}</span>}
+              {rk && (
+                <div className="flex items-center gap-2.5 justify-center sm:justify-start">
+                  <RankBadge rank={rk.rank} size={40} />
+                  <span className="text-lg font-black" style={{ color: rk.rank.c[1] }}>{rk.rank.name}</span>
+                </div>
+              )}
               <h1 className="text-2xl sm:text-3xl font-black text-white break-words">{me.name}</h1>
               {lvl && (
                 <div className="max-w-sm mx-auto sm:mx-0">
-                  <div className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={lvl.pct} aria-label="XP progress">
-                    <div className="h-full rounded-full transition-all" style={{ width: lvl.pct + '%', background: 'linear-gradient(90deg, #B7F34A, #19C6B4)' }} />
+                  <div className="h-3 rounded-full bg-bull-raised border border-bull-line overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={rk.pct} aria-label="XP progress">
+                    <div className="h-full rounded-full transition-all" style={{ width: rk.pct + '%', background: 'linear-gradient(90deg, ' + rk.rank.c[2] + ', ' + rk.rank.c[1] + ', ' + rk.rank.c[0] + ')' }} />
                   </div>
-                  <p className="text-sm text-slate-400 mt-1.5"><b className="font-black text-white">{data.xp.toLocaleString('en-IN')} XP</b>{lvl.next ? ' (' + lvl.toNext.toLocaleString('en-IN') + ' XP left to ' + lvl.next + ')' : ' (top level reached)'}</p>
+                  <p className="text-sm text-slate-400 mt-1.5"><b className="font-black text-white">{data.xp.toLocaleString('en-IN')} XP</b>{rk.next ? ' (' + rk.toNext.toLocaleString('en-IN') + ' XP left to ' + rk.next.name + ')' : ' (top rank reached)'}</p>
                 </div>
               )}
             </div>
@@ -250,7 +258,7 @@ export default function ProfilePage() {
                 ['Practice cash', inr(me.cash), 'text-white'],
                 ['Bazaar Bucks', me.bb + ' BB', 'text-bull-lime'],
                 ['Quiz streak', (data ? data.streak : 0) + ' days', 'text-amber-300'],
-                ['Rank', rank ? '#' + rank : '-', 'text-emerald-400'],
+                ['Leaderboard', rank ? '#' + rank : '-', 'text-emerald-400'],
               ].map(([l, v, c]) => (
                 <div key={l} className={card + ' p-4'}>
                   <p className="text-xs font-bold text-slate-400">{l}</p>
@@ -308,6 +316,25 @@ export default function ProfilePage() {
                 )}
               </section>
             </div>
+
+            {/* Rank ladder */}
+            {rk && (
+              <section className={card + ' p-6 space-y-4'}>
+                <div className="flex items-baseline justify-between">
+                  <h2 className="text-lg font-black text-white">Rank ladder</h2>
+                  <span className="text-sm font-bold text-bull-lime">{rk.rank.name}{rk.next ? ' > ' + rk.next.name : ''}</span>
+                </div>
+                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+                  {RANKS.map((r, i) => (
+                    <div key={r.id} className={'rounded-2xl border p-3 text-center ' + (i === rk.index ? 'border-bull-lime bg-bull-raised' : 'border-bull-line bg-bull-bg')}>
+                      <div className="flex justify-center"><RankBadge rank={r} size={52} locked={i > rk.index} /></div>
+                      <p className={'text-sm font-black mt-1.5 ' + (i > rk.index ? 'text-slate-400' : 'text-white')}>{r.name}</p>
+                      <p className="text-xs text-slate-400">{i === rk.index ? 'You are here' : i < rk.index ? 'Reached' : r.min.toLocaleString('en-IN') + ' XP'}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Badges */}
             <section className={card + ' p-6 space-y-4'}>
