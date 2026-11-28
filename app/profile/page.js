@@ -289,7 +289,7 @@ export default function ProfilePage() {
                 ['Practice cash', inr(me.cash), 'text-white'],
                 ['Bazaar Bucks', me.bb + ' BB', 'text-bull-lime'],
                 ['Quiz streak', (data ? data.streak : 0) + ' days', 'text-amber-300'],
-                ['World rank', rank ? '#' + rank : '-', 'text-emerald-400'],
+                ['World place', rank ? '#' + rank : '-', 'text-emerald-400'],
               ].map(([l, v, c]) => (
                 <div key={l} className={card + ' p-4'}>
                   <p className="text-xs font-bold text-slate-400">{l}</p>
