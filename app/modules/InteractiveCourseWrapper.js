@@ -442,7 +442,6 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-2xl bg-bull-bg border border-bull-lime/50 flex items-center justify-center text-2xl br-glow"><Mascot mood="cool" size={40} fallback={'\ud83d\udc02'} /></div>
             <div>
-              <span className="text-xs font-black tracking-widest text-bull-lime uppercase block font-mono">LEVEL {level}</span>
               <h3 className="text-base sm:text-lg font-black text-white">{levelName}</h3>
             </div>
           </div>
