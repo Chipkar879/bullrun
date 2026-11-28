@@ -135,14 +135,18 @@ export default function DailyQuiz() {
     const { data: topPlayers } = await supabase
       .from('profiles')
       .select('id, name, quiz_points, role')
+      .not('role', 'in', '(teacher,school_admin)')
       .order('quiz_points', { ascending: false, nullsFirst: false })
+      .order('id', { ascending: true })
       .limit(10);
     setQuizLeaderboard(topPlayers || []);
 
     const { data: allRanks } = await supabase
       .from('profiles')
       .select('id, quiz_points')
-      .order('quiz_points', { ascending: false, nullsFirst: false });
+      .not('role', 'in', '(teacher,school_admin)')
+      .order('quiz_points', { ascending: false, nullsFirst: false })
+      .order('id', { ascending: true });
 
     if (allRanks && currentUserId) {
       const idx = allRanks.findIndex((p) => p.id === currentUserId);
@@ -367,7 +371,7 @@ export default function DailyQuiz() {
   };
 
   const shareAchievement = () => {
-    const text = `🎯 I just scored ${score}/${questions.length} on the Bull Run Daily Quiz Arena and I'm currently Ranked #${userRank}! Can you beat my financial strategy? Check it out! 🚀`;
+    const text = `🎯 I just scored ${score}/${questions.length} on the Bull Run Daily Quiz Arena and I'm currently #${userRank} on Bazaar Bucks! Can you beat my financial strategy? Check it out! 🚀`;
     navigator.clipboard.writeText(text);
     alert('Achievement copied to clipboard! Share it with your friends. 🙌');
   };
@@ -457,7 +461,7 @@ export default function DailyQuiz() {
             </div>
             <div className="flex gap-4 text-right">
               <div>
-                <p className="text-xs uppercase font-black tracking-wider text-slate-400">Rank</p>
+                <p className="text-xs uppercase font-black tracking-wider text-slate-400">BB Rank</p>
                 <p className="text-sm font-mono font-black text-amber-400">#{userRank}</p>
               </div>
               <div>

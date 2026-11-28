@@ -29,7 +29,7 @@ export default function Mascot({ mood = 'hello', size = 96, fallback = '\ud83d\u
     inner = <img key="big" src={base + '.png'} {...imgProps} />;
   } else {
     inner = (
-      <picture>
+      <picture style={{ display: 'block', width: '100%', height: '100%' }}>
         <source media="(max-width: 640px)" srcSet={base + '-sm.png'} />
         <img key="pic" src={base + '.png'} {...imgProps} />
       </picture>

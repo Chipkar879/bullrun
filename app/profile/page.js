@@ -7,6 +7,7 @@ import Mascot from '@/components/Mascot';
 import RankBadge from '@/components/RankBadge';
 import { RANKS, getRank } from '@/lib/ranks';
 import { supabase } from '@/lib/supabase';
+import { getWorldRank } from '@/lib/netWorthRank';
 import { AVATARS, BADGES, LEVELS, RARITY, BB_TO_CASH, MIN_BB, avatarById } from '@/lib/gamification';
 
 const inr = (n) => '\u20B9' + Math.round(Number(n) || 0).toLocaleString('en-IN');
@@ -87,6 +88,7 @@ export default function ProfilePage() {
       .maybeSingle();
     const staff = p?.role === 'school_admin' || p?.role === 'teacher';
     const next = {
+      id: session.user.id,
       name: p?.name || 'Bull Run trader',
       email: session.user.email,
       joined: new Date(p?.created_at || session.user.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }),
@@ -107,14 +109,32 @@ export default function ProfilePage() {
           setToast('New badge: ' + out.newlyEarned.map((id) => BADGES.find((x) => x.id === id)?.name).filter(Boolean).join(', '));
         }
       }
-      const { count } = await supabase.from('profiles').select('id', { count: 'exact', head: true }).eq('role', next.role).gt('net_worth', next.netWorth);
-      setRank((count || 0) + 1);
     }
   }, [api, router]);
 
   useEffect(() => {
     loadAll().catch((e) => console.error('Profile load error', e)).finally(() => setLoading(false));
   }, [loadAll]);
+
+  // Same number as the World tab on the leaderboard, refreshed every 10 seconds
+  const rankedId = me && !me.staff ? me.id : null;
+  useEffect(() => {
+    if (!rankedId) return undefined;
+    let active = true;
+    const refresh = async () => {
+      try {
+        const mine = await getWorldRank(supabase, rankedId);
+        if (!active || !mine) return;
+        setRank(mine.rank);
+        setMe((m) => ({ ...m, netWorth: mine.netWorth }));
+      } catch (e) {
+        console.warn('Rank refresh failed', e);
+      }
+    };
+    refresh();
+    const timer = setInterval(refresh, 10000);
+    return () => { active = false; clearInterval(timer); };
+  }, [rankedId]);
 
   const saveName = async (e) => {
     e.preventDefault();
@@ -269,7 +289,7 @@ export default function ProfilePage() {
                 ['Practice cash', inr(me.cash), 'text-white'],
                 ['Bazaar Bucks', me.bb + ' BB', 'text-bull-lime'],
                 ['Quiz streak', (data ? data.streak : 0) + ' days', 'text-amber-300'],
-                ['Leaderboard', rank ? '#' + rank : '-', 'text-emerald-400'],
+                ['World rank', rank ? '#' + rank : '-', 'text-emerald-400'],
               ].map(([l, v, c]) => (
                 <div key={l} className={card + ' p-4'}>
                   <p className="text-xs font-bold text-slate-400">{l}</p>

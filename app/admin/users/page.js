@@ -226,7 +226,7 @@ export default function UsersPage() {
                     )}
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="rounded border border-bull-line bg-bull-surface px-1.5 py-0.5 font-mono text-xs font-black text-bull-lime">#{p.rank}</span>
+                        <span className="rounded border border-bull-line bg-bull-surface px-1.5 py-0.5 font-mono text-xs font-black text-bull-lime">{p.rank === '-' ? '-' : '#' + p.rank}</span>
                         <h3 className="truncate text-sm font-black text-white group-hover:text-bull-lime">{p.name || 'Unnamed Account'}</h3>
                       </div>
                       <p className="mt-1 truncate font-mono text-xs text-slate-400">{p.email}</p>

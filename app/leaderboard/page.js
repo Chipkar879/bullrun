@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import Navbar from '@/components/Navbar';
 import Mascot from '@/components/Mascot';
+import { onlyRanked, aheadOf } from '@/lib/netWorthRank';
 
 const TOP_STEP = 5;
 const NEIGHBOURS = 1;
@@ -118,7 +119,7 @@ function Avatar({ name, size = 'h-9 w-9 text-sm' }) {
 
 function applyScope(query, scope, profile) {
   // Staff are not paying students, so they never appear on any ranking.
-  query = query.not('role', 'in', '(teacher,school_admin)');
+  query = onlyRanked(query);
   if (scope === 'school' && profile?.school_id) {
     return query.eq('school_id', profile.school_id);
   }
@@ -203,9 +204,7 @@ export default function Leaderboard() {
               .select('id', { count: 'exact', head: true }),
             rankingScope,
             currentProfile
-          ).or(
-            `net_worth.gt.${value},and(net_worth.eq.${value},id.lt.${currentProfile.id})`
-          );
+          ).or(aheadOf(value, currentProfile.id));
 
           if (aheadError) throw aheadError;
 

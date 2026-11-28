@@ -47,7 +47,7 @@ export default function OverviewPage() {
     return { frozen, online, signupsToday, signupsWeek, quizToday, expiring3, days };
   }, [allProfiles, activityRows, lastSeen, now]);
 
-  const topFive = useMemo(() => allProfiles.slice(0, 5), [allProfiles]);
+  const topFive = useMemo(() => allProfiles.filter((p) => p.rank !== '-').slice(0, 5), [allProfiles]);
   const newest = useMemo(
     () => [...allProfiles].filter((p) => p.created_at).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 5),
     [allProfiles]
