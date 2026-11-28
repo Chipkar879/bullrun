@@ -1,0 +1,762 @@
+{
+  "id": "mod-10",
+  "title": "Derivatives: Futures and Options",
+  "submodules": [
+    {
+      "id": "submod-10-1",
+      "title": "1. What Are Derivatives?",
+      "intro": "What is a contract whose value comes from something else?",
+      "content": "\u26a1 MISSION BRIEFING: WHAT ARE DERIVATIVES?\nA derivative is a contract whose value is derived from something else, called the underlying. The underlying can be a share, an index like the Nifty 50, a currency or a commodity. People use derivatives to protect against price changes, which is called hedging, or to bet on price changes, which is called speculation. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nThe story goes that the Greek philosopher Thales once paid a small fee to reserve olive presses before a big harvest, which worked a bit like an option. Ideas like this are thousands of years old.\n\n\u26a1 FINANCIAL INTEL: THE KEY IDEAS\n\u2022 Underlying: the thing the contract follows, such as a share or an index.\n\u2022 Contract: an agreement about a future price, date and quantity.\n\u2022 Hedging: using a derivative to reduce a risk you already have.\n\u2022 Speculation: using a derivative to bet on a price move, which adds risk.\n\n\u26a1 FINANCIAL INTEL: FORWARDS AND FUTURES\n\u2022 A forward is a private deal between two parties to trade at a fixed price on a future date.\n\u2022 A futures contract is the same idea, but standardised and traded on an exchange, with a clearing corporation standing between buyer and seller to reduce the risk of someone not paying.\n\u2022 Options are another kind of derivative, covered in later lessons.\n\n\u26a1 FINANCIAL INTEL: WHY THEY MATTER\n\u2022 Businesses use derivatives to fix costs, such as a bakery fixing its wheat price.\n\u2022 Investors use them to protect a portfolio.\n\u2022 The same tools used carelessly can cause big losses very quickly.\n\n\ud83c\udf55 MINI CASE: THE BAKERY'S WHEAT\nA fictional bakery agrees today to buy 100 kg of wheat in 3 months at \u20b930 per kg, a total of \u20b93,000. If the market price rises to \u20b936, the bakery saves (36 - 30) x 100 = \u20b9600. If the price falls to \u20b926, it pays (30 - 26) x 100 = \u20b9400 more than the market. Aarav says the deal was a loss in the second case. Meera says the bakery wanted certainty about its cost, and it got it.\n\n\ud83e\uddea TRY IT: LOCK THE PRICE\nA fictional rice trader agrees to sell 50 kg of rice in 3 months at \u20b940 per kg. If the market price turns out to be \u20b934, who gains and by how much? What if it turns out to be \u20b945?\n(Answer: at \u20b934, the trader gains (40 - 34) x 50 = \u20b9300 compared with the market. At \u20b945, the trader gives up (45 - 40) x 50 = \u20b9250. The locked price gave certainty, not a guaranteed win.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA derivative is a contract that follows an underlying. It can reduce risk when used for hedging and add risk when used for speculation.",
+      "quiz": [
+        {
+          "question": "What is a derivative?",
+          "options": [
+            "A bank account",
+            "A contract whose value comes from an underlying",
+            "A type of tax",
+            "A company's profit"
+          ],
+          "correctIndex": 1,
+          "explanation": "A derivative's value is derived from something else, the underlying."
+        },
+        {
+          "question": "Which of these can be an underlying?",
+          "options": [
+            "A share, an index, a currency or a commodity",
+            "Only a share",
+            "Only gold",
+            "Only a bond"
+          ],
+          "correctIndex": 0,
+          "explanation": "Underlyings include shares, indices, currencies and commodities."
+        },
+        {
+          "question": "A bakery locks wheat at \u20b930 per kg for 100 kg. The market price becomes \u20b936. How much does it save?",
+          "options": [
+            "\u20b9100",
+            "\u20b9360",
+            "\u20b9400",
+            "\u20b9600"
+          ],
+          "correctIndex": 3,
+          "explanation": "(36 - 30) x 100 = \u20b9600."
+        },
+        {
+          "question": "What is hedging?",
+          "options": [
+            "Betting on a price move",
+            "Using a derivative to reduce an existing risk",
+            "Selling everything",
+            "Avoiding all contracts"
+          ],
+          "correctIndex": 1,
+          "explanation": "Hedging aims to lower a risk you already have."
+        },
+        {
+          "question": "How is a futures contract different from a forward?",
+          "options": [
+            "It has no price",
+            "It is always free",
+            "It is standardised and traded on an exchange",
+            "It is only for gold"
+          ],
+          "correctIndex": 2,
+          "explanation": "Futures are standardised exchange contracts, while forwards are private deals."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-2",
+      "title": "2. Futures Basics",
+      "intro": "What happens when you agree today to trade at a set price later?",
+      "content": "\u26a1 MISSION BRIEFING: FUTURES BASICS\nA futures contract is an agreement to buy or sell an underlying at a fixed price on a fixed date. Both sides are obliged to follow through, and profit or loss is settled every day. Because the exposure is large, futures can turn small price moves into big gains and big losses. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA futures buyer and seller are both committed. Unlike an option buyer, neither can simply walk away by losing a small fee.\n\n\u26a1 FINANCIAL INTEL: THE TERMS\n\u2022 Lot size: futures trade in fixed bundles, such as 100 shares per lot. You cannot buy just one share.\n\u2022 Expiry: the date the contract ends. The exchange sets these dates and they can change.\n\u2022 Long: you buy and profit when the price rises.\n\u2022 Short: you sell and profit when the price falls.\n\u2022 Profit or loss = (price now - entry price) x lot size for a long. A short is the opposite.\n\n\u26a1 FINANCIAL INTEL: DAILY SETTLEMENT\n\u2022 Mark-to-market means gains and losses are added to or taken from your account every day, not only at the end.\n\u2022 If losses eat into your deposit, you must top it up or the position can be closed.\n\u2022 Index futures are settled in cash. Stock futures in India are settled by delivery of shares.\n\n\u26a1 FINANCIAL INTEL: WHY PEOPLE USE THEM\n\u2022 To hedge a portfolio quickly, such as shorting index futures against a share portfolio.\n\u2022 To take a view on the whole market without picking one share.\n\u2022 To speculate, which is the riskiest use.\n\n\ud83c\udf55 MINI CASE: ONE LOT, TWO OUTCOMES\nIn her simulator, Meera buys one lot of a fictional share future at \u20b9200. The lot size is 100. If the price rises to \u20b9210, her profit is (210 - 200) x 100 = \u20b91,000. If it falls to \u20b9195, her loss is (200 - 195) x 100 = \u20b9500. A trader who sold at \u20b9200 would have the exact opposite results. Aarav notes that one side's gain is always the other side's loss.\n\n\ud83e\uddea TRY IT: SHORT IT\nIn a simulator, a trader sells one lot of 50 shares of a fictional share future at \u20b9500. The price falls to \u20b9480. What is the profit or loss?\n(Answer: a short profits when price falls. (500 - 480) x 50 = \u20b91,000 profit. If the price had risen to \u20b9520, the loss would be \u20b91,000.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nFutures commit both sides to a price and a date, are settled every day, and move in lot-sized steps. Both gains and losses can be large.",
+      "quiz": [
+        {
+          "question": "What does a long futures position profit from?",
+          "options": [
+            "A falling price",
+            "A rising price",
+            "A closed market",
+            "A dividend only"
+          ],
+          "correctIndex": 1,
+          "explanation": "A long position gains when the price rises."
+        },
+        {
+          "question": "You buy one lot of 100 at \u20b9200 and the price becomes \u20b9210. What is the profit?",
+          "options": [
+            "\u20b910",
+            "\u20b9210",
+            "\u20b9100",
+            "\u20b91,000"
+          ],
+          "correctIndex": 3,
+          "explanation": "(210 - 200) x 100 = \u20b91,000."
+        },
+        {
+          "question": "What is a lot size?",
+          "options": [
+            "The fixed bundle in which a contract trades",
+            "A type of tax",
+            "The price of a share",
+            "The exchange's name"
+          ],
+          "correctIndex": 0,
+          "explanation": "Futures trade in fixed lots, such as 100 shares."
+        },
+        {
+          "question": "What does mark-to-market mean?",
+          "options": [
+            "Choosing a market",
+            "Profit and loss are settled every day",
+            "Buying at the open",
+            "A discount for new traders"
+          ],
+          "correctIndex": 1,
+          "explanation": "Gains and losses are added or deducted daily."
+        },
+        {
+          "question": "A short position profits when...",
+          "options": [
+            "The price rises",
+            "The lot size grows",
+            "The price falls",
+            "Volume is zero"
+          ],
+          "correctIndex": 2,
+          "explanation": "A short sells first and profits if the price drops."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-3",
+      "title": "3. Margin and Leverage",
+      "intro": "How can a small deposit control a large position, and what is the catch?",
+      "content": "\u26a1 MISSION BRIEFING: MARGIN AND LEVERAGE\nTo trade futures you do not pay the full value of the contract. You put up a smaller deposit called margin. This gives leverage, which magnifies results in both directions. Leverage is the main reason derivatives are so risky. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nWith 5 times leverage, a 20% fall in the price can wipe out your entire margin.\n\n\u26a1 FINANCIAL INTEL: THE MATHS OF LEVERAGE\n\u2022 Contract value = price x lot size.\n\u2022 Margin = a percentage of the contract value, set by the exchange and broker.\n\u2022 Leverage = contract value \u00f7 margin.\n\u2022 Loss as a % of margin = % price move x leverage.\n\n\u26a1 FINANCIAL INTEL: MARGIN CALLS\n\u2022 If losses use up part of the margin, you may have to add more money, called a margin call.\n\u2022 If you do not, the broker can close your position at a loss.\n\u2022 Losses can be larger than the margin you put up.\n\n\u26a1 FINANCIAL INTEL: USING LEVERAGE SAFELY\n\u2022 Size the position by the loss you can accept, not by the margin available.\n\u2022 Keep spare cash in the account so a small swing does not force you out.\n\u2022 Remember that leverage also magnifies gains, which can tempt people to take too much.\n\n\ud83c\udf55 MINI CASE: A 10% FALL, A 50% LOSS\nA fictional futures contract is priced at \u20b9200 with a lot size of 100, so the contract value is \u20b920,000. The margin is 20%, which is \u20b94,000, so leverage is 20,000 \u00f7 4,000 = 5 times. The price falls 10%, which is a loss of 20,000 x 0.10 = \u20b92,000. That is 2,000 \u00f7 4,000 = 50% of the margin. A 20% fall would lose \u20b94,000, the whole margin.\n\n\ud83e\uddea TRY IT: WORK OUT THE HIT\nA fictional contract has a price of \u20b9500 and a lot size of 50. The margin is 20%. What are the contract value and margin, and what share of the margin is lost if the price falls 8%?\n(Answer: the contract value is 500 x 50 = \u20b925,000 and the margin is \u20b95,000. An 8% fall is a loss of 25,000 x 0.08 = \u20b92,000, which is 2,000 \u00f7 5,000 = 40% of the margin.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nMargin lets a small deposit control a large position, which magnifies gains and losses. Size positions by the loss you can accept, not by the margin you have.",
+      "quiz": [
+        {
+          "question": "What is margin?",
+          "options": [
+            "A deposit that is a part of the contract value",
+            "The full price of the contract",
+            "A tax refund",
+            "A broker's bonus"
+          ],
+          "correctIndex": 0,
+          "explanation": "Margin is a smaller deposit, not the full value."
+        },
+        {
+          "question": "Contract value is \u20b920,000 and margin is \u20b94,000. What is the leverage?",
+          "options": [
+            "2 times",
+            "4 times",
+            "5 times",
+            "20 times"
+          ],
+          "correctIndex": 2,
+          "explanation": "20,000 \u00f7 4,000 = 5 times."
+        },
+        {
+          "question": "With 5 times leverage, a 10% price fall loses what share of the margin?",
+          "options": [
+            "10%",
+            "50%",
+            "5%",
+            "100%"
+          ],
+          "correctIndex": 1,
+          "explanation": "10% x 5 = 50% of the margin."
+        },
+        {
+          "question": "What is a margin call?",
+          "options": [
+            "A free bonus",
+            "A phone survey",
+            "A tax notice",
+            "A demand to add money when losses reduce your margin"
+          ],
+          "correctIndex": 3,
+          "explanation": "You must top up the account or the position may be closed."
+        },
+        {
+          "question": "Can derivative losses exceed the margin you put up?",
+          "options": [
+            "Yes, they can",
+            "Never",
+            "Only for shares",
+            "Only in January"
+          ],
+          "correctIndex": 0,
+          "explanation": "Leverage means losses can be larger than the deposit."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-4",
+      "title": "4. Futures Pricing: Cost of Carry and Basis",
+      "intro": "Why does a future cost different from today's price?",
+      "content": "\u26a1 MISSION BRIEFING: FUTURES PRICING AND BASIS\nA futures price is usually not equal to today's price, which is called the spot price. The gap comes from the cost of holding the underlying until expiry. Understanding it explains why futures prices drift toward spot as expiry nears. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nOn the day of expiry, the futures price and the spot price become the same, which is called convergence.\n\n\u26a1 FINANCIAL INTEL: COST OF CARRY\n\u2022 Simple fair value = Spot x (1 + interest rate x time in years).\n\u2022 The idea: instead of buying the share now, you hold your money and earn interest, so the future costs a little more.\n\u2022 Expected dividends reduce the futures price, because the holder of the share would receive them.\n\n\u26a1 FINANCIAL INTEL: BASIS\n\u2022 Basis = futures price - spot price.\n\u2022 A positive basis is common and is called contango.\n\u2022 Basis shrinks toward zero as expiry gets closer.\n\n\u26a1 FINANCIAL INTEL: WHAT IT MEANS FOR TRADERS\n\u2022 A futures price is not a forecast that the share will rise.\n\u2022 If you roll a futures position into the next month, you pay the new month's higher price, which is a cost.\n\u2022 Large differences from fair value can attract arbitrage, where traders lock in tiny risk-free gaps, which keeps prices aligned.\n\n\ud83c\udf55 MINI CASE: FAIR VALUE OF A FUTURE\nA fictional share has a spot price of \u20b9100. The yearly interest rate is 6% and the contract expires in 3 months, which is 0.25 years. Fair value = 100 x (1 + 0.06 x 0.25) = 100 x 1.015 = \u20b9101.50. The basis is 101.50 - 100 = \u20b91.50. Aarav says the market expects a rise. Meera says it only reflects the interest cost of waiting.\n\n\ud83e\uddea TRY IT: PRICE THE FUTURE\nA fictional share has a spot price of \u20b9200. The yearly rate is 8% and the contract expires in 6 months. What is the simple fair value of the future, and what is the basis?\n(Answer: 200 x (1 + 0.08 x 0.5) = 200 x 1.04 = \u20b9208. The basis is 208 - 200 = \u20b98.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nFutures price reflects the cost of carry, not a forecast. The basis shrinks as expiry nears, and the futures price meets the spot price at expiry.",
+      "quiz": [
+        {
+          "question": "What is the basis?",
+          "options": [
+            "Futures price minus spot price",
+            "The lot size",
+            "The tax paid",
+            "Volume times price"
+          ],
+          "correctIndex": 0,
+          "explanation": "Basis = futures price - spot price."
+        },
+        {
+          "question": "Spot is \u20b9100, rate is 6% a year, expiry in 3 months. What is the simple fair value?",
+          "options": [
+            "\u20b9106",
+            "\u20b9101.50",
+            "\u20b9103",
+            "\u20b9100"
+          ],
+          "correctIndex": 1,
+          "explanation": "100 x (1 + 0.06 x 0.25) = \u20b9101.50."
+        },
+        {
+          "question": "What happens to the basis as expiry gets close?",
+          "options": [
+            "It doubles",
+            "It becomes negative always",
+            "It shrinks toward zero",
+            "It stays fixed"
+          ],
+          "correctIndex": 2,
+          "explanation": "Futures and spot converge at expiry."
+        },
+        {
+          "question": "Does a futures price above spot mean the market expects a rise?",
+          "options": [
+            "Yes, always",
+            "Yes, by law",
+            "Only on Mondays",
+            "No, it mostly reflects the cost of carry"
+          ],
+          "correctIndex": 3,
+          "explanation": "The gap mostly reflects interest cost, not a forecast."
+        },
+        {
+          "question": "How do expected dividends affect the futures price?",
+          "options": [
+            "They lower it",
+            "They raise it a lot",
+            "They have no effect",
+            "They set the lot size"
+          ],
+          "correctIndex": 0,
+          "explanation": "The share holder receives dividends, so the future is priced a bit lower."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-5",
+      "title": "5. Options Basics: Calls and Puts",
+      "intro": "What if you could buy the right, but not the duty, to trade later?",
+      "content": "\u26a1 MISSION BRIEFING: OPTIONS BASICS\nAn option gives the buyer the right, but not the duty, to buy or sell an underlying at a set price on or before a set date. The buyer pays a price for this right, called the premium. This is very different from futures, where both sides are committed. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nAn option buyer can never lose more than the premium paid, but an option seller can lose far more than the premium received.\n\n\u26a1 FINANCIAL INTEL: THE TERMS\n\u2022 Call option: the right to buy at the strike price.\n\u2022 Put option: the right to sell at the strike price.\n\u2022 Strike price: the fixed price in the contract.\n\u2022 Premium: the price of the option, paid by the buyer to the seller.\n\u2022 Expiry: the last date. Index options are settled in cash.\n\n\u26a1 FINANCIAL INTEL: BUYER AND SELLER\n\u2022 Buyer: pays the premium, has limited loss (the premium) and potentially large gain.\n\u2022 Seller (writer): receives the premium, has limited gain (the premium) and potentially very large loss.\n\u2022 The seller must put up margin because of that large risk.\n\n\u26a1 FINANCIAL INTEL: COST OF AN OPTION POSITION\n\u2022 Total premium = premium per share x lot size.\n\u2022 An option that is cheap can still lose its whole price quickly, so a cheap price is not a safe price.\n\n\ud83c\udf55 MINI CASE: BUYING A CALL IN THE SIMULATOR\nMeera buys one lot of a fictional call option in her simulator. The strike is \u20b9200, the premium is \u20b98 and the lot size is 100. Her total cost is 8 x 100 = \u20b9800, which is also the most she can lose. If the share stays below \u20b9200 at expiry, the option expires worthless and she loses \u20b9800. The seller keeps the \u20b9800 but must buy or sell if the option is used.\n\n\ud83e\uddea TRY IT: COUNT THE PREMIUM\nA fictional put option has a strike of \u20b9300, a premium of \u20b910 and a lot size of 50. What does the buyer pay in total, and what is the most the buyer can lose?\n(Answer: the total premium is 10 x 50 = \u20b9500, and that is also the most the buyer can lose.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nCalls give the right to buy and puts give the right to sell. Buyers risk only the premium, while sellers take on large risk for a small premium.",
+      "quiz": [
+        {
+          "question": "What does a call option give the buyer?",
+          "options": [
+            "The duty to sell",
+            "A dividend",
+            "The right to buy at the strike price",
+            "A guaranteed profit"
+          ],
+          "correctIndex": 2,
+          "explanation": "A call gives the right, not the duty, to buy."
+        },
+        {
+          "question": "What does a put option give the buyer?",
+          "options": [
+            "The right to sell at the strike price",
+            "The right to buy for free",
+            "A loan",
+            "A discount"
+          ],
+          "correctIndex": 0,
+          "explanation": "A put gives the right to sell at the strike."
+        },
+        {
+          "question": "A call has a premium of \u20b98 and a lot size of 100. What is the total cost?",
+          "options": [
+            "\u20b9108",
+            "\u20b980",
+            "\u20b9800",
+            "\u20b98,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "8 x 100 = \u20b9800."
+        },
+        {
+          "question": "What is the most an option buyer can lose?",
+          "options": [
+            "Unlimited",
+            "The premium paid",
+            "Ten times the premium",
+            "Nothing"
+          ],
+          "correctIndex": 1,
+          "explanation": "The buyer's loss is capped at the premium."
+        },
+        {
+          "question": "Why must option sellers be especially careful?",
+          "options": [
+            "They pay the premium",
+            "They cannot lose",
+            "They have no margin",
+            "They can lose far more than the premium they received"
+          ],
+          "correctIndex": 3,
+          "explanation": "The seller's gain is capped but the loss can be very large."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-6",
+      "title": "6. Option Payoffs and Breakeven",
+      "intro": "How far does the price have to move before an option buyer earns a profit?",
+      "content": "\u26a1 MISSION BRIEFING: OPTION PAYOFFS AND BREAKEVEN\nAn option's result at expiry depends on where the underlying finishes compared with the strike, and on the premium paid. The premium is a cost the price must first overcome. Learning to draw the payoff in your head helps you see the risk before you act. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA call buyer can be right about the direction of a share and still lose money if the move is too small to cover the premium.\n\n\u26a1 FINANCIAL INTEL: LONG CALL AT EXPIRY\n\u2022 Payoff per share = the larger of (price - strike) or 0.\n\u2022 Profit per share = payoff - premium.\n\u2022 Breakeven = strike + premium.\n\u2022 Maximum loss = premium. Profit grows as the price rises.\n\n\u26a1 FINANCIAL INTEL: LONG PUT AT EXPIRY\n\u2022 Payoff per share = the larger of (strike - price) or 0.\n\u2022 Profit per share = payoff - premium.\n\u2022 Breakeven = strike - premium.\n\u2022 Maximum loss = premium. Profit grows as the price falls.\n\n\u26a1 FINANCIAL INTEL: READING IT RIGHT\n\u2022 Multiply per-share results by the lot size to get rupees.\n\u2022 Between the strike and the breakeven, the option has some value but you still lose money overall.\n\u2022 These results apply at expiry. Before expiry, the option price also depends on time and volatility.\n\n\ud83c\udf55 MINI CASE: THE CALL, AT THREE PRICES\nMeera's fictional call has a strike of \u20b9200, a premium of \u20b98 and a lot size of 100. Breakeven is 200 + 8 = \u20b9208. At \u20b9220, profit per share is (220 - 200) - 8 = \u20b912, so \u20b91,200 per lot. At \u20b9205, the payoff is 5 but the premium was 8, so the loss is \u20b93 per share, \u20b9300 per lot. At \u20b9190, the option expires worthless and the loss is the full \u20b9800.\n\n\ud83e\uddea TRY IT: PUT PAYOFF\nA fictional put has a strike of \u20b9300, a premium of \u20b910 and a lot size of 50. At expiry the share is at \u20b9270. What is the breakeven, and what is the profit per lot?\n(Answer: breakeven = 300 - 10 = \u20b9290. At \u20b9270, the payoff is 30 and profit per share is 30 - 10 = \u20b920, so 20 x 50 = \u20b91,000 per lot.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nCalls need the price to rise above strike plus premium, and puts need it to fall below strike minus premium. The premium is a hurdle you must clear first.",
+      "quiz": [
+        {
+          "question": "A call has a strike of \u20b9200 and a premium of \u20b98. What is the breakeven at expiry?",
+          "options": [
+            "\u20b9192",
+            "\u20b9208",
+            "\u20b9200",
+            "\u20b9216"
+          ],
+          "correctIndex": 1,
+          "explanation": "Breakeven = strike + premium = 208."
+        },
+        {
+          "question": "The same call expires with the share at \u20b9220. What is the profit per share?",
+          "options": [
+            "\u20b920",
+            "\u20b98",
+            "\u20b912",
+            "\u20b928"
+          ],
+          "correctIndex": 2,
+          "explanation": "(220 - 200) - 8 = 12."
+        },
+        {
+          "question": "The same call expires with the share at \u20b9190. What is the result?",
+          "options": [
+            "Lose the whole premium",
+            "Profit of \u20b910",
+            "Profit of \u20b98",
+            "Lose nothing"
+          ],
+          "correctIndex": 0,
+          "explanation": "It expires worthless, so the premium is lost."
+        },
+        {
+          "question": "A put has a strike of \u20b9300 and a premium of \u20b910. What is the breakeven?",
+          "options": [
+            "\u20b9310",
+            "\u20b9300",
+            "\u20b9270",
+            "\u20b9290"
+          ],
+          "correctIndex": 3,
+          "explanation": "Breakeven = strike - premium = 290."
+        },
+        {
+          "question": "A call buyer is right about direction, but the move is smaller than the premium. What happens?",
+          "options": [
+            "Still a profit",
+            "Profit doubles",
+            "Still a loss overall",
+            "The premium is refunded"
+          ],
+          "correctIndex": 2,
+          "explanation": "The price must clear the premium before there is a profit."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-7",
+      "title": "7. Intrinsic Value, Time Value and Moneyness",
+      "intro": "What are you really paying for when you buy an option?",
+      "content": "\u26a1 MISSION BRIEFING: INTRINSIC VALUE, TIME VALUE AND MONEYNESS\nAn option's premium has two parts. Intrinsic value is the amount it is worth if used right now. Time value is the extra you pay for the chance that things move in your favour before expiry. Knowing the two parts shows why some options are so likely to lose money. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nAt the moment of expiry, an option has no time value left. Its price is only its intrinsic value.\n\n\u26a1 FINANCIAL INTEL: INTRINSIC VALUE\n\u2022 Call intrinsic value = the larger of (price - strike) or 0.\n\u2022 Put intrinsic value = the larger of (strike - price) or 0.\n\u2022 Premium = intrinsic value + time value.\n\n\u26a1 FINANCIAL INTEL: MONEYNESS\n\u2022 In the money (ITM): the option has intrinsic value. A call is ITM when price is above strike.\n\u2022 At the money (ATM): the strike is close to the current price.\n\u2022 Out of the money (OTM): no intrinsic value. A call is OTM when price is below strike.\n\u2022 An OTM option is all time value, so it is cheap, but it often expires worthless.\n\n\u26a1 FINANCIAL INTEL: A COMMON TRAP\n\u2022 Far OTM options look cheap, so beginners buy many of them, then lose the premium again and again.\n\u2022 The cheapness reflects a low chance of success, not a bargain.\n\n\ud83c\udf55 MINI CASE: SPLITTING THE PREMIUM\nA fictional share trades at \u20b9210. A call with a strike of \u20b9200 has a premium of \u20b915. Its intrinsic value is 210 - 200 = \u20b910, so its time value is 15 - 10 = \u20b95. A call with a strike of \u20b9220 costs \u20b94. It is OTM, so its intrinsic value is 0 and the whole \u20b94 is time value. Aarav loves that it is cheap. Meera points out the share must rise more than \u20b910 just to break even.\n\n\ud83e\uddea TRY IT: SPLIT IT\nA fictional share trades at \u20b9300. A put with a strike of \u20b9320 has a premium of \u20b928. What is its intrinsic value and time value, and is it ITM or OTM?\n(Answer: intrinsic value = 320 - 300 = \u20b920 and time value = 28 - 20 = \u20b98. The put is in the money, because the strike is above the price.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nPremium is intrinsic value plus time value. OTM options are cheap because they usually fail, not because they are bargains.",
+      "quiz": [
+        {
+          "question": "What is the premium made of?",
+          "options": [
+            "Intrinsic value plus time value",
+            "Tax plus brokerage",
+            "Only the strike",
+            "Lot size times 2"
+          ],
+          "correctIndex": 0,
+          "explanation": "Premium = intrinsic value + time value."
+        },
+        {
+          "question": "A share is at \u20b9210 and a call has a strike of \u20b9200. What is its intrinsic value?",
+          "options": [
+            "\u20b9210",
+            "\u20b90",
+            "\u20b9200",
+            "\u20b910"
+          ],
+          "correctIndex": 3,
+          "explanation": "210 - 200 = \u20b910."
+        },
+        {
+          "question": "When is a call out of the money?",
+          "options": [
+            "Price is above the strike",
+            "Price is below the strike",
+            "Price equals expiry",
+            "Volume is high"
+          ],
+          "correctIndex": 1,
+          "explanation": "A call is OTM when the price is below the strike."
+        },
+        {
+          "question": "The premium is \u20b915 and intrinsic value is \u20b910. What is the time value?",
+          "options": [
+            "\u20b925",
+            "\u20b910",
+            "\u20b95",
+            "\u20b915"
+          ],
+          "correctIndex": 2,
+          "explanation": "15 - 10 = \u20b95."
+        },
+        {
+          "question": "What is the time value at the exact moment of expiry?",
+          "options": [
+            "Zero",
+            "Equal to the premium",
+            "Equal to the strike",
+            "Always \u20b910"
+          ],
+          "correctIndex": 0,
+          "explanation": "Only intrinsic value remains at expiry."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-8",
+      "title": "8. Time Decay and Volatility",
+      "intro": "Why can an option lose value even when the share does not move?",
+      "content": "\u26a1 MISSION BRIEFING: TIME DECAY AND VOLATILITY\nOptions are a wasting asset. Their time value melts away as expiry gets closer, which is called time decay. How much you pay also depends on how much the market expects the price to swing, called implied volatility. Both can make a correct view lose money. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIf a share does not move at all, an option's price usually still drifts down toward its intrinsic value as expiry approaches.\n\n\u26a1 FINANCIAL INTEL: TIME DECAY\n\u2022 Time value shrinks every day, and the loss usually speeds up in the last days before expiry.\n\u2022 Theta is the name for the daily loss of value.\n\u2022 Buyers fight time decay. Sellers collect it, but they carry large risk.\n\n\u26a1 FINANCIAL INTEL: VOLATILITY\n\u2022 Historical volatility: how much the price actually moved in the past.\n\u2022 Implied volatility (IV): how much movement the option price is assuming for the future.\n\u2022 Higher IV means higher premiums. Lower IV means lower premiums.\n\n\u26a1 FINANCIAL INTEL: EVENT RISK\n\u2022 Before big events such as results or policy announcements, IV tends to rise.\n\u2022 After the event, uncertainty drops, IV falls, and premiums can fall sharply even if the price moved in your favour. This is sometimes called a volatility crush.\n\u2022 Many beginners buy options before an event and lose money anyway.\n\n\ud83c\udf55 MINI CASE: THE SHRINKING PREMIUM\nA fictional at-the-money call is bought for \u20b920, which is all time value, with 30 days to expiry. The share does not move. With 10 days left, the premium is \u20b98. The buyer has lost 20 - 8 = \u20b912 per share, which is 12 \u00f7 20 x 100 = 60% of the premium. Nothing went wrong with the share. Time just passed.\n\n\ud83e\uddea TRY IT: MEASURE THE DECAY\nA fictional option has a time value of \u20b950 with 20 days left. With 5 days left and the share unchanged, it is \u20b910. How much time value was lost, and what percentage is that?\n(Answer: 50 - 10 = \u20b940 lost, which is 40 \u00f7 50 x 100 = 80% of the time value.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nTime decay and falling volatility can shrink an option's price even when the share goes your way. Be especially careful with options near expiry and around big events.",
+      "quiz": [
+        {
+          "question": "What is time decay?",
+          "options": [
+            "The loss of an option's time value as expiry approaches",
+            "A tax on options",
+            "A rise in lot size",
+            "A longer trading day"
+          ],
+          "correctIndex": 0,
+          "explanation": "Time value melts away as expiry nears."
+        },
+        {
+          "question": "What does implied volatility describe?",
+          "options": [
+            "Yesterday's closing price",
+            "The strike price",
+            "How much movement the option price is assuming",
+            "The broker's fee"
+          ],
+          "correctIndex": 2,
+          "explanation": "IV shows the expected size of price swings."
+        },
+        {
+          "question": "What usually happens to premiums when IV rises?",
+          "options": [
+            "They fall",
+            "They rise",
+            "They become zero",
+            "They are refunded"
+          ],
+          "correctIndex": 1,
+          "explanation": "Higher IV means higher option premiums."
+        },
+        {
+          "question": "An option's time value falls from \u20b920 to \u20b98 with no share move. What percentage of it was lost?",
+          "options": [
+            "8%",
+            "20%",
+            "40%",
+            "60%"
+          ],
+          "correctIndex": 3,
+          "explanation": "12 \u00f7 20 x 100 = 60%."
+        },
+        {
+          "question": "Why can options lose value right after a big event even if the price moved your way?",
+          "options": [
+            "Volatility falls and the premium drops",
+            "Options are banned after events",
+            "Lot size changes",
+            "Brokers charge double"
+          ],
+          "correctIndex": 0,
+          "explanation": "Falling implied volatility can cut the premium."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-9",
+      "title": "9. The Greeks in Plain Words",
+      "intro": "What do delta, theta and vega tell you about an option?",
+      "content": "\u26a1 MISSION BRIEFING: THE GREEKS IN PLAIN WORDS\nThe Greeks are measures of how an option's price reacts to different things. You do not need advanced maths to use the idea. They help you see why an option moved and what could hurt you next. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nDelta is often used as a rough guide to the chance an option finishes in the money, so a delta of 0.3 is a loose way of saying about a 30% chance.\n\n\u26a1 FINANCIAL INTEL: DELTA\n\u2022 Delta: roughly how much the option price changes for a \u20b91 move in the underlying.\n\u2022 Calls have delta between 0 and 1. Puts have delta between 0 and -1.\n\u2022 An at-the-money option has a delta of about 0.5. Deep in the money options have deltas near 1, and far out of the money options near 0.\n\n\u26a1 FINANCIAL INTEL: THETA, VEGA, GAMMA\n\u2022 Theta: the rupees an option loses per day from time passing. It is usually negative for buyers.\n\u2022 Vega: how much the price changes for a 1 point change in implied volatility.\n\u2022 Gamma: how fast delta itself changes. It is highest for at-the-money options near expiry, which is why they can swing wildly.\n\n\u26a1 FINANCIAL INTEL: USING THEM\n\u2022 The Greeks are estimates and change as the price, time and volatility change.\n\u2022 Check the delta, theta and vega before you buy, so you know what moves you are betting on.\n\n\ud83c\udf55 MINI CASE: A DELTA EXAMPLE\nA fictional call has a delta of 0.5 and a premium of \u20b910. The share rises by \u20b94. The premium should rise by about 0.5 x 4 = \u20b92, to about \u20b912. For a lot of 100, that is about \u20b9200. Meanwhile, the option has a theta of -1.5, so each day it quietly loses about \u20b91.50 per share. After 4 days, that is about 4 x 1.5 = \u20b96 per share from time alone.\n\n\ud83e\uddea TRY IT: ESTIMATE THE MOVE\nA fictional call has a delta of 0.3 and the share rises \u20b910. A fictional put has a delta of -0.4 and the share falls \u20b95. Estimate the change in each option's premium.\n(Answer: the call rises by about 0.3 x 10 = \u20b93. The put rises by about 0.4 x 5 = \u20b92, because a falling share helps a put.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nDelta shows how much an option follows the share, theta shows what time takes away, and vega shows the effect of volatility. They are guides, not guarantees.",
+      "quiz": [
+        {
+          "question": "What does delta show?",
+          "options": [
+            "The expiry date",
+            "The lot size",
+            "The brokerage",
+            "About how much the option price changes per \u20b91 move in the underlying"
+          ],
+          "correctIndex": 3,
+          "explanation": "Delta links option price changes to underlying moves."
+        },
+        {
+          "question": "An at-the-money option usually has a delta of about...",
+          "options": [
+            "0",
+            "0.5",
+            "5",
+            "100"
+          ],
+          "correctIndex": 1,
+          "explanation": "ATM options have a delta near 0.5."
+        },
+        {
+          "question": "A call with a delta of 0.5 sees the share rise \u20b94. About how much does the premium rise?",
+          "options": [
+            "\u20b94",
+            "\u20b90.5",
+            "\u20b92",
+            "\u20b98"
+          ],
+          "correctIndex": 2,
+          "explanation": "0.5 x 4 = \u20b92."
+        },
+        {
+          "question": "What does theta measure?",
+          "options": [
+            "The value lost per day as time passes",
+            "The strike price",
+            "The share's dividend",
+            "The market's size"
+          ],
+          "correctIndex": 0,
+          "explanation": "Theta is the daily time decay."
+        },
+        {
+          "question": "Which Greek measures sensitivity to implied volatility?",
+          "options": [
+            "Delta",
+            "Theta",
+            "Gamma",
+            "Vega"
+          ],
+          "correctIndex": 3,
+          "explanation": "Vega shows the effect of volatility changes."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-10",
+      "title": "10. Hedging and Defined-Risk Strategies",
+      "intro": "How can options limit your downside instead of adding risk?",
+      "content": "\u26a1 MISSION BRIEFING: HEDGING AND DEFINED-RISK STRATEGIES\nOptions can be used like insurance. A hedge costs money, the premium, and in return it limits how much you can lose. Defined-risk strategies are built so that you know the worst case before you start. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA protective put works like an insurance policy on a share you own. You pay a premium and, in return, your loss is capped.\n\n\u26a1 FINANCIAL INTEL: PROTECTIVE PUT\n\u2022 You own a share and buy a put option on it.\n\u2022 If the share falls below the strike, the put gains and offsets the loss.\n\u2022 Maximum loss per share = (purchase price - strike) + premium.\n\u2022 The cost is the premium, which also lowers your profit if the share rises.\n\n\u26a1 FINANCIAL INTEL: BULL CALL SPREAD\n\u2022 Buy a call at a lower strike and sell a call at a higher strike.\n\u2022 Net cost = premium paid - premium received.\n\u2022 Maximum loss = net cost. Maximum profit = difference in strikes - net cost.\n\u2022 Breakeven = lower strike + net cost.\n\u2022 It costs less than a single call but caps your profit.\n\n\u26a1 FINANCIAL INTEL: IMPORTANT\n\u2022 Hedging reduces risk, not eliminates it, and always has a cost.\n\u2022 Selling a call or put on its own, without protection, is not a defined-risk strategy.\n\u2022 Learn these on a simulator before even thinking about real money.\n\n\ud83c\udf55 MINI CASE: INSURANCE ON A SHARE\nIn her simulator, Meera owns a fictional share bought at \u20b9200, lot size 100. She buys a put with a strike of \u20b9190 for a premium of \u20b95. Her maximum loss per share is (200 - 190) + 5 = \u20b915, which is \u20b91,500 per lot. If the share rises to \u20b9230, her gain is (230 - 200) - 5 = \u20b925 per share. For a spread, buying a call at \u20b9200 for \u20b910 and selling a call at \u20b9210 for \u20b94 costs \u20b96, so the maximum loss is \u20b96, the maximum profit is 10 - 6 = \u20b94, and breakeven is \u20b9206.\n\n\ud83e\uddea TRY IT: PRICE THE PROTECTION\nA fictional share is held at \u20b9500, lot size 50. A put with a strike of \u20b9480 costs \u20b912. What is the maximum loss per share, and per lot?\n(Answer: (500 - 480) + 12 = \u20b932 per share, so 32 x 50 = \u20b91,600 per lot.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nHedges and spreads put a limit on losses at a cost. Know your worst case in rupees before you enter, and avoid selling options without protection.",
+      "quiz": [
+        {
+          "question": "What is a protective put?",
+          "options": [
+            "Selling a share",
+            "Buying a put on a share you own",
+            "A loan from a broker",
+            "Buying two futures"
+          ],
+          "correctIndex": 1,
+          "explanation": "It is insurance for a share you hold."
+        },
+        {
+          "question": "A share is bought at \u20b9200, a \u20b9190 put costs \u20b95. What is the maximum loss per share?",
+          "options": [
+            "\u20b95",
+            "\u20b910",
+            "\u20b920",
+            "\u20b915"
+          ],
+          "correctIndex": 3,
+          "explanation": "(200 - 190) + 5 = \u20b915."
+        },
+        {
+          "question": "Buy a \u20b9200 call for \u20b910 and sell a \u20b9210 call for \u20b94. What is the maximum loss per share?",
+          "options": [
+            "\u20b94",
+            "\u20b910",
+            "\u20b96",
+            "\u20b914"
+          ],
+          "correctIndex": 2,
+          "explanation": "Net cost is 10 - 4 = \u20b96, which is the maximum loss."
+        },
+        {
+          "question": "What is the breakeven of that spread?",
+          "options": [
+            "\u20b9206",
+            "\u20b9210",
+            "\u20b9200",
+            "\u20b9216"
+          ],
+          "correctIndex": 0,
+          "explanation": "Lower strike 200 + net cost 6 = \u20b9206."
+        },
+        {
+          "question": "Does hedging remove all risk?",
+          "options": [
+            "Yes, completely",
+            "Yes, with puts only",
+            "No, it reduces risk at a cost",
+            "Yes, if done daily"
+          ],
+          "correctIndex": 2,
+          "explanation": "A hedge costs money and still leaves some risk."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-11",
+      "title": "11. Why Most Beginners Lose",
+      "intro": "What does the evidence say about trading derivatives?",
+      "content": "\u26a1 MISSION BRIEFING: WHY MOST BEGINNERS LOSE\nStudies by SEBI, India's market regulator, have found that around nine in ten individual traders in futures and options lose money, and many lose year after year. This lesson looks at why, so you can understand the risk. Derivatives trading is only for adults, and brokers require extra checks. For you, the right place is a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIn those SEBI studies, losses were large for the average trader, and the costs of trading made the results worse.\n\n\u26a1 FINANCIAL INTEL: THE MAIN REASONS\n\u2022 Leverage: small moves create big losses.\n\u2022 Time decay: option buyers lose value daily.\n\u2022 Costs: brokerage, taxes and other charges add up with every trade.\n\u2022 Overtrading: many small trades, many costs.\n\u2022 Expiry-day gambling: buying very cheap options on the last day, hoping for a miracle.\n\u2022 Selling options for small premiums and then facing a huge loss on a sudden move.\n\n\u26a1 FINANCIAL INTEL: THE SELLER'S TRAP\n\u2022 An option seller wins a small amount most of the time and loses a large amount rarely.\n\u2022 It can feel safe until one gap move erases many months of gains.\n\u2022 The maximum gain is the premium. The loss can be many times larger.\n\n\u26a1 FINANCIAL INTEL: EXPECTANCY AND COSTS\n\u2022 Expectancy = win rate x average win - loss rate x average loss.\n\u2022 Subtract costs from every trade. A rule with zero expectancy before costs loses money after costs.\n\n\ud83c\udf55 MINI CASE: THE LOPSIDED SELLER\nA fictional trader sells a call with a strike of \u20b9200 for a premium of \u20b95, lot size 100. The most that can be gained is 5 x 100 = \u20b9500. The share gaps up to \u20b9240 on news. The loss per share is (240 - 200) - 5 = \u20b935, which is \u20b93,500 per lot, or 7 times the best possible gain. A different trader wins 40% of trades with an average win of \u20b93,000 and an average loss of \u20b92,000. Expectancy = 0.4 x 3,000 - 0.6 x 2,000 = 1,200 - 1,200 = \u20b90. With costs of \u20b9150 per trade, the result is -\u20b9150 per trade.\n\n\ud83e\uddea TRY IT: SIZE THE DANGER\nA fictional trader sells a put with a strike of \u20b9300 for a premium of \u20b96, lot size 50. The share falls to \u20b9260. What is the loss per lot, and what was the maximum possible gain?\n(Answer: the loss per share is (300 - 260) - 6 = \u20b934, so 34 x 50 = \u20b91,700 per lot. The maximum gain was 6 x 50 = \u20b9300.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nMost individual derivatives traders lose money because of leverage, decay, costs and overtrading. Treat this area with great respect and practise only on a simulator until you are an adult.",
+      "quiz": [
+        {
+          "question": "What have SEBI studies found about individual futures and options traders?",
+          "options": [
+            "Most make steady profits",
+            "Everyone profits",
+            "Around nine in ten lose money",
+            "Nobody trades"
+          ],
+          "correctIndex": 2,
+          "explanation": "The SEBI studies found that a large majority lose money."
+        },
+        {
+          "question": "Which of these is a common reason beginners lose?",
+          "options": [
+            "Too little leverage",
+            "Costs and overtrading",
+            "Too much patience",
+            "Reading too much"
+          ],
+          "correctIndex": 1,
+          "explanation": "Costs, leverage and overtrading hurt most beginners."
+        },
+        {
+          "question": "An option seller receives \u20b95 per share and the share gap makes the loss \u20b935 per share. The loss is how many times the premium?",
+          "options": [
+            "7 times",
+            "2 times",
+            "35 times",
+            "1 time"
+          ],
+          "correctIndex": 0,
+          "explanation": "35 \u00f7 5 = 7 times."
+        },
+        {
+          "question": "A rule has an expectancy of \u20b90 before costs and costs are \u20b9150 per trade. What is the result per trade?",
+          "options": [
+            "+\u20b9150",
+            "\u20b90",
+            "+\u20b91,500",
+            "-\u20b9150"
+          ],
+          "correctIndex": 3,
+          "explanation": "0 - 150 = -\u20b9150."
+        },
+        {
+          "question": "Who may trade derivatives, and where should kids practise?",
+          "options": [
+            "Anyone, on real money",
+            "Adults only, and kids should practise on a simulator",
+            "Only children",
+            "Nobody can practise"
+          ],
+          "correctIndex": 1,
+          "explanation": "Derivatives are for adults, and a simulator is the safe way to learn."
+        }
+      ]
+    },
+    {
+      "id": "submod-10-12",
+      "title": "12. Your Derivatives Checklist and Journal",
+      "intro": "How do you put every lesson into one careful routine?",
+      "content": "\u26a1 MISSION BRIEFING: THE DERIVATIVES CHECKLIST\nYou have studied futures, margin, pricing, options, payoffs, time decay, the Greeks, hedging and the risks. This capstone turns it into a checklist and a journal for your simulator practice. The goal is a careful, repeatable routine, not fast profit. Derivatives are high-risk and only for adults, so use this lesson to learn and practise on a simulator. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMany professional traders keep a journal, because it shows their own repeated habits, both good and bad.\n\n\u26a1 FINANCIAL INTEL: THE CHECKLIST\n1. Purpose: am I hedging a risk or just practising a view?\n2. View: what does the trend and the market say?\n3. Contract: type (call, put or future), strike and expiry.\n4. Maximum loss: the rupee amount I can lose, known before I enter.\n5. Size: the maximum loss is no more than about 1% of my simulator capital.\n6. Time and events: how many days are left, how much theta, and is there an event ahead?\n7. Costs: what will charges take from the trade?\n8. Exit plan: target, stop-loss and a time limit written down.\n\n\u26a1 FINANCIAL INTEL: THE JOURNAL\nAfter every trade, write the date, the contract, your reason, entry, exit, result, how you felt and what you would change. Review the journal each month. It turns vague regret into a specific fix.\n\n\u26a1 FINANCIAL INTEL: COMMON TRAPS\n\u2022 Buying cheap options in the last days before expiry.\n\u2022 Trading to win back a loss.\n\u2022 Selling options without protection.\n\u2022 Using the full margin available.\n\u2022 Changing the plan in the middle of a trade.\n\n\ud83c\udf55 MINI CASE: LEARNING FROM THE JOURNAL\nMeera has \u20b91,00,000 in her simulator, so 1% is \u20b91,000. A call with a premium of \u20b98 and a lot size of 100 costs \u20b9800 at most, so one lot fits her limit. After 15 practice trades she wins 6, a win rate of 6 \u00f7 15 x 100 = 40%. Her journal shows that 7 of her 9 losses came from options bought with fewer than 5 days to expiry. She adds a rule: only buy options with at least 15 days left.\n\n\ud83e\uddea TRY IT: BUILD YOUR OWN\nFill in the eight checklist lines for an imaginary trade. Then work out how many lots you can take: with \u20b92,00,000 in the simulator, risk of 1%, and a premium of \u20b910 with a lot size of 50, how many lots fit?\n(Answer: 1% of \u20b92,00,000 is \u20b92,000. One lot costs 10 x 50 = \u20b9500, so 2,000 \u00f7 500 = 4 lots. Discuss your notes with a parent, teacher or guardian.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA checklist keeps you careful and a journal keeps you honest. No method guarantees profit, so practise on a simulator and involve a parent or guardian in any real money decision.",
+      "quiz": [
+        {
+          "question": "What is the purpose of the derivatives checklist?",
+          "options": [
+            "To guarantee profit",
+            "To bring the main checks and a risk limit into one routine",
+            "To replace a stop-loss",
+            "To predict prices"
+          ],
+          "correctIndex": 1,
+          "explanation": "The checklist keeps your analysis and risk consistent."
+        },
+        {
+          "question": "Simulator capital is \u20b91,00,000 and you risk 1%. What is the maximum loss per trade?",
+          "options": [
+            "\u20b9100",
+            "\u20b910,000",
+            "\u20b91,000",
+            "\u20b91,00,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "1% of 1,00,000 = \u20b91,000."
+        },
+        {
+          "question": "Out of 15 trades, 6 are wins. What is the win rate?",
+          "options": [
+            "6%",
+            "60%",
+            "9%",
+            "40%"
+          ],
+          "correctIndex": 3,
+          "explanation": "6 \u00f7 15 x 100 = 40%."
+        },
+        {
+          "question": "Why keep a trading journal?",
+          "options": [
+            "It shows your repeated habits and helps fix mistakes",
+            "It replaces risk limits",
+            "It guarantees wins",
+            "It is required by law"
+          ],
+          "correctIndex": 0,
+          "explanation": "A journal turns vague regret into specific fixes."
+        },
+        {
+          "question": "Does any checklist guarantee profit in derivatives?",
+          "options": [
+            "Yes, if used daily",
+            "Yes, for futures",
+            "No, risk always remains, so practise on a simulator and involve a parent or guardian",
+            "Yes, for hedged trades"
+          ],
+          "correctIndex": 2,
+          "explanation": "No method removes risk."
+        }
+      ]
+    }
+  ]
+}
