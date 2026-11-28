@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import Mascot from '@/components/Mascot';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 
@@ -494,6 +495,7 @@ export default function Home() {
 
         {/* HEADLINE BLOCK */}
         <div className="space-y-4 max-w-3xl mx-auto select-none">
+          <div className="flex justify-center"><Mascot mood="hello" size={150} eager /></div>
           
           {/* BADGE */}
           <div>

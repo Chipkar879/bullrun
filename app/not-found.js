@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Mascot from '@/components/Mascot';
 
 export default function NotFound() {
   return (
@@ -11,7 +12,7 @@ export default function NotFound() {
         
         {/* Visual Graphic Element */}
         <div className="space-y-2">
-          <span className="text-6xl block animate-bounce" role="img" aria-label="Stock Down">📉</span>
+          <div className="flex justify-center"><Mascot mood="oops" size={130} eager /></div>
           <h1 className="font-poppins font-black text-6xl text-bull-lime tracking-tight filter drop-shadow-[0_0_15px_color-mix(in_srgb,var(--color-bull-lime)_30%,transparent)]">
             404
           </h1>

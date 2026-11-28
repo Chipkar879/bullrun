@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
+import Mascot from '@/components/Mascot';
 import { supabase } from '@/lib/supabase';
 import { ASSETS, ASSET_BY_SYM, CATEGORIES } from '@/lib/catalog';
 
@@ -1155,6 +1156,7 @@ export default function RealSimulatorPage() {
         feesTotal: Number(result.fees?.total || 0),
         cashEffect: Number(result.cashEffect),
         newBalance: Number(result.balance),
+        xpNote: result.xpNote || null,
       });
 
       setOrderStage('SUCCESS');
@@ -1417,7 +1419,7 @@ export default function RealSimulatorPage() {
                 <button onClick={() => setActivePanel('owned')} className="text-xs font-bold px-3 py-1.5 rounded-full bg-bull-raised border border-bull-line hover:border-bull-lime">See all</button>
               </div>
               {ownedRows.length === 0 ? (
-                <p className="text-sm text-slate-400 py-10 text-center">Nothing owned yet. Pick an asset and place a practice order.</p>
+                <div className="py-6 text-center"><div className="flex justify-center"><Mascot mood="curious" size={96} eager /></div><p className="text-sm text-slate-400 mt-2">Nothing owned yet. Pick an asset and place a practice order.</p></div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
                   {ownedRows.slice(0, 6).map((row) => (
@@ -1569,7 +1571,8 @@ export default function RealSimulatorPage() {
                 {orderStage === 'SUCCESS' && executedReceipt && (
                   <div className="space-y-4">
                     <div className="text-emerald-300 font-black text-base">
-                      Simulated order completed · {executedReceipt.orderId}
+                      <span className="flex items-center gap-3"><Mascot mood={executedReceipt.xpNote ? 'encouraging' : 'celebrating'} size={64} eager /><span>Simulated order completed · {executedReceipt.orderId}</span></span>
+                    {executedReceipt.xpNote && <p className="mt-2 text-sm font-bold text-amber-200">{executedReceipt.xpNote}</p>}
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 bg-bull-raised border border-bull-line p-4 rounded-xl text-sm">

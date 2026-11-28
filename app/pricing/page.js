@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
+import Mascot from '@/components/Mascot';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
@@ -257,6 +258,7 @@ export default function PricingPage() {
 
         {/* HEADER */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <div className="flex justify-center"><Mascot mood="chest" size={110} eager /></div>
           <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-lime/30 text-bull-lime text-xs uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner font-mono">
             {'\u26A1'} BULL RUN PASS
           </span>
@@ -320,7 +322,7 @@ export default function PricingPage() {
         {/* LOCKED ACCOUNT WARNING - EXCLUSIVE TO FROZEN STATE */}
         {userSession && status.isFrozen && !status.isSuperAdmin && (
           <div className="bg-rose-950/60 border border-rose-500 p-6 rounded-3xl text-center space-y-3 max-w-xl mx-auto shadow-[0_0_30px_color-mix(in_srgb,var(--color-bull-coral)_25%,transparent)] animate-pulse">
-            <div className="text-3xl">{'\uD83D\uDD12'}</div>
+            <div className="flex justify-center"><Mascot mood="sleepy" size={84} eager /></div>
             <h2 className="text-lg font-black text-rose-200 uppercase font-mono tracking-wider">
               YOUR ACCOUNT ACCESS IS FROZEN
             </h2>
@@ -614,6 +616,7 @@ export default function PricingPage() {
             </div>
 
             <div className="space-y-2">
+              <div className="flex justify-center"><Mascot mood="celebrating" size={110} eager /></div>
               <h2 className="text-xl font-black text-emerald-400">Subscription Successfully Active!</h2>
               <p className="text-xs text-slate-300 leading-relaxed font-sans font-medium">
                 Your payment cleared. Your account is fully unfrozen in the database with access to all modules and Volatility Arena matches.

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import Navbar from '@/components/Navbar';
+import Mascot from '@/components/Mascot';
 
 const TOP_STEP = 5;
 const NEIGHBOURS = 1;
@@ -398,6 +399,7 @@ export default function Leaderboard() {
 
       <section className="relative max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
         <header className="text-center space-y-3">
+          <div className="flex justify-center"><Mascot mood="trophy" size={110} eager /></div>
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="inline-block rounded-full border border-bull-line bg-bull-raised px-4 py-1.5 text-xs font-black uppercase tracking-widest text-bull-lime">
               {'\u{1F3C6}'} Real-Time Arena Rankings

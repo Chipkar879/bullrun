@@ -2,6 +2,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
+import Mascot from '@/components/Mascot';
 import { useRouter } from 'next/navigation';
 
 // PRICE GRAPH
@@ -397,7 +398,7 @@ export default function ArenaPage() {
               ✕
             </button>
 
-            <div className="text-6xl animate-bounce pt-2">⚡</div>
+            <div className="flex justify-center pt-2"><Mascot mood="excited" size={120} eager /></div>
             <div className="space-y-2">
               <span className="text-xs font-black uppercase tracking-widest text-bull-lime bg-bull-raised border border-bull-line px-3 py-1 rounded-md">
                 30-Day Speed Trading
@@ -569,7 +570,7 @@ export default function ArenaPage() {
 
               {gameState === 'FINISHED' && (
                 <div className="bg-gradient-to-br from-bull-raised to-bull-bg border border-bull-lime-dark text-white p-6 rounded-3xl shadow-2xl space-y-4 text-center">
-                  <div className="text-5xl">🏆</div>
+                  <div className="flex justify-center"><Mascot mood="trophy" size={120} eager /></div>
                   <h2 className="font-black text-xl">30-Day Arena Finished!</h2>
                   <p className="text-rose-200/80 text-xs">Your final standing portfolio net worth:</p>
                   <div className="text-2xl font-black font-mono bg-bull-bg/50 p-3 rounded-2xl border border-white/10">
@@ -602,7 +603,7 @@ export default function ArenaPage() {
       {showExitModal && (
         <div className="fixed inset-0 bg-bull-bg/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
           <div className="bg-bull-surface border border-bull-lime/50 max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-5 text-center">
-            <div className="text-4xl text-rose-500">⚠️</div>
+            <div className="flex justify-center"><Mascot mood="warning" size={84} eager /></div>
             <div className="space-y-2">
               <h2 className="text-xl font-black text-white">Forfeit Arena Match?</h2>
               <p className="text-slate-400 text-xs">
