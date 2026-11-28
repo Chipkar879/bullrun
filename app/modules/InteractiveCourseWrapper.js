@@ -6,9 +6,38 @@ import Mascot from '@/components/Mascot';
 
 const STORE_PREFIX = 'bullrun_progress_v3_';
 let storeKey = STORE_PREFIX + 'guest';
-const XP_PER_LESSON = 100;
-const XP_PER_LEVEL = 500;
-const LEVELS = ['Rookie Saver', 'Smart Spender', 'Market Explorer', 'Strategy Builder', 'Wall Street Architect'];
+
+// XP plan: every module is worth exactly 1200 XP (12 modules x 1200 = 14,400 XP in total).
+// Early lessons in a module are easier, so they give less XP. The last lessons are the hardest and give the most.
+const MODULE_XP = 1200;
+const LESSON_XP_12 = [70, 75, 80, 85, 90, 95, 100, 105, 110, 120, 130, 140];
+
+function lessonXpTable(n) {
+  if (n === 12) return LESSON_XP_12;
+  if (n <= 0) return [];
+  const raw = Array.from({ length: n }).map((_, i) => 0.6 + 0.8 * (n > 1 ? i / (n - 1) : 0.5));
+  const sum = raw.reduce((a, b) => a + b, 0);
+  const out = raw.map((r) => Math.max(5, Math.round((r * MODULE_XP) / sum / 5) * 5));
+  out[n - 1] += MODULE_XP - out.reduce((a, b) => a + b, 0);
+  return out;
+}
+
+// Levels: each one needs more XP than the one before. "min" is the total XP needed to reach it.
+const LEVELS = [
+  { name: 'Rookie Saver', min: 0 },
+  { name: 'Smart Spender', min: 500 },
+  { name: 'Market Explorer', min: 1000 },
+  { name: 'Strategy Builder', min: 1700 },
+  { name: 'Chart Reader', min: 2500 },
+  { name: 'Value Hunter', min: 3500 },
+  { name: 'Portfolio Pilot', min: 4700 },
+  { name: 'Risk Manager', min: 6000 },
+  { name: 'Wall Street Architect', min: 7500 },
+  { name: 'Market Strategist', min: 9200 },
+  { name: 'Money Mentor', min: 11000 },
+  { name: 'Bull Run Master', min: 12800 },
+  { name: 'Bull Run Legend', min: 14400 },
+];
 
 const CSS = `
 @keyframes brFall{0%{transform:translateY(-10vh) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(540deg);opacity:0}}
@@ -238,10 +267,30 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   };
 
   const allLessons = initialTracks.flatMap((t) => (t.modules || []).flatMap((m) => m.submodules || []));
-  const xp = done.length * XP_PER_LESSON;
-  const level = Math.floor(xp / XP_PER_LEVEL) + 1;
-  const levelName = LEVELS[Math.min(level - 1, LEVELS.length - 1)];
-  const levelPct = ((xp % XP_PER_LEVEL) / XP_PER_LEVEL) * 100;
+
+  // XP for every lesson, worked out per module so each module adds up to exactly 1200 XP
+  const xpByLesson = useMemo(() => {
+    const map = {};
+    initialTracks.forEach((track) => {
+      (track.modules || []).forEach((m) => {
+        const subs = m.submodules || [];
+        const table = lessonXpTable(subs.length);
+        subs.forEach((s, i) => { map[s.id] = table[i]; });
+      });
+    });
+    return map;
+  }, [initialTracks]);
+  const xpFor = (id) => xpByLesson[id] || 0;
+
+  const xp = done.reduce((sum, id) => sum + xpFor(id), 0);
+  let levelIdx = 0;
+  for (let i = 0; i < LEVELS.length; i += 1) {
+    if (xp >= LEVELS[i].min) levelIdx = i;
+  }
+  const curLevel = LEVELS[levelIdx];
+  const nextLevel = LEVELS[levelIdx + 1] || null;
+  const levelName = curLevel.name;
+  const levelPct = nextLevel ? ((xp - curLevel.min) / (nextLevel.min - curLevel.min)) * 100 : 100;
 
   const activeTrack = initialTracks.find((t) => t.id === trackId);
   const blocks = useMemo(() => parseBlocks(lesson ? lesson.content : ''), [lesson]);
@@ -443,6 +492,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
             <div className="h-12 w-12 rounded-2xl bg-bull-bg border border-bull-lime/50 flex items-center justify-center text-2xl br-glow"><Mascot mood="cool" size={40} fallback={'\ud83d\udc02'} /></div>
             <div>
               <h3 className="text-base sm:text-lg font-black text-white">{levelName}</h3>
+              <span className="text-xs font-mono text-slate-500">LEVEL {levelIdx + 1} / {LEVELS.length}</span>
             </div>
           </div>
           <div className="flex items-center gap-3 font-mono text-xs">
@@ -458,8 +508,8 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
         </div>
         <div>
           <div className="flex justify-between text-xs font-mono text-slate-500 mb-1">
-            <span>NEXT LEVEL</span>
-            <span>{xp % XP_PER_LEVEL} / {XP_PER_LEVEL} XP</span>
+            <span>{nextLevel ? 'NEXT: ' + nextLevel.name.toUpperCase() : 'MAX LEVEL'}</span>
+            <span>{nextLevel ? (xp - curLevel.min) + ' / ' + (nextLevel.min - curLevel.min) + ' XP' : xp + ' XP'}</span>
           </div>
           <div className="h-2.5 bg-bull-bg rounded-full overflow-hidden border border-bull-line">
             <div className="h-full bg-gradient-to-r from-bull-lime to-emerald-400 transition-all duration-700" style={{ width: levelPct + '%' }} />
@@ -560,7 +610,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   <div className="min-w-0">
                     <h4 className="font-black text-sm text-white leading-tight">{s.title.replace(/^\d+\.\s*/, '')}</h4>
                     <p className="text-xs text-slate-400 mt-1 line-clamp-2">{s.intro}</p>
-                    <span className="text-xs font-mono font-black text-amber-400 mt-1.5 block">{ok ? 'PASSED' : '+100 XP'}</span>
+                    <span className="text-xs font-mono font-black text-amber-400 mt-1.5 block">{ok ? 'PASSED' : '+' + xpFor(s.id) + ' XP'}</span>
                   </div>
                 </button>
               );
@@ -576,7 +626,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
           {takeawayDone && <Confetti key={lesson.id + '-t'} count={24} />}
           <div className="bg-bull-surface border border-bull-lime/50 rounded-3xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[92vh] shadow-[0_0_60px_rgba(163,230,53,0.2)] br-slide relative">
             {xpPop && (
-              <div className="br-float absolute right-8 top-16 z-10 font-mono font-black text-amber-400 text-2xl">+100 XP</div>
+              <div className="br-float absolute right-8 top-16 z-10 font-mono font-black text-amber-400 text-2xl">+{xpFor(lesson.id)} XP</div>
             )}
 
             {/* header */}
@@ -744,7 +794,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     <p className="font-mono text-sm text-slate-300">
                       Score: <span className="font-black text-bull-lime">{result.correctCount} / {quiz.length}</span> (need {result.needed})
                     </p>
-                    {result.passed && <p className="font-mono font-black text-amber-400">+100 XP {'\ud83d\udd25'}</p>}
+                    {result.passed && <p className="font-mono font-black text-amber-400">+{xpFor(lesson.id)} XP {'\ud83d\udd25'}</p>}
                   </div>
                   <div className="space-y-3">
                     {quiz.map((q, qi) => {
