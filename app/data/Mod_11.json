@@ -1,0 +1,762 @@
+{
+  "id": "mod-11",
+  "title": "Behavioral Finance and Investor Psychology",
+  "submodules": [
+    {
+      "id": "submod-11-1",
+      "title": "1. Why Smart People Make Money Mistakes",
+      "intro": "If we know what to do, why do we often do the opposite?",
+      "content": "\u26a1 MISSION BRIEFING: WHY SMART PEOPLE MAKE MONEY MISTAKES\nBehavioural finance studies how feelings and mental shortcuts push people away from sensible money choices. It does not say people are foolish. It says that every human brain, including yours, has habits that can hurt an investor. Knowing them is the first defence. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nTry this puzzle fast: a bat and a ball cost \u20b9110 together, and the bat costs \u20b9100 more than the ball. Most people blurt out that the ball costs \u20b910, but the answer is \u20b95.\n\n\u26a1 FINANCIAL INTEL: TWO WAYS OF THINKING\n\u2022 Fast thinking: quick, automatic and emotional. It is great for catching a ball and poor for investing decisions.\n\u2022 Slow thinking: careful, effortful and logical. It is the one you need when money is involved.\n\u2022 Mistakes happen when fast thinking answers a question that needs slow thinking.\n\n\u26a1 FINANCIAL INTEL: WHERE MONEY MISTAKES COME FROM\n\u2022 Emotions: fear makes people sell low and greed makes them buy high.\n\u2022 Mental shortcuts: rules of thumb that are usually fine but sometimes badly wrong.\n\u2022 Social pressure: copying friends, family and social media.\n\n\u26a1 FINANCIAL INTEL: WHAT TO DO ABOUT IT\n\u2022 Name the bias when you notice it. Naming it slows you down.\n\u2022 Write rules in advance, while you are calm.\n\u2022 Keep a journal so you can see your own patterns.\n\n\ud83c\udf55 MINI CASE: THE PANIC SELL\nAarav's fictional simulator portfolio of \u20b91,00,000 drops 10% to \u20b990,000 after a scary headline. He feels sick and sells everything. Over the next three months, in this made-up example, it recovers to \u20b91,05,000. If he had stayed invested, he would have \u20b91,05,000, so his panic cost him 1,05,000 - 90,000 = \u20b915,000 compared with holding. Meera says the market did not hurt him. His fast thinking did.\n\n\ud83e\uddea TRY IT: CATCH THE TRICK\nSolve the puzzle slowly: a bat and a ball cost \u20b9110 together, and the bat costs \u20b9100 more than the ball. What does the ball cost?\n(Answer: if the ball is \u20b95, the bat is \u20b9105 and together they cost \u20b9110, with the bat \u20b9100 more. The ball costs \u20b95, not \u20b910. Slow thinking catches what fast thinking misses.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nEveryone has mental shortcuts and emotions that can hurt their money choices. Notice them, slow down and write your rules in advance.",
+      "quiz": [
+        {
+          "question": "What does behavioural finance study?",
+          "options": [
+            "How feelings and mental shortcuts affect money choices",
+            "Only company accounts",
+            "Only tax rules",
+            "Only interest rates"
+          ],
+          "correctIndex": 0,
+          "explanation": "It looks at the human side of money decisions."
+        },
+        {
+          "question": "A bat and a ball cost \u20b9110 and the bat costs \u20b9100 more than the ball. What is the ball's price?",
+          "options": [
+            "\u20b910",
+            "\u20b915",
+            "\u20b95",
+            "\u20b91"
+          ],
+          "correctIndex": 2,
+          "explanation": "Ball \u20b95 plus bat \u20b9105 gives \u20b9110, and the bat is \u20b9100 more."
+        },
+        {
+          "question": "Which kind of thinking is best for big money decisions?",
+          "options": [
+            "Slow, careful thinking",
+            "Fast, automatic thinking",
+            "Copying others",
+            "Guessing"
+          ],
+          "correctIndex": 0,
+          "explanation": "Slow thinking checks facts and avoids snap reactions."
+        },
+        {
+          "question": "What does fear tend to make investors do?",
+          "options": [
+            "Buy more at highs",
+            "Ignore prices",
+            "Sell at low prices",
+            "Open more accounts"
+          ],
+          "correctIndex": 2,
+          "explanation": "Fear often leads to selling after a drop."
+        },
+        {
+          "question": "What is a good first defence against a bias?",
+          "options": [
+            "Pretend you have none",
+            "Name it and write rules in advance",
+            "Check prices every minute",
+            "Follow the crowd"
+          ],
+          "correctIndex": 1,
+          "explanation": "Spotting the bias and having a rule gives you time to think."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-2",
+      "title": "2. Loss Aversion and Prospect Theory",
+      "intro": "Why does losing \u20b91,000 hurt more than gaining \u20b91,000 feels good?",
+      "content": "\u26a1 MISSION BRIEFING: LOSS AVERSION AND PROSPECT THEORY\nResearch by Daniel Kahneman and Amos Tversky, who introduced prospect theory in 1979, found that people feel losses more strongly than equal gains. This is called loss aversion. It explains why people hold losing shares for too long and sell winners too fast. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIn many studies, a loss feels roughly twice as strong as a gain of the same size, though the exact figure varies from person to person.\n\n\u26a1 FINANCIAL INTEL: THE CORE IDEAS\n\u2022 Loss aversion: a loss hurts more than an equal gain pleases.\n\u2022 Reference point: people judge results against a starting point, such as their purchase price, not against the final amount.\n\u2022 Risk mood flips: people tend to avoid risk when they can win and to take risk when they face a sure loss.\n\n\u26a1 FINANCIAL INTEL: EXPECTED VALUE\n\u2022 Expected value = chance of each outcome x its amount, added up.\n\u2022 A 50% chance of \u20b910,000 has an expected value of 0.5 x 10,000 = \u20b95,000.\n\u2022 Two choices can have the same expected value and still feel very different.\n\n\u26a1 FINANCIAL INTEL: HOW IT HURTS INVESTORS\n\u2022 Refusing to sell a loser because selling makes the loss real.\n\u2022 Selling a winner quickly to lock in the happy feeling.\n\u2022 Checking a portfolio often, which shows more red days and more pain.\n\n\ud83c\udf55 MINI CASE: SURE THING OR GAMBLE\nIn a classroom game, Meera can take a sure \u20b95,000 or a coin flip: 50% chance of \u20b910,000 and 50% chance of nothing. The expected value of the flip is 0.5 x 10,000 = \u20b95,000, the same as the sure amount. Most students take the sure \u20b95,000. Now the game flips: a sure loss of \u20b95,000 or a coin flip with a 50% chance of losing \u20b910,000 and a 50% chance of losing nothing. Many students now choose the gamble, because a sure loss hurts so much.\n\n\ud83e\uddea TRY IT: WORK OUT THE VALUE\nA fictional game offers a 25% chance of winning \u20b98,000 and a 75% chance of winning nothing. What is the expected value? Would a sure \u20b92,500 be better, equal or worse in pure expected value?\n(Answer: expected value = 0.25 x 8,000 = \u20b92,000. A sure \u20b92,500 is higher, so it is better in expected value.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nLosses feel stronger than gains, which pushes people to hold losers and sell winners. Judging choices by expected value, not by feeling, helps.",
+      "quiz": [
+        {
+          "question": "What is loss aversion?",
+          "options": [
+            "Liking to lose money",
+            "Losses feeling stronger than equal gains",
+            "Never taking a loss",
+            "Avoiding all shares"
+          ],
+          "correctIndex": 1,
+          "explanation": "A loss hurts more than an equal gain pleases."
+        },
+        {
+          "question": "Who introduced prospect theory?",
+          "options": [
+            "Warren Buffett and Charles Dow",
+            "Fibonacci and Wilder",
+            "Kahneman and Tversky",
+            "Lane and Appel"
+          ],
+          "correctIndex": 2,
+          "explanation": "Kahneman and Tversky introduced it in 1979."
+        },
+        {
+          "question": "What is the expected value of a 50% chance of winning \u20b910,000?",
+          "options": [
+            "\u20b910,000",
+            "\u20b95,000",
+            "\u20b92,000",
+            "\u20b90"
+          ],
+          "correctIndex": 1,
+          "explanation": "0.5 x 10,000 = \u20b95,000."
+        },
+        {
+          "question": "A 25% chance of \u20b98,000 has what expected value?",
+          "options": [
+            "\u20b92,000",
+            "\u20b98,000",
+            "\u20b94,000",
+            "\u20b932,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "0.25 x 8,000 = \u20b92,000."
+        },
+        {
+          "question": "How does loss aversion often hurt investors?",
+          "options": [
+            "They buy too little",
+            "They love paying fees",
+            "They check too rarely",
+            "They hold losing shares too long to avoid making the loss real"
+          ],
+          "correctIndex": 3,
+          "explanation": "Selling a loser makes the loss real, so people delay."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-3",
+      "title": "3. Overconfidence and the Illusion of Control",
+      "intro": "Why do most people think they are better than average?",
+      "content": "\u26a1 MISSION BRIEFING: OVERCONFIDENCE AND THE ILLUSION OF CONTROL\nOverconfidence is believing you know more, or can predict better, than you really can. A few lucky wins can make a beginner feel like an expert. This leads to bigger bets, more trades and higher costs. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIn some surveys, most people rate themselves as above-average drivers, which cannot be true for everyone.\n\n\u26a1 FINANCIAL INTEL: SIGNS OF OVERCONFIDENCE\n\u2022 Trading very often.\n\u2022 Putting too much money into one idea because you are 'sure'.\n\u2022 Crediting skill for wins and bad luck for losses.\n\u2022 Believing you can time the market.\n\n\u26a1 FINANCIAL INTEL: ILLUSION OF CONTROL\n\u2022 Feeling that more research, more screens or more checking gives control over a random outcome.\n\u2022 Short-term price moves have a large random part that no one controls.\n\n\u26a1 FINANCIAL INTEL: THE COST OF TOO MANY TRADES\n\u2022 Every trade costs brokerage, taxes and the gap between buy and sell prices.\n\u2022 Yearly cost % = (trades per year x cost per trade) \u00f7 portfolio value x 100.\n\u2022 Studies of individual investors often find that those who trade the most earn less.\n\n\ud83c\udf55 MINI CASE: TWO TRADING STYLES\nAarav makes 20 trades a month in his fictional \u20b91,00,000 account at \u20b960 each. That is 20 x 60 = \u20b91,200 a month, or \u20b914,400 a year, which is 14.4% of the account in costs alone. Meera makes 2 trades a month, which is 2 x 60 x 12 = \u20b91,440 a year, or 1.44%. Aarav needs a 14.4% gain just to break even. Meera keeps a journal and notes when she wins by luck.\n\n\ud83e\uddea TRY IT: COUNT THE COSTS\nA fictional trader makes 10 trades a month at \u20b950 each in a \u20b950,000 account. What is the yearly cost in rupees and as a percentage of the account?\n(Answer: 10 x 50 x 12 = \u20b96,000 a year, which is 6,000 \u00f7 50,000 x 100 = 12% of the account.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nOverconfidence leads to bigger bets and more trades, and trading costs add up. Treat wins with humility and keep records.",
+      "quiz": [
+        {
+          "question": "What is overconfidence?",
+          "options": [
+            "Doubting every idea",
+            "Believing you know more or can predict better than you really can",
+            "Avoiding all risk",
+            "Reading too much"
+          ],
+          "correctIndex": 1,
+          "explanation": "It means overrating your own knowledge or skill."
+        },
+        {
+          "question": "What is the illusion of control?",
+          "options": [
+            "Seeing a chart clearly",
+            "A broker's order type",
+            "A type of tax",
+            "Feeling you control an outcome that is largely random"
+          ],
+          "correctIndex": 3,
+          "explanation": "More screens do not control random moves."
+        },
+        {
+          "question": "20 trades a month at \u20b960 each cost how much per year?",
+          "options": [
+            "\u20b91,200",
+            "\u20b972,000",
+            "\u20b914,400",
+            "\u20b9720"
+          ],
+          "correctIndex": 2,
+          "explanation": "20 x 60 x 12 = \u20b914,400."
+        },
+        {
+          "question": "What is 10 trades a month at \u20b950 each in a \u20b950,000 account, as a yearly cost percentage?",
+          "options": [
+            "12%",
+            "6%",
+            "1.2%",
+            "60%"
+          ],
+          "correctIndex": 0,
+          "explanation": "6,000 \u00f7 50,000 x 100 = 12%."
+        },
+        {
+          "question": "What is a good habit after a win?",
+          "options": [
+            "Double the next bet",
+            "Note whether luck helped and record the reason",
+            "Quit your plan",
+            "Skip the journal"
+          ],
+          "correctIndex": 1,
+          "explanation": "Honest records separate skill from luck."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-4",
+      "title": "4. Herd Behaviour and FOMO",
+      "intro": "Why does everyone seem to buy at the very same time?",
+      "content": "\u26a1 MISSION BRIEFING: HERD BEHAVIOUR AND FOMO\nHumans copy each other, which is useful in daily life and risky in markets. Herd behaviour is following the crowd without checking the facts. FOMO, the fear of missing out, is the pain of watching others make money. Both push people to buy after a big rise, when prices are already high. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nPrices that rise on social media excitement can turn around fast once the crowd runs out of new buyers.\n\n\u26a1 FINANCIAL INTEL: HOW THE HERD WORKS\n\u2022 Rising prices attract attention, attention attracts buyers and buyers lift prices further.\n\u2022 Friends and online posts make a trade feel safe because many people are doing it.\n\u2022 When the crowd turns, everyone tries to leave at once.\n\n\u26a1 FINANCIAL INTEL: FOMO WARNING SIGNS\n\u2022 You want to buy only because the price is already up a lot.\n\u2022 You cannot explain what the business does.\n\u2022 You feel rushed and fear that the chance will vanish.\n\u2022 The idea came from a stranger's post or a group chat.\n\n\u26a1 FINANCIAL INTEL: WHAT TO DO INSTEAD\n\u2022 Pause for at least a day.\n\u2022 Check the facts: business, valuation, risk and your plan.\n\u2022 Ask: would I want this share if nobody else were talking about it?\n\u2022 Remember that there will always be another opportunity.\n\n\ud83c\udf55 MINI CASE: THE LATE BUYER\nA fictional share, RocketTech, rises five days in a row, from \u20b9100 to \u20b9140. Friends brag in a chat group and Aarav buys at \u20b9140. Soon it falls back to \u20b9112, a loss of 140 - 112 = \u20b928, which is 28 \u00f7 140 = 20%. Meera, who checked the facts and found no news behind the jump, stayed out.\n\n\ud83e\uddea TRY IT: EARLY VERSUS LATE\nA fictional share rises from \u20b9200 to \u20b9320 and then falls 25%. What is the price after the fall? How much does a buyer at \u20b9320 lose, and what is the result for a buyer at \u20b9200?\n(Answer: the fall is 25% of 320 = 80, so the price is \u20b9240. The \u20b9320 buyer loses 80 \u00f7 320 x 100 = 25%. The \u20b9200 buyer is still up (240 - 200) \u00f7 200 x 100 = 20%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nFollowing the crowd after a big rise often means buying high. Pause, check the facts and stick to your plan.",
+      "quiz": [
+        {
+          "question": "What is herd behaviour?",
+          "options": [
+            "Buying only shares of farms",
+            "Following the crowd without checking facts",
+            "Ignoring everyone",
+            "A trading licence"
+          ],
+          "correctIndex": 1,
+          "explanation": "It means copying others without your own analysis."
+        },
+        {
+          "question": "What does FOMO stand for?",
+          "options": [
+            "Fear Of Missing Out",
+            "Fast Orders Made Online",
+            "Funds Of Major Organisations",
+            "Fixed Option Market Offer"
+          ],
+          "correctIndex": 0,
+          "explanation": "FOMO is the fear of missing out."
+        },
+        {
+          "question": "A share bought at \u20b9140 falls to \u20b9112. What is the loss percentage?",
+          "options": [
+            "28%",
+            "10%",
+            "25%",
+            "20%"
+          ],
+          "correctIndex": 3,
+          "explanation": "28 \u00f7 140 x 100 = 20%."
+        },
+        {
+          "question": "Which is a FOMO warning sign?",
+          "options": [
+            "You studied the business",
+            "You waited a day",
+            "You want to buy mainly because the price is already up a lot",
+            "You wrote a plan"
+          ],
+          "correctIndex": 2,
+          "explanation": "Chasing a price rise is a classic FOMO sign."
+        },
+        {
+          "question": "What is a good response to a hot tip from a group chat?",
+          "options": [
+            "Pause and check the facts before acting",
+            "Buy at once",
+            "Borrow money",
+            "Tell everyone to buy"
+          ],
+          "correctIndex": 0,
+          "explanation": "A pause and fact check protects you from herd moves."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-5",
+      "title": "5. Anchoring and Confirmation Bias",
+      "intro": "Why do we cling to one number and ignore facts we dislike?",
+      "content": "\u26a1 MISSION BRIEFING: ANCHORING AND CONFIRMATION BIAS\nAnchoring means your mind sticks to the first number you saw, such as the price you paid or a share's old high. Confirmation bias means you notice facts that agree with you and ignore facts that do not. Together they can trap you in a bad position. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nStudies show that even a random number, like one from a spin of a wheel, can pull people's guesses toward it.\n\n\u26a1 FINANCIAL INTEL: ANCHORING\n\u2022 Your purchase price is an anchor, but the market does not know or care what you paid.\n\u2022 A share's 52-week high feels like where it 'should' trade.\n\u2022 Ask: would I buy this today at today's price?\n\n\u26a1 FINANCIAL INTEL: CONFIRMATION BIAS\n\u2022 You read only positive news about a share you own.\n\u2022 You follow people who agree with you and mute those who disagree.\n\u2022 A strong idea should survive the best arguments against it.\n\n\u26a1 FINANCIAL INTEL: THE BREAKEVEN TRAP\n\u2022 Gain needed to break even = (purchase price - current price) \u00f7 current price x 100.\n\u2022 Waiting to 'get back to even' may mean missing better uses of the money.\n\n\ud83c\udf55 MINI CASE: WAITING TO GET EVEN\nAarav bought a fictional share at \u20b9500 and it is now \u20b9400. He says he will sell only when it returns to \u20b9500. The gain needed is (500 - 400) \u00f7 400 x 100 = 25%. Meera asks him a different question: if he had \u20b9400 in cash today, would he buy this share? If the answer is no, the \u20b9500 anchor is the only reason he is holding.\n\n\ud83e\uddea TRY IT: FIND THE CLIMB\nA fictional share was bought at \u20b9300 and is now \u20b9225. What gain is needed to get back to \u20b9300?\n(Answer: (300 - 225) \u00f7 225 x 100 = 75 \u00f7 225 x 100 = 33.3%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nYour purchase price is only a memory, not a reason. Ask whether you would buy at today's price, and seek out views that disagree with you.",
+      "quiz": [
+        {
+          "question": "What is anchoring?",
+          "options": [
+            "Buying a boat",
+            "Sticking to the first number you saw",
+            "A type of loan",
+            "Selling at the open"
+          ],
+          "correctIndex": 1,
+          "explanation": "The mind clings to an early number such as a purchase price."
+        },
+        {
+          "question": "What is confirmation bias?",
+          "options": [
+            "Checking facts twice",
+            "A broker's confirmation slip",
+            "Noticing facts that agree with you and ignoring the rest",
+            "Doubting everything"
+          ],
+          "correctIndex": 2,
+          "explanation": "It means favouring information that supports your view."
+        },
+        {
+          "question": "A share bought at \u20b9500 is now \u20b9400. What gain brings it back to \u20b9500?",
+          "options": [
+            "25%",
+            "20%",
+            "100%",
+            "10%"
+          ],
+          "correctIndex": 0,
+          "explanation": "100 \u00f7 400 x 100 = 25%."
+        },
+        {
+          "question": "Which question helps break the anchoring trap?",
+          "options": [
+            "What did I pay?",
+            "What did my friend pay?",
+            "What was the high last year?",
+            "Would I buy this today at today's price?"
+          ],
+          "correctIndex": 3,
+          "explanation": "It ignores the old price and judges today's facts."
+        },
+        {
+          "question": "What is a good response to confirmation bias?",
+          "options": [
+            "Read only positive news",
+            "Seek the best arguments against your idea",
+            "Mute critics",
+            "Skip research"
+          ],
+          "correctIndex": 1,
+          "explanation": "Strong ideas survive opposing arguments."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-6",
+      "title": "6. The Disposition Effect and Sunk Costs",
+      "intro": "Why do people sell winners too soon and keep losers too long?",
+      "content": "\u26a1 MISSION BRIEFING: THE DISPOSITION EFFECT AND SUNK COSTS\nThe disposition effect is the habit of selling winning shares early to lock in a gain and holding losing shares to avoid a loss. It was described by Hersh Shefrin and Meir Statman in 1985. A related trap is the sunk cost fallacy: continuing something because of money already spent. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA winning share can feel like a trophy to cash in, and a losing share can feel like an unfinished fight, even though the market treats both the same.\n\n\u26a1 FINANCIAL INTEL: THE PATTERN\n\u2022 Winners are sold early because gains feel fragile.\n\u2022 Losers are kept because selling makes the loss real.\n\u2022 Over time, this cuts good ideas short and lets bad ideas run.\n\n\u26a1 FINANCIAL INTEL: SUNK COSTS\n\u2022 A sunk cost is money already spent that you cannot get back.\n\u2022 It should not decide your next move. Only the future outlook should.\n\u2022 Ask: knowing what I know now, would I start this again today?\n\n\u26a1 FINANCIAL INTEL: A BETTER APPROACH\n\u2022 Decide sell rules before you buy: a stop-loss and a target or a reason to exit.\n\u2022 Judge each holding on its future, not on how you feel about its past.\n\u2022 Review winners and losers on the same rules.\n\n\ud83c\udf55 MINI CASE: TWO SHARES, TWO MISTAKES\nMeera's fictional simulator holds two shares worth \u20b910,000 each. Share A rises 20% to \u20b912,000 and Aarav would sell it for a quick win. Share B falls 20% to \u20b98,000 and he would hold on to avoid the loss. Later A reaches \u20b915,000 and B falls to \u20b96,000. By selling A early, he banked \u20b92,000 instead of \u20b95,000, missing \u20b93,000. By holding B, the loss grew from \u20b92,000 to \u20b94,000.\n\n\ud83e\uddea TRY IT: ASK THE FRESH QUESTION\nA fictional share was bought at \u20b9100 and is now \u20b970, with weak business news. You have \u20b97,000 in it. If you had \u20b97,000 in cash today, would you buy it? What does the \u20b930 per share loss have to do with the decision?\n(Answer: if you would not buy it today, the case for holding is weak. The \u20b930 loss is a sunk cost and should not decide the next step, only the future outlook should.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nSelling winners too early and holding losers too long hurts results. Set exit rules in advance and judge holdings on their future, not their past.",
+      "quiz": [
+        {
+          "question": "What is the disposition effect?",
+          "options": [
+            "Selling winners early and holding losers too long",
+            "Buying only losers",
+            "Buying every dip",
+            "Holding cash only"
+          ],
+          "correctIndex": 0,
+          "explanation": "It is the pattern of locking in gains and avoiding losses."
+        },
+        {
+          "question": "What is a sunk cost?",
+          "options": [
+            "A cost you can still avoid",
+            "A bank charge",
+            "Money already spent that cannot be recovered",
+            "A tax refund"
+          ],
+          "correctIndex": 2,
+          "explanation": "A sunk cost is gone and should not drive future choices."
+        },
+        {
+          "question": "Two shares of \u20b910,000 each: A rises 20% and B falls 20%. What are their values?",
+          "options": [
+            "\u20b99,000 and \u20b911,000",
+            "\u20b912,000 and \u20b98,000",
+            "\u20b912,000 and \u20b912,000",
+            "\u20b98,000 and \u20b912,000"
+          ],
+          "correctIndex": 1,
+          "explanation": "A is \u20b912,000 and B is \u20b98,000."
+        },
+        {
+          "question": "Which question helps beat the sunk cost trap?",
+          "options": [
+            "How much did I lose?",
+            "What did I pay for it?",
+            "Would I start this position again today?",
+            "What will my friends say?"
+          ],
+          "correctIndex": 2,
+          "explanation": "It focuses on the future, not on past spending."
+        },
+        {
+          "question": "When is the best time to decide on a stop-loss?",
+          "options": [
+            "After the price falls",
+            "Before you buy",
+            "Never",
+            "When you feel panic"
+          ],
+          "correctIndex": 1,
+          "explanation": "Rules made in advance are calmer and clearer."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-7",
+      "title": "7. Mental Accounting and 'House Money'",
+      "intro": "Is a rupee from a gift different from a rupee you earned?",
+      "content": "\u26a1 MISSION BRIEFING: MENTAL ACCOUNTING AND HOUSE MONEY\nMental accounting is the habit of treating money differently depending on where it came from or what it is for, even though a rupee is a rupee. Economist Richard Thaler described the idea. It can lead to unwise choices, like taking big risks with 'free' money. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nPeople often spend a surprise bonus or a gift more freely than the same amount earned through hard work, though the money is identical.\n\n\u26a1 FINANCIAL INTEL: COMMON MENTAL ACCOUNTS\n\u2022 Salary money feels serious. Gift money feels free.\n\u2022 Profits from the market feel like 'house money', which people risk more easily.\n\u2022 Savings and spending money are kept in separate mental boxes.\n\n\u26a1 FINANCIAL INTEL: WHERE IT GOES WRONG\n\u2022 Risking profits recklessly because they feel like a bonus.\n\u2022 Keeping low-interest savings while paying high-interest debt.\n\u2022 Treating a tax refund or prize as spare cash while ignoring bigger goals.\n\n\u26a1 FINANCIAL INTEL: WHEN IT HELPS\n\u2022 Separate accounts for goals, such as an emergency fund, can be useful discipline.\n\u2022 The key is to follow rules on purpose, not by accident, and to remember that all money is the same money.\n\n\ud83c\udf55 MINI CASE: SAME MONEY, TWO HANDS\nIn a school quiz, Aarav wins \u20b95,000 in his fictional simulator story and treats it as free money, so he puts all of it into one risky idea. Meera treats her \u20b95,000 prize like any other money and follows her usual position limit. Another example: a fictional family keeps \u20b920,000 in savings at 3% while owing \u20b920,000 on a loan at 12%. The loan costs 20,000 x 0.12 = \u20b92,400 a year and the savings earn 20,000 x 0.03 = \u20b9600, a net loss of \u20b91,800 a year.\n\n\ud83e\uddea TRY IT: SPOT THE LEAK\nA fictional family holds \u20b950,000 in savings earning 4% a year while owing \u20b950,000 on a loan at 10%. What is the yearly interest paid, the yearly interest earned and the net difference?\n(Answer: interest paid = 50,000 x 0.10 = \u20b95,000. Interest earned = 50,000 x 0.04 = \u20b92,000. Net cost = \u20b93,000 a year, which a family should discuss with a trusted adult.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA rupee is a rupee wherever it came from. Treat all money by the same rules and watch for mental boxes that hide bad trade-offs.",
+      "quiz": [
+        {
+          "question": "What is mental accounting?",
+          "options": [
+            "A school subject",
+            "Treating money differently depending on its source or label",
+            "A type of tax",
+            "A broker report"
+          ],
+          "correctIndex": 1,
+          "explanation": "Mental accounting treats equal money unequally."
+        },
+        {
+          "question": "What does 'house money' mean in this lesson?",
+          "options": [
+            "Money from selling a house",
+            "Rent",
+            "Profits that feel free and so are risked more easily",
+            "A bank loan"
+          ],
+          "correctIndex": 2,
+          "explanation": "People risk winnings more freely than their own money."
+        },
+        {
+          "question": "\u20b920,000 at 12% interest costs how much per year?",
+          "options": [
+            "\u20b9600",
+            "\u20b92,400",
+            "\u20b91,200",
+            "\u20b92,000"
+          ],
+          "correctIndex": 1,
+          "explanation": "20,000 x 0.12 = \u20b92,400."
+        },
+        {
+          "question": "Savings earn 3% and a loan costs 12% on the same \u20b920,000. What is the yearly net loss?",
+          "options": [
+            "\u20b9600",
+            "\u20b92,400",
+            "\u20b93,000",
+            "\u20b91,800"
+          ],
+          "correctIndex": 3,
+          "explanation": "2,400 - 600 = \u20b91,800."
+        },
+        {
+          "question": "What is a sensible approach to prize or bonus money?",
+          "options": [
+            "Treat it by the same rules as other money",
+            "Risk all of it",
+            "Hide it",
+            "Ignore your plan"
+          ],
+          "correctIndex": 0,
+          "explanation": "A rupee is a rupee, so the same rules apply."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-8",
+      "title": "8. Recency, Hindsight and the Gambler's Fallacy",
+      "intro": "Why do we expect recent patterns to continue, or to reverse?",
+      "content": "\u26a1 MISSION BRIEFING: RECENCY, HINDSIGHT AND THE GAMBLER'S FALLACY\nOur minds love patterns, even in randomness. Recency bias gives too much weight to what just happened. Hindsight bias makes past events feel obvious, as though we knew them all along. The gambler's fallacy is the belief that a streak must reverse. All three can mislead an investor. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nAfter a fair coin lands heads five times, the chance of heads on the next flip is still exactly 50%.\n\n\u26a1 FINANCIAL INTEL: RECENCY BIAS\n\u2022 After a strong year, many people expect more of the same.\n\u2022 After a crash, they expect more crashes.\n\u2022 Long-term averages matter more than the latest few weeks.\n\n\u26a1 FINANCIAL INTEL: HINDSIGHT BIAS\n\u2022 After an event, it feels like it was predictable. 'I knew it!'\n\u2022 This makes people overrate their skill and learn the wrong lessons.\n\u2022 A written prediction made beforehand is the cure.\n\n\u26a1 FINANCIAL INTEL: STREAKS AND PROBABILITY\n\u2022 Chance of a given result in a row = (chance each time) multiplied together.\n\u2022 Five heads in a row has a chance of (1/2) x (1/2) x (1/2) x (1/2) x (1/2) = 1/32, about 3.1%, but the next flip is still 50-50.\n\u2022 A winning streak in the market does not prove skill, and a losing streak does not mean a win is due.\n\n\ud83c\udf55 MINI CASE: THE STREAK\nThe fictional Sundar Foods Ltd rises five days in a row, and Aarav assumes a sixth rise is certain. Meera reminds him that five heads in a row from a fair coin happens about once in 32 tries, and yet the next flip is still 50%. She writes her own prediction in her journal before each week, so she can later check it honestly without hindsight.\n\n\ud83e\uddea TRY IT: COIN CHECK\nWhat is the chance of three heads in a row from a fair coin? After three heads, what is the chance that the fourth flip is heads?\n(Answer: (1/2) x (1/2) x (1/2) = 1/8 = 12.5%. The fourth flip is still 50%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nStreaks and recent events feel meaningful, but randomness has no memory. Record predictions before the outcome to defeat hindsight.",
+      "quiz": [
+        {
+          "question": "What is recency bias?",
+          "options": [
+            "Ignoring all news",
+            "Giving too much weight to recent events",
+            "Preferring old shares",
+            "Using long averages"
+          ],
+          "correctIndex": 1,
+          "explanation": "It overweights what just happened."
+        },
+        {
+          "question": "What is hindsight bias?",
+          "options": [
+            "Past events feeling obvious after they happen",
+            "Planning ahead well",
+            "Using stop-losses",
+            "Reading charts"
+          ],
+          "correctIndex": 0,
+          "explanation": "Afterwards, events seem to have been predictable."
+        },
+        {
+          "question": "After 5 heads in a row, what is the chance of heads on the next flip of a fair coin?",
+          "options": [
+            "Less than 50%",
+            "More than 50%",
+            "50%",
+            "Zero"
+          ],
+          "correctIndex": 2,
+          "explanation": "A fair coin has no memory."
+        },
+        {
+          "question": "What is the chance of 3 heads in a row from a fair coin?",
+          "options": [
+            "50%",
+            "25%",
+            "33%",
+            "12.5%"
+          ],
+          "correctIndex": 3,
+          "explanation": "(1/2) x (1/2) x (1/2) = 1/8 = 12.5%."
+        },
+        {
+          "question": "What helps defeat hindsight bias?",
+          "options": [
+            "Forgetting the past",
+            "Written predictions made before the outcome",
+            "Checking prices daily",
+            "Copying friends"
+          ],
+          "correctIndex": 1,
+          "explanation": "A written record shows what you really thought."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-9",
+      "title": "9. Bubbles, Panics and Market Cycles",
+      "intro": "Why do prices swing far beyond what a business is worth?",
+      "content": "\u26a1 MISSION BRIEFING: BUBBLES, PANICS AND MARKET CYCLES\nA bubble happens when prices rise far above what the underlying value can support, driven by excitement and the hope of selling to someone else at a higher price. A panic is the opposite, with prices falling beyond reason. Studying them helps you spot the same emotions in yourself. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIn 1630s Holland, prices of tulip bulbs soared and then collapsed. Historians still debate how extreme it really was, but the story remains a classic warning.\n\n\u26a1 FINANCIAL INTEL: THE EMOTION CYCLE\n\u2022 Optimism, excitement and euphoria come as prices rise. Euphoria often marks the top.\n\u2022 Anxiety, fear, panic and despair come as prices fall. Despair often marks the bottom.\n\u2022 Hope returns, and the cycle begins again.\n\n\u26a1 FINANCIAL INTEL: SIGNS OF A BUBBLE\n\u2022 Prices far above what earnings or assets can justify.\n\u2022 Stories like 'this time is different'.\n\u2022 New investors rushing in, borrowing to buy, and everyone talking about it.\n\u2022 A valuation measure like P/E far above its usual range.\n\n\u26a1 FINANCIAL INTEL: STAYING SANE\n\u2022 Keep a long-term plan and a diversified mix.\n\u2022 Compare the price with the value of the business.\n\u2022 Be careful when everyone is euphoric and curious when everyone is fearful.\n\n\ud83c\udf55 MINI CASE: WHEN THE STORY RUNS AHEAD\nA fictional share earns \u20b910 per share and trades at \u20b9200, a P/E of 20. During a frenzy the price reaches \u20b9800 while earnings only grow to \u20b911, so P/E is about 800 \u00f7 11 = 72.7. When excitement fades and P/E returns to 20, the price is 20 x 11 = \u20b9220. From \u20b9800 that is a fall of (800 - 220) \u00f7 800 = 72.5%. The business did fine. The price had simply run far ahead.\n\n\ud83e\uddea TRY IT: WHAT IF P/E RETURNS\nA fictional share trades at \u20b9600 with earnings of \u20b912 per share, so P/E is 50. If P/E falls back to 25 and earnings stay at \u20b912, what is the price and the percentage fall?\n(Answer: price = 25 x 12 = \u20b9300. The fall is (600 - 300) \u00f7 600 x 100 = 50%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nBubbles and panics are driven by emotion, not value. Watch the price against the business and keep a plan for both the excitement and the fear.",
+      "quiz": [
+        {
+          "question": "What is a bubble?",
+          "options": [
+            "A soap product",
+            "Prices rising far above what value supports",
+            "A low-risk fund",
+            "A stock split"
+          ],
+          "correctIndex": 1,
+          "explanation": "Bubbles are prices detached from underlying value."
+        },
+        {
+          "question": "Which emotion often marks the top of a market cycle?",
+          "options": [
+            "Despair",
+            "Euphoria",
+            "Boredom",
+            "Doubt"
+          ],
+          "correctIndex": 1,
+          "explanation": "Euphoria is common near peaks."
+        },
+        {
+          "question": "A share trades at \u20b9600 with earnings of \u20b912. What is the P/E?",
+          "options": [
+            "12",
+            "600",
+            "72",
+            "50"
+          ],
+          "correctIndex": 3,
+          "explanation": "600 \u00f7 12 = 50."
+        },
+        {
+          "question": "If that P/E falls to 25 with earnings unchanged, what is the price?",
+          "options": [
+            "\u20b9300",
+            "\u20b9150",
+            "\u20b9250",
+            "\u20b9600"
+          ],
+          "correctIndex": 0,
+          "explanation": "25 x 12 = \u20b9300."
+        },
+        {
+          "question": "Which phrase is a common warning sign of a bubble?",
+          "options": [
+            "Prices follow earnings",
+            "This time is different",
+            "Investors are cautious",
+            "Valuations are low"
+          ],
+          "correctIndex": 1,
+          "explanation": "'This time is different' appears in many bubbles."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-10",
+      "title": "10. Finfluencers, Tips and Scams",
+      "intro": "How do you protect yourself from bad advice and fraud?",
+      "content": "\u26a1 MISSION BRIEFING: FINFLUENCERS, TIPS AND SCAMS\nSocial media, group chats and videos are full of money advice. Some of it is good education, and some of it is hype or fraud. In India, giving paid investment advice generally needs registration with SEBI, and the regulator has acted against unregistered advisers and misleading 'finfluencers'. Learn to check before you trust. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA promise of 10% returns every week sounds small, but over a year it would turn \u20b91,00,000 into about 142 times that amount. No real investment can do this.\n\n\u26a1 FINANCIAL INTEL: RED FLAGS\n\u2022 Guaranteed or very high returns with no risk.\n\u2022 Pressure to act now before a 'chance' disappears.\n\u2022 Secret tips sold in private groups.\n\u2022 Asking you to send money to a personal account, or to share passwords or OTPs.\n\u2022 Advisers who show only winning trades.\n\n\u26a1 FINANCIAL INTEL: COMMON SCHEMES\n\u2022 Pump and dump: promoters hype a tiny share, prices jump, they sell, and the price collapses on later buyers.\n\u2022 Ponzi scheme: early investors are paid with new investors' money until it collapses.\n\u2022 Fake apps and fake trading groups that copy real brands.\n\n\u26a1 FINANCIAL INTEL: HOW TO CHECK\n\u2022 Ask whether the person is a SEBI-registered adviser or analyst, and check SEBI's official list.\n\u2022 Search for the same claim on trusted sources.\n\u2022 Never share OTPs, passwords or card details.\n\u2022 Show tips to a parent, teacher or guardian before acting.\n\n\ud83c\udf55 MINI CASE: THE PUMP AND DUMP\nA fictional tiny share trades at \u20b910. A chat group hypes it and the price jumps to \u20b930, a rise of 200%. The organisers sell at the top and the price collapses to \u20b98. Aarav bought at \u20b930, so his loss is 30 - 8 = \u20b922 per share, which is 22 \u00f7 30 = 73.3%. Meera noticed that nobody could explain the business and stayed away.\n\n\ud83e\uddea TRY IT: CHECK THE PROMISE\nA fictional group promises 5% growth every week. Is that believable? Think about what 5% a week would mean over a year, and what the group should show you before you trust it.\n(Answer: 5% a week compounds to about 1.05 to the power of 52, which is roughly 12.6 times your money in a year, far beyond what any real investment reliably gives. A trustworthy adviser should show SEBI registration and explain the risks. Never send money to a stranger.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nHype and guaranteed returns are red flags. Check registration, never share OTPs and passwords, and show tips to a trusted adult first.",
+      "quiz": [
+        {
+          "question": "Which of these is a clear red flag?",
+          "options": [
+            "A guaranteed high return with no risk",
+            "A clear explanation of risk",
+            "A registered adviser",
+            "A written plan"
+          ],
+          "correctIndex": 0,
+          "explanation": "No real investment can guarantee high returns."
+        },
+        {
+          "question": "What is a pump and dump?",
+          "options": [
+            "A water system",
+            "A type of mutual fund",
+            "Hyping a tiny share so promoters can sell at the top",
+            "A tax rule"
+          ],
+          "correctIndex": 2,
+          "explanation": "Promoters pump the price, sell, and later buyers lose."
+        },
+        {
+          "question": "A share bought at \u20b930 falls to \u20b98. What is the loss percentage?",
+          "options": [
+            "22%",
+            "30%",
+            "26.7%",
+            "73.3%"
+          ],
+          "correctIndex": 3,
+          "explanation": "22 \u00f7 30 x 100 = 73.3%."
+        },
+        {
+          "question": "Who should you ask for registration proof when someone gives paid investment advice?",
+          "options": [
+            "A random group member",
+            "SEBI's official list and the adviser",
+            "Your classmates only",
+            "Nobody"
+          ],
+          "correctIndex": 1,
+          "explanation": "SEBI keeps an official list of registered advisers."
+        },
+        {
+          "question": "What should you never share with a stranger?",
+          "options": [
+            "Your favourite colour",
+            "Your school name",
+            "OTPs, passwords and card details",
+            "A share's name"
+          ],
+          "correctIndex": 2,
+          "explanation": "These can be used to steal your money."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-11",
+      "title": "11. Habits and Rules That Beat Emotions",
+      "intro": "How can you set things up so good decisions happen almost automatically?",
+      "content": "\u26a1 MISSION BRIEFING: HABITS AND RULES THAT BEAT EMOTIONS\nYou cannot switch off your emotions, but you can build rules and habits so that emotions have less power. The idea is precommitment: deciding in advance, when you are calm, what you will do later, when you are not. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nUlysses in the old Greek story had his sailors tie him to the mast so he could hear the sirens' song without steering the ship onto the rocks. A good rule works like the rope.\n\n\u26a1 FINANCIAL INTEL: RULES TO WRITE DOWN\n\u2022 The most I will risk on one idea, such as 1% of capital.\n\u2022 The most I will put in one share, such as 10% of the portfolio.\n\u2022 When I will sell, written before I buy.\n\u2022 A waiting period, such as 24 hours, before any new idea.\n\u2022 When I will review and rebalance.\n\n\u26a1 FINANCIAL INTEL: HABITS THAT HELP\n\u2022 Automate: a SIP invests on a schedule without a daily decision.\n\u2022 Check your portfolio less often. More checks show more red days and more pain.\n\u2022 Mute hype accounts and limit how much market news you read.\n\u2022 Keep a journal with a column for your feelings.\n\n\u26a1 FINANCIAL INTEL: WHEN YOU WANT TO BREAK A RULE\n\u2022 Write down why, wait a day and ask a parent, teacher or guardian.\n\u2022 If the reason is a feeling like fear or excitement, the rule is doing its job.\n\u2022 Update rules only during a calm review, not in the middle of a trade.\n\n\ud83c\udf55 MINI CASE: MEERA'S RULEBOOK\nMeera's fictional simulator account has \u20b91,00,000. Her rules: risk no more than 1%, which is \u20b91,000 per idea, hold no more than 10% in a single share, which is \u20b910,000, write the stop-loss before buying and wait 24 hours before any new idea. She also sets a SIP of \u20b92,000 a month, which invests \u20b924,000 over 12 months with no daily decisions. When a shiny tip arrives, her rules tell her what to do.\n\n\ud83e\uddea TRY IT: WRITE YOUR RULES\nWrite three rules for a simulator account of \u20b950,000. How much is 1% risk per idea, and how much is a 10% position cap?\n(Answer: 1% of 50,000 = \u20b9500 and 10% of 50,000 = \u20b95,000. Example rules: risk at most \u20b9500 per idea, hold at most \u20b95,000 in one share, and wait 24 hours before buying.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nRules and habits written in calm moments protect you in emotional ones. Automate, wait, and review on a schedule.",
+      "quiz": [
+        {
+          "question": "What is precommitment?",
+          "options": [
+            "Deciding in advance, while calm, what you will do later",
+            "Buying on impulse",
+            "Skipping rules",
+            "Copying a friend"
+          ],
+          "correctIndex": 0,
+          "explanation": "Precommitment sets the rule before emotions arrive."
+        },
+        {
+          "question": "A SIP of \u20b92,000 for 12 months invests how much in total?",
+          "options": [
+            "\u20b912,000",
+            "\u20b920,000",
+            "\u20b924,000",
+            "\u20b948,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "2,000 x 12 = \u20b924,000."
+        },
+        {
+          "question": "Why can checking your portfolio less often help?",
+          "options": [
+            "Prices stop moving",
+            "It shows fewer red days and less pain, so fewer panic decisions",
+            "It removes risk",
+            "Brokers require it"
+          ],
+          "correctIndex": 1,
+          "explanation": "Frequent checks expose you to more noise and fear."
+        },
+        {
+          "question": "1% of a \u20b950,000 account is how much?",
+          "options": [
+            "\u20b9500",
+            "\u20b95,000",
+            "\u20b950",
+            "\u20b9250"
+          ],
+          "correctIndex": 0,
+          "explanation": "50,000 x 0.01 = \u20b9500."
+        },
+        {
+          "question": "When should you change your rules?",
+          "options": [
+            "In the middle of a trade",
+            "When you feel fear",
+            "During a calm review",
+            "After every headline"
+          ],
+          "correctIndex": 2,
+          "explanation": "Calm reviews protect the rules from emotional edits."
+        }
+      ]
+    },
+    {
+      "id": "submod-11-12",
+      "title": "12. Your Behaviour Journal and Mind Checklist",
+      "intro": "How do you turn all these ideas into a routine that keeps you honest?",
+      "content": "\u26a1 MISSION BRIEFING: THE MIND CHECKLIST\nYou now know the main traps: panic, loss aversion, overconfidence, the herd, anchors, sunk costs, mental boxes, streaks, bubbles and scams. This capstone puts them into a checklist and a journal for your simulator practice. The goal is self-knowledge, not perfection. All examples are fictional and this is education, not advice. If money worries ever make you anxious or upset, talk to a parent, teacher or counsellor.\n\n\ud83e\udd2f WOW FACT:\nMany professional investors say the hardest part is not analysis but managing themselves, and a journal is one of their favourite tools.\n\n\u26a1 FINANCIAL INTEL: THE MIND CHECKLIST\n1. Feeling: what am I feeling right now, such as fear, excitement, boredom or FOMO?\n2. Source: where did this idea come from, and do they gain if I act?\n3. Facts: what facts do I have, and what is only a story?\n4. Opposite view: what is the best argument against this?\n5. Anchor: would I buy at today's price if I owned nothing?\n6. Plan: are my size, stop and target written down?\n7. Wait: have I waited at least 24 hours?\n8. Record: have I logged it in my journal?\n\n\u26a1 FINANCIAL INTEL: THE JOURNAL\nAdd a feeling column to your trade journal. After each trade, note the date, the idea, the reason, the result and what you felt. Once a month, compare impulsive trades with planned trades. The numbers show your own habits.\n\n\u26a1 FINANCIAL INTEL: COMMON TRAPS\n\u2022 Skipping the checklist when you feel sure.\n\u2022 Journaling only the wins.\n\u2022 Trading to win back a loss.\n\u2022 Changing rules in the middle of a trade.\n\n\ud83c\udf55 MINI CASE: WHAT THE JOURNAL SHOWED\nMeera takes 20 practice trades in her simulator. She labels 8 of them as FOMO or impulse trades and wins 2, a win rate of 2 \u00f7 8 x 100 = 25%. Her 12 planned trades win 7, a win rate of 7 \u00f7 12 x 100 = 58.3%. Overall she wins 9 of 20, which is 45%. The journal shows that her impulse trades were the weak spot. She adds a rule: no trade without the checklist.\n\n\ud83e\uddea TRY IT: BUILD YOUR OWN\nIn a fictional journal, 10 trades are logged: 4 impulsive with 1 win and 6 planned with 4 wins. Work out the win rate of each group. Then fill in the eight checklist lines for an idea you have and discuss them with a parent, teacher or guardian.\n(Answer: impulsive: 1 \u00f7 4 x 100 = 25%. Planned: 4 \u00f7 6 x 100 = 66.7%. A feeling column helps you see which habits help and which hurt.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA checklist slows you down and a journal keeps you honest. Know your biases, use rules, and practise on a simulator. No method guarantees profit, and a parent or guardian should be part of any real money decision.",
+      "quiz": [
+        {
+          "question": "What is the purpose of the mind checklist?",
+          "options": [
+            "To guarantee profit",
+            "To slow you down and check your feelings, sources and plan before acting",
+            "To replace research",
+            "To predict prices"
+          ],
+          "correctIndex": 1,
+          "explanation": "The checklist adds a pause and a structure to decisions."
+        },
+        {
+          "question": "2 wins out of 8 impulsive trades is what win rate?",
+          "options": [
+            "20%",
+            "40%",
+            "25%",
+            "2%"
+          ],
+          "correctIndex": 2,
+          "explanation": "2 \u00f7 8 x 100 = 25%."
+        },
+        {
+          "question": "Why add a feeling column to your journal?",
+          "options": [
+            "To show off",
+            "To replace numbers",
+            "To remove risk",
+            "To see which emotions lead to your best and worst trades"
+          ],
+          "correctIndex": 3,
+          "explanation": "Linking feelings to results shows your patterns."
+        },
+        {
+          "question": "Which source of a trading idea deserves extra caution?",
+          "options": [
+            "Someone who gains if you act",
+            "Your own written research",
+            "An annual report",
+            "Your journal"
+          ],
+          "correctIndex": 0,
+          "explanation": "People who benefit from your action may be biased."
+        },
+        {
+          "question": "Does any checklist guarantee profits?",
+          "options": [
+            "Yes, if used daily",
+            "Yes, for planned trades",
+            "Yes, for long-term investors",
+            "No, risk always remains, so practise on a simulator and involve a parent or guardian"
+          ],
+          "correctIndex": 3,
+          "explanation": "No method removes risk."
+        }
+      ]
+    }
+  ]
+}
