@@ -145,6 +145,8 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   const [replay, setReplay] = useState(0);
   const [react, setReact] = useState(null);
   const [small, setSmall] = useState(false);
+  const [simple, setSimple] = useState({});
+  const [explaining, setExplaining] = useState(false);
   const touchX = useRef(null);
   const trackRef = useRef(null);
   const bodyRef = useRef(null);
@@ -238,13 +240,15 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   const curLines = useMemo(() => {
     const b = blocks[card];
     if (!b) return [];
+    const sKey = lesson ? lesson.id + ':' + card : '';
+    if (simple[sKey]) return simple[sKey];
     if (card === 0 && lesson) {
       let h = 0;
       for (let i = 0; i < lesson.id.length; i += 1) h = (h * 31 + lesson.id.charCodeAt(i)) % 997;
       return [INTROS[h % INTROS.length]].concat(b.body);
     }
     return b.body;
-  }, [blocks, card, lesson]);
+  }, [blocks, card, lesson, simple]);
 
   const total = curLines.length;
   const allShown = shown >= total;
@@ -333,17 +337,32 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     }
   };
 
-  const onReact = (kind) => {
-    if (!lesson) return;
-    if (kind === 'got') {
-      goNext();
-      return;
-    }
+  const onReact = async (kind) => {
+    if (!lesson || explaining) return;
+    if (kind === 'got') { goNext(); return; }
     if (kind === 'blown') {
       setReact({ lessonId: lesson.id, card, mood: 'excited', say: 'Right?! Wait till you see the next one. \ud83e\udd2f' });
       return;
     }
-    setReact({ lessonId: lesson.id, card, mood: 'encouraging', say: 'Okay, one more time. Slow and clear! \ud83d\udd01' });
+    const key = lesson.id + ':' + card;
+    setExplaining(true);
+    setReact({ lessonId: lesson.id, card, mood: 'thinking', say: 'Hmm, let me think of an easier way...' });
+    try {
+      const headers = await authHeaders();
+      if (headers) {
+        const res = await fetch('/api/explain-again', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ title: lesson.title, head: blocks[card].head, lines: simple[key] || blocks[card].body }),
+        });
+        if (res.ok) {
+          const d = await res.json();
+          if (Array.isArray(d.lines) && d.lines.length) setSimple((p) => ({ ...p, [key]: d.lines }));
+        }
+      }
+    } catch (err2) { /* fall back to replaying the same card */ }
+    setReact({ lessonId: lesson.id, card, mood: 'encouraging', say: 'Okay, here is the easy version! \ud83d\udd01' });
+    setExplaining(false);
     setReplay((r) => r + 1);
   };
 
