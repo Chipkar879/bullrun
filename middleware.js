@@ -14,6 +14,7 @@ export async function middleware(req) {
     pathname.startsWith('/favicon.ico') ||
     pathname === '/icon.svg' ||
     pathname === '/apple-icon.png' ||
+    /\.(png|jpe?g|svg|webp|gif|ico)$/.test(pathname) ||
     pathname.startsWith('/opengraph-image') ||
     pathname.startsWith('/twitter-image') ||
     pathname === '/sitemap.xml' ||
