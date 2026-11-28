@@ -3,11 +3,14 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import Mascot from '@/components/Mascot';
 
 const TOUR_STEPS = [
   {
     title: '📖 1. Learning Modules',
     badge: 'STEP 1 OF 6',
+    mood: 'hello',
+    say: "Hi, I'm Bulzo! I'll show you around. 🐂",
     description: 'Start here. Master business fundamentals, technical analysis, valuation, and risk engineering across 5 level tracks and earn XP. Finish your first 2 modules and the simulator becomes the first page you see when you sign in.',
     href: '/modules',
     actionText: 'Next: Simulator →',
@@ -15,6 +18,8 @@ const TOUR_STEPS = [
   {
     title: '📈 2. Stock Simulator',
     badge: 'STEP 2 OF 6',
+    mood: 'curious',
+    say: 'Practice with ₹50,000 of play money. Zero risk!',
     description: 'Your ₹50,000 sandbox portfolio lives here. Practice trades on simulated prices for fictional companies, ETFs and commodities. No real money and no live exchange connection.',
     href: '/simulator',
     actionText: 'Next: Arena →',
@@ -22,6 +27,8 @@ const TOUR_STEPS = [
   {
     title: '⚔️ 3. Volatility Arena',
     badge: 'STEP 3 OF 6',
+    mood: 'excited',
+    say: 'Ready to race other traders?',
     description: 'Enter high-frequency 30-day volatility matches against other traders to test your market reaction speed.',
     href: '/arena',
     actionText: 'Next: Daily Quiz →',
@@ -30,6 +37,8 @@ const TOUR_STEPS = [
     title: '⚡ 4. Daily Market Quiz',
     badge: 'STEP 4 OF 6',
     isNew: true,
+    mood: 'thinking',
+    say: 'One quick quiz a day keeps your XP safe!',
     description: 'Test your daily financial awareness with fresh market questions and earn bonus XP rewards every 24 hours.',
     href: '/quiz',
     actionText: 'Next: Leaderboard →',
@@ -38,6 +47,8 @@ const TOUR_STEPS = [
     title: '🏆 5. Global & School Leaderboards',
     badge: 'STEP 5 OF 6',
     isNew: true,
+    mood: 'trophy',
+    say: 'Climb the board and earn your rank!',
     description: 'Track real-time standings based on Total Net Worth (Cash + Stock Value). Compare your rank globally or within your school hub.',
     href: '/leaderboard',
     actionText: 'Next: Pricing →',
@@ -45,11 +56,23 @@ const TOUR_STEPS = [
   {
     title: '💳 6. Pass & Subscriptions',
     badge: 'STEP 6 OF 6',
+    mood: 'chest',
+    say: 'Last stop! Your free trial starts now.',
     description: 'Your account starts with a 7-day free trial. Upgrade anytime to maintain continuous, un-frozen access to all platform features.',
     href: '/pricing',
     actionText: 'Finish Tour 🚀',
   },
 ];
+
+const TOUR_CSS = `
+@keyframes tourHop{0%{transform:translateY(30px) scale(.6) rotate(-8deg);opacity:0}55%{transform:translateY(-12px) scale(1.08) rotate(4deg);opacity:1}80%{transform:translateY(3px) scale(.98)}100%{transform:none;opacity:1}}
+@keyframes tourBubble{0%{opacity:0;transform:scale(.75) translateX(-12px)}70%{transform:scale(1.03)}100%{opacity:1;transform:none}}
+@keyframes tourBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.tour-hop{display:inline-block;animation:tourHop .7s cubic-bezier(.34,1.56,.64,1) both}
+.tour-bob{display:inline-block;animation:tourBob 2.4s ease-in-out .8s infinite}
+.tour-bubble{animation:tourBubble .45s ease-out .3s both}
+@media (prefers-reduced-motion:reduce){.tour-hop,.tour-bob,.tour-bubble{animation:none}}
+`;
 
 export default function OnboardingTour() {
   const [isOpen, setIsOpen] = useState(false);
@@ -155,8 +178,9 @@ export default function OnboardingTour() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bull-bg/85 backdrop-blur-md animate-fadeInFast font-sans">
-      <div className="bg-bull-surface border-2 border-bull-lime/60 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] space-y-6 relative animate-scaleUp font-mono">
-        
+      <style>{TOUR_CSS}</style>
+      <div className="bg-bull-surface border-2 border-bull-lime/60 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-[0_0_50px_color-mix(in_srgb,var(--color-bull-lime)_25%,transparent)] space-y-5 relative animate-scaleUp font-mono max-h-[92vh] overflow-y-auto">
+
         {/* HEADER BADGES */}
         <div className="flex justify-between items-center border-b border-bull-line pb-3">
           <div className="flex items-center gap-2">
@@ -169,13 +193,26 @@ export default function OnboardingTour() {
               </span>
             )}
           </div>
-          
+
           <button
             onClick={handleComplete}
             className="text-xs font-bold text-slate-500 hover:text-white transition cursor-pointer"
           >
             SKIP TOUR ✕
           </button>
+        </div>
+
+        {/* BULZO AND HIS SPEECH BUBBLE */}
+        <div key={currentStep} className="flex items-end gap-3 font-sans">
+          <span className="tour-hop shrink-0">
+            <span className="tour-bob">
+              <Mascot mood={step.mood} size={96} fallback={'\ud83d\udc02'} eager />
+            </span>
+          </span>
+          <div className="tour-bubble relative flex-1 min-w-0 rounded-2xl rounded-bl-md border border-bull-line bg-bull-raised px-4 py-3">
+            <span aria-hidden="true" className="absolute -left-1.5 bottom-5 h-3 w-3 rotate-45 border-b border-l border-bull-line bg-bull-raised" />
+            <p className="text-sm font-bold text-white leading-snug">{step.say}</p>
+          </div>
         </div>
 
         {/* STEP DESCRIPTION */}

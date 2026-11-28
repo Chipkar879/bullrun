@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import Navbar from '@/components/Navbar';
+import Mascot from '@/components/Mascot';
 
 /* ---------- helpers ---------- */
 const toLocalDateStr = (d = new Date()) =>
@@ -469,7 +470,8 @@ export default function DailyQuiz() {
 
         {loading && (
           <div className="text-center text-xs font-bold text-slate-400 py-12 animate-pulse">
-            Configuring Live Battleground Grid Parameters...
+            <Mascot mood="thinking" size={96} eager className="mx-auto" />
+            <span className="block mt-2">Getting your quiz ready...</span>
           </div>
         )}
 
@@ -488,6 +490,7 @@ export default function DailyQuiz() {
             </div>
 
             <div className="text-center space-y-4 max-w-xl mx-auto">
+              <div className="flex justify-center"><Mascot mood={hasPlayedToday ? 'proud' : 'excited'} size={120} eager /></div>
               <span className="inline-flex items-center gap-2 bg-bull-raised border border-bull-line text-bull-lime text-xs uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-inner">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
@@ -633,6 +636,7 @@ export default function DailyQuiz() {
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               {hasPlayedToday ? (
                 <div className="rounded-2xl border border-bull-line bg-bull-surface px-6 py-3 text-center shadow-inner">
+                  <div className="flex justify-center"><Mascot mood="sleepy" size={64} /></div>
                   <p className="text-xs font-black uppercase tracking-wider text-slate-500">🔒 Attempted today · next quiz in</p>
                   <p className="font-mono text-xl font-black text-bull-lime">{nextQuizIn}</p>
                 </div>
@@ -758,7 +762,7 @@ export default function DailyQuiz() {
         {/* ================= COMPLETED ================= */}
         {quizCompleted && (
           <div className="animate-scaleUp mx-auto max-w-md space-y-6 rounded-3xl border-2 border-b-4 border-bull-line border-b-bull-lime-dark bg-bull-surface p-8 text-center shadow-2xl">
-            <div className="text-6xl">🎯</div>
+            <div className="flex justify-center"><Mascot mood={score >= 12 ? 'trophy' : score >= 8 ? 'celebrating' : 'encouraging'} size={140} eager /></div>
             <div className="space-y-1">
               <h2 className="font-poppins text-2xl font-black text-white">Arena Run Complete!</h2>
               <p className="text-xs font-medium text-slate-400">Your financial pipeline metrics are secured.</p>
@@ -843,6 +847,7 @@ export default function DailyQuiz() {
             </div>
 
             <div className="space-y-6 rounded-3xl border-2 border-bull-line bg-bull-surface p-6 shadow-2xl sm:p-8">
+              <div className="flex justify-center"><Mascot mood={selectedAnswer === null ? 'thinking' : selectedAnswer === questions[currentIdx]?.correct_option ? 'excited' : 'encouraging'} size={72} eager /></div>
               <h3 className="font-poppins text-base font-black leading-relaxed text-white sm:text-lg">
                 {questions[currentIdx]?.question_text}
               </h3>

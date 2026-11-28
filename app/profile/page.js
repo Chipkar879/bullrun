@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import Mascot from '@/components/Mascot';
 import RankBadge from '@/components/RankBadge';
 import { RANKS, getRank } from '@/lib/ranks';
 import { supabase } from '@/lib/supabase';
@@ -171,6 +172,7 @@ export default function ProfilePage() {
         <div className="max-w-5xl mx-auto px-6 pt-32 pb-24 flex justify-center">
           <div className="text-center space-y-3">
             <div className="w-12 h-12 border-4 border-bull-lime border-t-transparent rounded-full animate-spin mx-auto" />
+            <Mascot mood="thinking" size={96} eager className="mx-auto" />
             <p className="text-slate-400 text-sm">Loading your profile...</p>
           </div>
         </div>
@@ -192,15 +194,17 @@ export default function ProfilePage() {
 
         {toast && (
           <div className="flex items-center justify-between gap-3 rounded-2xl border border-bull-lime/50 bg-bull-raised px-4 py-3 text-sm font-bold text-white" role="status">
-            <span>{toast}</span>
+            <span className="flex items-center gap-3"><Mascot mood={String(toast).startsWith('New badge') ? 'celebrating' : 'oops'} size={48} eager />{toast}</span>
             <button onClick={() => setToast('')} className="text-xs text-slate-400 hover:text-white" aria-label="Dismiss">Close</button>
           </div>
         )}
 
         {data && data.penalty && (data.penalty.lost > 0 || data.penalty.warnings.length > 0) && (
           <div className="rounded-2xl border border-amber-500/40 bg-amber-950/20 px-4 py-3 text-sm text-amber-100 space-y-1" role="status">
+            <div className="flex items-center gap-3"><Mascot mood={data.penalty.lost > 0 ? 'encouraging' : 'curious'} size={56} /><div className="space-y-1">
             {data.penalty.warnings.map((w) => <p key={w} className="font-bold">{w}</p>)}
             {data.penalty.lost > 0 && <p className="text-amber-200/80">You have lost {data.penalty.lost} XP to missed days. You can never drop below your current rank, and new XP brings you back up.</p>}
+            </div></div>
           </div>
         )}
 
