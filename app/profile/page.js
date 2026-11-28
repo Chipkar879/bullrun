@@ -197,6 +197,13 @@ export default function ProfilePage() {
           </div>
         )}
 
+        {data && data.penalty && (data.penalty.lost > 0 || data.penalty.warnings.length > 0) && (
+          <div className="rounded-2xl border border-amber-500/40 bg-amber-950/20 px-4 py-3 text-sm text-amber-100 space-y-1" role="status">
+            {data.penalty.warnings.map((w) => <p key={w} className="font-bold">{w}</p>)}
+            {data.penalty.lost > 0 && <p className="text-amber-200/80">You have lost {data.penalty.lost} XP to missed days. You can never drop below your current rank, and new XP brings you back up.</p>}
+          </div>
+        )}
+
         {/* Header */}
         <section className={card + ' p-6 sm:p-8 relative overflow-hidden'}>
           <div className="absolute -top-20 -right-16 w-64 h-64 rounded-full bg-bull-lime/15 blur-3xl pointer-events-none" />

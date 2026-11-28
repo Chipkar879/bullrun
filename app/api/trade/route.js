@@ -10,6 +10,7 @@ import {
   intradayQtyFor,
   istDayStartMs,
 } from '@/lib/costs';
+import { penalise, AMOUNT, istDay } from '@/lib/penalties';
 
 export const dynamic = 'force-dynamic';
 
@@ -155,6 +156,18 @@ export async function POST(req) {
     });
     if (error) return bad(error.message);
 
+    // A sale at a loss bigger than 5% costs a little XP (the trade itself never fails because of this)
+    let xpNote = null;
+    try {
+      const cost = built.avgCost * qty;
+      const pnl = Number(data.realized_gross);
+      if (side === 'SELL' && cost > 0 && Number.isFinite(pnl) && pnl < -0.05 * cost) {
+        const pct = Math.round((-pnl / cost) * 100);
+        const r = await penalise({ userId: user.id, amount: AMOUNT.trade, reason: 'Trade closed at a loss', day: istDay(0), ref: 'trade:' + data.history_id });
+        xpNote = 'Your trade dipped ' + pct + '%.' + (r.applied ? ' That costs ' + r.amount + ' XP. Check the news and your stop-loss next time.' : ' Learn from it and try again.');
+      }
+    } catch (penErr) { console.error('penalty failed', penErr); }
+
     const netWorth = await recomputeNetWorth(user.id, prices);
 
     return Response.json({
@@ -169,6 +182,7 @@ export async function POST(req) {
       realizedGross: data.realized_gross,
       historyId: data.history_id,
       netWorth,
+      xpNote,
     });
   } catch (e) {
     console.error('trade failed', e);

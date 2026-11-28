@@ -3,6 +3,7 @@ import { ORDER } from '@/lib/moduleData';
 import { moduleNumber } from '@/lib/progressLogic';
 import { ASSET_BY_SYM } from '@/lib/catalog';
 import { BADGES, AVATARS, CAP_BB, levelFor } from '@/lib/gamification';
+import { getRank } from '@/lib/ranks';
 
 export const dynamic = 'force-dynamic';
 const START_BALANCE = 50000;
@@ -10,13 +11,14 @@ const istDay = (offset = 0) => new Date(Date.now() + 19800000 - offset * 8640000
 
 async function summary(user) {
   const uid = user.id;
-  const [prof, lessonsRes, tradesRes, quizRes, badgesRes, convRes] = await Promise.all([
+  const [prof, lessonsRes, tradesRes, quizRes, badgesRes, convRes, penRes] = await Promise.all([
     admin.from('profiles').select('net_worth, quiz_points, wallet_balance, avatar').eq('id', uid).maybeSingle(),
     admin.from('module_progress').select('submodule_id').eq('user_id', uid),
     admin.from('trade_history').select('sym').eq('user_id', uid).limit(2000),
     admin.from('quiz_history').select('quiz_date, score, total').eq('user_id', uid),
     admin.from('user_badges').select('badge_id, earned_at').eq('user_id', uid),
     admin.from('bb_conversions').select('bb_spent, cash_added, created_at').eq('user_id', uid).order('created_at', { ascending: false }).limit(30),
+    admin.from('xp_penalties').select('amount').eq('user_id', uid).limit(5000),
   ]);
 
   const done = (lessonsRes.data || []).map((r) => r.submodule_id);
@@ -70,14 +72,21 @@ async function summary(user) {
   }
 
   const quizScore = quiz.reduce((a, q) => a + (q.score || 0), 0);
-  const xp = done.length * 100 + Math.min(quizScore * 5 + quiz.length * 20, 3000) + Math.min(trades.length, 300) * 10 + have.size * 50;
+  const gross = done.length * 100 + Math.min(quizScore * 5 + quiz.length * 20, 3000) + Math.min(trades.length, 300) * 10 + have.size * 50;
+  // Penalties lower XP, but never below the start of the rank already reached
+  const lostTotal = (penRes.data || []).reduce((a, r) => a + r.amount, 0);
+  const xp = Math.max(getRank(gross).rank.min, gross - lostTotal);
+  const warnings = [];
+  const sunday = new Date(istDay(0) + 'T00:00:00Z').getUTCDay() === 0;
+  if (!dates.has(istDay(0)) && !sunday) warnings.push('Play today\'s quiz to protect your XP.');
 
   const since = Date.now() - 30 * 86400000;
   const used30 = (convRes.data || []).filter((c) => new Date(c.created_at).getTime() > since).reduce((a, c) => a + c.bb_spent, 0);
 
   return {
     xp,
-    level: levelFor(xp),
+    level: levelFor(gross),
+    penalty: { lost: gross - xp, warnings },
     streak,
     avatar: prof.data?.avatar || 'calf',
     badges: BADGES.map((x) => ({ id: x.id, earned: have.has(x.id), at: have.get(x.id) || null })),
