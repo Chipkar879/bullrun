@@ -16,11 +16,25 @@ const CSS = `
 @keyframes brPop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
 @keyframes brFloat{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-80px);opacity:0}}
 @keyframes brGlow{0%,100%{box-shadow:0 0 0 0 rgba(163,230,53,0)}50%{box-shadow:0 0 28px 2px rgba(163,230,53,.35)}}
+@keyframes brHop{0%{transform:translateY(36px) scale(.55) rotate(-10deg);opacity:0}55%{transform:translateY(-16px) scale(1.1) rotate(5deg);opacity:1}78%{transform:translateY(4px) scale(.97)}100%{transform:none;opacity:1}}
+@keyframes brTalk{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-5px) rotate(-3deg)}50%{transform:translateY(0) rotate(0)}75%{transform:translateY(-3px) rotate(3deg)}}
+@keyframes brIdle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.02)}}
+@keyframes brBubble{0%{opacity:0;transform:scale(.7) translateX(-14px)}70%{transform:scale(1.04) translateX(0)}100%{opacity:1;transform:none}}
+@keyframes brMsg{0%{opacity:0;transform:translateY(14px) scale(.94)}70%{transform:translateY(-2px) scale(1.01)}100%{opacity:1;transform:none}}
+@keyframes brDots{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-5px);opacity:1}}
+@keyframes brSpark{0%{transform:scale(0) rotate(0);opacity:0}50%{transform:scale(1.2) rotate(20deg);opacity:1}100%{transform:scale(0) rotate(60deg);opacity:0}}
 .br-fall{position:fixed;top:0;animation-name:brFall;animation-timing-function:linear;animation-fill-mode:forwards}
 .br-slide{animation:brSlide .35s ease-out}
 .br-pop{display:inline-block;animation:brPop .5s ease-out}
 .br-float{animation:brFloat 1.8s ease-out forwards}
 .br-glow{animation:brGlow 2.2s ease-in-out infinite}
+.br-hop{display:inline-block;animation:brHop .7s cubic-bezier(.34,1.56,.64,1) both}
+.br-talk{display:inline-block;animation:brTalk .55s ease-in-out infinite}
+.br-idle{display:inline-block;animation:brIdle 2.4s ease-in-out infinite}
+.br-bubble{animation:brBubble .45s ease-out .35s both}
+.br-msg{animation:brMsg .4s cubic-bezier(.34,1.56,.64,1) both}
+.br-dot{display:inline-block;width:7px;height:7px;border-radius:9999px;background:currentColor;animation:brDots 1s infinite}
+.br-spark{animation:brSpark 1.6s ease-in-out infinite}
 .br-noscroll{scrollbar-width:none;-ms-overflow-style:none}
 .br-noscroll::-webkit-scrollbar{display:none}
 `;
@@ -54,23 +68,32 @@ function parseBlocks(content) {
 }
 
 // Default mascot mood per card type. A lesson can set its own opening mood
-// with a "mascot" field in the JSON (used on the first card).
+// with a "mascot" field in the JSON (used on the first card). Without one, Bulzo waves hello.
 const MOOD_BY_KIND = { mission: 'curious', intel: 'explaining', wow: 'excited', try: 'thinking', case: 'curious', takeaway: 'proud' };
+
+// Bulzo opens every lesson with one of these (picked from the lesson id, so it stays the same on reload).
+const INTROS = [
+  'Hey! Bulzo here. Let me break this down for you. \ud83d\udc02',
+  'Ready for a mission? I will explain it step by step.',
+  'New lesson unlocked! I will make it super easy.',
+  'Psst... this is simpler than it looks. Watch!',
+];
 
 // Fixed title colours so dark mode cannot turn them white.
 const TITLE_COLOR = { wow: '#4a044e', try: '#0c4a6e' };
+const LIGHT_BUBBLE = { background: 'rgba(255,255,255,0.72)', borderColor: 'rgba(0,0,0,0.12)' };
 
-function Confetti() {
+function Confetti({ count = 36 }) {
   const bits = useMemo(
     () =>
-      Array.from({ length: 36 }).map((_, i) => ({
+      Array.from({ length: count }).map((_, i) => ({
         left: Math.random() * 100,
         delay: Math.random() * 0.8,
         dur: 2 + Math.random() * 1.6,
         size: 14 + Math.random() * 16,
         ch: ['\ud83c\udf89', '\u2728', '\u26a1', '\ud83d\udcb0', '\ud83d\udd25'][i % 5],
       })),
-    []
+    [count]
   );
   return (
     <div className="pointer-events-none fixed inset-0 z-[70] overflow-hidden">
@@ -83,25 +106,25 @@ function Confetti() {
   );
 }
 
-function CardBody({ lines, big }) {
+// One chat message from Bulzo
+function Msg({ line, big }) {
+  const isBullet = line.charAt(0) === '\u2022' || /^\d+\.\s/.test(line);
   return (
-    <div className="space-y-2">
-      {lines.map((l, i) => {
-        const isBullet = l.charAt(0) === '\u2022' || /^\d+\.\s/.test(l);
-        if (isBullet) {
-          return (
-            <div key={i} className="flex items-start gap-2.5 bg-bull-bg/70 border border-bull-line rounded-xl p-3 text-xs sm:text-sm">
-              <span className="text-bull-lime font-black font-mono">{'\u27a4'}</span>
-              <span className="leading-relaxed text-slate-100">{l.replace(/^[\u2022]\s*/, '')}</span>
-            </div>
-          );
-        }
-        return (
-          <p key={i} className={(big ? 'text-base sm:text-lg font-bold ' : 'text-xs sm:text-sm font-medium ') + 'leading-relaxed'}>
-            {l}
-          </p>
-        );
-      })}
+    <div className="br-msg flex items-start gap-2.5 bg-bull-bg/70 border border-bull-line rounded-2xl rounded-tl-md p-3 text-slate-100">
+      {isBullet && <span className="text-bull-lime font-black font-mono">{'\u27a4'}</span>}
+      <span className={(big ? 'text-base sm:text-lg font-bold ' : 'text-sm font-medium ') + 'leading-relaxed'}>
+        {line.replace(/^[\u2022]\s*/, '')}
+      </span>
+    </div>
+  );
+}
+
+function Typing() {
+  return (
+    <div className="br-msg inline-flex items-center gap-1.5 bg-bull-bg/70 border border-bull-line rounded-2xl rounded-tl-md px-4 py-3 text-slate-400" aria-label="Bulzo is typing">
+      <span className="br-dot" />
+      <span className="br-dot" style={{ animationDelay: '.15s' }} />
+      <span className="br-dot" style={{ animationDelay: '.3s' }} />
     </div>
   );
 }
@@ -118,8 +141,14 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   const [checking, setChecking] = useState(false);
   const [err, setErr] = useState('');
   const [xpPop, setXpPop] = useState(false);
+  const [shown, setShown] = useState(0);
+  const [replay, setReplay] = useState(0);
+  const [react, setReact] = useState(null);
+  const [small, setSmall] = useState(false);
   const touchX = useRef(null);
   const trackRef = useRef(null);
+  const bodyRef = useRef(null);
+  const reducedRef = useRef(false);
 
   // The browser copy is only a cache so the page shows something instantly.
   // The database is the truth, so progress follows the student to any device.
@@ -177,6 +206,19 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     return () => { cancelled = true; };
   }, []);
 
+  // Phone size and reduced-motion preference
+  useEffect(() => {
+    const narrow = window.matchMedia('(max-width: 640px)');
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      setSmall(narrow.matches);
+      reducedRef.current = calm.matches;
+    };
+    update();
+    narrow.addEventListener('change', update);
+    return () => narrow.removeEventListener('change', update);
+  }, []);
+
   const scrollTracks = (dir) => {
     if (trackRef.current) {
       trackRef.current.scrollBy({ left: dir === 'left' ? -320 : 320, behavior: 'smooth' });
@@ -191,6 +233,56 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
   const activeTrack = initialTracks.find((t) => t.id === trackId);
   const blocks = useMemo(() => parseBlocks(lesson ? lesson.content : ''), [lesson]);
+
+  // The messages Bulzo says on the current card (the first card starts with a greeting)
+  const curLines = useMemo(() => {
+    const b = blocks[card];
+    if (!b) return [];
+    if (card === 0 && lesson) {
+      let h = 0;
+      for (let i = 0; i < lesson.id.length; i += 1) h = (h * 31 + lesson.id.charCodeAt(i)) % 997;
+      return [INTROS[h % INTROS.length]].concat(b.body);
+    }
+    return b.body;
+  }, [blocks, card, lesson]);
+
+  const total = curLines.length;
+  const allShown = shown >= total;
+  const skipAll = () => setShown((s) => Math.max(s, total));
+
+  // Bulzo "types" the messages one by one
+  useEffect(() => {
+    if (!lesson || mode !== 'read') return undefined;
+    const list = curLines;
+    if (reducedRef.current || list.length === 0) {
+      setShown(list.length);
+      return undefined;
+    }
+    setShown(0);
+    let i = 0;
+    let t = null;
+    const step = () => {
+      const len = String(list[i] || '').length;
+      t = setTimeout(() => {
+        i += 1;
+        setShown((s) => Math.max(s, i));
+        if (i < list.length) step();
+      }, 450 + Math.min(len * 6, 650));
+    };
+    const start = setTimeout(step, 650);
+    return () => {
+      clearTimeout(start);
+      if (t) clearTimeout(t);
+    };
+  }, [lesson, mode, card, replay, curLines]);
+
+  // Keep the newest message in view
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+    if (shown === 0) el.scrollTop = 0;
+    else el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+  }, [shown, card, mode, qIdx]);
 
   const lessonUnlocked = (id) => {
     const i = allLessons.findIndex((s) => s.id === id);
@@ -215,6 +307,8 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     setResult(null);
     setErr('');
     setXpPop(false);
+    setReact(null);
+    setShown(0);
   };
 
   const closeLesson = () => setLesson(null);
@@ -224,6 +318,33 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     setResult(null);
     setQIdx(0);
     setErr('');
+  };
+
+  // First tap finishes the typing, the next tap moves on
+  const goNext = () => {
+    if (!allShown) {
+      skipAll();
+      return;
+    }
+    if (card < blocks.length - 1) setCard(card + 1);
+    else {
+      setMode('quiz');
+      setQIdx(0);
+    }
+  };
+
+  const onReact = (kind) => {
+    if (!lesson) return;
+    if (kind === 'got') {
+      goNext();
+      return;
+    }
+    if (kind === 'blown') {
+      setReact({ lessonId: lesson.id, card, mood: 'excited', say: 'Right?! Wait till you see the next one. \ud83e\udd2f' });
+      return;
+    }
+    setReact({ lessonId: lesson.id, card, mood: 'encouraging', say: 'Okay, one more time. Slow and clear! \ud83d\udd01' });
+    setReplay((r) => r + 1);
   };
 
   const submitQuiz = async () => {
@@ -258,16 +379,22 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     touchX.current = e.touches[0].clientX;
   };
   const onTouchEnd = (e) => {
-    if (touchX.current === null) return;
+    if (touchX.current === null || mode !== 'read') return;
     const dx = e.changedTouches[0].clientX - touchX.current;
     touchX.current = null;
-    if (dx < -50 && card < blocks.length - 1) setCard(card + 1);
+    if (dx < -50) goNext();
     if (dx > 50 && card > 0) setCard(card - 1);
   };
 
   const quiz = lesson && lesson.quiz ? lesson.quiz : [];
   const answeredAll = quiz.length > 0 && Object.keys(answers).length >= quiz.length;
   const nextLessonObj = lesson ? allLessons[allLessons.findIndex((s) => s.id === lesson.id) + 1] : null;
+
+  const curBlock = blocks[card] || null;
+  const rx = react && lesson && react.lessonId === lesson.id && react.card === card ? react : null;
+  const takeawayDone = mode === 'read' && curBlock && curBlock.kind === 'takeaway' && allShown;
+  const mascotSize = small ? 92 : 128;
+  const lastCard = card >= blocks.length - 1;
 
   return (
     <div className="space-y-8 relative antialiased font-sans">
@@ -411,6 +538,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
       {lesson && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 backdrop-blur-xl bg-bull-bg/90">
           {result && result.passed && <Confetti />}
+          {takeawayDone && <Confetti key={lesson.id + '-t'} count={24} />}
           <div className="bg-bull-surface border border-bull-lime/50 rounded-3xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[92vh] shadow-[0_0_60px_rgba(163,230,53,0.2)] br-slide relative">
             {xpPop && (
               <div className="br-float absolute right-8 top-16 z-10 font-mono font-black text-amber-400 text-2xl">+100 XP</div>
@@ -425,7 +553,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                   </span>
                   <h3 className="font-black text-base sm:text-lg text-white leading-tight truncate">{lesson.title}</h3>
                 </div>
-                <button onClick={closeLesson} className="h-9 w-9 shrink-0 rounded-xl bg-bull-surface border border-bull-line text-slate-400 hover:text-white font-black">
+                <button onClick={closeLesson} aria-label="Close lesson" className="h-9 w-9 shrink-0 rounded-xl bg-bull-surface border border-bull-line text-slate-400 hover:text-white font-black">
                   {'\u2715'}
                 </button>
               </div>
@@ -443,33 +571,107 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
             </div>
 
             {/* body */}
-            <div className="p-4 sm:p-6 overflow-y-auto flex-1" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-              {mode === 'read' && blocks[card] && (() => {
-                const b = blocks[card];
+            <div ref={bodyRef} className="p-4 sm:p-6 overflow-y-auto flex-1" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+              {mode === 'read' && curBlock && (() => {
+                const b = curBlock;
                 const st = KIND[b.kind];
+                const light = b.kind === 'wow' || b.kind === 'try';
+                const mood = rx
+                  ? rx.mood
+                  : card === 0
+                    ? (lesson.mascot || 'hello')
+                    : MOOD_BY_KIND[b.kind];
+                const sparkle = (b.kind === 'wow' || b.kind === 'takeaway') && allShown;
+                const bubbleCls = light ? '' : ' bg-bull-bg/70 border-bull-line text-slate-100';
                 return (
-                  <div key={card} className={'br-slide rounded-3xl border p-5 sm:p-6 space-y-4 ' + st.box}>
-                    <div className="flex items-center gap-3">
-                      <Mascot mood={card === 0 && lesson.mascot ? lesson.mascot : MOOD_BY_KIND[b.kind]} size={72} fallback={st.icon} />
-                      <div>
-                        <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70" style={TITLE_COLOR[b.kind] ? { color: TITLE_COLOR[b.kind] } : undefined}>{st.label}</div>
-                        <h4 className="text-white font-black text-base sm:text-xl leading-tight" style={TITLE_COLOR[b.kind] ? { color: TITLE_COLOR[b.kind] } : undefined}>{b.head}</h4>
+                  <div
+                    key={lesson.id + '-' + card + '-' + replay}
+                    onClick={() => { if (!allShown) skipAll(); }}
+                    role="log"
+                    aria-live="polite"
+                    className={'br-slide rounded-3xl border p-4 sm:p-6 space-y-4 ' + st.box}
+                  >
+                    {/* Bulzo and his title bubble */}
+                    <div className="flex items-end gap-3 sm:gap-4">
+                      <div className="relative shrink-0">
+                        <span className="br-hop">
+                          <span className={allShown ? 'br-idle' : 'br-talk'}>
+                            <Mascot key={mood} mood={mood} size={mascotSize} fallback={st.icon} eager />
+                          </span>
+                        </span>
+                        <span aria-hidden="true" className="block mx-auto mt-0.5 h-2 w-14 rounded-full bg-black/20 blur-[2px]" />
+                        {sparkle && (
+                          <>
+                            <span aria-hidden="true" className="br-spark absolute -top-1 -right-1 text-lg">{'\u2728'}</span>
+                            <span aria-hidden="true" className="br-spark absolute top-8 -left-2 text-base" style={{ animationDelay: '.5s' }}>{'\u2b50'}</span>
+                          </>
+                        )}
+                      </div>
+                      <div
+                        className={'br-bubble relative flex-1 min-w-0 rounded-2xl rounded-bl-md border px-4 py-3' + bubbleCls}
+                        style={light ? { ...LIGHT_BUBBLE, color: TITLE_COLOR[b.kind] } : undefined}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={'absolute -left-1.5 bottom-5 h-3 w-3 rotate-45 border-b border-l' + (light ? '' : ' bg-bull-bg/70 border-bull-line')}
+                          style={light ? LIGHT_BUBBLE : undefined}
+                        />
+                        <div className="text-xs font-mono font-black uppercase tracking-widest opacity-70">{st.label}</div>
+                        <h4 className={'font-black text-base sm:text-xl leading-tight' + (light ? '' : ' text-white')}>{b.head}</h4>
+                        {rx && <p className="mt-1.5 text-sm font-bold">{rx.say}</p>}
                       </div>
                     </div>
-                    <CardBody lines={b.body} big={b.kind === 'wow' || b.kind === 'takeaway'} />
+
+                    {/* Bulzo's messages */}
+                    <div className="space-y-2.5">
+                      {curLines.slice(0, shown).map((l, i) => (
+                        <Msg key={i} line={l} big={(b.kind === 'wow' || b.kind === 'takeaway') && !(card === 0 && i === 0)} />
+                      ))}
+                      {!allShown && <Typing />}
+                    </div>
+
+                    {/* Reactions */}
+                    {allShown && (
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        {[
+                          ['got', '\ud83d\udc4d Got it', 0],
+                          ['blown', '\ud83e\udd2f Mind blown', 0.08],
+                          ['again', '\ud83e\udd14 Explain again', 0.16],
+                        ].map(([k, label, delay]) => (
+                          <button
+                            key={k}
+                            onClick={(e) => { e.stopPropagation(); onReact(k); }}
+                            className="br-msg px-3.5 py-2 rounded-full border border-bull-line bg-bull-surface text-slate-100 text-xs font-black hover:border-bull-lime/60 active:scale-95 transition"
+                            style={{ animationDelay: delay + 's' }}
+                          >
+                            {label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 );
               })()}
 
               {mode === 'quiz' && !result && quiz[qIdx] && (
-                <div key={qIdx} className="br-slide space-y-4">
+                <div key={qIdx} className="space-y-4">
                   <div className="flex items-center justify-between font-mono text-xs font-black uppercase tracking-widest text-slate-400">
                     <span>QUESTION {qIdx + 1} / {quiz.length}</span>
                     <span className="text-amber-400">{Object.keys(answers).length} ANSWERED</span>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Mascot mood="encouraging" size={56} fallback={'\ud83d\udc02'} />
-                    <h4 className="text-white font-black text-base sm:text-lg leading-snug">{quiz[qIdx].question}</h4>
+                  <div className="flex items-end gap-3">
+                    <div className="relative shrink-0">
+                      <span className="br-hop">
+                        <span className="br-idle">
+                          <Mascot key={answers[qIdx] === undefined ? 'thinking' : 'cool'} mood={answers[qIdx] === undefined ? 'thinking' : 'cool'} size={small ? 84 : 108} fallback={'\ud83d\udc02'} eager />
+                        </span>
+                      </span>
+                      <span aria-hidden="true" className="block mx-auto mt-0.5 h-2 w-12 rounded-full bg-black/20 blur-[2px]" />
+                    </div>
+                    <div className="br-bubble relative flex-1 min-w-0 rounded-2xl rounded-bl-md border border-bull-line bg-bull-raised px-4 py-3">
+                      <span aria-hidden="true" className="absolute -left-1.5 bottom-5 h-3 w-3 rotate-45 border-b border-l border-bull-line bg-bull-raised" />
+                      <h4 className="text-white font-black text-base sm:text-lg leading-snug">{quiz[qIdx].question}</h4>
+                    </div>
                   </div>
                   <div className="space-y-2.5">
                     {quiz[qIdx].options.map((opt, oi) => {
@@ -478,10 +680,11 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                         <button
                           key={oi}
                           onClick={() => setAnswers((p) => ({ ...p, [qIdx]: oi }))}
-                          className={'w-full text-left p-3.5 rounded-2xl border text-sm flex items-center gap-3 transition-all ' +
+                          className={'br-msg w-full text-left p-3.5 rounded-2xl border text-sm flex items-center gap-3 transition-all ' +
                             (sel
                               ? 'bg-bull-lime/20 border-bull-lime text-white font-bold scale-[1.01]'
                               : 'bg-bull-raised border-bull-line text-slate-300 hover:border-bull-lime/60')}
+                          style={{ animationDelay: (0.35 + oi * 0.08) + 's' }}
                         >
                           <span className={'h-7 w-7 shrink-0 rounded-lg flex items-center justify-center font-mono font-black text-xs ' + (sel ? 'bg-bull-lime text-bull-ink' : 'bg-bull-bg text-slate-400')}>
                             {String.fromCharCode(65 + oi)}
@@ -498,7 +701,11 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
               {mode === 'quiz' && result && (
                 <div className="space-y-5 br-slide">
                   <div className="text-center space-y-2 py-2">
-                    <div className="flex justify-center"><Mascot mood={result.passed ? (result.correctCount === quiz.length ? 'trophy' : 'celebrating') : 'oops'} size={140} fallback={result.passed ? '\ud83c\udfc6' : '\ud83d\udcaa'} /></div>
+                    <div className="flex justify-center">
+                      <span className="br-hop">
+                        <Mascot mood={result.passed ? (result.correctCount === quiz.length ? 'trophy' : 'celebrating') : 'oops'} size={small ? 120 : 150} fallback={result.passed ? '\ud83c\udfc6' : '\ud83d\udcaa'} eager />
+                      </span>
+                    </div>
                     <h4 className="text-white font-black text-2xl">{result.passed ? 'MISSION COMPLETE!' : 'So close! Try again.'}</h4>
                     <p className="font-mono text-sm text-slate-300">
                       Score: <span className="font-black text-bull-lime">{result.correctCount} / {quiz.length}</span> (need {result.needed})
@@ -540,15 +747,13 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                     >
                       {'\u2190'} BACK
                     </button>
-                    {card < blocks.length - 1 ? (
-                      <button onClick={() => setCard(card + 1)} className="flex-1 py-3 rounded-2xl bg-bull-lime text-bull-ink font-black text-xs uppercase tracking-wider font-mono active:scale-95 transition">
-                        NEXT {'\u2192'}
-                      </button>
-                    ) : (
-                      <button onClick={() => { setMode('quiz'); setQIdx(0); }} className="flex-1 py-3 rounded-2xl bg-emerald-500 text-bull-ink font-black text-xs uppercase tracking-wider font-mono active:scale-95 transition br-glow">
-                        {'\ud83c\udfaf'} START QUIZ ({quiz.length} QUESTIONS)
-                      </button>
-                    )}
+                    <button
+                      onClick={goNext}
+                      className={'flex-1 py-3 rounded-2xl text-bull-ink font-black text-xs uppercase tracking-wider font-mono active:scale-95 transition ' +
+                        (allShown && lastCard ? 'bg-emerald-500 br-glow' : 'bg-bull-lime')}
+                    >
+                      {!allShown ? 'SKIP \u23e9' : lastCard ? '\ud83c\udfaf START QUIZ (' + quiz.length + ' QUESTIONS)' : 'NEXT \u2192'}
+                    </button>
                   </div>
                 </div>
               )}
