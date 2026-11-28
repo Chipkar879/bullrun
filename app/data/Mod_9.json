@@ -1,0 +1,762 @@
+{
+  "id": "mod-9",
+  "title": "Portfolio and Risk Management",
+  "submodules": [
+    {
+      "id": "submod-9-1",
+      "title": "1. What Is Risk?",
+      "intro": "Is risk only about losing money, or something more?",
+      "content": "\u26a1 MISSION BRIEFING: WHAT IS RISK?\nEvery investment carries risk, which is the chance that the result will be different from what you hoped, usually worse. Risk is not something to avoid completely. It is something to understand, measure and keep to a level you can live with. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA share that falls 50% needs to rise 100% just to get back to where it started.\n\n\u26a1 FINANCIAL INTEL: TYPES OF RISK\n\u2022 Market risk: the whole market falls and takes most shares down with it.\n\u2022 Company risk: something goes wrong at one business.\n\u2022 Inflation risk: prices rise, so the same money buys less over time.\n\u2022 Liquidity risk: you cannot sell quickly at a fair price.\n\u2022 Concentration risk: too much money sits in one share or one sector.\n\n\u26a1 FINANCIAL INTEL: RISK AND RETURN\n\u2022 Higher possible return usually comes with higher risk. Nobody can offer high returns with no risk.\n\u2022 Volatility is how much a price swings up and down. Big swings feel uncomfortable even when the price later recovers.\n\u2022 Drawdown = (peak - low) \u00f7 peak x 100. It shows the worst fall from a high point.\n\n\u26a1 FINANCIAL INTEL: THE RECOVERY TRAP\nLosses are harder to repair than they look. After a fall of x%, the gain needed to recover is bigger than x%. A 20% fall needs a 25% gain. A 50% fall needs a 100% gain. This is why avoiding big losses matters so much.\n\n\ud83c\udf55 MINI CASE: A FALL AND THE CLIMB BACK\nThe fictional Sundar Foods Ltd peaks at \u20b9200 and falls to \u20b9150. The drawdown is (200 - 150) \u00f7 200 x 100 = 25%. To get back to \u20b9200 from \u20b9150, it needs to rise 50 \u00f7 150 x 100 = 33.3%. Aarav says, 'It fell 25%, so it only needs 25% back.' Meera shows him the sum. The climb back is always steeper than the fall.\n\n\ud83e\uddea TRY IT: HOW STEEP IS THE CLIMB?\nA fictional share falls from \u20b9100 to \u20b950. What is the drawdown, and what gain is needed to return to \u20b9100?\n(Answer: the drawdown is (100 - 50) \u00f7 100 x 100 = 50%. To go from \u20b950 to \u20b9100 it needs 50 \u00f7 50 x 100 = 100%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nRisk is the chance of a worse result than you hoped for, and it comes in several kinds. Measure it with drawdown, remember that big losses are hard to repair, and only take risk you can live with.",
+      "quiz": [
+        {
+          "question": "Which risk means you cannot sell quickly at a fair price?",
+          "options": [
+            "Inflation risk",
+            "Liquidity risk",
+            "Market risk",
+            "Company risk"
+          ],
+          "correctIndex": 1,
+          "explanation": "Liquidity risk is the difficulty of selling quickly without a bad price."
+        },
+        {
+          "question": "A share falls from \u20b9500 to \u20b9400. What is the drawdown?",
+          "options": [
+            "10%",
+            "25%",
+            "20%",
+            "80%"
+          ],
+          "correctIndex": 2,
+          "explanation": "(500 - 400) \u00f7 500 x 100 = 20%."
+        },
+        {
+          "question": "After a 20% fall, what gain is needed to recover?",
+          "options": [
+            "20%",
+            "10%",
+            "15%",
+            "25%"
+          ],
+          "correctIndex": 3,
+          "explanation": "100 falls to 80, and 80 must rise by 20 \u00f7 80 = 25% to reach 100."
+        },
+        {
+          "question": "What is the usual link between risk and return?",
+          "options": [
+            "Higher possible return usually comes with higher risk",
+            "High returns come with no risk",
+            "Risk and return are unrelated",
+            "Lower risk always means higher return"
+          ],
+          "correctIndex": 0,
+          "explanation": "Investments that offer more possible reward usually carry more risk."
+        },
+        {
+          "question": "What is inflation risk?",
+          "options": [
+            "The exchange is closed",
+            "A share splits",
+            "Prices rise so your money buys less over time",
+            "Volume falls to zero"
+          ],
+          "correctIndex": 2,
+          "explanation": "Inflation reduces what a rupee can buy."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-2",
+      "title": "2. Diversification",
+      "intro": "Why do investors say 'don't put all your eggs in one basket'?",
+      "content": "\u26a1 MISSION BRIEFING: DIVERSIFICATION\nDiversification means spreading your money across different investments so that one bad result does not ruin everything. It does not remove risk, and it does not promise profit. It reduces the damage from any single surprise. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMost of the benefit of diversifying across shares often comes from the first 15 to 25 holdings, so owning 100 does not make a portfolio five times safer.\n\n\u26a1 FINANCIAL INTEL: TWO KINDS OF RISK\n\u2022 Company-specific risk: one business has a fire, a fraud or poor results. Diversification can reduce this a lot.\n\u2022 Market-wide risk: everything falls together because of a crisis or a rate shock. Diversification across shares alone cannot remove this.\n\n\u26a1 FINANCIAL INTEL: WAYS TO DIVERSIFY\n\u2022 Across many companies.\n\u2022 Across sectors such as banks, IT, FMCG, pharma and energy.\n\u2022 Across asset classes such as shares, debt, gold and cash.\n\u2022 Across time, by investing in parts instead of all at once.\n\n\u26a1 FINANCIAL INTEL: THE LIMITS\n\u2022 Too many holdings (over-diversification) makes a portfolio hard to follow and dilutes your best ideas.\n\u2022 Owning many shares from one sector is not real diversification.\n\u2022 A single fund can already hold dozens of shares, so check what you own before adding more.\n\n\ud83c\udf55 MINI CASE: ONE BASKET OR TEN\nAarav puts \u20b91,00,000 into one fictional company, and it falls 40%. He loses \u20b940,000. Meera spreads \u20b91,00,000 equally over 10 fictional companies, \u20b910,000 each. One of them also falls 40%, so she loses 10,000 x 0.4 = \u20b94,000, which is 4% of her portfolio. Same bad news, very different damage.\n\n\ud83e\uddea TRY IT: SPREAD IT OUT\nA fictional portfolio of \u20b950,000 is split equally across 5 shares. One falls 50% and the others do not move. What is the loss in rupees and as a percentage of the portfolio?\n(Answer: each share is \u20b910,000, so the loss is 10,000 x 0.5 = \u20b95,000. That is 5,000 \u00f7 50,000 x 100 = 10% of the portfolio.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nDiversification limits the damage from any one mistake or surprise. It cannot remove market-wide risk, and more holdings is not always better.",
+      "quiz": [
+        {
+          "question": "What does diversification mean?",
+          "options": [
+            "Spreading money across different investments",
+            "Buying one share only",
+            "Selling everything",
+            "Trading daily"
+          ],
+          "correctIndex": 0,
+          "explanation": "Diversification spreads risk across several holdings."
+        },
+        {
+          "question": "\u20b91,00,000 sits in one share that falls 40%. What is the loss?",
+          "options": [
+            "\u20b94,000",
+            "\u20b960,000",
+            "\u20b940,000",
+            "\u20b91,00,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "1,00,000 x 0.4 = \u20b940,000."
+        },
+        {
+          "question": "\u20b91,00,000 is split equally over 10 shares and one falls 40%. What is the portfolio loss?",
+          "options": [
+            "40%",
+            "10%",
+            "0.4%",
+            "4%"
+          ],
+          "correctIndex": 3,
+          "explanation": "The share held \u20b910,000 and lost \u20b94,000, which is 4% of the portfolio."
+        },
+        {
+          "question": "Which risk can diversification across shares NOT remove?",
+          "options": [
+            "Company-specific risk",
+            "Market-wide risk",
+            "A single fraud",
+            "A single fire"
+          ],
+          "correctIndex": 1,
+          "explanation": "When the whole market falls, most shares fall together."
+        },
+        {
+          "question": "Why can owning too many holdings be a problem?",
+          "options": [
+            "It is illegal",
+            "It guarantees losses",
+            "It is hard to follow and dilutes your best ideas",
+            "Brokers ban it"
+          ],
+          "correctIndex": 2,
+          "explanation": "Over-diversification adds effort and little extra safety."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-3",
+      "title": "3. Asset Allocation",
+      "intro": "How should money be split between shares, debt and gold?",
+      "content": "\u26a1 MISSION BRIEFING: ASSET ALLOCATION\nAsset allocation is how you divide your money between asset classes such as shares, debt, gold and cash. It is often said to matter more for a portfolio's ups and downs than picking individual shares. The right mix depends on your goal, your time horizon and how much of a fall you can tolerate. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nDifferent asset classes often behave differently, so when shares are weak, debt or gold may hold up better, though this is a tendency and not a promise.\n\n\u26a1 FINANCIAL INTEL: THE MAIN ASSET CLASSES\n\u2022 Equity (shares): higher possible growth with large swings.\n\u2022 Debt (bonds, debt funds, fixed deposits): lower swings and lower possible growth.\n\u2022 Gold: a different pattern of movement, with no income.\n\u2022 Cash: safe and available, but inflation slowly eats its value.\n\n\u26a1 FINANCIAL INTEL: WHAT SHAPES YOUR MIX\n\u2022 Goal: money needed in 1 year should not sit in shares.\n\u2022 Time horizon: a longer horizon gives more time to recover from falls.\n\u2022 Risk tolerance: how you feel and behave when your portfolio drops 20%.\n\u2022 A rough rule of '100 minus your age in shares' is only a starting idea, never a fixed rule.\n\n\u26a1 FINANCIAL INTEL: PORTFOLIO RETURN\nA portfolio's return is each asset's return multiplied by its weight, then added up. Weights must add up to 100%.\n\n\ud83c\udf55 MINI CASE: A MIX IN NUMBERS\nMeera's fictional simulator portfolio is 60% equity, 30% debt and 10% gold. In one year, equity gives +10%, debt +6% and gold +4%. Portfolio return = 0.6 x 10 + 0.3 x 6 + 0.1 x 4 = 6 + 1.8 + 0.4 = 8.2%. Aarav asks why she holds the slower assets. Meera says they soften the falls when equity has a bad year.\n\n\ud83e\uddea TRY IT: WEIGHTED RETURN\nA fictional portfolio is 50% equity, 40% debt and 10% gold. The year's returns are +12%, +5% and -2%. What is the portfolio return?\n(Answer: 0.5 x 12 + 0.4 x 5 + 0.1 x (-2) = 6 + 2 - 0.2 = 7.8%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nYour mix of assets, shaped by your goal, time horizon and comfort with falls, drives much of your result. There is no single best mix, so choose one you can stick with.",
+      "quiz": [
+        {
+          "question": "What is asset allocation?",
+          "options": [
+            "Choosing a broker",
+            "Predicting tomorrow's price",
+            "How money is divided between asset classes",
+            "Paying tax"
+          ],
+          "correctIndex": 2,
+          "explanation": "It is the split between shares, debt, gold, cash and so on."
+        },
+        {
+          "question": "Weights 60/30/10 with returns 10%, 6% and 4%. What is the portfolio return?",
+          "options": [
+            "20%",
+            "6.7%",
+            "10%",
+            "8.2%"
+          ],
+          "correctIndex": 3,
+          "explanation": "6 + 1.8 + 0.4 = 8.2%."
+        },
+        {
+          "question": "Which asset class usually swings the most?",
+          "options": [
+            "Cash",
+            "Equity",
+            "Fixed deposits",
+            "Savings accounts"
+          ],
+          "correctIndex": 1,
+          "explanation": "Equities usually have the biggest ups and downs."
+        },
+        {
+          "question": "Why can a longer time horizon allow more equity?",
+          "options": [
+            "There is more time to recover from falls",
+            "Equity never falls",
+            "Debt is illegal",
+            "Taxes disappear"
+          ],
+          "correctIndex": 0,
+          "explanation": "A longer horizon gives time for temporary falls to heal."
+        },
+        {
+          "question": "Is '100 minus your age in shares' a fixed rule?",
+          "options": [
+            "Yes, always",
+            "Yes, by law",
+            "Yes, for everyone",
+            "No, it is only a rough starting idea"
+          ],
+          "correctIndex": 3,
+          "explanation": "Your goal and comfort with risk matter more than any formula."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-4",
+      "title": "4. Correlation and Hidden Concentration",
+      "intro": "Is a portfolio really diversified if everything moves together?",
+      "content": "\u26a1 MISSION BRIEFING: CORRELATION AND HIDDEN CONCENTRATION\nOwning many things is not the same as being diversified. What matters is whether your holdings move together. Correlation measures that. Two holdings that move in lockstep give you the risk of one. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIn sharp market crashes, many holdings that normally move differently suddenly fall together, which is why correlations tend to rise exactly when you want protection.\n\n\u26a1 FINANCIAL INTEL: WHAT CORRELATION MEANS\n\u2022 It runs from -1 to +1.\n\u2022 +1: the two move together perfectly.\n\u2022 0: no clear link.\n\u2022 -1: they move in opposite directions.\n\u2022 Low or negative correlation is what makes diversification work.\n\n\u26a1 FINANCIAL INTEL: HIDDEN CONCENTRATION\n\u2022 Five bank shares are one bet on banking, not five separate bets.\n\u2022 A share and a fund that holds the same share overlap.\n\u2022 Several companies with the same big customer or the same raw material share one risk.\n\u2022 Check sector weights and fund holdings, not only the number of names.\n\n\u26a1 FINANCIAL INTEL: CAUTION\nCorrelations change over time. A mix that looked well spread in calm months can behave like one big bet in a crisis, so look for different drivers of risk, not just different names.\n\n\ud83c\udf55 MINI CASE: FIVE SHARES, ONE BET\nAarav holds five fictional shares of \u20b920,000 each, all from banking, a \u20b91,00,000 portfolio. Banking falls 10% and he loses 5 x 2,000 = \u20b910,000, or 10%. Meera also holds five shares of \u20b920,000, each from a different sector. If only one sector falls 10%, she loses \u20b92,000, which is 2% of her portfolio. Both own five shares, but only one is truly spread out.\n\n\ud83e\uddea TRY IT: FIND THE CONCENTRATION\nA fictional \u20b980,000 portfolio holds four shares of \u20b920,000 each. Three of them are IT companies. If the IT sector falls 10% and the other share stays flat, what is the loss in rupees and as a percentage of the portfolio?\n(Answer: IT holdings are 3 x 20,000 = \u20b960,000. The loss is 60,000 x 0.1 = \u20b96,000, which is 6,000 \u00f7 80,000 x 100 = 7.5% of the portfolio.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nReal diversification means holdings that do not all move together. Look at sectors and overlaps, not just the number of names.",
+      "quiz": [
+        {
+          "question": "A correlation of +1 means the two holdings...",
+          "options": [
+            "Move in opposite directions",
+            "Are unrelated",
+            "Move together perfectly",
+            "Never trade"
+          ],
+          "correctIndex": 2,
+          "explanation": "+1 is perfect movement in the same direction."
+        },
+        {
+          "question": "A correlation of -1 means the two holdings...",
+          "options": [
+            "Move together",
+            "Move in opposite directions",
+            "Are unrelated",
+            "Always rise"
+          ],
+          "correctIndex": 1,
+          "explanation": "-1 is perfect movement in opposite directions."
+        },
+        {
+          "question": "Is a portfolio of ten banking shares well diversified?",
+          "options": [
+            "Yes, ten is enough",
+            "Yes, banks never fall",
+            "It depends on the colour of the chart",
+            "No, they share one sector risk"
+          ],
+          "correctIndex": 3,
+          "explanation": "Same-sector shares tend to move together."
+        },
+        {
+          "question": "\u20b980,000 is spread over four equal shares. Three are IT and IT falls 10%. What is the portfolio loss?",
+          "options": [
+            "7.5%",
+            "10%",
+            "2.5%",
+            "25%"
+          ],
+          "correctIndex": 0,
+          "explanation": "Loss = 60,000 x 0.1 = \u20b96,000, which is 7.5% of 80,000."
+        },
+        {
+          "question": "What often happens to correlations in a sharp market crash?",
+          "options": [
+            "They fall to zero",
+            "They always turn negative",
+            "They tend to rise as many things fall together",
+            "They vanish"
+          ],
+          "correctIndex": 2,
+          "explanation": "In a crash, many assets fall at once."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-5",
+      "title": "5. Position Sizing",
+      "intro": "How much should you put into a single idea?",
+      "content": "\u26a1 MISSION BRIEFING: POSITION SIZING\nPosition sizing means deciding how much money goes into one trade or one share. Even good ideas fail, so the size of each bet decides whether a bad run is an annoyance or a disaster. A simple tool is to risk only a small fixed percentage of your capital on each idea. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA string of 10 losses in a row, painful as it sounds, happens to many traders at some point. Position size decides whether they survive it.\n\n\u26a1 FINANCIAL INTEL: THE FIXED-RISK METHOD\n\u2022 Decide the most you will lose on one idea, often 1% of capital or less.\n\u2022 Risk per share = entry price - stop-loss price.\n\u2022 Number of shares = amount you are willing to risk \u00f7 risk per share.\n\u2022 Position value = number of shares x entry price.\n\n\u26a1 FINANCIAL INTEL: WHY SMALL RISK PER TRADE\n\u2022 Losses compound. With 1% risk per trade, 10 losses in a row leave about 90.4% of your capital, a fall of about 9.6%.\n\u2022 With 10% risk per trade, 10 losses in a row leave only about 34.9%, a fall of about 65%.\n\u2022 Small risk keeps you in the game long enough to learn.\n\n\u26a1 FINANCIAL INTEL: OTHER LIMITS TO SET\n\u2022 A cap on any single position, such as no more than 10% of the portfolio.\n\u2022 A cap on how much is risked across all open trades at once.\n\u2022 Smaller size when you are less sure or when a share is very volatile.\n\n\ud83c\udf55 MINI CASE: SIZING A SIMULATOR TRADE\nMeera has \u20b91,00,000 in her simulator and risks 1%, which is \u20b91,000. She plans to buy a fictional share at \u20b9250 with a stop-loss at \u20b9240. Risk per share is 250 - 240 = \u20b910. Shares = 1,000 \u00f7 10 = 100. The position value is 100 x 250 = \u20b925,000, which is 25% of her capital. She checks her own 10% cap per position and decides to buy 40 shares instead, a value of \u20b910,000.\n\n\ud83e\uddea TRY IT: SIZE THE TRADE\nA fictional account has \u20b92,00,000 and risks 1% per trade. The plan is entry \u20b9500 and stop-loss \u20b9480. How many shares, and what is the position value?\n(Answer: the risk amount is \u20b92,000 and the risk per share is \u20b920, so shares = 2,000 \u00f7 20 = 100. The position value is 100 x 500 = \u20b950,000, which is 25% of the account.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nDecide how much you can lose before you decide how much to buy. Small, fixed risk per idea keeps you alive through losing streaks.",
+      "quiz": [
+        {
+          "question": "What is position sizing?",
+          "options": [
+            "Choosing a stock colour",
+            "Deciding how much to put into one idea",
+            "Picking a broker",
+            "Timing the exchange hours"
+          ],
+          "correctIndex": 1,
+          "explanation": "It decides how big each position is."
+        },
+        {
+          "question": "Capital is \u20b91,00,000 and you risk 1% per trade. How much is risked?",
+          "options": [
+            "\u20b910,000",
+            "\u20b9100",
+            "\u20b91,00,000",
+            "\u20b91,000"
+          ],
+          "correctIndex": 3,
+          "explanation": "1% of 1,00,000 = \u20b91,000."
+        },
+        {
+          "question": "Risk amount \u20b91,000, entry \u20b9250, stop \u20b9240. How many shares?",
+          "options": [
+            "100",
+            "4",
+            "25",
+            "1,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "Risk per share is 10, so 1,000 \u00f7 10 = 100 shares."
+        },
+        {
+          "question": "Risking 10% per trade, about how much capital is left after 10 straight losses?",
+          "options": [
+            "90%",
+            "About 35%",
+            "About 65%",
+            "Exactly 0%"
+          ],
+          "correctIndex": 1,
+          "explanation": "0.9 multiplied ten times is about 0.349, so about 35% is left."
+        },
+        {
+          "question": "Why risk only a small percentage per trade?",
+          "options": [
+            "It guarantees profit",
+            "It removes all risk",
+            "Brokers require it",
+            "It helps you survive losing streaks"
+          ],
+          "correctIndex": 3,
+          "explanation": "Small risk keeps losses manageable."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-6",
+      "title": "6. Mutual Funds",
+      "intro": "How can many people invest together in one basket?",
+      "content": "\u26a1 MISSION BRIEFING: MUTUAL FUNDS\nA mutual fund collects money from many investors and invests it in a mix of shares, bonds or other assets, run by a professional fund manager. Each investor owns units of the fund. In India, mutual funds are regulated by SEBI. Real investing needs a parent or guardian for anyone under 18. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMutual fund units are priced once a day, after the market closes, using a number called NAV.\n\n\u26a1 FINANCIAL INTEL: HOW A FUND WORKS\n\u2022 You buy units, and the fund invests the pooled money.\n\u2022 NAV (Net Asset Value) = (value of the fund's assets - liabilities) \u00f7 number of units.\n\u2022 Units bought = amount invested \u00f7 NAV.\n\n\u26a1 FINANCIAL INTEL: MAIN TYPES\n\u2022 Equity funds: invest mostly in shares, with higher risk and higher possible growth.\n\u2022 Debt funds: invest in bonds and similar instruments, usually with smaller swings, but not risk-free.\n\u2022 Hybrid funds: a mix of equity and debt.\n\u2022 Index funds: copy an index like the Nifty 50.\n\u2022 Direct and regular plans: the same fund, but direct plans have lower costs because they pay no distributor commission.\n\n\u26a1 FINANCIAL INTEL: CAUTIONS\n\u2022 A low NAV does not mean a fund is cheap. NAV level says nothing about value.\n\u2022 Past returns do not guarantee future returns.\n\u2022 Read the fund's riskometer, holdings and costs before choosing.\n\n\ud83c\udf55 MINI CASE: READING A NAV\nA fictional fund has assets of \u20b95,25,00,000 and liabilities of \u20b925,00,000, with 25,00,000 units. Net assets are \u20b95,00,00,000, so NAV = 5,00,00,000 \u00f7 25,00,000 = \u20b9200. An investment of \u20b910,000 buys 10,000 \u00f7 200 = 50 units. Aarav says a \u20b920 NAV fund must be cheaper. Meera explains that NAV alone says nothing about value.\n\n\ud83e\uddea TRY IT: FIND THE NAV\nA fictional fund has net assets of \u20b960,00,000 and 3,00,000 units. What is the NAV, and how many units does \u20b95,000 buy?\n(Answer: NAV = 60,00,000 \u00f7 3,00,000 = \u20b920. Units = 5,000 \u00f7 20 = 250 units.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA mutual fund pools many investors' money under a professional manager. Understand NAV, fund type and costs, and remember that a low NAV does not mean a bargain.",
+      "quiz": [
+        {
+          "question": "What is a mutual fund?",
+          "options": [
+            "A single share",
+            "A pool of many investors' money invested together",
+            "A bank loan",
+            "A tax"
+          ],
+          "correctIndex": 1,
+          "explanation": "Many investors pool money, and a manager invests it."
+        },
+        {
+          "question": "A fund has net assets of \u20b95,00,00,000 and 25,00,000 units. What is the NAV?",
+          "options": [
+            "\u20b9200",
+            "\u20b920",
+            "\u20b92,000",
+            "\u20b95"
+          ],
+          "correctIndex": 0,
+          "explanation": "5,00,00,000 \u00f7 25,00,000 = \u20b9200."
+        },
+        {
+          "question": "NAV is \u20b9200. How many units does \u20b910,000 buy?",
+          "options": [
+            "5",
+            "500",
+            "20",
+            "50"
+          ],
+          "correctIndex": 3,
+          "explanation": "10,000 \u00f7 200 = 50 units."
+        },
+        {
+          "question": "Who regulates mutual funds in India?",
+          "options": [
+            "RBI only",
+            "A broker",
+            "The fund's own manager only",
+            "SEBI"
+          ],
+          "correctIndex": 3,
+          "explanation": "SEBI regulates mutual funds in India."
+        },
+        {
+          "question": "Is a fund with a lower NAV cheaper?",
+          "options": [
+            "Yes, always",
+            "No, NAV level says nothing about value",
+            "Yes, by law",
+            "Only for debt funds"
+          ],
+          "correctIndex": 1,
+          "explanation": "What matters are holdings, returns and costs, not the NAV number."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-7",
+      "title": "7. ETFs and Index Funds",
+      "intro": "What if you just want to follow the market instead of beating it?",
+      "content": "\u26a1 MISSION BRIEFING: ETFS AND INDEX FUNDS\nAn index fund and an ETF both try to copy an index, such as the Nifty 50, instead of trying to beat it. They hold the same shares as the index in the same proportions. This keeps costs low and the idea simple. Real investing needs a parent or guardian for anyone under 18. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA fund that simply copies an index needs no star stock picker, which is a big reason its fees can be so low.\n\n\u26a1 FINANCIAL INTEL: THE TWO FORMS\n\u2022 Index fund: a mutual fund that tracks an index. You buy and sell units at NAV through the fund house or a platform.\n\u2022 ETF (Exchange Traded Fund): tracks an index too, but trades on the exchange like a share, so you need a demat and trading account.\n\u2022 ETF prices move through the day, and a small gap between the ETF price and its underlying value can appear.\n\n\u26a1 FINANCIAL INTEL: TRACKING DIFFERENCE\n\u2022 A fund cannot copy its index perfectly. Costs and small timing gaps cause a difference.\n\u2022 Tracking difference = fund return - index return. It is usually a small negative number close to the fund's cost.\n\u2022 Tracking error is how much that gap wobbles over time.\n\n\u26a1 FINANCIAL INTEL: WHAT TO CHECK\n\u2022 Expense ratio: lower is better for the same index.\n\u2022 Liquidity of an ETF: check that there is enough trading and a small bid-ask gap.\n\u2022 The index itself: a Nifty 50 fund and a small-cap fund carry very different risk.\n\n\ud83c\udf55 MINI CASE: TRACKING THE INDEX\nA fictional Nifty 50 index fund earns 11.8% in a year while the index returns 12%. The tracking difference is 11.8 - 12 = -0.2 percentage points, close to the fund's yearly cost. Meera compares two ETFs on the same index and picks the one with the smaller cost and the tighter bid-ask gap. Aarav notes that copying the index means he gets the market's risk, including its falls.\n\n\ud83e\uddea TRY IT: MEASURE THE GAP\nA fictional index returns 10% and a fund tracking it returns 9.7%. What is the tracking difference?\n(Answer: 9.7 - 10 = -0.3 percentage points.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nIndex funds and ETFs follow a market at low cost. They give market returns and market risk, so pick the index, the cost and the liquidity with care.",
+      "quiz": [
+        {
+          "question": "What does an index fund try to do?",
+          "options": [
+            "Copy an index",
+            "Beat every share",
+            "Predict news",
+            "Avoid all risk"
+          ],
+          "correctIndex": 0,
+          "explanation": "It tracks an index such as the Nifty 50."
+        },
+        {
+          "question": "How is an ETF different from an index fund?",
+          "options": [
+            "It holds no shares",
+            "It trades on the exchange like a share",
+            "It is free of cost",
+            "It has no index"
+          ],
+          "correctIndex": 1,
+          "explanation": "An ETF is bought and sold on the exchange during market hours."
+        },
+        {
+          "question": "An index returns 12% and a fund returns 11.8%. What is the tracking difference?",
+          "options": [
+            "+0.2 points",
+            "-12 points",
+            "-0.2 points",
+            "0 points"
+          ],
+          "correctIndex": 2,
+          "explanation": "11.8 - 12 = -0.2 points."
+        },
+        {
+          "question": "What do you need to buy an ETF on the exchange?",
+          "options": [
+            "A passport",
+            "A savings account only",
+            "A loan",
+            "A demat and trading account"
+          ],
+          "correctIndex": 3,
+          "explanation": "ETFs trade like shares, so a demat and trading account is needed."
+        },
+        {
+          "question": "Does an index fund remove market risk?",
+          "options": [
+            "Yes, completely",
+            "No, it follows the market including its falls",
+            "Yes, for equity indices",
+            "Only in January"
+          ],
+          "correctIndex": 1,
+          "explanation": "It copies the index, so it shares the index's risk."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-8",
+      "title": "8. SIP and Rupee Cost Averaging",
+      "intro": "Does investing a fixed amount every month help?",
+      "content": "\u26a1 MISSION BRIEFING: SIP AND RUPEE COST AVERAGING\nA SIP (Systematic Investment Plan) invests a fixed amount at regular intervals, usually monthly, into a fund. It builds a habit, removes the pressure of timing the market and lets you start small. It does not guarantee profit. Real SIPs for anyone under 18 need a parent or guardian. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nA SIP buys more units when the price is low and fewer when it is high, without you having to decide anything.\n\n\u26a1 FINANCIAL INTEL: HOW IT WORKS\n\u2022 Each month the same rupee amount buys units at that day's NAV.\n\u2022 Low NAV means more units. High NAV means fewer units.\n\u2022 Average cost per unit = total invested \u00f7 total units. This is called rupee cost averaging.\n\n\u26a1 FINANCIAL INTEL: WHAT IT DOES AND DOES NOT DO\n\u2022 It helps with discipline and with avoiding big one-time timing mistakes.\n\u2022 It does not prevent losses if the market keeps falling for a long time.\n\u2022 It does not turn a bad fund into a good one.\n\n\u26a1 FINANCIAL INTEL: COMMON MISTAKES\n\u2022 Stopping the SIP in panic after a fall, with no reason linked to your goal.\n\u2022 Raising the amount beyond what the budget can bear.\n\u2022 Watching the NAV every day and reacting to noise.\n\n\ud83c\udf55 MINI CASE: THREE MONTHS OF SIP\nMeera invests \u20b95,000 a month in a fictional fund. NAV is \u20b950 in month 1, \u20b940 in month 2 and \u20b950 in month 3. She buys 100, 125 and 100 units, 325 units in all, for \u20b915,000. Average cost = 15,000 \u00f7 325 = \u20b946.15. The simple average of the three NAVs is (50 + 40 + 50) \u00f7 3 = \u20b946.67, so the SIP bought slightly cheaper than the average price.\n\n\ud83e\uddea TRY IT: COUNT THE UNITS\nA fictional SIP invests \u20b92,000 a month. NAV is \u20b910, \u20b98 and \u20b910 in three months. How many units in total, and what is the average cost per unit?\n(Answer: units = 200 + 250 + 200 = 650. Total invested is \u20b96,000, so average cost = 6,000 \u00f7 650 = \u20b99.23.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA SIP builds a regular habit and averages your buying price. It is a discipline tool, not a profit guarantee.",
+      "quiz": [
+        {
+          "question": "What is a SIP?",
+          "options": [
+            "A one-time bet",
+            "A tax form",
+            "A fixed amount invested at regular intervals",
+            "A type of share"
+          ],
+          "correctIndex": 2,
+          "explanation": "A SIP invests the same amount on a regular schedule."
+        },
+        {
+          "question": "\u20b95,000 is invested at NAV \u20b940. How many units are bought?",
+          "options": [
+            "50",
+            "125",
+            "200",
+            "40"
+          ],
+          "correctIndex": 1,
+          "explanation": "5,000 \u00f7 40 = 125 units."
+        },
+        {
+          "question": "A SIP buys 100, 125 and 100 units for \u20b915,000 in total. How many units is that?",
+          "options": [
+            "300",
+            "350",
+            "325",
+            "225"
+          ],
+          "correctIndex": 2,
+          "explanation": "100 + 125 + 100 = 325 units."
+        },
+        {
+          "question": "Does a SIP guarantee profit?",
+          "options": [
+            "Yes, if monthly",
+            "Yes, for equity funds",
+            "Yes, over 3 years",
+            "No, it does not remove market risk"
+          ],
+          "correctIndex": 3,
+          "explanation": "A SIP is a method of investing and carries the fund's risk."
+        },
+        {
+          "question": "Which is a common SIP mistake?",
+          "options": [
+            "Stopping in panic after a fall with no goal-based reason",
+            "Keeping a steady amount",
+            "Matching the amount to the budget",
+            "Reviewing yearly"
+          ],
+          "correctIndex": 0,
+          "explanation": "Panic stops break the discipline that makes a SIP work."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-9",
+      "title": "9. Costs, Fees and the Long Run",
+      "intro": "How can a small fee quietly eat a big part of your return?",
+      "content": "\u26a1 MISSION BRIEFING: COSTS, FEES AND THE LONG RUN\nCosts are one of the few things in investing that you can control. A fee of 1% sounds tiny, but it is charged every year on a growing amount of money, so over many years it adds up to a lot. Always check the cost before you invest. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nBecause returns compound, a cost that looks tiny each year can take a noticeable chunk of your final amount over 20 or 30 years.\n\n\u26a1 FINANCIAL INTEL: COMMON COSTS\n\u2022 Expense ratio (TER): the yearly fee of a fund as a % of its assets, taken out of the fund's returns.\n\u2022 Exit load: a charge if you sell units within a set period.\n\u2022 Brokerage and other charges when you buy or sell shares or ETFs.\n\u2022 Taxes: they reduce what you keep, and Module 12 covers them.\n\n\u26a1 FINANCIAL INTEL: DIRECT VS REGULAR\n\u2022 A direct plan has no distributor commission, so its expense ratio is lower than the regular plan of the same fund.\n\u2022 The portfolio inside is the same. Only the cost differs.\n\n\u26a1 FINANCIAL INTEL: THE MATHS OF A FEE\n\u2022 Net return = gross return - cost.\n\u2022 Final value = amount x (1 + net return) raised to the number of years.\n\u2022 Costs are certain, while returns are not, so keeping costs low is a sure gain.\n\n\ud83c\udf55 MINI CASE: ONE PERCENT OVER TEN YEARS\nAarav and Meera each invest \u20b91,00,000 for 10 years in funds that earn 10% before costs. Aarav's fund charges 1.5%, so his net return is 8.5%, and 1,00,000 x 1.085 to the power of 10 is about \u20b92,26,098. Meera's fund charges 0.5%, so her net return is 9.5%, and 1,00,000 x 1.095 to the power of 10 is about \u20b92,47,823. The 1% gap in cost costs Aarav about \u20b921,725.\n\n\ud83e\uddea TRY IT: COUNT THE COST\nA fictional fund earns 8% before costs and charges 1%. You invest \u20b91,00,000 for 10 years. What is the value with the fee, and what is the value if there were no fee?\n(Answer: with the fee, the net return is 7%, and 1,00,000 x 1.07 to the power of 10 is about \u20b91,96,715. With no fee, 1,00,000 x 1.08 to the power of 10 is about \u20b92,15,892. The fee costs about \u20b919,177.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nCosts compound just like returns do. Check the expense ratio and other charges before you invest, because lower cost is one of the few sure advantages.",
+      "quiz": [
+        {
+          "question": "What is an expense ratio?",
+          "options": [
+            "A one-time joining fee",
+            "The yearly fee of a fund as a % of its assets",
+            "A tax on profits",
+            "A bank loan rate"
+          ],
+          "correctIndex": 1,
+          "explanation": "It is the yearly running cost charged by the fund."
+        },
+        {
+          "question": "\u20b91,00,000 grows at 9.5% a year for 10 years. About what is the final amount?",
+          "options": [
+            "\u20b91,95,000",
+            "\u20b92,47,823",
+            "\u20b91,09,500",
+            "\u20b93,00,000"
+          ],
+          "correctIndex": 1,
+          "explanation": "1,00,000 x 1.095 to the power of 10 is about \u20b92,47,823."
+        },
+        {
+          "question": "In the lesson, how much did the 1% higher fee cost over 10 years?",
+          "options": [
+            "\u20b9100",
+            "\u20b92,172",
+            "\u20b921,725",
+            "\u20b92,17,250"
+          ],
+          "correctIndex": 2,
+          "explanation": "2,47,823 - 2,26,098 = \u20b921,725."
+        },
+        {
+          "question": "What is an exit load?",
+          "options": [
+            "A fee for buying",
+            "A bonus",
+            "A dividend",
+            "A charge for selling units within a set period"
+          ],
+          "correctIndex": 3,
+          "explanation": "Exit loads apply if you sell too early."
+        },
+        {
+          "question": "Why is a direct plan usually cheaper than a regular plan?",
+          "options": [
+            "It pays no distributor commission",
+            "It holds different shares",
+            "It has no manager",
+            "It is not regulated"
+          ],
+          "correctIndex": 0,
+          "explanation": "Direct plans skip the distributor commission."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-10",
+      "title": "10. Rebalancing",
+      "intro": "What do you do when one part of your portfolio grows too big?",
+      "content": "\u26a1 MISSION BRIEFING: REBALANCING\nOver time, the assets that grow fastest take a larger share of your portfolio, so your risk drifts away from your plan. Rebalancing means bringing the weights back to your target. It is a simple way to manage risk, without having to guess the market. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nRebalancing forces you to trim what has risen and add to what has lagged, which is the opposite of what excitement or fear usually tells you to do.\n\n\u26a1 FINANCIAL INTEL: WHY DRIFT HAPPENS\n\u2022 Suppose you start with 60% equity and 40% debt.\n\u2022 If equity rises faster, it might become 70% of the portfolio. You now hold more risk than you planned.\n\n\u26a1 FINANCIAL INTEL: WAYS TO REBALANCE\n\u2022 Calendar method: check once or twice a year and reset to the target.\n\u2022 Threshold method: rebalance when an asset is more than about 5 percentage points away from target.\n\u2022 Cash-flow method: direct new money into the part that is below target, so you do not have to sell.\n\n\u26a1 FINANCIAL INTEL: COSTS TO WATCH\n\u2022 Selling can mean brokerage, exit loads and taxes.\n\u2022 Rebalancing too often adds cost without much benefit.\n\u2022 Use new money first when you can.\n\n\ud83c\udf55 MINI CASE: TRIMMING THE WINNER\nMeera's fictional simulator portfolio starts at \u20b91,00,000: \u20b960,000 equity and \u20b940,000 debt. Equity rises to \u20b980,000 while debt stays at \u20b940,000, so the total is \u20b91,20,000 and equity is 80,000 \u00f7 1,20,000 = 66.7%. Her target is 60%, which is 0.6 x 1,20,000 = \u20b972,000. She sells \u20b98,000 of equity and moves it to debt, giving \u20b948,000 in debt.\n\n\ud83e\uddea TRY IT: REBALANCE IT\nA fictional portfolio starts at \u20b91,00,000 with a 50/50 split. Equity grows to \u20b970,000 and debt stays at \u20b950,000. What is the equity weight now, and how much equity must be sold to return to 50%?\n(Answer: the total is \u20b91,20,000 and equity is 70,000 \u00f7 1,20,000 = 58.3%. The target is 50% of 1,20,000 = \u20b960,000, so sell \u20b910,000 of equity.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nRebalancing resets your risk to the level you chose. Pick a simple rule, mind the costs and use new money where possible.",
+      "quiz": [
+        {
+          "question": "What is rebalancing?",
+          "options": [
+            "Buying only winners",
+            "Selling everything",
+            "Bringing portfolio weights back to the target",
+            "Changing your broker"
+          ],
+          "correctIndex": 2,
+          "explanation": "It resets the mix to the plan."
+        },
+        {
+          "question": "A 60/40 portfolio becomes \u20b980,000 equity and \u20b940,000 debt. What is the equity weight?",
+          "options": [
+            "80%",
+            "60%",
+            "50%",
+            "66.7%"
+          ],
+          "correctIndex": 3,
+          "explanation": "80,000 \u00f7 1,20,000 = 66.7%."
+        },
+        {
+          "question": "From that point, how much equity must be sold to return to 60%?",
+          "options": [
+            "\u20b98,000",
+            "\u20b980,000",
+            "\u20b940,000",
+            "\u20b972,000"
+          ],
+          "correctIndex": 0,
+          "explanation": "The target is 72,000, so 80,000 - 72,000 = \u20b98,000."
+        },
+        {
+          "question": "Which are two common rebalancing methods?",
+          "options": [
+            "Guessing and hoping",
+            "Calendar-based and threshold-based",
+            "Only daily selling",
+            "Random picking"
+          ],
+          "correctIndex": 1,
+          "explanation": "You can rebalance on a schedule or when weights drift past a limit."
+        },
+        {
+          "question": "Why watch costs when rebalancing?",
+          "options": [
+            "Selling is always free",
+            "Costs vanish after a year",
+            "Selling can trigger charges and taxes, so new money is often used first",
+            "Rebalancing is banned"
+          ],
+          "correctIndex": 2,
+          "explanation": "Charges and taxes can reduce the benefit."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-11",
+      "title": "11. Measuring Performance",
+      "intro": "How do you know whether your portfolio is really doing well?",
+      "content": "\u26a1 MISSION BRIEFING: MEASURING PERFORMANCE\nA rising portfolio is not always a good one. To judge it fairly, compare it with a benchmark, express growth per year, and look at how much risk was taken to get there. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nIf a portfolio falls 50% and then rises 50%, it does not return to the start. It ends 25% lower.\n\n\u26a1 FINANCIAL INTEL: CAGR: GROWTH PER YEAR\n\u2022 CAGR = (end value \u00f7 start value) raised to (1 \u00f7 number of years), minus 1.\n\u2022 It shows the steady yearly growth that would give the same result.\n\u2022 It lets you compare periods of different lengths.\n\n\u26a1 FINANCIAL INTEL: BENCHMARKS\n\u2022 A benchmark is a fair yardstick such as the Nifty 50 for a large-company equity fund.\n\u2022 Excess return = your return - benchmark return.\n\u2022 If you cannot beat a simple index fund after costs, an index fund may be the easier choice.\n\n\u26a1 FINANCIAL INTEL: RETURN PER UNIT OF RISK\n\u2022 A simple version: (return - risk-free rate) \u00f7 volatility. This is the idea behind the Sharpe ratio.\n\u2022 A higher number means more return for the risk taken.\n\u2022 Also watch the maximum drawdown, which is the worst fall from a peak.\n\n\ud83c\udf55 MINI CASE: BEATING THE BENCHMARK\nMeera's fictional portfolio grows from \u20b91,00,000 to \u20b91,61,051 in 5 years. Since 1.1 to the power of 5 is 1.61051, the CAGR is 10%. The Nifty gave 12% a year in the same period, so she lagged it by 2 percentage points. Next, portfolio A returns 12% with volatility of 15 and portfolio B returns 10% with volatility of 8, and the risk-free rate is 6%. A scores (12 - 6) \u00f7 15 = 0.4 and B scores (10 - 6) \u00f7 8 = 0.5. B earned more per unit of risk.\n\n\ud83e\uddea TRY IT: FIND THE CAGR\nA fictional portfolio grows from \u20b91,00,000 to \u20b91,44,000 in 2 years. What is the CAGR?\n(Answer: 1,44,000 \u00f7 1,00,000 = 1.44, and the square root of 1.44 is 1.2, so the CAGR is 20%.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nJudge a portfolio by yearly growth, against a fair benchmark and with the risk taken in mind, not by the final number alone.",
+      "quiz": [
+        {
+          "question": "What does CAGR show?",
+          "options": [
+            "The steady yearly growth rate that gives the same result",
+            "The highest daily price",
+            "The company profit",
+            "The tax paid"
+          ],
+          "correctIndex": 0,
+          "explanation": "CAGR smooths growth into a single yearly rate."
+        },
+        {
+          "question": "\u20b91,00,000 becomes \u20b91,61,051 in 5 years. What is the CAGR?",
+          "options": [
+            "61%",
+            "5%",
+            "12%",
+            "10%"
+          ],
+          "correctIndex": 3,
+          "explanation": "1.1 to the power of 5 is 1.61051, so the CAGR is 10%."
+        },
+        {
+          "question": "\u20b91,00,000 becomes \u20b91,44,000 in 2 years. What is the CAGR?",
+          "options": [
+            "22%",
+            "44%",
+            "20%",
+            "72%"
+          ],
+          "correctIndex": 2,
+          "explanation": "The square root of 1.44 is 1.2, so 20% a year."
+        },
+        {
+          "question": "A portfolio earns 9% and its benchmark earns 12%. What happened?",
+          "options": [
+            "It outperformed by 3 points",
+            "It underperformed by 3 points",
+            "It matched the benchmark",
+            "It outperformed by 21 points"
+          ],
+          "correctIndex": 1,
+          "explanation": "9 - 12 = -3 points, so it lagged."
+        },
+        {
+          "question": "A portfolio falls 50% and then rises 50%. Where does it end up?",
+          "options": [
+            "At the start",
+            "50% higher",
+            "100% higher",
+            "25% lower"
+          ],
+          "correctIndex": 3,
+          "explanation": "100 falls to 50, then rises 50% to 75, so it is 25% lower."
+        }
+      ]
+    },
+    {
+      "id": "submod-9-12",
+      "title": "12. Your Portfolio Plan",
+      "intro": "How do you turn everything into one written plan you can follow?",
+      "content": "\u26a1 MISSION BRIEFING: YOUR PORTFOLIO PLAN\nYou now know about risk, diversification, asset allocation, correlation, position sizing, funds, SIPs, costs, rebalancing and measurement. This capstone puts them into one written plan. A written plan lets you decide calmly now, so you do not decide in a panic later. All examples are fictional and this is education, not advice.\n\n\ud83e\udd2f WOW FACT:\nMany investors who write down their rules in advance find it easier to stay calm when markets fall, because the decision has already been made.\n\n\u26a1 FINANCIAL INTEL: THE PLAN CHECKLIST\n1. Goal: what is the money for, and when is it needed?\n2. Time horizon: money needed within 1 to 3 years should stay out of risky assets.\n3. Risk limit: the largest fall you can accept without panicking.\n4. Asset allocation: the target split, such as shares, debt and gold.\n5. Position limits: the most in any single share, and the most risked per trade.\n6. Costs: choose low-cost options where possible.\n7. Rebalancing rule: calendar or threshold.\n8. Review dates: when you will check progress and update the plan.\n\n\u26a1 FINANCIAL INTEL: BEFORE INVESTING\n\u2022 Build an emergency fund first, often 3 to 6 months of expenses, kept safe and easy to reach.\n\u2022 Do not invest money you cannot afford to see fall.\n\u2022 Avoid borrowing to invest.\n\n\u26a1 FINANCIAL INTEL: WHAT TO AVOID\n\u2022 Changing the plan after every headline.\n\u2022 Chasing last year's best performer.\n\u2022 Copying someone else's plan without checking your own goal and risk limit.\n\u2022 Skipping reviews, or reviewing too often.\n\n\ud83c\udf55 MINI CASE: MEERA'S SIMULATOR PLAN\nMeera writes a plan for her \u20b91,00,000 simulator account. Goal: practise for 3 months. Allocation: 50% index fund, 30% debt fund, 10% gold and 10% individual shares, which adds up to 100%. Limits: no single share above 10% of the account, which is \u20b910,000, and no more than 1% risked per trade, which is \u20b91,000. Rebalance if any part drifts more than 5 points from its target. She reviews it every month and shares it with her teacher.\n\n\ud83e\uddea TRY IT: WRITE YOUR OWN\nFill in all eight checklist lines for a goal of your choice, using simulator money. Then compute your emergency fund target: if monthly expenses are \u20b920,000, what is 6 months of expenses?\n(Answer: 6 x 20,000 = \u20b91,20,000. Share your plan with a parent, teacher or guardian and review it with them.)\n\n\ud83d\udca1 CORE TAKEAWAY:\nA written plan turns good ideas into repeatable rules. No plan guarantees profit, so practise on a simulator and involve a parent or guardian in any real money decision.",
+      "quiz": [
+        {
+          "question": "What should usually come before investing?",
+          "options": [
+            "Borrowing money",
+            "An emergency fund",
+            "Buying the best performer",
+            "Quitting your plan"
+          ],
+          "correctIndex": 1,
+          "explanation": "An emergency fund keeps you from selling investments in a crisis."
+        },
+        {
+          "question": "Monthly expenses are \u20b920,000. What is 6 months of expenses?",
+          "options": [
+            "\u20b960,000",
+            "\u20b92,40,000",
+            "\u20b91,20,000",
+            "\u20b920,000"
+          ],
+          "correctIndex": 2,
+          "explanation": "6 x 20,000 = \u20b91,20,000."
+        },
+        {
+          "question": "Why write your plan down in advance?",
+          "options": [
+            "To impress friends",
+            "To decide calmly now, not in a panic later",
+            "To guarantee profit",
+            "To avoid costs"
+          ],
+          "correctIndex": 1,
+          "explanation": "A written plan guides you when emotions run high."
+        },
+        {
+          "question": "Which belongs in a portfolio plan?",
+          "options": [
+            "A guaranteed return",
+            "A prediction of tomorrow's price",
+            "A rumour list",
+            "Goal, horizon, allocation, limits and review dates"
+          ],
+          "correctIndex": 3,
+          "explanation": "These are the parts that make a plan usable."
+        },
+        {
+          "question": "Does any plan guarantee profits?",
+          "options": [
+            "Yes, if you follow it for a year",
+            "No, risk always remains, so practise on a simulator and involve a parent or guardian",
+            "Yes, if you diversify",
+            "Yes, if costs are low"
+          ],
+          "correctIndex": 1,
+          "explanation": "No method removes risk."
+        }
+      ]
+    }
+  ]
+}
