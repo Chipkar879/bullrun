@@ -1,5 +1,5 @@
 import { admin } from '@/lib/supabaseAdmin';
-import { AMOUNT, DAILY_CAP, istDay, isSunday, inGrace } from '@/lib/penalties';
+import { scaled, dailyCap, istDay, isSunday, inGrace } from '@/lib/penalties';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -28,7 +28,7 @@ export async function GET(req) {
     const start = new Date(day + 'T00:00:00+05:30').toISOString();
     const end = new Date(new Date(start).getTime() + 86400000).toISOString();
 
-    const profs = await all((a, b) => admin.from('profiles').select('id, role, created_at').range(a, b));
+    const profs = await all((a, b) => admin.from('profiles').select('id, role, created_at, xp_gross').range(a, b));
     if (profs.error) throw profs.error;
     const quizzes = await all((a, b) => admin.from('quiz_history').select('user_id').eq('quiz_date', day).range(a, b));
     const trades = await all((a, b) => admin.from('trade_history').select('user_id').gte('created_at', start).lt('created_at', end).range(a, b));
@@ -47,15 +47,15 @@ export async function GET(req) {
     profs.rows.forEach((p) => {
       if (p.role === 'teacher' || p.role === 'school_admin' || p.role === 'admin') return;
       if (inGrace(p.created_at)) return;
-      let room = DAILY_CAP - (usedBy[p.id] || 0);
-      const add = (amount, reason, key) => {
-        const amt = Math.min(amount, room);
+      let room = dailyCap(p.xp_gross) - (usedBy[p.id] || 0);
+      const add = (kind, reason) => {
+        const amt = Math.min(scaled(p.xp_gross, kind), room);
         if (amt <= 0) return;
         room -= amt;
-        out.push({ user_id: p.id, amount: amt, reason, day, ref: key + ':' + day });
+        out.push({ user_id: p.id, amount: amt, reason, day, ref: kind + ':' + day });
       };
-      if (lessonsOk && !active.has(p.id)) add(AMOUNT.idle, 'No activity', 'idle');
-      if (!quizSet.has(p.id)) add(AMOUNT.quiz, 'Daily quiz missed', 'quiz');
+      if (lessonsOk && !active.has(p.id)) add('idle', 'No activity');
+      if (!quizSet.has(p.id)) add('quiz', 'Daily quiz missed');
     });
 
     let saved = 0;

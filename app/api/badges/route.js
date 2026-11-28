@@ -76,6 +76,8 @@ async function summary(user) {
   // Penalties lower XP, but never below the start of the rank already reached
   const lostTotal = (penRes.data || []).reduce((a, r) => a + r.amount, 0);
   const xp = Math.max(getRank(gross).rank.min, gross - lostTotal);
+  // Saved so penalties can be a share of the student's XP
+  await admin.from('profiles').update({ xp_gross: xp }).eq('id', uid);
   const warnings = [];
   const sunday = new Date(istDay(0) + 'T00:00:00Z').getUTCDay() === 0;
   if (!dates.has(istDay(0)) && !sunday) warnings.push('Play today\'s quiz to protect your XP.');
