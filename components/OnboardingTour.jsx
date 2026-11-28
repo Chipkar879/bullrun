@@ -92,13 +92,16 @@ export default function OnboardingTour() {
         const savedStep = sessionStorage.getItem(stepKey);
         const isResuming = savedStep !== null;
 
-        // Already shown once in this browser: never show again (except mid-tour page changes)
-        if (localStorage.getItem(seenKey) && !isResuming) return;
+        // Seen before on this account (any device) or in this browser: never show again.
+        // Mid-tour page changes in this tab still continue.
+        const meta = session.user.user_metadata || {};
+        const seenBefore = meta.tour_seen === true || !!localStorage.getItem(seenKey);
+        if (seenBefore && !isResuming) return;
 
-        // Only brand-new accounts (created in the last 30 minutes) get the tour
+        // Only accounts created in the last 24 hours get the tour
         const createdAt = new Date(session.user.created_at).getTime();
         const isNewAccount =
-          Number.isFinite(createdAt) && Date.now() - createdAt < 30 * 60 * 1000;
+          Number.isFinite(createdAt) && Date.now() - createdAt < 24 * 60 * 60 * 1000;
 
         if (!isResuming && !isNewAccount) return;
 
@@ -110,6 +113,7 @@ export default function OnboardingTour() {
         } else {
           localStorage.setItem(seenKey, 'true');
           sessionStorage.setItem(stepKey, '0');
+          await supabase.auth.updateUser({ data: { tour_seen: true } });
         }
 
         setIsOpen(true);
@@ -168,6 +172,7 @@ export default function OnboardingTour() {
       // MARK PERMANENTLY IN LOCALSTORAGE SO IT NEVER SHOWS AGAIN
       localStorage.setItem(`bullrun_has_seen_tour_${userId}`, 'true');
       sessionStorage.removeItem(`bullrun_tour_step_${userId}`);
+      await supabase.auth.updateUser({ data: { tour_seen: true } });
     }
     setIsOpen(false);
   };
