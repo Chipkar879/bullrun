@@ -151,6 +151,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   const trackRef = useRef(null);
   const bodyRef = useRef(null);
   const reducedRef = useRef(false);
+  const gridRef = useRef(null);
 
   // The browser copy is only a cache so the page shows something instantly.
   // The database is the truth, so progress follows the student to any device.
@@ -221,6 +222,15 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     return () => narrow.removeEventListener('change', update);
   }, []);
 
+  // When a module opens, glide down to its lessons
+  useEffect(() => {
+    if (!trackId) return undefined;
+    const t = setTimeout(() => {
+      if (gridRef.current) gridRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+    return () => clearTimeout(t);
+  }, [trackId]);
+
   const scrollTracks = (dir) => {
     if (trackRef.current) {
       trackRef.current.scrollBy({ left: dir === 'left' ? -320 : 320, behavior: 'smooth' });
@@ -241,7 +251,10 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
     const b = blocks[card];
     if (!b) return [];
     const sKey = lesson ? lesson.id + ':' + card : '';
-    if (simple[sKey]) return simple[sKey];
+    if (simple[sKey]) {
+      const hasBullets = b.body.some((l) => l.charAt(0) === '\u2022');
+      return simple[sKey].map((l) => (hasBullets && l.charAt(0) !== '\u2022' ? '\u2022 ' + l : l));
+    }
     if (card === 0 && lesson) {
       let h = 0;
       for (let i = 0; i < lesson.id.length; i += 1) h = (h * 31 + lesson.id.charCodeAt(i)) % 997;
@@ -252,7 +265,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
   const total = curLines.length;
   const allShown = shown >= total;
-  const skipAll = () => setShown((s) => Math.max(s, total));
+  const skipAll = () => { if (explaining) return; setShown((s) => Math.max(s, total)); };
 
   // Bulzo "types" the messages one by one
   useEffect(() => {
@@ -340,27 +353,31 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
   const onReact = async (kind) => {
     if (!lesson || explaining) return;
     if (kind === 'got') { goNext(); return; }
-    if (kind === 'blown') {
-      setReact({ lessonId: lesson.id, card, mood: 'excited', say: 'Right?! Wait till you see the next one. \ud83e\udd2f' });
-      return;
-    }
     const key = lesson.id + ':' + card;
+    const src = simple[key] || blocks[card].body;
     setExplaining(true);
+    setShown(0);
     setReact({ lessonId: lesson.id, card, mood: 'thinking', say: 'Hmm, let me think of an easier way...' });
+    if (bodyRef.current) bodyRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    const started = Date.now();
+    let fresh = null;
     try {
       const headers = await authHeaders();
       if (headers) {
         const res = await fetch('/api/explain-again', {
           method: 'POST',
           headers,
-          body: JSON.stringify({ title: lesson.title, head: blocks[card].head, lines: simple[key] || blocks[card].body }),
+          body: JSON.stringify({ title: lesson.title, head: blocks[card].head, lines: src }),
         });
         if (res.ok) {
           const d = await res.json();
-          if (Array.isArray(d.lines) && d.lines.length) setSimple((p) => ({ ...p, [key]: d.lines }));
+          if (Array.isArray(d.lines) && d.lines.length) fresh = d.lines;
         }
       }
     } catch (err2) { /* fall back to replaying the same card */ }
+    const wait = 1400 - (Date.now() - started);
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    if (fresh) setSimple((p) => ({ ...p, [key]: fresh }));
     setReact({ lessonId: lesson.id, card, mood: 'encouraging', say: 'Okay, here is the easy version! \ud83d\udd01' });
     setExplaining(false);
     setReplay((r) => r + 1);
@@ -514,7 +531,7 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
 
       {/* LESSON MAP (GRID) */}
       {activeTrack && (
-        <section className="bg-bull-surface p-5 sm:p-8 rounded-3xl border border-bull-lime/30 space-y-6 br-slide">
+        <section ref={gridRef} className="scroll-mt-4 bg-bull-surface p-5 sm:p-8 rounded-3xl border border-bull-lime/30 space-y-6 br-slide">
           <div className="flex justify-between items-center border-b border-bull-line pb-4">
             <h2 className="font-black text-xl sm:text-2xl text-white">{activeTrack.title}</h2>
             <button onClick={() => setTrackId(null)} className="text-xs font-black text-slate-400 hover:text-white bg-bull-raised border border-bull-line px-3 py-1.5 rounded-xl font-mono">
@@ -654,7 +671,6 @@ export default function InteractiveCourseWrapper({ initialTracks = [] }) {
                       <div className="flex flex-wrap gap-2 pt-1">
                         {[
                           ['got', '\ud83d\udc4d Got it', 0],
-                          ['blown', '\ud83e\udd2f Mind blown', 0.08],
                           ['again', '\ud83e\udd14 Explain again', 0.16],
                         ].map(([k, label, delay]) => (
                           <button
