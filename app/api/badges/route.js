@@ -9,14 +9,55 @@ export const dynamic = 'force-dynamic';
 const START_BALANCE = 50000;
 // XP for each lesson: every module adds up to 1200, with more for the harder lessons at the end
 const LESSON_XP = lessonXpMap(ORDER);
+// Daily quiz and trade XP are capped per calendar month (India time). The count starts again on the 1st.
+const XP_PER_TRADE = 10;
+const MONTH_CAP_QUIZ = 3000;
+const MONTH_CAP_TRADES = 3000;
 const istDay = (offset = 0) => new Date(Date.now() + 19800000 - offset * 86400000).toISOString().slice(0, 10);
+const istMonthOf = (iso) => {
+  const t = Date.parse(iso);
+  return Number.isNaN(t) ? 'all' : new Date(t + 19800000).toISOString().slice(0, 7);
+};
+
+// Adds up XP month by month. Each month can give at most "cap" XP.
+function monthlyXp(items, monthOf, xpOf, cap) {
+  const byMonth = {};
+  items.forEach((it) => {
+    const m = monthOf(it);
+    byMonth[m] = (byMonth[m] || 0) + xpOf(it);
+  });
+  return Object.values(byMonth).reduce((sum, v) => sum + Math.min(v, cap), 0);
+}
+
+// Loads every trade with its date. If the table has no created_at column, falls back to the old undated list.
+async function loadTrades(uid) {
+  const out = [];
+  for (let from = 0; from < 20000; from += 1000) {
+    const { data, error } = await admin
+      .from('trade_history')
+      .select('sym, created_at')
+      .eq('user_id', uid)
+      .order('created_at', { ascending: true })
+      .range(from, from + 999);
+    if (error) {
+      if (from === 0) {
+        const old = await admin.from('trade_history').select('sym').eq('user_id', uid).limit(2000);
+        return { rows: old.data || [], dated: false };
+      }
+      break;
+    }
+    out.push(...(data || []));
+    if (!data || data.length < 1000) break;
+  }
+  return { rows: out, dated: true };
+}
 
 async function summary(user) {
   const uid = user.id;
-  const [prof, lessonsRes, tradesRes, quizRes, badgesRes, convRes, penRes] = await Promise.all([
+  const [prof, lessonsRes, tradeData, quizRes, badgesRes, convRes, penRes] = await Promise.all([
     admin.from('profiles').select('net_worth, quiz_points, wallet_balance, avatar').eq('id', uid).maybeSingle(),
     admin.from('module_progress').select('submodule_id').eq('user_id', uid),
-    admin.from('trade_history').select('sym').eq('user_id', uid).limit(2000),
+    loadTrades(uid),
     admin.from('quiz_history').select('quiz_date, score, total').eq('user_id', uid),
     admin.from('user_badges').select('badge_id, earned_at').eq('user_id', uid),
     admin.from('bb_conversions').select('bb_spent, cash_added, created_at').eq('user_id', uid).order('created_at', { ascending: false }).limit(30),
@@ -24,7 +65,7 @@ async function summary(user) {
   ]);
 
   const done = (lessonsRes.data || []).map((r) => r.submodule_id);
-  const trades = tradesRes.data || [];
+  const trades = tradeData.rows;
   const quiz = quizRes.data || [];
   const have = new Map((badgesRes.data || []).map((x) => [x.badge_id, x.earned_at]));
 
@@ -73,9 +114,20 @@ async function summary(user) {
     fresh.forEach((x) => have.set(x.id, now));
   }
 
-  const quizScore = quiz.reduce((a, q) => a + (q.score || 0), 0);
   const lessonXp = done.reduce((a, id) => a + (LESSON_XP[id] || 0), 0);
-  const gross = lessonXp + Math.min(quizScore * 5 + quiz.length * 20, 3000) + Math.min(trades.length, 300) * 10 + have.size * 50;
+  const quizXp = monthlyXp(
+    quiz,
+    (q) => String(q.quiz_date || '').slice(0, 7) || 'all',
+    (q) => (q.score || 0) * 5 + 20,
+    MONTH_CAP_QUIZ
+  );
+  const tradeXp = monthlyXp(
+    trades,
+    (t) => (tradeData.dated && t.created_at ? istMonthOf(t.created_at) : 'all'),
+    () => XP_PER_TRADE,
+    MONTH_CAP_TRADES
+  );
+  const gross = lessonXp + quizXp + tradeXp + have.size * 50;
   // Penalties lower XP, but never below the start of the rank already reached
   const lostTotal = (penRes.data || []).reduce((a, r) => a + r.amount, 0);
   const xp = Math.max(getRank(gross).rank.min, gross - lostTotal);
